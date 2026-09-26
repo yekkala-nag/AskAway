@@ -19,7 +19,7 @@ export const UMBRELLA_TOPICS = [
     color: "#5EC4C8",
     dark: "#1F6B6E",
     description: "Roadmap stages 1–4: orientation, how LLMs work, prompting, models — home of the AI Engineer Roadmap",
-    tabs: ["fnd_start_hub", "fnd_internals_hub", "fnd_prompts_hub", "fnd_mlsoc_hub", "fnd_multimodal_hub", "airoadmap", "overview", "glossary", "reinforcementlearning", "trpo2grpo", "aimoralagency", "humancentric", "dialoguelamda", "modellandscape", "tokenization", "quantserve", "vramconductor", "promptfundamentals", "llmsampling", "selfattention", "posencoding", "archconcepts", "promptmgmt", "promptdependencygraph", "promptcontracts", "promptregression", "structuredoutputs", "topicmodeling", "workflows", "unhobbling", "aiharness", "promptlearning", "visionlanguage", "diffusionmodels", "speechvoice", "datacentricai", "threesentenceprompt", "uipreview"]
+    tabs: ["fnd_start_hub", "fnd_internals_hub", "fnd_prompts_hub", "fnd_mlsoc_hub", "fnd_multimodal_hub", "airoadmap", "overview", "glossary", "reinforcementlearning", "trpo2grpo", "aimoralagency", "humancentric", "dialoguelamda", "modellandscape", "tokenization", "quantserve", "vramconductor", "promptfundamentals", "llmsampling", "selfattention", "posencoding", "archconcepts", "promptmgmt", "promptdependencygraph", "promptcontracts", "promptregression", "structuredoutputs", "topicmodeling", "workflows", "unhobbling", "aiharness", "promptlearning", "visionlanguage", "diffusionmodels", "speechvoice", "datacentricai", "threesentenceprompt"]
   },
   {
     id: "data_platform",
@@ -312,15 +312,6 @@ export const TABS_REGISTRY = [
     icon: "⚙️",
     keywords: ["ai harness", "training loops", "transformer architecture", "kv cache", "gqa", "rlhf", "dpo", "gradient descent", "chinchilla", "flash attention", "evals", "failure modes"],
     component: lazy(() => import("../aiHarness/AIHarnessTab.jsx"))
-  },
-  {
-    id: "uipreview",
-    label: "🎨 UI Refresh Preview (sample)",
-    umbrellaId: "foundations",
-    category: "Foundations",
-    icon: "🎨",
-    keywords: ["ui preview", "design sample", "redesign", "mockup", "palette"],
-    component: lazy(() => import("../designPreview/DesignSampleTab.jsx"))
   },
   {
     id: "promptlearning",

@@ -76,7 +76,6 @@ export const TOPIC_META = {
   overview: { c: 'fnd_start', l: 1, p: [] },
   airoadmap: { c: 'fnd_start', l: 1, p: [] },
   glossary: { c: 'fnd_start', l: 1, p: [] },
-  uipreview: { c: 'fnd_start', l: 1, p: [] },
   firstaiapp: { c: 'fr_ops', l: 1, p: ['promptfundamentals', 'tokenization'] },
   promptfundamentals: { c: 'fnd_prompts', l: 1, p: [] },
   llmsampling: { c: 'fnd_internals', l: 1, p: [] },

@@ -45,7 +45,6 @@ const TabComponents = {
   topicmodeling: lazy(() => import('./topicModeling/TopicModelingTab.jsx')),
   aiharness: lazy(() => import('./aiHarness/AIHarnessTab.jsx')),
   promptlearning: lazy(() => import('./promptLearning/PromptLearningTab.jsx')),
-  uipreview: lazy(() => import('./designPreview/DesignSampleTab.jsx')),
 
   rag: lazy(() => import('./AppContent.jsx').then(m => ({ default: m.RAGTypesTab }))),
   pipeline: lazy(() => import('./AppContent.jsx').then(m => ({ default: m.PipelineTab }))),
