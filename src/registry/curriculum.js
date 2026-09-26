@@ -241,7 +241,8 @@ export const TOPIC_META = {
   slmedge: { c: 'fr_frontiers', l: 2, p: ['quantserve'] },
   ragbeyond: { c: 'fr_frontiers', l: 2, p: ['prodrag'] },
   frontiers: { c: 'fr_frontiers', l: 3, p: ['ragbeyond'] },
-  aigentools: { c: 'fr_frontiers', l: 1, p: [] }
+  aigentools: { c: 'fr_frontiers', l: 1, p: [] },
+  aiharnessquality: { c: 'fr_frontiers', l: 1, p: [] }
 };
 
 // ── Helpers ────────────────────────────────────────────────────────────────

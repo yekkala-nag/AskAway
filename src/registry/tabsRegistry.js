@@ -64,7 +64,7 @@ export const UMBRELLA_TOPICS = [
     color: "#9B89C4",
     dark: "#6B5E94",
     description: "Roadmap stage 8: evals, cost, observability — ship and stay reliable",
-    tabs: ["fr_eval_hub", "fr_ops_hub", "fr_frontiers_hub", "aigentools", "firstaiapp", "enterpriseadvancedplaybook", "tokenorchestrationplaybook", "productionragops", "enterpriseaiops", "enterprisegrade", "finops", "observability", "slmedge", "tokenbill", "llmevals", "modelvalidation", "reasoningbench", "practices", "powerfeatures", "ragbeyond", "frontiers", "progress", "guardrails", "llmreliability"]
+    tabs: ["fr_eval_hub", "fr_ops_hub", "fr_frontiers_hub", "aigentools", "aiharnessquality", "firstaiapp", "enterpriseadvancedplaybook", "tokenorchestrationplaybook", "productionragops", "enterpriseaiops", "enterprisegrade", "finops", "observability", "slmedge", "tokenbill", "llmevals", "modelvalidation", "reasoningbench", "practices", "powerfeatures", "ragbeyond", "frontiers", "progress", "guardrails", "llmreliability"]
   }
 ];
 
@@ -1764,6 +1764,15 @@ export const TABS_REGISTRY = [
     icon: "🎨",
     keywords: ["image generation", "text to image", "AI workflows", "simulators", "animations", "tables", "DALL-E", "Midjourney", "Stable Diffusion", "Runway", "context engineering", "JEV", "world models"],
     component: lazy(() => import("../aiGenTools/AiGenToolsTab.jsx"))
+  },
+  {
+    id: "aiharnessquality",
+    label: "AI Quality & Harnesses",
+    umbrellaId: "frontiers_production",
+    category: "Advanced & Frontiers",
+    icon: "🔒",
+    keywords: ["AI harnesses", "null returns", "coding agents", "guardrails", "pipeline returns", "output verification", "truthful AI", "abstention", "confidence scoring"],
+    component: lazy(() => import("../aiHarnessQuality/AiHarnessQualityTab.jsx"))
   }
 ];
 
