@@ -1,6 +1,4 @@
-import React from "react";
-import FndInternalsHubTab from "../fndInternalsHub/FndInternalsHubTab.jsx";
-
-export default function FndInternalsHubPageWrapper(props) {
-  return <FndInternalsHubTab {...props} />;
+import { HubPage } from "./HubPage.jsx";
+export default function FndInternalsHubTab({ onSelectTab }) {
+  return <HubPage childId="fnd_internals" onSelectTab={onSelectTab} />;
 }
