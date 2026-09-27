@@ -120,11 +120,15 @@ export default function TokenPlaybookTab() {
                 <span style={{ fontSize: '11px', color: '#3A9B9F', fontWeight: 'bold' }}>AI ARCHITECTURAL INFOGRAPHIC</span>
                 <h3 style={{ margin: '4px 0 0 0', color: '#f8fafc' }}>Containerized Microservices Architecture & Kubernetes Production</h3>
               </div>
-              <img
-                src="/Users/nyakkala/.gemini/antigravity-ide/brain/eab4e01b-fd32-4d53-8d7e-adc771847745/enterprise_ai_production_stack_1788449465917.jpg"
-                alt="Enterprise AI Production Stack"
-                style={{ width: '100%', borderRadius: '8px', border: '1px solid rgba(56, 189, 248, 0.3)' }}
-              />
+              <div style={{ width: '100%', aspectRatio: '16/9', maxHeight: '520px', overflow: 'hidden', borderRadius: '8px', border: '1px solid rgba(56, 189, 248, 0.3)', background: '#05070e', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <img
+                  src="/assets/enterprise_ai_production_stack_1788449465917.jpg"
+                  alt="Enterprise AI Production Stack"
+                  loading="lazy"
+                  decoding="async"
+                  style={{ width: '100%', height: '100%', objectFit: 'contain', objectPosition: 'center', display: 'block' }}
+                />
+              </div>
             </Card>
 
             <ContainerStackTopologyDiagram />
@@ -312,11 +316,15 @@ CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000", "--workers", 
                 <span style={{ fontSize: '11px', color: '#3A9B9F', fontWeight: 'bold' }}>AI ARCHITECTURAL INFOGRAPHIC</span>
                 <h3 style={{ margin: '4px 0 0 0', color: '#f8fafc' }}>LangSmith Token Governance & Executive ROI Tracking</h3>
               </div>
-              <img
-                src="/Users/nyakkala/.gemini/antigravity-ide/brain/eab4e01b-fd32-4d53-8d7e-adc771847745/langsmith_token_governance_trace_1788449496006.jpg"
-                alt="LangSmith Token Governance Trace"
-                style={{ width: '100%', borderRadius: '8px', border: '1px solid rgba(16, 185, 129, 0.3)' }}
-              />
+              <div style={{ width: '100%', aspectRatio: '16/9', maxHeight: '520px', overflow: 'hidden', borderRadius: '8px', border: '1px solid rgba(16, 185, 129, 0.3)', background: '#05070e', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <img
+                  src="/assets/langsmith_token_governance_trace_1788449496006.jpg"
+                  alt="LangSmith Token Governance Trace"
+                  loading="lazy"
+                  decoding="async"
+                  style={{ width: '100%', height: '100%', objectFit: 'contain', objectPosition: 'center', display: 'block' }}
+                />
+              </div>
             </Card>
 
             <LangSmithTraceWaterfallDiagram />
@@ -426,11 +434,15 @@ def process_enterprise_query(query: str):
                 <span style={{ fontSize: '11px', color: '#f59e0b', fontWeight: 'bold' }}>AI ARCHITECTURAL INFOGRAPHIC</span>
                 <h3 style={{ margin: '4px 0 0 0', color: '#f8fafc' }}>RAGAS Accuracy & Token Governance Evaluation Framework</h3>
               </div>
-              <img
-                src="/Users/nyakkala/.gemini/antigravity-ide/brain/eab4e01b-fd32-4d53-8d7e-adc771847745/ragas_evaluation_pipeline_1788449524458.jpg"
-                alt="RAGAS Evaluation Framework"
-                style={{ width: '100%', borderRadius: '8px', border: '1px solid rgba(245, 158, 11, 0.3)' }}
-              />
+              <div style={{ width: '100%', aspectRatio: '16/9', maxHeight: '520px', overflow: 'hidden', borderRadius: '8px', border: '1px solid rgba(245, 158, 11, 0.3)', background: '#05070e', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <img
+                  src="/assets/ragas_evaluation_pipeline_1788449524458.jpg"
+                  alt="RAGAS Evaluation Framework"
+                  loading="lazy"
+                  decoding="async"
+                  style={{ width: '100%', height: '100%', objectFit: 'contain', objectPosition: 'center', display: 'block' }}
+                />
+              </div>
             </Card>
 
             {/* Interactive RAGAS Gauge Sandbox */}

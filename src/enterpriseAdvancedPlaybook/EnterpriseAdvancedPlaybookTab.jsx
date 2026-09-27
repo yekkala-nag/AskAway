@@ -150,11 +150,15 @@ export default function EnterpriseAdvancedPlaybookTab() {
                 <span style={{ fontSize: '11px', color: '#3A9B9F', fontWeight: 'bold' }}>AI ARCHITECTURAL INFOGRAPHIC</span>
                 <h3 style={{ margin: '4px 0 0 0', color: '#f8fafc' }}>Enterprise Agentic Patterns Architecture</h3>
               </div>
-              <img
-                src="/Users/nyakkala/.gemini/antigravity-ide/brain/eab4e01b-fd32-4d53-8d7e-adc771847745/agentic_patterns_architecture_1788450102452.jpg"
-                alt="Agentic Patterns Architecture"
-                style={{ width: '100%', borderRadius: '8px', border: '1px solid rgba(56, 189, 248, 0.3)' }}
-              />
+              <div style={{ width: '100%', aspectRatio: '16/9', maxHeight: '520px', overflow: 'hidden', borderRadius: '8px', border: '1px solid rgba(56, 189, 248, 0.3)', background: '#05070e', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <img
+                  src="/assets/agentic_patterns_architecture_1788450102452.jpg"
+                  alt="Enterprise Agentic Patterns Architecture"
+                  loading="lazy"
+                  decoding="async"
+                  style={{ width: '100%', height: '100%', objectFit: 'contain', objectPosition: 'center', display: 'block' }}
+                />
+              </div>
             </Card>
 
             <AgenticPatternsQuadDiagram />
@@ -434,11 +438,15 @@ workflow.add_conditional_edges("supervisor", route_supervisor, {**{w: w for w in
                 <span style={{ fontSize: '11px', color: '#3A9B9F', fontWeight: 'bold' }}>AI ARCHITECTURAL INFOGRAPHIC</span>
                 <h3 style={{ margin: '4px 0 0 0', color: '#f8fafc' }}>Enterprise Full-Stack AI Observability Stack</h3>
               </div>
-              <img
-                src="/Users/nyakkala/.gemini/antigravity-ide/brain/eab4e01b-fd32-4d53-8d7e-adc771847745/fullstack_ai_observability_stack_1788450120849.jpg"
-                alt="Full-Stack Observability Stack"
-                style={{ width: '100%', borderRadius: '8px', border: '1px solid rgba(16, 185, 129, 0.3)' }}
-              />
+              <div style={{ width: '100%', aspectRatio: '16/9', maxHeight: '520px', overflow: 'hidden', borderRadius: '8px', border: '1px solid rgba(16, 185, 129, 0.3)', background: '#05070e', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <img
+                  src="/assets/fullstack_ai_observability_stack_1788450120849.jpg"
+                  alt="Enterprise Full-Stack AI Observability Stack"
+                  loading="lazy"
+                  decoding="async"
+                  style={{ width: '100%', height: '100%', objectFit: 'contain', objectPosition: 'center', display: 'block' }}
+                />
+              </div>
             </Card>
 
             <FullStackObservabilityStackDiagram />
@@ -522,11 +530,15 @@ start_http_server(8000)`}
                 <span style={{ fontSize: '11px', color: '#f59e0b', fontWeight: 'bold' }}>AI ARCHITECTURAL INFOGRAPHIC</span>
                 <h3 style={{ margin: '4px 0 0 0', color: '#f8fafc' }}>Distributed AI Computing: Kafka, Celery & Ray</h3>
               </div>
-              <img
-                src="/Users/nyakkala/.gemini/antigravity-ide/brain/eab4e01b-fd32-4d53-8d7e-adc771847745/distributed_ai_computing_kafka_celery_ray_1788450142581.jpg"
-                alt="Distributed AI Computing"
-                style={{ width: '100%', borderRadius: '8px', border: '1px solid rgba(245, 158, 11, 0.3)' }}
-              />
+              <div style={{ width: '100%', aspectRatio: '16/9', maxHeight: '520px', overflow: 'hidden', borderRadius: '8px', border: '1px solid rgba(245, 158, 11, 0.3)', background: '#05070e', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <img
+                  src="/assets/distributed_ai_computing_kafka_celery_ray_1788450142581.jpg"
+                  alt="Distributed AI Computing: Kafka, Celery & Ray"
+                  loading="lazy"
+                  decoding="async"
+                  style={{ width: '100%', height: '100%', objectFit: 'contain', objectPosition: 'center', display: 'block' }}
+                />
+              </div>
             </Card>
 
             {/* Distributed Stack Selector */}

@@ -293,8 +293,8 @@ export default function CliAgentTab() {
         </p>
 
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: "1.5rem", alignItems: "center" }}>
-          <div style={{ background: "#0d0d15", borderRadius: 12, overflow: "hidden", border: "1px solid #3b3b54", textAlign: "center" }}>
-            <img src="/assets/cli_agent_architecture.png" alt="CLI Agent Architecture" style={{ width: "100%", height: "auto", display: "block" }} />
+          <div style={{ background: "#0d0d15", borderRadius: 12, overflow: "hidden", border: "1px solid #3b3b54", textAlign: "center", display: "flex", alignItems: "center", justifyContent: "center", aspectRatio: "1/1", maxHeight: 440, margin: "0 auto", width: "100%" }}>
+            <img src="/assets/cli_agent_architecture.png" alt="CLI Agent Architecture" loading="lazy" decoding="async" style={{ width: "100%", height: "100%", objectFit: "contain", display: "block" }} />
           </div>
 
           <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>

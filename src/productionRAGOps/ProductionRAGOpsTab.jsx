@@ -130,11 +130,15 @@ export default function ProductionRAGOpsTab() {
                 <span style={{ fontSize: '11px', color: '#3A9B9F', fontWeight: 'bold' }}>AI ARCHITECTURAL INFOGRAPHIC</span>
                 <h3 style={{ margin: '4px 0 0 0', color: '#f8fafc' }}>Traditional MLOps Monitoring vs. Modern AgentOps Trajectories</h3>
               </div>
-              <img
-                src="/Users/nyakkala/.gemini/antigravity-ide/brain/eab4e01b-fd32-4d53-8d7e-adc771847745/agentops_vs_mlops_monitoring_1788446473776.jpg"
-                alt="AgentOps vs MLOps Architecture"
-                style={{ width: '100%', borderRadius: '8px', border: '1px solid rgba(56, 189, 248, 0.3)' }}
-              />
+              <div style={{ width: '100%', aspectRatio: '16/9', maxHeight: '520px', overflow: 'hidden', borderRadius: '8px', border: '1px solid rgba(56, 189, 248, 0.3)', background: '#05070e', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <img
+                  src="/assets/agentops_vs_mlops_monitoring_1788446473776.jpg"
+                  alt="Traditional MLOps Monitoring vs. Modern AgentOps Trajectories"
+                  loading="lazy"
+                  decoding="async"
+                  style={{ width: '100%', height: '100%', objectFit: 'contain', objectPosition: 'center', display: 'block' }}
+                />
+              </div>
             </Card>
 
             <AgentOpsTrajectoryDiagram />
@@ -375,11 +379,15 @@ export default function ProductionRAGOpsTab() {
                 <span style={{ fontSize: '11px', color: '#3A9B9F', fontWeight: 'bold' }}>AI ARCHITECTURAL INFOGRAPHIC</span>
                 <h3 style={{ margin: '4px 0 0 0', color: '#f8fafc' }}>Earned RAG Complexity Escalation Ladder (Levels 0 to 8)</h3>
               </div>
-              <img
-                src="/Users/nyakkala/.gemini/antigravity-ide/brain/eab4e01b-fd32-4d53-8d7e-adc771847745/earned_rag_complexity_ladder_1788446534429.jpg"
-                alt="Earned RAG Complexity Ladder"
-                style={{ width: '100%', borderRadius: '8px', border: '1px solid rgba(16, 185, 129, 0.3)' }}
-              />
+              <div style={{ width: '100%', aspectRatio: '16/9', maxHeight: '520px', overflow: 'hidden', borderRadius: '8px', border: '1px solid rgba(16, 185, 129, 0.3)', background: '#05070e', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <img
+                  src="/assets/earned_rag_complexity_ladder_1788446534429.jpg"
+                  alt="Earned RAG Complexity Ladder"
+                  loading="lazy"
+                  decoding="async"
+                  style={{ width: '100%', height: '100%', objectFit: 'contain', objectPosition: 'center', display: 'block' }}
+                />
+              </div>
             </Card>
 
             <EarnedComplexityLadderDiagram />
@@ -530,11 +538,15 @@ export default function ProductionRAGOpsTab() {
                 <span style={{ fontSize: '11px', color: '#3A9B9F', fontWeight: 'bold' }}>AI ARCHITECTURAL INFOGRAPHIC</span>
                 <h3 style={{ margin: '4px 0 0 0', color: '#f8fafc' }}>FAQ as RAG: Inverted Architecture & Semantic Cache Router</h3>
               </div>
-              <img
-                src="/Users/nyakkala/.gemini/antigravity-ide/brain/eab4e01b-fd32-4d53-8d7e-adc771847745/faq_as_rag_architecture_1788446566695.jpg"
-                alt="FAQ as RAG Architecture"
-                style={{ width: '100%', borderRadius: '8px', border: '1px solid rgba(56, 189, 248, 0.3)' }}
-              />
+              <div style={{ width: '100%', aspectRatio: '16/9', maxHeight: '520px', overflow: 'hidden', borderRadius: '8px', border: '1px solid rgba(56, 189, 248, 0.3)', background: '#05070e', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <img
+                  src="/assets/faq_as_rag_architecture_1788446566695.jpg"
+                  alt="FAQ as RAG Architecture"
+                  loading="lazy"
+                  decoding="async"
+                  style={{ width: '100%', height: '100%', objectFit: 'contain', objectPosition: 'center', display: 'block' }}
+                />
+              </div>
             </Card>
 
             <FAQAsRAGInvertedFlowDiagram />
@@ -691,11 +703,15 @@ export default function ProductionRAGOpsTab() {
                 <span style={{ fontSize: '11px', color: '#f59e0b', fontWeight: 'bold' }}>AI ARCHITECTURAL INFOGRAPHIC</span>
                 <h3 style={{ margin: '4px 0 0 0', color: '#f8fafc' }}>Noisy Text in RAG: Typos, OCR Visual Glitches & Solution Architectures</h3>
               </div>
-              <img
-                src="/Users/nyakkala/.gemini/antigravity-ide/brain/eab4e01b-fd32-4d53-8d7e-adc771847745/noisy_text_rag_pipeline_1788446676392.jpg"
-                alt="Noisy Text in RAG Pipeline"
-                style={{ width: '100%', borderRadius: '8px', border: '1px solid rgba(245, 158, 11, 0.3)' }}
-              />
+              <div style={{ width: '100%', aspectRatio: '16/9', maxHeight: '520px', overflow: 'hidden', borderRadius: '8px', border: '1px solid rgba(245, 158, 11, 0.3)', background: '#05070e', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <img
+                  src="/assets/noisy_text_rag_pipeline_1788446676392.jpg"
+                  alt="Noisy Text in RAG Pipeline"
+                  loading="lazy"
+                  decoding="async"
+                  style={{ width: '100%', height: '100%', objectFit: 'contain', objectPosition: 'center', display: 'block' }}
+                />
+              </div>
             </Card>
 
             <NoisyTextStrategyForkDiagram />
@@ -802,11 +818,15 @@ export default function ProductionRAGOpsTab() {
                 <span style={{ fontSize: '11px', color: '#3A9B9F', fontWeight: 'bold' }}>AI ARCHITECTURAL INFOGRAPHIC</span>
                 <h3 style={{ margin: '4px 0 0 0', color: '#f8fafc' }}>Defensible "Not in This Document" RAG: The 4-Brick Evidence Chain</h3>
               </div>
-              <img
-                src="/Users/nyakkala/.gemini/antigravity-ide/brain/eab4e01b-fd32-4d53-8d7e-adc771847745/rag_absence_four_evidences_1788447761773.jpg"
-                alt="Defensible Absence RAG 4 Bricks"
-                style={{ width: '100%', borderRadius: '8px', border: '1px solid rgba(56, 189, 248, 0.3)' }}
-              />
+              <div style={{ width: '100%', aspectRatio: '16/9', maxHeight: '520px', overflow: 'hidden', borderRadius: '8px', border: '1px solid rgba(56, 189, 248, 0.3)', background: '#05070e', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <img
+                  src="/assets/rag_absence_four_evidences_1788447761773.jpg"
+                  alt="Defensible Absence RAG 4 Bricks"
+                  loading="lazy"
+                  decoding="async"
+                  style={{ width: '100%', height: '100%', objectFit: 'contain', objectPosition: 'center', display: 'block' }}
+                />
+              </div>
             </Card>
 
             <AbsenceEvidenceChainDiagram />
@@ -950,11 +970,15 @@ export default function ProductionRAGOpsTab() {
                 <span style={{ fontSize: '11px', color: '#ef4444', fontWeight: 'bold' }}>AI ARCHITECTURAL INFOGRAPHIC</span>
                 <h3 style={{ margin: '4px 0 0 0', color: '#f8fafc' }}>Valid JSON, Wrong Data: Five Failure Modes LLM Structured Outputs Won't Catch</h3>
               </div>
-              <img
-                src="/Users/nyakkala/.gemini/antigravity-ide/brain/eab4e01b-fd32-4d53-8d7e-adc771847745/structured_outputs_five_failures_1788447786725.jpg"
-                alt="Valid JSON Wrong Data 5 Failure Modes"
-                style={{ width: '100%', borderRadius: '8px', border: '1px solid rgba(239, 68, 68, 0.3)' }}
-              />
+              <div style={{ width: '100%', aspectRatio: '16/9', maxHeight: '520px', overflow: 'hidden', borderRadius: '8px', border: '1px solid rgba(239, 68, 68, 0.3)', background: '#05070e', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <img
+                  src="/assets/structured_outputs_five_failures_1788447786725.jpg"
+                  alt="Valid JSON Wrong Data 5 Failure Modes"
+                  loading="lazy"
+                  decoding="async"
+                  style={{ width: '100%', height: '100%', objectFit: 'contain', objectPosition: 'center', display: 'block' }}
+                />
+              </div>
             </Card>
 
             <ThreeLayerDefenseDiagram />

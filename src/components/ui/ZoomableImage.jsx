@@ -121,7 +121,7 @@ export default function ZoomableImage({
 
         <div style={{ position: "relative", display: "flex", justifyContent: "center", alignItems: "center", padding: "1.25rem", background }}>
           {src ? (
-            <img src={src} alt={alt} style={{ width: "100%", maxWidth, height: "auto", display: "block" }} />
+            <img src={src} alt={alt} loading="lazy" decoding="async" style={{ width: "100%", maxWidth, height: "auto", objectFit: "contain", display: "block" }} />
           ) : (
             <div style={{ width: "100%", maxWidth, aspectRatio: "16 / 9", display: "flex", alignItems: "center", justifyContent: "center", background: "#0d0f17", color: "#94a3b8", borderRadius: 8, fontSize: "0.8rem" }}>
               (no image — use hotspots to annotate)
@@ -275,7 +275,7 @@ export default function ZoomableImage({
             style={{ flex: 1, overflow: "auto", background: "#0d0f17", display: "flex", alignItems: "center", justifyContent: "center", padding: "1rem", position: "relative" }}
           >
             <div style={{ background: "#fff", borderRadius: 8, padding: "1.5rem", boxShadow: "0 20px 50px rgba(0,0,0,0.6)", zoom: scale, width: "100%", maxWidth: 1600, display: "flex", justifyContent: "center", position: "relative" }}>
-              {src ? <img src={src} alt={alt} style={{ width: "100%", maxWidth, height: "auto", display: "block" }} /> : null}
+              {src ? <img src={src} alt={alt} loading="lazy" decoding="async" style={{ width: "100%", maxWidth: "100%", height: "auto", objectFit: "contain", display: "block" }} /> : null}
               {hasHotspots && src && hotspots.map((h, i) => (
                 <span key={i} title={h.label} style={{ position: "absolute", left: `${h.x}%`, top: `${h.y}%`, transform: "translate(-50%,-50%)", width: 18, height: 18, borderRadius: "50%", border: "2px solid #fff", background: h.color || accentColor, color: "#fff", fontSize: "10px", fontWeight: 800, display: "flex", alignItems: "center", justifyContent: "center" }}>{i + 1}</span>
               ))}

@@ -103,6 +103,7 @@ const DiagramImage = ({
               onError={() => setFailed(true)}
               style={{
                 width: "100%", maxWidth, height: "auto", display: "block",
+                objectFit: "contain",
                 opacity: loaded ? 1 : 0,
                 transition: "opacity 0.35s ease",
               }}
@@ -152,7 +153,7 @@ const DiagramImage = ({
             style={{ flex: 1, overflow: "auto", background: "#0F1219", display: "flex", alignItems: "center", justifyContent: "center", padding: "1rem" }}
           >
             <div style={{ background: "#FFFFFF", borderRadius: 8, padding: "1.5rem", boxShadow: "0 20px 50px rgba(0,0,0,0.6)", zoom: scale, width: "100%", maxWidth: 1600, display: "flex", justifyContent: "center" }}>
-              <img src={src} alt={alt} loading="lazy" decoding="async" style={{ width: "100%", maxWidth, height: "auto", display: "block" }} />
+              <img src={src} alt={alt} loading="lazy" decoding="async" style={{ width: "100%", maxWidth: "100%", height: "auto", objectFit: "contain", display: "block" }} />
             </div>
           </div>
         </div>

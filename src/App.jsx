@@ -4419,8 +4419,8 @@ export const ClaudeWorkflowsTab = ({ s }) => {
       </div>
 
       {/* HERO VISUAL BANNER */}
-      <div style={{ background: "#111827", borderRadius: 8, padding: "0.8rem", marginBottom: "1.5rem", border: "1px solid #374151" }}>
-        <img src="/agent_inside_workflow_hero_1785850390000.png" alt="Agent Inside Workflow Architecture" style={{ width: "100%", height: "auto", display: "block", borderRadius: 6 }} />
+      <div style={{ background: "#111827", borderRadius: 8, padding: "0.8rem", marginBottom: "1.5rem", border: "1px solid #374151", display: "flex", alignItems: "center", justifyContent: "center", maxHeight: 480, aspectRatio: "16/9", overflow: "hidden" }}>
+        <img src="/agent_inside_workflow_hero_1785850390000.png" alt="Agent Inside Workflow Architecture" loading="lazy" decoding="async" style={{ width: "100%", height: "100%", objectFit: "contain", objectPosition: "center", display: "block", borderRadius: 6 }} />
       </div>
 
       {/* ECOSYSTEM DIAGRAM */}
@@ -14464,11 +14464,15 @@ async def run_independent_branches(agents, payload):
                 📐 Overall Multi-Agent Cost Architecture
               </div>
               <ZoomableFigure title="Dynamic LLM Multi-Agent Cost Architecture">
-                <img
-                  src="file:///Users/nyakkala/.gemini/antigravity-ide/brain/c77b7377-55d0-486c-a313-d4f4e85a6ef8/multi_agent_token_cost_architecture_1785577825087.png"
-                  alt="Multi-Agent Token Cost Architecture"
-                  style={{ width: "100%", borderRadius: 6, border: "1px solid #e0dcd4" }}
-                />
+                <div style={{ width: "100%", aspectRatio: "1/1", maxHeight: 420, overflow: "hidden", display: "flex", alignItems: "center", justifyContent: "center", background: "#f8fafc", borderRadius: 6, border: "1px solid #e0dcd4" }}>
+                  <img
+                    src="/assets/multi_agent_token_cost_architecture_1785577825087.png"
+                    alt="Multi-Agent Token Cost Architecture"
+                    loading="lazy"
+                    decoding="async"
+                    style={{ width: "100%", height: "100%", objectFit: "contain", display: "block" }}
+                  />
+                </div>
               </ZoomableFigure>
               <p style={{ fontSize: "0.62rem", color: "#334155", lineHeight: 1.6, marginTop: "0.8rem" }}>
                 Flow showing supervisor task routing between high-cost reasoning models vs low-cost fast models, with context trimming before handoffs and parallel branch collection via <code style={{ color: "#3A9B9F" }}>asyncio.gather()</code>.
@@ -14480,11 +14484,15 @@ async def run_independent_branches(agents, payload):
                 🔁 Naive Retry Cascade vs. Isolated Retry Flow
               </div>
               <ZoomableFigure title="Retry Cascade vs Isolated Retry Infographic">
-                <img
-                  src="file:///Users/nyakkala/.gemini/antigravity-ide/brain/c77b7377-55d0-486c-a313-d4f4e85a6ef8/retry_cascade_vs_isolated_1785577840013.png"
-                  alt="Retry Cascade vs Isolated Retry"
-                  style={{ width: "100%", borderRadius: 6, border: "1px solid #e0dcd4" }}
-                />
+                <div style={{ width: "100%", aspectRatio: "1/1", maxHeight: 420, overflow: "hidden", display: "flex", alignItems: "center", justifyContent: "center", background: "#f8fafc", borderRadius: 6, border: "1px solid #e0dcd4" }}>
+                  <img
+                    src="/assets/retry_cascade_vs_isolated_1785577840013.png"
+                    alt="Retry Cascade vs Isolated Retry"
+                    loading="lazy"
+                    decoding="async"
+                    style={{ width: "100%", height: "100%", objectFit: "contain", display: "block" }}
+                  />
+                </div>
               </ZoomableFigure>
               <p style={{ fontSize: "0.62rem", color: "#334155", lineHeight: 1.6, marginTop: "0.8rem" }}>
                 Left: Naive retries force full upstream chain re-execution with heavy context. Right: Isolated retry with trimmed context and localized execution avoids redundant computation.
@@ -18648,8 +18656,8 @@ export const AgentDebuggingTab = ({ s }) => {
             <p style={{ fontSize: "0.82rem", color: "#94a3b8", maxWidth: "850px", lineHeight: 1.6, marginTop: "0.6rem" }}>
               A systematic verification framework for recording model tool requests, function outputs, CSS patches, build checks, and Playwright DOM bounding-box proofs to prevent silent failure claims.
             </p>
-            <div style={{ marginTop: "1.2rem", borderRadius: 8, overflow: "hidden", border: "1px solid #334155" }}>
-              <img src="/ai_agent_debugging_hero_1785850378111.png" alt="AI Agent Debugging Traceability Protocol" style={{ width: "100%", height: "auto", display: "block" }} />
+            <div style={{ marginTop: "1.2rem", borderRadius: 8, overflow: "hidden", border: "1px solid #334155", aspectRatio: "16/9", maxHeight: 380, background: "#0b0f19", display: "flex", alignItems: "center", justifyContent: "center" }}>
+              <img src="/ai_agent_debugging_hero_1785850378111.png" alt="AI Agent Debugging Traceability Protocol" loading="lazy" decoding="async" style={{ width: "100%", height: "100%", objectFit: "contain", objectPosition: "center", display: "block" }} />
             </div>
           </div>
 
@@ -18678,11 +18686,13 @@ export const AgentDebuggingTab = ({ s }) => {
             Generated High-Res Diagram
           </span>
         </div>
-        <div style={{ borderRadius: 8, overflow: "hidden", border: "1px solid #cbd5e1" }}>
+        <div style={{ borderRadius: 8, overflow: "hidden", border: "1px solid #cbd5e1", aspectRatio: "16/9", maxHeight: 480, background: "#0b0f19", display: "flex", alignItems: "center", justifyContent: "center" }}>
           <img
             src="/ai_agent_debugging_hero_1785850378111.png"
             alt="AI Agent Debugging Architecture"
-            style={{ width: "100%", height: "auto", display: "block" }}
+            loading="lazy"
+            decoding="async"
+            style={{ width: "100%", height: "100%", objectFit: "contain", objectPosition: "center", display: "block" }}
           />
         </div>
       </div>
