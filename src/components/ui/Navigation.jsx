@@ -7,6 +7,7 @@ import { useState, useRef, useEffect, useCallback } from 'react';
 import { UMBRELLA_TOPICS, getTabsForUmbrella, getUmbrellaForTab, getTabById, TABS_REGISTRY } from '../../registry/tabsRegistry.js';
 import { getModuleColors } from '../../design-system/tokens.js';
 import { Button, Badge } from './Core.jsx';
+import { LuminaLogo } from './LuminaLogo.jsx';
 import {
   getCurrentTrackId,
   getTrackById,
@@ -278,30 +279,55 @@ export function Sidebar({
           alignItems: 'center',
           justifyContent: collapsed ? 'center' : 'space-between',
         }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', overflow: 'hidden' }}>
+          <div
+            onClick={() => onSelectTab && onSelectTab('overview')}
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '10px',
+              overflow: 'hidden',
+              cursor: 'pointer',
+              userSelect: 'none'
+            }}
+            title="Lumina AI — Build, learn, and master the art of Generative AI."
+          >
             <div style={{
-              width: '32px', height: '32px', borderRadius: '8px',
-              background: 'linear-gradient(135deg, #3A9B9F 0%, #2E7D80 100%)',
+              width: '34px', height: '34px', borderRadius: '10px',
+              background: '#0B0F19',
+              border: '1px solid rgba(56, 189, 248, 0.25)',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
-              fontSize: '1rem', flexShrink: 0, color: 'white',
-              boxShadow: '0 2px 8px rgba(58,155,159,0.25)'
+              flexShrink: 0,
+              boxShadow: '0 2px 8px rgba(11, 15, 25, 0.12), inset 0 0 10px rgba(56, 189, 248, 0.15)'
             }}>
-              🤖
+              <LuminaLogo size={26} />
             </div>
             {!collapsed && (
               <div style={{ minWidth: 0 }}>
                 <div style={{
-                  fontWeight: 700, fontSize: '0.95rem', color: '#1A1D26',
-                  letterSpacing: '-0.01em', lineHeight: 1.2,
-                  whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis'
+                  fontWeight: 800, fontSize: '0.98rem', color: '#0F172A',
+                  letterSpacing: '-0.02em', lineHeight: 1.2,
+                  whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis',
+                  display: 'flex', alignItems: 'center', gap: '6px'
                 }}>
-                  AI Systems
+                  <span>Lumina AI</span>
+                  <span style={{
+                    fontSize: '0.58rem',
+                    fontWeight: 700,
+                    letterSpacing: '0.04em',
+                    padding: '1px 5px',
+                    borderRadius: '4px',
+                    background: 'rgba(56, 189, 248, 0.12)',
+                    color: '#0284C7',
+                    textTransform: 'uppercase'
+                  }}>PRO</span>
                 </div>
                 <div style={{
-                  fontSize: '0.65rem', color: '#9CA3AF',
-                  fontWeight: 500, marginTop: '1px'
-                }}>
-                  Knowledge Base
+                  fontSize: '0.67rem', color: '#64748B',
+                  fontWeight: 500, marginTop: '2px',
+                  whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis',
+                  maxWidth: '160px'
+                }} title="Build, learn, and master the art of Generative AI.">
+                  Build, learn & master GenAI
                 </div>
               </div>
             )}

@@ -460,7 +460,7 @@ export default function App() {
                 </a>
               </div>
               <div style={{ fontSize: '12px', color: '#f59e0b', fontWeight: 500 }}>
-                Educational Research & Open Knowledge Base
+                Build, learn, and master the art of Generative AI.
               </div>
               <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', justifyContent: 'center', marginTop: '4px', fontSize: '12px' }}>
                 <button

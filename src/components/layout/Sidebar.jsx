@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { UMBRELLA_TOPICS, getTabsForUmbrella } from "../../registry/tabsRegistry.js";
+import { LuminaLogo } from "../ui/LuminaLogo.jsx";
 
 export default function Sidebar({
   activeTab,
@@ -49,41 +50,47 @@ export default function Sidebar({
         alignItems: "center",
         justifyContent: isCollapsed ? "center" : "space-between"
       }}>
-        <div style={{ display: "flex", alignItems: "center", gap: "0.7rem", overflow: "hidden" }}>
+        <div
+          onClick={() => onSelectTab && onSelectTab('overview')}
+          style={{ display: "flex", alignItems: "center", gap: "0.7rem", overflow: "hidden", cursor: "pointer" }}
+          title="Lumina AI — Build, learn, and master the art of Generative AI."
+        >
           <div style={{
             width: 32,
             height: 32,
-            borderRadius: 6,
-            background: "linear-gradient(135deg, #F0A89A, #5EC4C8)",
+            borderRadius: 8,
+            background: "#0B0F19",
+            border: "1px solid rgba(56, 189, 248, 0.25)",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            fontWeight: 900,
-            fontSize: "1rem",
-            color: "#ffffff",
-            flexShrink: 0
+            flexShrink: 0,
+            boxShadow: "0 2px 8px rgba(11, 15, 25, 0.3)"
           }}>
-            ⚡
+            <LuminaLogo size={24} />
           </div>
           {!isCollapsed && (
             <div>
               <div style={{
                 fontFamily: "Syne, sans-serif",
                 fontWeight: 800,
-                fontSize: "0.8rem",
+                fontSize: "0.85rem",
                 color: "#ffffff",
                 letterSpacing: "-0.01em",
                 whiteSpace: "nowrap"
               }}>
-                AI Systems Engine
+                Lumina AI
               </div>
               <div style={{
                 fontSize: "0.58rem",
-                color: "#64748b",
-                fontFamily: "DM Mono, monospace",
-                letterSpacing: "0.05em"
+                color: "#94a3b8",
+                letterSpacing: "0.02em",
+                whiteSpace: "nowrap",
+                overflow: "hidden",
+                textOverflow: "ellipsis",
+                maxWidth: "140px"
               }}>
-                ARCHITECTURE v2026
+                Build, learn & master GenAI
               </div>
             </div>
           )}
