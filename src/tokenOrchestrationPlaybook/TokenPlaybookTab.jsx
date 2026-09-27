@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import * as Primitives from '../components/layout/Primitives.jsx';
 import { Hero, CodeBlock } from '../components/ui/Content.jsx';
 import { Card, Badge, Button, Callout } from '../components/ui/Core.jsx';
+import DiagramImage from '../components/ui/DiagramImage.jsx';
 import {
   CONTAINER_SERVICES,
   K8S_PRODUCTION_RULES,
@@ -64,6 +65,18 @@ export default function TokenPlaybookTab() {
         title="Enterprise AI Token Management & Orchestration Playbook"
         description="A complete, end-to-end production architecture blueprint for managing LLM context limits, token costs, and multi-service orchestration. Covering Docker/K8s deployment, LangSmith token governance, RAGAS accuracy evaluation, async parallelism, and a 4-phase enterprise rollout."
       />
+
+      <div style={{ marginBottom: 'var(--ds-space-6)' }}>
+        <DiagramImage
+          moduleId="frontiers_production"
+          src="/assets/spotify_token_optimization.png"
+          alt="How Spotify Cut Claude Code Token Usage by 92%"
+          title="Spotify's Token Optimization Architecture"
+          caption="PreToolUse hooks, bulk-read scripts, and cheap model delegation — how Spotify reduced token costs by 92% while maintaining code quality."
+          background="#090d16"
+          maxWidth={1100}
+        />
+      </div>
 
       <Container style={{ marginTop: 'var(--ds-space-6)' }}>
         {/* SUBTAB NAVIGATION */}

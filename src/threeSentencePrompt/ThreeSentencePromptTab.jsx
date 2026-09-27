@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import DiagramImage from '../components/ui/DiagramImage.jsx';
 
 const C = {
   bg: "#0F1219",
@@ -2439,6 +2440,18 @@ export default function ThreeSentencePromptTab() {
           forces the AI to pause, confirm what you actually want, and propose a plan before
           committing to a full response.
         </div>
+      </div>
+
+      <div style={{ marginBottom: 28 }}>
+        <DiagramImage
+          moduleId="foundations"
+          src="/assets/chatgpt_prompting_frameworks.png"
+          alt="ChatGPT Prompting Frameworks"
+          title="8 Prompting Frameworks Compared"
+          caption="TRACE, TAG, RTF, CLEAR, PACT, STAR, RISE, and RASCEF — structured approaches for different prompt scenarios."
+          background="#0F1219"
+          maxWidth={1100}
+        />
       </div>
 
       {/* The 3 sentences - hero card */}

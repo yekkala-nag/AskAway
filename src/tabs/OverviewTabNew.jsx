@@ -14,6 +14,7 @@ import { TABS_REGISTRY, UMBRELLA_TOPICS } from '../registry/tabsRegistry.js';
 import { Container, Section, Grid, Flex, Stack } from '../components/layout/Primitives.jsx';
 import { Hero, Diagram, CodeBlock, Accordion, Tabs, Stepper } from '../components/ui/Content.jsx';
 import { Card, Badge, Button, Callout } from '../components/ui/Core.jsx';
+import DiagramImage from '../components/ui/DiagramImage.jsx';
 import {
   ADAPTIVE_TRACKS,
   JOURNEY_TRACKS,
@@ -204,6 +205,18 @@ export function OverviewTab({ onSelectTab, setActiveTab: setGlobalActiveTab }) {
           { label: '📊 View Progress', variant: 'ghost', onClick: () => handleNavigate('progress') },
         ]}
       />
+
+      <div style={{ marginBottom: 'var(--ds-space-6)' }}>
+        <DiagramImage
+          moduleId="foundations"
+          src="/assets/seven_layers_of_ai.png"
+          alt="7 Layers of AI"
+          title="7 Layers of AI — From Classical Rules to AGI"
+          caption="Classical AI → Machine Learning → Neural Networks → Deep Learning → Generative AI → Agentic AI → AGI. We are currently at the Generative AI frontier."
+          background="#090d16"
+          maxWidth={1100}
+        />
+      </div>
 
       <Container size="normal">
         {/* ============================================================ */}

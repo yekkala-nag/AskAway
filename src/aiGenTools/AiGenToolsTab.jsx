@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import * as Primitives from '../components/layout/Primitives.jsx';
 import { Hero } from '../components/ui/Content.jsx';
 import { Card, Badge, Button } from '../components/ui/Core.jsx';
+import DiagramImage from '../components/ui/DiagramImage.jsx';
 
 const { Container, Grid, Flex, Stack } = Primitives;
 
@@ -136,6 +137,18 @@ export default function AiGenToolsTab() {
           { label: 'Reading', value: '7 articles' },
         ]}
       />
+
+      <div style={{ marginBottom: '24px' }}>
+        <DiagramImage
+          moduleId="frontiers_production"
+          src="/assets/free_ai_tools_overview.png"
+          alt="10 Best Free AI Tools"
+          title="Free AI Tools Landscape"
+          caption="BlueWillow, Microsoft Designer, RunwayML, Microsoft Copilot, Sheetplus, 10Web, Codeium, ChatGPT, Decktopus, and ElevenLabs — with selection criteria."
+          background="#090d16"
+          maxWidth={1100}
+        />
+      </div>
 
       <Container size="wide">
         {/* Category Selector */}
