@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import * as Primitives from '../components/layout/Primitives.jsx';
 import { Hero, CodeBlock } from '../components/ui/Content.jsx';
 import { Card, Badge, Button, Callout } from '../components/ui/Core.jsx';
-import DiagramImage from '../components/ui/DiagramImage.jsx';
 import {
   COGNITIVE_PROMPTING_PATTERNS,
   PROMPT_STRUCTURE_COMPONENTS,
@@ -62,18 +61,6 @@ Return strictly valid ${outputFormat}.`;
           { label: 'Programmatic Framework', value: 'DSPy Declarative Signatures' }
         ]}
       />
-
-      <div style={{ marginBottom: 'var(--ds-space-6)' }}>
-        <DiagramImage
-          moduleId="foundations"
-          src="/assets/ai_learning_prompting_techniques.png"
-          alt="9 Ways to Use AI to Learn Anything Faster"
-          title="9 AI-Powered Learning Techniques"
-          caption="Prompting strategies for faster learning: Explain Like I'm 5, Examples & Analogies, Role-Play Practice, Study Plans, Quiz & Feedback, Mind Maps, Expert Roundtables, and Mnemonics."
-          background="#090d16"
-          maxWidth={1100}
-        />
-      </div>
 
       <Container size="wide">
         {/* SUBTAB NAVIGATION */}

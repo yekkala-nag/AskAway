@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from 'react';
 import * as Primitives from '../components/layout/Primitives.jsx';
 import { Hero } from '../components/ui/Content.jsx';
 import { Card, Badge, Button } from '../components/ui/Core.jsx';
-import DiagramImage from '../components/ui/DiagramImage.jsx';
 import {
   PARTS,
   COMPONENTS,
@@ -201,18 +200,6 @@ export default function AIHarnessTab() {
           { label: 'Evaluations', value: 'MMLU / GSM8K / DPO' }
         ]}
       />
-
-      <div style={{ marginBottom: 'var(--ds-space-6)' }}>
-        <DiagramImage
-          moduleId="data_platform"
-          src="/assets/harness_zero_agent_distillation.png"
-          alt="Harness-Zero: Agent-as-Harness Distillation"
-          title="Harness-Zero Research — Distilling Harness Behavior into Model Weights"
-          caption="Agent harnesses mediate model-environment interaction. Harness-Zero transfers specialized harness behaviors into model weights via agent-as-harness trajectory collection and fine-tuning."
-          background="#090d16"
-          maxWidth={1100}
-        />
-      </div>
 
       <Container size="wide">
         {/* MAIN NAVIGATION BAR */}

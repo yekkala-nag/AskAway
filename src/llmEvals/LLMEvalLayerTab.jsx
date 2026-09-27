@@ -48,18 +48,6 @@ export default function LLMEvalLayerTab() {
         ]}
       />
 
-      <div style={{ marginBottom: 'var(--ds-space-6)' }}>
-        <DiagramImage
-          moduleId="frontiers_production"
-          src="/assets/llm_evaluation_methods.png"
-          alt="11 LLM Evaluation Methods"
-          title="LLM Evaluation Methods — From ROUGE to Trajectory Accuracy"
-          caption="G-Eval, ROUGE, BLEU, BERTScore, LLM-as-Judge, Human Eval, Multi-turn Eval, Safety Eval, LLM Juries, DAG Eval, and Trajectory Accuracy."
-          background="#090d16"
-          maxWidth={1100}
-        />
-      </div>
-
       <Container size="wide">
         {/* SUBTAB NAVIGATION */}
         <div style={{

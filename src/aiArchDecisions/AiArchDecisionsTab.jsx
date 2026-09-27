@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import * as Primitives from '../components/layout/Primitives.jsx';
 import { Hero } from '../components/ui/Content.jsx';
 import { Card, Badge, Button } from '../components/ui/Core.jsx';
-import DiagramImage from '../components/ui/DiagramImage.jsx';
 
 const { Container, Grid, Flex, Stack } = Primitives;
 
@@ -144,18 +143,6 @@ export default function AiArchDecisionsTab() {
           { label: 'Reading', value: '6 articles' },
         ]}
       />
-
-      <div style={{ marginBottom: '24px' }}>
-        <DiagramImage
-          moduleId="frontiers_production"
-          src="/assets/llm_rag_agent_comparison.png"
-          alt="LLM vs RAG vs AI Agent vs Agentic AI"
-          title="Architecture Comparison — LLM, RAG, Agent, Agentic AI"
-          caption="From basic LLM inference to full agentic systems: understanding when to use each architectural paradigm."
-          background="#090d16"
-          maxWidth={1100}
-        />
-      </div>
 
       <Container size="wide">
         {/* Category Selector */}

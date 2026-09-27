@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import DiagramImage from '../components/ui/DiagramImage.jsx';
 
 const C = {
   bg: "#080D1A", surface: "#0F1629", s2: "#162040", s3: "#1E2D52",
@@ -247,18 +246,6 @@ export default function DataCentricAITab() {
         <div style={{ color: C.muted, fontSize: 13, lineHeight: 1.7 }}>
           The prevailing focus in ML has been model-centric — bigger architectures, more parameters, novel losses. But consistently poor data quality is a silent killer that no architecture can fix.
         </div>
-      </div>
-
-      <div style={{ marginBottom: 8 }}>
-        <DiagramImage
-          moduleId="data_platform"
-          src="/assets/ai_ready_data_journey.png"
-          alt="What AI-Ready Data Actually Needs"
-          title="The AI-Ready Data Journey"
-          caption="From clean data to actually AI-ready: consistency, connectivity, clear definitions, business context, and reliability."
-          background="#080D1A"
-          maxWidth={1100}
-        />
       </div>
 
       <ParadigmComparison />
