@@ -183,10 +183,10 @@ function AgentSimulator() {
               COORDINATOR OUTPUT — VERDICT: HOLD
             </div>
             <div style={{ color: C.text, fontSize: 12, lineHeight: 1.7 }}>
-              <strong>Contradiction detected:</strong> {coordinatorOutput.contradictions[0].note}
+              <strong>Contradiction detected:</strong> {coordinatorOutput.contradictions?.[0]?.note || "Contradiction detected across specialist models"}
             </div>
             <div style={{ marginTop: 8, display: "flex", gap: 8, flexWrap: "wrap" }}>
-              {Object.entries(coordinatorOutput.riskSignals).map(([k, v]) => (
+              {Object.entries(coordinatorOutput.riskSignals || {}).map(([k, v]) => (
                 <span key={k} style={{
                   padding: "3px 8px", borderRadius: 4, fontSize: 10, fontWeight: 600,
                   background: v ? C.rose + "22" : C.sky + "11",
@@ -351,9 +351,9 @@ function RiskRoutingFlow() {
           </React.Fragment>
         ))}
       </div>
-      <div style={{ padding: "12px", background: C.surface, borderRadius: 8, borderLeft: `3px solid ${steps[step].color}` }}>
-        <div style={{ color: steps[step].color, fontWeight: 600, fontSize: 13 }}>{steps[step].label}</div>
-        <div style={{ color: C.muted, fontSize: 12, marginTop: 4 }}>{steps[step].desc}</div>
+      <div style={{ padding: "12px", background: C.surface, borderRadius: 8, borderLeft: `3px solid ${steps[step]?.color || C.amber}` }}>
+        <div style={{ color: steps[step]?.color || C.amber, fontWeight: 600, fontSize: 13 }}>{steps[step]?.label || "Step"}</div>
+        <div style={{ color: C.muted, fontSize: 12, marginTop: 4 }}>{steps[step]?.desc || ""}</div>
       </div>
       <div style={{ marginTop: 12, padding: "10px 14px", background: C.s2, borderRadius: 8, border: `1px solid ${C.amber}33` }}>
         <div style={{ color: C.amber, fontSize: 12, fontWeight: 600 }}>
@@ -364,7 +364,34 @@ function RiskRoutingFlow() {
   );
 }
 
-export default function MultiAgentCoordinationTab() {
+class LocalErrorBoundary extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { hasError: false };
+  }
+  static getDerivedStateFromError() {
+    return { hasError: true };
+  }
+  componentDidCatch(error, errorInfo) {
+    console.warn("MultiAgentCoordinationTab error caught:", error, errorInfo);
+  }
+  render() {
+    if (this.state.hasError) {
+      return (
+        <div style={{ padding: "3rem 1.5rem", textAlign: "center", background: "#0F1629", borderRadius: 12, border: "1px solid #243358", color: "#E2E8F0" }}>
+          <div style={{ fontSize: "2rem", marginBottom: "0.5rem" }}>⚙️</div>
+          <h3 style={{ margin: "0 0 0.5rem 0", fontSize: "1.1rem" }}>Component temporarily unavailable</h3>
+          <p style={{ color: "#7A8BA8", fontSize: "0.85rem", maxWidth: 450, margin: "0 auto" }}>
+            The multi-agent coordination simulation encountered an issue and was gracefully paused.
+          </p>
+        </div>
+      );
+    }
+    return this.props.children;
+  }
+}
+
+function MultiAgentCoordinationContent() {
   return (
     <div style={{ padding: "24px 32px", display: "flex", flexDirection: "column", gap: 28, maxWidth: 880, margin: "0 auto" }}>
       <div style={{ background: C.surface, border: `1px solid ${C.border}`, borderRadius: 14, padding: 24 }}>
@@ -394,5 +421,13 @@ export default function MultiAgentCoordinationTab() {
         </div>
       </Card>
     </div>
+  );
+}
+
+export default function MultiAgentCoordinationTab(props) {
+  return (
+    <LocalErrorBoundary>
+      <MultiAgentCoordinationContent {...props} />
+    </LocalErrorBoundary>
   );
 }

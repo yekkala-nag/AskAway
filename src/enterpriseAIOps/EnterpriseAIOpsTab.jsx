@@ -92,6 +92,26 @@ export default function EnterpriseAIOpsTab() {
       />
 
       <Container size="wide">
+        {/* STATUTORY REGULATORY & LEGAL ADVICE DISCLAIMER */}
+        <div style={{
+          marginTop: 'var(--ds-space-4)',
+          marginBottom: 'var(--ds-space-6)',
+          padding: '12px 16px',
+          background: 'rgba(239, 68, 68, 0.08)',
+          borderRadius: 8,
+          border: '1px solid rgba(239, 68, 68, 0.3)',
+          borderLeft: '4px solid #EF4444',
+          display: 'flex',
+          alignItems: 'flex-start',
+          gap: 12
+        }}>
+          <span style={{ fontSize: 18 }}>⚖️</span>
+          <div style={{ fontSize: 12, color: 'var(--ds-color-text-secondary)', lineHeight: 1.55 }}>
+            <strong style={{ color: '#EF4444' }}>LEGAL NOTICE — NOT LEGAL COUNSEL OR STATUTORY CERTIFICATION:</strong>{' '}
+            The contract analysis, indemnification review, GDPR adequacy evaluations, Schrems II jurisprudence citations, and regulatory SLA models simulated in this module are for engineering architecture research and technical demonstration only. They do not constitute formal legal advice, representation, or contract enforceability opinions. Consult a qualified, licensed attorney for all binding commercial agreements and statutory compliance determinations.
+          </div>
+        </div>
+
         {/* SUBTAB NAVIGATION */}
         <div style={{
           display: 'flex',

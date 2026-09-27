@@ -162,7 +162,7 @@ const COMPARISON = [
 // ─── HELPERS ─────────────────────────────────────────────────────
 // ─── ZOOMABLE FIGURE WRAPPER ──────────────────────────────────────
 // Wraps any SVG diagram with a maximize/restore control + fullscreen modal.
-const ZoomableFigure = ({ title, children }) => {
+const ZoomableFigure = ({ title, children, dark = false }) => {
   const [zoomed, setZoomed] = useState(false);
   const [scale, setScale]   = useState(1.0);
 
@@ -222,28 +222,40 @@ const ZoomableFigure = ({ title, children }) => {
   return (
     <>
       {/* INLINE CARD */}
-      <div style={{ borderRadius: 8, border: "1px solid #e0dcd4", background: "#ffffff", overflow: "hidden", marginBottom: "0.75rem", boxShadow: "0 2px 4px rgba(0,0,0,0.03)" }}>
+      <div style={{
+        borderRadius: 8,
+        border: dark ? "1px solid rgba(255,255,255,0.12)" : "1px solid #e0dcd4",
+        background: dark ? "#090d16" : "#ffffff",
+        overflow: "hidden",
+        marginBottom: "0.75rem",
+        boxShadow: dark ? "0 4px 14px rgba(0,0,0,0.4)" : "0 2px 4px rgba(0,0,0,0.03)"
+      }}>
         {/* Inline Card Header - Clean, No Zoom Text */}
         <div style={{
           display: "flex", justifyContent: "space-between", alignItems: "center",
-          padding: "0.5rem 0.9rem", background: "#f7f5f0", borderBottom: "1px solid #e0dcd4",
-          fontFamily: "Syne, sans-serif", fontSize: "0.7rem", fontWeight: 700, color: "#1E293B"
+          padding: "0.5rem 0.9rem",
+          background: dark ? "#0d111d" : "#f7f5f0",
+          borderBottom: dark ? "1px solid rgba(255,255,255,0.08)" : "1px solid #e0dcd4",
+          fontFamily: "Syne, sans-serif", fontSize: "0.7rem", fontWeight: 700,
+          color: dark ? "#94A3B8" : "#1E293B"
         }}>
           <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
             <span style={{ color: "#3A9B9F" }}>🔍</span>
-            <span style={{ color: "#1a1a2e" }}>{title || "Figure / Workflow"}</span>
+            <span style={{ color: dark ? "#F8FAFC" : "#1a1a2e" }}>{title || "Figure / Workflow"}</span>
           </div>
 
           <button
             onClick={openModal}
             title="Expand to Fullscreen View"
             style={{
-              padding: "4px 10px", height: 26, borderRadius: 4, background: "#ffffff", border: "1px solid #d0ccc4",
-              color: "#3A9B9F", cursor: "pointer", fontWeight: 700, fontSize: "0.65rem", display: "flex", alignItems: "center", gap: "4px",
+              padding: "4px 10px", height: 26, borderRadius: 4,
+              background: dark ? "#161b2c" : "#ffffff",
+              border: dark ? "1px solid rgba(94, 196, 200, 0.4)" : "1px solid #d0ccc4",
+              color: "#5EC4C8", cursor: "pointer", fontWeight: 700, fontSize: "0.65rem", display: "flex", alignItems: "center", gap: "4px",
               boxShadow: "0 1px 2px rgba(0,0,0,0.05)", transition: "all 0.15s ease"
             }}
             onMouseEnter={e => { e.currentTarget.style.background = "#5EC4C8"; e.currentTarget.style.color = "#fff"; }}
-            onMouseLeave={e => { e.currentTarget.style.background = "#ffffff"; e.currentTarget.style.color = "#5EC4C8"; }}
+            onMouseLeave={e => { e.currentTarget.style.background = dark ? "#161b2c" : "#ffffff"; e.currentTarget.style.color = "#5EC4C8"; }}
           >
             <span>⤢</span> Fullscreen
           </button>
@@ -256,7 +268,7 @@ const ZoomableFigure = ({ title, children }) => {
           style={{
             width: "100%",
             padding: "1rem",
-            background: "#ffffff",
+            background: dark ? "#090d16" : "#ffffff",
             cursor: "pointer",
             display: "flex",
             justifyContent: "center",
@@ -1763,7 +1775,7 @@ export const MultiAgentTab = ({ s }) => {
           src="/assets/multi_agent_systems_architecture.png"
           alt="Multi-Agent Systems Architecture Blueprint"
           title="Architectural Blueprint — Multi-Agent Systems & Orchestration Patterns"
-          caption="CognitionX architectural blueprint showcasing Supervisor Pattern, P2P Collaboration, Hierarchical Team, Debate Mode, Tool-Using Mesh, Topology Matrix, and Communication Flow."
+          caption="Multi-Agent Systems architectural blueprint showcasing Supervisor Pattern, P2P Collaboration, Hierarchical Team, Debate Mode, Tool-Using Mesh, Topology Matrix, and Communication Flow."
           maxWidth={1200}
         />
       </div>
@@ -3875,7 +3887,7 @@ export const MemoryEngineeringTab = ({ s }) => {
           src="/assets/memory_engineering_architecture.png"
           alt="Memory Engineering Architecture Blueprint"
           title="Architectural Blueprint — Memory Engineering Neural Storage Architecture"
-          caption="CognitionX architectural blueprint showcasing Short-Term Memory, Long-Term Memory, Memory Consolidation, Memory Retrieval, Privacy & Tenant Isolation, Memory Lifecycle, and Memory Types Comparison."
+          caption="Memory Engineering architectural blueprint showcasing Short-Term Memory, Long-Term Memory, Memory Consolidation, Memory Retrieval, Privacy & Tenant Isolation, Memory Lifecycle, and Memory Types Comparison."
           maxWidth={1200}
         />
       </div>
@@ -9270,151 +9282,181 @@ const PARALLEL_VARIANTS = [
   { name: "Skeleton-of-Thought", icon: "🦴", color: "#C47A6A", desc: "Generate high-level outline first (skeleton), then expand each skeleton point in parallel across multiple LLM calls. Fundamentally restructures generation, not just decoding.", use: "Long-form structured content where sections are independent.", speedup: "2–2.5×", lossless: false },
 ];
 
-// ── SVG: MLA architecture ──
 const MLADiagram = () => (
-  <svg viewBox="0 0 260 105" style={{ width: "100%", height: 155 }}>
-    <text x="130" y="10" textAnchor="middle" fontSize="5.5" fill="#334155" fontFamily="Syne, sans-serif" fontWeight="700" letterSpacing="1">MULTI-HEAD LATENT ATTENTION — LOW-RANK KV COMPRESSION</text>
-    {/* Standard MHA (left) */}
-    <rect x="8" y="18" width="68" height="76" rx={2} fill="#ffffff" stroke="#F0A89A" strokeWidth="0.7"/>
-    <text x="42" y="29" textAnchor="middle" fontSize="4.5" fill="#F0A89A" fontFamily="Syne, sans-serif" fontWeight="800">Standard MHA</text>
-    {["Q head 1", "K head 1", "V head 1", "Q head 2", "K head 2", "V head 2", "... × h heads"].map((t, i) => (
-      <g key={i}>
-        <rect x="14" y={33 + i * 8} width="56" height="6" rx={1} fill={t.startsWith("K") || t.startsWith("V") ? "rgba(196,87,42,0.15)" : "rgba(42,42,56,0.5)"} stroke={t.startsWith("K") || t.startsWith("V") ? "#F0A89A" : "#e0dcd4"} strokeWidth="0.4"/>
-        <text x="42" y={37 + i * 8} textAnchor="middle" fontSize="3.2" fill={t.startsWith("K") || t.startsWith("V") ? "#F0A89A" : "#334155"} fontFamily="DM Mono, monospace">{t}</text>
-      </g>
-    ))}
-    <text x="42" y="98" textAnchor="middle" fontSize="3.2" fill="#F0A89A" fontFamily="Syne, sans-serif" fontWeight="700">192–328 KB/token</text>
-    {/* Arrow */}
-    <text x="80" y="60" fontSize="8" fill="#1E293B" textAnchor="middle">→</text>
-    {/* MLA (right) */}
-    <rect x="88" y="18" width="164" height="76" rx={2} fill="#ffffff" stroke="#5EC4C8" strokeWidth="0.8"/>
-    <text x="170" y="28" textAnchor="middle" fontSize="4.5" fill="#5EC4C8" fontFamily="Syne, sans-serif" fontWeight="800">Multi-Head Latent Attention (MLA)</text>
-    {/* Input X */}
-    <rect x="94" y="32" width="30" height="10" rx={1} fill="rgba(201,168,76,0.1)" stroke="#F0A89A" strokeWidth="0.6"/>
-    <text x="109" y="39" textAnchor="middle" fontSize="3.8" fill="#F0A89A" fontFamily="Syne, sans-serif" fontWeight="700">Input X</text>
-    {/* Down projection */}
-    <rect x="132" y="32" width="44" height="10" rx={1} fill="rgba(42,138,132,0.12)" stroke="#5EC4C8" strokeWidth="0.7"/>
-    <text x="154" y="39" textAnchor="middle" fontSize="3.5" fill="#5EC4C8" fontFamily="DM Mono, monospace">C_KV = X·W_DKV</text>
-    {/* Cache only C_KV */}
-    <rect x="184" y="32" width="60" height="10" rx={1} fill="rgba(74,154,74,0.12)" stroke="#5EC4C8" strokeWidth="0.7"/>
-    <text x="214" y="39" textAnchor="middle" fontSize="3.5" fill="#5EC4C8" fontFamily="Syne, sans-serif" fontWeight="700">CACHE: C_KV only</text>
-    <text x="214" y="45" textAnchor="middle" fontSize="3" fill="#334155" fontFamily="DM Mono, monospace">70 KB/token</text>
-    {/* Arrows */}
-    <line x1="124" y1="37" x2="132" y2="37" stroke="#F0A89A" strokeWidth="0.5"/>
-    <line x1="176" y1="37" x2="184" y2="37" stroke="#5EC4C8" strokeWidth="0.5"/>
-    {/* Up projection at inference */}
-    <rect x="94" y="52" width="80" height="14" rx={1} fill="rgba(155,127,212,0.1)" stroke="#C9B8E8" strokeWidth="0.6"/>
-    <text x="134" y="59" textAnchor="middle" fontSize="4" fill="#C9B8E8" fontFamily="Syne, sans-serif" fontWeight="700">At inference: up-project C_KV</text>
-    <text x="134" y="64" textAnchor="middle" fontSize="3.2" fill="#334155" fontFamily="DM Mono, monospace">K^h = C_KV·W_UK_h   V^h = C_KV·W_UV_h</text>
-    <line x1="214" y1="42" x2="214" y2="52" stroke="#5EC4C8" strokeWidth="0.4" strokeDasharray="2,1"/>
-    <line x1="214" y1="52" x2="174" y2="52" stroke="#C9B8E8" strokeWidth="0.4" strokeDasharray="2,1"/>
-    {/* RoPE separation */}
-    <rect x="94" y="72" width="154" height="14" rx={1} fill="rgba(201,168,76,0.07)" stroke="#F0A89A" strokeWidth="0.5"/>
-    <text x="171" y="79" textAnchor="middle" fontSize="4" fill="#F0A89A" fontFamily="Syne, sans-serif" fontWeight="700">Decoupled RoPE: content path + position path combined only in attention scores</text>
-    <text x="130" y="100" textAnchor="middle" fontSize="3.5" fill="#334155" fontFamily="Syne, sans-serif">MHA2MLA retrofit (arxiv:2502.14837): Llama2-7B → 92.19% KV cache reduction, 0.5% LongBench drop</text>
-  </svg>
+  <div style={{ width: "100%", display: "flex", alignItems: "center", justifyContent: "center", background: "#05070e", borderRadius: 8, border: "1px solid rgba(94, 196, 200, 0.25)", overflow: "hidden" }}>
+    <img
+      src="/assets/arch_mla.jpg"
+      alt="Multi-Head Latent Attention (MLA) — Low-Rank KV Compression"
+      loading="lazy"
+      decoding="async"
+      style={{ width: "100%", height: "auto", maxHeight: "78vh", objectFit: "contain", display: "block" }}
+    />
+  </div>
 );
 
 // ── SVG: MoE routing diagram ──
 const MoEDiagram = () => (
-  <svg viewBox="0 0 260 100" style={{ width: "100%", height: 150 }}>
-    <text x="130" y="10" textAnchor="middle" fontSize="5.5" fill="#334155" fontFamily="Syne, sans-serif" fontWeight="700" letterSpacing="1">MIXTURE OF EXPERTS — SPARSE ROUTING</text>
-    {/* Token */}
-    <rect x="8" y="42" width="28" height="18" rx={2} fill="rgba(201,168,76,0.12)" stroke="#F0A89A" strokeWidth="0.7"/>
-    <text x="22" y="50" textAnchor="middle" fontSize="4.5" fill="#F0A89A" fontFamily="Syne, sans-serif" fontWeight="800">Token</text>
-    <text x="22" y="57" textAnchor="middle" fontSize="3.2" fill="#334155" fontFamily="DM Mono, monospace">x_t</text>
-    {/* Router */}
-    <line x1="36" y1="51" x2="48" y2="51" stroke="#F0A89A" strokeWidth="0.5"/>
-    <rect x="48" y="38" width="32" height="26" rx={2} fill="rgba(42,138,132,0.12)" stroke="#5EC4C8" strokeWidth="0.8"/>
-    <text x="64" y="48" textAnchor="middle" fontSize="4" fill="#5EC4C8" fontFamily="Syne, sans-serif" fontWeight="700">Router</text>
-    <text x="64" y="55" textAnchor="middle" fontSize="3.2" fill="#334155" fontFamily="DM Mono, monospace">G(x) = </text>
-    <text x="64" y="61" textAnchor="middle" fontSize="3.2" fill="#334155" fontFamily="DM Mono, monospace">Softmax(x·W_g)</text>
-    {/* Experts */}
-    {[0,1,2,3,4,5,6,7].map(i => {
-      const active = i === 2 || i === 5;
-      const x = 100, y = 15 + i * 10;
+  <svg viewBox="0 0 900 360" style={{ width: "100%", height: "auto", display: "block", background: "#090d16", borderRadius: 8 }}>
+    <rect width="900" height="360" fill="#090d16" rx={8} />
+    <g stroke="rgba(255,255,255,0.04)" strokeWidth="1">
+      {[...Array(18)].map((_, i) => <line key={i} x1={i * 50} y1="0" x2={i * 50} y2="360" />)}
+      {[...Array(8)].map((_, i) => <line key={i} x1="0" y1={i * 50} x2="900" y2={i * 50} />)}
+    </g>
+    <text x="450" y="36" textAnchor="middle" fontSize="16" fill="#F8FAFC" fontFamily="Syne, sans-serif" fontWeight="800" letterSpacing="1.5">MIXTURE OF EXPERTS (MoE) — SPARSE ROUTING & CONDITIONAL COMPUTE</text>
+    
+    <rect x="30" y="140" width="100" height="70" rx={8} fill="#0d111d" stroke="#5EC4C8" strokeWidth="1.5" />
+    <text x="80" y="170" textAnchor="middle" fontSize="14" fill="#5EC4C8" fontFamily="Syne, sans-serif" fontWeight="800">Token Input</text>
+    <text x="80" y="195" textAnchor="middle" fontSize="13" fill="#94A3B8" fontFamily="DM Mono, monospace">x_t (d_model)</text>
+
+    <line x1="130" y1="175" x2="190" y2="175" stroke="#5EC4C8" strokeWidth="2" markerEnd="url(#moe-arrow)" />
+
+    <rect x="190" y="115" width="160" height="120" rx={8} fill="#0d111d" stroke="#F59E0B" strokeWidth="1.8" />
+    <text x="270" y="145" textAnchor="middle" fontSize="14" fill="#F59E0B" fontFamily="Syne, sans-serif" fontWeight="800">Router / Gating</text>
+    <text x="270" y="172" textAnchor="middle" fontSize="12" fill="#F8FAFC" fontFamily="DM Mono, monospace">G(x) = Softmax(x·W_g)</text>
+    <rect x="210" y="192" width="120" height="26" rx={4} fill="rgba(245,158,11,0.15)" stroke="#F59E0B" strokeWidth="1" />
+    <text x="270" y="210" textAnchor="middle" fontSize="11" fill="#F59E0B" fontFamily="Syne, sans-serif" fontWeight="700">Top-k Selection (k=2)</text>
+
+    {[
+      { id: 1, name: "Expert 1", active: false },
+      { id: 2, name: "Expert 2", active: true },
+      { id: 3, name: "Expert 3", active: false },
+      { id: 4, name: "Expert 4", active: false },
+      { id: 5, name: "Expert 5", active: true },
+      { id: 6, name: "Expert 6", active: false },
+      { id: 7, name: "Expert 7", active: false },
+      { id: 8, name: "Expert 8", active: false },
+    ].map((exp, idx) => {
+      const y = 60 + idx * 34;
       return (
-        <g key={i}>
-          <line x1="80" y1="51" x2={x} y2={y + 4} stroke={active ? "#5EC4C8" : "#e0dcd4"} strokeWidth={active ? 0.8 : 0.4} strokeDasharray={active ? "none" : "1.5,1"}/>
-          <rect x={x} y={y} width={30} height={8} rx={1} fill={active ? "rgba(74,154,74,0.15)" : "#ffffff"} stroke={active ? "#5EC4C8" : "#e0dcd4"} strokeWidth={active ? 0.8 : 0.4}/>
-          <text x={x+15} y={y+5.5} textAnchor="middle" fontSize="3.2" fill={active ? "#5EC4C8" : "#1E293B"} fontFamily="Syne, sans-serif" fontWeight={active?"700":"400"}>Expert {i+1}{active ? " ✓" : ""}</text>
+        <g key={exp.id}>
+          <line
+            x1="350" y1="175" x2="430" y2={y + 14}
+            stroke={exp.active ? "#10B981" : "rgba(255,255,255,0.1)"}
+            strokeWidth={exp.active ? 2 : 1}
+            strokeDasharray={exp.active ? "none" : "3,3"}
+          />
+          <rect
+            x="430" y={y} width="160" height="28" rx={6}
+            fill={exp.active ? "rgba(16, 185, 129, 0.15)" : "#0d111d"}
+            stroke={exp.active ? "#10B981" : "rgba(255,255,255,0.1)"}
+            strokeWidth={exp.active ? 1.5 : 1}
+          />
+          <text x="445" y={y + 18} fontSize="12" fill={exp.active ? "#10B981" : "#64748B"} fontFamily="Syne, sans-serif" fontWeight={exp.active ? "800" : "500"}>
+            {exp.name} {exp.active ? "✓ ACTIVE (5.5%)" : "• IDLE (0 Compute)"}
+          </text>
+          {exp.active && (
+            <line x1="590" y1={y + 14} x2="670" y2="175" stroke="#10B981" strokeWidth="2" />
+          )}
         </g>
       );
     })}
-    <text x="115" y="96" textAnchor="middle" fontSize="3.5" fill="#F0A89A" fontFamily="Syne, sans-serif">Top-k=2 activated out of 8 — 6 experts completely skipped</text>
-    {/* Output */}
-    <rect x="140" y="42" width="46" height="18" rx={2} fill="rgba(74,154,74,0.1)" stroke="#5EC4C8" strokeWidth="0.7"/>
-    <text x="163" y="50" textAnchor="middle" fontSize="4" fill="#5EC4C8" fontFamily="Syne, sans-serif" fontWeight="700">Weighted sum</text>
-    <text x="163" y="57" textAnchor="middle" fontSize="3.2" fill="#334155" fontFamily="DM Mono, monospace">Σ G(x)_i × E_i(x)</text>
-    <line x1="130" y1="23" x2="140" y2="47" stroke="#5EC4C8" strokeWidth="0.5"/>
-    <line x1="130" y1="58" x2="140" y2="55" stroke="#5EC4C8" strokeWidth="0.5"/>
-    {/* Dense vs sparse */}
-    <rect x="194" y="30" width="60" height="44" rx={2} fill="#f7f5f0" stroke="#e0dcd4" strokeWidth="0.5"/>
-    <text x="224" y="40" textAnchor="middle" fontSize="4" fill="#334155" fontFamily="Syne, sans-serif" fontWeight="700">Dense FFN vs MoE</text>
-    <text x="200" y="49" fontSize="3.2" fill="#F0A89A" fontFamily="Syne, sans-serif">Dense: ALL neurons fire</text>
-    <text x="200" y="56" fontSize="3.2" fill="#F0A89A" fontFamily="Syne, sans-serif">= 671B active always</text>
-    <text x="200" y="63" fontSize="3.2" fill="#5EC4C8" fontFamily="Syne, sans-serif">MoE: k/N experts fire</text>
-    <text x="200" y="70" fontSize="3.2" fill="#5EC4C8" fontFamily="Syne, sans-serif">= 37B active per token</text>
+
+    <rect x="670" y="135" width="200" height="80" rx={8} fill="#0d111d" stroke="#5EC4C8" strokeWidth="1.5" />
+    <text x="770" y="165" textAnchor="middle" fontSize="14" fill="#5EC4C8" fontFamily="Syne, sans-serif" fontWeight="800">Weighted Combination</text>
+    <text x="770" y="192" textAnchor="middle" fontSize="13" fill="#F8FAFC" fontFamily="DM Mono, monospace">y = Σ G(x)_i · E_i(x)</text>
+
+    <rect x="190" y="295" width="520" height="42" rx={6} fill="rgba(16,185,129,0.08)" stroke="rgba(16,185,129,0.3)" strokeWidth="1" />
+    <text x="450" y="322" textAnchor="middle" fontSize="12" fill="#10B981" fontFamily="Syne, sans-serif" fontWeight="700">
+      ⚡ 671B Total Parameters in Memory → Only 37B (5.5%) Computed per Token (95% GPU Savings)
+    </text>
+
+    <defs>
+      <marker id="moe-arrow" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+        <path d="M0,1 L6,4 L0,7 Z" fill="#5EC4C8" />
+      </marker>
+    </defs>
   </svg>
 );
 
 // ── SVG: Speculative decoding timeline ──
 const SpecDecodingDiagram = () => (
-  <svg viewBox="0 0 260 95" style={{ width: "100%", height: 142 }}>
-    <text x="130" y="10" textAnchor="middle" fontSize="5.5" fill="#334155" fontFamily="Syne, sans-serif" fontWeight="700" letterSpacing="1">SPECULATIVE DECODING — PARALLEL VERIFICATION</text>
-    {/* Without speculative */}
-    <text x="14" y="22" fontSize="4.2" fill="#F0A89A" fontFamily="Syne, sans-serif" fontWeight="700">Standard autoregressive (slow)</text>
-    {[0,1,2,3,4,5,6,7].map(i => (
-      <g key={i}>
-        <rect x={14 + i * 28} y="25" width="24" height="10" rx={1} fill="rgba(196,87,42,0.12)" stroke="#F0A89A" strokeWidth="0.5"/>
-        <text x={14 + i*28 + 12} y="32" textAnchor="middle" fontSize="3.5" fill="#F0A89A" fontFamily="DM Mono, monospace">t{i+1}</text>
-        {i < 7 && <text x={14 + i*28 + 25} y="31.5" fontSize="4" fill="#1E293B">→</text>}
+  <svg viewBox="0 0 900 360" style={{ width: "100%", height: "auto", display: "block", background: "#090d16", borderRadius: 8 }}>
+    <rect width="900" height="360" fill="#090d16" rx={8} />
+    <g stroke="rgba(255,255,255,0.04)" strokeWidth="1">
+      {[...Array(18)].map((_, i) => <line key={i} x1={i * 50} y1="0" x2={i * 50} y2="360" />)}
+      {[...Array(8)].map((_, i) => <line key={i} x1="0" y1={i * 50} x2="900" y2={i * 50} />)}
+    </g>
+    <text x="450" y="36" textAnchor="middle" fontSize="16" fill="#F8FAFC" fontFamily="Syne, sans-serif" fontWeight="800" letterSpacing="1.5">SPECULATIVE DECODING — DRAFT, THEN VERIFY IN PARALLEL</text>
+
+    <rect x="40" y="65" width="820" height="100" rx={8} fill="#0d111d" stroke="#EF4444" strokeWidth="1.2" />
+    <text x="60" y="95" fontSize="13" fill="#EF4444" fontFamily="Syne, sans-serif" fontWeight="800">Standard Autoregressive (Serial Bottleneck — 1 token per forward pass)</text>
+    {[1, 2, 3, 4, 5, 6, 7].map((t, idx) => (
+      <g key={t}>
+        <rect x={60 + idx * 105} y="110" width="80" height="36" rx={4} fill="rgba(239, 68, 68, 0.1)" stroke="#EF4444" strokeWidth="1" />
+        <text x={60 + idx * 105 + 40} y="133" textAnchor="middle" fontSize="12" fill="#EF4444" fontFamily="DM Mono, monospace">Token {t}</text>
+        {idx < 6 && <text x={60 + idx * 105 + 92} y="132" fontSize="14" fill="#64748B">→</text>}
       </g>
     ))}
-    <text x="14" y="44" fontSize="3.2" fill="#334155" fontFamily="Syne, sans-serif">8 sequential forward passes through large model = 8× latency</text>
-    {/* With speculative */}
-    <text x="14" y="55" fontSize="4.2" fill="#5EC4C8" fontFamily="Syne, sans-serif" fontWeight="700">Speculative decoding (fast)</text>
-    {/* Draft phase */}
-    <rect x="14" y="58" width="110" height="12" rx={1} fill="rgba(42,138,132,0.1)" stroke="#5EC4C8" strokeWidth="0.6"/>
-    <text x="69" y="66" textAnchor="middle" fontSize="3.8" fill="#5EC4C8" fontFamily="Syne, sans-serif" fontWeight="700">Draft model: t1 t2 t3 t4 t5 (fast, cheap)</text>
-    {/* Verify phase */}
-    <rect x="130" y="58" width="120" height="12" rx={1} fill="rgba(74,154,74,0.12)" stroke="#5EC4C8" strokeWidth="0.7"/>
-    <text x="190" y="66" textAnchor="middle" fontSize="3.8" fill="#5EC4C8" fontFamily="Syne, sans-serif" fontWeight="700">Large model: verify ALL 5 in ONE forward pass</text>
-    {/* Accepted / rejected */}
-    {[0,1,2,3,4].map(i => {
-      const accepted = i < 3;
-      return (
-        <g key={i}>
-          <rect x={14 + i * 24} y="75" width="20" height="10" rx={1} fill={accepted ? "rgba(74,154,74,0.15)" : "rgba(196,87,42,0.15)"} stroke={accepted ? "#5EC4C8" : "#F0A89A"} strokeWidth="0.6"/>
-          <text x={14 + i*24 + 10} y="82" textAnchor="middle" fontSize="3.5" fill={accepted ? "#5EC4C8" : "#F0A89A"} fontFamily="Syne, sans-serif">{accepted ? "✓ t"+(i+1) : "✗ t"+(i+1)}</text>
-        </g>
-      );
-    })}
-    <text x="140" y="82" fontSize="3.5" fill="#F0A89A" fontFamily="Syne, sans-serif">→ Resample t4 from target distribution</text>
-    <text x="14" y="92" fontSize="3.5" fill="#5EC4C8" fontFamily="Syne, sans-serif">3 tokens accepted in time of 1 large-model pass → 3× throughput gain this round</text>
+    <text x="840" y="95" textAnchor="end" fontSize="12" fill="#EF4444" fontFamily="DM Mono, monospace">7 Passes = 7× Latency</text>
+
+    <rect x="40" y="185" width="820" height="150" rx={8} fill="#0d111d" stroke="#10B981" strokeWidth="1.5" />
+    <text x="60" y="215" fontSize="13" fill="#10B981" fontFamily="Syne, sans-serif" fontWeight="800">Speculative Decoding (Parallel Verification — 2.5–3× Throughput)</text>
+    <text x="840" y="215" textAnchor="end" fontSize="12" fill="#10B981" fontFamily="DM Mono, monospace">1 Large Pass = Fast</text>
+
+    <rect x="60" y="230" width="340" height="42" rx={6} fill="rgba(94, 196, 200, 0.12)" stroke="#5EC4C8" strokeWidth="1" />
+    <text x="80" y="256" fontSize="12" fill="#5EC4C8" fontFamily="Syne, sans-serif" fontWeight="700">Small Draft Model:</text>
+    <text x="210" y="256" fontSize="12" fill="#F8FAFC" fontFamily="DM Mono, monospace">Speculates t1, t2, t3, t4, t5 (fast)</text>
+
+    <line x1="410" y1="251" x2="445" y2="251" stroke="#5EC4C8" strokeWidth="2" />
+
+    <rect x="455" y="230" width="385" height="42" rx={6} fill="rgba(16, 185, 129, 0.15)" stroke="#10B981" strokeWidth="1" />
+    <text x="475" y="256" fontSize="12" fill="#10B981" fontFamily="Syne, sans-serif" fontWeight="700">Large Target Model:</text>
+    <text x="615" y="256" fontSize="12" fill="#F8FAFC" fontFamily="DM Mono, monospace">Verifies ALL 5 in 1 forward pass!</text>
+
+    {[
+      { t: "t1", status: "ACCEPTED ✓", ok: true },
+      { t: "t2", status: "ACCEPTED ✓", ok: true },
+      { t: "t3", status: "ACCEPTED ✓", ok: true },
+      { t: "t4", status: "ACCEPTED ✓", ok: true },
+      { t: "t5", status: "REJECTED (Resample)", ok: false },
+    ].map((res, i) => (
+      <g key={i}>
+        <rect
+          x={60 + i * 155} y="285" width="145" height="34" rx={5}
+          fill={res.ok ? "rgba(16, 185, 129, 0.15)" : "rgba(239, 68, 68, 0.15)"}
+          stroke={res.ok ? "#10B981" : "#EF4444"}
+          strokeWidth="1"
+        />
+        <text x={60 + i * 155 + 72} y="307" textAnchor="middle" fontSize="11" fill={res.ok ? "#10B981" : "#EF4444"} fontFamily="Syne, sans-serif" fontWeight="700">
+          {res.t}: {res.status}
+        </text>
+      </g>
+    ))}
   </svg>
 );
 
 // ── SVG: Dense vs Sparse parameter diagram ──
 const DenseSparseParamDiagram = () => (
-  <svg viewBox="0 0 260 80" style={{ width: "100%", height: 120 }}>
-    <text x="130" y="10" textAnchor="middle" fontSize="5.5" fill="#334155" fontFamily="Syne, sans-serif" fontWeight="700" letterSpacing="1">DENSE vs SPARSE — PARAMETERS vs ACTIVE COMPUTE</text>
-    {/* Dense model */}
-    <rect x="8" y="18" width="100" height="40" rx={2} fill="rgba(196,87,42,0.08)" stroke="#F0A89A" strokeWidth="0.7"/>
-    <text x="58" y="28" textAnchor="middle" fontSize="4.5" fill="#F0A89A" fontFamily="Syne, sans-serif" fontWeight="800">Dense (e.g. GPT-4)</text>
-    {[...Array(5)].map((_,i) => [...Array(10)].map((_2,j) => (
-      <rect key={i*10+j} x={14 + j*8} y={33 + i*6} width={6} height={4} rx={0.5} fill="#F0A89A" opacity="0.5"/>
+  <svg viewBox="0 0 540 240" style={{ width: "100%", height: "auto", display: "block", background: "#090d16", borderRadius: 8 }}>
+    <rect width="540" height="240" fill="#090d16" rx={8} />
+    <text x="270" y="28" textAnchor="middle" fontSize="13" fill="#F8FAFC" fontFamily="Syne, sans-serif" fontWeight="800">DENSE vs SPARSE — PARAMETERS vs ACTIVE COMPUTE</text>
+    
+    <rect x="20" y="45" width="235" height="150" rx={8} fill="#0d111d" stroke="#EF4444" strokeWidth="1.2" />
+    <text x="137" y="70" textAnchor="middle" fontSize="12" fill="#EF4444" fontFamily="Syne, sans-serif" fontWeight="800">Dense Model (e.g. GPT-4)</text>
+    {[...Array(4)].map((_, i) => [...Array(10)].map((_2, j) => (
+      <rect key={i * 10 + j} x={36 + j * 20} y={85 + i * 18} width="14" height="12" rx={2} fill="#EF4444" opacity="0.8" />
     )))}
-    <text x="58" y="62" textAnchor="middle" fontSize="3.5" fill="#F0A89A" fontFamily="Syne, sans-serif">ALL parameters active every token</text>
-    {/* Sparse MoE */}
-    <rect x="120" y="18" width="132" height="40" rx={2} fill="rgba(74,154,74,0.08)" stroke="#5EC4C8" strokeWidth="0.7"/>
-    <text x="186" y="28" textAnchor="middle" fontSize="4.5" fill="#5EC4C8" fontFamily="Syne, sans-serif" fontWeight="800">Sparse MoE (DeepSeek-V3)</text>
-    {[...Array(5)].map((_,i) => [...Array(16)].map((_2,j) => {
-      const active = j === 3 || j === 11;
-      return <rect key={i*16+j} x={126 + j*7} y={33 + i*6} width={5} height={4} rx={0.5} fill={active ? "#5EC4C8" : "#e0dcd4"} opacity={active ? 0.8 : 0.3}/>;
+    <text x="137" y="180" textAnchor="middle" fontSize="11" fill="#EF4444" fontFamily="Syne, sans-serif" fontWeight="700">100% Active: All neurons fire</text>
+
+    <rect x="285" y="45" width="235" height="150" rx={8} fill="#0d111d" stroke="#10B981" strokeWidth="1.5" />
+    <text x="402" y="70" textAnchor="middle" fontSize="12" fill="#10B981" fontFamily="Syne, sans-serif" fontWeight="800">Sparse MoE (DeepSeek-V3)</text>
+    {[...Array(4)].map((_, i) => [...Array(10)].map((_2, j) => {
+      const active = (i === 1 && j === 3) || (i === 2 && j === 7);
+      return (
+        <rect
+          key={i * 10 + j}
+          x={301 + j * 20} y={85 + i * 18} width="14" height="12" rx={2}
+          fill={active ? "#10B981" : "rgba(255,255,255,0.06)"}
+          stroke={active ? "#10B981" : "none"}
+          strokeWidth="1"
+        />
+      );
     }))}
-    <text x="186" y="62" textAnchor="middle" fontSize="3.5" fill="#5EC4C8" fontFamily="Syne, sans-serif">37B of 671B active (5.5%) — same quality, fraction of compute</text>
-    <text x="108" y="74" textAnchor="middle" fontSize="3.5" fill="#F0A89A" fontFamily="Syne, sans-serif">Why MoE costs $5.6M to train vs ~$50–100M for a dense equivalent</text>
+    <text x="402" y="180" textAnchor="middle" fontSize="11" fill="#10B981" fontFamily="Syne, sans-serif" fontWeight="700">5.5% Active: Top-k routing</text>
+
+    <text x="270" y="222" textAnchor="middle" fontSize="10.5" fill="#94A3B8" fontFamily="Syne, sans-serif">
+      MoE scales parameter capacity to 671B while running at 37B compute cost.
+    </text>
   </svg>
 );
 
@@ -9517,8 +9559,17 @@ export const ArchConceptsTab = ({ s }) => {
           </div>
 
           {/* Architecture diagram */}
-          <div style={{ background: "#ffffff", border: "1px solid #e0dcd4", borderRadius: 6, padding: "1.2rem", marginBottom: "1.5rem" }}>
-            <ZoomableFigure title="Multi-Head Latent Attention"><MLADiagram /></ZoomableFigure>
+          <div style={{ background: "#090d16", border: "1px solid #5EC4C8", borderRadius: 8, padding: "1.2rem", marginBottom: "1.5rem" }}>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "12px" }}>
+              <div>
+                <span style={{ fontSize: "11px", color: "#3A9B9F", fontWeight: "bold" }}>AI ARCHITECTURAL INFOGRAPHIC</span>
+                <h3 style={{ margin: "4px 0 0 0", color: "#f8fafc", fontSize: "1.05rem" }}>Multi-Head Latent Attention (MLA) — Low-Rank KV Compression</h3>
+              </div>
+              <span style={{ fontSize: "0.65rem", color: "#5EC4C8", background: "rgba(94, 196, 200, 0.1)", padding: "0.2rem 0.6rem", borderRadius: 4, border: "1px solid rgba(94, 196, 200, 0.3)" }}>
+                DeepSeek Innovation
+              </span>
+            </div>
+            <ZoomableFigure title="Multi-Head Latent Attention (MLA) — Low-Rank KV Compression" dark={true}><MLADiagram /></ZoomableFigure>
           </div>
 
           {/* Step-by-step animator */}
@@ -9572,8 +9623,17 @@ K = concat(K_content, rope(K_pos))   # ← RoPE only on positional part
         <div>
           <div style={s.sectionLabel("#9B89C4")}>Mixture of Experts (MoE) — DeepSeek, Mixtral, Llama 4, Qwen3</div>
 
-          <div style={{ background: "#ffffff", border: "1px solid #e0dcd4", borderRadius: 6, padding: "1.2rem", marginBottom: "1.5rem" }}>
-            <ZoomableFigure title="Mixture of Experts — Sparse Routing"><MoEDiagram /></ZoomableFigure>
+          <div style={{ background: "#090d16", border: "1px solid #9B89C4", borderRadius: 8, padding: "1.2rem", marginBottom: "1.5rem" }}>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "12px" }}>
+              <div>
+                <span style={{ fontSize: "11px", color: "#9B89C4", fontWeight: "bold" }}>AI ARCHITECTURAL INFOGRAPHIC</span>
+                <h3 style={{ margin: "4px 0 0 0", color: "#f8fafc", fontSize: "1.05rem" }}>Mixture of Experts (MoE) — Sparse Routing & Conditional Compute</h3>
+              </div>
+              <span style={{ fontSize: "0.65rem", color: "#9B89C4", background: "rgba(155, 137, 196, 0.1)", padding: "0.2rem 0.6rem", borderRadius: 4, border: "1px solid rgba(155, 137, 196, 0.3)" }}>
+                Sparse Scaling
+              </span>
+            </div>
+            <ZoomableFigure title="Mixture of Experts — Sparse Routing" dark={true}><MoEDiagram /></ZoomableFigure>
           </div>
 
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem", marginBottom: "1.5rem" }}>
@@ -9582,8 +9642,8 @@ K = concat(K_content, rope(K_pos))   # ← RoPE only on positional part
               <p style={{ fontSize: "0.68rem", color: "#334155", lineHeight: 1.8, marginBottom: "0.8rem" }}>Replace the dense feed-forward network in each transformer layer with <strong style={{ color: "#1a1a2e" }}>N expert FFNs</strong>. A router selects the top-k experts for each token. The other N-k experts are completely skipped — no compute, no memory access.</p>
               <p style={{ fontSize: "0.68rem", color: "#9B89C4", lineHeight: 1.8, fontWeight: 700 }}>Result: a model can have 671B total parameters but use only 37B (5.5%) per token — scaling law knowledge with dense-equivalent cost at inference.</p>
             </div>
-            <div style={{ background: "#ffffff", border: "1px solid #e0dcd4", borderRadius: 6, padding: "1.2rem" }}>
-              <ZoomableFigure title="Dense vs Sparse Parameters"><DenseSparseParamDiagram /></ZoomableFigure>
+            <div style={{ background: "#090d16", border: "1px solid #9B89C4", borderRadius: 8, padding: "1.2rem" }}>
+              <ZoomableFigure title="Dense vs Sparse Parameters" dark={true}><DenseSparseParamDiagram /></ZoomableFigure>
             </div>
           </div>
 
@@ -9672,8 +9732,17 @@ K = concat(K_content, rope(K_pos))   # ← RoPE only on positional part
           </div>
 
           {/* Diagram */}
-          <div style={{ background: "#ffffff", border: "1px solid #e0dcd4", borderRadius: 6, padding: "1.2rem", marginBottom: "1.5rem" }}>
-            <ZoomableFigure title="Speculative Decoding — Parallel Verification"><SpecDecodingDiagram /></ZoomableFigure>
+          <div style={{ background: "#090d16", border: "1px solid #C9B8E8", borderRadius: 8, padding: "1.2rem", marginBottom: "1.5rem" }}>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "12px" }}>
+              <div>
+                <span style={{ fontSize: "11px", color: "#C9B8E8", fontWeight: "bold" }}>AI ARCHITECTURAL INFOGRAPHIC</span>
+                <h3 style={{ margin: "4px 0 0 0", color: "#f8fafc", fontSize: "1.05rem" }}>Speculative & Parallel Decoding — Parallel Verification</h3>
+              </div>
+              <span style={{ fontSize: "0.65rem", color: "#C9B8E8", background: "rgba(201, 184, 232, 0.1)", padding: "0.2rem 0.6rem", borderRadius: 4, border: "1px solid rgba(201, 184, 232, 0.3)" }}>
+                Lossless 2–4× Speedup
+              </span>
+            </div>
+            <ZoomableFigure title="Speculative Decoding — Parallel Verification" dark={true}><SpecDecodingDiagram /></ZoomableFigure>
           </div>
 
           {/* Step by step */}
@@ -18656,8 +18725,10 @@ export const AgentDebuggingTab = ({ s }) => {
             <p style={{ fontSize: "0.82rem", color: "#94a3b8", maxWidth: "850px", lineHeight: 1.6, marginTop: "0.6rem" }}>
               A systematic verification framework for recording model tool requests, function outputs, CSS patches, build checks, and Playwright DOM bounding-box proofs to prevent silent failure claims.
             </p>
-            <div style={{ marginTop: "1.2rem", borderRadius: 8, overflow: "hidden", border: "1px solid #334155", aspectRatio: "16/9", maxHeight: 380, background: "#0b0f19", display: "flex", alignItems: "center", justifyContent: "center" }}>
-              <img src="/ai_agent_debugging_hero_1785850378111.png" alt="AI Agent Debugging Traceability Protocol" loading="lazy" decoding="async" style={{ width: "100%", height: "100%", objectFit: "contain", objectPosition: "center", display: "block" }} />
+            <div style={{ marginTop: "0.8rem", display: "flex", gap: "0.5rem", flexWrap: "wrap" }}>
+              <span style={{ fontSize: "0.65rem", padding: "0.25rem 0.6rem", background: "rgba(58,155,159,0.15)", color: "#3A9B9F", borderRadius: 4, fontFamily: "DM Mono, monospace", fontWeight: 700 }}>DOM Bounding Box</span>
+              <span style={{ fontSize: "0.65rem", padding: "0.25rem 0.6rem", background: "rgba(196,122,106,0.15)", color: "#C47A6A", borderRadius: 4, fontFamily: "DM Mono, monospace", fontWeight: 700 }}>Tool Request Log</span>
+              <span style={{ fontSize: "0.65rem", padding: "0.25rem 0.6rem", background: "rgba(122,107,168,0.15)", color: "#7A6BA8", borderRadius: 4, fontFamily: "DM Mono, monospace", fontWeight: 700 }}>Playwright Proofs</span>
             </div>
           </div>
 
@@ -22676,8 +22747,12 @@ export default function App() {
 
         {/* FOOTER */}
         <footer style={{ padding: "1.2rem 2.5rem", borderTop: "1px solid #e2e8f0", background: "#ffffff", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "1rem" }}>
-          <div style={{ fontSize: "0.68rem", color: "#64748b", fontFamily: "Inter, sans-serif" }}>AI Systems Knowledge Dashboard · 2025–2026</div>
-          <div style={{ fontSize: "0.62rem", color: "#94a3b8", fontFamily: "DM Mono, monospace" }}>46+ Modules Categorized into 6 Umbrella Topics</div>
+          <div style={{ fontSize: "0.68rem", color: "#64748b", fontFamily: "Inter, sans-serif" }}>
+            © 2025–2026 <a href="https://github.com/nyakkala" target="_blank" rel="noopener noreferrer" style={{ color: "#3A9B9F", textDecoration: "none", fontWeight: 700 }}>Nagaraj Y</a>. All rights reserved. · Educational Research & Open Knowledge Base
+          </div>
+          <div style={{ fontSize: "0.62rem", color: "#94a3b8", fontFamily: "DM Mono, monospace" }}>
+            189 Modules Categorized into 6 Umbrella Topics · Non-commercial use
+          </div>
         </footer>
       </div>
     </div>

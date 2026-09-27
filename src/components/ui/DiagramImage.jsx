@@ -23,6 +23,7 @@ const DiagramImage = ({
   const [loaded, setLoaded] = useState(false);
   const [failed, setFailed] = useState(false);
   const [retryKey, setRetryKey] = useState(0);
+  const [retryCount, setRetryCount] = useState(0);
 
   const tint = accent || (moduleId ? diagramAccentForModule(moduleId) : "#5EC4C8");
 
@@ -35,6 +36,7 @@ const DiagramImage = ({
     if (e) e.stopPropagation();
     setFailed(false);
     setLoaded(false);
+    setRetryCount(c => c + 1);
     setRetryKey(k => k + 1);
   };
 
@@ -82,12 +84,19 @@ const DiagramImage = ({
           )}
           {failed ? (
             <div style={{ textAlign: "center", padding: "2rem 1rem", color: "#4A4A5A" }}>
-              <div style={{ fontSize: "1.6rem", marginBottom: "6px" }}>🖼️</div>
-              <div style={{ fontSize: "0.8rem", fontWeight: 600, marginBottom: "4px" }}>Diagram failed to load</div>
-              <div style={{ fontSize: "0.7rem", opacity: 0.7, marginBottom: "10px" }}>{alt}</div>
+              <div style={{ fontSize: "1.6rem", marginBottom: "6px" }}>⚠️</div>
+              <div style={{ fontSize: "0.85rem", fontWeight: 700, color: "#ef4444", marginBottom: "4px" }}>
+                {retryCount > 0 ? "Asset malformed. Retry failed." : "Diagram failed to load"}
+              </div>
+              <div style={{ fontSize: "0.72rem", opacity: 0.8, marginBottom: "12px", maxWidth: 400, margin: "0 auto 12px" }}>
+                {retryCount > 0
+                  ? `Unable to parse image data from source (${src.split('/').pop()}). Retry attempt ${retryCount} did not resolve.`
+                  : (title || alt || "Diagram asset could not be loaded")}
+              </div>
               <button
+                type="button"
                 onClick={retry}
-                style={{ padding: "6px 14px", borderRadius: "6px", border: "1px solid #E8E8EC", background: "#F5F5F7", cursor: "pointer", fontSize: "0.75rem", fontWeight: 600 }}
+                style={{ padding: "6px 16px", borderRadius: "6px", border: "1px solid #E8E8EC", background: "#F5F5F7", cursor: "pointer", fontSize: "0.75rem", fontWeight: 600, color: "#1E293B" }}
               >
                 Retry
               </button>

@@ -41,17 +41,6 @@ export default function ContextLimitsTab() {
       />
 
       <Container size="wide">
-        {/* ARCHITECTURAL INFOGRAPHIC DIAGRAM */}
-        <div style={{ marginBottom: 'var(--ds-space-6)' }}>
-          <DiagramImage
-            src="/assets/1m_context_limits_working_memory_arch.png"
-            alt="LLM Working Memory Bottlenecks vs 1M Context Windows Architecture Diagram"
-            title="1M+ Context Window vs Working Memory Bottleneck Architecture"
-            caption="Overview: Left: 1M+ Token Context Window vs Small Working Memory Capacity (N=5-10 variables). Middle: BAPO Model with Prefix Bandwidth 'a' (Forward Compression) and Attention Bandwidth 'b' (Backward Lookup). Right: BAPO-Hard accuracy decay to 50% random guessing vs Engineering Fixes."
-            background="#090d16"
-            maxWidth={1050}
-          />
-        </div>
 
         {/* SUBTAB NAVIGATION */}
         <div style={{

@@ -1009,7 +1009,7 @@ export const TABS_REGISTRY = [
     umbrellaId: "agents_frameworks",
     category: "Agents & Frameworks",
     icon: "∞",
-    keywords: ["loop engineering", "ralph loop", "ralf", "ralphex", "addy osmani", "boris cherny", "peter steinberger", "goal loop", "loop library", "69 loops", "claude basics", "cross-model review", "autonomous agent loops"],
+    keywords: ["loop engineering", "ralph loop", "ralf", "ralphex", "boris cherny", "peter steinberger", "goal loop", "loop library", "69 loops", "claude basics", "cross-model review", "autonomous agent loops"],
     component: lazy(() => import("../loopEngineering/LoopEngineeringTab.jsx"))
   },
 

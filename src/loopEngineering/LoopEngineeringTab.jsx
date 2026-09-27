@@ -1020,12 +1020,12 @@ function AddyOsmani() {
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
 
-      {/* Source */}
+      {/* Reference Guide */}
       <div style={{ background: COLORS.surface, border: `1px solid ${COLORS.border}`, borderRadius: 10, padding: "12px 14px", display: "flex", gap: 10, alignItems: "center" }}>
         <span style={{ fontSize: 20 }}>📖</span>
         <div>
-          <div style={{ color: COLORS.text, fontSize: 12, fontWeight: 600 }}>Addy Osmani · O'Reilly Radar</div>
-          <div style={{ color: COLORS.muted, fontSize: 11, marginTop: 1 }}>Loop Engineering · June 22, 2026 · 14 min read · oreilly.com/radar/loop-engineering</div>
+          <div style={{ color: COLORS.text, fontSize: 12, fontWeight: 600 }}>Loop Engineering Reference Guide</div>
+          <div style={{ color: COLORS.muted, fontSize: 11, marginTop: 1 }}>Autonomous Agent Patterns & Architectural Execution Loops</div>
         </div>
       </div>
 
@@ -1135,7 +1135,7 @@ function AddyOsmani() {
         <div style={{ background: COLORS.surface2, border: `1px solid ${COLORS.amber}44`, borderRadius: 10, padding: "14px 16px", marginTop: 4 }}>
           <div style={{ color: COLORS.amber, fontWeight: 700, fontSize: 14, marginBottom: 6 }}>"Build the loop. Stay the engineer."</div>
           <div style={{ color: COLORS.muted, fontSize: 13, lineHeight: 1.7 }}>Go ahead and set up your loops, but don't forget that prompting your agents directly is also effective. Two people can build the exact same loop and get completely opposite results. One uses it to move faster on work they understand deeply. The other uses it to avoid understanding the work at all.</div>
-          <div style={{ color: COLORS.muted, fontSize: 11, marginTop: 8, fontFamily: "monospace" }}>— Addy Osmani, O'Reilly Radar, June 2026</div>
+          <div style={{ color: COLORS.muted, fontSize: 11, marginTop: 8, fontFamily: "monospace" }}>— Production Engineering Principle</div>
         </div>
       </div>
 
@@ -1461,7 +1461,7 @@ function RealWorld() {
             { year: "2023", label: "AutoGPT", desc: "Gave an agent a goal and let it prompt itself. No verifier, no cap. Famous for running forever and producing nothing.", color: COLORS.muted },
             { year: "2024", label: "Ralph Loop / bash wrappers", desc: "Practitioners hand-wrote bash to re-run Claude prompts. Worked but the maintenance burden was personal and permanent.", color: COLORS.violet },
             { year: "May 2026", label: "/goal ships in Claude Code v2.1.139", desc: "Native loop primitive with a separate verifier model. No bash required. Same shape as all of the above, now inside the product.", color: COLORS.sky },
-            { year: "Jun 2026", label: "Loop Engineering named", desc: "Cherny + Steinberger week. Addy Osmani publishes the essay. A practice that practitioners had been running for months gets a name.", color: COLORS.amber },
+            { year: "Jun 2026", label: "Loop Engineering named", desc: "Cherny + Steinberger week. Autonomous agent loop patterns codified. A practice that practitioners had been running for months gets a name.", color: COLORS.amber },
           ].map((r, i, arr) => (
             <div key={r.year} style={{ display: "flex", gap: 14, padding: "12px 16px", borderBottom: i < arr.length - 1 ? `1px solid ${COLORS.border}` : "none", alignItems: "flex-start" }}>
               <div style={{ color: r.color, fontFamily: "monospace", fontSize: 10, fontWeight: 700, minWidth: 64, paddingTop: 2 }}>{r.year}</div>
@@ -1603,9 +1603,9 @@ export function LoopEngineeringTab({ onSelectTab, setActiveTab }) {
     { id: "patterns", label: "Patterns" },
     { id: "library", label: "Loop Library" },
     { id: "guide", label: "Practical Guide" },
-    { id: "oreilly", label: "O'Reilly Radar" },
+    { id: "oreilly", label: "Architecture" },
     { id: "graphs", label: "Graph Engineering" },
-    { id: "addy", label: "Addy Osmani" },
+    { id: "addy", label: "Loop Design" },
     { id: "commands", label: "Commands" },
     { id: "realworld", label: "Real World" },
     { id: "start", label: "Start Here" },
@@ -1753,7 +1753,7 @@ export function LoopEngineeringTab({ onSelectTab, setActiveTab }) {
                 {[
                   { who: "Boris Cherny", where: "WorkOS Acquired Unplugged, Jun 2026", color: COLORS.sky },
                   { who: "Peter Steinberger", where: "OpenClaw / X, Jun 2026", color: COLORS.violet },
-                  { who: "Addy Osmani", where: "addyosmani.com + O'Reilly Radar, Jun 2026", color: COLORS.amber },
+                  { who: "System Architecture Guide", where: "Loop Engineering Patterns & Practices", color: COLORS.amber },
                   { who: "Eivind Kjosbakken", where: "Towards Data Science, Jun 2026", color: COLORS.emerald },
                   { who: "Brian Grinstead", where: "Mozilla / Lenny's Newsletter, Jun 2026", color: "#FF6B6B" },
                   { who: "Forward Future Loop Library", where: "signals.forwardfuture.com — 69 loops", color: COLORS.sky },
@@ -1806,13 +1806,13 @@ export function LoopEngineeringTab({ onSelectTab, setActiveTab }) {
         {/* PRACTICAL GUIDE TAB */}
         {tab === "guide" && <PracticalGuide />}
 
-        {/* O'REILLY RADAR TAB */}
+        {/* ARCHITECTURE TAB */}
         {tab === "oreilly" && <OReillyRadarTab />}
 
         {/* GRAPH ENGINEERING TAB */}
         {tab === "graphs" && <GraphEngineeringTab />}
 
-        {/* ADDY OSMANI TAB */}
+        {/* LOOP DESIGN TAB */}
         {tab === "addy" && <AddyOsmani />}
 
         {/* COMMANDS TAB */}

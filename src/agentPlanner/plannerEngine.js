@@ -93,11 +93,23 @@ export const DYNAMIC_SKILL_ARCHITECTURE = [
   }
 ];
 
-export const SKILL_RETRIEVAL_SIMULATOR = (taskContext, availableSkills, topK = 5) => {
+export const SKILL_RETRIEVAL_SIMULATOR = (taskContext = '', availableSkills = [], topK = 5) => {
+  // Safe extraction of state set and raw text
+  const contextStr = typeof taskContext === 'string' ? taskContext : (taskContext?.text || taskContext?.state || '');
+  const stateList = Array.isArray(taskContext?.state)
+    ? taskContext.state
+    : typeof taskContext?.state === 'string'
+      ? [taskContext.state]
+      : [];
+
   // Simulated dual-encoder retrieval with precondition filtering
-  const scored = availableSkills.map(skill => {
+  const scored = (availableSkills || []).map(skill => {
     const semanticScore = Math.random() * 0.4 + 0.3; // 0.3-0.7 simulated cosine sim
-    const precondMet = skill.preconditions.every(p => taskContext.state.includes(p));
+    const preconds = skill.preconditions || [];
+    const precondMet = preconds.length === 0 || preconds.every(p => {
+      const pNorm = String(p).toLowerCase().replace(/_/g, ' ');
+      return stateList.includes(p) || contextStr.toLowerCase().includes(pNorm);
+    });
     const relevance = precondMet ? semanticScore : semanticScore * 0.3;
     return { ...skill, relevance: +relevance.toFixed(2), precondMet };
   });

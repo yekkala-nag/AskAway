@@ -797,6 +797,25 @@ export default function FinAssistProjectTab() {
           A hands-on project to build a production-grade banking AI assistant using Agentic Workflows (LangGraph), Policy RAG (pgvector), and Model Context Protocol (MCP). Practice each module interactively before implementing.
         </div>
 
+        {/* STATUTORY REGULATORY & FINANCIAL DISCLAIMER */}
+        <div style={{
+          padding: "10px 14px",
+          background: "rgba(245, 158, 11, 0.08)",
+          borderRadius: 8,
+          border: "1px solid rgba(245, 158, 11, 0.3)",
+          borderLeft: "4px solid #F59E0B",
+          marginBottom: 16,
+          display: "flex",
+          alignItems: "flex-start",
+          gap: 10
+        }}>
+          <span style={{ fontSize: 16 }}>⚠️</span>
+          <div style={{ fontSize: 11, color: "#CBD5E1", lineHeight: 1.5 }}>
+            <strong style={{ color: "#F59E0B" }}>STATUTORY NOTICE — NOT FINANCIAL OR INVESTMENT ADVICE:</strong>{" "}
+            FinAssist is an academic and educational simulation illustrating technical AI architecture (MCP, LangGraph, and RAG). All balances, loan underwriting algorithms, transactions, and calculations are mock synthetic data. This system does not provide investment, financial, credit, tax, or legal advice, and should never be utilized for real-world capital decisions.
+          </div>
+        </div>
+
         {/* BRD Gaps Analysis */}
         <div style={{ padding: "12px 14px", background: C.s3, borderRadius: 8, borderLeft: `3px solid ${C.amber}` }}>
           <div style={{ color: C.amber, fontWeight: 700, fontSize: 12, marginBottom: 8 }}>🔍 BRD GAP ANALYSIS — What's Missing</div>

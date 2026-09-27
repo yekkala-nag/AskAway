@@ -131,14 +131,14 @@ export default function AgentPlannerTab() {
                     <Card style={{ padding: '14px', background: 'var(--ds-color-bg-surface)', borderLeft: '4px solid #5EC4C8' }}>
                       <div style={{ fontSize: '12px', color: '#3A9B9F', fontWeight: 'bold', marginBottom: '8px' }}>Top-K Retrieved Skills</div>
                       <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                        {skillRetrievalResults.map((s, i) => (
-                          <div key={i} style={{ padding: '8px', background: s.precondMet ? 'rgba(38,191,176,0.1)' : 'rgba(245,166,35,0.1)', borderRadius: '4px', border: `1px solid ${s.precondMet ? '#5EC4C833' : '#F5A62333'}` }}>
+                        {(skillRetrievalResults || []).map((s, i) => (
+                          <div key={s.id || i} style={{ padding: '8px', background: s.precondMet ? 'rgba(38,191,176,0.1)' : 'rgba(245,166,35,0.1)', borderRadius: '4px', border: `1px solid ${s.precondMet ? '#5EC4C833' : '#F5A62333'}` }}>
                             <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '11px' }}>
                               <span style={{ color: 'white', fontWeight: 'bold' }}>{s.name}</span>
-                              <span style={{ color: s.precondMet ? '#5EC4C8' : '#F5A623', fontFamily: 'monospace' }}>relevance: {s.relevance.toFixed(2)}</span>
+                              <span style={{ color: s.precondMet ? '#5EC4C8' : '#F5A623', fontFamily: 'monospace' }}>relevance: {typeof s.relevance === 'number' ? s.relevance.toFixed(2) : s.relevance}</span>
                             </div>
                             <div style={{ fontSize: '10px', color: 'var(--ds-color-text-tertiary)', marginTop: '2px' }}>
-                              Pre: [{s.preconditions.join(', ')}] → Post: [{s.postconditions.join(', ')}]
+                              Pre: [{(s.preconditions || []).join(', ')}] → Post: [{(s.postconditions || []).join(', ')}]
                             </div>
                           </div>
                         ))}

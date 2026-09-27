@@ -10,6 +10,8 @@ import { Sidebar, TopBar, CommandPalette } from './components/ui/Navigation.jsx'
 import { AdaptiveWorkflowBar } from './components/ui/AdaptiveWorkflowBar.jsx';
 import { ToastProvider, useToast, Skeleton } from './components/ui/Feedback.jsx';
 import { TopicFooter } from './components/ui/TopicFooter.jsx';
+import { LegalModal } from './components/ui/LegalModal.jsx';
+import { StorageNoticeBanner } from './components/ui/StorageNoticeBanner.jsx';
 import HubSequenceNav from './components/ui/HubSequenceNav.jsx';
 import { UMBRELLA_TOPICS, getUmbrellaForTab, getTabsForUmbrella, getTabById, TABS_REGISTRY } from './registry/tabsRegistry.js';
 import ErrorBoundary from './ErrorBoundary.jsx';
@@ -282,6 +284,13 @@ export default function App() {
   const [toast, setToast] = useState(null);
 
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [legalModalOpen, setLegalModalOpen] = useState(false);
+  const [legalModalTab, setLegalModalTab] = useState('privacy');
+
+  const openLegal = (tab) => {
+    setLegalModalTab(tab);
+    setLegalModalOpen(true);
+  };
 
   // Per-topic scroll memory + history handling
   const scrollMemory = useRef(new Map());
@@ -430,17 +439,57 @@ export default function App() {
                 flexDirection: 'column',
                 alignItems: 'center',
                 justifyContent: 'center',
-                gap: '6px',
+                gap: '8px',
                 textAlign: 'center',
                 fontSize: '13px',
                 color: 'var(--ds-color-text-secondary)'
               }}
             >
-              <div style={{ fontWeight: 600, color: 'var(--ds-color-text-primary)' }}>
-                Curated by: Nagaraj Y
+              <div style={{ fontWeight: 600, color: 'var(--ds-color-text-primary)', display: 'flex', alignItems: 'center', gap: '6px', flexWrap: 'wrap', justifyContent: 'center' }}>
+                <span>© 2025–2026</span>
+                <a
+                  href="https://github.com/nyakkala"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ color: 'inherit', textDecoration: 'none', borderBottom: '1px dotted var(--ds-color-text-tertiary)' }}
+                  onMouseEnter={(e) => (e.currentTarget.style.color = '#5EC4C8')}
+                  onMouseLeave={(e) => (e.currentTarget.style.color = 'inherit')}
+                  title="View Curator Profile"
+                >
+                  Nagaraj Y
+                </a>
+                <span>· All rights reserved.</span>
               </div>
-              <div style={{ fontSize: '12px', color: '#f59e0b' }}>
-                Educational use only. No commercial use.
+              <div style={{ fontSize: '12px', color: '#f59e0b', fontWeight: 500 }}>
+                Educational Research & Open Knowledge Base · Strictly non-commercial use.
+              </div>
+              <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', justifyContent: 'center', marginTop: '4px', fontSize: '12px' }}>
+                <button
+                  onClick={() => openLegal('privacy')}
+                  style={{ background: 'none', border: 'none', padding: 0, color: 'var(--ds-color-text-tertiary)', textDecoration: 'underline', cursor: 'pointer', fontSize: '12px' }}
+                  onMouseEnter={(e) => (e.currentTarget.style.color = '#5EC4C8')}
+                  onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--ds-color-text-tertiary)')}
+                >
+                  Privacy Policy
+                </button>
+                <span style={{ color: 'var(--ds-color-border-subtle)' }}>•</span>
+                <button
+                  onClick={() => openLegal('terms')}
+                  style={{ background: 'none', border: 'none', padding: 0, color: 'var(--ds-color-text-tertiary)', textDecoration: 'underline', cursor: 'pointer', fontSize: '12px' }}
+                  onMouseEnter={(e) => (e.currentTarget.style.color = '#5EC4C8')}
+                  onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--ds-color-text-tertiary)')}
+                >
+                  Terms of Service
+                </button>
+                <span style={{ color: 'var(--ds-color-border-subtle)' }}>•</span>
+                <button
+                  onClick={() => openLegal('trademarks')}
+                  style={{ background: 'none', border: 'none', padding: 0, color: 'var(--ds-color-text-tertiary)', textDecoration: 'underline', cursor: 'pointer', fontSize: '12px' }}
+                  onMouseEnter={(e) => (e.currentTarget.style.color = '#5EC4C8')}
+                  onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--ds-color-text-tertiary)')}
+                >
+                  Trademarks & Fair Use
+                </button>
               </div>
             </footer>
           </Container>
@@ -451,6 +500,16 @@ export default function App() {
           onClose={() => setCommandPaletteOpen(false)}
           tabs={TABS_REGISTRY}
           onSelectTab={handleTabSelect}
+        />
+
+        <LegalModal
+          isOpen={legalModalOpen}
+          initialTab={legalModalTab}
+          onClose={() => setLegalModalOpen(false)}
+        />
+
+        <StorageNoticeBanner
+          onOpenPrivacy={() => openLegal('privacy')}
         />
       </Page>
     </ToastProvider>

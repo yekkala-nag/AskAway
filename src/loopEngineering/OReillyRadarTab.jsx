@@ -38,9 +38,9 @@ export default function OReillyRadar() {
         <div style={{ display: "flex", gap: 12, alignItems: "flex-start", marginBottom: 16 }}>
           <span style={{ fontSize: 28 }}>📰</span>
           <div>
-            <div style={{ color: COLORS.amber, fontFamily: "JetBrains Mono, monospace", fontSize: 10, fontWeight: 700, letterSpacing: "0.1em", marginBottom: 4 }}>O'REILLY RADAR · JUNE 2026</div>
+            <div style={{ color: COLORS.amber, fontFamily: "JetBrains Mono, monospace", fontSize: 10, fontWeight: 700, letterSpacing: "0.1em", marginBottom: 4 }}>AUTONOMOUS AGENT ARCHITECTURE · JUNE 2026</div>
             <h2 style={{ margin: 0, fontSize: 22, fontWeight: 700, lineHeight: 1.2 }}>Own the Outer Loop</h2>
-            <div style={{ color: COLORS.muted, fontSize: 13, marginTop: 4 }}><span style={{ color: COLORS.sky }}>addyosmani.com</span></div>
+            <div style={{ color: COLORS.muted, fontSize: 13, marginTop: 4 }}><span style={{ color: COLORS.sky }}>Autonomous Agent Systems Guide</span></div>
           </div>
         </div>
 
@@ -111,9 +111,9 @@ export default function OReillyRadar() {
         <div style={{ display: "flex", gap: 12, alignItems: "flex-start", marginBottom: 16 }}>
           <span style={{ fontSize: 28 }}>📰</span>
           <div>
-            <div style={{ color: COLORS.amber, fontFamily: "JetBrains Mono, monospace", fontSize: 10, fontWeight: 700, letterSpacing: "0.1em", marginBottom: 4 }}>O'REILLY RADAR · JUNE 2026</div>
+            <div style={{ color: COLORS.amber, fontFamily: "JetBrains Mono, monospace", fontSize: 10, fontWeight: 700, letterSpacing: "0.1em", marginBottom: 4 }}>AUTONOMOUS AGENT ARCHITECTURE · JUNE 2026</div>
             <h2 style={{ margin: 0, fontSize: 22, fontWeight: 700, lineHeight: 1.2 }}>What the Hell Is a Loop Anyway?</h2>
-            <div style={{ color: COLORS.muted, fontSize: 13, marginTop: 4 }}><span style={{ color: COLORS.sky }}>Mozilla / Lenny's Newsletter</span></div>
+            <div style={{ color: COLORS.muted, fontSize: 13, marginTop: 4 }}><span style={{ color: COLORS.sky }}>Engineering Architecture Guide</span></div>
           </div>
         </div>
 

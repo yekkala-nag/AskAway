@@ -1969,15 +1969,15 @@ export default function RAGCaseStudiesTab() {
           <Stack gap={6}>
             <Reveal variant="rise" delay={60}>
               <ZoomableImage
-                src="/assets/sdlc_ast_code_chunking_flow.png"
-                title="Tree-Sitter AST Code-Chunking Architecture"
-                caption="Tap the numbered hotspots to inspect each chunking stage; click the figure for a zoomable fullscreen view."
+                src="/assets/sdlc_incident_context_pack_flow.png"
+                title="Real-Time Incident Context-Pack Architecture"
+                caption="Tap the numbered hotspots to inspect the real-time incident context pipeline; click the figure for a zoomable fullscreen view."
                 accent="rag"
                 hotspots={[
-                  { x: 14, y: 32, label: 'Source File', title: 'Raw Input', body: 'e.g. RefundService.java — parsed without losing structure.' },
-                  { x: 38, y: 30, label: 'Tree-Sitter AST', title: 'Parse', body: 'Splits the file into Class, Method and Import AST nodes.' },
-                  { x: 60, y: 42, label: 'Symbol Extraction', title: 'Extract', body: 'Pulls exact method names like validateIdempotencyKey().' },
-                  { x: 82, y: 36, label: 'Vector & Symbol Index', title: 'Index', body: 'Writes in parallel to a dense vector DB and a ctags symbol index.' },
+                  { x: 14, y: 32, label: 'Alert Trigger', title: 'PagerDuty', body: 'Event ingestion triggered upon latency/error threshold breach.' },
+                  { x: 38, y: 30, label: 'Stream Processing', title: 'Kafka / Flink', body: 'Resolves service topology, affected service entity and blast radius.' },
+                  { x: 60, y: 42, label: 'Parallel Retrieval', title: 'Context Pack', body: 'Pulls runbooks, past postmortems, recent commit SHAs, and APM telemetry.' },
+                  { x: 82, y: 36, label: 'ChatOps Delivery', title: 'Slack Incident Bot', body: 'Automated cited mitigation draft posted to on-call engineers in <5 seconds.' },
                 ]}
               />
             </Reveal>
