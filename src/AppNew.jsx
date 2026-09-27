@@ -25,6 +25,7 @@ const TabComponents = {
   firstaiapp: lazy(() => import('./firstAIApp/FirstAIAppTab.jsx')),
   modellandscape: lazy(() => import('./modelLandscape/ModelLandscapeTab.jsx')),
   tokenization: lazy(() => import('./tokenization/TokenizationTab.jsx')),
+  modelinternals: lazy(() => import('./modelInternals/ModelInternalsTab.jsx')),
   quantserve: lazy(() => import('./quantServe/QuantServeTab.jsx')),
   vramconductor: lazy(() => import('./vramConductor/VramConductorTab.jsx')),
   promptfundamentals: lazy(() => import('./promptEngineeringFundamentals/PromptFundamentalsTab.jsx')),
