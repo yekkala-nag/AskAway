@@ -34,7 +34,7 @@ export default function AIRoadmapTab({ onSelectTab }) {
     <div style={{ paddingBottom: 'var(--ds-space-12)' }}>
       <Hero
         moduleId="foundations"
-        moduleLabel="Home · AI Engineer Roadmap (roadmap.sh adapted)"
+        moduleLabel="Curriculum Map · AI Engineer Roadmap (roadmap.sh adapted)"
         title="Become an AI Engineer — One Map, Eight Stages"
         description="roadmap.sh's AI Engineer path rebuilt as a living map: every node below opens a real topic, dots fill as you prove mastery, and the planner turns background + goal + pace into your week-by-week schedule."
         metrics={[

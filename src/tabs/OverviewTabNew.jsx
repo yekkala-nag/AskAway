@@ -122,6 +122,7 @@ export function OverviewTab({ onSelectTab, setActiveTab: setGlobalActiveTab }) {
   const [diagExperience, setDiagExperience] = useState('beginner');
   const [diagGoal, setDiagGoal] = useState('foundations');
   const [diagRecommendation, setDiagRecommendation] = useState(null);
+  const [diagnosticExpanded, setDiagnosticExpanded] = useState(false);
   const [quizOpen, setQuizOpen] = useState(false);
   const [placement, setPlacement] = useState(() => getPlacement());
   const [recapTab, setRecapTab] = useState(null);
@@ -143,9 +144,6 @@ export function OverviewTab({ onSelectTab, setActiveTab: setGlobalActiveTab }) {
   };
 
   const handleStartLearning = () => {
-    // Adaptive entry: foundations track, starting at the first topic the
-    // learner hasn't proven (placement-aware). Fresh users orient first
-    // (glossary), never dropped mid-sequence into a build tutorial.
     const rec = diagnoseTrack({ experience: 'beginner', goal: 'foundations', placement: getPlacement() });
     setCurrentTrackId(rec.trackId);
     setActiveTrackId(rec.trackId);
@@ -187,26 +185,44 @@ export function OverviewTab({ onSelectTab, setActiveTab: setGlobalActiveTab }) {
     <>
       <Hero
         moduleId="foundations"
-        moduleLabel="Adaptive Learning Engine"
-        title="Modern AI Systems & Engineering"
-        description="A tailored, interactive architecture curriculum. Diagnostic assessments evaluate your goals and chart an adaptive path from foundational AI principles to production RAG, autonomous agents, and enterprise FinOps."
+        moduleLabel="Home · Interactive AI Systems & Engineering"
+        title="Modern AI Engineering & Interactive Systems"
+        description="A production-grade, interactive architecture laboratory and comprehensive curriculum. Explore the 7-layer engineering stack, interactive tensor simulators, retrieval architectures, autonomous agent swarms, and enterprise FinOps across 189 modules."
         metrics={[
+          { label: 'Curriculum Scope', value: '189 Modules' },
+          { label: 'Umbrella Tracks', value: '6 Tracks' },
           { label: 'Active Track', value: activeTrackObj.title.split(' ')[0] },
-          { label: 'Progress', value: `${progressMap[activeTrackId]?.percent || 0}%` },
-          { label: 'Curated Tracks', value: `${ADAPTIVE_TRACKS.length - 1}+1` },
-          { label: 'Topics', value: `${TABS_REGISTRY.length}` },
+          { label: 'Architecture', value: 'Clean-Room' },
         ]}
         actions={[
-          { label: '🚀 Start Learning (Foundations First)', variant: 'primary', onClick: handleStartLearning },
-          { label: '🎯 Take 30s Diagnostic', variant: 'secondary', onClick: () => {
-            const diagEl = document.getElementById('adaptive-diagnostic-section');
-            diagEl?.scrollIntoView({ behavior: 'smooth' });
-          }},
-          { label: '📊 View Progress', variant: 'ghost', onClick: () => handleNavigate('progress') },
+          {
+            label: '🏛️ Explore 7-Layer Stack',
+            variant: 'primary',
+            onClick: () => {
+              const el = document.getElementById('seven-layers-section');
+              el?.scrollIntoView({ behavior: 'smooth' });
+            }
+          },
+          {
+            label: '🧭 AI Engineer Roadmap',
+            variant: 'secondary',
+            onClick: () => handleNavigate('airoadmap')
+          },
+          {
+            label: '🎯 30s Skill Diagnostic',
+            variant: 'ghost',
+            onClick: () => {
+              setDiagnosticExpanded(true);
+              setTimeout(() => {
+                const diagEl = document.getElementById('adaptive-diagnostic-section');
+                diagEl?.scrollIntoView({ behavior: 'smooth' });
+              }, 60);
+            }
+          },
         ]}
       />
 
-      <Container size="normal">
+      <Container size="normal" id="seven-layers-section" style={{ scrollMarginTop: '80px' }}>
         <SevenLayersStack />
       </Container>
 
@@ -222,14 +238,24 @@ export function OverviewTab({ onSelectTab, setActiveTab: setGlobalActiveTab }) {
                   <h2 style={{ fontSize: 'var(--ds-font-size-h2)', marginBottom: 'var(--ds-space-2)' }}>
                     🎯 Adaptive Pathway Diagnostic
                   </h2>
-                  <p style={{ color: 'var(--ds-color-text-secondary)' }}>
+                  <p style={{ color: 'var(--ds-color-text-secondary)', margin: 0 }}>
                     Diagnose your background and engineering objective to generate your personalized learning sequence.
                   </p>
                 </div>
-                <Badge variant="module" moduleId="foundations" size="md">Adaptive AI Engine</Badge>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <Badge variant="module" moduleId="foundations" size="md">Adaptive AI Engine</Badge>
+                  <Button
+                    variant="secondary"
+                    size="sm"
+                    onClick={() => setDiagnosticExpanded(!diagnosticExpanded)}
+                  >
+                    {diagnosticExpanded ? "▲ Collapse Diagnostic" : "▼ Take 30s Diagnostic"}
+                  </Button>
+                </div>
               </Flex>
             </Section.Header>
-            <Section.Body>
+            {diagnosticExpanded ? (
+              <Section.Body>
               <Grid columns={{ base: 1, md: 2 }} gap="lg">
                 {/* Left: Interactive Questions */}
                 <div style={{
@@ -430,6 +456,29 @@ export function OverviewTab({ onSelectTab, setActiveTab: setGlobalActiveTab }) {
                 </div>
               </Grid>
             </Section.Body>
+            ) : (
+              <div style={{
+                padding: 'var(--ds-space-4) var(--ds-space-6)',
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                background: 'var(--ds-color-bg-canvas)',
+                borderRadius: '0 0 var(--ds-radius-lg) var(--ds-radius-lg)',
+                flexWrap: 'wrap',
+                gap: '12px'
+              }}>
+                <span style={{ fontSize: '0.85rem', color: 'var(--ds-color-text-secondary)' }}>
+                  Take a 30-second assessment to calculate your personalized learning sequence across 189 topics.
+                </span>
+                <Button
+                  variant="primary"
+                  size="sm"
+                  onClick={() => setDiagnosticExpanded(true)}
+                >
+                  ⚡ Start 30s Diagnostic
+                </Button>
+              </div>
+            )}
           </Section>
         </div>
 

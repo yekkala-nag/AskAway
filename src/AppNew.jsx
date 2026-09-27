@@ -276,7 +276,7 @@ function TabError({ tabId }) {
 export default function App() {
   const [activeTab, setActiveTab] = useState(() => {
     const tab = new URLSearchParams(window.location.search).get('tab');
-    return tab && TABS_REGISTRY.some(t => t.id === tab) ? tab : 'airoadmap';
+    return tab && TABS_REGISTRY.some(t => t.id === tab) ? tab : 'overview';
   });
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');

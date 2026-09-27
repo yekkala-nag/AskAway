@@ -81,11 +81,11 @@ export const TABS_REGISTRY = [
   },
   {
     id: "overview",
-    label: "Overview Map",
+    label: "Home / Overview",
     umbrellaId: "foundations",
     category: "Foundations",
-    icon: "🗺️",
-    keywords: ["overview", "introduction", "dashboard"],
+    icon: "🏠",
+    keywords: ["overview", "home", "introduction", "dashboard"],
     component: lazy(() => import("../tabs/OverviewTabNew.jsx").then(m => ({ default: m.OverviewTab })))
   },
   {
