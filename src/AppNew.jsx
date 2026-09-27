@@ -458,10 +458,9 @@ export default function App() {
                 >
                   Nagaraj Y
                 </a>
-                <span>· All rights reserved.</span>
               </div>
               <div style={{ fontSize: '12px', color: '#f59e0b', fontWeight: 500 }}>
-                Educational Research & Open Knowledge Base · Strictly non-commercial use.
+                Educational Research & Open Knowledge Base
               </div>
               <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', justifyContent: 'center', marginTop: '4px', fontSize: '12px' }}>
                 <button

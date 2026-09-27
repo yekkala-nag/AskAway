@@ -22748,10 +22748,10 @@ export default function App() {
         {/* FOOTER */}
         <footer style={{ padding: "1.2rem 2.5rem", borderTop: "1px solid #e2e8f0", background: "#ffffff", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "1rem" }}>
           <div style={{ fontSize: "0.68rem", color: "#64748b", fontFamily: "Inter, sans-serif" }}>
-            © 2025–2026 <a href="https://github.com/nyakkala" target="_blank" rel="noopener noreferrer" style={{ color: "#3A9B9F", textDecoration: "none", fontWeight: 700 }}>Nagaraj Y</a>. All rights reserved. · Educational Research & Open Knowledge Base
+            © 2025–2026 <a href="https://github.com/nyakkala" target="_blank" rel="noopener noreferrer" style={{ color: "#3A9B9F", textDecoration: "none", fontWeight: 700 }}>Nagaraj Y</a> · Educational Research & Open Knowledge Base
           </div>
           <div style={{ fontSize: "0.62rem", color: "#94a3b8", fontFamily: "DM Mono, monospace" }}>
-            189 Modules Categorized into 6 Umbrella Topics · Non-commercial use
+            189 Modules Categorized into 6 Umbrella Topics
           </div>
         </footer>
       </div>
