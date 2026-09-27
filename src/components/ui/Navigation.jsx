@@ -268,9 +268,9 @@ export function Sidebar({
       }}
       aria-label="Main navigation"
     >
-      {/* 1. BRAND HEADER */}
+      {/* 1. SIDEBAR DIRECTORY HEADER */}
       <div style={{
-        padding: collapsed ? '16px 12px' : '16px 16px 12px',
+        padding: collapsed ? '14px 10px' : '14px 16px',
         borderBottom: '1px solid #F1F3F5',
         flexShrink: 0
       }}>
@@ -279,63 +279,27 @@ export function Sidebar({
           alignItems: 'center',
           justifyContent: collapsed ? 'center' : 'space-between',
         }}>
-          <div
-            onClick={() => onSelectTab && onSelectTab('overview')}
-            style={{
+          {!collapsed ? (
+            <div style={{
               display: 'flex',
               alignItems: 'center',
-              gap: '10px',
-              overflow: 'hidden',
-              cursor: 'pointer',
-              userSelect: 'none'
-            }}
-            title="Lumina AI — Build, learn, and master the art of Generative AI."
-          >
-            <div style={{
-              width: '34px', height: '34px', borderRadius: '10px',
-              background: '#0B0F19',
-              border: '1px solid rgba(56, 189, 248, 0.25)',
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
-              flexShrink: 0,
-              boxShadow: '0 2px 8px rgba(11, 15, 25, 0.12), inset 0 0 10px rgba(56, 189, 248, 0.15)'
+              gap: '8px',
+              fontSize: '0.75rem',
+              fontWeight: 700,
+              color: '#475569',
+              textTransform: 'uppercase',
+              letterSpacing: '0.06em'
             }}>
-              <LuminaLogo size={26} />
+              <span>🧭</span>
+              <span>Curriculum Index</span>
             </div>
-            {!collapsed && (
-              <div style={{ minWidth: 0 }}>
-                <div style={{
-                  fontWeight: 800, fontSize: '0.98rem', color: '#0F172A',
-                  letterSpacing: '-0.02em', lineHeight: 1.2,
-                  whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis',
-                  display: 'flex', alignItems: 'center', gap: '6px'
-                }}>
-                  <span>Lumina AI</span>
-                  <span style={{
-                    fontSize: '0.58rem',
-                    fontWeight: 700,
-                    letterSpacing: '0.04em',
-                    padding: '1px 5px',
-                    borderRadius: '4px',
-                    background: 'rgba(56, 189, 248, 0.12)',
-                    color: '#0284C7',
-                    textTransform: 'uppercase'
-                  }}>PRO</span>
-                </div>
-                <div style={{
-                  fontSize: '0.67rem', color: '#64748B',
-                  fontWeight: 500, marginTop: '2px',
-                  whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis',
-                  maxWidth: '160px'
-                }} title="Build, learn, and master the art of Generative AI.">
-                  Build, learn & master GenAI
-                </div>
-              </div>
-            )}
-          </div>
-          {!collapsed && onToggleCollapse && (
+          ) : (
+            <span style={{ fontSize: '1.1rem' }} title="Curriculum Index">🧭</span>
+          )}
+          {onToggleCollapse && (
             <button
               onClick={() => onToggleCollapse?.()}
-              title="Collapse sidebar (⌘[)"
+              title={collapsed ? "Expand sidebar (⌘[)" : "Collapse sidebar (⌘[)"}
               style={{
                 background: 'transparent', border: '1px solid #E5E7EB',
                 borderRadius: '6px', color: '#9CA3AF', cursor: 'pointer',
@@ -345,9 +309,9 @@ export function Sidebar({
               }}
               onMouseEnter={e => { e.currentTarget.style.background = '#F1F3F5'; e.currentTarget.style.color = '#4B5563'; }}
               onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = '#9CA3AF'; }}
-              aria-label="Collapse sidebar"
+              aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
             >
-              ◂
+              {collapsed ? '▸' : '◂'}
             </button>
           )}
         </div>
@@ -793,53 +757,194 @@ export function TopBar({ activeTab, onSelectTab, onSearchOpen, onToggleSidebar, 
         }
       `}</style>
 
-      {/* BREADCRUMB ROW */}
+      {/* 1. TOP BRAND HEADER TIER */}
       <div style={{
         padding: '10px 20px',
-        display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-        gap: '12px', flexWrap: 'wrap'
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        gap: '16px',
+        borderBottom: '1px solid #F1F3F5',
+        background: '#FFFFFF'
       }}>
-        {/* Left: Mobile Toggle + Breadcrumb Path */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', minWidth: 0, flexWrap: 'wrap' }}>
+        {/* Left: Enlarged Logo + Title + Tagline */}
+        <div
+          onClick={() => onSelectTab && onSelectTab('overview')}
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '14px',
+            cursor: 'pointer',
+            userSelect: 'none',
+            minWidth: 0
+          }}
+          title="Lumina AI — Build, learn, and master the art of Generative AI."
+        >
           {onToggleSidebar && (
             <button
               className="topbar-mobile-menu-btn"
-              onClick={onToggleSidebar}
-              aria-label="Toggle mobile navigation menu"
+              onClick={(e) => {
+                e.stopPropagation();
+                onToggleSidebar();
+              }}
+              aria-label="Toggle navigation menu"
               style={{
-                alignItems: 'center', gap: '4px',
-                padding: '5px 10px',
-                background: '#F1F3F5',
-                border: '1px solid #E5E7EB',
-                borderRadius: '6px',
-                color: '#4B5563',
-                fontSize: '0.8rem',
-                fontWeight: 500,
-                cursor: 'pointer'
+                alignItems: 'center',
+                justifyContent: 'center',
+                width: '36px',
+                height: '36px',
+                background: '#F8FAFC',
+                border: '1px solid #E2E8F0',
+                borderRadius: '8px',
+                color: '#475569',
+                fontSize: '1rem',
+                cursor: 'pointer',
+                flexShrink: 0
               }}
             >
-              <span>☰</span>
+              ☰
             </button>
           )}
 
-          {/* Module Pill */}
+          {/* Enlarged Logo Container */}
+          <div style={{
+            width: '46px',
+            height: '46px',
+            borderRadius: '12px',
+            background: '#0B0F19',
+            border: '1px solid rgba(56, 189, 248, 0.35)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            flexShrink: 0,
+            boxShadow: '0 4px 12px rgba(11, 15, 25, 0.15), inset 0 0 12px rgba(56, 189, 248, 0.18)'
+          }}>
+            <LuminaLogo size={36} />
+          </div>
+
+          {/* Brand Title & Tagline */}
+          <div style={{ display: 'flex', flexDirection: 'column', minWidth: 0 }}>
+            <div style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '8px',
+              lineHeight: 1.2
+            }}>
+              <span style={{
+                fontWeight: 800,
+                fontSize: '1.2rem',
+                color: '#0F172A',
+                letterSpacing: '-0.025em'
+              }}>
+                Lumina AI
+              </span>
+              <span style={{
+                fontSize: '0.6rem',
+                fontWeight: 700,
+                letterSpacing: '0.05em',
+                padding: '1px 5px',
+                borderRadius: '4px',
+                background: 'rgba(56, 189, 248, 0.12)',
+                color: '#0284C7',
+                border: '1px solid rgba(56, 189, 248, 0.25)',
+                textTransform: 'uppercase'
+              }}>
+                PRO
+              </span>
+            </div>
+            <div style={{
+              fontSize: '0.76rem',
+              color: '#64748B',
+              fontWeight: 500,
+              marginTop: '2px',
+              letterSpacing: '-0.01em',
+              whiteSpace: 'nowrap',
+              overflow: 'hidden',
+              textOverflow: 'ellipsis'
+            }}>
+              Build, learn, and master the art of Generative AI.
+            </div>
+          </div>
+        </div>
+
+        {/* Right: Search Bar Trigger */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexShrink: 0 }}>
+          <button
+            onClick={onSearchOpen}
+            title="Search knowledge base (⌘K)"
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '6px',
+              padding: '6px 12px',
+              background: '#F8FAFC',
+              border: '1px solid #E2E8F0',
+              borderRadius: '7px',
+              color: '#475569',
+              fontSize: '0.78rem',
+              fontWeight: 500,
+              cursor: 'pointer',
+              transition: 'all 0.15s ease'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = '#F1F5F9';
+              e.currentTarget.style.borderColor = '#CBD5E1';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = '#F8FAFC';
+              e.currentTarget.style.borderColor = '#E2E8F0';
+            }}
+          >
+            <span>🔍</span>
+            <span>Search</span>
+            <kbd style={{
+              fontSize: '0.62rem',
+              padding: '1px 4px',
+              background: '#FFFFFF',
+              borderRadius: '3px',
+              border: '1px solid #CBD5E1',
+              color: '#64748B',
+              fontWeight: 600
+            }}>⌘K</kbd>
+          </button>
+        </div>
+      </div>
+
+      {/* 2. NAVIGATION BAR (BELOW THE LOGO) */}
+      <div style={{
+        padding: '7px 20px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        gap: '12px',
+        flexWrap: 'wrap',
+        background: '#FAFBFC'
+      }}>
+        {/* Left: Breadcrumbs Path */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', minWidth: 0, flexWrap: 'wrap' }}>
+          {/* Module Pill (Foundations & Architecture) */}
           <button
             onClick={() => onSelectTab('overview')}
             title={`All modules — currently in ${currentModule.title}`}
             style={{
-              display: 'inline-flex', alignItems: 'center', gap: '5px',
-              padding: '4px 10px', borderRadius: '6px',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '5px',
+              padding: '3px 9px',
+              borderRadius: '6px',
               background: accent.light,
               color: accent.dark,
-              fontSize: '0.78rem', fontWeight: 600,
-              border: 'none', cursor: 'pointer'
+              fontSize: '0.76rem',
+              fontWeight: 600,
+              border: `1px solid ${accent.border || 'transparent'}`,
+              cursor: 'pointer'
             }}
           >
             <span>{currentModule.icon}</span>
             <span>{currentModule.title}</span>
           </button>
 
-          <span style={{ color: '#D1D5DB', fontSize: '0.85rem' }}>/</span>
+          <span style={{ color: '#CBD5E1', fontSize: '0.85rem' }}>/</span>
 
           {activeChild && !isHubPage ? (
             <>
@@ -847,65 +952,60 @@ export function TopBar({ activeTab, onSelectTab, onSearchOpen, onToggleSidebar, 
                 onClick={() => hubPageId && onSelectTab(hubPageId)}
                 title={`${activeChild.title} — click for hub overview`}
                 style={{
-                  display: 'inline-flex', alignItems: 'center', gap: '5px',
-                  padding: '4px 10px', borderRadius: '6px',
-                  background: 'transparent',
-                  color: '#4B5563',
-                  fontSize: '0.78rem', fontWeight: 500,
-                  border: '1px solid #E5E7EB',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '5px',
+                  padding: '3px 9px',
+                  borderRadius: '6px',
+                  background: '#FFFFFF',
+                  color: '#475569',
+                  fontSize: '0.76rem',
+                  fontWeight: 500,
+                  border: '1px solid #E2E8F0',
                   cursor: 'pointer'
                 }}
               >
                 {activeChild.title}
               </button>
-              <span style={{ color: '#D1D5DB', fontSize: '0.85rem' }}>/</span>
+              <span style={{ color: '#CBD5E1', fontSize: '0.85rem' }}>/</span>
             </>
           ) : null}
 
-          {/* Active Tab Name */}
-          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '5px' }}>
-            <span style={{ fontSize: '0.95rem' }}>{currentTab.icon}</span>
+          {/* Active Tab Name (e.g. Home) */}
+          <div style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '5px',
+            background: '#FFFFFF',
+            padding: '3px 9px',
+            borderRadius: '6px',
+            border: '1px solid #E2E8F0'
+          }}>
+            <span style={{ fontSize: '0.88rem' }}>{currentTab.icon}</span>
             <span style={{
-              fontWeight: 600, fontSize: '0.85rem', color: '#1A1D26'
+              fontWeight: 600,
+              fontSize: '0.8rem',
+              color: '#0F172A'
             }}>
               {currentTab.label}
             </span>
           </div>
         </div>
 
-        {/* Right: Position & Search Trigger */}
+        {/* Right: Step Indicator */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
           <span
             title={activeChild ? `${activeChild.title} — ${activeChild.blurb}` : 'All topics in this module'}
             style={{
-              fontSize: '0.72rem', color: '#9CA3AF', fontWeight: 500
+              fontSize: '0.72rem',
+              color: '#64748B',
+              fontWeight: 500
             }}
           >
             {activeChild && childIndex >= 0
               ? `${childIndex + 1} of ${childTabs.length} · ${activeChild.title}`
               : `${activeIndex + 1} of ${siblingTabs.length}`}
           </span>
-          <button
-            onClick={onSearchOpen}
-            title="Search knowledge base (⌘K)"
-            style={{
-              display: 'flex', alignItems: 'center', gap: '5px',
-              padding: '5px 10px',
-              background: '#F1F3F5',
-              border: '1px solid #E5E7EB',
-              borderRadius: '6px',
-              color: '#4B5563',
-              fontSize: '0.75rem', fontWeight: 500,
-              cursor: 'pointer'
-            }}
-          >
-            <span>🔍</span>
-            <span>Search</span>
-            <kbd style={{
-              fontSize: '0.6rem', padding: '1px 4px', background: '#FFFFFF',
-              borderRadius: '3px', border: '1px solid #E5E7EB', color: '#9CA3AF'
-            }}>⌘K</kbd>
-          </button>
         </div>
       </div>
 
