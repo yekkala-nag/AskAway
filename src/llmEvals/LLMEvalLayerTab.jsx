@@ -3,6 +3,7 @@ import * as Primitives from '../components/layout/Primitives.jsx';
 import { Hero, CodeBlock } from '../components/ui/Content.jsx';
 import { Card, Badge, Button, Callout } from '../components/ui/Core.jsx';
 import DiagramImage from '../components/ui/DiagramImage.jsx';
+import { EvalMethodsGrid } from '../components/ui/CleanInfographics.jsx';
 import {
   EVAL_SCENARIOS,
   REGRESSION_TEST_SUITE,
@@ -47,6 +48,10 @@ export default function LLMEvalLayerTab() {
           { label: 'CI/CD Regression', value: 'Automated Scorecards' }
         ]}
       />
+
+      <Container size="wide">
+        <EvalMethodsGrid />
+      </Container>
 
       <Container size="wide">
         {/* SUBTAB NAVIGATION */}

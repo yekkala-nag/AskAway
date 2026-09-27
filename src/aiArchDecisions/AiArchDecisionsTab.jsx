@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import * as Primitives from '../components/layout/Primitives.jsx';
 import { Hero } from '../components/ui/Content.jsx';
 import { Card, Badge, Button } from '../components/ui/Core.jsx';
+import { ArchitectureComparison } from '../components/ui/CleanInfographics.jsx';
 
 const { Container, Grid, Flex, Stack } = Primitives;
 
@@ -143,6 +144,10 @@ export default function AiArchDecisionsTab() {
           { label: 'Reading', value: '6 articles' },
         ]}
       />
+
+      <Container size="wide">
+        <ArchitectureComparison />
+      </Container>
 
       <Container size="wide">
         {/* Category Selector */}

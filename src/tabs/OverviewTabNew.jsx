@@ -14,6 +14,7 @@ import { TABS_REGISTRY, UMBRELLA_TOPICS } from '../registry/tabsRegistry.js';
 import { Container, Section, Grid, Flex, Stack } from '../components/layout/Primitives.jsx';
 import { Hero, Diagram, CodeBlock, Accordion, Tabs, Stepper } from '../components/ui/Content.jsx';
 import { Card, Badge, Button, Callout } from '../components/ui/Core.jsx';
+import { SevenLayersStack } from '../components/ui/CleanInfographics.jsx';
 import {
   ADAPTIVE_TRACKS,
   JOURNEY_TRACKS,
@@ -204,6 +205,10 @@ export function OverviewTab({ onSelectTab, setActiveTab: setGlobalActiveTab }) {
           { label: '📊 View Progress', variant: 'ghost', onClick: () => handleNavigate('progress') },
         ]}
       />
+
+      <Container size="normal">
+        <SevenLayersStack />
+      </Container>
 
       <Container size="normal">
         {/* ============================================================ */}

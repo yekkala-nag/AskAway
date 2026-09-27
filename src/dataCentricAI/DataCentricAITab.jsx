@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { DataReadinessJourney } from "../components/ui/CleanInfographics.jsx";
 
 const C = {
   bg: "#080D1A", surface: "#0F1629", s2: "#162040", s3: "#1E2D52",
@@ -248,6 +249,7 @@ export default function DataCentricAITab() {
         </div>
       </div>
 
+      <DataReadinessJourney />
       <ParadigmComparison />
       <AnnotationConsistency />
       <DataQualityWorkflow />

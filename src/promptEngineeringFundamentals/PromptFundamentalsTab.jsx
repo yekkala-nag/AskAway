@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import * as Primitives from '../components/layout/Primitives.jsx';
 import { Hero, CodeBlock } from '../components/ui/Content.jsx';
 import { Card, Badge, Button, Callout } from '../components/ui/Core.jsx';
+import { LearningPromptsGrid } from '../components/ui/CleanInfographics.jsx';
 import {
   COGNITIVE_PROMPTING_PATTERNS,
   PROMPT_STRUCTURE_COMPONENTS,
@@ -61,6 +62,10 @@ Return strictly valid ${outputFormat}.`;
           { label: 'Programmatic Framework', value: 'DSPy Declarative Signatures' }
         ]}
       />
+
+      <Container size="wide">
+        <LearningPromptsGrid />
+      </Container>
 
       <Container size="wide">
         {/* SUBTAB NAVIGATION */}

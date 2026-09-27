@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import * as Primitives from '../components/layout/Primitives.jsx';
 import { Hero } from '../components/ui/Content.jsx';
 import { Card, Badge, Button } from '../components/ui/Core.jsx';
+import { ToolSelectionFramework } from '../components/ui/CleanInfographics.jsx';
 
 const { Container, Grid, Flex, Stack } = Primitives;
 
@@ -136,6 +137,10 @@ export default function AiGenToolsTab() {
           { label: 'Reading', value: '7 articles' },
         ]}
       />
+
+      <Container size="wide">
+        <ToolSelectionFramework />
+      </Container>
 
       <Container size="wide">
         {/* Category Selector */}

@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import * as Primitives from '../components/layout/Primitives.jsx';
 import { Hero } from '../components/ui/Content.jsx';
 import { Card, Badge, Button } from '../components/ui/Core.jsx';
+import { HarnessDistillationFlow } from '../components/ui/CleanInfographics.jsx';
 import {
   PARTS,
   COMPONENTS,
@@ -200,6 +201,10 @@ export default function AIHarnessTab() {
           { label: 'Evaluations', value: 'MMLU / GSM8K / DPO' }
         ]}
       />
+
+      <Container size="wide">
+        <HarnessDistillationFlow />
+      </Container>
 
       <Container size="wide">
         {/* MAIN NAVIGATION BAR */}

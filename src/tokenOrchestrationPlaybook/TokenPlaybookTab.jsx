@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import * as Primitives from '../components/layout/Primitives.jsx';
 import { Hero, CodeBlock } from '../components/ui/Content.jsx';
 import { Card, Badge, Button, Callout } from '../components/ui/Core.jsx';
+import { TokenOptimizationFlow } from '../components/ui/CleanInfographics.jsx';
 import {
   CONTAINER_SERVICES,
   K8S_PRODUCTION_RULES,
@@ -64,6 +65,10 @@ export default function TokenPlaybookTab() {
         title="Enterprise AI Token Management & Orchestration Playbook"
         description="A complete, end-to-end production architecture blueprint for managing LLM context limits, token costs, and multi-service orchestration. Covering Docker/K8s deployment, LangSmith token governance, RAGAS accuracy evaluation, async parallelism, and a 4-phase enterprise rollout."
       />
+
+      <Container style={{ marginTop: 'var(--ds-space-6)' }}>
+        <TokenOptimizationFlow />
+      </Container>
 
       <Container style={{ marginTop: 'var(--ds-space-6)' }}>
         {/* SUBTAB NAVIGATION */}

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { PromptFrameworksGrid } from "../components/ui/CleanInfographics.jsx";
 
 const C = {
   bg: "#0F1219",
@@ -2442,6 +2443,7 @@ export default function ThreeSentencePromptTab() {
       </div>
 
       {/* The 3 sentences - hero card */}
+      <PromptFrameworksGrid />
       <div
         style={{
           ...sectionStyle,
