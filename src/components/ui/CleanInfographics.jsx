@@ -34,6 +34,84 @@ const step = {
   padding: '10px 14px', fontSize: 12.5, color: '#CBD5E1', lineHeight: 1.6,
 };
 
+/* ---------- Inline SVG helpers (no image files, no watermarks) ---------- */
+
+const ICONS = {
+  book: (<><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" /><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" /></>),
+  link: (<><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" /><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" /></>),
+  target: (<><circle cx="12" cy="12" r="10" /><circle cx="12" cy="12" r="6" /><circle cx="12" cy="12" r="2" /></>),
+  smile: (<><circle cx="12" cy="12" r="10" /><path d="M8 14s1.5 2 4 2 4-2 4-2" /><line x1="9" y1="9" x2="9.01" y2="9" /><line x1="15" y1="9" x2="15.01" y2="9" /></>),
+  calendar: (<><rect x="3" y="4" width="18" height="18" rx="2" /><line x1="16" y1="2" x2="16" y2="6" /><line x1="8" y1="2" x2="8" y2="6" /><line x1="3" y1="10" x2="21" y2="10" /><path d="M9 16l2 2 4-4" /></>),
+  help: (<><circle cx="12" cy="12" r="10" /><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" /><line x1="12" y1="17" x2="12.01" y2="17" /></>),
+  nodes: (<><circle cx="18" cy="5" r="3" /><circle cx="6" cy="12" r="3" /><circle cx="18" cy="19" r="3" /><line x1="8.59" y1="13.51" x2="15.42" y2="17.49" /><line x1="15.41" y1="6.51" x2="8.59" y2="10.49" /></>),
+  users: (<><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M23 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /></>),
+  bulb: (<><path d="M9 18h6" /><path d="M10 22h4" /><path d="M12 2a7 7 0 0 0-4.1 12.7c.6.5 1.1 1.4 1.1 2.3h6c0-.9.5-1.8 1.1-2.3A7 7 0 0 0 12 2z" /></>),
+  clip: (<><rect x="8" y="2" width="8" height="4" rx="1" /><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" /><line x1="9" y1="12" x2="15" y2="12" /><line x1="9" y1="16" x2="13" y2="16" /></>),
+  gauge: (<><path d="M22 12h-4l-3 9L9 3l-3 9H2" /></>),
+  search: (<><circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" /></>),
+  eye: (<><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" /><circle cx="12" cy="12" r="3" /></>),
+  star: (<><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" /></>),
+  chart: (<><line x1="18" y1="20" x2="18" y2="10" /><line x1="12" y1="20" x2="12" y2="4" /><line x1="6" y1="20" x2="6" y2="14" /></>),
+  shield: (<><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" /><path d="M9 12l2 2 4-4" /></>),
+  chat: (<><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" /></>),
+  layers: (<><polygon points="12 2 2 7 12 12 22 7 12 2" /><polyline points="2 17 12 22 22 17" /><polyline points="2 12 12 17 22 12" /></>),
+  check: (<><polyline points="20 6 9 17 4 12" /></>),
+  zap: (<><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" /></>),
+  file: (<><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><polyline points="14 2 14 8 20 8" /><line x1="9" y1="13" x2="15" y2="13" /><line x1="9" y1="17" x2="15" y2="17" /></>),
+  cpu: (<><rect x="4" y="4" width="16" height="16" rx="2" /><rect x="9" y="9" width="6" height="6" /><line x1="9" y1="1" x2="9" y2="4" /><line x1="15" y1="1" x2="15" y2="4" /><line x1="9" y1="20" x2="9" y2="23" /><line x1="15" y1="20" x2="15" y2="23" /><line x1="1" y1="9" x2="4" y2="9" /><line x1="1" y1="15" x2="4" y2="15" /><line x1="20" y1="9" x2="23" y2="9" /><line x1="20" y1="15" x2="23" y2="15" /></>),
+  branch: (<><line x1="6" y1="3" x2="6" y2="15" /><circle cx="18" cy="6" r="3" /><circle cx="6" cy="18" r="3" /><path d="M18 9a9 9 0 0 1-9 9" /></>),
+  flag: (<><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z" /><line x1="4" y1="22" x2="4" y2="15" /></>),
+  send: (<><line x1="22" y1="2" x2="11" y2="13" /><polygon points="22 2 15 22 11 13 2 9 22 2" /></>),
+  globe: (<><circle cx="12" cy="12" r="10" /><line x1="2" y1="12" x2="22" y2="12" /><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" /></>),
+  play: (<><rect x="2" y="4" width="20" height="16" rx="3" /><polygon points="10 9 15 12 10 15 10 9" /></>),
+  pen: (<><path d="M17 3a2.8 2.8 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z" /></>),
+  slides: (<><rect x="2" y="3" width="20" height="14" rx="2" /><line x1="8" y1="21" x2="16" y2="21" /><line x1="12" y1="17" x2="12" y2="21" /></>),
+  table: (<><rect x="3" y="3" width="18" height="18" rx="2" /><line x1="3" y1="9" x2="21" y2="9" /><line x1="3" y1="15" x2="21" y2="15" /><line x1="9" y1="3" x2="9" y2="21" /></>),
+  code: (<><polyline points="16 18 22 12 16 6" /><polyline points="8 6 2 12 8 18" /></>),
+  mic: (<><rect x="9" y="2" width="6" height="12" rx="3" /><path d="M5 10a7 7 0 0 0 14 0" /><line x1="12" y1="19" x2="12" y2="22" /></>),
+  wrench: (<><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" /></>),
+  refresh: (<><polyline points="23 4 23 10 17 10" /><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10" /></>),
+  award: (<><circle cx="12" cy="8" r="6" /><path d="M15.5 13l1.5 8-5-3-5 3 1.5-8" /></>),
+};
+
+function Icon({ name, size = 26, color = '#5EC4C8' }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" style={{ flexShrink: 0 }}>
+      {ICONS[name] || ICONS.file}
+    </svg>
+  );
+}
+
+let __flowUid = 0;
+/* Generic horizontal flow strip: boxes + arrows, fully responsive SVG. */
+function FlowStrip({ steps, accent = '#5EC4C8' }) {
+  const uid = React.useMemo(() => `fs${++__flowUid}`, []);
+  const W = 640, H = 88, gap = 12, aw = 26;
+  const n = steps.length;
+  const bw = (W - (n - 1) * (gap + aw)) / n;
+  const cy = H / 2;
+  let x = 0;
+  const nodes = steps.map((s) => { const bx = x; x += bw + gap + aw; return { ...s, bx }; });
+  return (
+    <svg viewBox={`0 0 ${W} ${H}`} style={{ width: '100%', height: 'auto', display: 'block' }} role="img">
+      <defs>
+        <marker id={uid} markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+          <path d="M0,0 L6,3 L0,6" fill="none" stroke={accent} strokeWidth="1.6" />
+        </marker>
+      </defs>
+      {nodes.map((s, i) => (
+        <g key={i}>
+          <rect x={s.bx} y={10} width={bw} height={H - 20} rx={9} fill="#161B26" stroke="#2A3548" />
+          <rect x={s.bx} y={10} width={4} height={H - 20} rx={2} fill={accent} opacity={0.85} />
+          <text x={s.bx + bw / 2} y={s.d ? 40 : 50} textAnchor="middle" fontSize={s.label.length > 14 ? 10.5 : 12.5} fontWeight={700} fill="#F1F5F9">{s.label}</text>
+          {s.d ? <text x={s.bx + bw / 2} y={60} textAnchor="middle" fontSize={9.5} fill="#94A3B8">{s.d}</text> : null}
+          {i < nodes.length - 1 ? (<line x1={s.bx + bw + 3} y1={cy} x2={s.bx + bw + gap + aw - 3} y2={cy} stroke={accent} strokeWidth={1.8} markerEnd={`url(#${uid})`} />) : null}
+        </g>
+      ))}
+    </svg>
+  );
+}
+
 export function LearningPromptsGrid() {
   const items = [
     { t: 'Explain Like I\u2019m 5', d: 'Force a plain-language explanation with familiar everyday terms to reduce complexity.', p: 'Prompt: \u201CExplain [topic] like I\u2019m 5 using a real-life analogy and 3 key takeaways.\u201D' },
@@ -52,7 +130,10 @@ export function LearningPromptsGrid() {
       <p style={sub}>Reusable prompt shapes: simplify, analogize, motivate, simulate, plan, retrieve, map, debate, memorize.</p>
       <div style={grid(230)}>{items.map((it, i) => (
         <div key={i} style={card}>
-          <div style={cardTitle}>{i + 1}. {it.t}</div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 6 }}>
+            <Icon name={['book', 'link', 'target', 'smile', 'calendar', 'help', 'nodes', 'users', 'bulb'][i]} />
+            <div style={{ ...cardTitle, marginBottom: 0 }}>{i + 1}. {it.t}</div>
+          </div>
           <div style={cardBody}>{it.d}</div>
           <div style={promptStyle}>{it.p}</div>
         </div>
@@ -79,7 +160,10 @@ export function PromptFrameworksGrid() {
       <div style={grid(260)}>{items.map((it, i) => (
         <div key={i} style={card}>
           <span style={tag}>Best for: {it.b}</span>
-          <div style={cardTitle}>{String(i + 1).padStart(2, '0')} · {it.a}</div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 6 }}>
+            <Icon name={['clip', 'target', 'smile', 'search', 'eye', 'star', 'refresh', 'branch'][i]} />
+            <div style={{ ...cardTitle, marginBottom: 0 }}>{String(i + 1).padStart(2, '0')} · {it.a}</div>
+          </div>
           <div style={{ ...cardBody, color: '#94A3B8' }}>{it.e}</div>
           <ul style={{ ...cardBody, margin: '8px 0', paddingLeft: 16 }}>{it.pts.map((p, j) => <li key={j}>{p}</li>)}</ul>
           <div style={promptStyle}>{it.t}</div>
@@ -94,7 +178,15 @@ export function HarnessDistillationFlow() {
     <div style={wrap}>
       <div style={h3}>Harness Distillation via Agent-as-Harness</div>
       <p style={sub}>Use a domain-optimized harness as training-time guidance, transfer the induced behavior into model weights, then deploy under a single fixed harness.</p>
-      <div style={{ display: 'grid', gap: 12 }}>
+      <FlowStrip
+        accent="#5EC4C8"
+        steps={[
+          { label: 'Evolve & Adapt', d: 'specialize harness' },
+          { label: 'Collect', d: 'pass / replace' },
+          { label: 'Train & Deploy', d: 'distilled model' },
+        ]}
+      />
+      <div style={{ display: 'grid', gap: 12, marginTop: 12 }}>
         <div style={step}><b style={{ color: '#F1F5F9' }}>1. Evolve &amp; Adapt</b> — evolve a specialized harness from training tasks (tools, middleware, skills, memory), then adapt it into action recipes, review middleware, review guidance, and failure patterns.</div>
         <div style={step}><b style={{ color: '#F1F5F9' }}>2. Agent-as-Harness Trajectory Collection</b> — a harnessing agent corrects student proposals before execution in the fixed target harness action space: PASS keeps the proposal, Replace substitutes the corrected action. Unexecuted proposals never touch the environment.</div>
         <div style={step}><b style={{ color: '#F1F5F9' }}>3. Train &amp; Deploy</b> — retain reviewer-perspective trajectories, fine-tune on them, and deploy the distilled student alone. Reported effects: large task-success gains with the specialized harness removed, and high recovery of harness-induced behaviors.</div>
@@ -104,19 +196,24 @@ export function HarnessDistillationFlow() {
 }
 
 export function ArchitectureComparison() {
-  const rows = [
-    { t: 'Language Model', f: 'Prompt + provided context \u2192 learned parameters \u2192 sequentially generated response.' },
-    { t: 'Retrieval-Augmented Generation', f: 'Query \u2192 retriever searches an indexed knowledge base for relevant chunks \u2192 query + retrieved context \u2192 grounded response (not guaranteed correct).' },
-    { t: 'AI Agent', f: 'Goal \u2192 agent core (model + instructions + task state) \u2192 decide \u2192 act via tool calls (APIs, files, apps, databases) \u2192 observe result \u2192 update task state and repeat until the goal is met.' },
-    { t: 'Multi-Agent System', f: 'Objective \u2192 orchestration coordinates work across single/multi-agent workflows with shared task state \u2192 tool calls \u2192 evaluate progress \u2192 replan \u2192 outcome when the goal is met.' },
+  const tiers = [
+    { t: '1. Language Model', c: 'Prompt in, response out — no outside knowledge.', accent: '#6A9BD8', steps: [{ label: 'Prompt', d: '+ context' }, { label: 'Model', d: 'parameters' }, { label: 'Response', d: 'generated' }] },
+    { t: '2. Retrieval-Augmented Generation', c: 'Grounds answers in an indexed knowledge base.', accent: '#7FB069', steps: [{ label: 'Query', d: 'user ask' }, { label: 'Retriever', d: '+ index' }, { label: 'Model', d: 'with context' }, { label: 'Answer', d: 'grounded' }] },
+    { t: '3. AI Agent', c: 'Goal-driven loop: decide, act with tools, observe, repeat.', accent: '#E8C558', steps: [{ label: 'Goal', d: 'objective' }, { label: 'Core', d: 'model+state' }, { label: 'Decide', d: 'choose' }, { label: 'Act', d: 'tool call' }, { label: 'Observe', d: 'result' }] },
+    { t: '4. Multi-Agent System', c: 'Orchestrated team with shared state and evaluation.', accent: '#A78BFA', steps: [{ label: 'Objective', d: 'mission' }, { label: 'Orchestrate', d: 'coordinate' }, { label: 'Agent team', d: 'workflows' }, { label: 'Evaluate', d: 'progress' }, { label: 'Outcome', d: 'goal met' }] },
   ];
   return (
     <div style={wrap}>
       <div style={h3}>Architecture Comparison — Model, Retrieval, Agent, Multi-Agent</div>
       <p style={sub}>From single inference to orchestrated systems: each tier adds a capability — and operational cost.</p>
-      <div style={{ display: 'grid', gap: 12 }}>{rows.map((r, i) => (
-        <div key={i} style={step}><b style={{ color: '#F1F5F9' }}>{i + 1}. {r.t}</b> — {r.f}</div>
-      ))}</div>
+      <div style={{ display: 'grid', gap: 16 }}>
+        {tiers.map((tier) => (
+          <div key={tier.t}>
+            <div style={cardTitle}>{tier.t} <span style={{ fontWeight: 400, color: '#94A3B8', fontSize: 12 }}>— {tier.c}</span></div>
+            <FlowStrip steps={tier.steps} accent={tier.accent} />
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
@@ -141,7 +238,10 @@ export function EvalMethodsGrid() {
       <p style={sub}>Reference-based overlap, embedding similarity, model judges and juries, human review, safety gates, and execution-path scoring.</p>
       <div style={grid(210)}>{items.map((it, i) => (
         <div key={i} style={card}>
-          <div style={cardTitle}>{i + 1}. {it.t}</div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 6 }}>
+            <Icon name={['gauge', 'file', 'check', 'cpu', 'nodes', 'eye', 'chat', 'shield', 'award', 'branch', 'send'][i]} color="#7FB069" />
+            <div style={{ ...cardTitle, marginBottom: 0 }}>{i + 1}. {it.t}</div>
+          </div>
           <div style={cardBody}>{it.d}</div>
         </div>
       ))}</div>
@@ -151,44 +251,87 @@ export function EvalMethodsGrid() {
 
 export function DataReadinessJourney() {
   const miles = [
-    { t: 'Clean', n: 'A good starting point — necessary but not sufficient.' },
-    { t: 'Consistent across systems', n: 'Not always structured the same way.' },
+    { t: 'Clean', n: 'A good starting point.' },
+    { t: 'Consistent', n: 'Same meaning everywhere.' },
     { t: 'Connected', n: 'Silos make this hard.' },
-    { t: 'Clear definitions', n: 'What does \u201Con time\u201D actually mean?' },
+    { t: 'Clear definitions', n: 'Agree what fields mean.' },
     { t: 'Exceptions captured', n: 'Real life is messy.' },
-    { t: 'Business context', n: 'Data without context can mislead.' },
-    { t: 'Accessible to AI', n: 'The right format, at the right level.' },
-    { t: 'Reliable for the use case', n: 'It has to work in the real world.' },
-    { t: 'Actually AI-ready', n: 'Now it can drive real value.' },
+    { t: 'Business context', n: 'Data needs meaning.' },
+    { t: 'Accessible to AI', n: 'Right format, right level.' },
+    { t: 'Reliable', n: 'Works in the real world.' },
+    { t: 'Actually AI-ready', n: 'Now it drives value.', done: true },
   ];
+  const pts = miles.map((m, i) => ({ ...m, x: i % 2 === 0 ? 185 : 455, y: 36 + i * 58 }));
+  const pathD = pts.map((p, i) => `${i === 0 ? 'M' : 'L'}${p.x},${p.y}`).join(' ');
   return (
     <div style={wrap}>
       <div style={h3}>The AI-Ready Data Journey</div>
-      <p style={sub}>The naive view is linear — Clean \u2192 Organized \u2192 Digitized \u2192 AI-ready. The real path winds through consistency, connectivity, definitions, exceptions, context, accessibility, and reliability.</p>
-      <div style={{ display: 'grid', gap: 8 }}>{miles.map((m, i) => (
-        <div key={i} style={step}><b style={{ color: i === miles.length - 1 ? '#5EC4C8' : '#F1F5F9' }}>{i + 1}. {m.t}</b> <span style={{ color: '#94A3B8' }}>— {m.n}</span></div>
-      ))}</div>
+      <p style={sub}>The naive view is linear — Clean, Organized, Digitized, AI-ready. The real path winds through consistency, connectivity, definitions, exceptions, context, accessibility, and reliability.</p>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap', marginBottom: 14 }}>
+        {['Clean', 'Organized', 'Digitized', 'AI-ready?'].map((s, i, a) => (
+          <React.Fragment key={s}>
+            <span style={{ fontSize: 11.5, fontWeight: 700, color: '#94A3B8', background: '#161B26', border: '1px dashed #3A4A63', borderRadius: 20, padding: '4px 12px' }}>{s}</span>
+            {i < a.length - 1 ? (<span style={{ color: '#3A4A63' }}>→</span>) : null}
+          </React.Fragment>
+        ))}
+        <span style={{ fontSize: 11, color: '#94A3B8' }}>— the myth</span>
+      </div>
+      <svg viewBox="0 0 640 560" style={{ width: '100%', height: 'auto', display: 'block' }} role="img" aria-label="Winding AI-ready data journey">
+        <path d={pathD} fill="none" stroke="#2A3548" strokeWidth={20} strokeLinejoin="round" strokeLinecap="round" />
+        <path d={pathD} fill="none" stroke="#5EC4C8" strokeWidth={2} strokeDasharray="7 6" opacity={0.8} />
+        {pts.map((p, i) => {
+          const left = p.x < 320;
+          const accent = p.done ? '#34D399' : '#5EC4C8';
+          return (
+            <g key={i}>
+              <circle cx={p.x} cy={p.y} r={15} fill="#0F1219" stroke={accent} strokeWidth={3} />
+              <circle cx={p.x} cy={p.y} r={5.5} fill={accent} />
+              <text x={left ? p.x + 26 : p.x - 26} y={p.y - 1} textAnchor={left ? 'start' : 'end'} fontSize={13} fontWeight={800} fill="#F1F5F9">{i + 1}. {p.t}</text>
+              <text x={left ? p.x + 26 : p.x - 26} y={p.y + 16} textAnchor={left ? 'start' : 'end'} fontSize={10.5} fill="#94A3B8">{p.n}</text>
+            </g>
+          );
+        })}
+      </svg>
     </div>
   );
 }
 
 export function SevenLayersStack() {
   const layers = [
-    { n: 7, t: 'General Intelligence', d: 'General intelligence across tasks — not achieved yet.' },
-    { n: 6, t: 'Agentic AI', d: 'Plans, uses tools, and takes actions.' },
-    { n: 5, t: 'Generative AI', d: 'Creates text, images, audio, and code. Current frontier.' },
-    { n: 4, t: 'Deep Learning', d: 'Many-layer neural networks for vision, speech, and language.' },
-    { n: 3, t: 'Neural Networks', d: 'Interconnected learned representations.' },
-    { n: 2, t: 'Machine Learning', d: 'Learns patterns from data.' },
-    { n: 1, t: 'Classical AI', d: 'Rules, logic, search.' },
+    { n: 7, t: 'General Intelligence', d: 'General intelligence across tasks — not yet achieved.', c: '#A78BFA' },
+    { n: 6, t: 'Agentic AI', d: 'Plans, uses tools, and takes actions.', c: '#6A9BD8' },
+    { n: 5, t: 'Generative AI', d: 'Creates text, images, audio, and code.', c: '#5EC4C8', flag: 'current frontier' },
+    { n: 4, t: 'Deep Learning', d: 'Many-layer nets for vision, speech, language.', c: '#7FB069' },
+    { n: 3, t: 'Neural Networks', d: 'Interconnected learned representations.', c: '#E8C558' },
+    { n: 2, t: 'Machine Learning', d: 'Learns patterns from data.', c: '#E08A4C' },
+    { n: 1, t: 'Classical AI', d: 'Rules, logic, search.', c: '#C96A5A' },
   ];
+  const tierH = 46, tierGap = 8, topY = 8;
   return (
     <div style={wrap}>
       <div style={h3}>7 Layers of AI — From Classical Rules to General Intelligence</div>
       <p style={sub}>Each layer builds on the one below. We are currently at the generative frontier.</p>
-      <div style={{ display: 'grid', gap: 8 }}>{layers.map((l) => (
-        <div key={l.n} style={step}><b style={{ color: '#F1F5F9' }}>{l.n}. {l.t}</b> — {l.d}</div>
-      ))}</div>
+      <svg viewBox="0 0 640 400" style={{ width: '100%', height: 'auto', display: 'block' }} role="img" aria-label="Seven layers of AI stack">
+        <line x1={26} y1={384} x2={26} y2={16} stroke="#5EC4C8" strokeWidth={2} strokeDasharray="6 5" opacity={0.7} />
+        {layers.map((l, idx) => {
+          const w = 200 + idx * 68;
+          const x = (640 - w) / 2 + 14;
+          const y = topY + idx * (tierH + tierGap);
+          return (
+            <g key={l.n}>
+              <rect x={x} y={y} width={w} height={tierH} rx={9} fill={l.c} />
+              <circle cx={x + 26} cy={y + tierH / 2} r={14} fill="#0F1219" opacity={0.82} />
+              <text x={x + 26} y={y + tierH / 2 + 5.5} textAnchor="middle" fontSize={15} fontWeight={800} fill="#FFFFFF">{l.n}</text>
+              <text x={x + 50} y={w > 300 ? y + 20 : y + tierH / 2 + 5} fontSize={13.5} fontWeight={800} fill="#101820">{l.t}</text>
+              {w > 300 ? (<text x={x + 50} y={y + 36} fontSize={10.5} fill="#101820" opacity={0.78}>{l.d}</text>) : null}
+              {l.flag ? (<g>
+                <circle cx={26} cy={y + tierH / 2} r={5} fill="#5EC4C8" stroke="#0F1219" strokeWidth={2} />
+                <text x={40} y={y + tierH / 2 - 10} fontSize={11} fontWeight={700} fill="#5EC4C8">{l.flag}</text>
+              </g>) : null}
+            </g>
+          );
+        })}
+      </svg>
     </div>
   );
 }
@@ -196,13 +339,46 @@ export function SevenLayersStack() {
 export function TokenOptimizationFlow() {
   return (
     <div style={wrap}>
-      <div style={h3}>Token Optimization for Coding Agents (~92% Reduction Pattern)</div>
-      <p style={sub}>Keep large files out of the expensive model\u2019s context; delegate ruthlessly to cheaper models; enforce with pre-tool hooks.</p>
-      <div style={{ display: 'grid', gap: 12 }}>
-        <div style={step}><b style={{ color: '#F1F5F9' }}>Gate every read</b> — pre-tool hook checks file size / command before execution. Small reads pass; anything over the line threshold routes to bulk-read. Follow-ups then cost nothing extra.</div>
-        <div style={step}><b style={{ color: '#F1F5F9' }}>Bulk-read path</b> — a script wraps files in tags and attaches the question; a cheap model returns bullets only (name/line-number led). Files never enter the expensive context.</div>
-        <div style={step}><b style={{ color: '#F1F5F9' }}>Delegated writing</b> — code-write calls carry spec + reference file; a cheap writer matches reference patterns, code only. One shot, nothing kept between calls; delegations capped per run.</div>
-        <div style={step}><b style={{ color: '#F1F5F9' }}>Three layers</b> — 1) advisory skills and docs, 2) scripts that report tokens, 3) hooks that run before the tool and can refuse. Rules moved from ignored advisory text into enforced hooks.</div>
+      <div style={h3}>Token Optimization for Coding Agents</div>
+      <p style={sub}>Keep large files out of the expensive model’s context; delegate ruthlessly to cheaper models; enforce with pre-tool hooks.</p>
+      <svg viewBox="0 0 640 320" style={{ width: '100%', height: 'auto', display: 'block' }} role="img" aria-label="Token optimization flowchart">
+        <defs>
+          <marker id="tokA" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+            <path d="M0,0 L6,3 L0,6" fill="none" stroke="#5EC4C8" strokeWidth="1.6" />
+          </marker>
+        </defs>
+        <rect x={215} y={8} width={210} height={42} rx={9} fill="#161B26" stroke="#2A3548" />
+        <rect x={215} y={8} width={4} height={42} rx={2} fill="#5EC4C8" />
+        <text x={320} y={33} textAnchor="middle" fontSize={12.5} fontWeight={700} fill="#F1F5F9">Read / execute request</text>
+        <line x1={320} y1={50} x2={320} y2={64} stroke="#5EC4C8" strokeWidth={1.8} markerEnd="url(#tokA)" />
+        <polygon points="320,66 410,116 320,166 230,116" fill="#161B26" stroke="#E8C558" strokeWidth={2} />
+        <text x={320} y={112} textAnchor="middle" fontSize={13} fontWeight={800} fill="#F1F5F9">over the line limit?</text>
+        <text x={320} y={130} textAnchor="middle" fontSize={10} fill="#94A3B8">pre-tool hook gate</text>
+        <text x={206} y={106} textAnchor="end" fontSize={11} fontWeight={700} fill="#7FB069">no</text>
+        <text x={434} y={106} textAnchor="start" fontSize={11} fontWeight={700} fill="#E8C558">yes</text>
+        <line x1={228} y1={116} x2={188} y2={116} stroke="#5EC4C8" strokeWidth={1.8} markerEnd="url(#tokA)" />
+        <line x1={412} y1={116} x2={452} y2={116} stroke="#5EC4C8" strokeWidth={1.8} markerEnd="url(#tokA)" />
+        <rect x={22} y={88} width={160} height={56} rx={9} fill="#161B26" stroke="#2A3548" />
+        <rect x={22} y={88} width={4} height={56} rx={2} fill="#7FB069" />
+        <text x={102} y={111} textAnchor="middle" fontSize={12} fontWeight={700} fill="#F1F5F9">Small read</text>
+        <text x={102} y={129} textAnchor="middle" fontSize={10} fill="#94A3B8">passes straight through</text>
+        <rect x={458} y={88} width={160} height={56} rx={9} fill="#161B26" stroke="#2A3548" />
+        <rect x={458} y={88} width={4} height={56} rx={2} fill="#E8C558" />
+        <text x={538} y={111} textAnchor="middle" fontSize={12} fontWeight={700} fill="#F1F5F9">Bulk-read script</text>
+        <text x={538} y={129} textAnchor="middle" fontSize={10} fill="#94A3B8">file wrapped once</text>
+        <line x1={538} y1={144} x2={538} y2={158} stroke="#5EC4C8" strokeWidth={1.8} markerEnd="url(#tokA)" />
+        <rect x={458} y={162} width={160} height={56} rx={9} fill="#161B26" stroke="#2A3548" />
+        <rect x={458} y={162} width={4} height={56} rx={2} fill="#5EC4C8" />
+        <text x={538} y={185} textAnchor="middle" fontSize={12} fontWeight={700} fill="#F1F5F9">Cheap model</text>
+        <text x={538} y={203} textAnchor="middle" fontSize={10} fill="#94A3B8">bullets only, cited lines</text>
+        <rect x={60} y={252} width={520} height={52} rx={9} fill="#161B26" stroke="#2A3548" />
+        <text x={320} y={273} textAnchor="middle" fontSize={11.5} fill="#CBD5E1">Files never enter the expensive context — follow-ups cost nothing extra</text>
+        <text x={320} y={291} textAnchor="middle" fontSize={10.5} fill="#94A3B8">Three layers: advisory docs → token-reporting scripts → enforcing hooks</text>
+      </svg>
+      <div style={{ display: 'grid', gap: 12, marginTop: 12 }}>
+        <div style={step}><b style={{ color: '#F1F5F9' }}>Gate every read</b> — pre-tool hook checks file size / command before execution. Small reads pass; anything over the line threshold routes to bulk-read.</div>
+        <div style={step}><b style={{ color: '#F1F5F9' }}>Bulk-read path</b> — a script wraps files in tags and attaches the question; a cheap model returns bullets only (name/line-number led).</div>
+        <div style={step}><b style={{ color: '#F1F5F9' }}>Delegated writing</b> — code-write calls carry spec + reference file; a cheap writer matches reference patterns, code only. One shot, nothing kept between calls.</div>
       </div>
     </div>
   );
@@ -219,8 +395,40 @@ export function ToolSelectionFramework() {
       ))}</div>
       <div style={{ display: 'grid', gap: 12, marginTop: 12 }}>
         <div style={step}><b style={{ color: '#F1F5F9' }}>A) Pick fast (3 questions)</b> — 1) What are you making? 2) Do you need watermark-free exports? 3) How many free credits per month?</div>
-        <div style={step}><b style={{ color: '#F1F5F9' }}>B) Router</b> — image \u2192 image tool · design/poster \u2192 design tool · video \u2192 video tool · website \u2192 website builder · code \u2192 coding assistant · writing/ideas \u2192 writing assistant · slides \u2192 presentation tool · voice \u2192 voice tool · search answers \u2192 conversational search · spreadsheet formulas \u2192 spreadsheet helper.</div>
-        <div style={step}><b style={{ color: '#F1F5F9' }}>C) Reality check + quiz</b> — many free tools have credit, watermark, export, or trial limits. Self-test: cover the answers and name the right tool for spreadsheets, slides, code completion, conversational search, and credit-limited video.</div>
+        <div>
+          <div style={{ ...cardTitle, marginBottom: 6 }}>B) Task → tool router</div>
+          <svg viewBox="0 0 640 330" style={{ width: '100%', height: 'auto', display: 'block' }} role="img" aria-label="Task to tool router">
+            <defs>
+              <marker id="rtlA" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+                <path d="M0,0 L6,3 L0,6" fill="none" stroke="#5EC4C8" strokeWidth="1.6" />
+              </marker>
+            </defs>
+            <rect x={14} y={135} width={132} height={60} rx={9} fill="#5EC4C8" />
+            <text x={80} y={160} textAnchor="middle" fontSize={12.5} fontWeight={800} fill="#0F1219">Your task</text>
+            <text x={80} y={178} textAnchor="middle" fontSize={10} fill="#0F1219" opacity={0.75}>what to make?</text>
+            {['Image', 'Video + Voice', 'Website', 'Code', 'Writing + Slides'].map((m, i) => {
+              const y = 14 + i * 64;
+              return (
+                <g key={m}>
+                  <line x1={146} y1={165} x2={226} y2={y + 22} stroke="#5EC4C8" strokeWidth={1.4} opacity={0.65} markerEnd="url(#rtlA)" />
+                  <rect x={232} y={y} width={150} height={44} rx={9} fill="#161B26" stroke="#2A3548" />
+                  <text x={307} y={y + 27} textAnchor="middle" fontSize={11.5} fontWeight={700} fill="#F1F5F9">{m}</text>
+                </g>
+              );
+            })}
+            {['Create visuals', 'Generate media', 'Build sites', 'Develop code', 'Communicate'].map((r, i) => {
+              const y = 14 + i * 64;
+              return (
+                <g key={r}>
+                  <line x1={382} y1={y + 22} x2={462} y2={y + 22} stroke="#5EC4C8" strokeWidth={1.4} opacity={0.65} markerEnd="url(#rtlA)" />
+                  <rect x={468} y={y} width={158} height={44} rx={9} fill="#161B26" stroke="#34D399" />
+                  <text x={547} y={y + 27} textAnchor="middle" fontSize={11.5} fontWeight={700} fill="#F1F5F9">{r}</text>
+                </g>
+              );
+            })}
+          </svg>
+        </div>
+        <div style={step}><b style={{ color: '#F1F5F9' }}>C) Reality check + quiz</b> — many free tools have credit, watermark, export, or trial limits. Self-test: cover the answers and name the right lane for spreadsheets, slides, code completion, conversational search, and credit-limited video.</div>
       </div>
     </div>
   );
