@@ -19,7 +19,7 @@ export const UMBRELLA_TOPICS = [
     color: "#5EC4C8",
     dark: "#1F6B6E",
     description: "Roadmap stages 1–4: orientation, how LLMs work, prompting, models — home of the AI Engineer Roadmap",
-    tabs: ["fnd_start_hub", "fnd_internals_hub", "fnd_prompts_hub", "fnd_mlsoc_hub", "fnd_multimodal_hub", "airoadmap", "overview", "glossary", "reinforcementlearning", "trpo2grpo", "aimoralagency", "humancentric", "dialoguelamda", "modellandscape", "tokenization", "modelinternals", "quantserve", "vramconductor", "promptfundamentals", "llmsampling", "selfattention", "posencoding", "archconcepts", "promptmgmt", "promptdependencygraph", "promptcontracts", "promptregression", "structuredoutputs", "topicmodeling", "workflows", "unhobbling", "aiharness", "promptlearning", "visionlanguage", "diffusionmodels", "speechvoice", "datacentricai", "threesentenceprompt"]
+    tabs: ["fnd_start_hub", "fnd_internals_hub", "fnd_prompts_hub", "fnd_mlsoc_hub", "fnd_multimodal_hub", "airoadmap", "overview", "glossary", "reinforcementlearning", "trpo2grpo", "aimoralagency", "humancentric", "dialoguelamda", "modellandscape", "tokenization", "quantserve", "vramconductor", "promptfundamentals", "llmsampling", "selfattention", "posencoding", "archconcepts", "promptmgmt", "promptdependencygraph", "promptcontracts", "promptregression", "structuredoutputs", "topicmodeling", "workflows", "unhobbling", "aiharness", "promptlearning", "visionlanguage", "diffusionmodels", "speechvoice", "datacentricai", "threesentenceprompt"]
   },
   {
     id: "data_platform",
@@ -168,15 +168,6 @@ export const TABS_REGISTRY = [
     icon: "🔤",
     keywords: ["tokenization", "bpe", "unigram", "wordpiece", "fertility", "multilingual tokens", "tiktoken"],
     component: lazy(() => import("../tokenization/TokenizationTab.jsx"))
-  },
-  {
-    id: "modelinternals",
-    label: "Model Internals",
-    umbrellaId: "foundations",
-    category: "Foundations",
-    icon: "🧠",
-    keywords: ["model internals", "transformer", "attention", "kv cache", "swiglu", "feed forward", "layer norm", "rmsnorm", "rope", "moe", "mixture of experts", "forward pass"],
-    component: lazy(() => import("../modelInternals/ModelInternalsTab.jsx"))
   },
   {
     id: "quantserve",

@@ -84,7 +84,6 @@ export const TOPIC_META = {
   trpo2grpo: { c: 'fnd_mlsoc', l: 2, p: ['reinforcementlearning'], deep: true },
   archconcepts: { c: 'fnd_internals', l: 1, p: ['selfattention'] },
   tokenization: { c: 'fnd_internals', l: 1, p: [] },
-  modelinternals: { c: 'fnd_internals', l: 1, p: ['archconcepts'] },
   modellandscape: { c: 'fnd_internals', l: 2, p: ['archconcepts'] },
   quantserve: { c: 'fnd_internals', l: 2, p: ['modellandscape'] },
   vramconductor: { c: 'fnd_internals', l: 3, p: ['quantserve'] },
