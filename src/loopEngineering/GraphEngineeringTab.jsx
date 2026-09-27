@@ -38,7 +38,6 @@ export default function GraphEngineeringTab() {
         <div style={{ display: "flex", gap: 12, alignItems: "flex-start", marginBottom: 16 }}>
           <span style={{ fontSize: 28 }}>📰</span>
           <div>
-            <div style={{ color: COLORS.amber, fontFamily: "JetBrains Mono, monospace", fontSize: 10, fontWeight: 700, letterSpacing: "0.1em", marginBottom: 4 }}>TOWARDS DATA SCIENCE · SEPTEMBER 2026</div>
             <h2 style={{ margin: 0, fontSize: 22, fontWeight: 700, lineHeight: 1.2 }}>Graph Engineering for AI Agents</h2>
             <div style={{ color: COLORS.muted, fontSize: 13, marginTop: 4 }}>From Prompts and Loops to Workflows</div>
           </div>

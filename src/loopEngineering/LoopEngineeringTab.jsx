@@ -750,23 +750,6 @@ function PracticalGuide() {
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
 
-      {/* Source badge */}
-      <div style={{
-        background: COLORS.surface2,
-        border: `1px solid ${COLORS.border}`,
-        borderRadius: 10,
-        padding: "10px 14px",
-        display: "flex",
-        alignItems: "center",
-        gap: 10,
-      }}>
-        <span style={{ fontSize: 16 }}>📰</span>
-        <div>
-          <div style={{ color: COLORS.text, fontSize: 12, fontWeight: 600 }}>Eivind Kjosbakken · Towards Data Science</div>
-          <div style={{ color: COLORS.muted, fontSize: 11, marginTop: 1 }}>How to Create Powerful Loops in Claude Code · Jun 23, 2026</div>
-        </div>
-      </div>
-
       {/* Scenario compare */}
       <div>
         <div style={{ color: COLORS.amber, fontFamily: "JetBrains Mono, monospace", fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", marginBottom: 10 }}>WHY LOOPS MULTIPLY THROUGHPUT</div>
@@ -828,7 +811,7 @@ function PracticalGuide() {
           </div>
           {/* Real example */}
           <div style={{ background: "#07090F", padding: "14px 16px", borderTop: `1px solid ${COLORS.border}` }}>
-            <div style={{ color: COLORS.muted, fontFamily: "JetBrains Mono, monospace", fontSize: 10, marginBottom: 10 }}>REAL EXAMPLE (Eivind Kjosbakken)</div>
+            <div style={{ color: COLORS.muted, fontFamily: "JetBrains Mono, monospace", fontSize: 10, marginBottom: 10 }}>REAL-WORLD PRODUCTION EXAMPLE</div>
             {[
               { text: "/goal Implement everything I asked for.", color: COLORS.amber },
               { text: "Verify end-to-end by clicking through the browser with Playwright MCP.", color: COLORS.sky },
@@ -1194,12 +1177,6 @@ function CommandsRef() {
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
 
-      {/* Source badge */}
-      <div style={{ background: COLORS.surface, border: `1px solid ${COLORS.border}`, borderRadius: 10, padding: "10px 14px", display: "flex", gap: 10, alignItems: "center" }}>
-        <span style={{ fontSize: 16 }}>📡</span>
-        <div style={{ color: COLORS.muted, fontSize: 12 }}>Synthesised from VibeReady, Developers Digest, AI Agent Factory, The AI Corner · June–July 2026</div>
-      </div>
-
       {/* Command selector */}
       <div>
         <div style={{ color: COLORS.amber, fontFamily: "monospace", fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", marginBottom: 10 }}>CHOOSE A COMMAND</div>
@@ -1505,13 +1482,6 @@ function ClaudeBasics() {
 
   return (
     <div style={{ display:"flex", flexDirection:"column", gap:14 }}>
-      <div style={{ background:COLORS.surface, border:`1px solid ${COLORS.border}`, borderRadius:10, padding:"10px 14px", display:"flex", gap:10, alignItems:"center" }}>
-        <span style={{ fontSize:16 }}>📰</span>
-        <div>
-          <div style={{ color:COLORS.text, fontSize:12, fontWeight:600 }}>Julian Horsey · Geeky Gadgets · Howfinity</div>
-          <div style={{ color:COLORS.muted, fontSize:11, marginTop:1 }}>Claude AI Beginner Guide: 10 Workflows and Prompts to Try First · July 3, 2026</div>
-        </div>
-      </div>
 
       <div style={{ background:COLORS.surface2, border:`1px solid ${COLORS.sky}33`, borderRadius:12, padding:"14px 16px" }}>
         <div style={{ color:COLORS.sky, fontFamily:"monospace", fontSize:11, fontWeight:700, marginBottom:6 }}>WHY THIS TAB EXISTS IN A LOOP ENGINEERING APP</div>
@@ -1754,10 +1724,8 @@ export function LoopEngineeringTab({ onSelectTab, setActiveTab }) {
                   { who: "Boris Cherny", where: "WorkOS Acquired Unplugged, Jun 2026", color: COLORS.sky },
                   { who: "Peter Steinberger", where: "OpenClaw / X, Jun 2026", color: COLORS.violet },
                   { who: "System Architecture Guide", where: "Loop Engineering Patterns & Practices", color: COLORS.amber },
-                  { who: "Eivind Kjosbakken", where: "Towards Data Science, Jun 2026", color: COLORS.emerald },
                   { who: "Brian Grinstead", where: "Mozilla / Lenny's Newsletter, Jun 2026", color: "#FF6B6B" },
                   { who: "Forward Future Loop Library", where: "signals.forwardfuture.com — 69 loops", color: COLORS.sky },
-                  { who: "VibeReady · Developers Digest · AI Corner", where: "Multi-source synthesis, Jun–Jul 2026", color: COLORS.muted },
                 ].map(s => (
                   <div key={s.who} style={{ display: "flex", gap: 10, alignItems: "baseline" }}>
                     <span style={{ color: s.color, fontFamily: "monospace", fontSize: 11, fontWeight: 700, minWidth: 6, lineHeight: 1 }}>·</span>

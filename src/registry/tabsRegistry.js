@@ -811,7 +811,7 @@ export const TABS_REGISTRY = [
     umbrellaId: "agents_frameworks",
     category: "Agents & Frameworks",
     icon: "🚀",
-    keywords: ["claude code", "100 tasks", "sub-agents", "worktree", "git worktree", "task triage", "task bifurcation", "html report", "verification report", "eivind kjosbakken", "linear", "slack bot", "towards data science", "autonomous coding"],
+    keywords: ["claude code", "100 tasks", "sub-agents", "worktree", "git worktree", "task triage", "task bifurcation", "html report", "verification report", "linear", "slack bot", "towards data science", "autonomous coding"],
     component: lazy(() => import("../claudeCode100/ClaudeCode100Tab.jsx"))
   },
   {
