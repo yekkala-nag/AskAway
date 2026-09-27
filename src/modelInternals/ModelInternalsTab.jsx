@@ -8,25 +8,19 @@ import {
   PRODUCTION_PRINCIPLES
 } from "./internalsEngine.js";
 
-// Existing Application Light Theme Color Tokens
 const COLORS = {
-  bg: "#F7F8FA",
-  surface: "#FFFFFF",
-  surface2: "#F8FAFC",
-  surface3: "#EDF2F7",
-  border: "#E2E8F0",
-  borderSubtle: "#EEF2F6",
-  text: "#1E293B",
-  textHeading: "#0F172A",
-  muted: "#64748B",
-  teal: "#0D9488",
-  amber: "#D97706",
-  sky: "#0284C7",
-  emerald: "#059669",
-  rose: "#E11D48",
-  violet: "#7C3AED",
-  codeBg: "#0F172A",
-  codeText: "#E2E8F0",
+  bg: "#080D1A",
+  surface: "#0F1629",
+  surface2: "#162040",
+  surface3: "#1E2D52",
+  border: "#243358",
+  text: "#E2E8F0",
+  muted: "#7A8BA8",
+  amber: "#F59E0B",
+  sky: "#5EC4C8",
+  emerald: "#5EC4C8",
+  rose: "#F43F5E",
+  violet: "#A78BFA",
 };
 
 // ── SUBCOMPONENT: Card ──
@@ -38,8 +32,7 @@ function Card({ children, style = {}, onClick }) {
         background: COLORS.surface,
         border: `1px solid ${COLORS.border}`,
         borderRadius: 12,
-        padding: "18px 22px",
-        boxShadow: "0 1px 3px rgba(0, 0, 0, 0.04)",
+        padding: "16px 20px",
         ...style,
       }}
     >
@@ -58,15 +51,15 @@ function CodeBlock({ code, title = "PyTorch Implementation" }) {
   };
 
   return (
-    <div style={{ background: COLORS.codeBg, border: `1px solid ${COLORS.border}`, borderRadius: 10, overflow: "hidden", boxShadow: "0 2px 8px rgba(0,0,0,0.06)" }}>
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "10px 16px", background: "#1E293B", borderBottom: "1px solid #334155" }}>
-        <span style={{ color: "#5EC4C8", fontFamily: "JetBrains Mono, monospace", fontSize: 11, fontWeight: 700 }}>{title}</span>
+    <div style={{ background: "#050811", border: `1px solid ${COLORS.border}`, borderRadius: 10, overflow: "hidden" }}>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "10px 16px", background: COLORS.surface2, borderBottom: `1px solid ${COLORS.border}` }}>
+        <span style={{ color: COLORS.sky, fontFamily: "JetBrains Mono, monospace", fontSize: 11, fontWeight: 700 }}>{title}</span>
         <button
           onClick={handleCopy}
           style={{
-            background: copied ? "rgba(16, 185, 129, 0.2)" : "#334155",
-            border: `1px solid ${copied ? "#10B981" : "#475569"}`,
-            color: copied ? "#34D399" : "#F1F5F9",
+            background: copied ? COLORS.emerald + "33" : COLORS.surface3,
+            border: `1px solid ${copied ? COLORS.emerald : COLORS.border}`,
+            color: copied ? COLORS.emerald : COLORS.text,
             padding: "4px 10px",
             borderRadius: 6,
             fontSize: 10,
@@ -77,7 +70,7 @@ function CodeBlock({ code, title = "PyTorch Implementation" }) {
           {copied ? "✓ Copied" : "Copy Code"}
         </button>
       </div>
-      <pre style={{ margin: 0, padding: 16, color: COLORS.codeText, fontFamily: "JetBrains Mono, monospace", fontSize: 11, lineHeight: 1.6, overflowX: "auto" }}>
+      <pre style={{ margin: 0, padding: 16, color: COLORS.text, fontFamily: "JetBrains Mono, monospace", fontSize: 11, lineHeight: 1.6, overflowX: "auto" }}>
         {code}
       </pre>
     </div>
@@ -136,10 +129,9 @@ export default function ModelInternalsTab() {
           background: COLORS.surface,
           border: `1px solid ${COLORS.border}`,
           borderRadius: 14,
-          padding: "26px 28px",
+          padding: "24px 28px",
           position: "relative",
           overflow: "hidden",
-          boxShadow: "0 1px 3px rgba(0,0,0,0.04)",
         }}
       >
         <div
@@ -148,19 +140,19 @@ export default function ModelInternalsTab() {
             top: 0,
             left: 0,
             right: 0,
-            height: 4,
-            background: `linear-gradient(90deg, ${COLORS.teal}, ${COLORS.sky}, ${COLORS.violet}, ${COLORS.amber})`,
+            height: 3,
+            background: `linear-gradient(90deg, ${COLORS.sky}, ${COLORS.amber}, ${COLORS.rose}, ${COLORS.violet})`,
           }}
         />
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: 16 }}>
           <div>
             <div
               style={{
-                color: COLORS.teal,
+                color: COLORS.amber,
                 fontFamily: "JetBrains Mono, monospace",
-                fontSize: 11,
+                fontSize: 10,
                 fontWeight: 700,
-                letterSpacing: "0.08em",
+                letterSpacing: "0.12em",
                 textTransform: "uppercase",
                 marginBottom: 8,
               }}
@@ -172,7 +164,7 @@ export default function ModelInternalsTab() {
                 margin: "0 0 10px 0",
                 fontSize: "1.75rem",
                 fontWeight: 800,
-                color: COLORS.textHeading,
+                color: "#FFFFFF",
                 letterSpacing: "-0.02em",
                 lineHeight: 1.2,
               }}
@@ -182,7 +174,7 @@ export default function ModelInternalsTab() {
             <p
               style={{
                 color: COLORS.muted,
-                fontSize: "0.88rem",
+                fontSize: "0.85rem",
                 lineHeight: 1.7,
                 maxWidth: 720,
                 margin: 0,
@@ -197,7 +189,7 @@ export default function ModelInternalsTab() {
             style={{
               fontSize: "3.5rem",
               lineHeight: 1,
-              opacity: 0.25,
+              opacity: 0.2,
               userSelect: "none",
             }}
           >
@@ -211,7 +203,7 @@ export default function ModelInternalsTab() {
             display: "grid",
             gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
             gap: 12,
-            marginTop: 22,
+            marginTop: 20,
           }}
         >
           {MODEL_INTERNALS_KPI.map((m, i) => (
@@ -228,10 +220,10 @@ export default function ModelInternalsTab() {
               <div style={{ color: m.color, fontFamily: "JetBrains Mono, monospace", fontSize: "1.3rem", fontWeight: 800, lineHeight: 1 }}>
                 {m.val}
               </div>
-              <div style={{ fontSize: "0.75rem", fontWeight: 700, color: COLORS.textHeading, marginTop: 4 }}>
+              <div style={{ fontSize: "0.7rem", fontWeight: 700, color: COLORS.text, marginTop: 4 }}>
                 {m.label}
               </div>
-              <div style={{ fontSize: "0.68rem", color: COLORS.muted, marginTop: 2 }}>
+              <div style={{ fontSize: "0.62rem", color: COLORS.muted, marginTop: 2 }}>
                 {m.sub}
               </div>
             </div>
@@ -249,37 +241,34 @@ export default function ModelInternalsTab() {
           borderBottom: `1px solid ${COLORS.border}`,
         }}
       >
-        {TABS.map((t) => {
-          const isActive = activeTab === t.id;
-          return (
-            <button
-              key={t.id}
-              onClick={() => setActiveTab(t.id)}
-              style={{
-                padding: "8px 16px",
-                borderRadius: 8,
-                border: `1px solid ${isActive ? COLORS.teal : "transparent"}`,
-                background: isActive ? "rgba(13, 148, 136, 0.1)" : "transparent",
-                color: isActive ? COLORS.teal : COLORS.muted,
-                fontFamily: "JetBrains Mono, monospace",
-                fontSize: 11,
-                fontWeight: 700,
-                cursor: "pointer",
-                transition: "all 0.15s ease",
-                whiteSpace: "nowrap",
-              }}
-            >
-              {t.label}
-            </button>
-          );
-        })}
+        {TABS.map((t) => (
+          <button
+            key={t.id}
+            onClick={() => setActiveTab(t.id)}
+            style={{
+              padding: "8px 16px",
+              borderRadius: 8,
+              border: `1px solid ${activeTab === t.id ? COLORS.sky : "transparent"}`,
+              background: activeTab === t.id ? COLORS.surface2 : "transparent",
+              color: activeTab === t.id ? COLORS.sky : COLORS.muted,
+              fontFamily: "JetBrains Mono, monospace",
+              fontSize: 11,
+              fontWeight: 700,
+              cursor: "pointer",
+              transition: "all 0.15s ease",
+              whiteSpace: "nowrap",
+            }}
+          >
+            {t.label}
+          </button>
+        ))}
       </div>
 
       {/* ── TAB 1: OVERVIEW ── */}
       {activeTab === "overview" && (
         <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
           <Card>
-            <div style={{ color: COLORS.teal, fontFamily: "JetBrains Mono, monospace", fontSize: 11, fontWeight: 700, letterSpacing: "0.08em", marginBottom: 8 }}>
+            <div style={{ color: COLORS.sky, fontFamily: "JetBrains Mono, monospace", fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", marginBottom: 8 }}>
               THE CORE TRANSFORMATION PIPELINE
             </div>
             <p style={{ color: COLORS.text, fontSize: 13, lineHeight: 1.7, margin: "0 0 16px 0" }}>
@@ -288,7 +277,7 @@ export default function ModelInternalsTab() {
             </p>
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 12 }}>
               {[
-                { title: "Prefill Phase", tag: "Compute-Bound", desc: "Processes initial prompt tokens simultaneously. Matrix multiplications (GEMM) saturate GPU Tensor Cores.", color: COLORS.teal },
+                { title: "Prefill Phase", tag: "Compute-Bound", desc: "Processes initial prompt tokens simultaneously. Matrix multiplications (GEMM) saturate GPU Tensor Cores.", color: COLORS.sky },
                 { title: "Decode Phase", tag: "Memory-Bound", desc: "Generates one token at a time. Throughput is constrained by GPU memory bandwidth reading KV cache weights.", color: COLORS.amber },
                 { title: "Context Scaling", tag: "O(N) with GQA", desc: "Grouped-Query Attention pools key-value heads, allowing 128k+ sequence lengths within physical VRAM limits.", color: COLORS.rose },
                 { title: "MoE Gating", tag: "Sub-linear FLOPs", desc: "Top-2 routing decouples total parameter capacity from per-token active FLOP computation cost.", color: COLORS.violet },
@@ -329,12 +318,11 @@ export default function ModelInternalsTab() {
                 key={p.id}
                 style={{
                   background: COLORS.surface,
-                  border: `1px solid ${isOpen ? p.color : COLORS.border}`,
+                  border: `1px solid ${isOpen ? p.color + "55" : COLORS.border}`,
                   borderLeft: `4px solid ${p.color}`,
                   borderRadius: 10,
                   overflow: "hidden",
                   transition: "all 0.2s ease",
-                  boxShadow: "0 1px 3px rgba(0,0,0,0.04)",
                 }}
               >
                 <div
@@ -345,7 +333,6 @@ export default function ModelInternalsTab() {
                     display: "flex",
                     justifyContent: "space-between",
                     alignItems: "center",
-                    background: isOpen ? COLORS.surface2 : COLORS.surface,
                   }}
                 >
                   <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
@@ -357,38 +344,38 @@ export default function ModelInternalsTab() {
                       <div style={{ color: COLORS.muted, fontSize: 11, marginTop: 2 }}>{p.tagline}</div>
                     </div>
                   </div>
-                  <span style={{ color: COLORS.muted, fontSize: 13, fontFamily: "JetBrains Mono, monospace" }}>
+                  <span style={{ color: COLORS.muted, fontSize: 14, fontFamily: "JetBrains Mono, monospace" }}>
                     {isOpen ? "▲ Collapse" : "▼ Expand"}
                   </span>
                 </div>
 
                 {isOpen && (
-                  <div style={{ padding: "16px 18px 18px 18px", borderTop: `1px solid ${COLORS.border}`, background: COLORS.surface }}>
-                    <p style={{ color: COLORS.text, fontSize: 12, lineHeight: 1.7, margin: "0 0 14px 0" }}>
+                  <div style={{ padding: "0 18px 18px 18px", borderTop: `1px solid ${COLORS.border}`, paddingTop: 14 }}>
+                    <p style={{ color: COLORS.text, fontSize: 12, lineHeight: 1.7, margin: "0 0 12px 0" }}>
                       {p.summary}
                     </p>
 
                     <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12, marginBottom: 14 }}>
-                      <div style={{ background: COLORS.surface2, border: `1px solid ${COLORS.border}`, borderRadius: 6, padding: "10px 12px" }}>
-                        <div style={{ color: COLORS.teal, fontFamily: "JetBrains Mono, monospace", fontSize: 10, fontWeight: 700, marginBottom: 4 }}>MATHEMATICAL FORMULATION</div>
-                        <div style={{ color: COLORS.textHeading, fontFamily: "JetBrains Mono, monospace", fontSize: 11, fontWeight: 600 }}>{p.math}</div>
+                      <div style={{ background: "#050811", border: `1px solid ${COLORS.border}`, borderRadius: 6, padding: "10px 12px" }}>
+                        <div style={{ color: COLORS.sky, fontFamily: "JetBrains Mono, monospace", fontSize: 10, fontWeight: 700, marginBottom: 4 }}>MATHEMATICAL FORMULATION</div>
+                        <div style={{ color: COLORS.text, fontFamily: "JetBrains Mono, monospace", fontSize: 11 }}>{p.math}</div>
                       </div>
-                      <div style={{ background: COLORS.surface2, border: `1px solid ${COLORS.border}`, borderRadius: 6, padding: "10px 12px" }}>
+                      <div style={{ background: "#050811", border: `1px solid ${COLORS.border}`, borderRadius: 6, padding: "10px 12px" }}>
                         <div style={{ color: COLORS.amber, fontFamily: "JetBrains Mono, monospace", fontSize: 10, fontWeight: 700, marginBottom: 4 }}>TENSOR SHAPE FLOW</div>
-                        <div style={{ color: COLORS.textHeading, fontFamily: "JetBrains Mono, monospace", fontSize: 11, fontWeight: 600 }}>{p.tensorShapes}</div>
+                        <div style={{ color: COLORS.text, fontFamily: "JetBrains Mono, monospace", fontSize: 11 }}>{p.tensorShapes}</div>
                       </div>
                     </div>
 
                     <div style={{ marginBottom: 12 }}>
-                      <div style={{ color: COLORS.textHeading, fontSize: 11, fontWeight: 700, marginBottom: 6 }}>Key Mechanisms:</div>
-                      <ul style={{ margin: 0, paddingLeft: 18, color: COLORS.text, fontSize: 11, lineHeight: 1.6 }}>
+                      <div style={{ color: COLORS.text, fontSize: 11, fontWeight: 700, marginBottom: 6 }}>Key Mechanisms:</div>
+                      <ul style={{ margin: 0, paddingLeft: 18, color: COLORS.muted, fontSize: 11, lineHeight: 1.6 }}>
                         {p.keyPoints.map((kp, idx) => (
                           <li key={idx} style={{ marginBottom: 3 }}>{kp}</li>
                         ))}
                       </ul>
                     </div>
 
-                    <div style={{ background: "rgba(225, 29, 72, 0.05)", border: `1px solid rgba(225, 29, 72, 0.25)`, borderRadius: 6, padding: "10px 12px" }}>
+                    <div style={{ background: COLORS.surface2, border: `1px solid ${COLORS.rose}33`, borderRadius: 6, padding: "8px 12px" }}>
                       <span style={{ color: COLORS.rose, fontWeight: 700, fontSize: 10, fontFamily: "JetBrains Mono, monospace" }}>CRITICAL FAILURE MODE: </span>
                       <span style={{ color: COLORS.text, fontSize: 11 }}>{p.failureModes}</span>
                     </div>
@@ -404,7 +391,7 @@ export default function ModelInternalsTab() {
       {activeTab === "forward" && (
         <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
           <Card>
-            <div style={{ color: COLORS.teal, fontFamily: "JetBrains Mono, monospace", fontSize: 11, fontWeight: 700, letterSpacing: "0.08em", marginBottom: 8 }}>
+            <div style={{ color: COLORS.sky, fontFamily: "JetBrains Mono, monospace", fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", marginBottom: 8 }}>
               END-TO-END AUTOREGRESSIVE FORWARD PASS
             </div>
             <p style={{ color: COLORS.muted, fontSize: 12, lineHeight: 1.6, margin: "0 0 16px 0" }}>
@@ -413,44 +400,40 @@ export default function ModelInternalsTab() {
 
             {/* Stepper bar */}
             <div style={{ display: "flex", gap: 6, overflowX: "auto", paddingBottom: 8, marginBottom: 14 }}>
-              {FORWARD_PASS_STAGES.map((s, idx) => {
-                const isCur = activeStage === idx;
-                return (
-                  <button
-                    key={s.step}
-                    onClick={() => setActiveStage(idx)}
-                    style={{
-                      flex: 1,
-                      minWidth: 120,
-                      padding: "8px 10px",
-                      background: isCur ? `${s.color}15` : COLORS.surface2,
-                      border: `1px solid ${isCur ? s.color : COLORS.border}`,
-                      borderRadius: 6,
-                      color: isCur ? s.color : COLORS.muted,
-                      fontFamily: "JetBrains Mono, monospace",
-                      fontSize: 10,
-                      fontWeight: 700,
-                      cursor: "pointer",
-                      textAlign: "center",
-                      transition: "all 0.15s ease",
-                    }}
-                  >
-                    Step {s.step}
-                  </button>
-                );
-              })}
+              {FORWARD_PASS_STAGES.map((s, idx) => (
+                <button
+                  key={s.step}
+                  onClick={() => setActiveStage(idx)}
+                  style={{
+                    flex: 1,
+                    minWidth: 120,
+                    padding: "8px 10px",
+                    background: activeStage === idx ? s.color + "22" : COLORS.surface2,
+                    border: `1px solid ${activeStage === idx ? s.color : COLORS.border}`,
+                    borderRadius: 6,
+                    color: activeStage === idx ? s.color : COLORS.muted,
+                    fontFamily: "JetBrains Mono, monospace",
+                    fontSize: 10,
+                    fontWeight: 700,
+                    cursor: "pointer",
+                    textAlign: "center",
+                  }}
+                >
+                  Step {s.step}
+                </button>
+              ))}
             </div>
 
             {/* Selected stage details */}
             {(() => {
               const cur = FORWARD_PASS_STAGES[activeStage];
               return (
-                <div style={{ background: COLORS.surface2, border: `1px solid ${cur.color}55`, borderRadius: 8, padding: 18 }}>
+                <div style={{ background: COLORS.surface2, border: `1px solid ${cur.color}44`, borderRadius: 8, padding: 18 }}>
                   <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 8 }}>
                     <div style={{ color: cur.color, fontFamily: "JetBrains Mono, monospace", fontSize: 14, fontWeight: 800 }}>
                       {cur.title}
                     </div>
-                    <span style={{ background: `${cur.color}18`, color: cur.color, padding: "3px 8px", borderRadius: 4, fontSize: 10, fontFamily: "JetBrains Mono, monospace", fontWeight: 700 }}>
+                    <span style={{ background: cur.color + "22", color: cur.color, padding: "3px 8px", borderRadius: 4, fontSize: 10, fontFamily: "JetBrains Mono, monospace", fontWeight: 700 }}>
                       {cur.status}
                     </span>
                   </div>
@@ -460,13 +443,13 @@ export default function ModelInternalsTab() {
                   </p>
 
                   <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
-                    <div style={{ background: COLORS.surface, borderRadius: 6, padding: "8px 12px", border: `1px solid ${COLORS.border}` }}>
+                    <div style={{ background: "#050811", borderRadius: 6, padding: "8px 12px", border: `1px solid ${COLORS.border}` }}>
                       <div style={{ color: COLORS.muted, fontSize: 9, fontFamily: "JetBrains Mono, monospace" }}>INPUT TENSOR SHAPE</div>
-                      <div style={{ color: COLORS.textHeading, fontSize: 11, fontFamily: "JetBrains Mono, monospace", marginTop: 2, fontWeight: 600 }}>{cur.inputShape}</div>
+                      <div style={{ color: COLORS.text, fontSize: 11, fontFamily: "JetBrains Mono, monospace", marginTop: 2 }}>{cur.inputShape}</div>
                     </div>
-                    <div style={{ background: COLORS.surface, borderRadius: 6, padding: "8px 12px", border: `1px solid ${COLORS.border}` }}>
+                    <div style={{ background: "#050811", borderRadius: 6, padding: "8px 12px", border: `1px solid ${COLORS.border}` }}>
                       <div style={{ color: COLORS.muted, fontSize: 9, fontFamily: "JetBrains Mono, monospace" }}>OUTPUT TENSOR SHAPE</div>
-                      <div style={{ color: cur.color, fontSize: 11, fontFamily: "JetBrains Mono, monospace", marginTop: 2, fontWeight: 600 }}>{cur.outputShape}</div>
+                      <div style={{ color: cur.color, fontSize: 11, fontFamily: "JetBrains Mono, monospace", marginTop: 2 }}>{cur.outputShape}</div>
                     </div>
                   </div>
                 </div>
@@ -480,7 +463,7 @@ export default function ModelInternalsTab() {
       {activeTab === "attention" && (
         <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
           <Card>
-            <div style={{ color: COLORS.rose, fontFamily: "JetBrains Mono, monospace", fontSize: 11, fontWeight: 700, letterSpacing: "0.08em", marginBottom: 8 }}>
+            <div style={{ color: COLORS.rose, fontFamily: "JetBrains Mono, monospace", fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", marginBottom: 8 }}>
               ATTENTION FLAVORS: MHA vs GQA vs MQA
             </div>
             <p style={{ color: COLORS.muted, fontSize: 12, lineHeight: 1.6, margin: "0 0 14px 0" }}>
@@ -489,23 +472,23 @@ export default function ModelInternalsTab() {
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: 12 }}>
               <div style={{ background: COLORS.surface2, border: `1px solid ${COLORS.border}`, borderRadius: 8, padding: 14 }}>
                 <div style={{ color: COLORS.rose, fontWeight: 700, fontSize: 12, marginBottom: 4 }}>Multi-Head Attention (MHA)</div>
-                <div style={{ fontSize: 11, color: COLORS.textHeading, fontWeight: 600, marginBottom: 6 }}>1 Q Head : 1 KV Head</div>
+                <div style={{ fontSize: 11, color: COLORS.text, marginBottom: 6 }}>1 Q Head : 1 KV Head</div>
                 <div style={{ color: COLORS.muted, fontSize: 11, lineHeight: 1.5 }}>
                   Every query head possesses its own independent key and value heads. Maximum expressivity, but results in massive KV cache sizes that saturate memory bandwidth during generation.
                 </div>
               </div>
 
-              <div style={{ background: COLORS.surface2, border: `1px solid ${COLORS.sky}55`, borderRadius: 8, padding: 14 }}>
+              <div style={{ background: COLORS.surface2, border: `1px solid ${COLORS.sky}44`, borderRadius: 8, padding: 14 }}>
                 <div style={{ color: COLORS.sky, fontWeight: 700, fontSize: 12, marginBottom: 4 }}>Grouped-Query Attention (GQA)</div>
-                <div style={{ fontSize: 11, color: COLORS.sky, fontWeight: 600, marginBottom: 6 }}>4 or 8 Q Heads : 1 KV Head</div>
+                <div style={{ fontSize: 11, color: COLORS.sky, marginBottom: 6 }}>4 or 8 Q Heads : 1 KV Head</div>
                 <div style={{ color: COLORS.muted, fontSize: 11, lineHeight: 1.5 }}>
                   Groups of query heads share a single key-value head. Slashes KV cache by 87.5% with virtually identical perplexity. Standard in Llama-3, Mistral, and DeepSeek.
                 </div>
               </div>
 
-              <div style={{ background: COLORS.surface2, border: `1px solid ${COLORS.amber}55`, borderRadius: 8, padding: 14 }}>
+              <div style={{ background: COLORS.surface2, border: `1px solid ${COLORS.amber}44`, borderRadius: 8, padding: 14 }}>
                 <div style={{ color: COLORS.amber, fontWeight: 700, fontSize: 12, marginBottom: 4 }}>Multi-Query Attention (MQA)</div>
-                <div style={{ fontSize: 11, color: COLORS.amber, fontWeight: 600, marginBottom: 6 }}>All Q Heads : 1 Single KV Head</div>
+                <div style={{ fontSize: 11, color: COLORS.amber, marginBottom: 6 }}>All Q Heads : 1 Single KV Head</div>
                 <div style={{ color: COLORS.muted, fontSize: 11, lineHeight: 1.5 }}>
                   Extreme compression where all query heads share one singular KV head across the entire model layer. Maximum memory speed, with slight degradation in complex reasoning tasks.
                 </div>
@@ -513,12 +496,12 @@ export default function ModelInternalsTab() {
             </div>
           </Card>
 
-          <Card style={{ borderLeft: `4px solid ${COLORS.teal}` }}>
-            <div style={{ color: COLORS.teal, fontFamily: "JetBrains Mono, monospace", fontSize: 11, fontWeight: 700, marginBottom: 6 }}>
+          <Card style={{ borderLeft: `4px solid ${COLORS.sky}` }}>
+            <div style={{ color: COLORS.sky, fontFamily: "JetBrains Mono, monospace", fontSize: 11, fontWeight: 700, marginBottom: 6 }}>
               FLASHATTENTION-2: IO-AWARE HARDWARE ACCELERATION
             </div>
             <div style={{ color: COLORS.text, fontSize: 12, lineHeight: 1.7 }}>
-              Standard attention stores the intermediate <em>N × N</em> attention matrix in GPU High-Bandwidth Memory (HBM). For an 8,192 token prompt, this requires reading and writing 67 million floats per head.
+              Standard attention stores the intermediate $N \times N$ attention matrix in GPU High-Bandwidth Memory (HBM). For an 8,192 token prompt, this requires reading and writing 67 million floats per head.
               FlashAttention tiles the computation across GPU on-chip SRAM, computing online softmax without materializing the full attention matrix in HBM, achieving a 2x-4x speedup.
             </div>
           </Card>
@@ -529,7 +512,7 @@ export default function ModelInternalsTab() {
       {activeTab === "moe" && (
         <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
           <Card>
-            <div style={{ color: COLORS.violet, fontFamily: "JetBrains Mono, monospace", fontSize: 11, fontWeight: 700, letterSpacing: "0.08em", marginBottom: 8 }}>
+            <div style={{ color: COLORS.violet, fontFamily: "JetBrains Mono, monospace", fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", marginBottom: 8 }}>
               SPARSE MIXTURE-OF-EXPERTS (MoE) ROUTING SIMULATOR
             </div>
             <p style={{ color: COLORS.muted, fontSize: 12, lineHeight: 1.6, margin: "0 0 16px 0" }}>
@@ -537,36 +520,31 @@ export default function ModelInternalsTab() {
             </p>
 
             <div style={{ marginBottom: 16 }}>
-              <div style={{ color: COLORS.textHeading, fontSize: 11, fontWeight: 700, marginBottom: 6 }}>Select an incoming token:</div>
-              <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
-                {simTokens.map((t, idx) => {
-                  const isSel = selectedTokenIdx === idx;
-                  return (
-                    <button
-                      key={t}
-                      onClick={() => setSelectedTokenIdx(idx)}
-                      style={{
-                        background: isSel ? `${COLORS.violet}15` : COLORS.surface2,
-                        border: `1px solid ${isSel ? COLORS.violet : COLORS.border}`,
-                        color: isSel ? COLORS.violet : COLORS.muted,
-                        borderRadius: 6,
-                        padding: "6px 12px",
-                        fontFamily: "JetBrains Mono, monospace",
-                        fontSize: 11,
-                        fontWeight: isSel ? 700 : 500,
-                        cursor: "pointer",
-                        transition: "all 0.15s ease",
-                      }}
-                    >
-                      "{t}"
-                    </button>
-                  );
-                })}
+              <div style={{ color: COLORS.text, fontSize: 11, fontWeight: 700, marginBottom: 6 }}>Select an incoming token:</div>
+              <div style={{ display: "flex", gap: 8 }}>
+                {simTokens.map((t, idx) => (
+                  <button
+                    key={t}
+                    onClick={() => setSelectedTokenIdx(idx)}
+                    style={{
+                      background: selectedTokenIdx === idx ? COLORS.violet + "33" : COLORS.surface2,
+                      border: `1px solid ${selectedTokenIdx === idx ? COLORS.violet : COLORS.border}`,
+                      color: selectedTokenIdx === idx ? COLORS.violet : COLORS.muted,
+                      borderRadius: 6,
+                      padding: "6px 12px",
+                      fontFamily: "JetBrains Mono, monospace",
+                      fontSize: 11,
+                      cursor: "pointer",
+                    }}
+                  >
+                    "{t}"
+                  </button>
+                ))}
               </div>
             </div>
 
             {/* Expert matrix */}
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(230px, 1fr))", gap: 10 }}>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 10 }}>
               {[
                 { id: 0, name: "Expert 0: Code & Logic", affinity: [0.12, 0.65, 0.45, 0.05, 0.10][selectedTokenIdx] },
                 { id: 1, name: "Expert 1: Math & Reasoning", affinity: [0.78, 0.10, 0.20, 0.82, 0.60][selectedTokenIdx] },
@@ -582,7 +560,7 @@ export default function ModelInternalsTab() {
                   <div
                     key={exp.id}
                     style={{
-                      background: isActive ? `${COLORS.violet}0C` : COLORS.surface2,
+                      background: isActive ? COLORS.violet + "22" : COLORS.surface2,
                       border: `1px solid ${isActive ? COLORS.violet : COLORS.border}`,
                       borderRadius: 8,
                       padding: "10px 12px",
@@ -590,7 +568,7 @@ export default function ModelInternalsTab() {
                     }}
                   >
                     <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                      <span style={{ color: isActive ? COLORS.violet : COLORS.textHeading, fontWeight: 700, fontSize: 11 }}>
+                      <span style={{ color: isActive ? COLORS.violet : COLORS.text, fontWeight: 700, fontSize: 11 }}>
                         {exp.name}
                       </span>
                       {isActive && (
@@ -602,7 +580,7 @@ export default function ModelInternalsTab() {
                     <div style={{ color: COLORS.muted, fontSize: 10, fontFamily: "JetBrains Mono, monospace", marginTop: 4 }}>
                       Softmax Weight: {(exp.affinity * 100).toFixed(0)}%
                     </div>
-                    <div style={{ width: "100%", height: 5, background: COLORS.surface3, borderRadius: 3, marginTop: 6, overflow: "hidden" }}>
+                    <div style={{ width: "100%", height: 4, background: COLORS.surface3, borderRadius: 2, marginTop: 6, overflow: "hidden" }}>
                       <div style={{ width: `${exp.affinity * 100}%`, height: "100%", background: isActive ? COLORS.violet : COLORS.muted }} />
                     </div>
                   </div>
@@ -624,20 +602,20 @@ export default function ModelInternalsTab() {
       {activeTab === "calculator" && (
         <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
           <Card>
-            <div style={{ color: COLORS.amber, fontFamily: "JetBrains Mono, monospace", fontSize: 11, fontWeight: 700, letterSpacing: "0.08em", marginBottom: 8 }}>
+            <div style={{ color: COLORS.amber, fontFamily: "JetBrains Mono, monospace", fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", marginBottom: 8 }}>
               INTERACTIVE KV CACHE VRAM FOOTPRINT SIMULATOR
             </div>
             <p style={{ color: COLORS.muted, fontSize: 12, lineHeight: 1.6, margin: "0 0 16px 0" }}>
               Calculate the exact GPU VRAM requirement for caching Key-Value tensors during long-context autoregressive inference:
               <br />
-              <code style={{ color: COLORS.amber, fontFamily: "JetBrains Mono, monospace", background: COLORS.surface2, padding: "2px 6px", borderRadius: 4, display: "inline-block", marginTop: 4 }}>
+              <code style={{ color: COLORS.amber, fontFamily: "JetBrains Mono, monospace" }}>
                 VRAM = 2 × batch_size × layers × kv_heads × seq_len × head_dim × precision_bytes
               </code>
             </p>
 
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: 14, marginBottom: 20 }}>
               <div>
-                <label style={{ color: COLORS.textHeading, fontSize: 11, fontWeight: 700, display: "block", marginBottom: 4 }}>
+                <label style={{ color: COLORS.text, fontSize: 11, fontWeight: 700, display: "block", marginBottom: 4 }}>
                   Sequence Length (Tokens): {calcSeqLen.toLocaleString()}
                 </label>
                 <input
@@ -652,7 +630,7 @@ export default function ModelInternalsTab() {
               </div>
 
               <div>
-                <label style={{ color: COLORS.textHeading, fontSize: 11, fontWeight: 700, display: "block", marginBottom: 4 }}>
+                <label style={{ color: COLORS.text, fontSize: 11, fontWeight: 700, display: "block", marginBottom: 4 }}>
                   Layers: {calcLayers}
                 </label>
                 <input
@@ -667,7 +645,7 @@ export default function ModelInternalsTab() {
               </div>
 
               <div>
-                <label style={{ color: COLORS.textHeading, fontSize: 11, fontWeight: 700, display: "block", marginBottom: 4 }}>
+                <label style={{ color: COLORS.text, fontSize: 11, fontWeight: 700, display: "block", marginBottom: 4 }}>
                   KV Heads (GQA): {calcHeads}
                 </label>
                 <input
@@ -682,7 +660,7 @@ export default function ModelInternalsTab() {
               </div>
 
               <div>
-                <label style={{ color: COLORS.textHeading, fontSize: 11, fontWeight: 700, display: "block", marginBottom: 4 }}>
+                <label style={{ color: COLORS.text, fontSize: 11, fontWeight: 700, display: "block", marginBottom: 4 }}>
                   Precision: {calcPrecision === 2 ? "FP16 (2 bytes)" : "FP8 (1 byte)"}
                 </label>
                 <div style={{ display: "flex", gap: 8, marginTop: 4 }}>
@@ -693,10 +671,9 @@ export default function ModelInternalsTab() {
                       padding: "6px",
                       borderRadius: 4,
                       border: `1px solid ${calcPrecision === 2 ? COLORS.amber : COLORS.border}`,
-                      background: calcPrecision === 2 ? `${COLORS.amber}18` : COLORS.surface2,
+                      background: calcPrecision === 2 ? COLORS.amber + "22" : COLORS.surface2,
                       color: calcPrecision === 2 ? COLORS.amber : COLORS.muted,
                       fontSize: 10,
-                      fontWeight: 700,
                       cursor: "pointer",
                     }}
                   >
@@ -709,10 +686,9 @@ export default function ModelInternalsTab() {
                       padding: "6px",
                       borderRadius: 4,
                       border: `1px solid ${calcPrecision === 1 ? COLORS.amber : COLORS.border}`,
-                      background: calcPrecision === 1 ? `${COLORS.amber}18` : COLORS.surface2,
+                      background: calcPrecision === 1 ? COLORS.amber + "22" : COLORS.surface2,
                       color: calcPrecision === 1 ? COLORS.amber : COLORS.muted,
                       fontSize: 10,
-                      fontWeight: 700,
                       cursor: "pointer",
                     }}
                   >
@@ -723,14 +699,14 @@ export default function ModelInternalsTab() {
             </div>
 
             {/* Results card */}
-            <div style={{ background: "#FFFBEB", border: `1px solid #FDE68A`, borderRadius: 8, padding: 18, textAlign: "center" }}>
-              <div style={{ color: "#92400E", fontSize: 11, fontFamily: "JetBrains Mono, monospace", fontWeight: 700 }}>
+            <div style={{ background: COLORS.surface2, border: `1px solid ${COLORS.amber}55`, borderRadius: 8, padding: 18, textAlign: "center" }}>
+              <div style={{ color: COLORS.muted, fontSize: 11, fontFamily: "JetBrains Mono, monospace" }}>
                 ESTIMATED KV CACHE SIZE
               </div>
               <div style={{ color: COLORS.amber, fontFamily: "JetBrains Mono, monospace", fontSize: "2.4rem", fontWeight: 900, margin: "6px 0" }}>
                 {kvStats.gb > 1 ? `${kvStats.gb} GB` : `${kvStats.mb} MB`}
               </div>
-              <div style={{ color: "#78350F", fontSize: 11 }}>
+              <div style={{ color: COLORS.text, fontSize: 11 }}>
                 At {calcSeqLen.toLocaleString()} context length across {calcLayers} layers and {calcHeads} KV heads.
               </div>
             </div>
@@ -740,7 +716,7 @@ export default function ModelInternalsTab() {
 
       {/* ── FOOTER: PRODUCTION ENGINEERING PRINCIPLES ── */}
       <Card style={{ border: `1px solid ${COLORS.border}` }}>
-        <div style={{ color: COLORS.emerald, fontFamily: "JetBrains Mono, monospace", fontSize: 10, fontWeight: 700, letterSpacing: "0.08em", marginBottom: 12 }}>
+        <div style={{ color: COLORS.emerald, fontFamily: "JetBrains Mono, monospace", fontSize: 10, fontWeight: 700, letterSpacing: "0.1em", marginBottom: 12 }}>
           PRODUCTION MODEL SERVING PRINCIPLES
         </div>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 12 }}>
