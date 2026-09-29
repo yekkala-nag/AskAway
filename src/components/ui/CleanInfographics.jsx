@@ -325,7 +325,7 @@ export function SevenLayersStack() {
               <rect x={x} y={y} width={w} height={tierH} rx={9} fill={l.c} />
               <circle cx={x + 26} cy={y + tierH / 2} r={14} fill="#0F1219" opacity={0.82} />
               <text x={x + 26} y={y + tierH / 2 + 5.5} textAnchor="middle" fontSize={15} fontWeight={800} fill="#FFFFFF">{l.n}</text>
-              <text x={x + 50} y={w > 300 ? y + 20 : y + tierH / 2 + 5} fontSize={13.5} fontWeight={800} fill="#101820">{l.t}</text>
+              <text x={x + 50} y={w > 300 ? y + 20 : y + tierH / 2 + 5} fontSize={w > 300 ? 13.5 : w > 230 ? 12 : 11} fontWeight={800} fill="#101820">{l.t}</text>
               {w > 300 ? (<text x={x + 50} y={y + 36} fontSize={10.5} fill="#101820" opacity={0.78}>{l.d}</text>) : null}
               {l.flag ? (<g>
                 <circle cx={26} cy={y + tierH / 2} r={5} fill="#5EC4C8" stroke="#0F1219" strokeWidth={2} />
