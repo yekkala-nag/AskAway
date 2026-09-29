@@ -74,7 +74,7 @@ const ICONS = {
   award: (<><circle cx="12" cy="8" r="6" /><path d="M15.5 13l1.5 8-5-3-5 3 1.5-8" /></>),
 };
 
-function Icon({ name, size = 26, color = '#5EC4C8' }) {
+export function Icon({ name, size = 26, color = '#5EC4C8' }) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" style={{ flexShrink: 0 }}>
       {ICONS[name] || ICONS.file}
@@ -296,16 +296,19 @@ export function DataReadinessJourney() {
   );
 }
 
+/** Single source of truth for the 7-layer stack (also rendered by LayersShowcasePanel). */
+export const SEVEN_LAYERS = [
+  { n: 7, t: 'General Intelligence', d: 'General intelligence across tasks — not yet achieved.', c: '#A78BFA', icon: 'star' },
+  { n: 6, t: 'Agentic AI', d: 'Plans, uses tools, and takes actions.', c: '#6A9BD8', icon: 'cpu' },
+  { n: 5, t: 'Generative AI', d: 'Creates text, images, audio, and code.', c: '#5EC4C8', icon: 'zap', flag: 'current frontier' },
+  { n: 4, t: 'Deep Learning', d: 'Many-layer nets for vision, speech, language.', c: '#7FB069', icon: 'layers' },
+  { n: 3, t: 'Neural Networks', d: 'Interconnected learned representations.', c: '#E8C558', icon: 'nodes' },
+  { n: 2, t: 'Machine Learning', d: 'Learns patterns from data.', c: '#E08A4C', icon: 'chart' },
+  { n: 1, t: 'Classical AI', d: 'Rules, logic, search.', c: '#C96A5A', icon: 'branch' },
+];
+
 export function SevenLayersStack() {
-  const layers = [
-    { n: 7, t: 'General Intelligence', d: 'General intelligence across tasks — not yet achieved.', c: '#A78BFA' },
-    { n: 6, t: 'Agentic AI', d: 'Plans, uses tools, and takes actions.', c: '#6A9BD8' },
-    { n: 5, t: 'Generative AI', d: 'Creates text, images, audio, and code.', c: '#5EC4C8', flag: 'current frontier' },
-    { n: 4, t: 'Deep Learning', d: 'Many-layer nets for vision, speech, language.', c: '#7FB069' },
-    { n: 3, t: 'Neural Networks', d: 'Interconnected learned representations.', c: '#E8C558' },
-    { n: 2, t: 'Machine Learning', d: 'Learns patterns from data.', c: '#E08A4C' },
-    { n: 1, t: 'Classical AI', d: 'Rules, logic, search.', c: '#C96A5A' },
-  ];
+  const layers = SEVEN_LAYERS;
   const tierH = 46, tierGap = 8, topY = 8;
   return (
     <div style={wrap}>

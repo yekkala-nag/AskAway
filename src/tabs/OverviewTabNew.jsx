@@ -15,7 +15,7 @@ import { Container, Section, Grid, Flex, Stack } from '../components/layout/Prim
 import { Hero, Diagram, CodeBlock, Accordion, Tabs, Stepper } from '../components/ui/Content.jsx';
 import { Card, Badge, Button, Callout } from '../components/ui/Core.jsx';
 import { AskAwayLogo } from '../components/ui/AskAwayLogo.jsx';
-import { SevenLayersStack } from '../components/ui/CleanInfographics.jsx';
+import { StatsStrip, CtaRow, LayersShowcasePanel } from '../components/overview/OverviewWidgets.jsx';
 import {
   ADAPTIVE_TRACKS,
   JOURNEY_TRACKS,
@@ -241,8 +241,21 @@ export function OverviewTab({ onSelectTab, setActiveTab: setGlobalActiveTab }) {
         ]}
       />
 
-      <Container size="normal" id="seven-layers-section" style={{ scrollMarginTop: '80px' }}>
-        <SevenLayersStack />
+      <Container size="normal">
+        <StatsStrip onSelectTab={handleNavigate} />
+        <CtaRow
+          onExploreLayers={() => {
+            const el = document.getElementById('seven-layers-section');
+            el?.scrollIntoView({ behavior: 'smooth' });
+          }}
+          onOpenRoadmap={() => handleNavigate('airoadmap')}
+          onOpenDiagnostic={() => {
+            setDiagnosticExpanded(true);
+            const diagEl = document.getElementById('adaptive-diagnostic-section');
+            diagEl?.scrollIntoView({ behavior: 'smooth' });
+          }}
+        />
+        <LayersShowcasePanel />
       </Container>
 
       <Container size="normal">

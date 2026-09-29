@@ -29,6 +29,7 @@ import {
 } from '../../registry/curriculum.js';
 import { useModalA11y } from '../../hooks/useModalA11y.js';
 import { isMastered } from '../../services/mastery.js';
+import { useCuratedProgress, getCuratedNextTab } from '../overview/OverviewWidgets.jsx';
 
 // Category accents — EdTech palette
 const MODULE_ACCENTS = {
@@ -201,6 +202,7 @@ export function Sidebar({
 
   const activeTrack = getTrackById(trackId);
   const [, setProgTick] = useState(0);
+  const curated = useCuratedProgress();
 
   const [expandedModules, setExpandedModules] = useState({
     foundations: true,
@@ -257,14 +259,14 @@ export function Sidebar({
       style={{
         width: '100%',
         height: '100%',
-        background: '#FFFFFF',
+        background: 'var(--ds-color-chrome-sidebarBg, #EDF1F6)',
         color: '#1A1D26',
         display: 'flex',
         flexDirection: 'column',
         overflow: 'hidden',
         fontFamily: '-apple-system, BlinkMacSystemFont, "Inter", "SF Pro Text", system-ui, sans-serif',
         userSelect: 'none',
-        borderRight: '1px solid #E5E7EB'
+        borderRight: 'none'
       }}
       aria-label="Main navigation"
     >
@@ -284,14 +286,12 @@ export function Sidebar({
               display: 'flex',
               alignItems: 'center',
               gap: '8px',
-              fontSize: '0.75rem',
-              fontWeight: 700,
-              color: '#475569',
-              textTransform: 'uppercase',
-              letterSpacing: '0.06em'
+              fontSize: '0.95rem',
+              fontWeight: 800,
+              color: '#1A1D26',
+              letterSpacing: '0.01em'
             }}>
-              <span>🧭</span>
-              <span>Curriculum Index</span>
+              <span>CURRICULUM INDEX</span>
             </div>
           ) : (
             <span style={{ fontSize: '1.1rem' }} title="Curriculum Index">🧭</span>
@@ -360,31 +360,33 @@ export function Sidebar({
         </div>
       )}
 
-      {/* 3. TODAY'S GOAL CARD */}
+      {/* 3. DAILY PROGRESS CARD */}
       {!collapsed && !queryStr && (
         <div style={{ padding: '4px 16px 12px', flexShrink: 0 }}>
           <div style={{
-            background: '#F7F8FA', border: '1px solid #E5E7EB',
-            borderRadius: '10px', padding: '12px'
+            background: 'var(--ds-color-chrome-sidebarCard, #FFFFFF)',
+            border: '1px solid var(--ds-color-chrome-headerBorder, #E7EDF3)',
+            borderRadius: '12px', padding: '14px',
+            boxShadow: '0 4px 14px rgba(22, 40, 63, 0.06)'
           }}>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '6px' }}>
-              <span style={{ fontSize: '0.75rem', fontWeight: 600, color: '#1A1D26' }}>
-                Today's goal
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '8px' }}>
+              <span style={{ fontSize: '0.82rem', fontWeight: 700, color: '#1A1D26' }}>
+                Daily Progress
               </span>
-              <span style={{ fontSize: '0.7rem', fontWeight: 600, color: '#3A9B9F' }}>
+              <span style={{ fontSize: '0.7rem', fontWeight: 600, color: '#4B5563' }}>
                 {trackProgress.completed}/{trackProgress.total} items
               </span>
             </div>
-            <div style={{ height: '4px', borderRadius: '2px', background: '#E5E7EB', overflow: 'hidden', marginBottom: '6px' }}>
+            <div style={{ height: '6px', borderRadius: '3px', background: '#E5E7EB', overflow: 'hidden', marginBottom: '8px' }}>
               <div style={{
-                height: '100%', width: `${trackProgress.percent}%`, borderRadius: '2px',
-                background: 'linear-gradient(90deg, #3A9B9F, #2E7D80)',
+                height: '100%', width: `${trackProgress.percent}%`, borderRadius: '3px',
+                background: 'linear-gradient(90deg, var(--ds-color-chrome-ctaFrom, #14B8A6), var(--ds-color-chrome-ctaTo, #0E9F8A))',
                 transition: 'width 0.3s ease'
               }} />
             </div>
-            <div style={{ fontSize: '0.68rem', color: '#9CA3AF' }}>
+            <div style={{ fontSize: '0.74rem', color: '#1A1D26', fontWeight: 500, lineHeight: 1.45 }}>
               {trackProgress.percent === 0
-                ? 'Complete items to stay at a good pace!'
+                ? 'Start Module 1 to unlock your first badge!'
                 : trackProgress.percent >= 100
                   ? 'Great work! You\'re ahead of schedule.'
                   : 'Keep going — you\'re making progress!'}
@@ -393,55 +395,41 @@ export function Sidebar({
         </div>
       )}
 
-      {/* 4. QUICK NAVIGATION */}
+      {/* 4. CURATED INDEX (mock labels, live progress) */}
       {!collapsed && !queryStr && (
         <div style={{ padding: '0 16px 8px', flexShrink: 0 }}>
-          <div style={{ fontSize: '0.62rem', fontWeight: 700, color: '#9CA3AF', letterSpacing: '0.06em', textTransform: 'uppercase', marginBottom: '6px', paddingLeft: '2px' }}>
-            Quick Navigation
-          </div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
-            <button
-              onClick={() => onSelectTab('overview')}
-              style={{
-                display: 'flex', alignItems: 'center', gap: '8px',
-                padding: '6px 8px', borderRadius: '6px',
-                background: activeTab === 'overview' ? 'rgba(58,155,159,0.08)' : 'transparent',
-                color: activeTab === 'overview' ? '#3A9B9F' : '#4B5563',
-                border: 'none', cursor: 'pointer', textAlign: 'left', fontSize: '0.8rem',
-                fontWeight: activeTab === 'overview' ? 600 : 500,
-                transition: 'all 0.12s ease', width: '100%'
-              }}
-              onMouseEnter={e => { if (activeTab !== 'overview') e.currentTarget.style.background = '#F1F3F5'; }}
-              onMouseLeave={e => { if (activeTab !== 'overview') e.currentTarget.style.background = 'transparent'; }}
-            >
-              <span style={{ fontSize: '0.85rem' }}>📊</span>
-              <span>Overview & Roadmap</span>
-            </button>
-            <button
-              onClick={() => onSelectTab('airoadmap')}
-              style={{
-                display: 'flex', alignItems: 'center', gap: '8px',
-                padding: '6px 8px', borderRadius: '6px',
-                background: activeTab === 'airoadmap' ? 'rgba(58,155,159,0.08)' : 'transparent',
-                color: activeTab === 'airoadmap' ? '#3A9B9F' : '#4B5563',
-                border: 'none', cursor: 'pointer', textAlign: 'left', fontSize: '0.8rem',
-                fontWeight: activeTab === 'airoadmap' ? 600 : 500,
-                transition: 'all 0.12s ease', width: '100%'
-              }}
-              onMouseEnter={e => { if (activeTab !== 'airoadmap') e.currentTarget.style.background = '#F1F3F5'; }}
-              onMouseLeave={e => { if (activeTab !== 'airoadmap') e.currentTarget.style.background = 'transparent'; }}
-            >
-              <span style={{ fontSize: '0.85rem' }}>{activeTrack.icon}</span>
-              <span style={{ flex: 1, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                {activeTrack.title}
-              </span>
-              <span style={{
-                fontSize: '0.65rem', fontWeight: 600, color: '#3A9B9F',
-                background: 'rgba(58,155,159,0.08)', padding: '1px 6px', borderRadius: '4px'
-              }}>
-                {trackProgress.percent}%
-              </span>
-            </button>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+            {curated.map((entry) => {
+              const isActive = entry.tabIds.includes(activeTab);
+              return (
+                <button
+                  key={entry.id}
+                  onClick={() => onSelectTab && onSelectTab(getCuratedNextTab(entry))}
+                  title={`${entry.label} — ${entry.completed}/${entry.total} done`}
+                  style={{
+                    display: 'flex', alignItems: 'center', gap: '10px',
+                    padding: '8px 10px', borderRadius: '8px',
+                    background: isActive ? '#FFFFFF' : 'transparent',
+                    color: '#1A1D26',
+                    border: isActive ? '1px solid var(--ds-color-chrome-headerBorder, #E7EDF3)' : '1px solid transparent',
+                    boxShadow: isActive ? '0 2px 8px rgba(22, 40, 63, 0.06)' : 'none',
+                    cursor: 'pointer', textAlign: 'left', fontSize: '0.86rem',
+                    fontWeight: isActive ? 700 : 500,
+                    transition: 'all 0.12s ease', width: '100%'
+                  }}
+                  onMouseEnter={e => { if (!isActive) e.currentTarget.style.background = 'rgba(255,255,255,0.65)'; }}
+                  onMouseLeave={e => { if (!isActive) e.currentTarget.style.background = 'transparent'; }}
+                >
+                  <span style={{ fontSize: '1rem', flexShrink: 0 }}>{entry.icon}</span>
+                  <span style={{ flex: 1, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                    {entry.label}
+                  </span>
+                  <span style={{ fontSize: '0.78rem', fontWeight: 700, color: '#1A1D26', flexShrink: 0 }}>
+                    {entry.percent}%
+                  </span>
+                </button>
+              );
+            })}
           </div>
         </div>
       )}
@@ -742,8 +730,8 @@ export function TopBar({ activeTab, onSelectTab, onSearchOpen, onToggleSidebar, 
 
   return (
     <header style={{
-      background: '#FFFFFF',
-      borderBottom: '1px solid #E5E7EB',
+      background: 'transparent',
+      borderBottom: 'none',
       fontFamily: '-apple-system, BlinkMacSystemFont, "Inter", "SF Pro Text", system-ui, sans-serif'
     }}>
       <style jsx>{`
@@ -757,15 +745,19 @@ export function TopBar({ activeTab, onSelectTab, onSearchOpen, onToggleSidebar, 
         }
       `}</style>
 
-      {/* 1. TOP BRAND HEADER TIER */}
+      {/* 1. ASK AWAY HEADER CARD (floating) */}
       <div style={{
-        padding: '10px 20px',
+        margin: '12px 16px 0',
+        padding: '14px 22px',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
         gap: '16px',
-        borderBottom: '1px solid #F1F3F5',
-        background: '#FFFFFF'
+        flexWrap: 'wrap',
+        background: 'var(--ds-color-chrome-headerBg, #FFFFFF)',
+        border: '1px solid var(--ds-color-chrome-headerBorder, #E7EDF3)',
+        borderRadius: '18px',
+        boxShadow: 'var(--ds-color-chrome-headerShadow, 0 10px 30px rgba(22, 40, 63, 0.08))'
       }}>
         {/* Left: Enlarged Logo + Title + Tagline */}
         <div
@@ -867,45 +859,46 @@ export function TopBar({ activeTab, onSelectTab, onSearchOpen, onToggleSidebar, 
           </div>
         </div>
 
-        {/* Right: Search Bar Trigger */}
+        {/* Right: Search Pill Trigger */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexShrink: 0 }}>
           <button
             onClick={onSearchOpen}
-            title="Search knowledge base (⌘K)"
+            title="Search knowledge base (Ctrl+K / ⌘K)"
             style={{
               display: 'flex',
               alignItems: 'center',
               gap: '6px',
-              padding: '6px 12px',
-              background: '#F8FAFC',
-              border: '1px solid #E2E8F0',
-              borderRadius: '7px',
-              color: '#475569',
-              fontSize: '0.78rem',
+              minWidth: '220px',
+              padding: '10px 8px 10px 14px',
+              background: 'var(--ds-color-chrome-searchPill, #F1F4F8)',
+              border: '1px solid transparent',
+              borderRadius: '9999px',
+              color: '#94A3B8',
+              fontSize: '0.82rem',
               fontWeight: 500,
               cursor: 'pointer',
               transition: 'all 0.15s ease'
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.background = '#F1F5F9';
+              e.currentTarget.style.background = '#E8EDF3';
               e.currentTarget.style.borderColor = '#CBD5E1';
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.background = '#F8FAFC';
-              e.currentTarget.style.borderColor = '#E2E8F0';
+              e.currentTarget.style.background = 'var(--ds-color-chrome-searchPill, #F1F4F8)';
+              e.currentTarget.style.borderColor = 'transparent';
             }}
           >
-            <span>🔍</span>
-            <span>Search</span>
+            <span style={{ flex: 1, textAlign: 'left' }}>Search modules…</span>
             <kbd style={{
-              fontSize: '0.62rem',
-              padding: '1px 4px',
+              fontSize: '0.66rem',
+              padding: '3px 8px',
               background: '#FFFFFF',
-              borderRadius: '3px',
+              borderRadius: '6px',
               border: '1px solid #CBD5E1',
               color: '#64748B',
-              fontWeight: 600
-            }}>⌘K</kbd>
+              fontWeight: 700,
+              fontFamily: 'inherit'
+            }}>Ctrl+K</kbd>
           </button>
         </div>
       </div>

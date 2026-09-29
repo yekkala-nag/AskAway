@@ -67,6 +67,23 @@ export const tokens = {
       editor: '#0F1219',
     },
 
+    // AskAway chrome (v5.1) — floating header, light index sidebar, CTAs, showcase
+    chrome: {
+      headerBg: '#FFFFFF',
+      headerBorder: '#E7EDF3',
+      headerShadow: '0 10px 30px rgba(22, 40, 63, 0.08)',
+      sidebarBg: '#EDF1F6',
+      sidebarCard: '#FFFFFF',
+      ctaFrom: '#14B8A6',
+      ctaTo: '#0E9F8A',
+      ctaShadow: '0 8px 20px rgba(20, 184, 166, 0.35)',
+      showcaseBg: '#0A1430',
+      showcaseEdge: 'rgba(94, 196, 200, 0.25)',
+      proBadge: '#E5484D',
+      searchPill: '#F1F4F8',
+      searchKbd: '#E2E8F0',
+    },
+
     // Semantic states
     state: {
       success: { light: '#059669', dark: '#10B981' },
