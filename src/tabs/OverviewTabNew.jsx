@@ -14,7 +14,7 @@ import { TABS_REGISTRY, UMBRELLA_TOPICS } from '../registry/tabsRegistry.js';
 import { Container, Section, Grid, Flex, Stack } from '../components/layout/Primitives.jsx';
 import { Hero, Diagram, CodeBlock, Accordion, Tabs, Stepper } from '../components/ui/Content.jsx';
 import { Card, Badge, Button, Callout } from '../components/ui/Core.jsx';
-import { LuminaLogo } from '../components/ui/LuminaLogo.jsx';
+import { AskAwayLogo } from '../components/ui/AskAwayLogo.jsx';
 import { SevenLayersStack } from '../components/ui/CleanInfographics.jsx';
 import {
   ADAPTIVE_TRACKS,
@@ -186,7 +186,7 @@ export function OverviewTab({ onSelectTab, setActiveTab: setGlobalActiveTab }) {
     <>
       <Hero
         moduleId="foundations"
-        moduleLabel="Lumina AI · Engineering Platform"
+        moduleLabel="AskAway · Engineering Platform"
         title={
           <span style={{ display: 'inline-flex', alignItems: 'center', gap: '14px', flexWrap: 'wrap' }}>
             <span style={{
@@ -196,14 +196,14 @@ export function OverviewTab({ onSelectTab, setActiveTab: setGlobalActiveTab }) {
               width: '50px',
               height: '50px',
               borderRadius: '14px',
-              background: '#0B0F19',
-              border: '1px solid rgba(56, 189, 248, 0.3)',
-              boxShadow: '0 4px 18px rgba(56, 189, 248, 0.22), inset 0 0 12px rgba(245, 158, 11, 0.15)',
+              background: 'linear-gradient(135deg, #FFFFFF 0%, #E7F0F5 100%)',
+              border: '1px solid rgba(20, 184, 166, 0.4)',
+              boxShadow: '0 4px 18px rgba(20, 184, 166, 0.25), inset 0 0 12px rgba(20, 184, 166, 0.1)',
               flexShrink: 0
             }}>
-              <LuminaLogo size={38} />
+              <AskAwayLogo size={38} />
             </span>
-            <span>Lumina AI</span>
+            <span>AskAway</span>
           </span>
         }
         description="Build, learn, and master the art of Generative AI."

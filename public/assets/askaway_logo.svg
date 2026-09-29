@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="18 14 96 96" fill="none" role="img" aria-label="AskAway Logo">
+  <defs>
+    <linearGradient id="askBubble" x1="0%" y1="0%" x2="100%" y2="30%">
+      <stop offset="0%" stop-color="#1B3A6B"/>
+      <stop offset="55%" stop-color="#0E7C96"/>
+      <stop offset="100%" stop-color="#14B8A6"/>
+    </linearGradient>
+    <linearGradient id="askTrace" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#8FA6BE"/>
+      <stop offset="100%" stop-color="#6B8AA5"/>
+    </linearGradient>
+  </defs>
+  <g stroke="url(#askTrace)" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.85">
+    <path d="M30 38 H38 L43 43 H50"/>
+    <path d="M30 47 H40 L44 51 H49"/>
+    <path d="M30 56 H37 L42 51"/>
+    <path d="M86 38 H78 L73 43 H68"/>
+    <path d="M86 47 H76 L72 51 H69"/>
+    <path d="M86 56 H79 L74 51"/>
+  </g>
+  <g fill="none" stroke="#8FA6BE" stroke-width="1.6" opacity="0.85">
+    <circle cx="52" cy="43" r="2.4"/>
+    <circle cx="51" cy="51" r="2.4"/>
+    <circle cx="66" cy="43" r="2.4"/>
+    <circle cx="67" cy="51" r="2.4"/>
+    <circle cx="75" cy="57" r="2.2"/>
+    <circle cx="41" cy="57" r="2.2"/>
+  </g>
+  <path d="M66 70 H74 Q86 70 86 58 V36 Q86 24 74 24 H42 Q30 24 30 36 V58 Q30 70 42 70 H50" stroke="url(#askBubble)" stroke-width="7" stroke-linecap="round" fill="none"/>
+  <path d="M46 68 L37 92 L58 69" stroke="url(#askBubble)" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <path d="M50 40 C50 30 56 26 62 26 C70 26 75 31 75 38 C75 45 68 48 64 53 C61 56 60 59 60 62" stroke="url(#askBubble)" stroke-width="8.5" stroke-linecap="round" fill="none"/>
+  <circle cx="60" cy="67.5" r="4.2" fill="#14B8A6"/>
+  <path d="M56 84 C51 84 49.5 77.5 55 75.5 C59 74.2 62 76.5 61.5 79.5" stroke="#14B8A6" stroke-width="5" stroke-linecap="round" fill="none"/>
+  <line x1="58" y1="84" x2="86" y2="84" stroke="#14B8A6" stroke-width="7" stroke-linecap="round"/>
+  <polygon points="86,76 86,92 98,84" fill="#14B8A6"/>
+</svg>

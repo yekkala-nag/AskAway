@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { UMBRELLA_TOPICS, getTabsForUmbrella } from "../../registry/tabsRegistry.js";
-import { LuminaLogo } from "../ui/LuminaLogo.jsx";
+import { AskAwayLogo } from "../ui/AskAwayLogo.jsx";
 
 export default function Sidebar({
   activeTab,
@@ -53,21 +53,21 @@ export default function Sidebar({
         <div
           onClick={() => onSelectTab && onSelectTab('overview')}
           style={{ display: "flex", alignItems: "center", gap: "0.7rem", overflow: "hidden", cursor: "pointer" }}
-          title="Lumina AI — Build, learn, and master the art of Generative AI."
+          title="AskAway — Build, learn, and master the art of Generative AI."
         >
           <div style={{
             width: 32,
             height: 32,
             borderRadius: 8,
-            background: "#0B0F19",
-            border: "1px solid rgba(56, 189, 248, 0.25)",
+            background: "linear-gradient(135deg, #FFFFFF 0%, #E7F0F5 100%)",
+            border: "1px solid rgba(20, 184, 166, 0.4)",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
             flexShrink: 0,
-            boxShadow: "0 2px 8px rgba(11, 15, 25, 0.3)"
+            boxShadow: "0 2px 8px rgba(20, 184, 166, 0.2)"
           }}>
-            <LuminaLogo size={24} />
+            <AskAwayLogo size={24} />
           </div>
           {!isCollapsed && (
             <div>
@@ -79,7 +79,7 @@ export default function Sidebar({
                 letterSpacing: "-0.01em",
                 whiteSpace: "nowrap"
               }}>
-                Lumina AI
+                AskAway
               </div>
               <div style={{
                 fontSize: "0.58rem",

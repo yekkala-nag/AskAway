@@ -7,7 +7,7 @@ import { useState, useRef, useEffect, useCallback } from 'react';
 import { UMBRELLA_TOPICS, getTabsForUmbrella, getUmbrellaForTab, getTabById, TABS_REGISTRY } from '../../registry/tabsRegistry.js';
 import { getModuleColors } from '../../design-system/tokens.js';
 import { Button, Badge } from './Core.jsx';
-import { LuminaLogo } from './LuminaLogo.jsx';
+import { AskAwayLogo } from './AskAwayLogo.jsx';
 import {
   getCurrentTrackId,
   getTrackById,
@@ -778,7 +778,7 @@ export function TopBar({ activeTab, onSelectTab, onSearchOpen, onToggleSidebar, 
             userSelect: 'none',
             minWidth: 0
           }}
-          title="Lumina AI — Build, learn, and master the art of Generative AI."
+          title="AskAway — Build, learn, and master the art of Generative AI."
         >
           {onToggleSidebar && (
             <button
@@ -811,15 +811,15 @@ export function TopBar({ activeTab, onSelectTab, onSearchOpen, onToggleSidebar, 
             width: '46px',
             height: '46px',
             borderRadius: '12px',
-            background: '#0B0F19',
-            border: '1px solid rgba(56, 189, 248, 0.35)',
+            background: 'linear-gradient(135deg, #FFFFFF 0%, #E7F0F5 100%)',
+            border: '1px solid rgba(20, 184, 166, 0.4)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
             flexShrink: 0,
-            boxShadow: '0 4px 12px rgba(11, 15, 25, 0.15), inset 0 0 12px rgba(56, 189, 248, 0.18)'
+            boxShadow: '0 4px 12px rgba(20, 184, 166, 0.2), inset 0 0 12px rgba(20, 184, 166, 0.1)'
           }}>
-            <LuminaLogo size={36} />
+            <AskAwayLogo size={36} />
           </div>
 
           {/* Brand Title & Tagline */}
@@ -833,10 +833,10 @@ export function TopBar({ activeTab, onSelectTab, onSearchOpen, onToggleSidebar, 
               <span style={{
                 fontWeight: 800,
                 fontSize: '1.2rem',
-                color: '#0F172A',
+                color: '#16283F',
                 letterSpacing: '-0.025em'
               }}>
-                Lumina AI
+                AskAway
               </span>
               <span style={{
                 fontSize: '0.6rem',
