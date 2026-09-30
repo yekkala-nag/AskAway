@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import * as Primitives from '../components/layout/Primitives.jsx';
 import { Hero, CodeBlock } from '../components/ui/Content.jsx';
 import { Card, Badge, Button, Callout } from '../components/ui/Core.jsx';
-import DiagramImage from '../components/ui/DiagramImage.jsx';
+import { Panel, GlassCard } from '../components/ui/CleanInfographics.jsx';
 import {
   BAPO_THEORY_STEPS,
   BAPO_TASK_TAXONOMY,
@@ -15,6 +15,46 @@ import Workflow from '../components/ui/Workflow.jsx';
 import { Reveal, AnimatedNumber } from '../components/ui/AnimatedReveal.jsx';
 
 const { Container, Grid, Flex, Stack } = Primitives;
+
+/** Native recreation: giant windows, tiny working memory, and the fixes. */
+function BapoPanel() {
+  const pts = { fontSize: 12.5, color: '#CBD5E1', lineHeight: 1.65, margin: '6px 0 0', paddingLeft: 16 };
+  return (
+    <Panel
+      title="Working Memory Bottlenecks vs 1M+ Context Windows"
+      sub="A million-token window with a handful of working variables: hard tasks decay to guessing unless engineered around."
+    >
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))', gap: 12 }}>
+        <GlassCard color="#5EC4C8" icon="file" title="1. Input & Capacity">
+          <ul style={pts}>
+            <li>1M+ token context window in</li>
+            <li>Effective working memory: N variables (roughly 5–10)</li>
+          </ul>
+        </GlassCard>
+        <GlassCard color="#6A9BD8" icon="cpu" title="2. Two Bandwidths">
+          <ul style={pts}>
+            <li>Prefix bandwidth “a” — forward embedding compression</li>
+            <li>Attention bandwidth “b” — backward token lookup</li>
+            <li>Constraint: b ≤ min(N, a)</li>
+          </ul>
+        </GlassCard>
+        <GlassCard color="#E8836A" icon="chart" title="3. Hard Tasks Decay" badge="→ 50% baseline">
+          <ul style={pts}>
+            <li>Variable tracking, graph reachability, majority aggregation</li>
+            <li>Accuracy slides to random-guessing baseline</li>
+          </ul>
+        </GlassCard>
+        <GlassCard color="#34D399" icon="wrench" title="4. Engineering Fixes">
+          <ul style={pts}>
+            <li>Test-time reasoning tokens — deliberate longer</li>
+            <li>Tool outsourcing — compute outside the window</li>
+            <li>Context compactness — compress inputs to fit</li>
+          </ul>
+        </GlassCard>
+      </div>
+    </Panel>
+  );
+}
 
 export default function ContextLimitsTab() {
   const [activeSubTab, setActiveSubTab] = useState('theory'); // 'theory' | 'tracking' | 'taxonomy' | 'code'
@@ -245,6 +285,8 @@ export default function ContextLimitsTab() {
           </Stack>
         )}
       {/* ─── INTERACTIVE ENHANCEMENTS: IMAGE + WORKFLOW + TABLE + ANIMATION ─── */}
+      <BapoPanel />
+
       <Stack gap={6} style={{ marginTop: 'var(--ds-space-8)' }}>
         <Reveal variant="rise">
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: 'var(--ds-space-3)' }}>

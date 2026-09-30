@@ -1,5 +1,5 @@
 import { useState, useMemo } from 'react';
-import DiagramImage from '../components/ui/DiagramImage.jsx';
+import { Panel, GlassBar } from '../components/ui/CleanInfographics.jsx';
 import { CodeBlock } from '../components/ui/Content.jsx';
 import { Container, Section, Grid, Flex, Stack } from '../components/layout/Primitives.jsx';
 import { Card, Badge, Button, Callout } from '../components/ui/Core.jsx';
@@ -10,6 +10,35 @@ import {
   extractKeywords,
   routeQuestion
 } from './routerEngine.js';
+
+/** Native recreation: route simple queries around the LLM via margin gating. */
+function FastPathRouterPanel() {
+  const chip = (accent) => ({
+    background: 'rgba(255,255,255,0.05)', border: `1px solid ${accent}66`,
+    borderRadius: 10, padding: '10px 14px', fontSize: 12.5, fontWeight: 700,
+    color: '#F1F5F9', textAlign: 'center', minWidth: 120,
+  });
+  const note = { fontSize: 11, color: '#94A3B8', fontWeight: 400, marginTop: 2 };
+  const arrow = { color: '#5EC4C8', fontWeight: 800, fontSize: 16, alignSelf: 'center', flexShrink: 0 };
+  return (
+    <Panel
+      title="Zero-Model Fast-Path Query Router — Calling the LLM Less"
+      sub="A 0.1ms deterministic score plus a margin gate routes clean answers around the model; only genuine reasoning pays the full pipeline."
+    >
+      <div style={{ display: 'flex', alignItems: 'stretch', gap: 10, flexWrap: 'wrap', marginBottom: 12 }}>
+        <div style={{ ...chip('#94A3B8'), alignSelf: 'center' }}>Incoming Question</div>
+        <span style={arrow}>→</span>
+        <div style={{ ...chip('#5EC4C8'), alignSelf: 'center' }}>Signal Scorer<div style={note}>0.1ms keyword co-occurrence</div></div>
+        <span style={arrow}>→</span>
+        <div style={{ ...chip('#E8C558'), alignSelf: 'center' }}>Margin Gate<div style={note}>Top Score ≥ 4 &amp; Margin ≥ 3</div></div>
+      </div>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: 12 }}>
+        <GlassBar color="#34D399" icon="zap" title="Branch 1 · Fast Path" badge="0.1ms · 0 tokens · $0.00" detail="Deterministic value extractor → expert dictionary. No model call, no tokens, no cost." />
+        <GlassBar color="#6A9BD8" icon="cpu" title="Branch 2 · Full Reasoning" badge="~2000ms" detail="Hosted model waterfall: 1. question parser → 2. candidate arbiter → 3. typed generator." />
+      </div>
+    </Panel>
+  );
+}
 
 export function ZeroModelRouterTab() {
   const [activeSubTab, setActiveSubTab] = useState('simulator'); // simulator | benchmark | fronts | tuner | code
@@ -65,16 +94,9 @@ export function ZeroModelRouterTab() {
         </p>
       </Section>
 
-      {/* ARCHITECTURAL INFOGRAPHIC CARD */}
+      {/* NATIVE GLASS RECREATION */}
       <div style={{ marginBottom: 'var(--ds-space-6)' }}>
-        <DiagramImage
-          src="/assets/rag_zero_model_fastpath_router.png"
-          alt="Enterprise RAG Zero-Model Fast-Path Query Router Architecture"
-          title="Zero-Model Fast-Path Query Router — Dual-Path Architecture"
-          caption="A 0.1ms deterministic co-occurrence score & margin check on line_df routes clean single-line answers straight to an Expert Dictionary Extractor (Branch 1), keeping the 3-step hosted model waterfall only for genuine multi-line reasoning (Branch 2)."
-          background="#0a0f1d"
-          maxWidth={1200}
-        />
+        <FastPathRouterPanel />
       </div>
 
       {/* NAVIGATION SUB-TABS */}

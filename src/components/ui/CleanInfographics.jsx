@@ -4,35 +4,9 @@ import React from 'react';
  * No raster images, no watermarks, no brand names, no attributions, no social UI.
  * Dark contrast section so it works inside both light (EdTech) and dark tabs. */
 
-const wrap = {
-  background: '#0F1219',
-  border: '1px solid #2A3548',
-  borderRadius: 12,
-  padding: 20,
-  marginBottom: 24,
-};
-const h3 = { margin: '0 0 4px', fontSize: 17, fontWeight: 800, color: '#F1F5F9' };
-const sub = { margin: '0 0 16px', fontSize: 13, color: '#94A3B8', lineHeight: 1.6 };
 const grid = (min = 220) => ({
   display: 'grid', gridTemplateColumns: `repeat(auto-fill, minmax(${min}px, 1fr))`, gap: 12,
 });
-const card = {
-  background: '#161B26', border: '1px solid #2A3548', borderRadius: 10, padding: 14,
-};
-const cardTitle = { fontSize: 13, fontWeight: 800, color: '#F1F5F9', marginBottom: 6 };
-const cardBody = { fontSize: 12.5, color: '#CBD5E1', lineHeight: 1.65 };
-const promptStyle = {
-  marginTop: 8, fontSize: 12, color: '#5EC4C8', background: '#0B1220',
-  border: '1px solid #234', borderRadius: 6, padding: '6px 8px', lineHeight: 1.5,
-};
-const tag = {
-  display: 'inline-block', fontSize: 10.5, fontWeight: 700, color: '#5EC4C8',
-  background: '#5EC4C822', border: '1px solid #5EC4C844', borderRadius: 20, padding: '2px 8px', marginBottom: 8,
-};
-const step = {
-  background: '#161B26', border: '1px solid #2A3548', borderRadius: 10,
-  padding: '10px 14px', fontSize: 12.5, color: '#CBD5E1', lineHeight: 1.6,
-};
 
 /* ---------- Inline SVG helpers (no image files, no watermarks) ---------- */
 
@@ -101,7 +75,7 @@ function FlowStrip({ steps, accent = '#5EC4C8' }) {
       </defs>
       {nodes.map((s, i) => (
         <g key={i}>
-          <rect x={s.bx} y={10} width={bw} height={H - 20} rx={9} fill="#161B26" stroke="#2A3548" />
+          <rect x={s.bx} y={10} width={bw} height={H - 20} rx={9} fill="rgba(255,255,255,0.05)" stroke={accent} strokeOpacity={0.45} />
           <rect x={s.bx} y={10} width={4} height={H - 20} rx={2} fill={accent} opacity={0.85} />
           <text x={s.bx + bw / 2} y={s.d ? 40 : 50} textAnchor="middle" fontSize={s.label.length > 14 ? 10.5 : 12.5} fontWeight={700} fill="#F1F5F9">{s.label}</text>
           {s.d ? <text x={s.bx + bw / 2} y={60} textAnchor="middle" fontSize={9.5} fill="#94A3B8">{s.d}</text> : null}
@@ -111,6 +85,115 @@ function FlowStrip({ steps, accent = '#5EC4C8' }) {
     </svg>
   );
 }
+
+/* ---------- Unified showcase system (reference: 7-Layers panel) ----------
+ * Navy ground, glassy per-color bars/cards, icon chips, spine, pill badges.
+ * Every diagram below renders through these primitives — no bespoke skins. */
+
+export function Panel({ title, sub, children }) {
+  return (
+    <div style={{
+      background: 'var(--ds-color-chrome-showcaseBg, #0A1430)',
+      border: '1px solid var(--ds-color-chrome-showcaseEdge, rgba(94, 196, 200, 0.25))',
+      borderRadius: 18, padding: '26px 26px 30px', marginBottom: 24,
+      boxShadow: '0 20px 50px rgba(10, 20, 48, 0.35)',
+    }}>
+      <div style={{
+        color: '#FFFFFF', fontSize: '1.25rem', fontWeight: 800,
+        textAlign: 'center', margin: '0 0 6px', letterSpacing: '-0.01em',
+      }}>
+        {title}
+      </div>
+      {sub ? (
+        <p style={{
+          margin: '0 auto 20px', maxWidth: 660, fontSize: 13,
+          color: '#94A3B8', lineHeight: 1.6, textAlign: 'center',
+        }}>
+          {sub}
+        </p>
+      ) : null}
+      {children}
+    </div>
+  );
+}
+
+function Pill({ children, color = '#5EC4C8' }) {
+  return (
+    <span style={{
+      marginLeft: 'auto', fontSize: '0.66rem', fontWeight: 700, color: '#0A1430',
+      background: color, borderRadius: 20, padding: '3px 10px',
+      textTransform: 'uppercase', letterSpacing: '0.04em', flexShrink: 0, whiteSpace: 'nowrap',
+    }}>
+      {children}
+    </span>
+  );
+}
+
+function Chip({ icon, color, size = 32 }) {
+  return (
+    <span style={{
+      width: size, height: size, borderRadius: 10, flexShrink: 0,
+      display: 'flex', alignItems: 'center', justifyContent: 'center',
+      background: 'rgba(255,255,255,0.08)', border: `1px solid ${color}88`,
+    }}>
+      <Icon name={icon} size={Math.round(size * 0.58)} color="#FFFFFF" />
+    </span>
+  );
+}
+
+export function GlassBar({ color, icon, index, title, badge, detail }) {
+  return (
+    <div style={{
+      padding: '13px 18px 13px 16px', borderRadius: 14,
+      background: `linear-gradient(90deg, ${color}55 0%, ${color}22 55%, transparent 100%)`,
+      border: `1px solid ${color}66`, boxShadow: `0 0 24px ${color}33`,
+    }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
+        <Chip icon={icon} color={color} />
+        <span style={{ color: '#FFFFFF', fontSize: '1.02rem', fontWeight: 700 }}>
+          {index != null ? (<span style={{ opacity: 0.75, marginRight: '8px' }}>{index}</span>) : null}
+          {title}
+        </span>
+        {badge ? (<Pill>{badge}</Pill>) : null}
+      </div>
+      {detail ? (
+        <div style={{ color: '#CBD5E1', fontSize: 12.5, lineHeight: 1.65, marginTop: 8, paddingLeft: 46 }}>
+          {detail}
+        </div>
+      ) : null}
+    </div>
+  );
+}
+
+export function GlassCard({ color = '#5EC4C8', icon, title, badge, children }) {
+  return (
+    <div style={{
+      background: 'rgba(255,255,255,0.04)',
+      border: `1px solid ${color}44`, borderRadius: 12, padding: 14,
+      boxShadow: `0 0 18px ${color}22`,
+    }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 8 }}>
+        <Chip icon={icon} color={color} size={28} />
+        <div style={{ flex: 1, fontSize: 13, fontWeight: 800, color: '#F1F5F9' }}>{title}</div>
+        {badge ? (<span style={{
+          fontSize: '0.62rem', fontWeight: 700, color: '#0A1430', background: color,
+          borderRadius: 20, padding: '2px 8px', textTransform: 'uppercase',
+          letterSpacing: '0.04em', flexShrink: 0, whiteSpace: 'nowrap',
+        }}>
+          {badge}
+        </span>) : null}
+      </div>
+      {children}
+    </div>
+  );
+}
+
+const glassBody = { fontSize: 12.5, color: '#CBD5E1', lineHeight: 1.65 };
+const glassPrompt = {
+  marginTop: 8, fontSize: 12, color: '#7FE3DC', background: 'rgba(0,0,0,0.35)',
+  border: '1px solid rgba(94,196,200,0.25)', borderRadius: 6, padding: '6px 8px', lineHeight: 1.5,
+};
+const glassList = { ...glassBody, margin: '8px 0 0', paddingLeft: 16 };
 
 export function LearningPromptsGrid() {
   const items = [
@@ -124,21 +207,20 @@ export function LearningPromptsGrid() {
     { t: 'Expert Roundtable', d: 'Compare perspectives to understand trade-offs, edge cases, and decision criteria faster.', p: 'Prompt: \u201CSimulate 3 experts debating [topic] (pragmatist, skeptic, specialist) and summarize consensus + risks.\u201D' },
     { t: 'Mental Associations (Mnemonics)', d: 'Encode key ideas with memory hooks to improve recall under time pressure.', p: 'Prompt: \u201CCreate 5 mnemonics for [topic] and a 60-second recall drill I can repeat daily.\u201D' },
   ];
+  const icons = ['book', 'link', 'target', 'smile', 'calendar', 'help', 'nodes', 'users', 'bulb'];
+  const palette = ['#5EC4C8', '#6A9BD8', '#A78BFA', '#7FB069', '#E8C558', '#E08A4C', '#F0A89A', '#9B89C4', '#34D399'];
   return (
-    <div style={wrap}>
-      <div style={h3}>9 Prompt Patterns for Learning Anything Faster</div>
-      <p style={sub}>Reusable prompt shapes: simplify, analogize, motivate, simulate, plan, retrieve, map, debate, memorize.</p>
+    <Panel
+      title="9 Prompt Patterns for Learning Anything Faster"
+      sub="Reusable prompt shapes: simplify, analogize, motivate, simulate, plan, retrieve, map, debate, memorize."
+    >
       <div style={grid(230)}>{items.map((it, i) => (
-        <div key={i} style={card}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 6 }}>
-            <Icon name={['book', 'link', 'target', 'smile', 'calendar', 'help', 'nodes', 'users', 'bulb'][i]} />
-            <div style={{ ...cardTitle, marginBottom: 0 }}>{i + 1}. {it.t}</div>
-          </div>
-          <div style={cardBody}>{it.d}</div>
-          <div style={promptStyle}>{it.p}</div>
-        </div>
+        <GlassCard key={i} color={palette[i % palette.length]} icon={icons[i]} title={`${i + 1}. ${it.t}`}>
+          <div style={glassBody}>{it.d}</div>
+          <div style={glassPrompt}>{it.p}</div>
+        </GlassCard>
       ))}</div>
-    </div>
+    </Panel>
   );
 }
 
@@ -153,68 +235,75 @@ export function PromptFrameworksGrid() {
     { a: 'RISE', e: 'Reflect, Inquire, Suggest, Elevate', b: 'Feedback loops and iteration', pts: ['Reflect what you observed (neutral)', 'Ask targeted questions (Inquire)', 'Suggest specific improvements (Suggest)', 'Elevate with a higher standard or next iteration (Elevate)'], t: 'Reflect: [what\u2019s working / what you see] / Inquire: [2\u20133 diagnostic questions] / Suggest: [concrete changes] / Elevate: [stronger version]' },
     { a: 'RASCEF', e: 'Role, Action, Step, Context, Example, Format', b: 'Complex, multi-stage tasks', pts: ['Lock expertise (Role) + deliverable operation (Action)', 'Break process into steps (Step) for reliability', 'Add constraints and background (Context)', 'Provide exemplar (Example); enforce structure (Format)'], t: 'Role: [expert] / Action: [create/analyze/plan] / Steps: 1) \u2026 2) \u2026 / Context: [constraints, audience] / Example: [mini sample] / Format: [table/sections]' },
   ];
+  const icons = ['clip', 'target', 'smile', 'search', 'eye', 'star', 'refresh', 'branch'];
+  const palette = ['#5EC4C8', '#6A9BD8', '#A78BFA', '#7FB069', '#E8C558', '#E08A4C', '#F0A89A', '#9B89C4'];
   return (
-    <div style={wrap}>
-      <div style={h3}>8 Structured Prompting Frameworks Compared</div>
-      <p style={sub}>Pick by need: clarity, speed, tone control, cleanup, stakeholder framing, narrative, iteration, or multi-stage reliability.</p>
+    <Panel
+      title="8 Structured Prompting Frameworks Compared"
+      sub="Pick by need: clarity, speed, tone control, cleanup, stakeholder framing, narrative, iteration, or multi-stage reliability."
+    >
       <div style={grid(260)}>{items.map((it, i) => (
-        <div key={i} style={card}>
-          <span style={tag}>Best for: {it.b}</span>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 6 }}>
-            <Icon name={['clip', 'target', 'smile', 'search', 'eye', 'star', 'refresh', 'branch'][i]} />
-            <div style={{ ...cardTitle, marginBottom: 0 }}>{String(i + 1).padStart(2, '0')} · {it.a}</div>
-          </div>
-          <div style={{ ...cardBody, color: '#94A3B8' }}>{it.e}</div>
-          <ul style={{ ...cardBody, margin: '8px 0', paddingLeft: 16 }}>{it.pts.map((p, j) => <li key={j}>{p}</li>)}</ul>
-          <div style={promptStyle}>{it.t}</div>
-        </div>
+        <GlassCard
+          key={i}
+          color={palette[i % palette.length]}
+          icon={icons[i]}
+          title={`${String(i + 1).padStart(2, '0')} · ${it.a}`}
+        >
+          <div style={{ fontSize: 11, fontWeight: 700, color: palette[i % palette.length], marginBottom: 6, textTransform: 'uppercase', letterSpacing: '0.04em' }}>Best for: {it.b}</div>
+          <div style={{ ...glassBody, color: '#94A3B8' }}>{it.e}</div>
+          <ul style={glassList}>{it.pts.map((p, j) => <li key={j}>{p}</li>)}</ul>
+          <div style={glassPrompt}>{it.t}</div>
+        </GlassCard>
       ))}</div>
-    </div>
+    </Panel>
   );
 }
 
 export function HarnessDistillationFlow() {
   return (
-    <div style={wrap}>
-      <div style={h3}>Harness Distillation via Agent-as-Harness</div>
-      <p style={sub}>Use a domain-optimized harness as training-time guidance, transfer the induced behavior into model weights, then deploy under a single fixed harness.</p>
-      <FlowStrip
-        accent="#5EC4C8"
-        steps={[
-          { label: 'Evolve & Adapt', d: 'specialize harness' },
-          { label: 'Collect', d: 'pass / replace' },
-          { label: 'Train & Deploy', d: 'distilled model' },
-        ]}
-      />
-      <div style={{ display: 'grid', gap: 12, marginTop: 12 }}>
-        <div style={step}><b style={{ color: '#F1F5F9' }}>1. Evolve &amp; Adapt</b> — evolve a specialized harness from training tasks (tools, middleware, skills, memory), then adapt it into action recipes, review middleware, review guidance, and failure patterns.</div>
-        <div style={step}><b style={{ color: '#F1F5F9' }}>2. Agent-as-Harness Trajectory Collection</b> — a harnessing agent corrects student proposals before execution in the fixed target harness action space: PASS keeps the proposal, Replace substitutes the corrected action. Unexecuted proposals never touch the environment.</div>
-        <div style={step}><b style={{ color: '#F1F5F9' }}>3. Train &amp; Deploy</b> — retain reviewer-perspective trajectories, fine-tune on them, and deploy the distilled student alone. Reported effects: large task-success gains with the specialized harness removed, and high recovery of harness-induced behaviors.</div>
+    <Panel
+      title="Harness Distillation via Agent-as-Harness"
+      sub="Use a domain-optimized harness as training-time guidance, transfer the induced behavior into model weights, then deploy under a single fixed harness."
+    >
+      <div style={{ display: 'grid', gap: 12 }}>
+        <GlassBar
+          color="#5EC4C8" icon="refresh" index="1." title="Evolve & Adapt"
+          detail="Evolve a specialized harness from training tasks (tools, middleware, skills, memory), then adapt it into action recipes, review middleware, review guidance, and failure patterns."
+        />
+        <GlassBar
+          color="#7FB069" icon="zap" index="2." title="Agent-as-Harness Trajectory Collection"
+          detail="A harnessing agent corrects student proposals before execution in the fixed target harness action space: PASS keeps the proposal, Replace substitutes the corrected action. Unexecuted proposals never touch the environment."
+        />
+        <GlassBar
+          color="#6A9BD8" icon="check" index="3." title="Train & Deploy"
+          detail="Retain reviewer-perspective trajectories, fine-tune on them, and deploy the distilled student alone. Reported effects: large task-success gains with the specialized harness removed, and high recovery of harness-induced behaviors."
+        />
       </div>
-    </div>
+    </Panel>
   );
 }
 
 export function ArchitectureComparison() {
   const tiers = [
-    { t: '1. Language Model', c: 'Prompt in, response out — no outside knowledge.', accent: '#6A9BD8', steps: [{ label: 'Prompt', d: '+ context' }, { label: 'Model', d: 'parameters' }, { label: 'Response', d: 'generated' }] },
-    { t: '2. Retrieval-Augmented Generation', c: 'Grounds answers in an indexed knowledge base.', accent: '#7FB069', steps: [{ label: 'Query', d: 'user ask' }, { label: 'Retriever', d: '+ index' }, { label: 'Model', d: 'with context' }, { label: 'Answer', d: 'grounded' }] },
-    { t: '3. AI Agent', c: 'Goal-driven loop: decide, act with tools, observe, repeat.', accent: '#E8C558', steps: [{ label: 'Goal', d: 'objective' }, { label: 'Core', d: 'model+state' }, { label: 'Decide', d: 'choose' }, { label: 'Act', d: 'tool call' }, { label: 'Observe', d: 'result' }] },
-    { t: '4. Multi-Agent System', c: 'Orchestrated team with shared state and evaluation.', accent: '#A78BFA', steps: [{ label: 'Objective', d: 'mission' }, { label: 'Orchestrate', d: 'coordinate' }, { label: 'Agent team', d: 'workflows' }, { label: 'Evaluate', d: 'progress' }, { label: 'Outcome', d: 'goal met' }] },
+    { n: 1, t: 'Language Model', c: 'Prompt in, response out — no outside knowledge.', accent: '#6A9BD8', icon: 'chat', steps: [{ label: 'Prompt', d: '+ context' }, { label: 'Model', d: 'parameters' }, { label: 'Response', d: 'generated' }] },
+    { n: 2, t: 'Retrieval-Augmented Generation', c: 'Grounds answers in an indexed knowledge base.', accent: '#7FB069', icon: 'search', steps: [{ label: 'Query', d: 'user ask' }, { label: 'Retriever', d: '+ index' }, { label: 'Model', d: 'with context' }, { label: 'Answer', d: 'grounded' }] },
+    { n: 3, t: 'AI Agent', c: 'Goal-driven loop: decide, act with tools, observe, repeat.', accent: '#E8C558', icon: 'cpu', steps: [{ label: 'Goal', d: 'objective' }, { label: 'Core', d: 'model+state' }, { label: 'Decide', d: 'choose' }, { label: 'Act', d: 'tool call' }, { label: 'Observe', d: 'result' }] },
+    { n: 4, t: 'Multi-Agent System', c: 'Orchestrated team with shared state and evaluation.', accent: '#A78BFA', icon: 'nodes', steps: [{ label: 'Objective', d: 'mission' }, { label: 'Orchestrate', d: 'coordinate' }, { label: 'Agent team', d: 'workflows' }, { label: 'Evaluate', d: 'progress' }, { label: 'Outcome', d: 'goal met' }] },
   ];
   return (
-    <div style={wrap}>
-      <div style={h3}>Architecture Comparison — Model, Retrieval, Agent, Multi-Agent</div>
-      <p style={sub}>From single inference to orchestrated systems: each tier adds a capability — and operational cost.</p>
-      <div style={{ display: 'grid', gap: 16 }}>
+    <Panel
+      title="Architecture Comparison — Model, Retrieval, Agent, Multi-Agent"
+      sub="From single inference to orchestrated systems: each tier adds a capability — and operational cost."
+    >
+      <div style={{ display: 'grid', gap: 18 }}>
         {tiers.map((tier) => (
-          <div key={tier.t}>
-            <div style={cardTitle}>{tier.t} <span style={{ fontWeight: 400, color: '#94A3B8', fontSize: 12 }}>— {tier.c}</span></div>
+          <div key={tier.n} style={{ display: 'grid', gap: 10 }}>
+            <GlassBar color={tier.accent} icon={tier.icon} index={`${tier.n}.`} title={tier.t} detail={tier.c} />
             <FlowStrip steps={tier.steps} accent={tier.accent} />
           </div>
         ))}
       </div>
-    </div>
+    </Panel>
   );
 }
 
@@ -232,20 +321,24 @@ export function EvalMethodsGrid() {
     { t: 'DAG Eval', d: 'Decision-tree evaluation: criteria tree root \u2192 node evaluation \u2192 branch paths \u2192 leaf scores.' },
     { t: 'Trajectory Accuracy', d: 'Measures how closely an agent\u2019s step-by-step execution path matches the expected path.' },
   ];
+  const icons = ['gauge', 'file', 'check', 'cpu', 'nodes', 'eye', 'chat', 'shield', 'award', 'branch', 'send'];
+  const palette = ['#5EC4C8', '#6A9BD8', '#A78BFA', '#7FB069', '#E8C558', '#E08A4C', '#F0A89A', '#9B89C4', '#34D399', '#F472B6', '#38BDF8'];
   return (
-    <div style={wrap}>
-      <div style={h3}>11 Evaluation Methods — From Overlap to Trajectory Accuracy</div>
-      <p style={sub}>Reference-based overlap, embedding similarity, model judges and juries, human review, safety gates, and execution-path scoring.</p>
+    <Panel
+      title="11 Evaluation Methods — From Overlap to Trajectory Accuracy"
+      sub="Reference-based overlap, embedding similarity, model judges and juries, human review, safety gates, and execution-path scoring."
+    >
       <div style={grid(210)}>{items.map((it, i) => (
-        <div key={i} style={card}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 6 }}>
-            <Icon name={['gauge', 'file', 'check', 'cpu', 'nodes', 'eye', 'chat', 'shield', 'award', 'branch', 'send'][i]} color="#7FB069" />
-            <div style={{ ...cardTitle, marginBottom: 0 }}>{i + 1}. {it.t}</div>
-          </div>
-          <div style={cardBody}>{it.d}</div>
-        </div>
+        <GlassCard
+          key={i}
+          color={palette[i % palette.length]}
+          icon={icons[i]}
+          title={`${i + 1}. ${it.t}`}
+        >
+          <div style={glassBody}>{it.d}</div>
+        </GlassCard>
       ))}</div>
-    </div>
+    </Panel>
   );
 }
 
@@ -264,27 +357,28 @@ export function DataReadinessJourney() {
   const pts = miles.map((m, i) => ({ ...m, x: i % 2 === 0 ? 185 : 455, y: 36 + i * 58 }));
   const pathD = pts.map((p, i) => `${i === 0 ? 'M' : 'L'}${p.x},${p.y}`).join(' ');
   return (
-    <div style={wrap}>
-      <div style={h3}>The AI-Ready Data Journey</div>
-      <p style={sub}>The naive view is linear — Clean, Organized, Digitized, AI-ready. The real path winds through consistency, connectivity, definitions, exceptions, context, accessibility, and reliability.</p>
+    <Panel
+      title="The AI-Ready Data Journey"
+      sub="The naive view is linear — Clean, Organized, Digitized, AI-ready. The real path winds through consistency, connectivity, definitions, exceptions, context, accessibility, and reliability."
+    >
       <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap', marginBottom: 14 }}>
         {['Clean', 'Organized', 'Digitized', 'AI-ready?'].map((s, i, a) => (
           <React.Fragment key={s}>
-            <span style={{ fontSize: 11.5, fontWeight: 700, color: '#94A3B8', background: '#161B26', border: '1px dashed #3A4A63', borderRadius: 20, padding: '4px 12px' }}>{s}</span>
+            <span style={{ fontSize: 11.5, fontWeight: 700, color: '#94A3B8', background: 'rgba(255,255,255,0.05)', border: '1px dashed #3A4A63', borderRadius: 20, padding: '4px 12px' }}>{s}</span>
             {i < a.length - 1 ? (<span style={{ color: '#3A4A63' }}>→</span>) : null}
           </React.Fragment>
         ))}
         <span style={{ fontSize: 11, color: '#94A3B8' }}>— the myth</span>
       </div>
       <svg viewBox="0 0 640 560" style={{ width: '100%', height: 'auto', display: 'block' }} role="img" aria-label="Winding AI-ready data journey">
-        <path d={pathD} fill="none" stroke="#2A3548" strokeWidth={20} strokeLinejoin="round" strokeLinecap="round" />
+        <path d={pathD} fill="none" stroke="#3B4A6E" strokeWidth={20} strokeLinejoin="round" strokeLinecap="round" />
         <path d={pathD} fill="none" stroke="#5EC4C8" strokeWidth={2} strokeDasharray="7 6" opacity={0.8} />
         {pts.map((p, i) => {
           const left = p.x < 320;
           const accent = p.done ? '#34D399' : '#5EC4C8';
           return (
             <g key={i}>
-              <circle cx={p.x} cy={p.y} r={15} fill="#0F1219" stroke={accent} strokeWidth={3} />
+              <circle cx={p.x} cy={p.y} r={15} fill="#0A1430" stroke={accent} strokeWidth={3} />
               <circle cx={p.x} cy={p.y} r={5.5} fill={accent} />
               <text x={left ? p.x + 26 : p.x - 26} y={p.y - 1} textAnchor={left ? 'start' : 'end'} fontSize={13} fontWeight={800} fill="#F1F5F9">{i + 1}. {p.t}</text>
               <text x={left ? p.x + 26 : p.x - 26} y={p.y + 16} textAnchor={left ? 'start' : 'end'} fontSize={10.5} fill="#94A3B8">{p.n}</text>
@@ -292,7 +386,7 @@ export function DataReadinessJourney() {
           );
         })}
       </svg>
-    </div>
+    </Panel>
   );
 }
 
@@ -308,98 +402,92 @@ export const SEVEN_LAYERS = [
 ];
 
 export function SevenLayersStack() {
-  const layers = SEVEN_LAYERS;
-  const tierH = 46, tierGap = 8, topY = 8;
   return (
-    <div style={wrap}>
-      <div style={h3}>7 Layers of AI — From Classical Rules to General Intelligence</div>
-      <p style={sub}>Each layer builds on the one below. We are currently at the generative frontier.</p>
-      <svg viewBox="0 0 640 400" style={{ width: '100%', height: 'auto', display: 'block' }} role="img" aria-label="Seven layers of AI stack">
-        <line x1={26} y1={384} x2={26} y2={16} stroke="#5EC4C8" strokeWidth={2} strokeDasharray="6 5" opacity={0.7} />
-        {layers.map((l, idx) => {
-          const w = 200 + idx * 68;
-          const x = (640 - w) / 2 + 14;
-          const y = topY + idx * (tierH + tierGap);
-          return (
-            <g key={l.n}>
-              <rect x={x} y={y} width={w} height={tierH} rx={9} fill={l.c} />
-              <circle cx={x + 26} cy={y + tierH / 2} r={14} fill="#0F1219" opacity={0.82} />
-              <text x={x + 26} y={y + tierH / 2 + 5.5} textAnchor="middle" fontSize={15} fontWeight={800} fill="#FFFFFF">{l.n}</text>
-              <text x={x + 50} y={w > 300 ? y + 20 : y + tierH / 2 + 5} fontSize={w > 300 ? 13.5 : w > 230 ? 12 : 11} fontWeight={800} fill="#101820">{l.t}</text>
-              {w > 300 ? (<text x={x + 50} y={y + 36} fontSize={10.5} fill="#101820" opacity={0.78}>{l.d}</text>) : null}
-              {l.flag ? (<g>
-                <circle cx={26} cy={y + tierH / 2} r={5} fill="#5EC4C8" stroke="#0F1219" strokeWidth={2} />
-                <text x={40} y={y + tierH / 2 - 10} fontSize={11} fontWeight={700} fill="#5EC4C8">{l.flag}</text>
-              </g>) : null}
-            </g>
-          );
-        })}
-      </svg>
-    </div>
+    <Panel
+      title="7 Layers of AI — From Classical Rules to General Intelligence"
+      sub="Each layer builds on the one below. We are currently at the generative frontier."
+    >
+      <div style={{ display: 'grid', gap: 12 }}>
+        {SEVEN_LAYERS.map((l) => (
+          <GlassBar key={l.n} color={l.c} icon={l.icon} index={`${l.n}.`} title={l.t} badge={l.flag} detail={l.d} />
+        ))}
+      </div>
+    </Panel>
   );
 }
 
 export function TokenOptimizationFlow() {
   return (
-    <div style={wrap}>
-      <div style={h3}>Token Optimization for Coding Agents</div>
-      <p style={sub}>Keep large files out of the expensive model’s context; delegate ruthlessly to cheaper models; enforce with pre-tool hooks.</p>
+    <Panel
+      title="Token Optimization for Coding Agents"
+      sub="Keep large files out of the expensive model’s context; delegate ruthlessly to cheaper models; enforce with pre-tool hooks."
+    >
       <svg viewBox="0 0 640 320" style={{ width: '100%', height: 'auto', display: 'block' }} role="img" aria-label="Token optimization flowchart">
         <defs>
           <marker id="tokA" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
             <path d="M0,0 L6,3 L0,6" fill="none" stroke="#5EC4C8" strokeWidth="1.6" />
           </marker>
         </defs>
-        <rect x={215} y={8} width={210} height={42} rx={9} fill="#161B26" stroke="#2A3548" />
+        <rect x={215} y={8} width={210} height={42} rx={9} fill="rgba(255,255,255,0.05)" stroke="#2A3548" />
         <rect x={215} y={8} width={4} height={42} rx={2} fill="#5EC4C8" />
         <text x={320} y={33} textAnchor="middle" fontSize={12.5} fontWeight={700} fill="#F1F5F9">Read / execute request</text>
         <line x1={320} y1={50} x2={320} y2={64} stroke="#5EC4C8" strokeWidth={1.8} markerEnd="url(#tokA)" />
-        <polygon points="320,66 410,116 320,166 230,116" fill="#161B26" stroke="#E8C558" strokeWidth={2} />
+        <polygon points="320,66 410,116 320,166 230,116" fill="rgba(255,255,255,0.05)" stroke="#E8C558" strokeWidth={2} />
         <text x={320} y={112} textAnchor="middle" fontSize={13} fontWeight={800} fill="#F1F5F9">over the line limit?</text>
         <text x={320} y={130} textAnchor="middle" fontSize={10} fill="#94A3B8">pre-tool hook gate</text>
         <text x={206} y={106} textAnchor="end" fontSize={11} fontWeight={700} fill="#7FB069">no</text>
         <text x={434} y={106} textAnchor="start" fontSize={11} fontWeight={700} fill="#E8C558">yes</text>
         <line x1={228} y1={116} x2={188} y2={116} stroke="#5EC4C8" strokeWidth={1.8} markerEnd="url(#tokA)" />
         <line x1={412} y1={116} x2={452} y2={116} stroke="#5EC4C8" strokeWidth={1.8} markerEnd="url(#tokA)" />
-        <rect x={22} y={88} width={160} height={56} rx={9} fill="#161B26" stroke="#2A3548" />
+        <rect x={22} y={88} width={160} height={56} rx={9} fill="rgba(255,255,255,0.05)" stroke="#2A3548" />
         <rect x={22} y={88} width={4} height={56} rx={2} fill="#7FB069" />
         <text x={102} y={111} textAnchor="middle" fontSize={12} fontWeight={700} fill="#F1F5F9">Small read</text>
         <text x={102} y={129} textAnchor="middle" fontSize={10} fill="#94A3B8">passes straight through</text>
-        <rect x={458} y={88} width={160} height={56} rx={9} fill="#161B26" stroke="#2A3548" />
+        <rect x={458} y={88} width={160} height={56} rx={9} fill="rgba(255,255,255,0.05)" stroke="#2A3548" />
         <rect x={458} y={88} width={4} height={56} rx={2} fill="#E8C558" />
         <text x={538} y={111} textAnchor="middle" fontSize={12} fontWeight={700} fill="#F1F5F9">Bulk-read script</text>
         <text x={538} y={129} textAnchor="middle" fontSize={10} fill="#94A3B8">file wrapped once</text>
         <line x1={538} y1={144} x2={538} y2={158} stroke="#5EC4C8" strokeWidth={1.8} markerEnd="url(#tokA)" />
-        <rect x={458} y={162} width={160} height={56} rx={9} fill="#161B26" stroke="#2A3548" />
+        <rect x={458} y={162} width={160} height={56} rx={9} fill="rgba(255,255,255,0.05)" stroke="#2A3548" />
         <rect x={458} y={162} width={4} height={56} rx={2} fill="#5EC4C8" />
         <text x={538} y={185} textAnchor="middle" fontSize={12} fontWeight={700} fill="#F1F5F9">Cheap model</text>
         <text x={538} y={203} textAnchor="middle" fontSize={10} fill="#94A3B8">bullets only, cited lines</text>
-        <rect x={60} y={252} width={520} height={52} rx={9} fill="#161B26" stroke="#2A3548" />
+        <rect x={60} y={252} width={520} height={52} rx={9} fill="rgba(255,255,255,0.05)" stroke="#2A3548" />
         <text x={320} y={273} textAnchor="middle" fontSize={11.5} fill="#CBD5E1">Files never enter the expensive context — follow-ups cost nothing extra</text>
         <text x={320} y={291} textAnchor="middle" fontSize={10.5} fill="#94A3B8">Three layers: advisory docs → token-reporting scripts → enforcing hooks</text>
       </svg>
       <div style={{ display: 'grid', gap: 12, marginTop: 12 }}>
-        <div style={step}><b style={{ color: '#F1F5F9' }}>Gate every read</b> — pre-tool hook checks file size / command before execution. Small reads pass; anything over the line threshold routes to bulk-read.</div>
-        <div style={step}><b style={{ color: '#F1F5F9' }}>Bulk-read path</b> — a script wraps files in tags and attaches the question; a cheap model returns bullets only (name/line-number led).</div>
-        <div style={step}><b style={{ color: '#F1F5F9' }}>Delegated writing</b> — code-write calls carry spec + reference file; a cheap writer matches reference patterns, code only. One shot, nothing kept between calls.</div>
+        <GlassBar color="#5EC4C8" icon="zap" title="Gate every read" detail="Pre-tool hook checks file size / command before execution. Small reads pass; anything over the line threshold routes to bulk-read." />
+        <GlassBar color="#E8C558" icon="file" title="Bulk-read path" detail="A script wraps files in tags and attaches the question; a cheap model returns bullets only (name/line-number led)." />
+        <GlassBar color="#6A9BD8" icon="send" title="Delegated writing" detail="Code-write calls carry spec + reference file; a cheap writer matches reference patterns, code only. One shot, nothing kept between calls." />
       </div>
-    </div>
+    </Panel>
   );
 }
 
 export function ToolSelectionFramework() {
   const cats = ['Image generation', 'Website building', 'Video creation', 'Coding assistance', 'Writing assistance', 'Conversational search', 'Presentation generation', 'Spreadsheet formulas', 'Voice generation', 'Design editing'];
+  const catLook = [
+    { c: '#5EC4C8', icon: 'eye' }, { c: '#6A9BD8', icon: 'globe' },
+    { c: '#A78BFA', icon: 'play' }, { c: '#7FB069', icon: 'code' },
+    { c: '#E8C558', icon: 'pen' }, { c: '#E08A4C', icon: 'search' },
+    { c: '#F0A89A', icon: 'slides' }, { c: '#9B89C4', icon: 'table' },
+    { c: '#34D399', icon: 'mic' }, { c: '#38BDF8', icon: 'layers' },
+  ];
   return (
-    <div style={wrap}>
-      <div style={h3}>Free-Tier AI Tool Selection Framework</div>
-      <p style={sub}>Ten capability areas across create, search, build, and communicate — plus a picker, a router, and a self-quiz.</p>
+    <Panel
+      title="Free-Tier AI Tool Selection Framework"
+      sub="Ten capability areas across create, search, build, and communicate — plus a picker, a router, and a self-quiz."
+    >
       <div style={grid(180)}>{cats.map((c, i) => (
-        <div key={i} style={card}><div style={cardTitle}>{i + 1}. {c}</div><div style={cardBody}>Free tier available with limits — check credits, export caps, and output restrictions.</div></div>
+        <GlassCard key={i} color={catLook[i].c} icon={catLook[i].icon} title={`${i + 1}. ${c}`}>
+          <div style={glassBody}>Free tier available with limits — check credits, export caps, and output restrictions.</div>
+        </GlassCard>
       ))}</div>
-      <div style={{ display: 'grid', gap: 12, marginTop: 12 }}>
-        <div style={step}><b style={{ color: '#F1F5F9' }}>A) Pick fast (3 questions)</b> — 1) What are you making? 2) Do you need watermark-free exports? 3) How many free credits per month?</div>
-        <div>
-          <div style={{ ...cardTitle, marginBottom: 6 }}>B) Task → tool router</div>
+      <div style={{ display: 'grid', gap: 12, marginTop: 14 }}>
+        <GlassBar color="#5EC4C8" icon="check" title="A) Pick fast (3 questions)" detail="1) What are you making? 2) Do you need watermark-free exports? 3) How many free credits per month?" />
+        <div style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(94,196,200,0.2)', borderRadius: 14, padding: '14px 14px 6px' }}>
+          <div style={{ color: '#F1F5F9', fontSize: 13, fontWeight: 800, marginBottom: 6 }}>B) Task → tool router</div>
           <svg viewBox="0 0 640 330" style={{ width: '100%', height: 'auto', display: 'block' }} role="img" aria-label="Task to tool router">
             <defs>
               <marker id="rtlA" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
@@ -414,7 +502,7 @@ export function ToolSelectionFramework() {
               return (
                 <g key={m}>
                   <line x1={146} y1={165} x2={226} y2={y + 22} stroke="#5EC4C8" strokeWidth={1.4} opacity={0.65} markerEnd="url(#rtlA)" />
-                  <rect x={232} y={y} width={150} height={44} rx={9} fill="#161B26" stroke="#2A3548" />
+                  <rect x={232} y={y} width={150} height={44} rx={9} fill="rgba(255,255,255,0.05)" stroke="#2A3548" />
                   <text x={307} y={y + 27} textAnchor="middle" fontSize={11.5} fontWeight={700} fill="#F1F5F9">{m}</text>
                 </g>
               );
@@ -424,15 +512,173 @@ export function ToolSelectionFramework() {
               return (
                 <g key={r}>
                   <line x1={382} y1={y + 22} x2={462} y2={y + 22} stroke="#5EC4C8" strokeWidth={1.4} opacity={0.65} markerEnd="url(#rtlA)" />
-                  <rect x={468} y={y} width={158} height={44} rx={9} fill="#161B26" stroke="#34D399" />
+                  <rect x={468} y={y} width={158} height={44} rx={9} fill="rgba(255,255,255,0.05)" stroke="#34D399" />
                   <text x={547} y={y + 27} textAnchor="middle" fontSize={11.5} fontWeight={700} fill="#F1F5F9">{r}</text>
                 </g>
               );
             })}
           </svg>
         </div>
-        <div style={step}><b style={{ color: '#F1F5F9' }}>C) Reality check + quiz</b> — many free tools have credit, watermark, export, or trial limits. Self-test: cover the answers and name the right lane for spreadsheets, slides, code completion, conversational search, and credit-limited video.</div>
+        <GlassBar color="#E8C558" icon="shield" title="C) Reality check + quiz" detail="Many free tools have credit, watermark, export, or trial limits. Self-test: cover the answers and name the right lane for spreadsheets, slides, code completion, conversational search, and credit-limited video." />
       </div>
-    </div>
+    </Panel>
+  );
+}
+
+/* Shared cross-tab panels (imported by eval + reasoning tabs). */
+
+const panelBody = { fontSize: 12.5, color: '#CBD5E1', lineHeight: 1.65 };
+const panelList = { ...panelBody, margin: '6px 0 0', paddingLeft: 16 };
+
+/** Evaluation-framework poster recreation (goal → archetypes → launch gate). */
+export function PmEvalFrameworkPanel() {
+  return (
+    <Panel
+      title="Evaluation Framework — From Model Goal to Launch Gate"
+      sub="Translate product goals into evals, grow past headline-accuracy thinking, and gate launch on measured tradeoffs with post-launch monitoring."
+    >
+      <div style={grid(240)}>
+        <GlassCard color="#34D399" icon="check" title="1. Goal → Eval Translation">
+          <div style={panelBody}>Each model paradigm gets its own metrics:</div>
+          <ul style={panelList}>
+            <li><b>Classification</b> — precision, recall, false positives</li>
+            <li><b>Text generation</b> — accuracy, fluency, hallucination detection, relevance</li>
+            <li><b>Recommender</b> — click-through rate, CTR, novelty</li>
+          </ul>
+        </GlassCard>
+        <GlassCard color="#5EC4C8" icon="users" title="2. Three PM Archetypes">
+          <ul style={panelList}>
+            <li><b>Ships blind</b> — launches on headline accuracy, ignores failure slices</li>
+            <li><b>Inspects</b> — slices datasets, hunts false positives</li>
+            <li><b>Co-designs</b> — diverse training data, domain experts, UI safety nets</li>
+          </ul>
+        </GlassCard>
+        <GlassCard color="#E8C558" icon="flag" title="3. Eval → Launch Gate">
+          <ul style={panelList}>
+            <li><b>Tradeoffs</b> — speed vs accuracy assessed explicitly</li>
+            <li><b>Thresholds</b> — acceptable cutoff bounds before ship</li>
+            <li><b>Flywheel</b> — production data → eval &amp; monitoring → retraining data</li>
+          </ul>
+        </GlassCard>
+      </div>
+    </Panel>
+  );
+}
+
+/** Reasoning-benchmark poster recreation (mutation → noise → robust reasoning). */
+export function GsmSymbolicPanel() {
+  return (
+    <Panel
+      title="Rethinking Benchmarks: Reasoning Beyond Training Data"
+      sub="Static benchmarks leak into training data. Symbolic mutation and noise injection test whether models reason — or match patterns."
+    >
+      <div style={{ display: 'grid', gap: 12 }}>
+        <GlassBar
+          color="#6A9BD8" icon="refresh" index="1." title="Symbolic Template Generator"
+          detail="Static benchmark problems are mutated into dynamic symbolic variables — new numbers, names, and conditions over identical reasoning. Memorized answers stop working; only real reasoning transfers."
+        />
+        <GlassBar
+          color="#E8836A" icon="zap" index="2." title="Noise Injection" badge="≈65% drop reported"
+          detail="Irrelevant distractor clauses are injected into prompts. Accuracy falls steeply as noise rises — up to ~65% reported drop in autoregressive models, exposing pattern matching."
+        />
+        <GlassBar
+          color="#A78BFA" icon="cpu" index="3." title="Pattern Matching vs Robust Reasoning"
+          detail="Fragile path: test-time pattern matching. Robust path: test-time compute search plus code-interpreter verification and symbolic execution engines."
+        />
+      </div>
+    </Panel>
+  );
+}
+
+/* Shared framework panels (also used by the App.jsx component library). */
+
+const fwPts = { fontSize: 12.5, color: '#CBD5E1', lineHeight: 1.65, margin: '6px 0 0', paddingLeft: 16 };
+const fwFlow = { fontSize: 12, color: '#7FE3DC', marginTop: 8, lineHeight: 1.6 };
+
+/** Composable chain: prompt | model | parser, plus tools and memory. */
+export function LcelPipelinePanel() {
+  return (
+    <Panel
+      title="Composable Pipeline — Prompt | Model | Parser"
+      sub="Modular, declarative workflows: chain = prompt | model | output_parser, with tools and memory attached."
+    >
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(230px, 1fr))', gap: 12 }}>
+        <GlassCard color="#5EC4C8" icon="file" title="1. Prompts">
+          <div style={fwFlow}>Topic + style → templates → formatted prompt.</div>
+          <ul style={fwPts}>
+            <li>System message templates</li>
+            <li>User message templates</li>
+          </ul>
+        </GlassCard>
+        <GlassCard color="#6A9BD8" icon="cpu" title="2. Chat Models">
+          <div style={fwFlow}>Any chat model behind one interface.</div>
+          <ul style={fwPts}>
+            <li>Model choice + parameters</li>
+            <li>Model response out</li>
+          </ul>
+        </GlassCard>
+        <GlassCard color="#34D399" icon="check" title="3. Output Parsers">
+          <div style={fwFlow}>Raw text → typed structure.</div>
+          <ul style={fwPts}>
+            <li>Plain-text extraction</li>
+            <li>JSON-to-dict parsing</li>
+            <li>Schema-validated objects</li>
+          </ul>
+        </GlassCard>
+        <GlassCard color="#E8C558" icon="wrench" title="+ Tools & Memory">
+          <ul style={fwPts}>
+            <li>Agent executor: retriever, search, calculators</li>
+            <li>Conversation buffer + history</li>
+          </ul>
+        </GlassCard>
+      </div>
+    </Panel>
+  );
+}
+
+/** Stateful agent graph: nodes, edges, checkpoints, cyclic loop. */
+export function StateGraphPanel() {
+  return (
+    <Panel
+      title="Stateful Agent Graph — Nodes, Edges, Checkpoints"
+      sub="Start → agent ⇄ tools in a cyclic feedback loop; every state transition checkpointed, interruptible for approval."
+    >
+      <div style={{ display: 'grid', gap: 12 }}>
+        <GlassBar color="#A78BFA" icon="cpu" index="1." title="Agent Node" detail="Brain, plan, choose tool. Emits state updates and next-step decisions into the shared state graph." />
+        <GlassBar color="#5EC4C8" icon="zap" index="2." title="Tools Node + Cyclic Loop" detail="Executes chosen tools and API calls, then routes back — rejection and correction edges included — until the answer is final." />
+        <GlassBar color="#E8C558" icon="file" index="3." title="Checkpoint Storage" detail="Durable checkpointer for long-term state plus volatile in-memory saver; interrupts pause for human approval; compiled graph ends with the final answer." />
+      </div>
+    </Panel>
+  );
+}
+
+/** Classic RAG: index lane plus retrieve lane. */
+export function RagIndexRetrievePanel() {
+  return (
+    <Panel
+      title="RAG Indexing & Retrieval Architecture"
+      sub="Index once up front; retrieve at runtime. Documents → chunks → embeddings → vector store; query → vector → search → augment → generate."
+    >
+      <div style={{ display: 'grid', gap: 12 }}>
+        <GlassBar color="#5EC4C8" icon="file" index="1." title="Indexing Lane" detail="Documents → chunking → embedding model → vectorized vectors → vector store nodes, indexed and ready." />
+        <GlassBar color="#6A9BD8" icon="search" index="2." title="Retrieval Lane" detail="User → query → vectorize → search the store → retrieve nodes → augment the prompt with relevant contexts → model generates → response." />
+      </div>
+    </Panel>
+  );
+}
+
+/** Hybrid retrieval: dense + keyword fusion, filters, rerank, top-10. */
+export function HybridRetrievalPanel() {
+  return (
+    <Panel
+      title="Hybrid Retrieval Pipeline — Dense + Keyword Fusion"
+      sub="Semantic recall plus exact match, fused and filtered down to the ten best contexts."
+    >
+      <div style={{ display: 'grid', gap: 12 }}>
+        <GlassBar color="#5EC4C8" icon="search" index="1." title="Parallel Retrieval" detail="Dense vector search for semantic matching runs beside BM25 keyword search for exact matches such as identifiers and clause IDs." />
+        <GlassBar color="#E8C558" icon="nodes" index="2." title="Fusion + Metadata Filters" detail="Reciprocal rank fusion merges both rankings; jurisdiction, effective-date, and access-control filters prune." />
+        <GlassBar color="#34D399" icon="check" index="3." title="Rerank → Top 10" detail="Cross-encoder reranking scores the survivors; the top-10 contexts go to the model." badge="top-10" />
+      </div>
+    </Panel>
   );
 }

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import * as Primitives from '../components/layout/Primitives.jsx';
 import { Hero, CodeBlock } from '../components/ui/Content.jsx';
 import { Card, Badge, Button, Callout } from '../components/ui/Core.jsx';
-import DiagramImage from '../components/ui/DiagramImage.jsx';
+import { Panel, GlassBar } from '../components/ui/CleanInfographics.jsx';
 import {
   FINE_TUNE_VS_RAG_MATRIX,
   FINE_TUNING_PARADIGMS,
@@ -23,6 +23,31 @@ import {
 } from './finetuningEngine.js';
 
 const { Container, Grid, Flex, Stack } = Primitives;
+
+/** Native recreation: decide → quantize → train → merge. */
+function FinetuneQloraPanel() {
+  return (
+    <Panel
+      title="Fine-Tuning & QLoRA End-to-End Pipeline"
+      sub="Decide between encoding and retrieving, freeze the base in 4-bit, train small adapters, merge for inference."
+    >
+      <div style={{ display: 'grid', gap: 12 }}>
+        <GlassBar
+          color="#5EC4C8" icon="help" index="1." title="Fine-Tune vs RAG Decision"
+          detail="Fine-tuning wins static domain knowledge and task-specific accuracy (high domain accuracy, low hallucination); retrieval wins dynamic real-time data at lower resource cost."
+        />
+        <GlassBar
+          color="#A78BFA" icon="cpu" index="2." title="QLoRA Intuition"
+          detail="Frozen 4-bit base weights plus double quantization; trainable low-rank adapters — W = W0 + B×A — updated through paged optimizers with unified GPU/CPU memory."
+        />
+        <GlassBar
+          color="#6A9BD8" icon="refresh" index="3." title="Training Loop & Merge"
+          detail="Tokenize → batch → forward through quantized base + adapters → loss → backward into adapters only → update. Then merge adapters into one final finetuned model for inference."
+        />
+      </div>
+    </Panel>
+  );
+}
 
 export default function LLMFinetuningTab() {
   const [activeSubTab, setActiveSubTab] = useState('decision'); 
@@ -79,14 +104,7 @@ export default function LLMFinetuningTab() {
       <Container size="wide">
         {/* ARCHITECTURAL INFOGRAPHIC DIAGRAM */}
         <div style={{ marginBottom: 'var(--ds-space-6)' }}>
-          <DiagramImage
-            src="/assets/llm_finetuning_qlora_arch.png"
-            alt="LLM Fine-Tuning & QLoRA End-to-End Pipeline Architecture Diagram"
-            title="LLM Fine-Tuning & QLoRA End-to-End Pipeline Architecture"
-            caption="Overview: Left: Fine-Tune vs RAG Decision Matrix. Middle: LoRA & QLoRA Mathematical Decomposition (Frozen 4-bit Base, Trainable Low-Rank Adapters B & A, Paged Optimizers). Right: PyTorch Training, Adapter Merging & vLLM Serving."
-            background="#090d16"
-            maxWidth={1050}
-          />
+          <FinetuneQloraPanel />
         </div>
 
         {/* SUBTAB NAVIGATION */}

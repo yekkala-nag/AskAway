@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import * as Primitives from '../components/layout/Primitives.jsx';
 import { Hero, CodeBlock } from '../components/ui/Content.jsx';
 import { Card, Badge, Button, Callout } from '../components/ui/Core.jsx';
+import { GlassBar } from '../components/ui/CleanInfographics.jsx';
 import {
   MLOPS_BROKEN_ASSUMPTIONS,
   CALCULATE_COMPOUNDING_RELIABILITY,
@@ -130,14 +131,10 @@ export default function ProductionRAGOpsTab() {
                 <span style={{ fontSize: '11px', color: '#3A9B9F', fontWeight: 'bold' }}>AI ARCHITECTURAL INFOGRAPHIC</span>
                 <h3 style={{ margin: '4px 0 0 0', color: '#f8fafc' }}>Traditional MLOps Monitoring vs. Modern AgentOps Trajectories</h3>
               </div>
-              <div style={{ width: '100%', aspectRatio: '16/9', maxHeight: '520px', overflow: 'hidden', borderRadius: '8px', border: '1px solid rgba(56, 189, 248, 0.3)', background: '#05070e', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <img
-                  src="/assets/agentops_vs_mlops_monitoring_1788446473776.jpg"
-                  alt="Traditional MLOps Monitoring vs. Modern AgentOps Trajectories"
-                  loading="lazy"
-                  decoding="async"
-                  style={{ width: '100%', height: '100%', objectFit: 'contain', objectPosition: 'center', display: 'block' }}
-                />
+              <div style={{ display: 'grid', gap: 10 }}>
+                <GlassBar color="#5EC4C8" icon="chart" title="Stateless 85% ≠ system success" detail="Single-threshold MLOps watches one accuracy number; a 10-step agent loop at 85% per step lands at 0.85^10 ≈ 19.6% true success." />
+                <GlassBar color="#E8C558" icon="search" title="Waterfall traces + side-effect gates" detail="Tool execution spans show what ran; pre-action gates approve environment interaction before it happens." />
+                <GlassBar color="#E8836A" icon="shield" title="Hard cap on retries" detail="An uncapped loop retries forever — the infinite-retry box gets a hard iteration cap." />
               </div>
             </Card>
 
@@ -379,14 +376,12 @@ export default function ProductionRAGOpsTab() {
                 <span style={{ fontSize: '11px', color: '#3A9B9F', fontWeight: 'bold' }}>AI ARCHITECTURAL INFOGRAPHIC</span>
                 <h3 style={{ margin: '4px 0 0 0', color: '#f8fafc' }}>Earned RAG Complexity Escalation Ladder (Levels 0 to 8)</h3>
               </div>
-              <div style={{ width: '100%', aspectRatio: '16/9', maxHeight: '520px', overflow: 'hidden', borderRadius: '8px', border: '1px solid rgba(16, 185, 129, 0.3)', background: '#05070e', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <img
-                  src="/assets/earned_rag_complexity_ladder_1788446534429.jpg"
-                  alt="Earned RAG Complexity Ladder"
-                  loading="lazy"
-                  decoding="async"
-                  style={{ width: '100%', height: '100%', objectFit: 'contain', objectPosition: 'center', display: 'block' }}
-                />
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
+                {['L0 Direct Context', 'L1 Corpus Structure', 'L2 Lexical BM25', 'L3 Dense Embeddings', 'L4 Hybrid Fusion', 'L5 Neural Reranking', 'L6 Contextual Chunks', 'L7 Query Transformation', 'L8 Agentic Multi-Hop'].map((rung, i) => (
+                  <span key={rung} style={{ fontSize: 12, fontWeight: 700, color: '#F1F5F9', background: 'rgba(52,211,153,0.08)', border: '1px solid rgba(52,211,153,0.35)', borderRadius: 20, padding: '5px 12px' }}>
+                    {rung}{i < 8 ? ' →' : ''}
+                  </span>
+                ))}
               </div>
             </Card>
 
@@ -538,14 +533,10 @@ export default function ProductionRAGOpsTab() {
                 <span style={{ fontSize: '11px', color: '#3A9B9F', fontWeight: 'bold' }}>AI ARCHITECTURAL INFOGRAPHIC</span>
                 <h3 style={{ margin: '4px 0 0 0', color: '#f8fafc' }}>FAQ as RAG: Inverted Architecture & Semantic Cache Router</h3>
               </div>
-              <div style={{ width: '100%', aspectRatio: '16/9', maxHeight: '520px', overflow: 'hidden', borderRadius: '8px', border: '1px solid rgba(56, 189, 248, 0.3)', background: '#05070e', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <img
-                  src="/assets/faq_as_rag_architecture_1788446566695.jpg"
-                  alt="FAQ as RAG Architecture"
-                  loading="lazy"
-                  decoding="async"
-                  style={{ width: '100%', height: '100%', objectFit: 'contain', objectPosition: 'center', display: 'block' }}
-                />
+              <div style={{ display: 'grid', gap: 10 }}>
+                <GlassBar color="#34D399" icon="check" title="Direct match · sim ≥ 0.92" badge="0 tokens" detail="Canonical answer returns instantly — no model call at all." />
+                <GlassBar color="#5EC4C8" icon="refresh" title="Adjacent match · sim 0.78–0.92" detail="Retrieve top-k Q-A pairs → dynamic few-shot builder → model rewriting engine → rewritten answer." />
+                <GlassBar color="#A78BFA" icon="users" title="Miss · sim < 0.78" detail="Route to the expert escalation queue. Flywheel: unanswered queries get embedded, clustered, and promoted into canonical FAQs." />
               </div>
             </Card>
 
@@ -703,14 +694,10 @@ export default function ProductionRAGOpsTab() {
                 <span style={{ fontSize: '11px', color: '#f59e0b', fontWeight: 'bold' }}>AI ARCHITECTURAL INFOGRAPHIC</span>
                 <h3 style={{ margin: '4px 0 0 0', color: '#f8fafc' }}>Noisy Text in RAG: Typos, OCR Visual Glitches & Solution Architectures</h3>
               </div>
-              <div style={{ width: '100%', aspectRatio: '16/9', maxHeight: '520px', overflow: 'hidden', borderRadius: '8px', border: '1px solid rgba(245, 158, 11, 0.3)', background: '#05070e', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <img
-                  src="/assets/noisy_text_rag_pipeline_1788446676392.jpg"
-                  alt="Noisy Text in RAG Pipeline"
-                  loading="lazy"
-                  decoding="async"
-                  style={{ width: '100%', height: '100%', objectFit: 'contain', objectPosition: 'center', display: 'block' }}
-                />
+              <div style={{ display: 'grid', gap: 10 }}>
+                <GlassBar color="#E8836A" icon="zap" title="Noise sources" detail="User typos, transcription errors, and OCR visual glitches enter before any retrieval happens." />
+                <GlassBar color="#E8C558" icon="help" title="Classical gaps" detail="Edit distance and phonetic matching stumble on real-word typos (from/form), domain acronyms — and keyword recall crashes toward ~0% on noisy text." />
+                <GlassBar color="#34D399" icon="check" title="Deep-learning fixes" detail="Subword tokenization splits unknown words, character 3-grams add typo tolerance, dense embeddings match meaning past surface noise." />
               </div>
             </Card>
 
@@ -818,14 +805,11 @@ export default function ProductionRAGOpsTab() {
                 <span style={{ fontSize: '11px', color: '#3A9B9F', fontWeight: 'bold' }}>AI ARCHITECTURAL INFOGRAPHIC</span>
                 <h3 style={{ margin: '4px 0 0 0', color: '#f8fafc' }}>Defensible "Not in This Document" RAG: The 4-Brick Evidence Chain</h3>
               </div>
-              <div style={{ width: '100%', aspectRatio: '16/9', maxHeight: '520px', overflow: 'hidden', borderRadius: '8px', border: '1px solid rgba(56, 189, 248, 0.3)', background: '#05070e', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <img
-                  src="/assets/rag_absence_four_evidences_1788447761773.jpg"
-                  alt="Defensible Absence RAG 4 Bricks"
-                  loading="lazy"
-                  decoding="async"
-                  style={{ width: '100%', height: '100%', objectFit: 'contain', objectPosition: 'center', display: 'block' }}
-                />
+              <div style={{ display: 'grid', gap: 10 }}>
+                <GlassBar color="#5EC4C8" icon="file" index="1." title="Relational Parse Coverage" detail="63 of 63 pages parsed, zero OCR dropouts, zero blank pages — absence claims start from complete coverage." />
+                <GlassBar color="#6A9BD8" icon="search" index="2." title="Validated Concept Vocabulary" detail="Query concepts expanded to synonyms and related terms, so a miss means truly absent — not merely reworded." />
+                <GlassBar color="#E8C558" icon="check" index="3." title="Exhaustive Sweep" detail="Zero full-text hits across the entire document, plus the nearest-distractor snippet as proof of diligence." />
+                <GlassBar color="#34D399" icon="shield" index="4." title="Structured Justification" detail="Machine-readable verdict with citation logs — the absence claim ships with its evidence attached." />
               </div>
             </Card>
 
@@ -970,14 +954,16 @@ export default function ProductionRAGOpsTab() {
                 <span style={{ fontSize: '11px', color: '#ef4444', fontWeight: 'bold' }}>AI ARCHITECTURAL INFOGRAPHIC</span>
                 <h3 style={{ margin: '4px 0 0 0', color: '#f8fafc' }}>Valid JSON, Wrong Data: Five Failure Modes LLM Structured Outputs Won't Catch</h3>
               </div>
-              <div style={{ width: '100%', aspectRatio: '16/9', maxHeight: '520px', overflow: 'hidden', borderRadius: '8px', border: '1px solid rgba(239, 68, 68, 0.3)', background: '#05070e', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <img
-                  src="/assets/structured_outputs_five_failures_1788447786725.jpg"
-                  alt="Valid JSON Wrong Data 5 Failure Modes"
-                  loading="lazy"
-                  decoding="async"
-                  style={{ width: '100%', height: '100%', objectFit: 'contain', objectPosition: 'center', display: 'block' }}
-                />
+              <div style={{ display: 'grid', gap: 10 }}>
+                <GlassBar color="#E8836A" icon="zap" title="The validation trap" detail="100% valid JSON schema compliance can still carry wrong data — syntax checks never see semantic lies." />
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
+                  {['Enum hallucination', 'Confident fabrication', 'Cross-field contradiction', 'Distributional collapse', 'Phantom extraction'].map((m, i) => (
+                    <span key={m} style={{ fontSize: 12, fontWeight: 700, color: '#F1F5F9', background: 'rgba(232,131,106,0.1)', border: '1px solid rgba(232,131,106,0.4)', borderRadius: 20, padding: '5px 12px' }}>
+                      {i + 1}. {m}
+                    </span>
+                  ))}
+                </div>
+                <GlassBar color="#34D399" icon="shield" title="3-layer defense" detail="Schema syntax checks → semantic validators (logic, ranges, cross-field) → uncertainty surfacing with entropy and confidence monitoring." />
               </div>
             </Card>
 

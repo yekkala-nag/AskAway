@@ -7,6 +7,7 @@ import ZoomableImage from '../components/ui/ZoomableImage.jsx';
 import DataTable from '../components/ui/DataTable.jsx';
 import Workflow from '../components/ui/Workflow.jsx';
 import { Reveal, AnimatedNumber } from '../components/ui/AnimatedReveal.jsx';
+import { Panel, GlassBar } from '../components/ui/CleanInfographics.jsx';
 
 const { Container, Section, Grid, Flex, Stack } = Primitives;
 
@@ -295,7 +296,6 @@ const SDLC_DIAGRAMS = [
     id: "ast_chunking",
     title: "S1: Tree-Sitter AST Code-Chunking Architecture",
     description: "Language-aware AST parsing extracts function and class chunks while preserving scope breadcrumbs and signature metadata.",
-    image: "/assets/sdlc_ast_code_chunking_flow.png",
     nodes: [
       { step: "Source File", detail: "RefundService.java (Raw Source Code)" },
       { step: "Tree-Sitter AST", detail: "Parses file into Class, Method, & Import AST nodes" },
@@ -307,21 +307,19 @@ const SDLC_DIAGRAMS = [
   {
     id: "incident_pack",
     title: "S2: Real-Time Incident Context-Pack Generator Flow",
-    description: "Event-driven pipeline automatically assembles runbooks, postmortems, recent deploys, and APM metrics when PagerDuty fires.",
-    image: "/assets/sdlc_incident_context_pack_flow.png",
+    description: "Event-driven pipeline automatically assembles runbooks, postmortems, recent deploys, and APM metrics when the alert fires.",
     nodes: [
-      { step: "PagerDuty Trigger", detail: "Alert: payment-gateway p99 latency > 2s" },
-      { step: "Kafka / Flink Stream", detail: "Processes alert, resolves service entity & severity score" },
+      { step: "Alert Trigger", detail: "Alert: payment-gateway p99 latency > 2s" },
+      { step: "Alert Stream", detail: "Processes alert, resolves service entity & severity score" },
       { step: "Parallel Retrieval", detail: "Fetches: Runbooks + Past Postmortems + Recent Commits + APM Health" },
       { step: "Context Pack Assembly", detail: "Compresses retrieved evidence & formats cited mitigation draft" },
-      { step: "ChatOps Delivery", detail: "Automated bot posts cited incident pack to Slack channel in < 5 seconds" }
+      { step: "ChatOps Delivery", detail: "Automated bot posts cited incident pack to the team channel in < 5 seconds" }
     ]
   },
   {
     id: "staleness",
     title: "S3: Commit-SHA Staleness Control Webhook Flow",
     description: "Webhook-driven incremental re-indexing combined with query-time commit_sha HEAD validation.",
-    image: "/assets/sdlc_staleness_control_flow.png",
     nodes: [
       { step: "Git Push Webhook", detail: "Developer pushes commit '9f2c1ab' to main branch" },
       { step: "Incremental Re-Index", detail: "Triggers micro-job: re-indexes only touched files; flags old chunks as superseded" },
@@ -333,7 +331,6 @@ const SDLC_DIAGRAMS = [
     id: "eval_suite",
     title: "S4: Multi-Metric Code RAG Evaluation Suite",
     description: "Continuous CI/CD regression suite evaluating retrieval, sandbox code compilation, and zero secret leakage.",
-    image: "/assets/sdlc_eval_dashboard_mock.png",
     nodes: [
       { step: "Recall@10 (0.92)", detail: "Target > 90% on 800+ golden query-symbol ground truth pairs" },
       { step: "pass@1 Compile (0.78)", detail: "78% pass rate for generated unit tests in isolated Docker sandbox" },
@@ -345,7 +342,6 @@ const SDLC_DIAGRAMS = [
     id: "tenant_isolation",
     title: "S5: Multi-Tenant Confidentiality Isolation Topology",
     description: "Gateway tenant tokens enforce physical/logical index & model sharding with cross-tenant blocking.",
-    image: "/assets/sdlc_tenant_isolation_flow.png",
     nodes: [
       { step: "Auth Gateway", detail: "Validates request token & extracts tenant_id (Tenant A / B / C)" },
       { step: "Pre-Retrieval Filter", detail: "Applies strict WHERE tenant_id = user.tenant_id filter at Vector DB" },
@@ -722,6 +718,149 @@ def evaluate_rag_pipeline(golden_dataset):
         
     return aggregate_eval_metrics(results)`
 };
+
+// ============================================
+// NATIVE GLASS RECREATION — 9-step enterprise RAG blueprint
+// (normalizes the source's duplicated step numbers into a clean 1–9 run)
+// ============================================
+function NineStepBlueprintPanel() {
+  const steps = [
+    { t: 'Requirements & Latency Budget', d: 'Define goals, target latency, and user needs. Sets the SLA everything else is measured against.', c: '#5EC4C8', icon: 'flag' },
+    { t: 'Use Case Classification', d: 'Document Q&A, chatbot, extraction, agentic tasks — the pattern dictates the pipeline shape.', c: '#6A9BD8', icon: 'clip' },
+    { t: 'NFR & Compliance', d: 'Security, privacy, compliance, scalability, governance — non-negotiables before any build.', c: '#A78BFA', icon: 'shield' },
+    { t: 'Data Sources', d: 'Structured and unstructured data with access control; databases, files, and APIs as one corpus.', c: '#7FB069', icon: 'file' },
+    { t: 'Ingestion & Chunking Pipeline', d: 'Text extraction, chunking strategy, embedding generation, vector DB loading.', c: '#E8C558', icon: 'refresh' },
+    { t: 'Query & Tool Orchestration', d: 'Intent detection, routing, tool access, and context assembly per request.', c: '#E08A4C', icon: 'search' },
+    { t: 'Continuous Evaluation Suite', d: 'Retrieval relevance, generation quality, user feedback, and A/B testing on a loop.', c: '#F0A89A', icon: 'chart' },
+    { t: 'Production Safeguards', d: 'Guardrails, prompt engineering, caching strategies, and rate limiting at serve time.', c: '#9B89C4', icon: 'eye' },
+    { t: 'Architecture Trade-offs Matrix', d: 'Performance vs cost, latency vs accuracy, maintainability vs complexity — decided explicitly.', c: '#34D399', icon: 'nodes' },
+  ];
+  return (
+    <Panel
+      title="9-Step Enterprise RAG System Design Blueprint"
+      sub="From SLA and requirements to ingestion, orchestration, evals, safeguards, and explicit trade-offs."
+    >
+      <div style={{ display: 'grid', gap: 12 }}>
+        {steps.map((s, i) => (
+          <GlassBar key={s.t} color={s.c} icon={s.icon} index={`${i + 1}.`} title={s.t} detail={s.d} />
+        ))}
+      </div>
+    </Panel>
+  );
+}
+
+// ============================================
+// NATIVE GLASS RECREATION — SDLC diagram entries (S1–S5)
+// One compact visual per entry; the Stepper below keeps narrating the steps.
+// ============================================
+const sChip = (accent = '#5EC4C8') => ({
+  background: 'rgba(255,255,255,0.05)', border: `1px solid ${accent}66`,
+  borderRadius: 10, padding: '9px 13px', fontSize: 12, fontWeight: 700,
+  color: '#F1F5F9', textAlign: 'center', minWidth: 96,
+});
+const sNote = { fontSize: 10.5, color: '#94A3B8', fontWeight: 400, marginTop: 2 };
+const sArrow = { color: '#5EC4C8', fontWeight: 800, fontSize: 15, alignSelf: 'center', flexShrink: 0 };
+const sFlow = { display: 'flex', alignItems: 'stretch', gap: 8, flexWrap: 'wrap' };
+
+function SdlcEntryVisual({ entryId }) {
+  if (entryId === 'ast_chunking') {
+    const stages = [
+      { t: 'Source file', n: 'raw code in', c: '#5EC4C8' },
+      { t: 'AST parse', n: 'class · method · variable nodes', c: '#6A9BD8' },
+      { t: 'Chunks + enrichment', n: 'breadcrumbs · signatures · SHA tags', c: '#A78BFA' },
+      { t: 'Dual index', n: 'dense vectors + symbol graph', c: '#34D399' },
+    ];
+    return (
+      <Panel title="S1 · AST Code-Chunking" sub="Language-aware parsing into function and class chunks with scope breadcrumbs and signature metadata — indexed twice, for semantic search and precise lookups.">
+        <div style={sFlow}>
+          {stages.map((s, i) => (
+            <div key={s.t} style={{ display: 'flex', alignItems: 'center', gap: 8, flex: '1 1 0' }}>
+              <div style={{ ...sChip(s.c), flex: 1 }}>{s.t}<div style={sNote}>{s.n}</div></div>
+              {i < stages.length - 1 ? (<span style={sArrow}>→</span>) : null}
+            </div>
+          ))}
+        </div>
+      </Panel>
+    );
+  }
+  if (entryId === 'incident_pack') {
+    const stages = [
+      { t: 'Alert trigger', n: 'p99 latency breach', c: '#E8836A' },
+      { t: 'Message queue', n: 'event ingestion', c: '#E8C558' },
+      { t: 'Stream processor', n: 'entity + severity', c: '#E8C558' },
+      { t: 'Orchestrator + LLM', n: 'runbooks · postmortems · commits · telemetry', c: '#5EC4C8' },
+      { t: 'Cited draft → review', n: 'under 5 seconds', c: '#34D399' },
+    ];
+    return (
+      <Panel title="S2 · Real-Time Incident Context Pack" sub="Event-driven pipeline assembling runbooks, postmortems, recent deploys, and telemetry into a cited mitigation draft.">
+        <div style={sFlow}>
+          {stages.map((s, i) => (
+            <div key={s.t} style={{ display: 'flex', alignItems: 'center', gap: 8, flex: '1 1 0' }}>
+              <div style={{ ...sChip(s.c), flex: 1 }}>{s.t}<div style={sNote}>{s.n}</div></div>
+              {i < stages.length - 1 ? (<span style={sArrow}>→</span>) : null}
+            </div>
+          ))}
+        </div>
+      </Panel>
+    );
+  }
+  if (entryId === 'staleness') {
+    return (
+      <Panel title="S3 · Commit-SHA Staleness Control" sub="Webhook-driven incremental re-indexing plus query-time HEAD validation — stale chunks refreshed or down-ranked.">
+        <div style={sFlow}>
+          <div style={{ ...sChip('#A78BFA'), flex: '1 1 0' }}>Push webhook<div style={sNote}>commit SHA payload</div></div>
+          <span style={sArrow}>→</span>
+          <div style={{ ...sChip('#A78BFA'), flex: '1 1 0' }}>Re-index micro-job<div style={sNote}>touched files only · flag outdated</div></div>
+          <span style={sArrow}>→</span>
+          <div style={{ ...sChip('#5EC4C8'), flex: '1 1 0' }}>Query-time check<div style={sNote}>chunk SHA vs branch HEAD</div></div>
+          <span style={sArrow}>→</span>
+          <div style={{ ...sChip('#34D399'), flex: '1 1 0' }}>Valid → generate<div style={sNote}>stale → down-rank + refresh</div></div>
+        </div>
+      </Panel>
+    );
+  }
+  if (entryId === 'eval_suite') {
+    const stats = [
+      { t: 'Recall@10', v: '94.2%', d: '+1.8% · 800+ golden pairs', c: '#5EC4C8' },
+      { t: 'Sandbox compile', v: '78%', d: '+4.2% pass@1, isolated runs', c: '#6A9BD8' },
+      { t: 'PR merge rate', v: '38%', d: '−2.1% accepted suggestions', c: '#E8C558' },
+      { t: 'MTTR', v: '48m → 26m', d: '−46% resolution time', c: '#E8836A' },
+      { t: 'Secret leaks', v: '0', d: 'entropy scans, pre + post', c: '#34D399' },
+    ];
+    return (
+      <Panel title="S4 · Multi-Metric Evaluation Suite" sub="Continuous CI/CD regression across retrieval, sandboxed compilation, merge acceptance, speed, and zero-leak security.">
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(150px, 1fr))', gap: 10 }}>
+          {stats.map((s) => (
+            <div key={s.t} style={{ ...sChip(s.c), textAlign: 'left' }}>
+              <div style={{ fontSize: 11, color: '#94A3B8', fontWeight: 600 }}>{s.t}</div>
+              <div style={{ fontSize: 20, fontWeight: 800, color: '#FFFFFF', margin: '2px 0' }}>{s.v}</div>
+              <div style={sNote}>{s.d}</div>
+            </div>
+          ))}
+        </div>
+      </Panel>
+    );
+  }
+  // tenant_isolation (default)
+  const tenants = ['A', 'B', 'C'];
+  return (
+    <Panel title="S5 · Multi-Tenant Isolation Topology" sub="Gateway tokens enforce sharding with hard cross-tenant blocking — context never crosses client boundaries.">
+      <div style={sFlow}>
+        <div style={{ ...sChip('#A78BFA'), alignSelf: 'center' }}>Auth gateway<div style={sNote}>token → tenant_id</div></div>
+        <span style={sArrow}>→</span>
+        <div style={{ ...sChip('#E8836A'), alignSelf: 'center' }}>Hard firewall<div style={sNote}>blocks cross-tenant reads</div></div>
+        <span style={sArrow}>→</span>
+        <div style={{ display: 'flex', gap: 8, flex: '1 1 0', flexWrap: 'wrap' }}>
+          {tenants.map((t) => (
+            <div key={t} style={{ ...sChip('#5EC4C8'), flex: '1 1 0' }}>
+              Tenant {t}<div style={sNote}>repo → embedding → index → LLM</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </Panel>
+  );
+}
 
 // ============================================
 // MAIN COMPONENT
@@ -1171,13 +1310,7 @@ export default function RAGCaseStudiesTab() {
                             <p style={{ marginTop: 'var(--ds-space-2)', color: 'var(--ds-color-text-secondary)', fontSize: 'var(--ds-font-size-body)' }}>{diag.description}</p>
                           </div>
 
-                          {diag.image && (
-                            <DiagramImage
-                              src={diag.image}
-                              alt={diag.title}
-                              caption={diag.description}
-                            />
-                          )}
+                          <SdlcEntryVisual entryId={diag.id} />
 
                           <Stack gap={3}>
                             <Flex justify="space-between" align="center">
@@ -1547,11 +1680,7 @@ export default function RAGCaseStudiesTab() {
                 <h3 style={{ margin: 0 }}>🎨 9-Step System Design Master Architecture Diagram</h3>
                 <p style={{ color: 'var(--ds-color-text-secondary)' }}>AI-generated end-to-end architecture topology covering all 9 system design phases.</p>
               </Section.Header>
-              <DiagramImage
-                src="/assets/rag_system_design_9step_blueprint.png"
-                alt="9-Step Enterprise RAG System Design Blueprint"
-                caption="9-Step Enterprise RAG System Design Blueprint — From SLA & Requirements to Ingestion, Hybrid Search, RAGAS Evals, and Safeguards."
-              />
+              <NineStepBlueprintPanel />
             </Section>
 
             {/* INTERACTIVE PIPELINE ARCHITECTURE TUNER */}
@@ -1974,10 +2103,10 @@ export default function RAGCaseStudiesTab() {
                 caption="Tap the numbered hotspots to inspect the real-time incident context pipeline; click the figure for a zoomable fullscreen view."
                 accent="rag"
                 hotspots={[
-                  { x: 14, y: 32, label: 'Alert Trigger', title: 'PagerDuty', body: 'Event ingestion triggered upon latency/error threshold breach.' },
-                  { x: 38, y: 30, label: 'Stream Processing', title: 'Kafka / Flink', body: 'Resolves service topology, affected service entity and blast radius.' },
-                  { x: 60, y: 42, label: 'Parallel Retrieval', title: 'Context Pack', body: 'Pulls runbooks, past postmortems, recent commit SHAs, and APM telemetry.' },
-                  { x: 82, y: 36, label: 'ChatOps Delivery', title: 'Slack Incident Bot', body: 'Automated cited mitigation draft posted to on-call engineers in <5 seconds.' },
+                    { x: 14, y: 32, label: 'Alert Trigger', title: 'Alerting system', body: 'Event ingestion triggered upon latency/error threshold breach.' },
+                    { x: 38, y: 30, label: 'Stream Processing', title: 'Stream processor', body: 'Resolves service topology, affected service entity and blast radius.' },
+                    { x: 60, y: 42, label: 'Parallel Retrieval', title: 'Context Pack', body: 'Pulls runbooks, past postmortems, recent commit SHAs, and APM telemetry.' },
+                    { x: 82, y: 36, label: 'ChatOps Delivery', title: 'Team chat bot', body: 'Automated cited mitigation draft posted to on-call engineers in <5 seconds.' },
                 ]}
               />
             </Reveal>

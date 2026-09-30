@@ -1,5 +1,5 @@
 import { useState, useMemo } from 'react';
-import DiagramImage from '../components/ui/DiagramImage.jsx';
+import { Panel, GlassBar } from '../components/ui/CleanInfographics.jsx';
 import { CodeBlock } from '../components/ui/Content.jsx';
 import { Container, Section, Grid, Flex, Stack } from '../components/layout/Primitives.jsx';
 import { Card, Badge, Button, Callout } from '../components/ui/Core.jsx';
@@ -10,6 +10,183 @@ import {
   shouldContinue,
   expandQuerySafely
 } from './workflowEngine.js';
+
+const flowBox = (accent = '#5EC4C8') => ({
+  background: 'rgba(255,255,255,0.05)', border: `1px solid ${accent}66`,
+  borderRadius: 10, padding: '10px 14px', fontSize: 12.5, fontWeight: 700,
+  color: '#F1F5F9', textAlign: 'center', minWidth: 104,
+});
+const flowNote = { fontSize: 11, color: '#94A3B8', fontWeight: 400, marginTop: 2 };
+const flowArrow = { color: '#5EC4C8', fontWeight: 800, fontSize: 16, alignSelf: 'center', flexShrink: 0 };
+
+function OnOff({ on }) {
+  return (
+    <span style={{
+      fontSize: 10, fontWeight: 800, padding: '2px 8px', borderRadius: 6, flexShrink: 0,
+      color: on ? '#0A1430' : '#94A3B8',
+      background: on ? '#34D399' : 'rgba(148,163,184,0.15)',
+      border: `1px solid ${on ? '#34D399' : '#475569'}`,
+    }}>
+      {on ? 'ON' : 'OFF'}
+    </span>
+  );
+}
+
+/** Dispatcher activation pipeline: inputs → dispatcher → pattern flags → answer. */
+function DispatcherActivationPanel() {
+  const patterns = [
+    { t: 'TOC retrieval', on: true }, { t: 'Keyword retrieval', on: true },
+    { t: 'Dense retrieval', on: false }, { t: 'Two-hop references', on: true },
+    { t: 'Listing aggregation', on: true }, { t: 'Adaptive parsing', on: false },
+    { t: 'Iterative feedback', on: true },
+  ];
+  return (
+    <Panel
+      title="Dispatcher Activation Pipeline"
+      sub="ParsedQuestion + DocumentProfile feed decide_pipeline_patterns() — one rule per activation — emitting ON/OFF flags per retrieval pattern."
+    >
+      <div style={{ display: 'flex', alignItems: 'stretch', gap: 10, flexWrap: 'wrap' }}>
+        <div style={{ display: 'grid', gap: 8, alignContent: 'center' }}>
+          <div style={flowBox('#E8C558')}>ParsedQuestion</div>
+          <div style={flowBox('#E8C558')}>DocumentProfile</div>
+        </div>
+        <span style={flowArrow}>→</span>
+        <div style={{ ...flowBox('#E8C558'), alignSelf: 'center', minWidth: 150 }}>
+          Dispatcher<div style={flowNote}>decide_pipeline_patterns()<br />rules in decide.py</div>
+        </div>
+        <span style={flowArrow}>→</span>
+        <div style={{ display: 'grid', gap: 6, flex: '1 1 200px' }}>
+          {patterns.map((p) => (
+            <div key={p.t} style={{ display: 'flex', alignItems: 'center', gap: 8, background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(148,163,184,0.3)', borderRadius: 8, padding: '6px 10px', fontSize: 12, color: p.on ? '#F1F5F9' : '#94A3B8', fontWeight: 600 }}>
+              <OnOff on={p.on} />{p.t}
+            </div>
+          ))}
+        </div>
+        <span style={flowArrow}>→</span>
+        <div style={{ ...flowBox('#34D399'), alignSelf: 'center' }}>Answer</div>
+      </div>
+    </Panel>
+  );
+}
+
+/** Nested handler rings: four concentric scopes, control stays in code. */
+function NestedRingsPanel() {
+  const ring = (color) => ({
+    border: `2px solid ${color}`, borderRadius: 14, padding: 14,
+    background: 'rgba(255,255,255,0.02)',
+  });
+  const ringHead = (color) => ({
+    display: 'flex', justifyContent: 'space-between', gap: 8, flexWrap: 'wrap',
+    fontSize: 13, fontWeight: 800, color, marginBottom: 4,
+  });
+  const ringDesc = { fontSize: 11.5, color: '#94A3B8', marginBottom: 10, lineHeight: 1.5 };
+  const bricks = ['Parsing', 'Question parsing', 'Retrieval', 'Generation'];
+  return (
+    <Panel
+      title="Nested Handler Rings — Control Stays in Code"
+      sub="One handler nested in the next: each ring calls the one inside; orchestration never leaves deterministic code."
+    >
+      <div style={ring('#E8C558')}>
+        <div style={ringHead('#E8C558')}><span>corpus_pdf_qa</span><span style={{ fontWeight: 500 }}>corpus layer</span></div>
+        <div style={ringDesc}>SQL-scope the corpus index to candidate docs, then run the per-document handler on each.</div>
+        <div style={ring('#6A9BD8')}>
+          <div style={ringHead('#6A9BD8')}><span>pdf_qa_loop</span><span style={{ fontWeight: 500 }}>workflow composite</span></div>
+          <div style={ringDesc}>decide_pipeline_patterns picks what fires · iterate_with_bound loops on the feedback fields.</div>
+          <div style={ring('#A78BFA')}>
+            <div style={ringHead('#A78BFA')}><span>one pass · the four-brick chain</span></div>
+            <div style={ringDesc}>Parse the PDF · parse the question · retrieve pages · generate a typed answer that emits feedback fields.</div>
+            <div style={ring('#34D399')}>
+              <div style={ringHead('#34D399')}><span>the four bricks</span><span style={{ fontWeight: 500 }}>the spine</span></div>
+              <div style={{ display: 'flex', alignItems: 'stretch', gap: 8, flexWrap: 'wrap' }}>
+                {bricks.map((b, i) => (
+                  <div key={b} style={{ display: 'flex', alignItems: 'center', gap: 8, flex: '1 1 0' }}>
+                    <div style={{ ...flowBox('#34D399'), flex: 1 }}>
+                      <div style={{ fontSize: 10, color: '#94A3B8' }}>{i + 1}</div>{b}
+                    </div>
+                    {i < bricks.length - 1 ? (<span style={flowArrow}>→</span>) : null}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Panel>
+  );
+}
+
+/** Five maturity rungs: control stays in code until the agentic jump. */
+function MaturityLadderPanel() {
+  const rungs = [
+    { n: '05', t: 'AGENTIC', c: '#E8836A', icon: 'cpu', badge: 'loop · in LLM', d: 'The LLM picks the next step from a tool catalog itself. (pdf_qa_agentic)' },
+    { n: '04', t: 'MULTI-INTENT', c: '#A78BFA', icon: 'chat', badge: 'routing · in CODE', d: 'One chat entry, any intent; small talk exits early. (pdf_chat)' },
+    { n: '03', t: 'WORKFLOW', c: '#6A9BD8', icon: 'refresh', badge: 'loop · in CODE', d: 'The pass inside a bounded loop + pattern dispatch. (pdf_qa_loop)' },
+    { n: '02', t: 'UPGRADED', c: '#7FB069', icon: 'zap', badge: 'no loop', d: 'Full parse + TOC routing. Emits feedback, unused. (pdf_qa)' },
+    { n: '01', t: 'BASELINE', c: '#94A3B8', icon: 'file', badge: 'no loop', d: 'Four bricks chained once, keyword retrieval only. (pdf_qa_baseline)' },
+  ];
+  return (
+    <Panel
+      title="Same Four Bricks. Five Levels of Control."
+      sub="Rungs 1–4 keep the control in code: a richer pass, then a loop, then routing. Only the last step moves the control loop from CODE to the LLM."
+    >
+      <div style={{ display: 'grid', gap: 12 }}>
+        {rungs.map((r) => (
+          <GlassBar key={r.n} color={r.c} icon={r.icon} index={`${r.n}.`} title={r.t} badge={r.badge} detail={r.d} />
+        ))}
+      </div>
+    </Panel>
+  );
+}
+
+/** Three-layer dispatcher state machine. */
+function LoopStateMachinePanel() {
+  return (
+    <Panel
+      title="Three-Layer State Machine: Dispatcher, Loop & Guardrails"
+      sub="Deterministic flags route upfront; a bounded loop iterates on typed signals; guardrails decide when to stop."
+    >
+      <div style={{ display: 'grid', gap: 12 }}>
+        <GlassBar
+          color="#5EC4C8" icon="zap" index="1." title="Upfront Dispatcher"
+          detail="User query → dispatcher state machine. Deterministic bool flags route TOC routing, layout hint, and dense fallback; the False/True branch drops into the loop."
+        />
+        <GlassBar
+          color="#6A9BD8" icon="refresh" index="2." title="Bounded Iteration Loop"
+          detail="Knowledge bases → Pass 1 retrieve (candidate knowledge) → evaluate typed signals — pending references, incomplete answer → Pass 2 two-hop recovery → candidate set. Repeats under bound, never open-ended."
+        />
+        <GlassBar
+          color="#E8C558" icon="shield" index="3." title="Termination Guardrails"
+          detail="should_continue checks candidate-set stability, keyword saturation, and confidence drop → final answer generation → response to user."
+        />
+      </div>
+    </Panel>
+  );
+}
+
+/** Workflow + loop engineering: dispatcher, orchestrator, cited answer. */
+function WorkflowLoopDispatcherPanel() {
+  return (
+    <Panel
+      title="Workflow & Loop Engineering — Dispatcher & Feedback Rails"
+      sub="Deterministic pattern activations upfront; a bounded orchestrator with typed feedback; a guardrail gate that halts safely with an audit trail."
+    >
+      <div style={{ display: 'grid', gap: 12 }}>
+        <GlassBar
+          color="#5EC4C8" icon="cpu" index="1." title="The Dispatcher"
+          detail="Incoming question + document profile → TOC retrieval, two-hop references, listing aggregation. decide_pipeline_patterns() fires exactly the patterns the profile calls for."
+        />
+        <GlassBar
+          color="#E8C558" icon="refresh" index="2." title="Bounded Loop Orchestrator"
+          detail="Pass 1 (parse → TOC retrieval → generation) emits typed feedback — complete_answer_found, pending_references → Pass 2 two-hop reference resolution → guardrail gate: stable candidates, stable keywords, confidence drop, max iterations ≤ 4."
+        />
+        <GlassBar
+          color="#34D399" icon="check" index="3." title="Cited Answer + Audit Trail"
+          detail="The answer ships with citations plus an iteration-record audit trail — every execution history entry preserved for compliance review."
+        />
+      </div>
+    </Panel>
+  );
+}
 
 export function WorkflowLoopTab() {
   const [activeSubTab, setActiveSubTab] = useState('simulator'); // simulator | dispatcher | guardrails | audit | code
@@ -80,24 +257,10 @@ export function WorkflowLoopTab() {
         </p>
       </Section>
 
-      {/* DUAL ARCHITECTURAL INFOGRAPHIC CARDS */}
+      {/* DUAL NATIVE PANELS */}
       <Grid columns={{ base: '1fr', lg: '1fr 1fr' }} gap="var(--ds-space-4)" style={{ marginBottom: 'var(--ds-space-6)' }}>
-        <DiagramImage
-          src="/assets/rag_workflow_loop_dispatcher.png"
-          alt="Enterprise RAG Workflow and Loop Engineering Dispatcher Architecture"
-          title="1. Workflow & Loop Engineering — Dispatcher & Feedback Rails"
-          caption="Incoming question and document profile trigger deterministic pattern activations. The bounded orchestrator runs Pass 1, evaluates typed feedback flags, routes recovery actions via feedback rails, and halts safely."
-          background="#0a0f1d"
-          maxWidth={700}
-        />
-        <DiagramImage
-          src="/assets/rag_loop_state_machine.png"
-          alt="The 3-Layer Dispatcher State Machine Infographic"
-          title="2. Three-Layer State Machine: Upfront Dispatcher, Loop, & Guardrails"
-          caption="Detailed state machine transitions: Layer 1 Upfront Dispatcher ➔ Layer 2 Bounded Iteration Loop & Typed Feedback ➔ Layer 3 Termination Guardrails (Candidate Stability, Keyword Saturation, Confidence Drop)."
-          background="#0a0f1d"
-          maxWidth={700}
-        />
+        <WorkflowLoopDispatcherPanel />
+        <LoopStateMachinePanel />
       </Grid>
 
       {/* NAVIGATION SUB-TABS */}
@@ -440,14 +603,7 @@ export function WorkflowLoopTab() {
                     </span>
                   </Flex>
 
-                  <DiagramImage
-                    src="/assets/dispatcher_activation_pipeline.png"
-                    alt="The Upfront Dispatcher decide_pipeline_patterns architecture"
-                    title="Dispatcher Activation Architecture — Input Profile to Pipeline Flags"
-                    caption="ParsedQuestion and DocumentProfile feed into decide_pipeline_patterns(), which deterministically outputs ON/OFF boolean flags for TOC retrieval, Keyword search, Dense embeddings, Two-hop references, Listing aggregation, Adaptive parsing, and Iterative feedback."
-                    background="#ffffff"
-                    maxWidth={1000}
-                  />
+                  <DispatcherActivationPanel />
                 </Stack>
               </Card>
 
@@ -464,14 +620,7 @@ export function WorkflowLoopTab() {
                     </span>
                   </Flex>
 
-                  <DiagramImage
-                    src="/assets/nested_handlers_rings.png"
-                    alt="Nested Handlers Architecture Rings"
-                    title="Concentric Architecture Rings — The Four Bricks to Corpus QA"
-                    caption="The Four Bricks (Parsing, Question Parsing, Retrieval, Generation) form the core spine. One Pass wraps the 4 bricks. pdf_qa_loop adds Dispatcher + Bounded Feedback. corpus_pdf_qa SQL-scopes the corpus index."
-                    background="#ffffff"
-                    maxWidth={1000}
-                  />
+                  <NestedRingsPanel />
 
                   {/* INTERACTIVE RING EXPLORER */}
                   <div>
@@ -519,14 +668,7 @@ export function WorkflowLoopTab() {
                     </span>
                   </Flex>
 
-                  <DiagramImage
-                    src="/assets/pipeline_maturity_5levels.png"
-                    alt="Pipeline Maturity 5 Levels of Control"
-                    title="The 5-Level Control Maturity Ladder"
-                    caption="Rungs 1 to 4 keep orchestration and loop logic strictly deterministic in Python code. Only Level 5 (Agentic) moves the loop decision into the LLM's action space."
-                    background="#ffffff"
-                    maxWidth={1000}
-                  />
+                  <MaturityLadderPanel />
 
                   {/* INTERACTIVE MATURITY LEVEL CONTROLLER */}
                   <div>

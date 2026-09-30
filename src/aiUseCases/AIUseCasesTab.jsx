@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import * as Primitives from '../components/layout/Primitives.jsx';
 import { Hero, CodeBlock } from '../components/ui/Content.jsx';
 import { Card, Badge, Button, Callout } from '../components/ui/Core.jsx';
-import DiagramImage from '../components/ui/DiagramImage.jsx';
+import { Panel, GlassCard } from '../components/ui/CleanInfographics.jsx';
 import {
   THREE_USE_CASES_MATRIX,
   SAMPLE_RESUME_PROFILES,
@@ -15,6 +15,44 @@ import DataTable from '../components/ui/DataTable.jsx';
 import { Reveal, AnimatedNumber } from '../components/ui/AnimatedReveal.jsx';
 
 const { Container, Section, Grid, Flex, Stack } = Primitives;
+
+/** Native recreation: three enterprise AI patterns beyond chatbots. */
+function UseCasesPanel() {
+  const pts = { fontSize: 12.5, color: '#CBD5E1', lineHeight: 1.65, margin: '6px 0 0', paddingLeft: 16 };
+  const flow = { fontSize: 12, color: '#7FE3DC', marginTop: 8, lineHeight: 1.6 };
+  return (
+    <Panel
+      title="Enterprise AI Architecture — 3 Use Cases Beyond Chatbots"
+      sub="Unstructured text becomes structured features, embeddings, and scored priorities."
+    >
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))', gap: 12 }}>
+        <GlassCard color="#5EC4C8" icon="file" title="1. Feature Engineering via LLMs">
+          <div style={flow}>Raw resume text → extraction engine → structured variables → feature store.</div>
+          <ul style={pts}>
+            <li>Named entity recognition</li>
+            <li>Text summarization</li>
+            <li>Skills &amp; experience extraction</li>
+          </ul>
+        </GlassCard>
+        <GlassCard color="#6A9BD8" icon="search" title="2. Structuring via Embeddings">
+          <div style={flow}>Unstructured text → embedding model → vector space + vector DB.</div>
+          <ul style={pts}>
+            <li>Ideal-customer-profile embedding</li>
+            <li>Current vs ICP vector, cosine distance</li>
+            <li>Relevance score out</li>
+          </ul>
+        </GlassCard>
+        <GlassCard color="#A78BFA" icon="chart" title="3. Predictive Lead Scoring">
+          <div style={flow}>Raw lead data + engineered features → trained model → probabilities.</div>
+          <ul style={pts}>
+            <li>Scoring &amp; grading into an A/B/C/D queue</li>
+            <li>Sales action dashboard on top</li>
+          </ul>
+        </GlassCard>
+      </div>
+    </Panel>
+  );
+}
 
 export default function AIUseCasesTab() {
   const [activeSubTab, setActiveSubTab] = useState('overview'); // 'overview' | 'features' | 'embeddings' | 'scoring'
@@ -47,14 +85,7 @@ export default function AIUseCasesTab() {
       <Container size="wide">
         {/* ARCHITECTURAL INFOGRAPHIC DIAGRAM */}
         <div style={{ marginBottom: 'var(--ds-space-6)' }}>
-          <DiagramImage
-            src="/assets/ai_use_cases_sales_arch.png"
-            alt="3 Enterprise AI Use Cases Beyond Chatbots Diagram"
-            title="3 Enterprise AI Sales Architecture Pipeline"
-            caption="Overview: 1) LLM Feature Engineering (Text ➔ LLM Extraction ➔ Structured Variables). 2) Structuring Unstructured Data (Text ➔ Embeddings ➔ ICP Cosine Similarity). 3) Predictive Lead Scoring (ML Model ➔ Lead Grades A/B/C/D Priority Queue)."
-            background="#090d16"
-            maxWidth={1050}
-          />
+          <UseCasesPanel />
         </div>
 
         {/* SUBTAB NAVIGATION */}

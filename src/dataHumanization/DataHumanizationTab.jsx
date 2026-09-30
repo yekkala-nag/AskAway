@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import * as Primitives from '../components/layout/Primitives.jsx';
 import { Hero, CodeBlock } from '../components/ui/Content.jsx';
 import { Card, Badge, Button, Callout } from '../components/ui/Core.jsx';
-import DiagramImage from '../components/ui/DiagramImage.jsx';
+import { Panel, GlassCard } from '../components/ui/CleanInfographics.jsx';
 import {
   KPI_TO_HUMANIZED_INSIGHTS,
   NARRATIVE_FRAMEWORKS,
@@ -11,6 +11,61 @@ import {
 } from './humanizationEngine.js';
 
 const { Container, Grid, Flex, Stack } = Primitives;
+
+/** Native recreation: raw dumps vs perception, bridged by four pillars. */
+function HumanizationPanel() {
+  const pts = { fontSize: 12.5, color: '#CBD5E1', lineHeight: 1.65, margin: '6px 0 0', paddingLeft: 16 };
+  const flow = { fontSize: 12, color: '#7FE3DC', marginTop: 8, lineHeight: 1.6 };
+  return (
+    <Panel
+      title="Data Humanization & Storytelling Framework"
+      sub="Raw KPI dumps overwhelm; human perception needs narrative. Four pillars bridge the gap to decisions."
+    >
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: 12 }}>
+        <GlassCard color="#E8836A" icon="zap" title="The Paradox">
+          <div style={flow}>Raw dump: complex, overwhelming, low context.</div>
+          <ul style={pts}>
+            <li>Human perception: comprehensible, high impact</li>
+          </ul>
+        </GlassCard>
+        <GlassCard color="#5EC4C8" icon="smile" title="Pillar 1 · Quick Wins">
+          <div style={flow}>Customer voices first.</div>
+          <ul style={pts}>
+            <li>Satisfaction metrics that move fast</li>
+            <li>Fast insights over perfect ones</li>
+          </ul>
+        </GlassCard>
+        <GlassCard color="#E8C558" icon="users" title="Pillar 2 · Data Artisan">
+          <div style={flow}>One hybrid role bridging worlds.</div>
+          <ul style={pts}>
+            <li>Data science + design thinking</li>
+            <li>Plus business strategy</li>
+          </ul>
+        </GlassCard>
+        <GlassCard color="#6A9BD8" icon="chat" title="Pillar 3 · Narratives">
+          <div style={flow}>AIDA and SCQA story shapes.</div>
+          <ul style={pts}>
+            <li>Attention → Interest → Desire → Action</li>
+            <li>Situation → Complication → Question → Answer</li>
+          </ul>
+        </GlassCard>
+        <GlassCard color="#A78BFA" icon="chart" title="Pillar 4 · ROI Engine">
+          <div style={flow}>Quantifiable value or it didn't happen.</div>
+          <ul style={pts}>
+            <li>Cost savings, revenue uplift</li>
+          </ul>
+        </GlassCard>
+        <GlassCard color="#34D399" icon="check" title="Enterprise Output">
+          <div style={flow}>Where the story lands.</div>
+          <ul style={pts}>
+            <li>Root-cause resolution</li>
+            <li>Executive decisions, strategic alignment</li>
+          </ul>
+        </GlassCard>
+      </div>
+    </Panel>
+  );
+}
 
 export default function DataHumanizationTab() {
   const [activeSubTab, setActiveSubTab] = useState('illusion'); // 'illusion' | 'table' | 'frameworks' | 'roi'
@@ -46,14 +101,7 @@ export default function DataHumanizationTab() {
       <Container size="wide">
         {/* ARCHITECTURAL INFOGRAPHIC DIAGRAM */}
         <div style={{ marginBottom: 'var(--ds-space-6)' }}>
-          <DiagramImage
-            src="/assets/data_humanization_storytelling_arch.png"
-            alt="Data Humanization and Storytelling Framework Architecture Diagram"
-            title="Data Humanization and Storytelling Framework for Enterprise Data Platforms"
-            caption="Overview: Left: The Scintillating Grid Paradox (Raw KPI Data Dump vs Human Perception). Middle: 4 Pillars of Data Humanization (Quick Wins, Data Artisan Role, Narrative Frameworks AIDA & SCQA, ROI Financial Engine). Right: Actionable Enterprise Output."
-            background="#090d16"
-            maxWidth={1050}
-          />
+          <HumanizationPanel />
         </div>
 
         {/* SUBTAB NAVIGATION */}

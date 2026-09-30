@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import * as Primitives from '../components/layout/Primitives.jsx';
 import { Hero, CodeBlock, Stepper } from '../components/ui/Content.jsx';
 import { Card, Badge, Button, Callout } from '../components/ui/Core.jsx';
-import DiagramImage from '../components/ui/DiagramImage.jsx';
+import { Panel, GlassBar } from '../components/ui/CleanInfographics.jsx';
 import {
   TOP_10_SEED_QUESTIONS,
   RAW_CORPUS_SAMPLES,
@@ -11,6 +11,24 @@ import {
 } from './kbEngine.js';
 
 const { Container, Section, Grid, Flex, Stack } = Primitives;
+
+/** Native recreation: five pillars from ingestion to freshness. */
+function KnowledgeBasePanel() {
+  return (
+    <Panel
+      title="How to Build an Efficient Knowledge Base"
+      sub="Ingest broadly, clean ruthlessly, chunk atomically, index by shape, and never stop evaluating freshness."
+    >
+      <div style={{ display: 'grid', gap: 12 }}>
+        <GlassBar color="#5EC4C8" icon="file" index="1." title="Ingestion + Question Seeding" detail="Loaders pull PDFs, docs, and wikis into a base corpus; top-10 essential QA pairs seed coverage from day one." />
+        <GlassBar color="#6A9BD8" icon="refresh" index="2." title="Cleansing & Dedup Engine" detail="Strip boilerplate headers, footers, and noise; merge near-duplicates into one refined knowledge base." />
+        <GlassBar color="#A78BFA" icon="clip" index="3." title="Atomic Chunking + RBAC Tags" detail="Fixed-size and hierarchical semantic chunks at optimal granularity, each tagged Admins:RW, Engineers:RO, Finance:Deny." />
+        <GlassBar color="#E8C558" icon="search" index="4." title="Index Selection Matrix" detail="Flat O(N) for exact search, IVF O(N/C) balanced, HNSW O(log N) ultra-low latency — pick against the sub-10ms SLA." />
+        <GlassBar color="#34D399" icon="chart" index="5." title="Eval Loop + Freshness TTLs" detail="Precision/recall and latency dashboards, periodic re-embedding, time-to-live freshness — feeding incremental updates back to ingestion." />
+      </div>
+    </Panel>
+  );
+}
 
 export default function KnowledgeBaseTab() {
   const [activeSubTab, setActiveSubTab] = useState('lifecycle'); // 'lifecycle' | 'cleanse' | 'rbac' | 'indexing' | 'freshness' | 'code'
@@ -42,14 +60,7 @@ export default function KnowledgeBaseTab() {
       <Container size="wide">
         {/* ARCHITECTURAL INFOGRAPHIC CARD */}
         <div style={{ marginBottom: 'var(--ds-space-6)' }}>
-          <DiagramImage
-            src="/assets/efficient_knowledge_base_arch.png"
-            alt="How to Build an Efficient Knowledge Base for AI Models Architecture Diagram"
-            title="Efficient Knowledge Base Architecture — Ingestion to Continuous Evaluation"
-            caption="5 Core Pillars: 1. Core Ingestion & Top-10 Seeding ➔ 2. Cleansing & Deduplication Engine ➔ 3. Atomic Semantic Chunking & RBAC Tagging ➔ 4. Index Selection Matrix (FLAT vs IVF vs HNSW) ➔ 5. Continuous Evaluation Loop & Freshness TTLs."
-            background="#0a0f1d"
-            maxWidth={1050}
-          />
+          <KnowledgeBasePanel />
         </div>
 
         {/* SUBTAB NAVIGATION */}

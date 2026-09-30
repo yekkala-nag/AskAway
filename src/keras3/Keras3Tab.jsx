@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import * as Primitives from '../components/layout/Primitives.jsx';
 import { Hero, CodeBlock } from '../components/ui/Content.jsx';
 import { Card, Badge, Button, Callout } from '../components/ui/Core.jsx';
-import DiagramImage from '../components/ui/DiagramImage.jsx';
+import { Panel, GlassBar } from '../components/ui/CleanInfographics.jsx';
 import {
   BACKEND_COMPARISON_MATRIX,
   NMT_SAMPLE_DATASET,
@@ -11,6 +11,36 @@ import {
 } from './keras3Engine.js';
 
 const { Container, Section, Grid, Flex, Stack } = Primitives;
+
+/** Native recreation: one API over three backends, then the NMT encoder-decoder. */
+function KerasNmtPanel() {
+  const chip = (accent) => ({
+    background: 'rgba(255,255,255,0.05)', border: `1px solid ${accent}66`,
+    borderRadius: 10, padding: '10px 14px', fontSize: 12.5, fontWeight: 700,
+    color: '#F1F5F9', textAlign: 'center', minWidth: 110,
+  });
+  const note = { fontSize: 11, color: '#94A3B8', fontWeight: 400, marginTop: 2 };
+  const arrow = { color: '#5EC4C8', fontWeight: 800, fontSize: 16, alignSelf: 'center', flexShrink: 0 };
+  return (
+    <Panel
+      title="Multi-Backend Deep Learning for NMT"
+      sub="One unified API over three execution backends with seamless switching, running a sequence-to-sequence encoder-decoder translator."
+    >
+      <div style={{ display: 'flex', alignItems: 'stretch', gap: 10, flexWrap: 'wrap', marginBottom: 12 }}>
+        {['Backend A', 'Backend B', 'Backend C'].map((b, i) => (
+          <div key={b} style={{ display: 'flex', alignItems: 'center', gap: 10, flex: '1 1 0' }}>
+            <div style={{ ...chip(['#5EC4C8', '#A78BFA', '#E8C558'][i]), flex: 1 }}>{b}<div style={note}>switchable at runtime</div></div>
+            {i < 2 ? (<span style={arrow}>⇄</span>) : null}
+          </div>
+        ))}
+      </div>
+      <div style={{ display: 'grid', gap: 12 }}>
+        <GlassBar color="#5EC4C8" icon="file" index="1." title="Encoder — Source Language In" detail="Source text → encoder embedding → bidirectional encoder LSTM → final hidden states (hT, cT) handed to the decoder." />
+        <GlassBar color="#E8C558" icon="refresh" index="2." title="Decoder — Target Language Out" detail="Initial state + shifted target text → decoder embedding → decoder LSTM → dense softmax → target-language prediction, token by token." />
+      </div>
+    </Panel>
+  );
+}
 
 export default function Keras3Tab() {
   const [activeSubTab, setActiveSubTab] = useState('backend'); // 'backend' | 'vectorizer' | 'architecture' | 'code'
@@ -38,14 +68,7 @@ export default function Keras3Tab() {
       <Container size="wide">
         {/* ARCHITECTURAL INFOGRAPHIC DIAGRAM */}
         <div style={{ marginBottom: 'var(--ds-space-6)' }}>
-          <DiagramImage
-            src="/assets/keras3_multi_backend_nmt_arch.png"
-            alt="Keras 3.0 Multi-Backend Deep Learning Architecture"
-            title="Keras 3.0 Multi-Backend Infrastructure & NMT Model Flow"
-            caption="Overview: Unified Keras 3.0 API Layer ➔ Choice of PyTorch, JAX, or TensorFlow Execution Backend ➔ Encoder-Decoder LSTM Sequence-to-Sequence Architecture."
-            background="#090d16"
-            maxWidth={1050}
-          />
+          <KerasNmtPanel />
         </div>
 
         {/* SUBTAB NAVIGATION */}

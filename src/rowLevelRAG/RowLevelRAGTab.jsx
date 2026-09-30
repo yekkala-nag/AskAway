@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import * as Primitives from '../components/layout/Primitives.jsx';
 import { Hero, CodeBlock } from '../components/ui/Content.jsx';
 import { Card, Badge, Button, Callout } from '../components/ui/Core.jsx';
-import DiagramImage from '../components/ui/DiagramImage.jsx';
+import { Panel, GlassCard } from '../components/ui/CleanInfographics.jsx';
 import {
   RETRIEVAL_MISMATCH_CONCEPTS,
   MARKDOWN_PIPE_PARSER_RULES,
@@ -12,6 +12,43 @@ import {
 } from './rowLevelEngine.js';
 
 const { Container, Grid, Flex, Stack } = Primitives;
+
+/** Native recreation: row-level chunks fix the whole-table retrieval paradox. */
+function RowLevelPanel() {
+  const pts = { fontSize: 12.5, color: '#CBD5E1', lineHeight: 1.65, margin: '6px 0 0', paddingLeft: 16 };
+  const flow = { fontSize: 12, color: '#7FE3DC', marginTop: 8, lineHeight: 1.6 };
+  return (
+    <Panel
+      title="Row-Level Table Chunks for RAG"
+      sub="Whole tables drown the model in irrelevant rows; row-level chunks plus a dual index retrieve exactly what's asked."
+    >
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))', gap: 12 }}>
+        <GlassCard color="#E8836A" icon="zap" title="1. The Mismatch Paradox">
+          <div style={flow}>Whole-table chunking retrieves ~40 rows of mostly irrelevant context.</div>
+          <ul style={pts}>
+            <li>Row-level chunking retrieves 1 targeted row</li>
+            <li>Targeted context in, noise out</li>
+          </ul>
+        </GlassCard>
+        <GlassCard color="#5EC4C8" icon="layers" title="2. Dual-Scale Index Build">
+          <div style={flow}>Row chunks via markdown pipe parsing (| Header | Value |).</div>
+          <ul style={pts}>
+            <li>Key-value table index for precise rows</li>
+            <li>Header-value serialization → full-text index</li>
+            <li>Dual-index sync keeps both aligned</li>
+          </ul>
+        </GlassCard>
+        <GlassCard color="#6A9BD8" icon="search" title="3. Query Dispatcher">
+          <div style={flow}>Route by intent, then feed the model only the winner.</div>
+          <ul style={pts}>
+            <li>Targeted 1-row keyword queries → key-value index</li>
+            <li>Whole-table overview queries → full-text index</li>
+          </ul>
+        </GlassCard>
+      </div>
+    </Panel>
+  );
+}
 
 export default function RowLevelRAGTab() {
   const [activeSubTab, setActiveSubTab] = useState('paradox'); // 'paradox' | 'parser' | 'simulator' | 'code'
@@ -41,14 +78,7 @@ export default function RowLevelRAGTab() {
       <Container size="wide">
         {/* ARCHITECTURAL INFOGRAPHIC DIAGRAM */}
         <div style={{ marginBottom: 'var(--ds-space-6)' }}>
-          <DiagramImage
-            src="/assets/row_level_rag_arch.png"
-            alt="Row-Level Table Chunks for RAG Architecture Diagram"
-            title="Row-Level Table Chunks & Dual-Scale Retrieval Architecture"
-            caption="Overview: Left: Table vs Row Mismatch Paradox. Middle: Building the Dual-Scale Index (Markdown Pipe Parsing & Header:Value Serialization). Right: Dual-Index Query Dispatcher."
-            background="#090d16"
-            maxWidth={1050}
-          />
+          <RowLevelPanel />
         </div>
 
         {/* SUBTAB NAVIGATION */}

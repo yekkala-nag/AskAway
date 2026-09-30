@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import * as Primitives from '../components/layout/Primitives.jsx';
 import { Hero, CodeBlock } from '../components/ui/Content.jsx';
 import { Card, Badge, Button, Callout } from '../components/ui/Core.jsx';
-import DiagramImage from '../components/ui/DiagramImage.jsx';
+import { Panel, GlassCard } from '../components/ui/CleanInfographics.jsx';
 import {
   MCP_CLIENT_PROTOCOL_CONCEPTS,
   REMOTE_SERVERS_CATALOG,
@@ -11,6 +11,41 @@ import {
 } from './mcpClientEngine.js';
 
 const { Container, Grid, Flex, Stack } = Primitives;
+
+/** Native recreation: web UI ↔ MCP transport engine ↔ remote tool servers. */
+function McpClientPanel() {
+  const pts = { fontSize: 12.5, color: '#CBD5E1', lineHeight: 1.65, margin: '6px 0 0', paddingLeft: 16 };
+  return (
+    <Panel
+      title="MCP Client Development — UI, Transport Engine, Remote Servers"
+      sub="A web frontend drives a protocol engine that negotiates transports, calls tools, and normalizes responses from remote servers."
+    >
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))', gap: 12 }}>
+        <GlassCard color="#5EC4C8" icon="send" title="1. Web UI Frontend">
+          <ul style={pts}>
+            <li>Topic input for queries</li>
+            <li>API key manager</li>
+            <li>Server selector</li>
+          </ul>
+        </GlassCard>
+        <GlassCard color="#E8C558" icon="cpu" title="2. Transport & Protocol Engine">
+          <ul style={pts}>
+            <li>JSON-RPC 2.0 handshake</li>
+            <li>Stdio / server-sent-event transports</li>
+            <li>Dynamic tool calling + structured responses</li>
+          </ul>
+        </GlassCard>
+        <GlassCard color="#A78BFA" icon="globe" title="3. Remote Tool Servers">
+          <ul style={pts}>
+            <li>Code summarizer service</li>
+            <li>Model recommender service</li>
+            <li>Enterprise vector store</li>
+          </ul>
+        </GlassCard>
+      </div>
+    </Panel>
+  );
+}
 
 export default function MCPClientTab() {
   const [activeSubTab, setActiveSubTab] = useState('protocol'); // 'protocol' | 'catalog' | 'simulator' | 'code'
@@ -40,14 +75,7 @@ export default function MCPClientTab() {
       <Container size="wide">
         {/* ARCHITECTURAL INFOGRAPHIC DIAGRAM */}
         <div style={{ marginBottom: 'var(--ds-space-6)' }}>
-          <DiagramImage
-            src="/assets/mcp_client_streamlit_arch.png"
-            alt="MCP Client Development with Streamlit Architecture Diagram"
-            title="MCP Client Development with Streamlit Web Application Architecture"
-            caption="Overview: Left: Streamlit Web UI Frontend (Topic Input, API Key Manager, MCP Server Selector). Middle: MCP Client Transport Engine (JSON-RPC 2.0 Handshake, Stdio/SSE Transports, Tool Calling). Right: Remote MCP Servers."
-            background="#090d16"
-            maxWidth={1050}
-          />
+          <McpClientPanel />
         </div>
 
         {/* SUBTAB NAVIGATION */}

@@ -2,7 +2,7 @@ import React, { useState, useMemo, useRef } from 'react';
 import * as Primitives from '../components/layout/Primitives.jsx';
 import { Hero, CodeBlock } from '../components/ui/Content.jsx';
 import { Card, Badge, Button, Callout } from '../components/ui/Core.jsx';
-import DiagramImage from '../components/ui/DiagramImage.jsx';
+import { Panel, GlassCard } from '../components/ui/CleanInfographics.jsx';
 import LossCurveChart from '../components/ui/LossCurveChart.jsx';
 import LossHistoryChart from '../components/ui/LossHistoryChart.jsx';
 import ScatterPlot from '../components/ui/ScatterPlot.jsx';
@@ -20,6 +20,48 @@ import Workflow from '../components/ui/Workflow.jsx';
 import { Reveal, AnimatedNumber } from '../components/ui/AnimatedReveal.jsx';
 
 const { Container, Section, Grid, Flex, Stack } = Primitives;
+
+/** Native recreation: fit the line, measure residuals, descend the bowl. */
+function LinearRegressionPanel() {
+  const pts = { fontSize: 12.5, color: '#CBD5E1', lineHeight: 1.65, margin: '6px 0 0', paddingLeft: 16 };
+  const mono = {
+    fontFamily: 'ui-monospace, SFMono-Regular, Menlo, Consolas, monospace',
+    fontSize: 12.5, color: '#7FE3DC', background: 'rgba(0,0,0,0.35)',
+    border: '1px solid rgba(94,196,200,0.25)', borderRadius: 6,
+    padding: '8px 10px', marginTop: 8, lineHeight: 1.8, textAlign: 'center',
+  };
+  return (
+    <Panel
+      title="Linear Regression & Gradient Descent"
+      sub="Fit house price to size, measure what the line misses, then walk the loss surface downhill."
+    >
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))', gap: 12 }}>
+        <GlassCard color="#5EC4C8" icon="chart" title="1. Fit the Line">
+          <ul style={pts}>
+            <li>y = actual price, x = house size</li>
+            <li>y-hat = predicted price; w = slope, b = intercept</li>
+            <li>Residuals e[i] = y[i] − y-hat[i]</li>
+          </ul>
+          <div style={mono}>y_hat = w * x + b</div>
+        </GlassCard>
+        <GlassCard color="#E8C558" icon="zap" title="2. Cost = MSE">
+          <ul style={pts}>
+            <li>Mean squared error over all points</li>
+            <li>One bowl, one global minimum</li>
+          </ul>
+          <div style={mono}>J = (1/n) * sum((y - y_hat)^2)</div>
+        </GlassCard>
+        <GlassCard color="#34D399" icon="refresh" title="3. Descend & Update">
+          <ul style={pts}>
+            <li>Step against the gradient by learning rate</li>
+            <li>MAE as the companion metric</li>
+          </ul>
+          <div style={mono}>w = w - lr * dJ/dw{'\n'}b = b - lr * dJ/db</div>
+        </GlassCard>
+      </div>
+    </Panel>
+  );
+}
 
 export default function LinearRegressionTab() {
   const [activeSubTab, setActiveSubTab] = useState('fitting');
@@ -110,14 +152,7 @@ export default function LinearRegressionTab() {
       <Container size="wide">
         {/* ARCHITECTURAL INFOGRAPHIC DIAGRAM */}
         <div style={{ marginBottom: 'var(--ds-space-6)' }}>
-          <DiagramImage
-            src="/assets/linear_regression_gradient_descent_arch.png"
-            alt="Linear Regression and Gradient Descent Architecture Diagram"
-            title="Linear Regression & Cost Function Optimization Pipeline"
-            caption="Overview: Left: Scatter plot of house sizes vs prices with linear regression line and residual errors. Middle: Convex loss surface J(w,b) showing Gradient Descent ball descending to global minimum. Right: Equation breakdown for MSE/MAE and weight update rules."
-            background="#090d16"
-            maxWidth={1050}
-          />
+          <LinearRegressionPanel />
         </div>
 
         {/* SUBTAB NAVIGATION */}

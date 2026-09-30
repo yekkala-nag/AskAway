@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import * as Primitives from '../components/layout/Primitives.jsx';
 import { Hero, CodeBlock, Stepper } from '../components/ui/Content.jsx';
 import { Card, Badge, Button, Callout } from '../components/ui/Core.jsx';
-import DiagramImage from '../components/ui/DiagramImage.jsx';
+import { Panel, GlassCard } from '../components/ui/CleanInfographics.jsx';
 import {
   EXTRACTION_SCENARIOS,
   FSM_DECODING_STEPS,
@@ -10,6 +10,45 @@ import {
 } from './structuredEngine.js';
 
 const { Container, Section, Grid, Flex, Stack } = Primitives;
+
+/** Native recreation: three paradigms for schema-valid LLM outputs. */
+function StructuredOutputsPanel() {
+  const pts = { fontSize: 12.5, color: '#CBD5E1', lineHeight: 1.65, margin: '6px 0 0', paddingLeft: 16 };
+  const flow = { fontSize: 12, color: '#7FE3DC', marginTop: 8, lineHeight: 1.6 };
+  return (
+    <Panel
+      title="Generating Structured Outputs — 3 Core Paradigms"
+      sub="From retry loops to server-side enforcement to mathematically guaranteed constrained decoding."
+    >
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))', gap: 12 }}>
+        <GlassCard color="#6A9BD8" icon="refresh" title="1. Prompt & Re-prompting">
+          <div style={flow}>Input → LLM + JSON instructions → validation → parsed output; retry on parse errors.</div>
+          <ul style={pts}>
+            <li>Simple to implement</li>
+            <li>Prone to hallucinations &amp; structural errors</li>
+            <li>Multiple round trips; inconsistent results</li>
+          </ul>
+        </GlassCard>
+        <GlassCard color="#E8C558" icon="shield" title="2. Provider Enforcement">
+          <div style={flow}>Input → LLM + defined JSON schema; server-side grammar validated during generation.</div>
+          <ul style={pts}>
+            <li>Needs tuning or proprietary hooks</li>
+            <li>Capability-dependent; fewer errors</li>
+            <li>Black-box implementation</li>
+          </ul>
+        </GlassCard>
+        <GlassCard color="#34D399" icon="cpu" title="3. Constrained Decoding" badge="100% valid">
+          <div style={flow}>Schema → compiler → deterministic finite automaton; logit masking zeroes invalid tokens.</div>
+          <ul style={pts}>
+            <li>Guaranteed structural validity</li>
+            <li>Open-weights compatible; single pass</li>
+            <li>No token-level hallucinations</li>
+          </ul>
+        </GlassCard>
+      </div>
+    </Panel>
+  );
+}
 
 export default function StructuredOutputsTab() {
   const [activeSubTab, setActiveSubTab] = useState('paradigms'); // 'paradigms' | 'fsm' | 'workbench' | 'benchmark' | 'code'
@@ -39,14 +78,7 @@ export default function StructuredOutputsTab() {
       <Container size="wide">
         {/* ARCHITECTURAL INFOGRAPHIC CARD */}
         <div style={{ marginBottom: 'var(--ds-space-6)' }}>
-          <DiagramImage
-            src="/assets/structured_outputs_llm_arch.png"
-            alt="Generating Structured Outputs from LLMs: 3 Core Paradigms Diagram"
-            title="Structured Output Paradigms — Prompting vs API Enforcement vs FSM Constrained Decoding"
-            caption="Comparison: 1. Prompt & Re-prompting (Client-side validation with retry loops) ➔ 2. API Provider Enforcement (OpenAI strict JSON Schema) ➔ 3. Constrained Decoding (FSM Logit Masking compiling JSON Schema into DFA and masking invalid vocabulary logits to -infinity at each step)."
-            background="#0a0f1d"
-            maxWidth={1050}
-          />
+          <StructuredOutputsPanel />
         </div>
 
         {/* SUBTAB NAVIGATION */}

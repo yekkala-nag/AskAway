@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import * as Primitives from '../components/layout/Primitives.jsx';
 import { Hero, CodeBlock } from '../components/ui/Content.jsx';
 import { Card, Badge, Button, Callout } from '../components/ui/Core.jsx';
-import DiagramImage from '../components/ui/DiagramImage.jsx';
+import { Panel, GlassCard } from '../components/ui/CleanInfographics.jsx';
 import {
   FLAT_PILE_FAILURE_MODES,
   CORPUS_SHAPES_TAXONOMY,
@@ -12,6 +12,45 @@ import {
 } from './corpusEngine.js';
 
 const { Container, Grid, Flex, Stack } = Primitives;
+
+/** Native recreation: diagnose the corpus shape, then pick the architecture it deserves. */
+function CorpusShapesPanel() {
+  const pts = { fontSize: 12.5, color: '#CBD5E1', lineHeight: 1.65, margin: '6px 0 0', paddingLeft: 16 };
+  const flow = { fontSize: 12, color: '#7FE3DC', marginTop: 8, lineHeight: 1.6 };
+  return (
+    <Panel
+      title="Three Kinds of RAG Corpus & Architecture Selection"
+      sub="A flat pile of vectors fails in predictable ways; three diagnostic questions reveal the corpus shape, and the shape picks the architecture."
+    >
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))', gap: 12 }}>
+        <GlassCard color="#E8836A" icon="zap" title="1. Flat-Pile Failure Modes">
+          <div style={flow}>One naive vector store over a random assortment.</div>
+          <ul style={pts}>
+            <li>Vocabulary drift across conflicting terminologies</li>
+            <li>Cross-file bleeding into unrelated text</li>
+            <li>Multi-doc dilution, missing-file silence</li>
+            <li>Supersession failure — stale versions win</li>
+          </ul>
+        </GlassCard>
+        <GlassCard color="#5EC4C8" icon="help" title="2. Three Diagnostic Questions">
+          <div style={flow}>Unstructured? Typed content? Logically bundled?</div>
+          <ul style={pts}>
+            <li>Pile of unrelated PDFs</li>
+            <li>Homogeneous typed corpus — invoices, contracts, emails</li>
+            <li>Case-file bundles — client info, briefs, exhibits</li>
+          </ul>
+        </GlassCard>
+        <GlassCard color="#6A9BD8" icon="cpu" title="3. Architecture Selection">
+          <div style={flow}>Match the engine to the shape.</div>
+          <ul style={pts}>
+            <li>Naive for-loop baseline — slow, exhaustive, a starting point</li>
+            <li>Metadata table indexing — doc_type / client filters, precise</li>
+          </ul>
+        </GlassCard>
+      </div>
+    </Panel>
+  );
+}
 
 export default function RAGCorpusShapesTab() {
   const [activeSubTab, setActiveSubTab] = useState('failures'); // 'failures' | 'taxonomy' | 'benchmark' | 'code'
@@ -44,14 +83,7 @@ export default function RAGCorpusShapesTab() {
       <Container size="wide">
         {/* ARCHITECTURAL INFOGRAPHIC DIAGRAM */}
         <div style={{ marginBottom: 'var(--ds-space-6)' }}>
-          <DiagramImage
-            src="/assets/rag_corpus_shapes_arch.png"
-            alt="Three Kinds of RAG Corpus Architecture Diagram"
-            title="Three Kinds of RAG Corpus & Architecture Selection Matrix"
-            caption="Overview: Left: Flat-Pile Vector Store Failure Modes. Middle: 3 Diagnostic Questions & Corpus Taxonomy. Right: Naive For-Loop Baseline vs Metadata Table Indexing."
-            background="#090d16"
-            maxWidth={1050}
-          />
+          <CorpusShapesPanel />
         </div>
 
         {/* SUBTAB NAVIGATION */}

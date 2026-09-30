@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import * as Primitives from '../components/layout/Primitives.jsx';
 import { Hero, CodeBlock } from '../components/ui/Content.jsx';
 import { Card, Badge, Button, Callout } from '../components/ui/Core.jsx';
-import DiagramImage from '../components/ui/DiagramImage.jsx';
+import { Panel, GlassCard } from '../components/ui/CleanInfographics.jsx';
 import {
   GOAL_CATEGORIES,
   INITIAL_GOALS_CATALOG,
@@ -12,6 +12,39 @@ import {
 } from './goalEngine.js';
 
 const { Container, Section, Grid, Flex, Stack } = Primitives;
+
+/** Native recreation: goal catalog → serverless Postgres → analytics dashboard. */
+function GoalTrackerPanel() {
+  const pts = { fontSize: 12.5, color: '#CBD5E1', lineHeight: 1.65, margin: '6px 0 0', paddingLeft: 16 };
+  return (
+    <Panel
+      title="Data-Driven Vision Board & Goal Tracker"
+      sub="Catalog goals by frequency, persist them in serverless Postgres, and read progress off an analytics dashboard."
+    >
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))', gap: 12 }}>
+        <GlassCard color="#34D399" icon="flag" title="1. Goal Catalog">
+          <ul style={pts}>
+            <li>High-frequency: daily routines, habits, updates</li>
+            <li>Low-frequency: long-term vision, strategy, milestones</li>
+          </ul>
+        </GlassCard>
+        <GlassCard color="#5EC4C8" icon="file" title="2. Serverless Database">
+          <ul style={pts}>
+            <li>Tables: goals catalog, daily/weekly/long-term tracking, users</li>
+            <li>Serverless connection pooling + data sync</li>
+          </ul>
+        </GlassCard>
+        <GlassCard color="#A78BFA" icon="chart" title="3. Execution Dashboard">
+          <ul style={pts}>
+            <li>Matrix visualisation + gap indicators</li>
+            <li>Weekday aggregations + progress heatmaps</li>
+            <li>Incremental updates close the loop</li>
+          </ul>
+        </GlassCard>
+      </div>
+    </Panel>
+  );
+}
 
 export default function GoalTrackerTab() {
   const [activeSubTab, setActiveSubTab] = useState('execution'); // 'setup' | 'execution' | 'analytics' | 'code'
@@ -73,14 +106,7 @@ export default function GoalTrackerTab() {
       <Container size="wide">
         {/* ARCHITECTURAL INFOGRAPHIC DIAGRAM */}
         <div style={{ marginBottom: 'var(--ds-space-6)' }}>
-          <DiagramImage
-            src="/assets/goal_tracker_2026_arch.png"
-            alt="The 2026 Goal Tracker & Vision Board Architecture Diagram"
-            title="System Architecture — Multi-Scale Goal Catalog, Neon Postgres DB, and Streamlit Matrix Grid"
-            caption="Overview: 1. Multi-Frequency Goal Catalog (High-frequency Daily Habits vs Low-frequency Strategic Vision) ➔ 2. Neon Serverless Postgres Database (5 SQL Tables) ➔ 3. Streamlit Execution Grid & Analytics Dashboard (Gap analysis & ISO week aggregations)."
-            background="#080c16"
-            maxWidth={1050}
-          />
+          <GoalTrackerPanel />
         </div>
 
         {/* SUBTAB NAVIGATION */}

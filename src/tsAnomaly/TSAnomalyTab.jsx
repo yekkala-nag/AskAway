@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import * as Primitives from '../components/layout/Primitives.jsx';
 import { Hero, CodeBlock } from '../components/ui/Content.jsx';
 import { Card, Badge, Button, Callout } from '../components/ui/Core.jsx';
-import DiagramImage from '../components/ui/DiagramImage.jsx';
+import { Panel, GlassBar } from '../components/ui/CleanInfographics.jsx';
 import {
   ANOMALY_DETECTION_THEORY,
   GENERATE_SYNTHETIC_SIGNAL,
@@ -14,6 +14,39 @@ import Workflow from '../components/ui/Workflow.jsx';
 import { Reveal, AnimatedNumber } from '../components/ui/AnimatedReveal.jsx';
 
 const { Container, Section, Grid, Flex, Stack } = Primitives;
+
+/** Native recreation: conv autoencoder compresses the signal; MSE decides normal vs anomaly. */
+function AnomalyAutoencoderPanel() {
+  const chip = (accent) => ({
+    background: 'rgba(255,255,255,0.05)', border: `1px solid ${accent}66`,
+    borderRadius: 10, padding: '10px 14px', fontSize: 12.5, fontWeight: 700,
+    color: '#F1F5F9', textAlign: 'center', minWidth: 120,
+  });
+  const note = { fontSize: 11, color: '#94A3B8', fontWeight: 400, marginTop: 2 };
+  const arrow = { color: '#5EC4C8', fontWeight: 800, fontSize: 16, alignSelf: 'center', flexShrink: 0 };
+  return (
+    <Panel
+      title="1D Convolutional Autoencoder — Anomaly by Reconstruction Error"
+      sub="Train on normal signals only. What reconstructs cleanly is normal; what the bottleneck cannot rebuild is anomalous."
+    >
+      <div style={{ display: 'flex', alignItems: 'stretch', gap: 10, flexWrap: 'wrap', marginBottom: 12 }}>
+        <div style={{ ...chip('#94A3B8'), alignSelf: 'center' }}>Input signal</div>
+        <span style={arrow}>→</span>
+        <div style={{ ...chip('#5EC4C8'), alignSelf: 'center' }}>1D Conv Encoder<div style={note}>Conv1D + ReLU · MaxPool downsample</div></div>
+        <span style={arrow}>→</span>
+        <div style={{ ...chip('#A78BFA'), alignSelf: 'center' }}>Bottleneck<div style={note}>compressed latent space</div></div>
+        <span style={arrow}>→</span>
+        <div style={{ ...chip('#6A9BD8'), alignSelf: 'center' }}>1D Conv Decoder<div style={note}>transpose conv · upsample</div></div>
+        <span style={arrow}>→</span>
+        <div style={{ ...chip('#E8C558'), alignSelf: 'center' }}>MSE gate<div style={note}>loss(x, x̂) vs threshold</div></div>
+      </div>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: 12 }}>
+        <GlassBar color="#34D399" icon="check" title="Low MSE → OK / Normal" detail="Reconstruction matches the input: the pattern was seen in training." />
+        <GlassBar color="#E8836A" icon="zap" title="High MSE → Anomaly Alert" detail="Reconstruction diverges: unseen pattern. Raise the alert with the offending window attached." />
+      </div>
+    </Panel>
+  );
+}
 
 export default function TSAnomalyTab() {
   const [activeSubTab, setActiveSubTab] = useState('theory'); // 'theory' | 'generator' | 'threshold' | 'code'
@@ -42,16 +75,9 @@ export default function TSAnomalyTab() {
       />
 
       <Container size="wide">
-        {/* ARCHITECTURAL INFOGRAPHIC DIAGRAM */}
+        {/* NATIVE GLASS RECREATION */}
         <div style={{ marginBottom: 'var(--ds-space-6)' }}>
-          <DiagramImage
-            src="/assets/time_series_autoencoder_arch.png"
-            alt="Time Series Autoencoder Anomaly Detection Architecture Diagram"
-            title="1D Convolutional Autoencoder Anomaly Detection Pipeline"
-            caption="Overview: Input Time Series Signal ➔ 1D ConvEncoder (Conv1D + MaxPool1D) compresses input into Bottleneck Latent Space ➔ 1D ConvDecoder (ConvTranspose1D + UpSampling) reconstructs signal ➔ MSE Loss compared against 99th Percentile Threshold (Low MSE = Normal, High MSE = Anomaly Alert)."
-            background="#090d16"
-            maxWidth={1050}
-          />
+          <AnomalyAutoencoderPanel />
         </div>
 
         {/* SUBTAB NAVIGATION */}

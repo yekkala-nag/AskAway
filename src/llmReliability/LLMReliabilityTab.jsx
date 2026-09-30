@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import * as Primitives from '../components/layout/Primitives.jsx';
 import { Hero, CodeBlock } from '../components/ui/Content.jsx';
 import { Card, Badge, Button, Callout } from '../components/ui/Core.jsx';
-import DiagramImage from '../components/ui/DiagramImage.jsx';
+import { Panel, GlassCard } from '../components/ui/CleanInfographics.jsx';
 import {
   PARSE_MARKUP_TAGS,
   VALIDATE_OUTPUT_SCHEMA,
@@ -14,6 +14,57 @@ import Workflow from '../components/ui/Workflow.jsx';
 import { Reveal, AnimatedNumber } from '../components/ui/AnimatedReveal.jsx';
 
 const { Container, Grid, Flex, Stack } = Primitives;
+
+/** Native recreation: stochastic challenges → 5 mechanisms → reliable output. */
+function ReliabilityPanel() {
+  const pts = { fontSize: 12.5, color: '#CBD5E1', lineHeight: 1.65, margin: '6px 0 0', paddingLeft: 16 };
+  return (
+    <Panel
+      title="LLM Reliability & Fault Tolerance — 5 Mechanisms"
+      sub="Stochastic outputs go in; five deterministic mechanisms stand between them and production."
+    >
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: 12 }}>
+        <GlassCard color="#E8836A" icon="zap" title="Challenges In">
+          <ul style={pts}>
+            <li>Inconsistent formats (JSON / free-text mix)</li>
+            <li>Rate limits and throttling</li>
+            <li>Provider outages</li>
+          </ul>
+        </GlassCard>
+        <GlassCard color="#5EC4C8" icon="clip" title="1–2 · Parse & Validate">
+          <ul style={pts}>
+            <li>Markup tag parsing — extract content</li>
+            <li>Schema validation — types enforced</li>
+          </ul>
+        </GlassCard>
+        <GlassCard color="#6A9BD8" icon="file" title="3 · System Prompting">
+          <ul style={pts}>
+            <li>Structured prompt + context blocks</li>
+            <li>Conformance described up front</li>
+          </ul>
+        </GlassCard>
+        <GlassCard color="#E8C558" icon="refresh" title="4 · Backoff Retries">
+          <ul style={pts}>
+            <li>Exponential timeline: 2s → 4s → 8s</li>
+            <li>Transient faults ride out</li>
+          </ul>
+        </GlassCard>
+        <GlassCard color="#A78BFA" icon="nodes" title="5 · Provider Fallback">
+          <ul style={pts}>
+            <li>Primary → fallback → fallback chain</li>
+            <li>Yes/no routing on failure</li>
+          </ul>
+        </GlassCard>
+        <GlassCard color="#34D399" icon="check" title="Reliable Output" badge="99.9%">
+          <ul style={pts}>
+            <li>Status, success, and data streams green</li>
+            <li>Handled errors → logging + notifications</li>
+          </ul>
+        </GlassCard>
+      </div>
+    </Panel>
+  );
+}
 
 export default function LLMReliabilityTab() {
   const [activeSubTab, setActiveSubTab] = useState('xml'); // 'xml' | 'schema' | 'fallback' | 'code'
@@ -55,14 +106,7 @@ export default function LLMReliabilityTab() {
       <Container size="wide">
         {/* ARCHITECTURAL INFOGRAPHIC DIAGRAM */}
         <div style={{ marginBottom: 'var(--ds-space-6)' }}>
-          <DiagramImage
-            src="/assets/llm_application_reliability_arch.png"
-            alt="LLM Application Reliability & Fault Tolerance Architecture Diagram"
-            title="LLM Application Reliability & Fault Tolerance Engineering Architecture"
-            caption="Overview: Left: Stochastic LLM Output Challenges. Middle: 5 Reliability Mechanisms (XML Tags, Pydantic Validation, System Prompting, Backoff Retries, Multi-Provider Fallback). Right: 99.9% Production Reliable Output Stream vs Handled Error Alerts."
-            background="#090d16"
-            maxWidth={1050}
-          />
+          <ReliabilityPanel />
         </div>
 
         {/* SUBTAB NAVIGATION */}

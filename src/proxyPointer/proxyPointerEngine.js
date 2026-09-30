@@ -232,7 +232,6 @@ export const MULTIMODAL_SCENARIOS = [
     multimodalLLMAnswer: {
       model: "Gemini 1.5 Pro / GPT-4o Multimodal",
       textAnswer: "According to Figure 4.2 on page 14 of the Q2 2026 Financial Report, revenue in Europe grew by +32.4% year-over-year, increasing from $142 Million in Q2 2025 to $188 Million in Q2 2026, driven primarily by enterprise SaaS expansion.",
-      renderedAssetUri: "/assets/proxy_pointer_multimodal_architecture.jpg",
       confidence: "99.4%"
     },
     clipColPaliVsProxyComparison: {
@@ -260,7 +259,6 @@ export const MULTIMODAL_SCENARIOS = [
     multimodalLLMAnswer: {
       model: "Gemini 1.5 Pro / GPT-4o Multimodal",
       textAnswer: "As illustrated in Figure 2.1 on page 8 of the Platform Architecture Blueprint, a Redis Cluster L2 Cache sits directly between the API Gateway and the Auth Service to cache validated JWT session tokens and prevent DB stampedes.",
-      renderedAssetUri: "/assets/multimodal_proxy_pointer_flow.png",
       confidence: "98.9%"
     },
     clipColPaliVsProxyComparison: {

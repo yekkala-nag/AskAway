@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import * as Primitives from '../components/layout/Primitives.jsx';
 import { Hero, CodeBlock } from '../components/ui/Content.jsx';
 import { Card, Badge, Button, Callout } from '../components/ui/Core.jsx';
-import DiagramImage from '../components/ui/DiagramImage.jsx';
+import { Panel, GlassCard } from '../components/ui/CleanInfographics.jsx';
 import {
   LSTM_VS_XLSTM_MATRIX,
   CALCULATE_CLASSICAL_LSTM_STEP,
@@ -14,6 +14,50 @@ import Workflow from '../components/ui/Workflow.jsx';
 import { Reveal, AnimatedNumber } from '../components/ui/AnimatedReveal.jsx';
 
 const { Container, Section, Grid, Flex, Stack } = Primitives;
+
+/** Native recreation: classical scalar-memory LSTM vs xLSTM (sLSTM + mLSTM). */
+function LstmComparisonPanel() {
+  const mono = {
+    fontFamily: 'ui-monospace, SFMono-Regular, Menlo, Consolas, monospace',
+    fontSize: 12, color: '#7FE3DC', background: 'rgba(0,0,0,0.35)',
+    border: '1px solid rgba(94,196,200,0.25)', borderRadius: 6,
+    padding: '8px 10px', marginTop: 8, lineHeight: 1.7, whiteSpace: 'pre-wrap',
+  };
+  const pts = { fontSize: 12.5, color: '#CBD5E1', lineHeight: 1.65, margin: '6px 0 0', paddingLeft: 16 };
+  return (
+    <Panel
+      title="Classical LSTM vs Extended LSTM (xLSTM)"
+      sub="Scalar memory with sigmoid gates — versus exponential gating with a normalizer plus a matrix memory with key/query/value projections."
+    >
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 12 }}>
+        <GlassCard color="#6A9BD8" icon="refresh" title="Classical LSTM · Scalar Memory">
+          <ul style={pts}>
+            <li>Forget / input / output sigmoid gates</li>
+            <li>Single scalar cell C[t] with tanh output</li>
+            <li>Inputs: x[t], h[t-1]</li>
+          </ul>
+          <div style={mono}>{'C[t] = f[t]*C[t-1] + i[t]*C~[t]\nh[t] = o[t] * tanh(C[t])'}</div>
+        </GlassCard>
+        <GlassCard color="#A78BFA" icon="zap" title="sLSTM · Exponential Gating">
+          <ul style={pts}>
+            <li>Exponential gates replace sigmoids</li>
+            <li>Normalizer state n[t] stabilizes scale</li>
+            <li>n[t] = f[t]*n[t-1] + i[t]</li>
+          </ul>
+          <div style={mono}>{'f[t] = exp(W_f · x[t])\nscalar memory, normalized'}</div>
+        </GlassCard>
+        <GlassCard color="#34D399" icon="cpu" title="mLSTM · Matrix Memory">
+          <ul style={pts}>
+            <li>Memory cell is a matrix C in R^(dxd)</li>
+            <li>Key / query / value projections</li>
+            <li>Covariance-style outer-product update</li>
+          </ul>
+          <div style={mono}>{'C[t] = f[t]*C[t-1] + i[t]*(v[t]·k[t]^T)'}</div>
+        </GlassCard>
+      </div>
+    </Panel>
+  );
+}
 
 export default function XLSTMTab() {
   const [activeSubTab, setActiveSubTab] = useState('overview'); // 'overview' | 'handcalc' | 'slstm' | 'code'
@@ -49,16 +93,9 @@ export default function XLSTMTab() {
       />
 
       <Container size="wide">
-        {/* ARCHITECTURAL INFOGRAPHIC DIAGRAM */}
+        {/* NATIVE GLASS RECREATION */}
         <div style={{ marginBottom: 'var(--ds-space-6)' }}>
-          <DiagramImage
-            src="/assets/xlstm_architecture_arch.png"
-            alt="Classical LSTM vs Extended LSTM (xLSTM) Architecture Diagram"
-            title="Classical LSTM vs Extended LSTM (sLSTM & mLSTM) Structural Comparison"
-            caption="Left: Classical LSTM with Sigmoid Forget/Input/Output gates and scalar memory cell C_t. Right: xLSTM with sLSTM (Exponential Gating exp(x) + Normalizer state n_t) and mLSTM (Matrix Memory C_t in R^{d x d} with Key, Query, Value projections)."
-            background="#090d16"
-            maxWidth={1050}
-          />
+          <LstmComparisonPanel />
         </div>
 
         {/* SUBTAB NAVIGATION */}

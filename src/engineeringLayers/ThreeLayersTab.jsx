@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Panel, GlassBar } from "../components/ui/CleanInfographics.jsx";
 
 const LAYERS = [
   {
@@ -107,6 +108,22 @@ const FLASHCARDS = [
   { q: "What is Adversarial Verification in loop engineering?", a: "Deploying a dedicated 'refuter' sub-agent whose sole goal is attempting to disprove or find flaws in a candidate answer before committing.", cat: "Loop Engineering" }
 ];
 
+/** Native glass companion to the interactive layer selector. */
+function EngineeringLayersPanel() {
+  return (
+    <Panel
+      title="Three Engineering Layers of Enterprise RAG"
+      sub="Prompt, context, and loop — each layer owns a failure mode and a fix."
+    >
+      <div style={{ display: "grid", gap: 12 }}>
+        <GlassBar color="#E8C558" icon="chat" index="1." title="Prompt Engineering" detail="User query → system prompt (role, constraints) + schema → LLM call → generated response." />
+        <GlassBar color="#5EC4C8" icon="search" index="2." title="Context Engineering" detail="Query → semantic search over the vector DB → retrieval pipeline (rewrite, dense/sparse) → select, compress, filter → optimized context." />
+        <GlassBar color="#A78BFA" icon="refresh" index="3." title="Loop Engineering" detail="Execution loop: triggers, fan-out/fan-in, adversarial verify, retry with backoff, self-correction, evaluation loop, parallel execution, termination." />
+      </div>
+    </Panel>
+  );
+}
+
 export default function ThreeLayersTab() {
   const [selectedLayer, setSelectedLayer] = useState("prompt");
   const [contextSize, setContextSize] = useState(16); // in k tokens
@@ -168,8 +185,8 @@ export default function ThreeLayersTab() {
         </p>
 
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: "1.5rem", alignItems: "center" }}>
-          <div style={{ background: "#0d0d15", borderRadius: 12, overflow: "hidden", border: "1px solid #3b3b54", textAlign: "center", display: "flex", alignItems: "center", justifyContent: "center", aspectRatio: "1/1", maxHeight: 440, margin: "0 auto", width: "100%" }}>
-            <img src="/assets/three_engineering_layers.png" alt="Three Engineering Layers of RAG" loading="lazy" decoding="async" style={{ width: "100%", height: "100%", objectFit: "contain", display: "block" }} />
+          <div style={{ background: "transparent", borderRadius: 12, overflow: "hidden", textAlign: "center", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto", width: "100%" }}>
+            <EngineeringLayersPanel />
           </div>
 
           <div style={{ display: "flex", flexDirection: "column", gap: "0.8rem" }}>

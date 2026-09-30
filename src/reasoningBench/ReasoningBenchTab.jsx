@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import * as Primitives from '../components/layout/Primitives.jsx';
 import { Hero, CodeBlock } from '../components/ui/Content.jsx';
 import { Card, Badge, Button, Callout } from '../components/ui/Core.jsx';
-import DiagramImage from '../components/ui/DiagramImage.jsx';
+import { GsmSymbolicPanel } from '../components/ui/CleanInfographics.jsx';
 import {
   GSM_SYMBOLIC_MUTATIONS,
   GSM_NOOP_DISTRACTORS,
@@ -46,16 +46,9 @@ export default function ReasoningBenchTab() {
       />
 
       <Container size="wide">
-        {/* ARCHITECTURAL INFOGRAPHIC DIAGRAM */}
+        {/* NATIVE GLASS RECREATION */}
         <div style={{ marginBottom: 'var(--ds-space-6)' }}>
-          <DiagramImage
-            src="/assets/gsm_symbolic_reasoning_arch.png"
-            alt="Rethinking LLM Benchmarks: Apple GSM-Symbolic Architecture Diagram"
-            title="Apple's GSM-Symbolic Benchmark Architecture — Pattern Matching vs Abstract Reasoning"
-            caption="Overview: 1. GSM-Symbolic Template Generator (Mutating numbers/names) ➔ 2. GSM-NoOp Irrelevant Noise Injection (Up to 65% accuracy drop) ➔ 3. Pattern Matching vs Neuro-Symbolic Reasoning Engine."
-            background="#090d16"
-            maxWidth={1050}
-          />
+          <GsmSymbolicPanel />
         </div>
 
         {/* SUBTAB NAVIGATION */}

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import * as Primitives from '../components/layout/Primitives.jsx';
 import { Hero, CodeBlock } from '../components/ui/Content.jsx';
 import { Card, Badge, Button, Callout } from '../components/ui/Core.jsx';
-import DiagramImage from '../components/ui/DiagramImage.jsx';
+import { Panel, GlassCard } from '../components/ui/CleanInfographics.jsx';
 import {
   PARADIGMS_COMPARISON,
   BENCHMARK_RULESET_DATA,
@@ -11,6 +11,45 @@ import {
 } from './promptLearningEngine.js';
 
 const { Container, Grid, Flex, Stack } = Primitives;
+
+/** Native recreation: from gradient RL to natural-language prompt learning loops. */
+function PromptLearningPanel() {
+  const pts = { fontSize: 12.5, color: '#CBD5E1', lineHeight: 1.65, margin: '6px 0 0', paddingLeft: 16 };
+  const flow = { fontSize: 12, color: '#7FE3DC', marginTop: 8, lineHeight: 1.6 };
+  return (
+    <Panel
+      title="Prompt Learning & English Feedback Loop"
+      sub="Skip weight gradients: critique outputs in plain language, fold the critique into better instructions, repeat until the rules stick."
+    >
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))', gap: 12 }}>
+        <GlassCard color="#6A9BD8" icon="refresh" title="1. Three Paradigms">
+          <div style={flow}>From expensive gradients to gradient-free words.</div>
+          <ul style={pts}>
+            <li>RL weight gradients — scalar reward, backprop, expensive</li>
+            <li>Scalar prompt optimization — discrete tokens, gradient-free</li>
+            <li>Prompt learning — natural-language critiques of failures</li>
+          </ul>
+        </GlassCard>
+        <GlassCard color="#5EC4C8" icon="nodes" title="2. Four-Stage Loop">
+          <div style={flow}>Each loop produces a stronger prompt than the last.</div>
+          <ul style={pts}>
+            <li>Production execution trace (outputs + metadata)</li>
+            <li>Evaluator critique vs examples and guidelines</li>
+            <li>Meta-prompt manager writes improved instructions</li>
+            <li>Context accumulation compacts the instruction set</li>
+          </ul>
+        </GlassCard>
+        <GlassCard color="#34D399" icon="chart" title="3. Benchmark Trend" badge="100% by loop 5">
+          <div style={flow}>Accuracy, success, and compliance climb every loop.</div>
+          <ul style={pts}>
+            <li>100% rule compliance on 10–50 latent rules</li>
+            <li>Error rate collapses across 5 iterations</li>
+          </ul>
+        </GlassCard>
+      </div>
+    </Panel>
+  );
+}
 
 export default function PromptLearningTab() {
   const [activeSubTab, setActiveSubTab] = useState('paradigms'); // 'paradigms' | 'simulator' | 'benchmarks' | 'code'
@@ -40,14 +79,7 @@ export default function PromptLearningTab() {
       <Container size="wide">
         {/* ARCHITECTURAL INFOGRAPHIC DIAGRAM */}
         <div style={{ marginBottom: 'var(--ds-space-6)' }}>
-          <DiagramImage
-            src="/assets/prompt_learning_english_feedback_arch.png"
-            alt="Prompt Learning & English Feedback Loop Architecture Diagram"
-            title="Prompt Learning & English Feedback Loop Architecture Diagram"
-            caption="Overview: Left: Traditional RL Weight Gradients vs Scalar Prompt Optimization vs Prompt Learning (Natural Language Critiques). Middle: The 4-Stage Prompt Learning Loop (Trace ➔ Critique ➔ Meta-Prompt ➔ Instruction Compaction). Right: 5-Loop Benchmark Performance."
-            background="#090d16"
-            maxWidth={1050}
-          />
+          <PromptLearningPanel />
         </div>
 
         {/* SUBTAB NAVIGATION */}

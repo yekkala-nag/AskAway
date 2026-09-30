@@ -2,6 +2,7 @@ import { useState, useEffect, useRef, useCallback, Suspense } from "react";
 import { TABS_REGISTRY, CATEGORIES, UMBRELLA_TOPICS, getTabById } from "./registry/tabsRegistry.js";
 import { s } from "./styles/legacyStyles.js";
 import DiagramImage from "./components/ui/DiagramImage.jsx";
+import { LcelPipelinePanel, StateGraphPanel, RagIndexRetrievePanel, HybridRetrievalPanel } from "./components/ui/CleanInfographics.jsx";
 import LangChainVsLangGraphComparison from "./components/ui/LangChainVsLangGraphComparison.jsx";
 import StrandsAgentCoreTab from "./strandsAgentCore/StrandsAgentCoreTab.jsx";
 import Sidebar from "./components/layout/Sidebar.jsx";
@@ -651,14 +652,7 @@ const LangChainVisual = () => {
     <div>
       {/* INTERACTIVE PIPELINE DIAGRAM */}
       <div style={{ marginBottom: "1.5rem" }}>
-        <DiagramImage
-          src="/assets/langchain_pipeline.png"
-          alt="LangChain Pipeline Infographic"
-          title="LangChain — Composable Pipeline Architecture"
-          caption="LangChain uses a pipeline approach where components are chained together in a specific sequence: Prompt → Model → Output Parser, with optional integration of Tools and Memory."
-          background="#0a0d14"
-          maxWidth={1200}
-        />
+        <LcelPipelinePanel />
       </div>
 
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem" }}>
@@ -863,14 +857,7 @@ const LangGraphVisual = () => {
     <div>
       {/* INTERACTIVE BLUEPRINT DIAGRAM */}
       <div style={{ marginBottom: "1.5rem" }}>
-        <DiagramImage
-          src="/assets/langgraph_framework_infographic.png"
-          alt="LangGraph Stateful Multi-Agent Framework Infographic"
-          title="LangGraph — Stateful Multi-Agent Framework & Core Architecture"
-          caption="Full LangGraph framework diagram mapping Graph-Based State Machines, Persistent State Checkpointing, Human-in-the-Loop Interruption, Streaming & Async Branches, Multi-Agent Support, Alternatives Matrix, Workflow, and Core Concepts."
-          background="#0a0d14"
-          maxWidth={1200}
-        />
+        <StateGraphPanel />
       </div>
 
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem" }}>
@@ -1129,13 +1116,7 @@ export const OverviewTab = ({ s }) => (
 export const RAGTypesTab = ({ s }) => (
   <div>
     <div style={{ marginBottom: "2rem", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(450px, 1fr))", gap: "1.5rem" }}>
-      <DiagramImage
-        src="/assets/rag_indexing_retrieval_architecture.png"
-        alt="RAG Indexing, Vector Store Retrieval & Context Augmentation Flow"
-        title="RAG Indexing & Retrieval Architecture"
-        caption="Complete end-to-end flow: Document Indexing (Chunking → Embedding → Vector Store) paired with Runtime Query Vectorization, Top-K Node Retrieval, Context Augmentation, and LLM Generation."
-        background="#031627"
-      />
+      <RagIndexRetrievePanel />
       <DiagramImage
         src="/assets/rag_types_spectrum.svg"
         alt="The RAG spectrum from Naive to cutting-edge variants"
@@ -1294,14 +1275,7 @@ export const FilteringTab = ({ s }) => {
 
       {/* HYBRID RETRIEVAL PIPELINE DIAGRAM */}
       <div style={{ marginBottom: "1.5rem" }}>
-        <DiagramImage
-          src="/assets/hybrid_retrieval_fusion_pipeline.png"
-          alt="Hybrid Retrieval Pipeline Diagram"
-          title="Hybrid Retrieval Pipeline — Vector + BM25 Fusion with Reranking"
-          caption="Production Hybrid Retrieval Architecture: User Query → Parallel Dense Vector Search (Semantic Matching) & BM25 Keyword Search (Exact Match for ISINs & Policy IDs) → Reciprocal Rank Fusion (RRF) → Metadata Filters (Jurisdiction, Effective Date, Access Control) → Cross-Encoder Reranking → Top 10 Context to LLM."
-          background="#ffffff"
-          maxWidth={1200}
-        />
+      <HybridRetrievalPanel />
       </div>
 
       {/* THE CORE INSIGHT */}

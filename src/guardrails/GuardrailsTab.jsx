@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import * as Primitives from '../components/layout/Primitives.jsx';
 import { Hero, CodeBlock } from '../components/ui/Content.jsx';
 import { Card, Badge, Button, Callout } from '../components/ui/Core.jsx';
-import DiagramImage from '../components/ui/DiagramImage.jsx';
+import { Panel, GlassCard } from '../components/ui/CleanInfographics.jsx';
 import {
   ANONYMIZE_PII_AND_AUTHORS,
   CHECK_COPYRIGHT_AND_IP,
@@ -11,6 +11,50 @@ import {
 } from './guardrailsEngine.js';
 
 const { Container, Grid, Flex, Stack } = Primitives;
+
+/** Native recreation: threats → 5-guardrail chain → safe stream or blocked alert. */
+function GuardrailsPanel() {
+  const pts = { fontSize: 12.5, color: '#CBD5E1', lineHeight: 1.65, margin: '6px 0 0', paddingLeft: 16 };
+  return (
+    <Panel
+      title="Responsible AI Guardrails & Safety Pipeline"
+      sub="Every prompt runs a threat gauntlet; five guardrails decide whether the output ships sanitized — or gets blocked with an alert."
+    >
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: 12 }}>
+        <GlassCard color="#E8836A" icon="zap" title="Threats In">
+          <ul style={pts}>
+            <li>Prompt injection attacks</li>
+            <li>PII extraction attempts</li>
+            <li>Copyrighted content requests</li>
+          </ul>
+        </GlassCard>
+        <GlassCard color="#5EC4C8" icon="shield" title="The 5-Guardrail Chain">
+          <ul style={pts}>
+            <li>Input filter — malicious strings</li>
+            <li>PII &amp; author redaction</li>
+            <li>Copyright / IP verification</li>
+            <li>System persona guard</li>
+            <li>Output anonymizer</li>
+          </ul>
+        </GlassCard>
+        <GlassCard color="#34D399" icon="check" title="Safe Output Stream" badge="sanitized">
+          <ul style={pts}>
+            <li>Redacted PII placeholders</li>
+            <li>IP compliance verified</li>
+            <li>General knowledge answers</li>
+          </ul>
+        </GlassCard>
+        <GlassCard color="#E5484D" icon="flag" title="Blocked Alerts">
+          <ul style={pts}>
+            <li>Jailbreak attempts (403)</li>
+            <li>PII disclosure prevented</li>
+            <li>Harmful language + notifications</li>
+          </ul>
+        </GlassCard>
+      </div>
+    </Panel>
+  );
+}
 
 export default function GuardrailsTab() {
   const [activeSubTab, setActiveSubTab] = useState('redaction'); // 'redaction' | 'copyright' | 'injection' | 'code'
@@ -53,14 +97,7 @@ export default function GuardrailsTab() {
       <Container size="wide">
         {/* ARCHITECTURAL INFOGRAPHIC DIAGRAM */}
         <div style={{ marginBottom: 'var(--ds-space-6)' }}>
-          <DiagramImage
-            src="/assets/responsible_ai_guardrails_security_arch.png"
-            alt="Responsible AI Guardrails & Security Architecture Diagram"
-            title="Responsible AI Guardrails, LLM Security & Safety Pipeline Architecture"
-            caption="Overview: Left: Threat Vector Detection. Middle: Multi-Layer Guardrail Architecture (Input Filter, PII & Author Redaction, Copyright/IP Verification Engine, System Persona Guard). Right: Safe Sanitized Output Stream vs Blocked Security Alerts."
-            background="#090d16"
-            maxWidth={1050}
-          />
+          <GuardrailsPanel />
         </div>
 
         {/* SUBTAB NAVIGATION */}

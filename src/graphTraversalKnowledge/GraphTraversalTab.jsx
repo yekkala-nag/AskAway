@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import * as Primitives from '../components/layout/Primitives.jsx';
 import { Hero, CodeBlock } from '../components/ui/Content.jsx';
 import { Card, Badge, Button, Callout } from '../components/ui/Core.jsx';
-import DiagramImage from '../components/ui/DiagramImage.jsx';
+import { Panel, GlassCard } from '../components/ui/CleanInfographics.jsx';
 import {
   ROUTER_RETIREMENT_COMPARISON,
   BITEMPORAL_EDGE_CONCEPTS,
@@ -12,6 +12,47 @@ import {
 } from './graphEngine.js';
 
 const { Container, Grid, Flex, Stack } = Primitives;
+
+/** Native recreation: fused retrieval, bitemporal integrity, two-threshold resolution. */
+function GraphTraversalPanel() {
+  const pts = { fontSize: 12.5, color: '#CBD5E1', lineHeight: 1.65, margin: '6px 0 0', paddingLeft: 16 };
+  const mono = {
+    fontFamily: 'ui-monospace, SFMono-Regular, Menlo, Consolas, monospace',
+    fontSize: 12, color: '#7FE3DC', background: 'rgba(0,0,0,0.35)',
+    border: '1px solid rgba(94,196,200,0.25)', borderRadius: 6,
+    padding: '6px 10px', marginTop: 8, lineHeight: 1.6,
+  };
+  return (
+    <Panel
+      title="Always-Fused Graph Traversal Knowledge Layer"
+      sub="Retire the heuristic router: run vector, keyword, and graph retrieval fused — on bitemporal edges with adjudicated entities."
+    >
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))', gap: 12 }}>
+        <GlassCard color="#A78BFA" icon="refresh" title="1. Fused Pipeline">
+          <ul style={pts}>
+            <li>Retire the heuristic query router</li>
+            <li>Vector + keyword + graph in parallel</li>
+            <li>One optimized multi-modal result set</li>
+          </ul>
+        </GlassCard>
+        <GlassCard color="#5EC4C8" icon="nodes" title="2. Temporal Integrity">
+          <ul style={pts}>
+            <li>Bitemporal edges: valid-time + system-time</li>
+            <li>Contradiction detection → reconciliation log</li>
+          </ul>
+          <div style={mono}>valid_from / valid_to + ingested_at</div>
+        </GlassCard>
+        <GlassCard color="#E8C558" icon="search" title="3. Entity Resolution" badge="149 → 19">
+          <ul style={pts}>
+            <li>Similarity ≥ 0.90 → auto-link canonical</li>
+            <li>0.60–0.90 → adjudicator: canonical or new</li>
+            <li>Below 0.60 → create new entity</li>
+          </ul>
+        </GlassCard>
+      </div>
+    </Panel>
+  );
+}
 
 export default function GraphTraversalTab() {
   const [activeSubTab, setActiveSubTab] = useState('pipeline'); // 'pipeline' | 'bitemporal' | 'resolver' | 'code'
@@ -42,14 +83,7 @@ export default function GraphTraversalTab() {
       <Container size="wide">
         {/* ARCHITECTURAL INFOGRAPHIC DIAGRAM */}
         <div style={{ marginBottom: 'var(--ds-space-6)' }}>
-          <DiagramImage
-            src="/assets/graph_traversal_knowledge_arch.png"
-            alt="Always-Fused Graph Traversal Knowledge Layer Architecture Diagram"
-            title="Always-Fused Graph Traversal & Bitemporal Knowledge Layer Architecture"
-            caption="Overview: Left: Retiring Heuristic Router for Always-Fused Retrieval. Middle: Bitemporal Edges & Contradictions. Right: Two-Threshold Entity Resolution Pipeline."
-            background="#090d16"
-            maxWidth={1050}
-          />
+          <GraphTraversalPanel />
         </div>
 
         {/* SUBTAB NAVIGATION */}

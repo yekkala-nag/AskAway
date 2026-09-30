@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import * as Primitives from '../components/layout/Primitives.jsx';
 import { Hero, CodeBlock } from '../components/ui/Content.jsx';
 import { Card, Badge, Button, Callout } from '../components/ui/Core.jsx';
-import { TokenOptimizationFlow } from '../components/ui/CleanInfographics.jsx';
+import { TokenOptimizationFlow, GlassBar } from '../components/ui/CleanInfographics.jsx';
 import {
   CONTAINER_SERVICES,
   K8S_PRODUCTION_RULES,
@@ -120,14 +120,10 @@ export default function TokenPlaybookTab() {
                 <span style={{ fontSize: '11px', color: '#3A9B9F', fontWeight: 'bold' }}>AI ARCHITECTURAL INFOGRAPHIC</span>
                 <h3 style={{ margin: '4px 0 0 0', color: '#f8fafc' }}>Containerized Microservices Architecture & Kubernetes Production</h3>
               </div>
-              <div style={{ width: '100%', aspectRatio: '16/9', maxHeight: '520px', overflow: 'hidden', borderRadius: '8px', border: '1px solid rgba(56, 189, 248, 0.3)', background: '#05070e', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <img
-                  src="/assets/enterprise_ai_production_stack_1788449465917.jpg"
-                  alt="Enterprise AI Production Stack"
-                  loading="lazy"
-                  decoding="async"
-                  style={{ width: '100%', height: '100%', objectFit: 'contain', objectPosition: 'center', display: 'block' }}
-                />
+              <div style={{ display: 'grid', gap: 10 }}>
+                <GlassBar color="#5EC4C8" icon="file" title="Local Compose" detail="Single-file local stack for development: API, cache, and vector store on fixed ports." />
+                <GlassBar color="#6A9BD8" icon="cpu" title="Containerized Microservices" detail="API container with orchestration libs, semantic-cache and rate-limit store, vector database — wired over service ports." />
+                <GlassBar color="#A78BFA" icon="shield" title="Production Deployment" detail="Autoscaler on API replicas, secrets vault for keys, cloud tracing and telemetry spans on every request." />
               </div>
             </Card>
 
@@ -316,14 +312,9 @@ CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000", "--workers", 
                 <span style={{ fontSize: '11px', color: '#3A9B9F', fontWeight: 'bold' }}>AI ARCHITECTURAL INFOGRAPHIC</span>
                 <h3 style={{ margin: '4px 0 0 0', color: '#f8fafc' }}>LangSmith Token Governance & Executive ROI Tracking</h3>
               </div>
-              <div style={{ width: '100%', aspectRatio: '16/9', maxHeight: '520px', overflow: 'hidden', borderRadius: '8px', border: '1px solid rgba(16, 185, 129, 0.3)', background: '#05070e', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <img
-                  src="/assets/langsmith_token_governance_trace_1788449496006.jpg"
-                  alt="LangSmith Token Governance Trace"
-                  loading="lazy"
-                  decoding="async"
-                  style={{ width: '100%', height: '100%', objectFit: 'contain', objectPosition: 'center', display: 'block' }}
-                />
+              <div style={{ display: 'grid', gap: 10 }}>
+                <GlassBar color="#34D399" icon="zap" title="Span Waterfall" badge="450 / 620 saved" detail="Pipeline 420ms: cache check hits in 45ms, routing in 12ms, vector search over 12 docs, assembly, then generation (520 in / 100 out)." />
+                <GlassBar color="#5EC4C8" icon="chart" title="ROI Dashboard" detail="12.45M cumulative tokens saved (~$8,715 estimated): 240ms average vs 480ms p95 latency, 78% cache hits, 150 requests/min." />
               </div>
             </Card>
 
@@ -434,14 +425,10 @@ def process_enterprise_query(query: str):
                 <span style={{ fontSize: '11px', color: '#f59e0b', fontWeight: 'bold' }}>AI ARCHITECTURAL INFOGRAPHIC</span>
                 <h3 style={{ margin: '4px 0 0 0', color: '#f8fafc' }}>RAGAS Accuracy & Token Governance Evaluation Framework</h3>
               </div>
-              <div style={{ width: '100%', aspectRatio: '16/9', maxHeight: '520px', overflow: 'hidden', borderRadius: '8px', border: '1px solid rgba(245, 158, 11, 0.3)', background: '#05070e', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <img
-                  src="/assets/ragas_evaluation_pipeline_1788449524458.jpg"
-                  alt="RAGAS Evaluation Framework"
-                  loading="lazy"
-                  decoding="async"
-                  style={{ width: '100%', height: '100%', objectFit: 'contain', objectPosition: 'center', display: 'block' }}
-                />
+              <div style={{ display: 'grid', gap: 10 }}>
+                <GlassBar color="#5EC4C8" icon="file" title="Input Pipeline" detail="Source documents → embeddings and chunking → vector database, evaluated against ground-truth question/context/answer sets." />
+                <GlassBar color="#E8836A" icon="zap" title="Three Gauges" badge="< 0.80 red line" detail="Faithfulness (no hallucinations), answer relevancy, context precision — plus prompt-token, compression-ratio, and cost gauges." />
+                <GlassBar color="#34D399" icon="check" title="Automated Testing" detail="Unit tests gate the build; CI/CD runs test → deploy; every production decision ships with an evaluation report." />
               </div>
             </Card>
 

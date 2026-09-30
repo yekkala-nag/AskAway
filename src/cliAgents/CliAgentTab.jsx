@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Panel, GlassBar } from "../components/ui/CleanInfographics.jsx";
 
 const STEPS = [
   {
@@ -227,6 +228,22 @@ const SIMULATOR_PRESETS = [
   }
 ];
 
+/** Native glass companion to the interactive loop explainer. */
+function CliAgentLoopPanel() {
+  return (
+    <Panel
+      title="Local CLI Agent — Full Control, No External APIs"
+      sub="Terminal in, tool calls out, observations back: the whole loop runs on a local model runtime."
+    >
+      <div style={{ display: "grid", gap: 12 }}>
+        <GlassBar color="#E8C558" icon="send" title="Terminal + System Prompt" detail="Natural-language request packaged with system instructions and JSON tool schemas." />
+        <GlassBar color="#5EC4C8" icon="cpu" title="Agent Core + Local Model" detail="Prompt goes out, completion streams back; tool calling parses function, parameters, and JSON." />
+        <GlassBar color="#6A9BD8" icon="zap" title="Subprocess Execution" detail="Commands run locally; process output ([FILE_LIST]) returns as observation and context feedback into the core." />
+      </div>
+    </Panel>
+  );
+}
+
 export default function CliAgentTab() {
   const [activeStep, setActiveStep] = useState(0);
   const [simIndex, setSimIndex] = useState(0);
@@ -293,8 +310,8 @@ export default function CliAgentTab() {
         </p>
 
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: "1.5rem", alignItems: "center" }}>
-          <div style={{ background: "#0d0d15", borderRadius: 12, overflow: "hidden", border: "1px solid #3b3b54", textAlign: "center", display: "flex", alignItems: "center", justifyContent: "center", aspectRatio: "1/1", maxHeight: 440, margin: "0 auto", width: "100%" }}>
-            <img src="/assets/cli_agent_architecture.png" alt="CLI Agent Architecture" loading="lazy" decoding="async" style={{ width: "100%", height: "100%", objectFit: "contain", display: "block" }} />
+          <div style={{ background: "transparent", borderRadius: 12, overflow: "hidden", textAlign: "center", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto", width: "100%" }}>
+            <CliAgentLoopPanel />
           </div>
 
           <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>

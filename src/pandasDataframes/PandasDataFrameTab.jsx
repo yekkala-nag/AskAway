@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import * as Primitives from '../components/layout/Primitives.jsx';
 import { Hero, CodeBlock } from '../components/ui/Content.jsx';
 import { Card, Badge, Button, Callout } from '../components/ui/Core.jsx';
-import DiagramImage from '../components/ui/DiagramImage.jsx';
+import { Panel, GlassCard } from '../components/ui/CleanInfographics.jsx';
 import {
   DATA_STRUCTURES_COMPARISON,
   ARRAY_DIMENSIONS_DATA,
@@ -15,6 +15,53 @@ import Workflow from '../components/ui/Workflow.jsx';
 import { Reveal, AnimatedNumber } from '../components/ui/AnimatedReveal.jsx';
 
 const { Container, Grid, Flex, Stack } = Primitives;
+
+/** Native recreation: lists → numpy → DataFrames → creation workflows. */
+function PandasPanel() {
+  const pts = { fontSize: 12.5, color: '#CBD5E1', lineHeight: 1.65, margin: '6px 0 0', paddingLeft: 16 };
+  const flow = { fontSize: 12, color: '#7FE3DC', marginTop: 8, lineHeight: 1.6 };
+  const mono = {
+    fontFamily: 'ui-monospace, SFMono-Regular, Menlo, Consolas, monospace',
+    fontSize: 12, color: '#7FE3DC', background: 'rgba(0,0,0,0.35)',
+    border: '1px solid rgba(94,196,200,0.25)', borderRadius: 6,
+    padding: '8px 10px', marginTop: 8, lineHeight: 1.7, whiteSpace: 'pre-wrap',
+  };
+  return (
+    <Panel
+      title="Python Data Structures — NumPy vs Pandas DataFrames"
+      sub="Heterogeneous lists, vectorized homogeneous arrays, and labeled in-memory tables — plus the three ways frames get built."
+    >
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(230px, 1fr))', gap: 12 }}>
+        <GlassCard color="#6A9BD8" icon="clip" title="1. Python Lists">
+          <div style={flow}>Heterogeneous elements, one by one.</div>
+          <ul style={pts}>
+            <li>Mixed types per list</li>
+            <li>No vectorization</li>
+          </ul>
+        </GlassCard>
+        <GlassCard color="#5EC4C8" icon="cpu" title="2. NumPy ndarrays">
+          <div style={flow}>Homogeneous, vectorized operations.</div>
+          <ul style={pts}>
+            <li>1D arrays, 2D matrices, 3D arrays</li>
+            <li>Typed dtypes: int64, float64</li>
+          </ul>
+        </GlassCard>
+        <GlassCard color="#A78BFA" icon="table" title="3. DataFrame Core">
+          <div style={flow}>In-memory tabular layout with metadata alignment.</div>
+          <ul style={pts}>
+            <li>Index (axis 0), columns (axis 1)</li>
+            <li>Per-column dtypes; Series access</li>
+            <li>data.shape · df.dtypes · df.loc alignment</li>
+          </ul>
+        </GlassCard>
+        <GlassCard color="#34D399" icon="code" title="4. Creation Workflows">
+          <div style={flow}>Three on-ramps into frames.</div>
+          <div style={mono}>{'pd.DataFrame(data=..., index=..., columns=...)\npd.DataFrame(data=dict)\npd.read_csv("data.csv")'}</div>
+        </GlassCard>
+      </div>
+    </Panel>
+  );
+}
 
 export default function PandasDataFrameTab() {
   const [activeSubTab, setActiveSubTab] = useState('structures'); // 'structures' | 'ndarrays' | 'workflows' | 'operations' | 'code'
@@ -44,14 +91,7 @@ export default function PandasDataFrameTab() {
       <Container size="wide">
         {/* ARCHITECTURAL INFOGRAPHIC DIAGRAM */}
         <div style={{ marginBottom: 'var(--ds-space-6)' }}>
-          <DiagramImage
-            src="/assets/pandas_dataframes_fundamentals_arch.png"
-            alt="Python Data Structures: NumPy Ndarrays vs Pandas DataFrames Architecture Diagram"
-            title="Python Data Structures: NumPy Ndarrays vs Pandas DataFrames Architecture"
-            caption="Overview: Left: Python Lists vs NumPy 1D/2D/3D Ndarrays. Middle: Pandas DataFrame Core Structure (Index Axis 0, Columns Axis 1, In-Memory Tabular Layout). Right: Creation Workflows (From 2D Array, Dictionary, List of Dicts, and CSV File)."
-            background="#090d16"
-            maxWidth={1050}
-          />
+          <PandasPanel />
         </div>
 
         {/* SUBTAB NAVIGATION */}

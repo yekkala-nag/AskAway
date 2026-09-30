@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import * as Primitives from '../components/layout/Primitives.jsx';
 import { Hero, CodeBlock } from '../components/ui/Content.jsx';
 import { Card, Badge, Button, Callout } from '../components/ui/Core.jsx';
-import DiagramImage from '../components/ui/DiagramImage.jsx';
+import { Panel, GlassBar } from '../components/ui/CleanInfographics.jsx';
 import {
   SEEDED_SCENARIOS,
   PREPROCESSING_COMPARISON,
@@ -14,6 +14,31 @@ import Workflow from '../components/ui/Workflow.jsx';
 import { Reveal, AnimatedNumber } from '../components/ui/AnimatedReveal.jsx';
 
 const { Container, Section, Grid, Flex, Stack } = Primitives;
+
+/** Native recreation: seeded KeyNMF → LLM summarization → topic analyzer + trend engine. */
+function SeededTopicPanel() {
+  return (
+    <Panel
+      title="Seeded Topic Modeling + LLM Integration"
+      sub="Seed phrases condition the topic matrix, LLM summarization removes token noise, and zero-shot labeling tracks topics across a 25-year trend."
+    >
+      <div style={{ display: 'grid', gap: 12 }}>
+        <GlassBar
+          color="#E8C558" icon="zap" index="1." title="Seeded KeyNMF Engine"
+          detail="Free-text seed phrases → sentence-transformer embeddings → document cosine scoring with seed-exponent pruning → NMF matrix factorization."
+        />
+        <GlassBar
+          color="#5EC4C8" icon="file" index="2." title="LLM Summarization Preprocessing"
+          detail="Long unstructured documents → LLM summarization → semantic key points → token noise eliminated before modeling."
+        />
+        <GlassBar
+          color="#6A9BD8" icon="chart" index="3." title="Topic Analyzer & Trend Engine"
+          detail="Zero-shot LLM topic labeling → descriptions → smoothed time-series trend plot spanning 2002–2026."
+        />
+      </div>
+    </Panel>
+  );
+}
 
 export default function TopicModelingTab() {
   const [activeSubTab, setActiveSubTab] = useState('seeded'); // 'seeded' | 'preprocessing' | 'analyzer' | 'trends' | 'code'
@@ -43,16 +68,9 @@ export default function TopicModelingTab() {
       />
 
       <Container size="wide">
-        {/* ARCHITECTURAL INFOGRAPHIC CARD */}
+        {/* NATIVE GLASS RECREATION */}
         <div style={{ marginBottom: 'var(--ds-space-6)' }}>
-          <DiagramImage
-            src="/assets/topic_modeling_2026_arch.png"
-            alt="Topic Modeling Techniques for 2026 Architecture Diagram"
-            title="2026 Topic Modeling Pipeline — Seeded KeyNMF, LLM Preprocessing, and 25-Year Trend Engine"
-            caption="Overview: 1. Seeded KeyNMF Engine (Conditioning topic matrix with free-text seed phrases) ➔ 2. LLM Summarization Preprocessing (Extracting semantic key points to remove token noise) ➔ 3. LLM Topic Analyzer & 25-Year Trend Engine (Zero-shot LLM labeling and Savitzky-Golay smoothed time-series trends 2002-2026)."
-            background="#0a0f1d"
-            maxWidth={1050}
-          />
+          <SeededTopicPanel />
         </div>
 
         {/* SUBTAB NAVIGATION */}

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import * as Primitives from '../components/layout/Primitives.jsx';
 import { Hero, CodeBlock } from '../components/ui/Content.jsx';
 import { Card, Badge, Button, Callout } from '../components/ui/Core.jsx';
-import DiagramImage from '../components/ui/DiagramImage.jsx';
+import { Panel, GlassBar } from '../components/ui/CleanInfographics.jsx';
 import {
   SSL_COMPARISON_MATRIX,
   CALCULATE_BYOL_LOSS,
@@ -15,6 +15,30 @@ import Workflow from '../components/ui/Workflow.jsx';
 import { Reveal, AnimatedNumber } from '../components/ui/AnimatedReveal.jsx';
 
 const { Container, Section, Grid, Flex, Stack } = Primitives;
+
+/** Native recreation: twin networks, stop-gradient, and slow-moving targets. */
+function ByolPanel() {
+  const mono = {
+    fontFamily: 'ui-monospace, SFMono-Regular, Menlo, Consolas, monospace',
+    fontSize: 12, color: '#7FE3DC', background: 'rgba(0,0,0,0.35)',
+    border: '1px solid rgba(94,196,200,0.25)', borderRadius: 6,
+    padding: '8px 10px', marginTop: 8, lineHeight: 1.7, textAlign: 'center',
+  };
+  return (
+    <Panel
+      title="Bootstrap Your Own Latent (BYOL) — Learning Without Labels"
+      sub="Two augmented views, two networks, zero negative pairs: the online net predicts, the target net drifts slowly behind."
+    >
+      <div style={{ display: 'grid', gap: 12 }}>
+        <GlassBar color="#5EC4C8" icon="eye" index="1." title="Two Views" detail="One image → two stochastic augmentations (v and v′). Same content, different pixels — the only supervision signal." />
+        <GlassBar color="#E8C558" icon="cpu" index="2." title="Online Network (Trains)" detail="Encoder → projector → predictor. Gradient descent updates every weight; its prediction is L2-normalized before the loss." />
+        <GlassBar color="#A78BFA" icon="shield" index="3." title="Target Network (No Gradients)" detail="Encoder → projector with a hard stop-gradient. Updated only by exponential moving average (decay 0.99) — a slow, stable teacher that cannot collapse." />
+        <GlassBar color="#34D399" icon="check" index="4." title="MSE Loss, No Negatives" detail="Mean-squared error between normalized prediction and target representation. No contrastive pairs, no large batches required." />
+      </div>
+      <div style={mono}>target = stop_gradient(projector(encoder(v′))) · EMA decay 0.99</div>
+    </Panel>
+  );
+}
 
 export default function BYOLTab() {
   const [activeSubTab, setActiveSubTab] = useState('comparison'); // 'comparison' | 'ema' | 'loss' | 'code'
@@ -52,14 +76,7 @@ export default function BYOLTab() {
       <Container size="wide">
         {/* ARCHITECTURAL INFOGRAPHIC DIAGRAM */}
         <div style={{ marginBottom: 'var(--ds-space-6)' }}>
-          <DiagramImage
-            src="/assets/byol_self_supervised_arch.png"
-            alt="Bootstrap Your Own Latent (BYOL) Architecture Diagram"
-            title="BYOL Dual-Network Computational Architecture"
-            caption="Complete Pipeline: Augmented views v and v' ➔ Online Network (Encoder f_θ, Projector g_θ, Predictor q_θ) updated via Gradient Descent ➔ Target Network (Encoder f_ξ, Projector g_ξ) updated via Target EMA (ξ ← τ·ξ + (1-τ)·θ) with Stop-Gradient."
-            background="#090d16"
-            maxWidth={1050}
-          />
+          <ByolPanel />
         </div>
 
         {/* SUBTAB NAVIGATION */}

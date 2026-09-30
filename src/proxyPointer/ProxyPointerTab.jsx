@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import * as Primitives from '../components/layout/Primitives.jsx';
 import { Hero, CodeBlock, Stepper } from '../components/ui/Content.jsx';
 import { Card, Badge, Button, Callout } from '../components/ui/Core.jsx';
-import DiagramImage from '../components/ui/DiagramImage.jsx';
+import { Panel, GlassBar } from '../components/ui/CleanInfographics.jsx';
 import {
   SAMPLE_MARKDOWN_DOC,
   PIPELINE_STEPS,
@@ -12,6 +12,91 @@ import {
 } from './proxyPointerEngine.js';
 
 const { Container, Section, Grid, Flex, Stack } = Primitives;
+
+/** Native recreation of the 9-stage proxy-pointer ingestion strip. */
+function ProxyPipelineStripPanel() {
+  const stages = [
+    { t: 'Markdown documents', d: 'Raw docs in — no preprocessing.', c: '#5EC4C8', icon: 'file' },
+    { t: 'Skeleton Tree', d: 'Regex heading parse, no LLM, under 1 second.', c: '#6A9BD8', icon: 'nodes' },
+    { t: 'Tree Walk', d: 'Boundary propagation with parent-propagation capping.', c: '#A78BFA', icon: 'refresh' },
+    { t: 'Noise Filter', d: 'Lightweight LLM filter with 6-category exclusion.', c: '#E8C558', icon: 'zap' },
+    { t: 'Breadcrumb Injection', d: 'Prepend the ancestry path on every chunk.', c: '#7FB069', icon: 'link' },
+    { t: 'Structure-Guided Chunking', d: '2000-char windows, 200 overlap, per-node boundaries.', c: '#E08A4C', icon: 'clip' },
+    { t: 'Metadata Attach', d: 'Doc/node id, title, and start/end line on each chunk.', c: '#F0A89A', icon: 'check' },
+    { t: 'Embed', d: 'Text embeddings at 1536 dimensions.', c: '#9B89C4', icon: 'cpu' },
+    { t: 'Index', d: 'Vector pointer index ready for retrieval.', c: '#34D399', icon: 'search' },
+  ];
+  return (
+    <Panel
+      title="Proxy-Pointer Ingestion Pipeline — Skeleton Tree to Pointer Map"
+      sub="Nine deterministic stages from raw markdown to an indexed pointer map — one LLM call, everything else rules and regex."
+    >
+      <div style={{ display: 'grid', gap: 12 }}>
+        {stages.map((s, i) => (
+          <GlassBar key={s.t} color={s.c} icon={s.icon} index={`${i + 1}.`} title={s.t} detail={s.d} />
+        ))}
+      </div>
+    </Panel>
+  );
+}
+
+/** Native recreation of the 4-stage multimodal proxy-pointer flow. */
+function MultimodalFlowPanel() {
+  return (
+    <Panel
+      title="Proxy-Pointer Multimodal RAG — Answers Without Multimodal Embeddings"
+      sub="Lightweight text proxies do the searching; pointers pull the original high-resolution visuals at synthesis time."
+    >
+      <div style={{ display: 'grid', gap: 12 }}>
+        <GlassBar
+          color="#5EC4C8" icon="file" index="1." title="Multimodal Document Ingestion"
+          detail="Source PDFs → parser/extractor → extracted text & metadata, plus the original high-resolution image assets kept with bounding boxes."
+        />
+        <GlassBar
+          color="#6A9BD8" icon="layers" index="2." title="Dual Indexing"
+          detail="Lightweight text proxy index — captions and OCR into text embeddings in a vector DB with pointers — beside a physical asset store mapping bounding-box coordinates to unique asset IDs."
+        />
+        <GlassBar
+          color="#E8C558" icon="search" index="3." title="Fast Text Vector Search"
+          detail="Natural-language query → query vector → proxy index. Sub-millisecond matching with no multimodal-embedding overhead returns text plus asset pointers."
+        />
+        <GlassBar
+          color="#A78BFA" icon="cpu" index="4." title="Pointer Resolution & Synthesis"
+          detail="Pointers resolve to the original high-res charts and retrieved multimodal images; a large multimodal model fuses cross-modal reasoning into one cited multimodal answer."
+        />
+      </div>
+    </Panel>
+  );
+}
+
+/** Native recreation: naive shredding destroys context; layout proxies preserve it. */
+function ShreddingVsProxyPanel() {
+  return (
+    <Panel
+      title="Naive Shredding vs Layout Preservation"
+      sub="Chunking shreds charts, images, and tables into broken context; proxies keep layout trees plus decoupled text stand-ins."
+    >
+      <div style={{ display: 'grid', gap: 12 }}>
+        <GlassBar color="#E8836A" icon="zap" title="Naive Path — Shredded Context" detail="Documents shredded into fragments: charts lose axes, tables lose headers, images lose position. Retrieval returns shards; answers hallucinate the gaps." />
+        <GlassBar color="#34D399" icon="check" title="Proxy Path — Layout Preserved" detail="Layout trees extracted once; text proxies answer search while pointers resolve to exact document line ranges and structural hierarchy at synthesis." />
+      </div>
+    </Panel>
+  );
+}
+
+/** Pointer-graph note: the caption was the content (source art was decorative). */
+function PointerGraphNote() {
+  return (
+    <Panel
+      title="Decoupled Vector Space & Pointer Graph"
+      sub="Proxy vector coordinates dynamically resolve to exact document line ranges and structural hierarchy."
+    >
+      <div style={{ display: 'grid', gap: 12 }}>
+        <GlassBar color="#5EC4C8" icon="nodes" title="Coordinates, Not Copies" detail="The index stores lightweight proxy coordinates; the originals stay authoritative. Every retrieved chunk carries its line range and position in the document tree." />
+      </div>
+    </Panel>
+  );
+}
 
 export default function ProxyPointerTab() {
   const [activeSubTab, setActiveSubTab] = useState('pipeline'); // 'pipeline' | 'multimodal' | 'resolution' | 'noise' | 'benchmark' | 'code'
@@ -44,22 +129,8 @@ export default function ProxyPointerTab() {
       <Container size="wide">
         {/* DUAL ARCHITECTURAL INFOGRAPHIC CARDS */}
         <Grid columns={{ base: '1fr', lg: '1.4fr 0.6fr' }} gap="var(--ds-space-4)" style={{ marginBottom: 'var(--ds-space-6)' }}>
-          <DiagramImage
-            src="/assets/proxy_pointer_rag_pipeline.png"
-            alt="The 8-Stage Proxy-Pointer RAG Ingestion Pipeline Diagram"
-            title="Proxy-Pointer Ingestion Pipeline — Regex Skeleton Tree to FAISS Pointer Map"
-            caption="8-stage architecture: Markdown ➔ Regex Skeleton Tree (<1s) ➔ Tree Walk ➔ Gemini Flash Lite Noise Filter ➔ Breadcrumb Injection ➔ Structure-Guided Chunking (2000 char/200 overlap) ➔ Metadata Attachment ➔ Gemini 1536d Embedding + FAISS Pointer Index."
-            background="#ffffff"
-            maxWidth={900}
-          />
-          <DiagramImage
-            src="/assets/neural_knowledge_cubes.jpg"
-            alt="Neural Knowledge Structure Architecture"
-            title="Decoupled Vector Space & Pointer Graph"
-            caption="Proxy vector coordinates dynamically resolve to exact document line ranges and structural hierarchy."
-            background="#0a0f1d"
-            maxWidth={500}
-          />
+          <ProxyPipelineStripPanel />
+          <PointerGraphNote />
         </Grid>
 
         {/* SUBTAB NAVIGATION */}
@@ -124,24 +195,10 @@ export default function ProxyPointerTab() {
                   <Badge variant="success">Zero Vision Embedding Overhead</Badge>
                 </Flex>
 
-                {/* DUAL MULTIMODAL DIAGRAMS */}
+                {/* DUAL MULTIMODAL PANELS */}
                 <Grid columns={{ base: '1fr', lg: '1fr 1fr' }} gap="var(--ds-space-4)">
-                  <DiagramImage
-                    src="/assets/proxy_pointer_multimodal_architecture.jpg"
-                    alt="Proxy Pointer Multimodal Document Shredding vs Structure Graph Architecture"
-                    title="1. Naive Shredding vs Proxy-Pointer Layout Preservation"
-                    caption="Naive chunking shreds multimodal documents (charts, images, tables) leading to broken context. Proxy-Pointer extracts layout trees and decoupled text proxies."
-                    background="#0a0f1d"
-                    maxWidth={600}
-                  />
-                  <DiagramImage
-                    src="/assets/multimodal_proxy_pointer_flow.png"
-                    alt="Proxy-Pointer Multimodal 4-Stage Architecture Flowchart"
-                    title="2. Fast Text Vector Search to Multimodal LLM Pointer Synthesis"
-                    caption="Dual Indexing: Fast text vector database (Pinecone/FAISS) holds text captions; Physical Asset Store holds high-res images and SVG bounding boxes."
-                    background="#0a0f1d"
-                    maxWidth={600}
-                  />
+                  <ShreddingVsProxyPanel />
+                  <MultimodalFlowPanel />
                 </Grid>
 
                 {/* INTERACTIVE MULTIMODAL SCENARIO SELECTOR */}

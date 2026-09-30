@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import * as Primitives from '../components/layout/Primitives.jsx';
 import { Hero, CodeBlock } from '../components/ui/Content.jsx';
 import { Card, Badge, Button, Callout } from '../components/ui/Core.jsx';
+import { GlassBar } from '../components/ui/CleanInfographics.jsx';
 import {
   AGENTIC_PATTERNS,
   MEMORY_PATTERNS,
@@ -150,14 +151,11 @@ export default function EnterpriseAdvancedPlaybookTab() {
                 <span style={{ fontSize: '11px', color: '#3A9B9F', fontWeight: 'bold' }}>AI ARCHITECTURAL INFOGRAPHIC</span>
                 <h3 style={{ margin: '4px 0 0 0', color: '#f8fafc' }}>Enterprise Agentic Patterns Architecture</h3>
               </div>
-              <div style={{ width: '100%', aspectRatio: '16/9', maxHeight: '520px', overflow: 'hidden', borderRadius: '8px', border: '1px solid rgba(56, 189, 248, 0.3)', background: '#05070e', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <img
-                  src="/assets/agentic_patterns_architecture_1788450102452.jpg"
-                  alt="Enterprise Agentic Patterns Architecture"
-                  loading="lazy"
-                  decoding="async"
-                  style={{ width: '100%', height: '100%', objectFit: 'contain', objectPosition: 'center', display: 'block' }}
-                />
+              <div style={{ display: 'grid', gap: 10 }}>
+                <GlassBar color="#5EC4C8" icon="refresh" title="1 · ReAct" detail="Thought → action → observation loop with API and database tools attached." />
+                <GlassBar color="#34D399" icon="file" title="2 · Plan-and-Execute" detail="Planner writes the step list; executor runs it; status updates trigger the replanner." />
+                <GlassBar color="#E8C558" icon="users" title="3 · Multi-Agent Collaboration" detail="Researcher → analyst → writer → reviewer, with a revision feedback loop back up the chain." />
+                <GlassBar color="#A78BFA" icon="cpu" title="4 · Supervisor-Agent" detail="Supervisor fans task updates out to data scientist, engineer, and researcher specialists." />
               </div>
             </Card>
 
@@ -438,14 +436,11 @@ workflow.add_conditional_edges("supervisor", route_supervisor, {**{w: w for w in
                 <span style={{ fontSize: '11px', color: '#3A9B9F', fontWeight: 'bold' }}>AI ARCHITECTURAL INFOGRAPHIC</span>
                 <h3 style={{ margin: '4px 0 0 0', color: '#f8fafc' }}>Enterprise Full-Stack AI Observability Stack</h3>
               </div>
-              <div style={{ width: '100%', aspectRatio: '16/9', maxHeight: '520px', overflow: 'hidden', borderRadius: '8px', border: '1px solid rgba(16, 185, 129, 0.3)', background: '#05070e', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <img
-                  src="/assets/fullstack_ai_observability_stack_1788450120849.jpg"
-                  alt="Enterprise Full-Stack AI Observability Stack"
-                  loading="lazy"
-                  decoding="async"
-                  style={{ width: '100%', height: '100%', objectFit: 'contain', objectPosition: 'center', display: 'block' }}
-                />
+              <div style={{ display: 'grid', gap: 10 }}>
+                <GlassBar color="#34D399" icon="chart" title="Business Metrics" detail="Cost per query, ROI, and user satisfaction ratings on top." />
+                <GlassBar color="#5EC4C8" icon="zap" title="Application Metrics" detail="Latency and throughput, error rates, cache hit rate." />
+                <GlassBar color="#E8C558" icon="search" title="Tracing Layer" detail="Run trees, open telemetry spans, and prompt/completion token tracking." />
+                <GlassBar color="#A78BFA" icon="file" title="Infrastructure Layer" detail="Metrics collection, dashboards, structured JSON logging, CPU/GPU utilization." />
               </div>
             </Card>
 
@@ -530,14 +525,11 @@ start_http_server(8000)`}
                 <span style={{ fontSize: '11px', color: '#f59e0b', fontWeight: 'bold' }}>AI ARCHITECTURAL INFOGRAPHIC</span>
                 <h3 style={{ margin: '4px 0 0 0', color: '#f8fafc' }}>Distributed AI Computing: Kafka, Celery & Ray</h3>
               </div>
-              <div style={{ width: '100%', aspectRatio: '16/9', maxHeight: '520px', overflow: 'hidden', borderRadius: '8px', border: '1px solid rgba(245, 158, 11, 0.3)', background: '#05070e', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <img
-                  src="/assets/distributed_ai_computing_kafka_celery_ray_1788450142581.jpg"
-                  alt="Distributed AI Computing: Kafka, Celery & Ray"
-                  loading="lazy"
-                  decoding="async"
-                  style={{ width: '100%', height: '100%', objectFit: 'contain', objectPosition: 'center', display: 'block' }}
-                />
+              <div style={{ display: 'grid', gap: 10 }}>
+                <GlassBar color="#5EC4C8" icon="send" title="Edge & Streaming" detail="Clients → authenticated API gateway → partitioned message streams → worker task queues with scheduling, results, and chaining." />
+                <GlassBar color="#E8C558" icon="file" title="State & Cache" detail="Distributed cache and key-value state with high availability sit beside every hot path." />
+                <GlassBar color="#A78BFA" icon="cpu" title="Actor Compute" detail="Head node plus control store fan documents out to actor pools; processed docs flow onward." />
+                <GlassBar color="#34D399" icon="zap" title="Multi-Model Execution" detail="Prompt data fans out to hosted models on pooled GPUs; processed outputs return through the same fabric." />
               </div>
             </Card>
 

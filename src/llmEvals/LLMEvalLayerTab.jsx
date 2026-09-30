@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import * as Primitives from '../components/layout/Primitives.jsx';
 import { Hero, CodeBlock } from '../components/ui/Content.jsx';
 import { Card, Badge, Button, Callout } from '../components/ui/Core.jsx';
-import DiagramImage from '../components/ui/DiagramImage.jsx';
-import { EvalMethodsGrid } from '../components/ui/CleanInfographics.jsx';
+import { EvalMethodsGrid, PmEvalFrameworkPanel, GsmSymbolicPanel } from '../components/ui/CleanInfographics.jsx';
 import {
   EVAL_SCENARIOS,
   REGRESSION_TEST_SUITE,
@@ -517,15 +516,8 @@ class DeterministicEvalLayer:
         {/* ─── 6. AI EVALS FOR PRODUCT MANAGERS (PM CO-DESIGN) ─── */}
         {activeSubTab === 'pm_eval' && (
           <Stack gap={6}>
-            {/* ARCHITECTURAL DIAGRAM CARD */}
-            <DiagramImage
-              src="/assets/pm_eval_framework_arch.png"
-              alt="AI Evaluation Framework for Product Managers Diagram"
-              title="AI Evaluation Framework for Product Managers (PM Co-Design)"
-              caption="Overview: 1. Model Goal to Eval Translation across 3 AI Paradigms ➔ 2. The 3 AI PM Archetypes (Bad PM vs Better PM vs Best PM) ➔ 3. Eval to Launch Gate (Acceptable threshold bounds & post-launch flywheel)."
-              background="#090d16"
-              maxWidth={1050}
-            />
+            {/* NATIVE GLASS RECREATION */}
+            <PmEvalFrameworkPanel />
 
             <Card style={{ padding: 'var(--ds-space-5)', background: 'var(--ds-color-bg-canvas)' }}>
               <Stack gap={5}>
@@ -721,15 +713,8 @@ class DeterministicEvalLayer:
         {/* ─── 7. GSM-SYMBOLIC & REASONING BENCHMARKS (APPLE STUDY) ─── */}
         {activeSubTab === 'gsm_symbolic' && (
           <Stack gap={6}>
-            {/* ARCHITECTURAL DIAGRAM CARD */}
-            <DiagramImage
-              src="/assets/gsm_symbolic_reasoning_arch.png"
-              alt="Rethinking LLM Benchmarks: Apple GSM-Symbolic Architecture Diagram"
-              title="Apple's GSM-Symbolic Benchmark — Measuring True Reasoning Beyond Training Data"
-              caption="Overview: 1. GSM-Symbolic Template Generator (Mutating numbers/names) ➔ 2. GSM-NoOp Irrelevant Noise Injection (Up to 65% accuracy drop) ➔ 3. Pattern Matching vs Neuro-Symbolic Reasoning Engine."
-              background="#090d16"
-              maxWidth={1050}
-            />
+            {/* NATIVE GLASS RECREATION */}
+            <GsmSymbolicPanel />
 
             <Card style={{ padding: 'var(--ds-space-5)', background: 'var(--ds-color-bg-canvas)' }}>
               <Stack gap={5}>

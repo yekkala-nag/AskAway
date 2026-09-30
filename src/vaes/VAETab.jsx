@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import * as Primitives from '../components/layout/Primitives.jsx';
 import { Hero, CodeBlock } from '../components/ui/Content.jsx';
 import { Card, Badge, Button, Callout } from '../components/ui/Core.jsx';
-import DiagramImage from '../components/ui/DiagramImage.jsx';
+import { Panel, GlassBar } from '../components/ui/CleanInfographics.jsx';
 import {
   VAE_VS_VANILLA_COMPARISON,
   CALCULATE_ELBO,
@@ -11,6 +11,44 @@ import {
 } from './vaeEngine.js';
 
 const { Container, Section, Grid, Flex, Stack } = Primitives;
+
+/** Native recreation: VAE encode → reparameterize → decode → ELBO loss. */
+function VaePanel() {
+  const mono = {
+    fontFamily: 'ui-monospace, SFMono-Regular, Menlo, Consolas, monospace',
+    fontSize: 12.5, color: '#7FE3DC', background: 'rgba(0,0,0,0.35)',
+    border: '1px solid rgba(94,196,200,0.25)', borderRadius: 6,
+    padding: '8px 12px', marginTop: 8, lineHeight: 1.7, textAlign: 'center',
+  };
+  const chip = (accent) => ({
+    background: 'rgba(255,255,255,0.05)', border: `1px solid ${accent}66`,
+    borderRadius: 10, padding: '10px 12px', fontSize: 12.5, fontWeight: 700,
+    color: '#F1F5F9', textAlign: 'center', minWidth: 105,
+  });
+  const note = { fontSize: 11, color: '#94A3B8', fontWeight: 400, marginTop: 2 };
+  const arrow = { color: '#5EC4C8', fontWeight: 800, fontSize: 16, alignSelf: 'center', flexShrink: 0 };
+  return (
+    <Panel
+      title="Variational Autoencoder — Encode, Sample, Decode"
+      sub="The encoder predicts a distribution, the reparameterization trick keeps gradients flowing, the decoder reconstructs — ELBO balances both."
+    >
+      <div style={{ display: 'flex', alignItems: 'stretch', gap: 10, flexWrap: 'wrap', marginBottom: 12 }}>
+        <div style={{ ...chip('#94A3B8'), alignSelf: 'center' }}>Input x</div>
+        <span style={arrow}>→</span>
+        <div style={{ ...chip('#34D399'), alignSelf: 'center' }}>Encoder q(z|x)<div style={note}>mean μ + log variance</div></div>
+        <span style={arrow}>→</span>
+        <div style={{ ...chip('#E8C558'), alignSelf: 'center' }}>Sample z<div style={note}>z = μ + σ · ε, ε ∼ N(0,I)</div></div>
+        <span style={arrow}>→</span>
+        <div style={{ ...chip('#E08A4C'), alignSelf: 'center' }}>Decoder p(x|z)<div style={note}>reconstruct x̂</div></div>
+      </div>
+      <div style={mono}>ELBO = L_reconstruction + L_KL-divergence</div>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: 12, marginTop: 12 }}>
+        <GlassBar color="#5EC4C8" icon="check" title="Reconstruction term" detail="Minimizes the gap between x and x-hat: mean-squared error, or binary cross-entropy for specific data types." />
+        <GlassBar color="#A78BFA" icon="shield" title="KL term" detail="Keeps the learned posterior near the standard normal prior: 0.5 · sum(1 + log σ² − μ² − σ²)." />
+      </div>
+    </Panel>
+  );
+}
 
 export default function VAETab() {
   const [activeSubTab, setActiveSubTab] = useState('comparison'); // 'comparison' | 'elbo' | 'reparam' | 'pytorch'
@@ -43,16 +81,9 @@ export default function VAETab() {
       />
 
       <Container size="wide">
-        {/* ARCHITECTURAL INFOGRAPHIC DIAGRAM */}
+        {/* NATIVE GLASS RECREATION */}
         <div style={{ marginBottom: 'var(--ds-space-6)' }}>
-          <DiagramImage
-            src="/assets/vae_elbo_reparameterization_arch.png"
-            alt="Variational Autoencoders Architecture, ELBO Loss, and Reparameterization Trick"
-            title="Variational Autoencoder (VAE) Computational Architecture"
-            caption="Complete Data & Gradient Flow: Encoder q(z|x) predicts μ and σ² ➔ Auxiliary noise ε ~ N(0, I) applied via Reparameterization Trick (z = μ + σ * ε) ➔ Decoder p(x|z) reconstructs x̂ ➔ Evaluated via ELBO Loss."
-            background="#090d16"
-            maxWidth={1050}
-          />
+          <VaePanel />
         </div>
 
         {/* SUBTAB NAVIGATION */}
