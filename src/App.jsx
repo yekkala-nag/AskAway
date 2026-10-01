@@ -2,7 +2,7 @@ import { useState, useEffect, useRef, useCallback, Suspense } from "react";
 import { TABS_REGISTRY, CATEGORIES, UMBRELLA_TOPICS, getTabById } from "./registry/tabsRegistry.js";
 import { s } from "./styles/legacyStyles.js";
 import DiagramImage from "./components/ui/DiagramImage.jsx";
-import { LcelPipelinePanel, StateGraphPanel, RagIndexRetrievePanel, HybridRetrievalPanel } from "./components/ui/CleanInfographics.jsx";
+import { LcelPipelinePanel, StateGraphPanel, RagIndexRetrievePanel, HybridRetrievalPanel, MultiAgentPatternsPanel, ContextGraphMemoryPanel, ContextEngineeringPanel, MemoryEngineeringPanel, MarketEventPanel, ComplianceGatesPanel, PilotImpactPanel, ContextQualityPanel, AdvisorCopilotPanel, TokenCostRouterPanel, RetryIsolationPanel, AgentInWorkflowPanel, DebuggingLoopPanel, GlassCard } from "./components/ui/CleanInfographics.jsx";
 import LangChainVsLangGraphComparison from "./components/ui/LangChainVsLangGraphComparison.jsx";
 import StrandsAgentCoreTab from "./strandsAgentCore/StrandsAgentCoreTab.jsx";
 import Sidebar from "./components/layout/Sidebar.jsx";
@@ -1745,13 +1745,7 @@ export const MultiAgentTab = ({ s }) => {
 
       {/* INTERACTIVE BLUEPRINT DIAGRAM */}
       <div style={{ marginBottom: "1.5rem" }}>
-        <DiagramImage
-          src="/assets/multi_agent_systems_architecture.png"
-          alt="Multi-Agent Systems Architecture Blueprint"
-          title="Architectural Blueprint — Multi-Agent Systems & Orchestration Patterns"
-          caption="Multi-Agent Systems architectural blueprint showcasing Supervisor Pattern, P2P Collaboration, Hierarchical Team, Debate Mode, Tool-Using Mesh, Topology Matrix, and Communication Flow."
-          maxWidth={1200}
-        />
+        <MultiAgentPatternsPanel />
       </div>
 
       {/* SINGLE vs MULTI CONTRAST */}
@@ -2707,14 +2701,7 @@ export const ContextGraphTab = ({ s }) => {
 
       {/* INTERACTIVE BLUEPRINT DIAGRAM */}
       <div style={{ marginBottom: "1.5rem" }}>
-        <DiagramImage
-          src="/assets/context_graph_multi_agent_memory_infographic.png"
-          alt="Context Graph for Multi-Agent Memory Infographic"
-          title="Context Graph for Multi-Agent Memory — Architecture & Schema"
-          caption="Complete shared knowledge graph memory architecture: Unified Memory Layer, Scoped Subgraphs, Consistency Engine, Real-Time Sync, Multi-Hop Cypher Traversal, Dual Memory Stores, and Cypher Graph Schema."
-          background="#0a0d14"
-          maxWidth={1200}
-        />
+        <ContextGraphMemoryPanel />
       </div>
 
       {/* THE CORE PROBLEM */}
@@ -3177,13 +3164,7 @@ export const ContextEngineeringTab = ({ s }) => {
 
       {/* INFOGRAPHIC DIAGRAM */}
       <div style={{ marginBottom: "2rem" }}>
-        <DiagramImage
-          src="/assets/context_engineering_infographic.png"
-          alt="Context Engineering Framework and Assembly Pipeline"
-          title="Context Engineering Framework & Assembly Pipeline"
-          caption="The complete Context Engineering architecture: Context Window Optimization, Assembly Patterns, Dynamic Retrieval Injection, Deduplication, Hierarchical Layers, State Evolution, and Key Production Principles."
-          background="#0a0d14"
-        />
+        <ContextEngineeringPanel />
       </div>
 
       {/* CONTEXT STRATEGIES OVERVIEW */}
@@ -3857,13 +3838,7 @@ export const MemoryEngineeringTab = ({ s }) => {
 
       {/* INTERACTIVE BLUEPRINT DIAGRAM */}
       <div style={{ marginBottom: "1.5rem" }}>
-        <DiagramImage
-          src="/assets/memory_engineering_architecture.png"
-          alt="Memory Engineering Architecture Blueprint"
-          title="Architectural Blueprint — Memory Engineering Neural Storage Architecture"
-          caption="Memory Engineering architectural blueprint showcasing Short-Term Memory, Long-Term Memory, Memory Consolidation, Memory Retrieval, Privacy & Tenant Isolation, Memory Lifecycle, and Memory Types Comparison."
-          maxWidth={1200}
-        />
+        <MemoryEngineeringPanel />
       </div>
 
       {/* THE PROBLEM */}
@@ -4404,9 +4379,9 @@ export const ClaudeWorkflowsTab = ({ s }) => {
         </div>
       </div>
 
-      {/* HERO VISUAL BANNER */}
-      <div style={{ background: "#111827", borderRadius: 8, padding: "0.8rem", marginBottom: "1.5rem", border: "1px solid #374151", display: "flex", alignItems: "center", justifyContent: "center", maxHeight: 480, aspectRatio: "16/9", overflow: "hidden" }}>
-        <img src="/agent_inside_workflow_hero_1785850390000.png" alt="Agent Inside Workflow Architecture" loading="lazy" decoding="async" style={{ width: "100%", height: "100%", objectFit: "contain", objectPosition: "center", display: "block", borderRadius: 6 }} />
+      {/* NATIVE GLASS RECREATION */}
+      <div style={{ background: "#111827", borderRadius: 8, padding: "0.8rem", marginBottom: "1.5rem", border: "1px solid #374151", display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden" }}>
+        <AgentInWorkflowPanel />
       </div>
 
       {/* ECOSYSTEM DIAGRAM */}
@@ -6906,14 +6881,7 @@ export const ProductionRAGTab = ({ s }) => {
 
       {/* REAL-TIME MARKET EVENT PROCESSING DIAGRAM */}
       <div style={{ marginBottom: "1.5rem" }}>
-        <DiagramImage
-          src="/assets/realtime_market_event_processing.png"
-          alt="Real-Time Market Event Processing Architecture"
-          title="Real-Time Market Event Processing RAG Architecture"
-          caption="Event-driven streaming RAG pipeline: Market Data Feed → Kafka Topic → Flink Stream Processor (Entity Resolution + Severity Scoring) → Real-time Vector Index Update, Advisor Alerts, and Approved Response Pack."
-          background="#ffffff"
-          maxWidth={1200}
-        />
+        <MarketEventPanel />
       </div>
 
       {/* FULL CONTRACT DIAGRAM */}
@@ -9256,17 +9224,36 @@ const PARALLEL_VARIANTS = [
   { name: "Skeleton-of-Thought", icon: "🦴", color: "#C47A6A", desc: "Generate high-level outline first (skeleton), then expand each skeleton point in parallel across multiple LLM calls. Fundamentally restructures generation, not just decoding.", use: "Long-form structured content where sections are independent.", speedup: "2–2.5×", lossless: false },
 ];
 
-const MLADiagram = () => (
-  <div style={{ width: "100%", display: "flex", alignItems: "center", justifyContent: "center", background: "#05070e", borderRadius: 8, border: "1px solid rgba(94, 196, 200, 0.25)", overflow: "hidden" }}>
-    <img
-      src="/assets/arch_mla.jpg"
-      alt="Multi-Head Latent Attention (MLA) — Low-Rank KV Compression"
-      loading="lazy"
-      decoding="async"
-      style={{ width: "100%", height: "auto", maxHeight: "78vh", objectFit: "contain", display: "block" }}
-    />
+const MLADiagram = () => {
+  const pts = { fontSize: 12.5, color: '#CBD5E1', lineHeight: 1.65, margin: '6px 0 0', paddingLeft: 16 };
+  const mono = {
+    fontFamily: 'ui-monospace, SFMono-Regular, Menlo, Consolas, monospace',
+    fontSize: 12, color: '#7FE3DC', background: 'rgba(0,0,0,0.35)',
+    border: '1px solid rgba(94,196,200,0.25)', borderRadius: 6,
+    padding: '6px 10px', marginTop: 8, lineHeight: 1.6, textAlign: 'center',
+  };
+  return (
+  <div style={{ width: "100%", display: "flex", alignItems: "stretch", justifyContent: "center", background: "#05070e", borderRadius: 8, border: "1px solid rgba(94, 196, 200, 0.25)", overflow: "hidden" }}>
+    <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: 12, padding: 14, width: "100%" }}>
+      <GlassCard color="#E8836A" icon="zap" title="Standard Attention — Cache Bottleneck" badge="192–328 KB/token">
+        <ul style={pts}>
+          <li>Every head caches full keys and values</li>
+          <li>KV cache grows as O(n × h × d)</li>
+          <li>Massive footprint → out-of-memory walls</li>
+        </ul>
+      </GlassCard>
+      <GlassCard color="#34D399" icon="check" title="Latent Attention — Compressed Cache" badge="~70 KB · −80-92%">
+        <ul style={pts}>
+          <li>Input → down-projection into latent KV cache</li>
+          <li>Keys/values up-projected on the fly at runtime</li>
+          <li>Decoupled positional embeddings join at final scores</li>
+        </ul>
+        <div style={mono}>cache C_kv · up-project W_UK / W_UV per step</div>
+      </GlassCard>
+    </div>
   </div>
-);
+  );
+};
 
 // ── SVG: MoE routing diagram ──
 const MoEDiagram = () => (
@@ -11243,14 +11230,7 @@ export const HallucinationLoopTab = ({ s }) => {
 
       {/* RAG GUARDRAILS & COMPLIANCE DIAGRAM */}
       <div style={{ marginBottom: "1.5rem" }}>
-        <DiagramImage
-          src="/assets/rag_guardrails_compliance_flow.png"
-          alt="RAG Guardrails and Compliance Security Pipeline"
-          title="RAG Guardrails & Enterprise Compliance Architecture"
-          caption="Four sequential security gates along the query pipeline: Input Guardrails (Prompt Injection, PII Detection) → Retrieval Guardrails (ACL, Temporal Filters) → Generation Guardrails (Groundedness, Citations) → Output Guardrails (Required Disclosures, Audit Log) → Audited Response."
-          background="#ffffff"
-          maxWidth={1200}
-        />
+        <ComplianceGatesPanel />
       </div>
 
       {/* SECTION NAV */}
@@ -14252,14 +14232,7 @@ export const TokenBillTab = ({ s }) => {
 
       {/* BUSINESS IMPACT BEFORE VS AFTER RAG PILOT CHART */}
       <div style={{ marginBottom: "1.5rem" }}>
-        <DiagramImage
-          src="/assets/rag_pilot_business_impact_chart.png"
-          alt="Business Impact: Before vs After RAG Pilot Chart"
-          title="Business Impact & ROI — Before vs. After RAG Pilot"
-          caption="Empirical business metrics from enterprise deployment: Research Time reduced from 25m to 9m (-64%), Event Prep reduced from 60m to 15m (-75%), Advisor Satisfaction increased from 3.2 to 4.4 (+37.5%), and Policy Exceptions dropped from 1.8% to 0.3% (-83.3%)."
-          background="#ffffff"
-          maxWidth={1200}
-        />
+        <PilotImpactPanel />
       </div>
 
       {/* SUB TAB NAVIGATION */}
@@ -14507,15 +14480,7 @@ async def run_independent_branches(agents, payload):
                 📐 Overall Multi-Agent Cost Architecture
               </div>
               <ZoomableFigure title="Dynamic LLM Multi-Agent Cost Architecture">
-                <div style={{ width: "100%", aspectRatio: "1/1", maxHeight: 420, overflow: "hidden", display: "flex", alignItems: "center", justifyContent: "center", background: "#f8fafc", borderRadius: 6, border: "1px solid #e0dcd4" }}>
-                  <img
-                    src="/assets/multi_agent_token_cost_architecture_1785577825087.png"
-                    alt="Multi-Agent Token Cost Architecture"
-                    loading="lazy"
-                    decoding="async"
-                    style={{ width: "100%", height: "100%", objectFit: "contain", display: "block" }}
-                  />
-                </div>
+                <TokenCostRouterPanel />
               </ZoomableFigure>
               <p style={{ fontSize: "0.62rem", color: "#334155", lineHeight: 1.6, marginTop: "0.8rem" }}>
                 Flow showing supervisor task routing between high-cost reasoning models vs low-cost fast models, with context trimming before handoffs and parallel branch collection via <code style={{ color: "#3A9B9F" }}>asyncio.gather()</code>.
@@ -14527,15 +14492,7 @@ async def run_independent_branches(agents, payload):
                 🔁 Naive Retry Cascade vs. Isolated Retry Flow
               </div>
               <ZoomableFigure title="Retry Cascade vs Isolated Retry Infographic">
-                <div style={{ width: "100%", aspectRatio: "1/1", maxHeight: 420, overflow: "hidden", display: "flex", alignItems: "center", justifyContent: "center", background: "#f8fafc", borderRadius: 6, border: "1px solid #e0dcd4" }}>
-                  <img
-                    src="/assets/retry_cascade_vs_isolated_1785577840013.png"
-                    alt="Retry Cascade vs Isolated Retry"
-                    loading="lazy"
-                    decoding="async"
-                    style={{ width: "100%", height: "100%", objectFit: "contain", display: "block" }}
-                  />
-                </div>
+                <RetryIsolationPanel />
               </ZoomableFigure>
               <p style={{ fontSize: "0.62rem", color: "#334155", lineHeight: 1.6, marginTop: "0.8rem" }}>
                 Left: Naive retries force full upstream chain re-execution with heavy context. Right: Isolated retry with trimmed context and localized execution avoids redundant computation.
@@ -15313,14 +15270,7 @@ export const ContextMeasureTab = ({ s }) => {
 
       {/* INTERACTIVE BLUEPRINT DIAGRAM */}
       <div style={{ marginBottom: "1.5rem" }}>
-        <DiagramImage
-          src="/assets/measuring_context_quality_infographic.png"
-          alt="Measuring Context Quality Infographic & Evaluation Dimensions Matrix"
-          title="Measuring Context Quality — Evaluation Metrics & Matrix"
-          caption="Full evaluation framework mapping Context Precision, Recall, Relevance, Faithfulness, Utilization, RAGAS & ARES frameworks, Evaluation Dimensions Matrix, and production Best Practices."
-          background="#0a0d14"
-          maxWidth={1200}
-        />
+        <ContextQualityPanel />
       </div>
 
       {/* SECTION NAV */}
@@ -17565,14 +17515,7 @@ export const AIProductBuilderTab = ({ s }) => {
 
       {/* ENTERPRISE ADVISOR INTELLIGENCE COPILOT UI MOCKUP */}
       <div style={{ marginBottom: "1.5rem" }}>
-        <DiagramImage
-          src="/assets/advisor_intelligence_copilot_ui.png"
-          alt="Advisor Intelligence Copilot UI Mockup"
-          title="Advisor Intelligence Copilot — Enterprise RAG Product Interface"
-          caption="Production-grade AI Copilot UI: Grounded Conversational Q&A with real-time Portfolio Exposure visualization, Market Warning indicators, Document Citation Badges (Q2 Report.pdf, Risk Policy v3.1, Regulatory Update 2024), and automated Compliance Verification."
-          background="#0b1329"
-          maxWidth={1200}
-        />
+        <AdvisorCopilotPanel />
       </div>
 
       {/* LIFECYCLE DIAGRAM */}
@@ -18731,14 +18674,8 @@ export const AgentDebuggingTab = ({ s }) => {
             Generated High-Res Diagram
           </span>
         </div>
-        <div style={{ borderRadius: 8, overflow: "hidden", border: "1px solid #cbd5e1", aspectRatio: "16/9", maxHeight: 480, background: "#0b0f19", display: "flex", alignItems: "center", justifyContent: "center" }}>
-          <img
-            src="/ai_agent_debugging_hero_1785850378111.png"
-            alt="AI Agent Debugging Architecture"
-            loading="lazy"
-            decoding="async"
-            style={{ width: "100%", height: "100%", objectFit: "contain", objectPosition: "center", display: "block" }}
-          />
+        <div style={{ borderRadius: 8, overflow: "hidden", border: "1px solid #cbd5e1", background: "#0b0f19", display: "flex", alignItems: "center", justifyContent: "center" }}>
+          <DebuggingLoopPanel />
         </div>
       </div>
 

@@ -682,3 +682,324 @@ export function HybridRetrievalPanel() {
     </Panel>
   );
 }
+
+/* App.jsx library panels (shared; keeps the legacy file to swaps + import). */
+
+const libPts = { fontSize: 12.5, color: '#CBD5E1', lineHeight: 1.65, margin: '6px 0 0', paddingLeft: 16 };
+const libFlow = { fontSize: 12, color: '#7FE3DC', marginTop: 8, lineHeight: 1.6 };
+
+/** Five multi-agent topologies plus protocol, flow, and tool use. */
+export function MultiAgentPatternsPanel() {
+  return (
+    <Panel
+      title="Multi-Agent Systems — Topologies & Protocol"
+      sub="One task, many agents: pick the topology that matches the coordination you need."
+    >
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: 12 }}>
+        <GlassCard color="#5EC4C8" icon="users" title="Supervisor Pattern">
+          <div style={libFlow}>Chief agent delegates tasks, workers report status.</div>
+        </GlassCard>
+        <GlassCard color="#6A9BD8" icon="nodes" title="Peer-to-Peer (P2P)">
+          <div style={libFlow}>Bidirectional collaboration, data sharing, resource exchange — no boss.</div>
+        </GlassCard>
+        <GlassCard color="#A78BFA" icon="layers" title="Hierarchical Team">
+          <div style={libFlow}>Chief → team leads → specialists, layered delegation.</div>
+        </GlassCard>
+        <GlassCard color="#E8C558" icon="chat" title="Competitive Debate">
+          <div style={libFlow}>Debaters trade argument and counterargument; an arbitrator renders the decision.</div>
+        </GlassCard>
+        <GlassCard color="#34D399" icon="send" title="Protocol, Flow & Tools">
+          <ul style={libPts}>
+            <li>Structured request/response with handshake signals</li>
+            <li>Message-broker flow for real-time process</li>
+            <li>Tool-using agents: API calls, queries, cloud data</li>
+          </ul>
+        </GlassCard>
+      </div>
+    </Panel>
+  );
+}
+
+/** Shared graph memory: six mechanisms plus schema and agent strip. */
+export function ContextGraphMemoryPanel() {
+  const mono = {
+    fontFamily: 'ui-monospace, SFMono-Regular, Menlo, Consolas, monospace',
+    fontSize: 12, color: '#7FE3DC', background: 'rgba(0,0,0,0.35)',
+    border: '1px solid rgba(94,196,200,0.25)', borderRadius: 6,
+    padding: '8px 10px', marginTop: 8, lineHeight: 1.7, whiteSpace: 'pre-wrap',
+  };
+  return (
+    <Panel
+      title="Context Graph for Multi-Agent Memory"
+      sub="A shared knowledge graph gives every agent persistent, queryable memory — scoped, versioned, and consistent."
+    >
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: 12 }}>
+        <GlassCard color="#5EC4C8" icon="nodes" title="Shared Knowledge Graph">
+          <div style={libFlow}>Entities, concepts, and facts as one collective memory with temporal labels.</div>
+        </GlassCard>
+        <GlassCard color="#A78BFA" icon="eye" title="Agent-Specific Views">
+          <div style={libFlow}>Role-based access, subgraph queries, and privacy filters per agent.</div>
+        </GlassCard>
+        <GlassCard color="#34D399" icon="check" title="Conflict Resolution">
+          <div style={libFlow}>Versioning, confidence scoring, and meta-agent judge settle competing writes.</div>
+        </GlassCard>
+        <GlassCard color="#E8C558" icon="zap" title="Event-Driven Updates">
+          <div style={libFlow}>Discoveries publish to a bus; the graph subscribes in real time. Event sourcing + change streams.</div>
+        </GlassCard>
+        <GlassCard color="#6A9BD8" icon="search" title="Traversal Retrieval">
+          <div style={libFlow}>Find an entity, follow relationships, aggregate facts — multi-hop reasoning over flat search.</div>
+        </GlassCard>
+        <GlassCard color="#E8836A" icon="file" title="Episodic vs Semantic">
+          <div style={libFlow}>Semantic store for general knowledge, episodic store for interaction traces, procedural rules for both.</div>
+        </GlassCard>
+      </div>
+      <div style={mono}>{'(:Agent {name:"ResearchAgent"})-[:DISCOVERED]->(:Fact)\n(:Fact)-[:ABOUT]->(:Entity)\n(:Entity)-[:HAS_RISK]->(:Concept)'}</div>
+    </Panel>
+  );
+}
+
+/** Context engineering: six practices, assembly pipeline, principles. */
+export function ContextEngineeringPanel() {
+  return (
+    <Panel
+      title="Context Engineering — Craft the Window"
+      sub="The art and science of assembling, structuring, and evolving model context for reasoning quality."
+    >
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: 12 }}>
+        <GlassCard color="#5EC4C8" icon="gauge" title="Window Optimization">
+          <div style={libFlow}>Budget tokens by priority: rank, compress semantically, truncate the rest.</div>
+        </GlassCard>
+        <GlassCard color="#A78BFA" icon="clip" title="Assembly Patterns">
+          <div style={libFlow}>System instructions, roles, few-shots, retrieved docs, and queries in one narrative.</div>
+        </GlassCard>
+        <GlassCard color="#34D399" icon="search" title="Retrieval Injection">
+          <div style={libFlow}>Hybrid search, reranking, and query expansion surface the pertinent slice per query.</div>
+        </GlassCard>
+        <GlassCard color="#E8C558" icon="refresh" title="Cleaning & Dedup">
+          <div style={libFlow}>Semantic dedup, noise filtering, and contradiction detection keep state coherent.</div>
+        </GlassCard>
+        <GlassCard color="#6A9BD8" icon="layers" title="Hierarchical Layers">
+          <div style={libFlow}>Global, session, and turn layers with different eviction and priority policies.</div>
+        </GlassCard>
+        <GlassCard color="#E8836A" icon="nodes" title="State Evolution">
+          <div style={libFlow}>Summarize turns, hold working memory, track intent as context shifts.</div>
+        </GlassCard>
+      </div>
+      <div style={{ marginTop: 12 }}>
+        <GlassBar color="#5EC4C8" icon="send" title="Assembly Pipeline" detail="Query → retrieve top-k → clean (dedupe) → rank by relevance → assemble structured prompt → inject window → generate." />
+      </div>
+      <div style={{ ...libFlow, marginTop: 10, textAlign: 'center' }}>Principles: signal-to-noise · recency bias · coherence · attribution · budget awareness.</div>
+    </Panel>
+  );
+}
+
+/** Memory engineering: lifecycle, privacy, layered architecture, types. */
+export function MemoryEngineeringPanel() {
+  return (
+    <Panel
+      title="Memory Engineering — Neural Storage Architecture"
+      sub="From temporary buffers to isolated enclaves: encode, store, utilize — then forget or archive."
+    >
+      <div style={{ display: 'grid', gap: 12 }}>
+        <GlassBar color="#5EC4C8" icon="refresh" title="Lifecycle" detail="Encoding → storage → utilization, with a forgetting/archiving path that keeps memory lean." />
+        <GlassBar color="#A78BFA" icon="shield" title="Privacy & Isolation" detail="User data enclaves plus secure access control — memory segments stay separated by owner." />
+        <GlassBar color="#6A9BD8" icon="layers" title="Four Architecture Layers" detail="Physical storage → semantic representation (graphs, concepts) → abstraction and access (files, databases) → cognitive application (agent reasoning)." />
+        <GlassBar color="#E8C558" icon="file" title="Memory Types" detail="Short-term: limited, seconds, very fast buffer. Long-term: consolidation store. Working memory: ~20-second buffer feeding active reasoning." />
+      </div>
+    </Panel>
+  );
+}
+
+/** Market event processing: feed → topic → processor → three outputs. */
+export function MarketEventPanel() {
+  return (
+    <Panel
+      title="Real-Time Market Event Processing"
+      sub="Data feeds stream through topics into a severity-scoring processor that fans out to three destinations."
+    >
+      <div style={{ display: 'grid', gap: 12 }}>
+        <GlassBar color="#5EC4C8" icon="send" title="Feed → Topic" detail="Rating-agency and market data feeds publish into a streaming topic." />
+        <GlassBar color="#E8C558" icon="cpu" title="Stream Processor" detail="Entity resolution plus severity scoring, computed per event in flight." />
+        <GlassBar color="#34D399" icon="check" title="Three Outputs" detail="Vector index update, advisor alerts for affected clients, and an approved response pack." />
+      </div>
+    </Panel>
+  );
+}
+
+/* B11b-ii panels: compliance gates, pilot impact, quality metrics, copilot UI,
+   token-cost routing, retry isolation, agent-in-workflow, debugging loop. */
+
+const bxPts = { fontSize: 12.5, color: '#CBD5E1', lineHeight: 1.65, margin: '6px 0 0', paddingLeft: 16 };
+const bxFlow = { fontSize: 12, color: '#7FE3DC', marginTop: 8, lineHeight: 1.6 };
+
+/** Four sequential gates from query to audited response. */
+export function ComplianceGatesPanel() {
+  return (
+    <Panel
+      title="RAG Guardrails & Compliance — Four Gates"
+      sub="Every query walks a gauntlet of four gates; what exits is audited."
+    >
+      <div style={{ display: 'grid', gap: 12 }}>
+        <GlassBar color="#5EC4C8" icon="send" index="1." title="Input Guardrails" detail="Prompt-injection and PII detection on the way in." />
+        <GlassBar color="#6A9BD8" icon="search" index="2." title="Retrieval Guardrails" detail="Access-control lists and temporal filters on what may be fetched." />
+        <GlassBar color="#E8C558" icon="check" index="3." title="Generation Guardrails" detail="Groundedness checks and citations on the way out of the model." />
+        <GlassBar color="#34D399" icon="shield" index="4." title="Output Guardrails" detail="Required disclosures plus an audit log — the audited response." />
+      </div>
+    </Panel>
+  );
+}
+
+/** Before/after pilot bars with exact chart values. */
+export function PilotImpactPanel() {
+  const rows = [
+    { t: 'Research Time', before: '25 min', after: '9 min', pct: 36, c: '#5EC4C8', note: '−64%' },
+    { t: 'Event Prep', before: '60 min', after: '15 min', pct: 25, c: '#6A9BD8', note: '−75%' },
+    { t: 'Advisor Satisfaction', before: '3.2', after: '4.4', pct: 100, c: '#E8C558', note: '+37.5%' },
+    { t: 'Policy Exceptions', before: '1.8%', after: '0.3%', pct: 17, c: '#34D399', note: '−83%' },
+  ];
+  const track = { height: 10, borderRadius: 5, background: '#2A3548', overflow: 'hidden', marginTop: 6 };
+  const fill = (w, c) => ({ width: `${w}%`, height: '100%', background: c, borderRadius: 5 });
+  return (
+    <Panel
+      title="Business Impact — Before vs After RAG Pilot"
+      sub="Red bars are before, green bars after the pilot. Same work, a fraction of the time."
+    >
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: 12 }}>
+        {rows.map((r) => (
+          <div key={r.t} style={{ background: 'rgba(255,255,255,0.04)', border: `1px solid ${r.c}44`, borderRadius: 12, padding: 14 }}>
+            <div style={{ fontSize: 13, fontWeight: 800, color: '#F1F5F9' }}>{r.t}</div>
+            <div style={{ fontSize: 12, color: '#94A3B8', marginTop: 8 }}>Before</div>
+            <div style={{ fontSize: 16, fontWeight: 800, color: '#E8836A' }}>{r.before}</div>
+            <div style={track}><div style={fill(100, '#E8836A')} /></div>
+            <div style={{ fontSize: 12, color: '#94A3B8', marginTop: 8 }}>After pilot</div>
+            <div style={{ fontSize: 16, fontWeight: 800, color: '#34D399' }}>{r.after} <span style={{ fontSize: 11, color: r.c }}>{r.note}</span></div>
+            <div style={track}><div style={fill(r.pct, r.c)} /></div>
+          </div>
+        ))}
+      </div>
+    </Panel>
+  );
+}
+
+/** Six context-quality metrics plus matrix and practices. */
+export function ContextQualityPanel() {
+  const cards = [
+    { c: '#5EC4C8', icon: 'search', t: 'Precision · Signal Density', d: 'Fraction of retrieved chunks that answer the query. Precision@K, MRR, nDCG.' },
+    { c: '#6A9BD8', icon: 'check', t: 'Recall · Coverage', d: 'All ground-truth information present in context. Recall@K, answer coverage, ground-truth match.' },
+    { c: '#34D399', icon: 'eye', t: 'Relevance · Alignment', d: 'Semantic similarity per chunk: cosine similarity, cross-encoder scores, judge ratings.' },
+    { c: '#E8C558', icon: 'shield', t: 'Faithfulness · Groundedness', d: 'Output factually supported by context. Claim verification, NLI scoring, attribution.' },
+    { c: '#A78BFA', icon: 'zap', t: 'Utilization · Efficiency', d: 'Share of injected context actually used. Token efficiency, attention analysis, compression ratio.' },
+    { c: '#E8836A', icon: 'clip', t: 'Eval Frameworks', d: 'Automated suites scoring quality without human labels — faithfulness, relevance, recall.' },
+  ];
+  return (
+    <Panel
+      title="Measuring Context Quality"
+      sub="Six metrics, one matrix, five practices for quantifying how well context supports grounded generation."
+    >
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: 12 }}>
+        {cards.map((m) => (
+          <GlassCard key={m.t} color={m.c} icon={m.icon} title={m.t}>
+            <div style={bxFlow}>{m.d}</div>
+          </GlassCard>
+        ))}
+      </div>
+      <div style={{ ...bxFlow, marginTop: 12, textAlign: 'center' }}>
+        Matrix: precision → relevance of chunks · recall → ground-truth completeness · relevance → semantic alignment · faithfulness → output grounding · utilization → token efficiency · latency → p50/p95/p99. Practices: golden datasets, human-in-the-loop, A/B tests, end-to-end vs component metrics, continuous monitoring.
+      </div>
+    </Panel>
+  );
+}
+
+/** Copilot answer flow: question → cited answer → exposure → warnings → verdict. */
+export function AdvisorCopilotPanel() {
+  return (
+    <Panel
+      title="Advisor Intelligence Copilot"
+      sub="Client questions answered with cited sources, exposure breakdowns, market warnings, and a compliance verdict."
+    >
+      <div style={{ display: 'grid', gap: 12 }}>
+        <GlassBar color="#5EC4C8" icon="chat" index="1." title="Grounded Q&A" detail="Questions answered from cited sources — filings, risk policies, regulatory updates — never from memory alone." />
+        <GlassBar color="#6A9BD8" icon="chart" index="2." title="Portfolio Exposure" detail="Holdings broken down by segment so concentration risk is visible at a glance." />
+        <GlassBar color="#E8C558" icon="flag" index="3." title="Market Warnings" detail="Severity-graded alerts attach to the positions they threaten." />
+        <GlassBar color="#34D399" icon="check" index="4." title="Compliant Verdict" detail="Every answer ships with a compliance check before it reaches the advisor." badge="compliant" />
+      </div>
+    </Panel>
+  );
+}
+
+/** Supervisor router splitting complex vs simple work across model tiers. */
+export function TokenCostRouterPanel() {
+  return (
+    <Panel
+      title="Dynamic Multi-Agent Token Cost Routing"
+      sub="A supervisor routes by complexity: heavy reasoning for hard tasks, small fast models for the rest — trimmed branches gathered in parallel."
+    >
+      <div style={{ display: 'grid', gap: 12 }}>
+        <GlassBar color="#E8C558" icon="cpu" title="Supervisor + Dynamic Router" detail="Task intake triages every request: complex tasks go up, simple tasks go down — never the reverse." />
+        <GlassBar color="#E8836A" icon="zap" title="High-Cost Branch" badge="large reasoning models" detail="Complex tasks route to large reasoning models where depth matters more than price." />
+        <GlassBar color="#5EC4C8" icon="send" title="Low-Cost Branch" badge="small fast models" detail="Simple tasks route to small fast models; three agent branches trim context before handoff and gather results in parallel." />
+        <GlassBar color="#34D399" icon="check" title="No Global Rebuilds" detail="Retries stay local to the failed branch — upstream state is never rebuilt from scratch." />
+      </div>
+    </Panel>
+  );
+}
+
+/** Naive cascade vs isolated retry, with reported savings. */
+export function RetryIsolationPanel() {
+  return (
+    <Panel
+      title="Naive Retry Cascade vs Isolated Retry"
+      sub="One small tool failure should not re-run the world: retry the failed node with trimmed context."
+    >
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: 12 }}>
+        <GlassCard color="#E8836A" icon="zap" title="Expensive Cascade" badge="high waste">
+          <ul style={bxPts}>
+            <li>Plan → dispatch → external call fails</li>
+            <li>Entire chain re-runs on full context</li>
+            <li>Redundant agent calls pile up</li>
+          </ul>
+        </GlassCard>
+        <GlassCard color="#34D399" icon="check" title="Isolated Retry" badge="40% tokens · 50% latency">
+          <ul style={bxPts}>
+            <li>Clean isolated retry of the failed tool</li>
+            <li>Trimming agent: summary + essential params</li>
+            <li>Small re-run on trimmed context succeeds</li>
+          </ul>
+        </GlassCard>
+      </div>
+    </Panel>
+  );
+}
+
+/** Deterministic prep wrapping an agentic loop, ending in a structured report. */
+export function AgentInWorkflowPanel() {
+  return (
+    <Panel
+      title="Put the Agent Inside the Workflow"
+      sub="Deterministic stages around one autonomous loop: structured in, agentic in the middle, structured out."
+    >
+      <div style={{ display: 'grid', gap: 12 }}>
+        <GlassBar color="#5EC4C8" icon="file" index="1." title="Structured Prep" detail="Project goals, data constraints, and metric definitions compile into a typed experiment spec → structured prompt → candidate hyperparameters." />
+        <GlassBar color="#E8C558" icon="refresh" index="2." title="Agentic Loop" detail="Trial queue → sample → parallel training runs → cross-validation → analyze → best configuration, iterating until the update converges." />
+        <GlassBar color="#34D399" icon="check" index="3." title="Structured Report" detail="Best specs, validation metrics, and comparison analysis render as one typed report summary." />
+      </div>
+    </Panel>
+  );
+}
+
+/** Debug loop: trace → inspect → patch → verify. */
+export function DebuggingLoopPanel() {
+  return (
+    <Panel
+      title="AI Agent Debugging Loop"
+      sub="Trace the run, inspect the live layout, visualize the patch, verify the viewport."
+    >
+      <div style={{ display: 'grid', gap: 12 }}>
+        <GlassBar color="#5EC4C8" icon="file" index="1." title="Agent Trace Log" detail="Timestamped run log: files analyzed, errors detected with line numbers, fix hypotheses proposed." />
+        <GlassBar color="#E8C558" icon="eye" index="2." title="Layout Bounding Boxes" detail="Inspect the live mobile viewport element by element — widths, offsets, and tap targets." />
+        <GlassBar color="#A78BFA" icon="code" index="3." title="Diff Patch Visualizer" detail="Proposed style fixes render as before/after diffs before anything is applied." />
+        <GlassBar color="#34D399" icon="check" index="4." title="Verified Layout" detail="Patched viewport re-checked and marked verified — mobile layout confirmed." badge="verified" />
+      </div>
+    </Panel>
+  );
+}
