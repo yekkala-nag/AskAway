@@ -282,12 +282,30 @@ export function PromptFrameworksGrid() {
     { a: 'Directional Stimulus', e: 'D.I.R.E.C.T. — angle, concepts, keywords, scope, generation', b: 'summarization, sentiment, extraction', tier: 'Structured', icon: 'send',
       pts: ['Specify angle plus 3–5 anchor keywords, not full examples', 'Constrain scope; allow freedom within bounds'],
       t: '"Write about [topic] emphasizing [k1, k2, k3] as anchors — not required phrases. Avoid [unwanted angle]."' },
+    { a: 'Step-Back', e: 'S.T.E.P. — query, abstraction, principles, guided solution', b: 'physics/math, legal analysis, debugging, strategy', tier: 'Advanced', icon: 'help',
+      pts: ['Take a step back before solving', 'Extract 2–3 governing principles first', 'Solve guided by principles, not noise'],
+      t: '"Before answering, step back: list 2–3 fundamental principles governing this problem type. Then use them to answer: [question]."' },
+    { a: 'Reflexion', e: 'R.E.F.L.E.X. — respond, evaluate, extract lesson, embed, re-execute', b: 'agentic loops, debugging, iterative writing', tier: 'Advanced', icon: 'zap',
+      pts: ['Review failures for gaps and hallucinations', 'Write a reflection rule from each lesson', 'Re-attempt strictly adhering to the rule'],
+      t: '"Review your answer for gaps and hallucinations. Write a Reflection rule to avoid each mistake. Generate a new answer obeying the rule."' },
+    { a: 'Meta-Prompting', e: 'M.E.T.A. — mission, expert persona, template, analysis', b: 'beginners, workflow setup, reverse-engineering outputs', tier: 'Foundation', icon: 'wrench',
+      pts: ['Describe the goal, not the prompt', 'AI acts as expert prompt engineer', 'Get variables, format, and failure guards back'],
+      t: '"You are an expert prompt engineer. My goal: [goal]. Write the optimal detailed prompt — placeholders, output format, and anti-failure constraints."' },
+    { a: 'Self-Ask', e: 'S.E.L.F. — state, elicit, locate, formulate', b: 'multi-hop QA, RAG QA, fact-checking', tier: 'Advanced', icon: 'users',
+      pts: ['Force explicit follow-up questions', 'Answer each intermediate before proceeding', 'Compose the final answer from intermediates'],
+      t: '"Are follow-ups needed? Yes. Follow-up: [Q1]? Intermediate: [A1]. Follow-up: [Q2]? Intermediate: [A2]. Final answer: [...]."' },
+    { a: 'Contrastive', e: 'C.O.N.T.R.A.S.T. — objective, positive, negative, boundaries, execution', b: 'brand voice, strict formats, correcting bad habits', tier: 'Structured', icon: 'gauge',
+      pts: ['Show one ideal output and one flawed output', 'Name exactly why the bad one fails', 'Generate avoiding the named pitfalls'],
+      t: '"Task: [task]. Good: [ideal]. Bad: [flawed] — fails because [reason]. Generate avoiding the bad example\u2019s pitfalls."' },
+    { a: 'Multimodal', e: 'M.U.L.T.I. — media, understand, link, target, iterate', b: 'UI generation, chart analysis, diagram-to-code', tier: 'Advanced', icon: 'play',
+      pts: ['Declare each input modality up front', 'Describe structures, then map across modalities', 'Generate with visual/logical fidelity checks'],
+      t: '"Analyze [image/code/data]: describe key structures, map them to [text/schema], then generate [output] preserving fidelity."' },
   ];
   const icons = ['clip', 'target', 'smile', 'search', 'eye', 'star', 'refresh', 'branch'];
   const palette = ['#5EC4C8', '#6A9BD8', '#A78BFA', '#7FB069', '#E8C558', '#E08A4C', '#F0A89A', '#9B89C4'];
   return (
     <Panel
-      title="24 Prompt Frameworks & Reasoning Methodologies"
+      title="30 Prompt Frameworks & Reasoning Methodologies"
       sub="Structure inputs, guide reasoning, engineer systems — Foundation habits, Structured frameworks, Advanced engineering."
     >
       <div style={grid(260)}>{items.map((it, i) => {
