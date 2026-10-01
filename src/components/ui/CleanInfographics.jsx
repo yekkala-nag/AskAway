@@ -226,35 +226,87 @@ export function LearningPromptsGrid() {
 
 export function PromptFrameworksGrid() {
   const items = [
-    { a: 'TRACE', e: 'Task, Request, Action, Context, Example', b: 'Repeatable, high-clarity instructions', pts: ['Start with the outcome (Task)', 'Specify the ask (Request) and method (Action)', 'Add constraints/background (Context)', 'Provide a reference output (Example)'], t: 'Task: [goal] / Request: [what you want back] / Action: [steps/criteria] / Context: [background/constraints] / Example: [sample format]' },
-    { a: 'TAG', e: 'Task, Action, Goal', b: 'Quick, lightweight prompts', pts: ['Define the objective (Task)', 'State the operations to perform (Action)', 'Make success measurable (Goal)'], t: 'Task: [objective] / Action: [do X using Y] / Goal: [metric/definition of done]' },
-    { a: 'RTF', e: 'Role, Task, Format', b: 'Controlling tone and structure', pts: ['Assign expertise to shape judgment (Role)', 'Specify deliverable (Task)', 'Lock output structure (Format)'], t: 'Role: Act as a [expert] / Task: Produce [deliverable] / Format: [bullets/table/checklist], include [sections]' },
-    { a: 'CLEAR', e: 'Concise, Logical, Explicit, Actionable, Responsible', b: 'Refining messy prompts', pts: ['Remove noise; keep only essential constraints', 'Order requirements stepwise', 'Make assumptions explicit and testable', 'Ensure outputs can be executed; add safety/limits if needed'], t: 'Concise ask: [one sentence] / Logic: [ordered requirements] / Explicit constraints: [must/avoid] / Actionable output: [next steps] / Responsible guardrails: [limits]' },
-    { a: 'PACT', e: 'Perspective, Action, Context, Task', b: 'Stakeholder-aware outputs', pts: ['Set viewpoint to frame trade-offs (Perspective)', 'Define output operation (Action)', 'Provide scenario details (Context)', 'State the objective (Task)'], t: 'Perspective: As a [stakeholder/expert] / Action: [analyze/compare/design] / Context: [situation, constraints, audience] / Task: [objective + success criteria]' },
-    { a: 'STAR', e: 'Situation, Task, Action, Result', b: 'Case write-ups and structured narratives', pts: ['Describe the setting (Situation)', 'Clarify responsibility (Task)', 'Detail what was done (Action)', 'Quantify/qualify impact (Result)'], t: 'Situation: [context] / Task: [what needed to happen] / Action: [steps taken] / Result: [outcome + metric + lesson]' },
-    { a: 'RISE', e: 'Reflect, Inquire, Suggest, Elevate', b: 'Feedback loops and iteration', pts: ['Reflect what you observed (neutral)', 'Ask targeted questions (Inquire)', 'Suggest specific improvements (Suggest)', 'Elevate with a higher standard or next iteration (Elevate)'], t: 'Reflect: [what\u2019s working / what you see] / Inquire: [2\u20133 diagnostic questions] / Suggest: [concrete changes] / Elevate: [stronger version]' },
-    { a: 'RASCEF', e: 'Role, Action, Step, Context, Example, Format', b: 'Complex, multi-stage tasks', pts: ['Lock expertise (Role) + deliverable operation (Action)', 'Break process into steps (Step) for reliability', 'Add constraints and background (Context)', 'Provide exemplar (Example); enforce structure (Format)'], t: 'Role: [expert] / Action: [create/analyze/plan] / Steps: 1) \u2026 2) \u2026 / Context: [constraints, audience] / Example: [mini sample] / Format: [table/sections]' },
+    { a: 'TRACE', e: 'Task, Request, Action, Context, Example', b: 'Repeatable, high-clarity instructions', tier: 'Structured', pts: ['Start with the outcome (Task)', 'Specify the ask (Request) and method (Action)', 'Add constraints/background (Context)', 'Provide a reference output (Example)'], t: 'Task: [goal] / Request: [what you want back] / Action: [steps/criteria] / Context: [background/constraints] / Example: [sample format]' },
+    { a: 'TAG', e: 'Task, Action, Goal', b: 'Quick, lightweight prompts', tier: 'Foundation', pts: ['Define the objective (Task)', 'State the operations to perform (Action)', 'Make success measurable (Goal)'], t: 'Task: [objective] / Action: [do X using Y] / Goal: [metric/definition of done]' },
+    { a: 'RTF', e: 'Role, Task, Format', b: 'Controlling tone and structure', tier: 'Foundation', pts: ['Assign expertise to shape judgment (Role)', 'Specify deliverable (Task)', 'Lock output structure (Format)'], t: 'Role: Act as a [expert] / Task: Produce [deliverable] / Format: [bullets/table/checklist], include [sections]' },
+    { a: 'CLEAR', e: 'Concise, Logical, Explicit, Actionable, Responsible', b: 'Refining messy prompts', tier: 'Structured', pts: ['Remove noise; keep only essential constraints', 'Order requirements stepwise', 'Make assumptions explicit and testable', 'Ensure outputs can be executed; add safety/limits if needed'], t: 'Concise ask: [one sentence] / Logic: [ordered requirements] / Explicit constraints: [must/avoid] / Actionable output: [next steps] / Responsible guardrails: [limits]' },
+    { a: 'PACT', e: 'Perspective, Action, Context, Task', b: 'Stakeholder-aware outputs', tier: 'Structured', pts: ['Set viewpoint to frame trade-offs (Perspective)', 'Define output operation (Action)', 'Provide scenario details (Context)', 'State the objective (Task)'], t: 'Perspective: As a [stakeholder/expert] / Action: [analyze/compare/design] / Context: [situation, constraints, audience] / Task: [objective + success criteria]' },
+    { a: 'STAR', e: 'Situation, Task, Action, Result', b: 'Case write-ups and structured narratives', tier: 'Structured', pts: ['Describe the setting (Situation)', 'Clarify responsibility (Task)', 'Detail what was done (Action)', 'Quantify/qualify impact (Result)'], t: 'Situation: [context] / Task: [what needed to happen] / Action: [steps taken] / Result: [outcome + metric + lesson]' },
+    { a: 'RISE', e: 'Reflect, Inquire, Suggest, Elevate', b: 'Feedback loops and iteration', tier: 'Structured', pts: ['Reflect what you observed (neutral)', 'Ask targeted questions (Inquire)', 'Suggest specific improvements (Suggest)', 'Elevate with a higher standard or next iteration (Elevate)'], t: 'Reflect: [what\u2019s working / what you see] / Inquire: [2\u20133 diagnostic questions] / Suggest: [concrete changes] / Elevate: [stronger version]' },
+    { a: 'RASCEF', e: 'Role, Action, Step, Context, Example, Format', b: 'Complex, multi-stage tasks', tier: 'Advanced', pts: ['Lock expertise (Role) + deliverable operation (Action)', 'Break process into steps (Step) for reliability', 'Add constraints and background (Context)', 'Provide exemplar (Example); enforce structure (Format)'],       t: 'Role: [expert] / Action: [create/analyze/plan] / Steps: 1) … 2) … / Context: [constraints, audience] / Example: [mini sample] / Format: [table/sections]' },
+    { a: 'CO-STAR', e: 'Context, Objective, Style, Tone, Audience, Response', b: 'copywriting, brand-aligned content', tier: 'Structured', icon: 'pen',
+      pts: ['Set the scene (Context) plus the goal (Objective)', 'Separate style from tone explicitly', 'Name the audience; lock the deliverable (Response)'],
+      t: 'Context: [background] / Objective: [goal] / Style: [voice] / Tone: [mood] / Audience: [reader] / Response: [format]' },
+    { a: 'CREATE', e: 'Character, Request, Examples, Adjustments, Type, Extras', b: 'creative writing, iterative design', tier: 'Structured', icon: 'bulb',
+      pts: ['Cast a character (Character) plus the ask (Request)', 'Show examples, then iterate via adjustments', 'Lock output type and extras/constraints'],
+      t: 'Character: [persona] / Request: [task] / Examples: [samples] / Adjustments: [revise X] / Type: [format] / Extras: [constraints, avoid Y]' },
+    { a: 'CoT / ToT', e: 'Chain-of-Thought, Tree-of-Thoughts', b: 'math, logic, code, planning', tier: 'Advanced', icon: 'nodes',
+      pts: ['Force visible reasoning instead of jumping to answers', 'Branch multiple paths (ToT), score them, converge on the strongest', 'Show the work — auditability is the point'],
+      t: '"Let\'s think step by step." / ToT: propose 3 paths → evaluate each → converge on the best-supported chain' },
+    { a: 'Few/Zero/One-Shot', e: 'Zero-Shot, One-Shot, Few-Shot', b: 'classification, translation, format adherence', tier: 'Foundation', icon: 'layers',
+      pts: ['Zero-shot: instruct with no examples', 'One-shot: a single exemplar sets the pattern', 'Few-shot: 2–5 diverse exemplars cover edge cases'],
+      t: 'Zero: "[instruction]" / Few: "[instruction] + Example 1..3 (input → output)" — match exemplar diversity to edge cases' },
+    { a: 'Self-Consistency', e: 'Self-Consistency / Self-Refinement', b: 'high-stakes accuracy, anti-hallucination', tier: 'Advanced', icon: 'check',
+      pts: ['Sample multiple answers independently', 'Majority-vote or judge-select the winner', 'Self-critique the winner and refine once'],
+      t: '"Generate 3 independent answers, then vote for the most consistent. Critique the winner for flaws and refine once."' },
+    { a: 'Prompt Chaining', e: 'Prompt Chaining / Modular Prompting', b: 'long-form content, multi-step workflows', tier: 'Advanced', icon: 'link',
+      pts: ['Split complex work: outline → draft → critique → rewrite', 'Each link feeds the next; isolate failures per link'],
+      t: 'Chain: [outline prompt] → feed outline into [draft prompt] → feed draft into [critique prompt] → [rewrite prompt]' },
+    { a: 'Negative Prompting', e: 'Exclusions & Anti-Patterns', b: 'image gen, strict formats, bias avoidance', tier: 'Structured', icon: 'flag',
+      pts: ['State what to avoid alongside what to do', 'List clichés, formats, and biases explicitly'],
+      t: '"Do X. Avoid: [cliché 1, format Y, bias Z]. If tempted by an avoided item, substitute [alternative]."' },
+    { a: 'Emotion Prompting', e: 'E.M.O.T.I.O.N. — stake, motive, outcome, tone, audience, effort, integration', b: 'creative tasks, high-stakes analysis', tier: 'Foundation', icon: 'mic',
+      pts: ['State personal or professional stakes', 'Align tone; demand best effort', 'Reported +10–15% gains on complex tasks'],
+      t: '"This is critical for my [career/project] because [reason]. Give your absolute best with [tone] as a top priority."' },
+    { a: 'ReAct', e: 'R.E.A.C.T. — reason, execute, assess, continue, terminate', b: 'agents, search APIs, multi-step tasks', tier: 'Advanced', icon: 'cpu',
+      pts: ['Reason → single tool call → observe → repeat', 'Show the trace before each action; stop when done'],
+      t: '"Tools: [list]. Per step: 1) think, 2) execute ONE call, 3) observe, 4) continue or terminate. Show reasoning first."' },
+    { a: 'Generated Knowledge', e: 'G.E.N.K.N.O.W. — generate, evaluate, narrow, synthesize, answer', b: 'commonsense QA without retrieval', tier: 'Structured', icon: 'file',
+      pts: ['Generate 5–7 knowledge statements first', 'Filter for relevance; synthesize context', 'Answer citing supporting statements'],
+      t: '"Generate 5–7 facts about [topic]. Keep only those relevant to [question]. Answer using ONLY them, citing each claim."' },
+    { a: 'Active-Prompt', e: 'A.C.T.I.V.E. — ambiguity, clarify, target, iterate, verify, execute', b: 'interactive RAG, requirements, ambiguous queries', tier: 'Advanced', icon: 'chat',
+      pts: ['Detect missing context; ask 1–3 targeted questions', 'Refine strategy from answers; verify before executing'],
+      t: '"Before answering, flag ambiguities. Ask up to 3 clarifying questions. Wait for my response, then proceed."' },
+    { a: 'Constitutional', e: 'P.R.I.N.C.I.P.L.E. — principles, trace, draft, norm-check, critique, revise', b: 'enterprise bots, moderation, compliance', tier: 'Advanced', icon: 'shield',
+      pts: ['Embed 3–5 explicit principles', 'Draft → self-critique against principles → revise violations only'],
+      t: '"Follow: [3–5 rules]. Draft first. Critique the draft against each rule. Output only the revised version."' },
+    { a: 'Least-to-Most', e: 'D.E.C.O.M.P.O.S.E. — decompose, order, solve progressively, synthesize', b: 'complex math, multi-hop QA, refactoring', tier: 'Advanced', icon: 'chart',
+      pts: ['List sub-problems first — solve nothing yet', 'Solve sequentially, feeding answers forward', 'Synthesize the intermediates; check completeness'],
+      t: '"List sub-problems for [task] in order. Do NOT solve yet. Then solve one by one, using each answer as context. Synthesize."' },
+    { a: 'Graph-of-Thoughts', e: 'G.R.A.P.H. — generate, relate, aggregate, prune, harmonize', b: 'creative writing, system design, strategy', tier: 'Advanced', icon: 'globe',
+      pts: ['Generate 3+ independent approaches with pros/cons', 'Connect compatible elements; prune dead branches', 'Merge best elements into a hybrid'],
+      t: '"Generate 3 approaches with pros/cons. Connect compatible elements across them. Synthesize a final merging the best of 2+."' },
+    { a: 'Skeleton-of-Thought', e: 'S.K.E.L.E.T.O.N. — outline, key points, expand, link, verify', b: 'reports, docs, long-form guides', tier: 'Advanced', icon: 'book',
+      pts: ['Output ONLY the skeleton first; get approval', 'Expand sections independently; link transitions', 'Verify alignment with the skeleton'],
+      t: '"Output ONLY a detailed skeleton for [task]. Do NOT write content yet. After approval, expand each section in structure."' },
+    { a: 'Directional Stimulus', e: 'D.I.R.E.C.T. — angle, concepts, keywords, scope, generation', b: 'summarization, sentiment, extraction', tier: 'Structured', icon: 'send',
+      pts: ['Specify angle plus 3–5 anchor keywords, not full examples', 'Constrain scope; allow freedom within bounds'],
+      t: '"Write about [topic] emphasizing [k1, k2, k3] as anchors — not required phrases. Avoid [unwanted angle]."' },
   ];
   const icons = ['clip', 'target', 'smile', 'search', 'eye', 'star', 'refresh', 'branch'];
   const palette = ['#5EC4C8', '#6A9BD8', '#A78BFA', '#7FB069', '#E8C558', '#E08A4C', '#F0A89A', '#9B89C4'];
   return (
     <Panel
-      title="8 Structured Prompting Frameworks Compared"
-      sub="Pick by need: clarity, speed, tone control, cleanup, stakeholder framing, narrative, iteration, or multi-stage reliability."
+      title="24 Prompt Frameworks & Reasoning Methodologies"
+      sub="Structure inputs, guide reasoning, engineer systems — Foundation habits, Structured frameworks, Advanced engineering."
     >
-      <div style={grid(260)}>{items.map((it, i) => (
+      <div style={grid(260)}>{items.map((it, i) => {
+        const color = palette[i % palette.length];
+        return (
         <GlassCard
           key={i}
-          color={palette[i % palette.length]}
-          icon={icons[i]}
+          color={color}
+          icon={it.icon || icons[i % icons.length]}
           title={`${String(i + 1).padStart(2, '0')} · ${it.a}`}
+          badge={it.tier}
         >
-          <div style={{ fontSize: 11, fontWeight: 700, color: palette[i % palette.length], marginBottom: 6, textTransform: 'uppercase', letterSpacing: '0.04em' }}>Best for: {it.b}</div>
+          <div style={{ fontSize: 11, fontWeight: 700, color, marginBottom: 6, textTransform: 'uppercase', letterSpacing: '0.04em' }}>Best for: {it.b}</div>
           <div style={{ ...glassBody, color: '#94A3B8' }}>{it.e}</div>
           <ul style={glassList}>{it.pts.map((p, j) => <li key={j}>{p}</li>)}</ul>
           <div style={glassPrompt}>{it.t}</div>
         </GlassCard>
-      ))}</div>
+        );
+      })}</div>
     </Panel>
   );
 }
