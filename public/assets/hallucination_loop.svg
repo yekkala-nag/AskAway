@@ -1,18 +1,19 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 360" font-family="Syne, sans-serif">
-<rect width="1000" height="360" fill="#f7f5f0"/>
-<text x="500" y="40" font-family="Syne, sans-serif" font-size="Silent Hallucination Loop — Confident but Wrong" font-weight="800" fill="#c4572a" text-anchor="middle">Silent Hallucination Loop — Confident but Wrong</text>
-<rect x="120" y="150" width="200" height="70" rx="10" fill="#c4572a14" stroke="#c4572a" stroke-width="2"/>
-<text x="220" y="185" font-family="Syne, sans-serif" font-size="❓ Query" font-weight="800" fill="#c4572a" text-anchor="middle">❓ Query</text>
-<line x1="320" y1="185" x2="420" y2="185" stroke="#c4572a" stroke-width="2.5" marker-end="url(#ah7)"/>
-<rect x="420" y="150" width="200" height="70" rx="10" fill="#fff" stroke="#c4572a" stroke-width="2"/>
-<text x="520" y="185" font-family="Syne, sans-serif" font-size="🔍 Bad retrieval" font-weight="800" fill="#c4572a" text-anchor="middle">🔍 Bad retrieval</text>
-<line x1="620" y1="185" x2="720" y2="185" stroke="#c4572a" stroke-width="2.5" marker-end="url(#ah7)"/>
-<rect x="720" y="150" width="200" height="70" rx="10" fill="#1a1a2e" stroke="#c4572a" stroke-width="2"/>
-<text x="820" y="185" font-family="Syne, sans-serif" font-size="🚨 Fluent lie" font-weight="800" fill="#c4572a" text-anchor="middle">🚨 Fluent lie</text>
-<line x1="820" y1="150" x2="820" y2="90" stroke="#9b7fd4" stroke-width="2"/>
-<rect x="720" y="40" width="200" height="60" rx="10" fill="#9b7fd4 14" stroke="#9b7fd4" stroke-width="2"/>
-<text x="820" y="72" font-family="Syne, sans-serif" font-size="assume correct → loop" font-weight="800" fill="#9b7fd4" text-anchor="middle">assume correct → loop</text>
-<line x1="720" y1="70" x2="620" y2="150" stroke="#9b7fd4" stroke-width="2"/>
-<defs><marker id="ah7" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#c4572a"/></marker></defs>
-<text x="500" y="300" font-family="Syne, sans-serif" font-size="No error is thrown — the model sounds right. Fix with citation checks, provenance, verification loops." font-weight="600" fill="#6a6a7a" text-anchor="middle">No error is thrown — the model sounds right. Fix with citation checks, provenance, verification loops.</text>
+<defs><linearGradient id="lbg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#090d16"/><stop offset="1" stop-color="#101a30"/></linearGradient></defs>
+<rect width="1000" height="360" fill="url(#lbg)"/>
+<text x="500" y="40" font-family="Syne, sans-serif" font-weight="800" fill="#C96A5A" text-anchor="middle">Silent Hallucination Loop — Confident but Wrong</text>
+<rect x="120" y="150" width="200" height="70" rx="10" fill="#C96A5A21" stroke="#C96A5A" stroke-width="2"/>
+<text x="220" y="185" font-family="Syne, sans-serif" font-weight="800" fill="#C96A5A" text-anchor="middle">❓ Query</text>
+<line x1="320" y1="185" x2="420" y2="185" stroke="#C96A5A" stroke-width="2.5" marker-end="url(#ah7)"/>
+<rect x="420" y="150" width="200" height="70" rx="10" fill="#0f172a" stroke="#C96A5A" stroke-width="2"/>
+<text x="520" y="185" font-family="Syne, sans-serif" font-weight="800" fill="#C96A5A" text-anchor="middle">🔍 Bad retrieval</text>
+<line x1="620" y1="185" x2="720" y2="185" stroke="#C96A5A" stroke-width="2.5" marker-end="url(#ah7)"/>
+<rect x="720" y="150" width="200" height="70" rx="10" fill="#1a1a2e" stroke="#C96A5A" stroke-width="2"/>
+<text x="820" y="185" font-family="Syne, sans-serif" font-weight="800" fill="#C96A5A" text-anchor="middle">🚨 Fluent lie</text>
+<line x1="820" y1="150" x2="820" y2="90" stroke="#A78BFA" stroke-width="2"/>
+<rect x="720" y="40" width="200" height="60" rx="10" fill="#A78BFA21" stroke="#A78BFA" stroke-width="2"/>
+<text x="820" y="72" font-family="Syne, sans-serif" font-weight="800" fill="#A78BFA" text-anchor="middle">assume correct → loop</text>
+<line x1="720" y1="70" x2="620" y2="150" stroke="#A78BFA" stroke-width="2"/>
+<defs><marker id="ah7" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#C96A5A"/></marker></defs>
+<text x="500" y="300" font-family="Syne, sans-serif" font-weight="600" fill="#94A3B8" text-anchor="middle">No error is thrown — the model sounds right. Fix with citation checks, provenance, verification loops.</text>
 </svg>

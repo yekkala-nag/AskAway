@@ -6,10 +6,10 @@
 <text x="40" y="48" fill="#fff" font-size="24" font-weight="800">Wishes in, actions out — schemas in between</text>
 <text x="40" y="72" fill="#94a3b8" font-size="13">Data pipelines emit · agents need verbs · typed functions both sides understand.</text>
 <g font-size="12" font-weight="700">
-<rect x="40" y="100" width="220" height="90" rx="10" fill="#0f172a" stroke="#38bdf8" stroke-width="2"/><text x="56" y="128" fill="#38bdf8">Model wishes</text><text x="56" y="150" fill="#e2e8f0" font-weight="400">"weather in Tokyo"</text><text x="56" y="170" fill="#64748b" font-weight="400">prose, no grip</text>
+<rect x="40" y="100" width="220" height="90" rx="10" fill="#0f172a" stroke="#38bdf8" stroke-width="2"/><text x="56" y="128" fill="#38bdf8">Model wishes</text><text x="56" y="150" fill="#e2e8f0" font-weight="400">"weather in Tokyo"</text><text x="56" y="170" fill="#94a3b8" font-weight="400">prose, no grip</text>
 <rect x="300" y="100" width="280" height="90" rx="10" fill="#0f172a" stroke="#f59e0b" stroke-width="2"/><text x="316" y="128" fill="#f59e0b">Schema gate</text><text x="316" y="150" fill="#e2e8f0" font-weight="400">name · types · required</text><text x="316" y="170" fill="#e2e8f0" font-weight="400">validate pre-execution</text>
 <rect x="620" y="100" width="220" height="90" rx="10" fill="url(#tcgrn)"/><text x="636" y="128" fill="#fff">Machine action</text><text x="636" y="150" fill="#d1fae5" font-weight="400">lat 35.68 lon 139.69</text><text x="636" y="170" fill="#fff" font-weight="400">executes cleanly</text>
-<rect x="880" y="100" width="240" height="90" rx="10" fill="#0f172a" stroke="#475569" stroke-width="2"/><text x="896" y="128" fill="#fff">Parallel batch</text><text x="896" y="150" fill="#e2e8f0" font-weight="400">independent calls, 1 turn</text><text x="896" y="170" fill="#64748b" font-weight="400">serial latency is a bug</text>
+<rect x="880" y="100" width="240" height="90" rx="10" fill="#0f172a" stroke="#475569" stroke-width="2"/><text x="896" y="128" fill="#fff">Parallel batch</text><text x="896" y="150" fill="#e2e8f0" font-weight="400">independent calls, 1 turn</text><text x="896" y="170" fill="#94a3b8" font-weight="400">serial latency is a bug</text>
 </g>
 <g stroke="#38bdf8" stroke-width="2" marker-end="url(#tcarr)"><line x1="260" y1="145" x2="298" y2="145"/><line x1="580" y1="145" x2="618" y2="145"/><line x1="840" y1="145" x2="878" y2="145"/></g>
 <rect x="40" y="215" width="1120" height="60" rx="10" fill="#0f172a" stroke="#ef4444" stroke-width="2"/>

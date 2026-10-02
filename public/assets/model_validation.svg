@@ -6,9 +6,9 @@
 <text x="40" y="48" fill="#fff" font-size="24" font-weight="800">SR 11-7 for GenAI — same questions, new evidence</text>
 <text x="40" y="72" fill="#94a3b8" font-size="13">No dev sample, no retrain, vendor core, silent drift: replication → test design.</text>
 <g font-size="12" font-weight="700">
-<rect x="40" y="100" width="340" height="100" rx="10" fill="#0f172a" stroke="#38bdf8" stroke-width="2"/><text x="56" y="128" fill="#38bdf8">1 · Conceptual soundness</text><text x="56" y="150" fill="#e2e8f0" font-weight="400">LLM at all? component map</text><text x="56" y="170" fill="#e2e8f0" font-weight="400">customization justifications</text><text x="56" y="190" fill="#64748b" font-weight="400">cheapest challenge first</text>
+<rect x="40" y="100" width="340" height="100" rx="10" fill="#0f172a" stroke="#38bdf8" stroke-width="2"/><text x="56" y="128" fill="#38bdf8">1 · Conceptual soundness</text><text x="56" y="150" fill="#e2e8f0" font-weight="400">LLM at all? component map</text><text x="56" y="170" fill="#e2e8f0" font-weight="400">customization justifications</text><text x="56" y="190" fill="#94a3b8" font-weight="400">cheapest challenge first</text>
 <rect x="400" y="100" width="340" height="100" rx="10" fill="url(#mvgrn)"/><text x="416" y="128" fill="#fff">2 · Outcomes analysis ★</text><text x="416" y="150" fill="#d1fae5" font-weight="400">dimensions × robustness</text><text x="416" y="170" fill="#d1fae5" font-weight="400">failure clusters, not averages</text><text x="416" y="190" fill="#fff" font-weight="400">the crucial step</text>
-<rect x="760" y="100" width="400" height="100" rx="10" fill="#0f172a" stroke="#f59e0b" stroke-width="2"/><text x="776" y="128" fill="#f59e0b">3 · Ongoing monitoring</text><text x="776" y="150" fill="#e2e8f0" font-weight="400">fabrication · drift · retrieval</text><text x="776" y="170" fill="#e2e8f0" font-weight="400">override rate = control health</text><text x="776" y="190" fill="#64748b" font-weight="400">breach plan pre-agreed</text>
+<rect x="760" y="100" width="400" height="100" rx="10" fill="#0f172a" stroke="#f59e0b" stroke-width="2"/><text x="776" y="128" fill="#f59e0b">3 · Ongoing monitoring</text><text x="776" y="150" fill="#e2e8f0" font-weight="400">fabrication · drift · retrieval</text><text x="776" y="170" fill="#e2e8f0" font-weight="400">override rate = control health</text><text x="776" y="190" fill="#94a3b8" font-weight="400">breach plan pre-agreed</text>
 </g>
 <rect x="40" y="220" width="560" height="70" rx="10" fill="url(#mvred)"/>
 <text x="60" y="246" fill="#fff" font-size="12" font-weight="800">5 breaks: system-not-model · distribution · no ground truth · vendor core · silent drift</text>
@@ -19,5 +19,5 @@
 <rect x="40" y="310" width="1120" height="80" rx="10" fill="#0f172a" stroke="#334155"/>
 <text x="60" y="336" fill="#fff" font-size="12" font-weight="700">Grounded ≠ true (stale source) · true ≠ usable (unverifiable). Groundedness binds in regulated work.</text>
 <text x="60" y="358" fill="#94a3b8" font-size="11">Judge-the-judge: agreement · position · verbosity · self-preference · recalibration. Unvalidated scorers move risk.</text>
-<text x="60" y="380" fill="#64748b" font-size="11">Simulator: exposure × acts × materiality → tier, evidence bar, first move.</text>
+<text x="60" y="380" fill="#94a3b8" font-size="11">Simulator: exposure × acts × materiality → tier, evidence bar, first move.</text>
 </svg>

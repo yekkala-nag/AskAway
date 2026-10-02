@@ -1,8 +1,9 @@
 /**
  * Diagram style guide — P2 UI pass
  * One accent family per umbrella. All NEW diagrams and figure chrome
- * use these values; legacy SVGs with bespoke gradients are grandfathered
- * (migrated opportunistically, never in bulk).
+ * use these values. Legacy light-canvas SVGs were migrated once via
+ * scripts/restyle-legacy-svg.mjs (navy ground + ramp accents + markup
+ * repairs); keep new assets on these rules from the start.
  *
  * Rules for new diagrams:
  * 1. Background: deep navy `#090d16 → #101a30` (dark) — never light gray.

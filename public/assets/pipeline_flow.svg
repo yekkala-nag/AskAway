@@ -1,33 +1,34 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1180 300" font-family="Syne, sans-serif">
-<defs><marker id="ah" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#c9a84c"/></marker></defs>
-<rect width="1180" height="300" fill="#f7f5f0"/>
-<rect x="30.0" y="110" width="150" height="80" rx="10" fill="#c9a84c14" stroke="#c9a84c" stroke-width="2"/>
-<text x="105.0" y="150" font-family="Syne, sans-serif" font-size="💬 Query" font-weight="800" fill="#c9a84c" text-anchor="middle">💬 Query</text>
-<line x1="180.0" y1="150" x2="341.66666666666663" y2="150" stroke="#c9a84c" stroke-width="2.5" marker-end="url(#ah)"/>
-<rect x="191.66666666666666" y="110" width="150" height="80" rx="10" fill="#2a8a8414" stroke="#2a8a84" stroke-width="2"/>
-<text x="266.66666666666663" y="150" font-family="Syne, sans-serif" font-size="✏️ Rewrite" font-weight="800" fill="#2a8a84" text-anchor="middle">✏️ Rewrite</text>
-<line x1="341.66666666666663" y1="150" x2="503.33333333333326" y2="150" stroke="#2a8a84" stroke-width="2.5" marker-end="url(#ah)"/>
-<rect x="353.3333333333333" y="110" width="150" height="80" rx="10" fill="#5c3d8f14" stroke="#5c3d8f" stroke-width="2"/>
-<text x="428.3333333333333" y="150" font-family="Syne, sans-serif" font-size="🔀 Hybrid" font-weight="800" fill="#5c3d8f" text-anchor="middle">🔀 Hybrid</text>
-<line x1="503.3333333333333" y1="150" x2="665.0" y2="150" stroke="#5c3d8f" stroke-width="2.5" marker-end="url(#ah)"/>
-<rect x="515.0" y="110" width="150" height="80" rx="10" fill="#c4572a14" stroke="#c4572a" stroke-width="2"/>
-<text x="590.0" y="150" font-family="Syne, sans-serif" font-size="📐 Re-rank" font-weight="800" fill="#c4572a" text-anchor="middle">📐 Re-rank</text>
-<line x1="665.0" y1="150" x2="826.6666666666666" y2="150" stroke="#c4572a" stroke-width="2.5" marker-end="url(#ah)"/>
-<rect x="676.6666666666666" y="110" width="150" height="80" rx="10" fill="#2a8a8414" stroke="#2a8a84" stroke-width="2"/>
-<text x="751.6666666666666" y="150" font-family="Syne, sans-serif" font-size="✂️ Compress" font-weight="800" fill="#2a8a84" text-anchor="middle">✂️ Compress</text>
-<line x1="826.6666666666666" y1="150" x2="988.3333333333333" y2="150" stroke="#2a8a84" stroke-width="2.5" marker-end="url(#ah)"/>
-<rect x="838.3333333333333" y="110" width="150" height="80" rx="10" fill="#c9a84c14" stroke="#c9a84c" stroke-width="2"/>
-<text x="913.3333333333333" y="150" font-family="Syne, sans-serif" font-size="🤖 Agent" font-weight="800" fill="#c9a84c" text-anchor="middle">🤖 Agent</text>
-<line x1="988.3333333333333" y1="150" x2="1150.0" y2="150" stroke="#c9a84c" stroke-width="2.5" marker-end="url(#ah)"/>
-<rect x="1000.0" y="110" width="150" height="80" rx="10" fill="#4a9a4a14" stroke="#4a9a4a" stroke-width="2"/>
-<text x="1075.0" y="150" font-family="Syne, sans-serif" font-size="✅ Answer" font-weight="800" fill="#4a9a4a" text-anchor="middle">✅ Answer</text>
-<text x="600" y="70" font-family="Syne, sans-serif" font-size="RAG Pipeline — One Query, Seven Stages" font-weight="800" fill="#1a1a2e" text-anchor="middle">RAG Pipeline — One Query, Seven Stages</text>
-<text x="105.0" y="225" font-family="Syne, sans-serif" font-size="step 1" font-weight="600" fill="#6a6a7a" text-anchor="middle">step 1</text>
-<text x="266.66666666666663" y="225" font-family="Syne, sans-serif" font-size="step 2" font-weight="600" fill="#6a6a7a" text-anchor="middle">step 2</text>
-<text x="428.3333333333333" y="225" font-family="Syne, sans-serif" font-size="step 3" font-weight="600" fill="#6a6a7a" text-anchor="middle">step 3</text>
-<text x="590.0" y="225" font-family="Syne, sans-serif" font-size="step 4" font-weight="600" fill="#6a6a7a" text-anchor="middle">step 4</text>
-<text x="751.6666666666666" y="225" font-family="Syne, sans-serif" font-size="step 5" font-weight="600" fill="#6a6a7a" text-anchor="middle">step 5</text>
-<text x="913.3333333333333" y="225" font-family="Syne, sans-serif" font-size="step 6" font-weight="600" fill="#6a6a7a" text-anchor="middle">step 6</text>
-<text x="1075.0" y="225" font-family="Syne, sans-serif" font-size="step 7" font-weight="600" fill="#6a6a7a" text-anchor="middle">step 7</text>
-<text x="600" y="265" font-family="Syne, sans-serif" font-size="Each stage filters noise: hybrid fuses dense+sparse, rerank keeps top-5, compress trims tokens before the LLM." font-weight="600" fill="#6a6a7a" text-anchor="middle">Each stage filters noise: hybrid fuses dense+sparse, rerank keeps top-5, compress trims tokens before the LLM.</text>
+<defs><marker id="ah" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#E8C558"/></marker></defs>
+<defs><linearGradient id="lbg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#090d16"/><stop offset="1" stop-color="#101a30"/></linearGradient></defs>
+<rect width="1180" height="300" fill="url(#lbg)"/>
+<rect x="30.0" y="110" width="150" height="80" rx="10" fill="#E8C55821" stroke="#E8C558" stroke-width="2"/>
+<text x="105.0" y="150" font-family="Syne, sans-serif" font-weight="800" fill="#E8C558" text-anchor="middle">💬 Query</text>
+<line x1="180.0" y1="150" x2="341.66666666666663" y2="150" stroke="#E8C558" stroke-width="2.5" marker-end="url(#ah)"/>
+<rect x="191.66666666666666" y="110" width="150" height="80" rx="10" fill="#5EC4C821" stroke="#5EC4C8" stroke-width="2"/>
+<text x="266.66666666666663" y="150" font-family="Syne, sans-serif" font-weight="800" fill="#5EC4C8" text-anchor="middle">✏️ Rewrite</text>
+<line x1="341.66666666666663" y1="150" x2="503.33333333333326" y2="150" stroke="#5EC4C8" stroke-width="2.5" marker-end="url(#ah)"/>
+<rect x="353.3333333333333" y="110" width="150" height="80" rx="10" fill="#A78BFA21" stroke="#A78BFA" stroke-width="2"/>
+<text x="428.3333333333333" y="150" font-family="Syne, sans-serif" font-weight="800" fill="#A78BFA" text-anchor="middle">🔀 Hybrid</text>
+<line x1="503.3333333333333" y1="150" x2="665.0" y2="150" stroke="#A78BFA" stroke-width="2.5" marker-end="url(#ah)"/>
+<rect x="515.0" y="110" width="150" height="80" rx="10" fill="#C96A5A21" stroke="#C96A5A" stroke-width="2"/>
+<text x="590.0" y="150" font-family="Syne, sans-serif" font-weight="800" fill="#C96A5A" text-anchor="middle">📐 Re-rank</text>
+<line x1="665.0" y1="150" x2="826.6666666666666" y2="150" stroke="#C96A5A" stroke-width="2.5" marker-end="url(#ah)"/>
+<rect x="676.6666666666666" y="110" width="150" height="80" rx="10" fill="#5EC4C821" stroke="#5EC4C8" stroke-width="2"/>
+<text x="751.6666666666666" y="150" font-family="Syne, sans-serif" font-weight="800" fill="#5EC4C8" text-anchor="middle">✂️ Compress</text>
+<line x1="826.6666666666666" y1="150" x2="988.3333333333333" y2="150" stroke="#5EC4C8" stroke-width="2.5" marker-end="url(#ah)"/>
+<rect x="838.3333333333333" y="110" width="150" height="80" rx="10" fill="#E8C55821" stroke="#E8C558" stroke-width="2"/>
+<text x="913.3333333333333" y="150" font-family="Syne, sans-serif" font-weight="800" fill="#E8C558" text-anchor="middle">🤖 Agent</text>
+<line x1="988.3333333333333" y1="150" x2="1150.0" y2="150" stroke="#E8C558" stroke-width="2.5" marker-end="url(#ah)"/>
+<rect x="1000.0" y="110" width="150" height="80" rx="10" fill="#7FB06921" stroke="#7FB069" stroke-width="2"/>
+<text x="1075.0" y="150" font-family="Syne, sans-serif" font-weight="800" fill="#7FB069" text-anchor="middle">✅ Answer</text>
+<text x="600" y="70" font-family="Syne, sans-serif" font-weight="800" fill="#F1F5F9" text-anchor="middle">RAG Pipeline — One Query, Seven Stages</text>
+<text x="105.0" y="225" font-family="Syne, sans-serif" font-weight="600" fill="#94A3B8" text-anchor="middle">step 1</text>
+<text x="266.66666666666663" y="225" font-family="Syne, sans-serif" font-weight="600" fill="#94A3B8" text-anchor="middle">step 2</text>
+<text x="428.3333333333333" y="225" font-family="Syne, sans-serif" font-weight="600" fill="#94A3B8" text-anchor="middle">step 3</text>
+<text x="590.0" y="225" font-family="Syne, sans-serif" font-weight="600" fill="#94A3B8" text-anchor="middle">step 4</text>
+<text x="751.6666666666666" y="225" font-family="Syne, sans-serif" font-weight="600" fill="#94A3B8" text-anchor="middle">step 5</text>
+<text x="913.3333333333333" y="225" font-family="Syne, sans-serif" font-weight="600" fill="#94A3B8" text-anchor="middle">step 6</text>
+<text x="1075.0" y="225" font-family="Syne, sans-serif" font-weight="600" fill="#94A3B8" text-anchor="middle">step 7</text>
+<text x="600" y="265" font-family="Syne, sans-serif" font-weight="600" fill="#94A3B8" text-anchor="middle">Each stage filters noise: hybrid fuses dense+sparse, rerank keeps top-5, compress trims tokens before the LLM.</text>
 </svg>

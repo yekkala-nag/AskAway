@@ -2,8 +2,9 @@
  * SPECTRUM — single source of truth for the 7-step warm→cool ramp
  * and the showcase frame chrome derived from it.
  *
- * Scope: chrome/frame only. Asset files (/public/assets/*) and inline
- * SVG internals are NOT recolored by this module.
+ * Scope: chrome/frame only. Asset files (/public/assets/*) are restyled by
+ * scripts/restyle-legacy-svg.mjs (one-time migration of the legacy light
+ * canvas diagrams to DIAGRAM_BG + this ramp), not by this module.
  *
  * Color progression (bottom → top, warm → cool):
  *   1 Classical AI → 7 General Intelligence

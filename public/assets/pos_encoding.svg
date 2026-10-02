@@ -6,11 +6,11 @@
 <text x="40" y="48" fill="#fff" font-size="24" font-weight="800">Order changes meaning — attention needs position</text>
 <text x="40" y="72" fill="#94a3b8" font-size="13">30°→20° ≠ 20°→30°. Shuffle the 5 temps: same attention, story gone.</text>
 <g font-size="11" font-weight="700">
-<rect x="40" y="100" width="200" height="80" rx="8" fill="#0f172a" stroke="#475569"/><text x="56" y="126" fill="#fff">scalars 22 25…</text><text x="56" y="148" fill="#94a3b8" font-weight="400">what, no where</text><text x="56" y="166" fill="#64748b" font-weight="400">e = Wx+b</text>
-<rect x="260" y="100" width="200" height="80" rx="8" fill="#0f172a" stroke="#475569"/><text x="276" y="126" fill="#fff">Q K V</text><text x="276" y="148" fill="#94a3b8" font-weight="400">ask · match · carry</text><text x="276" y="166" fill="#64748b" font-weight="400">softmax → z₅</text>
+<rect x="40" y="100" width="200" height="80" rx="8" fill="#0f172a" stroke="#475569"/><text x="56" y="126" fill="#fff">scalars 22 25…</text><text x="56" y="148" fill="#94a3b8" font-weight="400">what, no where</text><text x="56" y="166" fill="#94a3b8" font-weight="400">e = Wx+b</text>
+<rect x="260" y="100" width="200" height="80" rx="8" fill="#0f172a" stroke="#475569"/><text x="276" y="126" fill="#fff">Q K V</text><text x="276" y="148" fill="#94a3b8" font-weight="400">ask · match · carry</text><text x="276" y="166" fill="#94a3b8" font-weight="400">softmax → z₅</text>
 <rect x="480" y="100" width="200" height="80" rx="8" fill="url(#peblu)"/><text x="496" y="126" fill="#fff">h = e + p ✎</text><text x="496" y="148" fill="#e0f2fe" font-weight="400">value + position</text><text x="496" y="166" fill="#fff" font-weight="400">clocks, many speeds</text>
 <rect x="700" y="100" width="200" height="80" rx="8" fill="url(#pegrn)"/><text x="716" y="126" fill="#fff">lags t−1 t−7</text><text x="716" y="148" fill="#d1fae5" font-weight="400">momentum · weekly</text><text x="716" y="166" fill="#fff" font-weight="400">learnable relations</text>
-<rect x="920" y="100" width="200" height="80" rx="8" fill="#0f172a" stroke="#f59e0b"/><text x="936" y="126" fill="#f59e0b">beyond sine</text><text x="936" y="148" fill="#e2e8f0" font-weight="400">learned · RoPE</text><text x="936" y="166" fill="#64748b" font-weight="400">irregular = time feats</text>
+<rect x="920" y="100" width="200" height="80" rx="8" fill="#0f172a" stroke="#f59e0b"/><text x="936" y="126" fill="#f59e0b">beyond sine</text><text x="936" y="148" fill="#e2e8f0" font-weight="400">learned · RoPE</text><text x="936" y="166" fill="#94a3b8" font-weight="400">irregular = time feats</text>
 </g>
 <rect x="40" y="205" width="560" height="62" rx="10" fill="#0f172a" stroke="#334155"/>
 <text x="60" y="229" fill="#fff" font-size="11" font-weight="700">PE(t,2i) = sin(t / 10000^(2i/d)) — geometric frequencies, smooth neighborhoods</text>
@@ -21,5 +21,5 @@
 <rect x="40" y="287" width="1120" height="93" rx="10" fill="#0f172a" stroke="#334155"/>
 <text x="60" y="313" fill="#fff" font-size="12" font-weight="800">Simulator: chrono vs shuffled week → identical attention without p, distinct with p · lag picker t−1/t−7/t−30</text>
 <text x="60" y="335" fill="#94a3b8" font-size="11">Five temps, one idea: self-attention learns relations; positional signal supplies the where.</text>
-<text x="60" y="357" fill="#64748b" font-size="11">G. Kaur, TDS · sinusoidal today, RoPE/learned tomorrow — same problem underneath.</text>
+<text x="60" y="357" fill="#94a3b8" font-size="11">G. Kaur, TDS · sinusoidal today, RoPE/learned tomorrow — same problem underneath.</text>
 </svg>

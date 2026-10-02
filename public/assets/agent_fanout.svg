@@ -8,7 +8,7 @@
 <g font-size="12" font-weight="700">
 <rect x="40" y="100" width="330" height="100" rx="10" fill="url(#fored)"/><text x="56" y="128" fill="#fff">Latency stacking</text><text x="56" y="150" fill="#fecaca" font-weight="400">4 hops × 400ms = 1.6s+</text><text x="56" y="170" fill="#fecaca" font-weight="400">p95 explodes, p50 calm</text><text x="56" y="190" fill="#fff" font-weight="400">measure per hop</text>
 <rect x="390" y="100" width="330" height="100" rx="10" fill="url(#fored)"/><text x="406" y="128" fill="#fff">Stale-at-speed</text><text x="406" y="150" fill="#fecaca" font-weight="400">read→act gap invalidates</text><text x="406" y="170" fill="#fecaca" font-weight="400">TTL cache = fast wrong</text><text x="406" y="190" fill="#fff" font-weight="400">freshness contracts</text>
-<rect x="740" y="100" width="420" height="100" rx="10" fill="#0f172a" stroke="#f59e0b" stroke-width="2"/><text x="756" y="128" fill="#f59e0b">Relevance drift + fragments</text><text x="756" y="150" fill="#e2e8f0" font-weight="400">reformulations wander off-intent</text><text x="756" y="170" fill="#e2e8f0" font-weight="400">VDB+ranker+serve: 3 truths, 0 truth</text><text x="756" y="190" fill="#64748b" font-weight="400">cap hops · unify layer</text>
+<rect x="740" y="100" width="420" height="100" rx="10" fill="#0f172a" stroke="#f59e0b" stroke-width="2"/><text x="756" y="128" fill="#f59e0b">Relevance drift + fragments</text><text x="756" y="150" fill="#e2e8f0" font-weight="400">reformulations wander off-intent</text><text x="756" y="170" fill="#e2e8f0" font-weight="400">VDB+ranker+serve: 3 truths, 0 truth</text><text x="756" y="190" fill="#94a3b8" font-weight="400">cap hops · unify layer</text>
 </g>
 <rect x="40" y="220" width="560" height="70" rx="10" fill="#0f172a" stroke="#334155"/>
 <text x="60" y="246" fill="#fff" font-size="12" font-weight="700">Naive fixes fail: more cache → fast-wrong + thundering · bigger VDB → capacity ≠ freshness</text>
@@ -18,5 +18,5 @@
 <text x="640" y="268" fill="#d1fae5" font-size="11">Retrieval + ranking + serving agree, or agents disagree with reality.</text>
 <rect x="40" y="310" width="1120" height="60" rx="10" fill="#0f172a" stroke="#334155"/>
 <text x="60" y="334" fill="#94a3b8" font-size="11">Simulator: agents × reformulations × cache → effective QPS, p95, stale-risk → WALL / CORRUPTION / HOLDING.</text>
-<text x="60" y="356" fill="#64748b" font-size="11">Pairs with: validity layer (freshness), FinOps (hop budgets), observability (per-hop p95).</text>
+<text x="60" y="356" fill="#94a3b8" font-size="11">Pairs with: validity layer (freshness), FinOps (hop budgets), observability (per-hop p95).</text>
 </svg>

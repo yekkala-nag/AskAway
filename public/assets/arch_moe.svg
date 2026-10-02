@@ -1,22 +1,23 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 360" font-family="Syne, sans-serif">
-<rect width="1100" height="360" fill="#f7f5f0"/>
-<text x="550" y="40" font-family="Syne, sans-serif" font-size="Mixture of Experts — Activate 5.5% of Params" font-weight="800" fill="#c9a84c" text-anchor="middle">Mixture of Experts — Activate 5.5% of Params</text>
-<rect x="60" y="100" width="180" height="80" rx="10" fill="#fff" stroke="#c9a84c" stroke-width="2"/>
-<text x="150" y="135" font-family="Syne, sans-serif" font-size="Input token" font-weight="800" fill="#c9a84c" text-anchor="middle">Input token</text>
-<text x="150" y="158" font-family="Syne, sans-serif" font-size="x" font-weight="600" fill="#6a6a7a" text-anchor="middle">x</text>
-<line x1="240" y1="140" x2="360" y2="140" stroke="#c9a84c" stroke-width="2.5" marker-end="url(#ah3)"/>
-<rect x="360" y="100" width="180" height="80" rx="10" fill="#c9a84c14" stroke="#c9a84c" stroke-width="2"/>
-<text x="450" y="135" font-family="Syne, sans-serif" font-size="Router / Gating" font-weight="800" fill="#c9a84c" text-anchor="middle">Router / Gating</text>
-<text x="450" y="158" font-family="Syne, sans-serif" font-size="picks top-k experts" font-weight="600" fill="#6a6a7a" text-anchor="middle">picks top-k experts</text>
-<defs><marker id="ah3" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#c9a84c"/></marker></defs>
-<rect x="360" y="210" width="180" height="26" rx="10" fill="#fff" stroke="#e0dcd4" stroke-width="2"/>
-<text x="450" y="227" font-family="Syne, sans-serif" font-size="Expert 1 idle" font-weight="700" fill="#e0dcd4" text-anchor="middle">Expert 1 idle</text>
-<rect x="360" y="242" width="180" height="26" rx="10" fill="#4a9a4a14" stroke="#4a9a4a" stroke-width="2"/>
-<text x="450" y="259" font-family="Syne, sans-serif" font-size="Expert 2 ✓ active" font-weight="700" fill="#4a9a4a" text-anchor="middle">Expert 2 ✓ active</text>
-<rect x="360" y="274" width="180" height="26" rx="10" fill="#fff" stroke="#e0dcd4" stroke-width="2"/>
-<text x="450" y="291" font-family="Syne, sans-serif" font-size="Expert 3 idle" font-weight="700" fill="#e0dcd4" text-anchor="middle">Expert 3 idle</text>
-<rect x="360" y="306" width="180" height="26" rx="10" fill="#fff" stroke="#e0dcd4" stroke-width="2"/>
-<text x="450" y="323" font-family="Syne, sans-serif" font-size="Expert 4 idle" font-weight="700" fill="#e0dcd4" text-anchor="middle">Expert 4 idle</text>
-<line x1="540" y1="140" x2="540" y2="223" stroke="#c9a84c" stroke-width="2" marker-end="url(#ah3)"/>
-<text x="550" y="330" font-family="Syne, sans-serif" font-size="671B total params, but each token fires only ~37B (5.5%) experts chosen by the router." font-weight="600" fill="#6a6a7a" text-anchor="middle">671B total params, but each token fires only ~37B (5.5%) experts chosen by the router.</text>
+<defs><linearGradient id="lbg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#090d16"/><stop offset="1" stop-color="#101a30"/></linearGradient></defs>
+<rect width="1100" height="360" fill="url(#lbg)"/>
+<text x="550" y="40" font-family="Syne, sans-serif" font-weight="800" fill="#E8C558" text-anchor="middle">Mixture of Experts — Activate 5.5% of Params</text>
+<rect x="60" y="100" width="180" height="80" rx="10" fill="#0f172a" stroke="#E8C558" stroke-width="2"/>
+<text x="150" y="135" font-family="Syne, sans-serif" font-weight="800" fill="#E8C558" text-anchor="middle">Input token</text>
+<text x="150" y="158" font-family="Syne, sans-serif" font-weight="600" fill="#94A3B8" text-anchor="middle">x</text>
+<line x1="240" y1="140" x2="360" y2="140" stroke="#E8C558" stroke-width="2.5" marker-end="url(#ah3)"/>
+<rect x="360" y="100" width="180" height="80" rx="10" fill="#E8C55821" stroke="#E8C558" stroke-width="2"/>
+<text x="450" y="135" font-family="Syne, sans-serif" font-weight="800" fill="#E8C558" text-anchor="middle">Router / Gating</text>
+<text x="450" y="158" font-family="Syne, sans-serif" font-weight="600" fill="#94A3B8" text-anchor="middle">picks top-k experts</text>
+<defs><marker id="ah3" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#E8C558"/></marker></defs>
+<rect x="360" y="210" width="180" height="26" rx="10" fill="#0f172a" stroke="#475569" stroke-width="2"/>
+<text x="450" y="227" font-family="Syne, sans-serif" font-weight="700" fill="#e0dcd4" text-anchor="middle">Expert 1 idle</text>
+<rect x="360" y="242" width="180" height="26" rx="10" fill="#7FB06921" stroke="#7FB069" stroke-width="2"/>
+<text x="450" y="259" font-family="Syne, sans-serif" font-weight="700" fill="#7FB069" text-anchor="middle">Expert 2 ✓ active</text>
+<rect x="360" y="274" width="180" height="26" rx="10" fill="#0f172a" stroke="#475569" stroke-width="2"/>
+<text x="450" y="291" font-family="Syne, sans-serif" font-weight="700" fill="#e0dcd4" text-anchor="middle">Expert 3 idle</text>
+<rect x="360" y="306" width="180" height="26" rx="10" fill="#0f172a" stroke="#475569" stroke-width="2"/>
+<text x="450" y="323" font-family="Syne, sans-serif" font-weight="700" fill="#e0dcd4" text-anchor="middle">Expert 4 idle</text>
+<line x1="540" y1="140" x2="540" y2="223" stroke="#E8C558" stroke-width="2" marker-end="url(#ah3)"/>
+<text x="550" y="330" font-family="Syne, sans-serif" font-size="671B total params, but each token fires only ~37B (5.5%) experts chosen by the router." font-weight="600" fill="#94A3B8" text-anchor="middle">671B total params, but each token fires only ~37B (5.5%) experts chosen by the router.</text>
 </svg>

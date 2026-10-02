@@ -7,7 +7,7 @@
 <text x="40" y="48" fill="#fff" font-size="24" font-weight="800">Handoff transfers · tools consult — pick per query shape</text>
 <text x="40" y="72" fill="#94a3b8" font-size="13">Triage nurse routes; orchestrator merges. Trace proves which ran (1.7s vs 7.2s).</text>
 <g font-size="12" font-weight="700">
-<rect x="40" y="100" width="500" height="110" rx="10" fill="#0f172a" stroke="#38bdf8" stroke-width="2"/><text x="56" y="128" fill="#38bdf8">Handoff: triage → specialist (control moves)</text><text x="56" y="150" fill="#e2e8f0" font-weight="400">transfer_to_* = LLM-visible functions</text><text x="56" y="170" fill="#e2e8f0" font-weight="400">customize: names · on_handoff · Pydantic input</text><text x="56" y="192" fill="#64748b" font-weight="400">ambiguous → clarify, never force</text>
+<rect x="40" y="100" width="500" height="110" rx="10" fill="#0f172a" stroke="#38bdf8" stroke-width="2"/><text x="56" y="128" fill="#38bdf8">Handoff: triage → specialist (control moves)</text><text x="56" y="150" fill="#e2e8f0" font-weight="400">transfer_to_* = LLM-visible functions</text><text x="56" y="170" fill="#e2e8f0" font-weight="400">customize: names · on_handoff · Pydantic input</text><text x="56" y="192" fill="#94a3b8" font-weight="400">ambiguous → clarify, never force</text>
 <rect x="560" y="100" width="600" height="110" rx="10" fill="url(#sdkgrn)"/><text x="576" y="128" fill="#fff">Agents-as-tools: orchestrator keeps control ✓</text><text x="576" y="150" fill="#d1fae5" font-weight="400">as_tool() consults one or many, merges answers</text><text x="576" y="170" fill="#d1fae5" font-weight="400">custom Runner.run tools fix lat/lon drift</text><text x="576" y="190" fill="#fff" font-weight="400">Jakarta weather + AQI → one caution</text>
 </g>
 <g stroke="#38bdf8" stroke-width="2" marker-end="url(#sdkarr)"><line x1="250" y1="230" x2="250" y2="252"/><line x1="850" y1="230" x2="850" y2="252"/></g>
@@ -18,5 +18,5 @@
 <text x="640" y="284" fill="#fff" font-size="12" font-weight="800">Agents SDK + Streamlit + Open-Meteo: real APIs, real traces</text>
 <text x="640" y="306" fill="#e0f2fe" font-size="11">Weather + air-quality specialists, triage nurse up front.</text>
 <rect x="40" y="340" width="1120" height="30" rx="8" fill="#0f172a" stroke="#334155"/>
-<text x="60" y="358" fill="#64748b" font-size="11">I. Rahmadhan, TDS · simulator picks the pattern from your query shape.</text>
+<text x="60" y="358" fill="#94a3b8" font-size="11">I. Rahmadhan, TDS · simulator picks the pattern from your query shape.</text>
 </svg>

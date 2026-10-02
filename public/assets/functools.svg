@@ -13,6 +13,6 @@
 <rect x="40" y="230" width="1120" height="110" rx="10" fill="#0f172a" stroke="#334155"/>
 <text x="60" y="256" fill="#fff" font-size="12" font-weight="800">Simulator: toggle tricks → lines before/after + caveat board. ~60% fewer lines, zero new dependencies.</text>
 <text x="60" y="278" fill="#94a3b8" font-size="11">Rule: stdlib first. from functools import * in articles; import names explicitly in production.</text>
-<text x="60" y="300" fill="#64748b" font-size="11">C. Tao, TDS · lru_cache covered in lineage — recursion + web-call memoization for free.</text>
+<text x="60" y="300" fill="#94a3b8" font-size="11">C. Tao, TDS · lru_cache covered in lineage — recursion + web-call memoization for free.</text>
 <text x="60" y="322" fill="#94a3b8" font-size="11">Readability is the feature. The line count is just how you notice it.</text>
 </svg>

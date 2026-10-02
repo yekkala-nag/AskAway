@@ -25,8 +25,8 @@
   <rect x="40" y="100" width="220" height="120" rx="10" fill="#7f1d1d" stroke="#ef4444" stroke-width="2"/>
   <text x="56" y="128" fill="#fecaca" font-size="13" font-weight="800">◉ base-policy v1→v2</text>
   <text x="56" y="148" fill="#fff" font-size="12">refunds: 30d → 14d ✎</text>
-  <text x="56" y="166" fill="#94a3b8" font-size="11">privacy: unchanged</text>
-  <text x="56" y="184" fill="#94a3b8" font-size="11">escalation: unchanged</text>
+  <text x="56" y="166" fill="#f1f5f9" font-size="11">privacy: unchanged</text>
+  <text x="56" y="184" fill="#f1f5f9" font-size="11">escalation: unchanged</text>
   <text x="56" y="204" fill="#fca5a5" font-size="11">changed_sections() = [refunds]</text>
 
   <g font-size="11" font-weight="700">
@@ -48,7 +48,7 @@
   <text x="60" y="273" fill="#ef4444" font-size="14" font-weight="800">REACHABLE = 45 (ceiling)</text>
   <text x="60" y="295" fill="#e2e8f0" font-size="12">every node downstream of base-policy</text>
   <text x="60" y="315" fill="#e2e8f0" font-size="12">for ANY reason (any section)</text>
-  <text x="60" y="355" fill="#64748b" font-size="11">flat lookup finds 1 hop · BFS finds all 4+</text>
+  <text x="60" y="355" fill="#94a3b8" font-size="11">flat lookup finds 1 hop · BFS finds all 4+</text>
 
   <rect x="420" y="245" width="360" height="130" rx="10" fill="#0f172a" stroke="#fb923c"/>
   <text x="440" y="273" fill="#fb923c" font-size="14" font-weight="800">CANDIDATE = 24 (eval set)</text>
@@ -71,5 +71,5 @@
     <rect x="660" y="436" width="180" height="60" rx="6" fill="#1e293b" stroke="#475569"/><text x="672" y="458" fill="#cbd5e1">76% shared → 20%</text><text x="672" y="477" fill="#94a3b8" font-weight="400">54 reach · 43 cand</text>
     <rect x="860" y="436" width="180" height="60" rx="6" fill="url(#dgred)"/><text x="872" y="458" fill="#fff">100% tone → 0%</text><text x="872" y="477" fill="#fecaca" font-weight="400">55 reach · 55 cand</text>
   </g>
-  <text x="1060" y="508" fill="#64748b" font-size="10">Emmimal Alexander, TDS</text>
+  <text x="1060" y="508" fill="#94a3b8" font-size="10">Emmimal Alexander, TDS</text>
 </svg>

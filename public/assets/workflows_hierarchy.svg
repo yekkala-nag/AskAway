@@ -1,23 +1,24 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 360" font-family="Syne, sans-serif">
-<rect width="1100" height="360" fill="#f7f5f0"/>
-<text x="550" y="40" font-family="Syne, sans-serif" font-size="Claude Workflows — Prompt → Chain → Agent" font-weight="800" fill="#2a8a84" text-anchor="middle">Claude Workflows — Prompt → Chain → Agent</text>
-<rect x="80.0" y="120" width="180" height="90" rx="10" fill="#2a8a8414" stroke="#2a8a84" stroke-width="2"/>
-<text x="170.0" y="158" font-family="Syne, sans-serif" font-size="Prompt" font-weight="800" fill="#2a8a84" text-anchor="middle">Prompt</text>
-<text x="170.0" y="182" font-family="Syne, sans-serif" font-size="(1-shot)" font-weight="600" fill="#6a6a7a" text-anchor="middle">(1-shot)</text>
-<line x1="260.0" y1="165" x2="513.3333333333334" y2="165" stroke="#2a8a84" stroke-width="2.5" marker-end="url(#ah5)"/>
-<rect x="333.33333333333337" y="120" width="180" height="90" rx="10" fill="#c9a84c14" stroke="#c9a84c" stroke-width="2"/>
-<text x="423.33333333333337" y="158" font-family="Syne, sans-serif" font-size="Chain" font-weight="800" fill="#c9a84c" text-anchor="middle">Chain</text>
-<text x="423.33333333333337" y="182" font-family="Syne, sans-serif" font-size="(seq steps)" font-weight="600" fill="#6a6a7a" text-anchor="middle">(seq steps)</text>
-<line x1="513.3333333333334" y1="165" x2="766.6666666666667" y2="165" stroke="#c9a84c" stroke-width="2.5" marker-end="url(#ah5)"/>
-<rect x="586.6666666666667" y="120" width="180" height="90" rx="10" fill="#c4572a14" stroke="#c4572a" stroke-width="2"/>
-<text x="676.6666666666667" y="158" font-family="Syne, sans-serif" font-size="Workflow" font-weight="800" fill="#c4572a" text-anchor="middle">Workflow</text>
-<text x="676.6666666666667" y="182" font-family="Syne, sans-serif" font-size="(branches)" font-weight="600" fill="#6a6a7a" text-anchor="middle">(branches)</text>
-<line x1="766.6666666666667" y1="165" x2="1020.0000000000001" y2="165" stroke="#c4572a" stroke-width="2.5" marker-end="url(#ah5)"/>
-<rect x="840.0" y="120" width="180" height="90" rx="10" fill="#9b7fd414" stroke="#9b7fd4" stroke-width="2"/>
-<text x="930.0" y="158" font-family="Syne, sans-serif" font-size="Agent" font-weight="800" fill="#9b7fd4" text-anchor="middle">Agent</text>
-<text x="930.0" y="182" font-family="Syne, sans-serif" font-size="(autonomous)" font-weight="600" fill="#6a6a7a" text-anchor="middle">(autonomous)</text>
-<defs><marker id="ah5" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#9b7fd4"/></marker></defs>
-<rect x="80" y="250" width="940" height="60" rx="10" fill="#fff" stroke="#e0dcd4" stroke-width="2"/>
-<text x="550" y="278" font-family="Syne, sans-serif" font-size="Escalate only as needed: most tasks are chains; reserve agents for open-ended, multi-step goals." font-weight="600" fill="#6a6a7a" text-anchor="middle">Escalate only as needed: most tasks are chains; reserve agents for open-ended, multi-step goals.</text>
-<text x="550" y="300" font-family="Syne, sans-serif" font-size="Anthropic's hierarchy: more autonomy = more cost & risk. Earn it." font-weight="700" fill="#9b7fd4" text-anchor="middle">Anthropic's hierarchy: more autonomy = more cost & risk. Earn it.</text>
+<defs><linearGradient id="lbg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#090d16"/><stop offset="1" stop-color="#101a30"/></linearGradient></defs>
+<rect width="1100" height="360" fill="url(#lbg)"/>
+<text x="550" y="40" font-family="Syne, sans-serif" font-weight="800" fill="#5EC4C8" text-anchor="middle">Claude Workflows — Prompt → Chain → Agent</text>
+<rect x="80.0" y="120" width="180" height="90" rx="10" fill="#5EC4C821" stroke="#5EC4C8" stroke-width="2"/>
+<text x="170.0" y="158" font-family="Syne, sans-serif" font-weight="800" fill="#5EC4C8" text-anchor="middle">Prompt</text>
+<text x="170.0" y="182" font-family="Syne, sans-serif" font-weight="600" fill="#94A3B8" text-anchor="middle">(1-shot)</text>
+<line x1="260.0" y1="165" x2="513.3333333333334" y2="165" stroke="#5EC4C8" stroke-width="2.5" marker-end="url(#ah5)"/>
+<rect x="333.33333333333337" y="120" width="180" height="90" rx="10" fill="#E8C55821" stroke="#E8C558" stroke-width="2"/>
+<text x="423.33333333333337" y="158" font-family="Syne, sans-serif" font-weight="800" fill="#E8C558" text-anchor="middle">Chain</text>
+<text x="423.33333333333337" y="182" font-family="Syne, sans-serif" font-weight="600" fill="#94A3B8" text-anchor="middle">(seq steps)</text>
+<line x1="513.3333333333334" y1="165" x2="766.6666666666667" y2="165" stroke="#E8C558" stroke-width="2.5" marker-end="url(#ah5)"/>
+<rect x="586.6666666666667" y="120" width="180" height="90" rx="10" fill="#C96A5A21" stroke="#C96A5A" stroke-width="2"/>
+<text x="676.6666666666667" y="158" font-family="Syne, sans-serif" font-weight="800" fill="#C96A5A" text-anchor="middle">Workflow</text>
+<text x="676.6666666666667" y="182" font-family="Syne, sans-serif" font-weight="600" fill="#94A3B8" text-anchor="middle">(branches)</text>
+<line x1="766.6666666666667" y1="165" x2="1020.0000000000001" y2="165" stroke="#C96A5A" stroke-width="2.5" marker-end="url(#ah5)"/>
+<rect x="840.0" y="120" width="180" height="90" rx="10" fill="#A78BFA21" stroke="#A78BFA" stroke-width="2"/>
+<text x="930.0" y="158" font-family="Syne, sans-serif" font-weight="800" fill="#A78BFA" text-anchor="middle">Agent</text>
+<text x="930.0" y="182" font-family="Syne, sans-serif" font-weight="600" fill="#94A3B8" text-anchor="middle">(autonomous)</text>
+<defs><marker id="ah5" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#A78BFA"/></marker></defs>
+<rect x="80" y="250" width="940" height="60" rx="10" fill="#0f172a" stroke="#475569" stroke-width="2"/>
+<text x="550" y="278" font-family="Syne, sans-serif" font-weight="600" fill="#94A3B8" text-anchor="middle">Escalate only as needed: most tasks are chains; reserve agents for open-ended, multi-step goals.</text>
+<text x="550" y="300" font-family="Syne, sans-serif" font-weight="700" fill="#A78BFA" text-anchor="middle">Anthropic's hierarchy: more autonomy = more cost &amp; risk. Earn it.</text>
 </svg>

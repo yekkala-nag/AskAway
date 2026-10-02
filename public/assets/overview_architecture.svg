@@ -1,33 +1,33 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 520" font-family="Syne, sans-serif">
 <defs>
- <marker id="ah" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L8,3 L0,6 Z" fill="#9b7fd4"/></marker>
- <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f7f5f0"/><stop offset="1" stop-color="#eef2f6"/></linearGradient>
+ <marker id="ah" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L8,3 L0,6 Z" fill="#A78BFA"/></marker>
+ <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#090d16"/><stop offset="1" stop-color="#090d16"/></linearGradient>
 </defs>
 <rect x="0" y="0" width="1200" height="520" fill="url(#bg)"/>
-<text x="600" y="42" font-family="Syne, sans-serif" font-size="Modern AI Systems — Five Interlocking Layers" font-weight="800" fill="#1a1a2e" text-anchor="middle">Modern AI Systems — Five Interlocking Layers</text>
-<text x="600" y="68" font-family="Syne, sans-serif" font-size="A single LLM call, wrapped by RAG · Context · Loop · Agents · Production" font-weight="600" fill="#6a6a7a" text-anchor="middle">A single LLM call, wrapped by RAG · Context · Loop · Agents · Production</text>
-<rect x="500" y="300" width="200" height="90" rx="14" fill="#1a1a2e" stroke="#c9a84c" stroke-width="2"/>
-<text x="600" y="338" font-family="Syne, sans-serif" font-size="🤖 LLM Call" font-weight="800" fill="#c9a84c" text-anchor="middle">🤖 LLM Call</text>
-<text x="600" y="362" font-family="Syne, sans-serif" font-size="foundation model" font-weight="600" fill="#f0ede6" text-anchor="middle">foundation model</text>
-<rect x="140" y="300" width="200" height="90" rx="14" fill="#2a8a8414" stroke="#2a8a84" stroke-width="2"/>
-<text x="240" y="334" font-family="Syne, sans-serif" font-size="RAG" font-weight="800" fill="#2a8a84" text-anchor="middle">RAG</text>
-<text x="240" y="358" font-family="Syne, sans-serif" font-size="retrieve · embed · rerank" font-weight="600" fill="#6a6a7a" text-anchor="middle">retrieve · embed · rerank</text>
-<line x1="340" y1="345" x2="500" y2="345" stroke="#2a8a84" stroke-width="2.5" marker-end="url(#ah)"/>
-<rect x="140" y="170" width="200" height="90" rx="14" fill="#c9a84c14" stroke="#c9a84c" stroke-width="2"/>
-<text x="240" y="204" font-family="Syne, sans-serif" font-size="Context" font-weight="800" fill="#c9a84c" text-anchor="middle">Context</text>
-<text x="240" y="228" font-family="Syne, sans-serif" font-size="write · select · compress · isolate" font-weight="600" fill="#6a6a7a" text-anchor="middle">write · select · compress · isolate</text>
-<line x1="240" y1="260" x2="600" y2="300" stroke="#c9a84c" stroke-width="2.5" marker-end="url(#ah)"/>
-<rect x="500" y="90" width="200" height="90" rx="14" fill="#9b7fd414" stroke="#9b7fd4" stroke-width="2"/>
-<text x="600" y="124" font-family="Syne, sans-serif" font-size="Loop" font-weight="800" fill="#9b7fd4" text-anchor="middle">Loop</text>
-<text x="600" y="148" font-family="Syne, sans-serif" font-size="trigger · terminate · recover" font-weight="600" fill="#6a6a7a" text-anchor="middle">trigger · terminate · recover</text>
-<line x1="600" y1="180" x2="600" y2="300" stroke="#9b7fd4" stroke-width="2.5" marker-end="url(#ah)"/>
-<rect x="960" y="170" width="200" height="90" rx="14" fill="#c4572a14" stroke="#c4572a" stroke-width="2"/>
-<text x="1060" y="204" font-family="Syne, sans-serif" font-size="Agents" font-weight="800" fill="#c4572a" text-anchor="middle">Agents</text>
-<text x="1060" y="228" font-family="Syne, sans-serif" font-size="tools · planning · memory" font-weight="600" fill="#6a6a7a" text-anchor="middle">tools · planning · memory</text>
-<line x1="1060" y1="260" x2="600" y2="300" stroke="#c4572a" stroke-width="2.5" marker-end="url(#ah)"/>
-<rect x="960" y="300" width="200" height="90" rx="14" fill="#4a9a4a14" stroke="#4a9a4a" stroke-width="2"/>
-<text x="1060" y="334" font-family="Syne, sans-serif" font-size="Production" font-weight="800" fill="#4a9a4a" text-anchor="middle">Production</text>
-<text x="1060" y="358" font-family="Syne, sans-serif" font-size="scale · eval · guardrails" font-weight="600" fill="#6a6a7a" text-anchor="middle">scale · eval · guardrails</text>
-<line x1="960" y1="345" x2="700" y2="345" stroke="#4a9a4a" stroke-width="2.5" marker-end="url(#ah)"/>
-<text x="600" y="478" font-family="Syne, sans-serif" font-size="Each outer layer governs one question: what to fetch, what to show, when to call again, what to delegate, how to ship safely." font-weight="600" fill="#6a6a7a" text-anchor="middle">Each outer layer governs one question: what to fetch, what to show, when to call again, what to delegate, how to ship safely.</text>
+<text x="600" y="42" font-family="Syne, sans-serif" font-weight="800" fill="#F1F5F9" text-anchor="middle">Modern AI Systems — Five Interlocking Layers</text>
+<text x="600" y="68" font-family="Syne, sans-serif" font-weight="600" fill="#94A3B8" text-anchor="middle">A single LLM call, wrapped by RAG · Context · Loop · Agents · Production</text>
+<rect x="500" y="300" width="200" height="90" rx="14" fill="#1a1a2e" stroke="#E8C558" stroke-width="2"/>
+<text x="600" y="338" font-family="Syne, sans-serif" font-weight="800" fill="#E8C558" text-anchor="middle">🤖 LLM Call</text>
+<text x="600" y="362" font-family="Syne, sans-serif" font-weight="600" fill="#f0ede6" text-anchor="middle">foundation model</text>
+<rect x="140" y="300" width="200" height="90" rx="14" fill="#5EC4C821" stroke="#5EC4C8" stroke-width="2"/>
+<text x="240" y="334" font-family="Syne, sans-serif" font-weight="800" fill="#5EC4C8" text-anchor="middle">RAG</text>
+<text x="240" y="358" font-family="Syne, sans-serif" font-weight="600" fill="#94A3B8" text-anchor="middle">retrieve · embed · rerank</text>
+<line x1="340" y1="345" x2="500" y2="345" stroke="#5EC4C8" stroke-width="2.5" marker-end="url(#ah)"/>
+<rect x="140" y="170" width="200" height="90" rx="14" fill="#E8C55821" stroke="#E8C558" stroke-width="2"/>
+<text x="240" y="204" font-family="Syne, sans-serif" font-weight="800" fill="#E8C558" text-anchor="middle">Context</text>
+<text x="240" y="228" font-family="Syne, sans-serif" font-weight="600" fill="#94A3B8" text-anchor="middle">write · select · compress · isolate</text>
+<line x1="240" y1="260" x2="600" y2="300" stroke="#E8C558" stroke-width="2.5" marker-end="url(#ah)"/>
+<rect x="500" y="90" width="200" height="90" rx="14" fill="#A78BFA21" stroke="#A78BFA" stroke-width="2"/>
+<text x="600" y="124" font-family="Syne, sans-serif" font-weight="800" fill="#A78BFA" text-anchor="middle">Loop</text>
+<text x="600" y="148" font-family="Syne, sans-serif" font-weight="600" fill="#94A3B8" text-anchor="middle">trigger · terminate · recover</text>
+<line x1="600" y1="180" x2="600" y2="300" stroke="#A78BFA" stroke-width="2.5" marker-end="url(#ah)"/>
+<rect x="960" y="170" width="200" height="90" rx="14" fill="#C96A5A21" stroke="#C96A5A" stroke-width="2"/>
+<text x="1060" y="204" font-family="Syne, sans-serif" font-weight="800" fill="#C96A5A" text-anchor="middle">Agents</text>
+<text x="1060" y="228" font-family="Syne, sans-serif" font-weight="600" fill="#94A3B8" text-anchor="middle">tools · planning · memory</text>
+<line x1="1060" y1="260" x2="600" y2="300" stroke="#C96A5A" stroke-width="2.5" marker-end="url(#ah)"/>
+<rect x="960" y="300" width="200" height="90" rx="14" fill="#7FB06921" stroke="#7FB069" stroke-width="2"/>
+<text x="1060" y="334" font-family="Syne, sans-serif" font-weight="800" fill="#7FB069" text-anchor="middle">Production</text>
+<text x="1060" y="358" font-family="Syne, sans-serif" font-weight="600" fill="#94A3B8" text-anchor="middle">scale · eval · guardrails</text>
+<line x1="960" y1="345" x2="700" y2="345" stroke="#7FB069" stroke-width="2.5" marker-end="url(#ah)"/>
+<text x="600" y="478" font-family="Syne, sans-serif" font-weight="600" fill="#94A3B8" text-anchor="middle">Each outer layer governs one question: what to fetch, what to show, when to call again, what to delegate, how to ship safely.</text>
 </svg>

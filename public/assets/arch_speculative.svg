@@ -1,18 +1,19 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 320" font-family="Syne, sans-serif">
-<rect width="1100" height="320" fill="#f7f5f0"/>
-<text x="550" y="40" font-family="Syne, sans-serif" font-size="Speculative Decoding — Draft, then Verify in Parallel" font-weight="800" fill="#9b7fd4" text-anchor="middle">Speculative Decoding — Draft, then Verify in Parallel</text>
-<rect x="70" y="110" width="200" height="70" rx="10" fill="#9b7fd4 14" stroke="#9b7fd4" stroke-width="2"/>
-<text x="170" y="140" font-family="Syne, sans-serif" font-size="Small draft model" font-weight="800" fill="#9b7fd4" text-anchor="middle">Small draft model</text>
-<text x="170" y="162" font-family="Syne, sans-serif" font-size="proposes k tokens" font-weight="600" fill="#6a6a7a" text-anchor="middle">proposes k tokens</text>
-<line x1="270" y1="145" x2="380" y2="145" stroke="#9b7fd4" stroke-width="2.5" marker-end="url(#ah4)"/>
-<rect x="380" y="110" width="200" height="70" rx="10" fill="#fff" stroke="#9b7fd4" stroke-width="2"/>
-<text x="480" y="140" font-family="Syne, sans-serif" font-size="Big target model" font-weight="800" fill="#9b7fd4" text-anchor="middle">Big target model</text>
-<text x="480" y="162" font-family="Syne, sans-serif" font-size="verifies all at once" font-weight="600" fill="#6a6a7a" text-anchor="middle">verifies all at once</text>
-<defs><marker id="ah4" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#9b7fd4"/></marker></defs>
-<text x="690" y="135" font-family="Syne, sans-serif" font-size="→ accept" font-weight="800" fill="#4a9a4a" text-anchor="middle">→ accept</text>
-<text x="690" y="158" font-family="Syne, sans-serif" font-size="reject + resample" font-weight="700" fill="#c4572a" text-anchor="middle">reject + resample</text>
-<rect x="700" y="110" width="330" height="70" rx="10" fill="#ffffff" stroke="#e0dcd4" stroke-width="2"/>
-<text x="865" y="140" font-family="Syne, sans-serif" font-size="2–4× throughput, lossless" font-weight="800" fill="#1a1a2e" text-anchor="middle">2–4× throughput, lossless</text>
-<text x="865" y="162" font-family="Syne, sans-serif" font-size="quality identical to big model" font-weight="600" fill="#6a6a7a" text-anchor="middle">quality identical to big model</text>
-<text x="550" y="290" font-family="Syne, sans-serif" font-size="A cheap model guesses several tokens; the flagship validates them in a single forward pass." font-weight="600" fill="#6a6a7a" text-anchor="middle">A cheap model guesses several tokens; the flagship validates them in a single forward pass.</text>
+<defs><linearGradient id="lbg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#090d16"/><stop offset="1" stop-color="#101a30"/></linearGradient></defs>
+<rect width="1100" height="320" fill="url(#lbg)"/>
+<text x="550" y="40" font-family="Syne, sans-serif" font-weight="800" fill="#A78BFA" text-anchor="middle">Speculative Decoding — Draft, then Verify in Parallel</text>
+<rect x="70" y="110" width="200" height="70" rx="10" fill="#A78BFA21" stroke="#A78BFA" stroke-width="2"/>
+<text x="170" y="140" font-family="Syne, sans-serif" font-weight="800" fill="#A78BFA" text-anchor="middle">Small draft model</text>
+<text x="170" y="162" font-family="Syne, sans-serif" font-weight="600" fill="#94A3B8" text-anchor="middle">proposes k tokens</text>
+<line x1="270" y1="145" x2="380" y2="145" stroke="#A78BFA" stroke-width="2.5" marker-end="url(#ah4)"/>
+<rect x="380" y="110" width="200" height="70" rx="10" fill="#0f172a" stroke="#A78BFA" stroke-width="2"/>
+<text x="480" y="140" font-family="Syne, sans-serif" font-weight="800" fill="#A78BFA" text-anchor="middle">Big target model</text>
+<text x="480" y="162" font-family="Syne, sans-serif" font-weight="600" fill="#94A3B8" text-anchor="middle">verifies all at once</text>
+<defs><marker id="ah4" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#A78BFA"/></marker></defs>
+<text x="690" y="135" font-family="Syne, sans-serif" font-weight="800" fill="#7FB069" text-anchor="middle">→ accept</text>
+<text x="690" y="158" font-family="Syne, sans-serif" font-weight="700" fill="#C96A5A" text-anchor="middle">reject + resample</text>
+<rect x="700" y="110" width="330" height="70" rx="10" fill="#0f172a" stroke="#475569" stroke-width="2"/>
+<text x="865" y="140" font-family="Syne, sans-serif" font-size="2–4× throughput, lossless" font-weight="800" fill="#F1F5F9" text-anchor="middle">2–4× throughput, lossless</text>
+<text x="865" y="162" font-family="Syne, sans-serif" font-weight="600" fill="#94A3B8" text-anchor="middle">quality identical to big model</text>
+<text x="550" y="290" font-family="Syne, sans-serif" font-weight="600" fill="#94A3B8" text-anchor="middle">A cheap model guesses several tokens; the flagship validates them in a single forward pass.</text>
 </svg>

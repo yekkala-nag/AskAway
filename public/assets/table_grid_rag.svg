@@ -29,8 +29,8 @@
     <text x="60" y="188">no "row 47" → line-citation breaks</text>
   </g>
   <g font-size="10" font-family="monospace">
-    <rect x="60" y="200" width="300" height="22" rx="4" fill="#1e293b"/><text x="70" y="215" fill="#64748b">wheat … 41.2 … 44.8 … ??? which row?</text>
-    <rect x="60" y="226" width="300" height="22" rx="4" fill="#1e293b"/><text x="70" y="241" fill="#64748b">… 2027f values with no commodity</text>
+    <rect x="60" y="200" width="300" height="22" rx="4" fill="#1e293b"/><text x="70" y="215" fill="#94a3b8">wheat … 41.2 … 44.8 … ??? which row?</text>
+    <rect x="60" y="226" width="300" height="22" rx="4" fill="#1e293b"/><text x="70" y="241" fill="#94a3b8">… 2027f values with no commodity</text>
   </g>
 
   <rect x="400" y="100" width="380" height="170" rx="10" fill="#0f172a" stroke="#38bdf8" stroke-width="2"/>
@@ -41,7 +41,7 @@
     <text x="420" y="186" fill="#e2e8f0">header: present / absent / continuation</text>
     <text x="420" y="204" fill="#e2e8f0">pages: autonomous / from-N / to-M</text>
     <text x="420" y="222" fill="#e2e8f0">doc ratio: 6% · 13% · 26% → ~50% = SQL</text>
-    <text x="420" y="248" fill="#64748b" font-size="10">orthogonal — a table can be all hard at once</text>
+    <text x="420" y="248" fill="#94a3b8" font-size="10">orthogonal — a table can be all hard at once</text>
   </g>
 
   <rect x="800" y="100" width="360" height="170" rx="10" fill="#0f172a" stroke="#10b981" stroke-width="2"/>
@@ -51,7 +51,7 @@
     <text x="820" y="168" fill="#e2e8f0">B · table_df (columns addressable)</text>
     <text x="820" y="186" fill="#e2e8f0">C · typed columns → SQL corpus</text>
     <text x="820" y="204" fill="#94a3b8">D · heterogeneous fallback (honest)</text>
-    <text x="820" y="230" fill="#64748b" font-size="10">most stay A · few → B · recurring → C</text>
+    <text x="820" y="230" fill="#94a3b8" font-size="10">most stay A · few → B · recurring → C</text>
   </g>
 
   <text x="40" y="300" fill="#fff" font-size="14" font-weight="800">Five composable, idempotent ops (dispatcher composes, e.g. O1→O2→O3)</text>
@@ -68,12 +68,12 @@
   <text x="60" y="442" fill="#e2e8f0" font-size="12">Attention Table-3 (13 cols): Fitz → 3 cells (failed) · Azure DI → 13 cols (perfect).</text>
   <text x="60" y="462" fill="#e2e8f0" font-size="12">NIST Core: O1 folds 8→4 cols, O2 forward-fills Function/Category across ~20 pp.</text>
   <text x="60" y="482" fill="#e2e8f0" font-size="12">CMO p17 (42×14): O1 recovers Commodity labels, O3 projects (wheat, 2027).</text>
-  <text x="60" y="522" fill="#64748b" font-size="11">Start cheap, escalate hard tables/pages (Art.10 cascade). Audit = diagnostic + ops + table_df.</text>
+  <text x="60" y="522" fill="#94a3b8" font-size="11">Start cheap, escalate hard tables/pages (Art.10 cascade). Audit = diagnostic + ops + table_df.</text>
 
   <rect x="780" y="392" width="380" height="150" rx="10" fill="#0f172a" stroke="#c9a84c"/>
   <text x="800" y="420" fill="#c9a84c" font-size="14" font-weight="800">Question modulates answer</text>
   <text x="800" y="442" fill="#e2e8f0" font-size="12">cell → 1 value + rect citation</text>
   <text x="800" y="462" fill="#e2e8f0" font-size="12">column → markdown slice + table cite</text>
   <text x="800" y="482" fill="#e2e8f0" font-size="12">aggregate → SQL agent, no retrieval</text>
-  <text x="800" y="522" fill="#64748b" font-size="11">Kezhan Shi, TDS B4 · EDI series</text>
+  <text x="800" y="522" fill="#94a3b8" font-size="11">Kezhan Shi, TDS B4 · EDI series</text>
 </svg>
