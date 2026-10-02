@@ -5,14 +5,16 @@ import { Card, Badge, Button, Callout } from '../components/ui/Core.jsx';
 import {
   AGENT_PAIRING_PILLARS,
   WORKFLOW_COMPARISON_MODES,
-  PYTHON_AGENT_TEST_DRIVEN_SCRIPT
+  PYTHON_AGENT_TEST_DRIVEN_SCRIPT,
+  TOKEN_SAVERS,
+  TOKEN_DISPLAY
 } from './agentPairEngine.js';
 
 const { Container, Grid, Flex, Stack } = Primitives;
 
 export default function AgentPairTab() {
   const [activeSubTab, setActiveSubTab] = useState('pillars'); 
-  // 'pillars' | 'comparison' | 'decomposition' | 'code'
+  // 'pillars' | 'comparison' | 'decomposition' | 'code' | 'tokens'
 
   // Interactive Task Decomposition Demo state
   const [selectedTaskType, setSelectedTaskType] = useState('fullstack');
@@ -49,7 +51,8 @@ export default function AgentPairTab() {
             { id: 'pillars', icon: '🏛️', label: '1. Four Core Pillars', desc: 'Context, steps, tests, control' },
             { id: 'comparison', icon: '⚖️', label: '2. Vibe Coding vs Engineered', desc: 'Failure rates & technical debt' },
             { id: 'decomposition', icon: '🧩', label: '3. Task Decomposition Lab', desc: 'Breaking complex problems down' },
-            { id: 'code', icon: '🛠️', label: '4. Test-Driven Agent Prompts', desc: 'System prompts & verification loops' }
+            { id: 'code', icon: '🛠️', label: '4. Test-Driven Agent Prompts', desc: 'System prompts & verification loops' },
+            { id: 'tokens', icon: '🪙', label: '5. Token Optimization', desc: '5 big savers + reading the display' }
           ].map(tab => (
             <button
               key={tab.id}
@@ -261,6 +264,74 @@ export default function AgentPairTab() {
 
                 <Callout type="success">
                   <strong>The Golden Rule:</strong> An agent that verifies its own work against automated unit tests frees human engineers from babysitting syntax bugs and lets them focus purely on high-level system design.
+                </Callout>
+              </Stack>
+            </Card>
+          </Stack>
+        )}
+
+        {/* ─── SUBTAB 5: TOKEN OPTIMIZATION CHEAT SHEET ─── */}
+        {activeSubTab === 'tokens' && (
+          <Stack gap={6}>
+            <Card style={{ padding: 'var(--ds-space-5)', background: 'var(--ds-color-bg-canvas)' }}>
+              <Stack gap={4}>
+                <div>
+                  <h3 style={{ margin: 0 }}>🪙 The 5 Biggest Token Savers</h3>
+                  <p style={{ margin: '4px 0 0 0', color: 'var(--ds-color-text-secondary)', fontSize: 'var(--ds-font-size-bodySm)' }}>
+                    Where an agent session actually burns tokens — and the five habits that cut the bill. Figures are illustrative; exact numbers vary by tool and model.
+                  </p>
+                </div>
+
+                <Grid columns={{ base: '1fr', md: '1fr 1fr' }} gap="var(--ds-space-3)">
+                  {TOKEN_SAVERS.map((t, idx) => (
+                    <Card key={idx} style={{ padding: '16px', background: 'var(--ds-color-bg-surface)', borderLeft: '4px solid #F5A623' }}>
+                      <strong style={{ fontSize: '13px', color: '#F5A623', display: 'block', marginBottom: '8px' }}>
+                        {idx + 1}. {t.saver}
+                      </strong>
+
+                      <div style={{ fontSize: '11.5px', color: 'var(--ds-color-text-secondary)', marginBottom: '6px' }}>
+                        How: {t.how}
+                      </div>
+
+                      <div style={{ background: 'rgba(16,185,129,0.08)', padding: '8px 10px', borderRadius: '4px', borderLeft: '3px solid #34D399', fontSize: '11px', color: '#34d399', marginBottom: '6px' }}>
+                        <strong>Saves:</strong> {t.saves}
+                      </div>
+
+                      <div style={{ background: 'rgba(239,68,68,0.08)', padding: '8px 10px', borderRadius: '4px', borderLeft: '3px solid #ef4444', fontSize: '11px', color: '#f87171' }}>
+                        <strong>Watch out:</strong> {t.watch}
+                      </div>
+                    </Card>
+                  ))}
+                </Grid>
+
+                <Callout type="info">
+                  <strong>Order of impact:</strong> a long-running session with a huge untouched history dwarfs any micro-optimization — compact first, then batch commands, then scope reads.
+                </Callout>
+              </Stack>
+            </Card>
+
+            <Card style={{ padding: 'var(--ds-space-5)', background: 'var(--ds-color-bg-canvas)' }}>
+              <Stack gap={4}>
+                <div>
+                  <h3 style={{ margin: 0 }}>📊 Understanding the Token Display</h3>
+                  <p style={{ margin: '4px 0 0 0', color: 'var(--ds-color-text-secondary)', fontSize: 'var(--ds-font-size-bodySm)' }}>
+                    What each counter in your assistant's token readout means, what it costs, and how to push it down:
+                  </p>
+                </div>
+
+                <Grid columns={{ base: '1fr', md: '1fr 1fr 1fr 1fr' }} gap="var(--ds-space-2)">
+                  {TOKEN_DISPLAY.map((t, idx) => (
+                    <Card key={idx} style={{ padding: '14px', background: 'var(--ds-color-bg-surface)', borderLeft: `4px solid ${idx === 0 ? '#5EC4C8' : idx === 1 ? '#a78bfa' : idx === 2 ? '#34D399' : '#F5A623'}` }}>
+                      <strong style={{ fontSize: '12.5px', color: 'white', display: 'block', marginBottom: '6px' }}>{t.term}</strong>
+                      <div style={{ fontSize: '11px', color: 'var(--ds-color-text-secondary)', marginBottom: '6px' }}>{t.meaning}</div>
+                      <div style={{ fontSize: '11px', color: '#5EC4C8', marginBottom: '4px' }}><strong>Cost:</strong> {t.cost}</div>
+                      <div style={{ fontSize: '11px', color: '#F5A623' }}><strong>Tip:</strong> {t.tip}</div>
+                    </Card>
+                  ))}
+                </Grid>
+
+                <Callout type="warning">
+                  <strong>Why caching beats everything:</strong> input history grows every turn — cache reads (~10% of base price) and compaction are the only levers that fight the compounding, while output tokens cost several × input, so ask for concise diffs when you only need changes.
                 </Callout>
               </Stack>
             </Card>

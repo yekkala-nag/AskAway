@@ -90,3 +90,49 @@ def test_user_discount_calculation():
 if __name__ == '__main__':
     test_driven_agent_loop()
 `;
+
+// ============================================================================
+// TOKEN OPTIMIZATION CHEAT SHEET
+// Biggest savings when working with an AI coding assistant, plus how to read
+// the token display. Illustrative figures — exact numbers vary by tool/model.
+// ============================================================================
+
+export const TOKEN_SAVERS = [
+  {
+    saver: "/compact — summarize the conversation",
+    how: "Run /compact when total tokens exceed ~50k; the assistant summarizes history into a smaller context.",
+    saves: "Large sessions: cuts context by 50–90% in one call.",
+    watch: "Details get compressed — pin file paths & decisions before compacting."
+  },
+  {
+    saver: "Batch bash commands in one message",
+    how: "npm install && npm run build && npm test as a single command instead of 3 separate shell calls.",
+    saves: "Each turn re-sends full history — fewer turns = fewer input tokens.",
+    watch: "Chain only when steps truly depend on each other; a failing step still stops the run."
+  },
+  {
+    saver: "Specify line ranges when reading files",
+    how: '"Read lines 1–80 of server.ts" instead of reading the whole 500-line file.',
+    saves: "~2k tokens per avoided full-file read; adds up fast across a session.",
+    watch: "If you need cross-file context, whole-file reads are worth it — scope narrowly only when you know the target."
+  },
+  {
+    saver: "Stay in the same session",
+    how: "Re-use the session for related work instead of starting fresh — cached context is served at a fraction of normal cost.",
+    saves: "Cache reads are typically ~10% of the base input price.",
+    watch: "Stale context misleads — start fresh when the topic or branch changes."
+  },
+  {
+    saver: "Write clear, scoped tasks",
+    how: '"Fix the login bug in auth.ts line 42" instead of "Fix all the bugs in the project".',
+    saves: "The agent reads fewer files → less input, less output, fewer tokens.",
+    watch: "Scope too tight and the fix is a band-aid; name the constraint (file/line/error) but not the solution."
+  }
+];
+
+export const TOKEN_DISPLAY = [
+  { term: "Input tokens", meaning: "Everything sent to the model: your prompt + file contents the agent read + conversation history.", cost: "Base cost.", tip: "Browsers of large files dominate this — use line ranges." },
+  { term: "Output tokens", meaning: "Words the model generated: code, explanations, plans.", cost: "Usually priced several × input.", tip: "Long verbose replies cost more — ask for concise diffs when you only need changes." },
+  { term: "Cache read", meaning: "Prompt portions served from the provider's prompt cache instead of re-sent.", cost: "≈10% of base input price.", tip: "Rewriting the system prompt or restarting sessions evicts the cache." },
+  { term: "Cache creation", meaning: "First time a large context block is written to cache.", cost: "Slightly more than base input upfront.", tip: "Pays for itself the moment the same context is reused." }
+];

@@ -838,7 +838,7 @@ export const TABS_REGISTRY = [
     umbrellaId: "agents_frameworks",
     category: "Agents & Frameworks",
     icon: "🤝",
-    keywords: ["ai coding agents", "pair programming", "sara metwalli", "task decomposition", "test-driven", "context injection", "vibe coding", "human in the loop", "towards data science"],
+    keywords: ["ai coding agents", "pair programming", "sara metwalli", "task decomposition", "test-driven", "context injection", "vibe coding", "human in the loop", "token optimization", "token savings", "/compact", "cache read", "input output tokens", "batch commands", "scoped prompts", "towards data science"],
     component: lazy(() => import("../agentPairProgramming/AgentPairTab.jsx"))
   },
   {
