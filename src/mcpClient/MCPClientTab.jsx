@@ -11,6 +11,7 @@ import {
 } from './mcpClientEngine.js';
 import MCPTab from './MCPTab.jsx';
 import McpIntegrationGuide from './McpIntegrationGuide.jsx';
+import { JumpNav, COURSE_SECTIONS } from './mcpInteractive.jsx';
 
 const { Container, Grid, Flex, Stack } = Primitives;
 
@@ -80,51 +81,67 @@ export default function MCPClientTab() {
           <McpClientPanel />
         </div>
 
-        {/* SUBTAB NAVIGATION */}
+        {/* STICKY NAV STACK — subtabs + course jump-nav stay visible while scrolling */}
         <div style={{
-          display: 'flex',
-          gap: 'var(--ds-space-2)',
-          marginBottom: 'var(--ds-space-6)',
-          background: 'var(--ds-color-bg-surface)',
-          padding: 'var(--ds-space-2)',
-          borderRadius: 'var(--ds-radius-lg)',
-          border: '1px solid var(--ds-color-border-subtle)',
-          overflowX: 'auto'
+          position: 'sticky',
+          top: 0,
+          zIndex: 30,
+          background: 'var(--ds-color-bg-canvas)',
+          margin: '0 calc(-1 * clamp(16px, 3vw, 24px))',
+          padding: '0 clamp(16px, 3vw, 24px) var(--ds-space-3)',
+          boxShadow: '0 10px 18px -14px rgba(22, 40, 63, 0.25)'
         }}>
-          {[
-            { id: 'course', icon: '📘', label: '1. MCP Course', desc: 'Protocol, architecture, security, production' },
-            { id: 'guide', icon: '🧭', label: '2. Integration Guide', desc: 'MCP inside AskAway — SDK, governance, use cases' },
-            { id: 'protocol', icon: '🔌', label: '3. Client vs Server Protocol', desc: 'JSON-RPC 2.0 & SSE Transports' },
-            { id: 'catalog', icon: '🌐', label: '4. Remote MCP Servers Catalog', desc: 'DeepWiki, HuggingFace & Supabase' },
-            { id: 'simulator', icon: '💻', label: '5. Streamlit Client App Simulator', desc: 'Interactive UI tool runner' },
-            { id: 'code', icon: '🛠️', label: '6. Production Python & Streamlit Code', desc: 'OpenAI & dotenv bindings' }
-          ].map(tab => (
-            <button
-              key={tab.id}
-              onClick={() => setActiveSubTab(tab.id)}
-              style={{
-                flex: 1,
-                minWidth: '210px',
-                padding: 'var(--ds-space-3) var(--ds-space-4)',
-                borderRadius: 'var(--ds-radius-md)',
-                border: 'none',
-                background: activeSubTab === tab.id ? 'var(--ds-color-module-foundations-primary)' : 'transparent',
-                color: activeSubTab === tab.id ? 'white' : 'var(--ds-color-text-secondary)',
-                cursor: 'pointer',
-                textAlign: 'left',
-                transition: 'all var(--ds-motion-duration-base)',
-                fontWeight: activeSubTab === tab.id ? 'var(--ds-font-weight-semibold)' : 'var(--ds-font-weight-medium)'
-              }}
-            >
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: 'var(--ds-font-size-body)', marginBottom: '2px' }}>
-                <span>{tab.icon}</span>
-                <span>{tab.label}</span>
-              </div>
-              <div style={{ fontSize: 'var(--ds-font-size-caption)', opacity: activeSubTab === tab.id ? 0.9 : 0.7 }}>
-                {tab.desc}
-              </div>
-            </button>
-          ))}
+          <div style={{
+            display: 'flex',
+            gap: 'var(--ds-space-2)',
+            margin: 'var(--ds-space-2) 0 0',
+            background: 'var(--ds-color-bg-surface)',
+            padding: 'var(--ds-space-2)',
+            borderRadius: 'var(--ds-radius-lg)',
+            border: '1px solid var(--ds-color-border-subtle)',
+            overflowX: 'auto'
+          }}>
+            {[
+              { id: 'course', icon: '📘', label: '1. MCP Course', desc: 'Protocol, architecture, security, production' },
+              { id: 'guide', icon: '🧭', label: '2. Integration Guide', desc: 'MCP inside AskAway — SDK, governance, use cases' },
+              { id: 'protocol', icon: '🔌', label: '3. Client vs Server Protocol', desc: 'JSON-RPC 2.0 & SSE Transports' },
+              { id: 'catalog', icon: '🌐', label: '4. Remote MCP Servers Catalog', desc: 'DeepWiki, HuggingFace & Supabase' },
+              { id: 'simulator', icon: '💻', label: '5. Streamlit Client App Simulator', desc: 'Interactive UI tool runner' },
+              { id: 'code', icon: '🛠️', label: '6. Production Python & Streamlit Code', desc: 'OpenAI & dotenv bindings' }
+            ].map(tab => (
+              <button
+                key={tab.id}
+                onClick={() => setActiveSubTab(tab.id)}
+                style={{
+                  flex: 1,
+                  minWidth: '210px',
+                  padding: 'var(--ds-space-3) var(--ds-space-4)',
+                  borderRadius: 'var(--ds-radius-md)',
+                  border: 'none',
+                  background: activeSubTab === tab.id ? 'var(--ds-color-module-foundations-primary)' : 'transparent',
+                  color: activeSubTab === tab.id ? 'white' : 'var(--ds-color-text-secondary)',
+                  cursor: 'pointer',
+                  textAlign: 'left',
+                  transition: 'all var(--ds-motion-duration-base)',
+                  fontWeight: activeSubTab === tab.id ? 'var(--ds-font-weight-semibold)' : 'var(--ds-font-weight-medium)'
+                }}
+              >
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: 'var(--ds-font-size-body)', marginBottom: '2px' }}>
+                  <span>{tab.icon}</span>
+                  <span>{tab.label}</span>
+                </div>
+                <div style={{ fontSize: 'var(--ds-font-size-caption)', opacity: activeSubTab === tab.id ? 0.9 : 0.7 }}>
+                  {tab.desc}
+                </div>
+              </button>
+            ))}
+          </div>
+
+          {activeSubTab === 'course' && (
+            <div style={{ marginTop: 'var(--ds-space-2)' }}>
+              <JumpNav sections={COURSE_SECTIONS} />
+            </div>
+          )}
         </div>
 
         {/* ─── SUBTAB 1: MCP COURSE ─── */}

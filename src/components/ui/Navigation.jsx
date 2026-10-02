@@ -186,24 +186,6 @@ export function Sidebar({
   collapsed,
   onToggleCollapse,
 }) {
-  const [trackId, setTrackId] = useState(() => getCurrentTrackId());
-  const [trackProgress, setTrackProgress] = useState(() => getTrackProgress(trackId));
-
-  useEffect(() => {
-    const refresh = () => {
-      const t = getCurrentTrackId();
-      setTrackId(t);
-      setTrackProgress(getTrackProgress(t));
-      setProgTick(x => x + 1);
-    };
-    refresh();
-    return subscribeToAdaptiveProgress(refresh);
-  }, []);
-
-  const activeTrack = getTrackById(trackId);
-  const [, setProgTick] = useState(0);
-  const curated = useCuratedProgress();
-
   const [expandedModules, setExpandedModules] = useState({
     foundations: true,
     rag_architecture: false,
@@ -248,6 +230,7 @@ export function Sidebar({
   };
 
   const moduleOrder = UMBRELLA_TOPICS.map(m => m.id);
+  const curated = useCuratedProgress();
   const queryStr = (typeof searchQuery === 'string' ? searchQuery : (searchQuery?.target?.value || '')).trim().toLowerCase();
   const isHubTab = (tabId) => typeof tabId === 'string' && tabId.endsWith('_hub');
   const isSearchMode = queryStr.length > 0;
@@ -339,15 +322,7 @@ export function Sidebar({
                 color: '#1A1D26', fontSize: '0.8rem', outline: 'none', fontFamily: 'inherit'
               }}
             />
-            {queryStr.length === 0 ? (
-              <kbd style={{
-                fontSize: '0.6rem', padding: '2px 5px', borderRadius: '4px',
-                background: '#FFFFFF', border: '1px solid #E5E7EB',
-                color: '#9CA3AF', fontWeight: 600, flexShrink: 0
-              }}>
-                ⌘K
-              </kbd>
-            ) : (
+            {queryStr.length > 0 && (
               <button
                 onClick={() => onSearchChange?.('')}
                 style={{ background: 'none', border: 'none', color: '#9CA3AF', cursor: 'pointer', fontSize: '0.75rem', padding: '0 2px' }}
@@ -360,42 +335,7 @@ export function Sidebar({
         </div>
       )}
 
-      {/* 3. DAILY PROGRESS CARD */}
-      {!collapsed && !queryStr && (
-        <div style={{ padding: '4px 16px 12px', flexShrink: 0 }}>
-          <div style={{
-            background: 'var(--ds-color-chrome-sidebarCard, #FFFFFF)',
-            border: '1px solid var(--ds-color-chrome-headerBorder, #E7EDF3)',
-            borderRadius: '12px', padding: '14px',
-            boxShadow: '0 4px 14px rgba(22, 40, 63, 0.06)'
-          }}>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '8px' }}>
-              <span style={{ fontSize: '0.82rem', fontWeight: 700, color: '#1A1D26' }}>
-                Daily Progress
-              </span>
-              <span style={{ fontSize: '0.7rem', fontWeight: 600, color: '#4B5563' }}>
-                {trackProgress.completed}/{trackProgress.total} items
-              </span>
-            </div>
-            <div style={{ height: '6px', borderRadius: '3px', background: '#E5E7EB', overflow: 'hidden', marginBottom: '8px' }}>
-              <div style={{
-                height: '100%', width: `${trackProgress.percent}%`, borderRadius: '3px',
-                background: 'linear-gradient(90deg, var(--ds-color-chrome-ctaFrom, #14B8A6), var(--ds-color-chrome-ctaTo, #0E9F8A))',
-                transition: 'width 0.3s ease'
-              }} />
-            </div>
-            <div style={{ fontSize: '0.74rem', color: '#1A1D26', fontWeight: 500, lineHeight: 1.45 }}>
-              {trackProgress.percent === 0
-                ? 'Start Module 1 to unlock your first badge!'
-                : trackProgress.percent >= 100
-                  ? 'Great work! You\'re ahead of schedule.'
-                  : 'Keep going — you\'re making progress!'}
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* 4. CURATED INDEX (mock labels, live progress) */}
+      {/* 3. CURATED INDEX (mock labels, live progress) */}
       {!collapsed && !queryStr && (
         <div style={{ padding: '0 16px 8px', flexShrink: 0 }}>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
@@ -738,6 +678,54 @@ export function TopBar({ activeTab, onSelectTab, onSearchOpen, onToggleSidebar, 
         .topbar-mobile-menu-btn {
           display: none !important;
         }
+        .aw-search-pill {
+          background: linear-gradient(var(--ds-color-chrome-searchPill, #F1F4F8), var(--ds-color-chrome-searchPill, #F1F4F8)) padding-box,
+                      linear-gradient(120deg, var(--ds-color-chrome-ctaFrom, #14B8A6), var(--ds-color-module-context-primary, #9B89C4)) border-box;
+          border: 1px solid transparent;
+          transition: all 0.2s cubic-bezier(0.2, 0, 0, 1);
+        }
+        .aw-search-pill:hover {
+          transform: translateY(-1px);
+          box-shadow: 0 6px 18px rgba(20, 184, 166, 0.28);
+        }
+        .aw-chip {
+          border-radius: 9999px;
+          transition: all 0.2s cubic-bezier(0.2, 0, 0, 1);
+        }
+        .aw-chip:hover {
+          transform: translateY(-1px);
+          box-shadow: 0 4px 10px rgba(22, 40, 63, 0.10);
+        }
+        .aw-btn {
+          display: inline-flex;
+          align-items: center;
+          gap: 5px;
+          border-radius: 9999px;
+          transition: all 0.2s cubic-bezier(0.2, 0, 0, 1);
+        }
+        .aw-btn-prev {
+          background: #FFFFFF;
+          border: 1px solid var(--ds-color-border-subtle, #E5E7EB);
+          color: var(--ds-color-text-secondary, #4B5563);
+        }
+        .aw-btn-prev:hover:not(:disabled) {
+          background: var(--ds-color-bg-surfaceHover, #F1F3F5);
+          border-color: var(--ds-color-border-default, #D1D5DB);
+          transform: translateY(-1px);
+          box-shadow: 0 4px 10px rgba(22, 40, 63, 0.08);
+        }
+        .aw-btn-next {
+          background: linear-gradient(135deg, var(--ds-color-chrome-ctaFrom, #14B8A6), var(--ds-color-chrome-ctaTo, #0E9F8A));
+          border: none;
+          color: #FFFFFF;
+          font-weight: 600;
+          box-shadow: 0 6px 16px rgba(20, 184, 166, 0.30);
+        }
+        .aw-btn-next:hover:not(:disabled) {
+          transform: translateY(-1px);
+          box-shadow: 0 8px 22px rgba(20, 184, 166, 0.42);
+          filter: saturate(1.08);
+        }
         @media (max-width: 768px) {
           .topbar-mobile-menu-btn {
             display: inline-flex !important;
@@ -834,11 +822,11 @@ export function TopBar({ activeTab, onSelectTab, onSearchOpen, onToggleSidebar, 
                 fontSize: '0.6rem',
                 fontWeight: 700,
                 letterSpacing: '0.05em',
-                padding: '1px 5px',
-                borderRadius: '4px',
-                background: 'rgba(56, 189, 248, 0.12)',
-                color: '#0284C7',
-                border: '1px solid rgba(56, 189, 248, 0.25)',
+                padding: '1px 7px',
+                borderRadius: '9999px',
+                background: 'rgba(229, 72, 77, 0.10)',
+                color: 'var(--ds-color-chrome-proBadge, #E5484D)',
+                border: '1px solid rgba(229, 72, 77, 0.25)',
                 textTransform: 'uppercase'
               }}>
                 PRO
@@ -859,9 +847,48 @@ export function TopBar({ activeTab, onSelectTab, onSearchOpen, onToggleSidebar, 
           </div>
         </div>
 
-        {/* Right: Search Pill Trigger */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexShrink: 0 }}>
+        {/* Right: Daily Progress pill + Search Pill Trigger */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexShrink: 0, flexWrap: 'wrap', justifyContent: 'flex-end' }}>
+          <div
+            title={`Daily Progress — ${activeTrack ? activeTrack.title : 'current track'}`}
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '5px',
+              padding: '8px 16px',
+              background: 'var(--ds-color-chrome-sidebarCard, #FFFFFF)',
+              border: '1px solid var(--ds-color-chrome-headerBorder, #E7EDF3)',
+              borderRadius: '9999px',
+              boxShadow: '0 4px 14px rgba(22, 40, 63, 0.06)'
+            }}
+          >
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '14px' }}>
+              <span style={{
+                fontSize: '0.62rem', fontWeight: 700, letterSpacing: '0.06em',
+                textTransform: 'uppercase', color: '#64748B'
+              }}>
+                Daily Progress
+              </span>
+              <span style={{
+                fontSize: '0.7rem', fontWeight: 800,
+                color: 'var(--ds-color-chrome-ctaTo, #0E9F8A)'
+              }}>
+                {trackProgress.percent}%
+              </span>
+            </div>
+            <div style={{ height: '5px', width: '130px', borderRadius: '3px', background: '#E5E7EB', overflow: 'hidden' }}>
+              <div style={{
+                height: '100%', width: `${trackProgress.percent}%`, borderRadius: '3px',
+                background: 'linear-gradient(90deg, var(--ds-color-chrome-ctaFrom, #14B8A6), var(--ds-color-chrome-ctaTo, #0E9F8A))',
+                transition: 'width 0.3s ease'
+              }} />
+            </div>
+            <span style={{ fontSize: '0.62rem', fontWeight: 500, color: '#9CA3AF' }}>
+              {trackProgress.completed}/{trackProgress.total} items
+            </span>
+          </div>
           <button
+            className="aw-search-pill"
             onClick={onSearchOpen}
             title="Search knowledge base (Ctrl+K / ⌘K)"
             style={{
@@ -870,22 +897,11 @@ export function TopBar({ activeTab, onSelectTab, onSearchOpen, onToggleSidebar, 
               gap: '6px',
               minWidth: '220px',
               padding: '10px 8px 10px 14px',
-              background: 'var(--ds-color-chrome-searchPill, #F1F4F8)',
-              border: '1px solid transparent',
               borderRadius: '9999px',
               color: '#94A3B8',
               fontSize: '0.82rem',
               fontWeight: 500,
-              cursor: 'pointer',
-              transition: 'all 0.15s ease'
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.background = '#E8EDF3';
-              e.currentTarget.style.borderColor = '#CBD5E1';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.background = 'var(--ds-color-chrome-searchPill, #F1F4F8)';
-              e.currentTarget.style.borderColor = 'transparent';
+              cursor: 'pointer'
             }}
           >
             <span style={{ flex: 1, textAlign: 'left' }}>Search modules…</span>
@@ -917,14 +933,14 @@ export function TopBar({ activeTab, onSelectTab, onSearchOpen, onToggleSidebar, 
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px', minWidth: 0, flexWrap: 'wrap' }}>
           {/* Module Pill (Foundations & Architecture) */}
           <button
+            className="aw-chip"
             onClick={() => onSelectTab('overview')}
             title={`All modules — currently in ${currentModule.title}`}
             style={{
               display: 'inline-flex',
               alignItems: 'center',
               gap: '5px',
-              padding: '3px 9px',
-              borderRadius: '6px',
+              padding: '3px 11px',
               background: accent.light,
               color: accent.dark,
               fontSize: '0.76rem',
@@ -942,14 +958,14 @@ export function TopBar({ activeTab, onSelectTab, onSearchOpen, onToggleSidebar, 
           {activeChild && !isHubPage ? (
             <>
               <button
+                className="aw-chip"
                 onClick={() => hubPageId && onSelectTab(hubPageId)}
                 title={`${activeChild.title} — click for hub overview`}
                 style={{
                   display: 'inline-flex',
                   alignItems: 'center',
                   gap: '5px',
-                  padding: '3px 9px',
-                  borderRadius: '6px',
+                  padding: '3px 11px',
                   background: '#FFFFFF',
                   color: '#475569',
                   fontSize: '0.76rem',
@@ -965,15 +981,18 @@ export function TopBar({ activeTab, onSelectTab, onSearchOpen, onToggleSidebar, 
           ) : null}
 
           {/* Active Tab Name (e.g. Home) */}
-          <div style={{
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: '5px',
-            background: '#FFFFFF',
-            padding: '3px 9px',
-            borderRadius: '6px',
-            border: '1px solid #E2E8F0'
-          }}>
+          <div
+            className="aw-chip"
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '5px',
+              background: '#FFFFFF',
+              padding: '3px 11px',
+              border: '1px solid #E2E8F0',
+              boxShadow: '0 1px 4px rgba(22, 40, 63, 0.06)'
+            }}
+          >
             <span style={{ fontSize: '0.88rem' }}>{currentTab.icon}</span>
             <span style={{
               fontWeight: 600,
@@ -1012,14 +1031,13 @@ export function TopBar({ activeTab, onSelectTab, onSearchOpen, onToggleSidebar, 
           {childIndex >= 0 ? (
             <>
               <button
+                className="aw-btn aw-btn-prev"
                 onClick={() => prevInChild ? onSelectTab(prevInChild.id) : (hubPageId && onSelectTab(hubPageId))}
                 title={prevInChild ? `Previous: ${prevInChild.label}` : `Back to ${activeChild.title} overview`}
                 style={{
-                  display: 'inline-flex', alignItems: 'center', gap: '5px',
-                  padding: '4px 12px', borderRadius: '6px',
-                  background: 'transparent', color: '#4B5563',
-                  border: '1px solid #E5E7EB', fontSize: '0.75rem', fontWeight: 500,
-                  cursor: 'pointer', maxWidth: '40vw',
+                  padding: '4px 14px',
+                  fontSize: '0.75rem', fontWeight: 500,
+                  maxWidth: '40vw',
                   whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis'
                 }}
               >
@@ -1038,6 +1056,7 @@ export function TopBar({ activeTab, onSelectTab, onSearchOpen, onToggleSidebar, 
                 {activeChild.title} · {childIndex + 1} of {childTabs.length}
               </button>
               <button
+                className="aw-btn aw-btn-next"
                 onClick={() => {
                   if (nextInChild) onSelectTab(nextInChild.id);
                   else if (nextHub) onSelectTab(getHubPageId(nextHub.id));
@@ -1046,10 +1065,8 @@ export function TopBar({ activeTab, onSelectTab, onSearchOpen, onToggleSidebar, 
                 }}
                 title={nextInChild ? `Next: ${nextInChild.label}` : (nextHub ? `Next section: ${nextHub.title}` : 'Hub overview')}
                 style={{
-                  display: 'inline-flex', alignItems: 'center', gap: '5px',
-                  padding: '4px 12px', borderRadius: '6px',
-                  background: '#3A9B9F', color: '#ffffff',
-                  border: 'none', fontSize: '0.75rem', fontWeight: 600,
+                  padding: '4px 14px',
+                  fontSize: '0.75rem',
                   cursor: 'pointer', maxWidth: '40vw',
                   whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis'
                 }}
@@ -1061,15 +1078,14 @@ export function TopBar({ activeTab, onSelectTab, onSearchOpen, onToggleSidebar, 
           ) : (
             <>
               <button
+                className="aw-btn aw-btn-prev"
                 onClick={() => prevHub && onSelectTab(getHubPageId(prevHub.id))}
                 disabled={!prevHub}
                 title={prevHub ? `Previous section: ${prevHub.title}` : 'First section'}
                 style={{
-                  display: 'inline-flex', alignItems: 'center', gap: '5px',
-                  padding: '4px 12px', borderRadius: '6px',
-                  background: 'transparent',
+                  padding: '4px 14px',
+                  fontSize: '0.75rem', fontWeight: 500,
                   color: prevHub ? '#4B5563' : '#D1D5DB',
-                  border: '1px solid #E5E7EB', fontSize: '0.75rem', fontWeight: 500,
                   cursor: prevHub ? 'pointer' : 'default',
                   opacity: prevHub ? 1 : 0.5, maxWidth: '40vw',
                   whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis'
@@ -1082,16 +1098,15 @@ export function TopBar({ activeTab, onSelectTab, onSearchOpen, onToggleSidebar, 
                 {activeChild.title} · Hub overview
               </span>
               <button
+                className="aw-btn aw-btn-next"
                 onClick={() => {
                   if (nextHub) onSelectTab(getHubPageId(nextHub.id));
                   else onSelectTab('overview');
                 }}
                 title={nextHub ? `Next section: ${nextHub.title}` : 'Back to Overview'}
                 style={{
-                  display: 'inline-flex', alignItems: 'center', gap: '5px',
-                  padding: '4px 12px', borderRadius: '6px',
-                  background: '#3A9B9F', color: '#ffffff',
-                  border: 'none', fontSize: '0.75rem', fontWeight: 600,
+                  padding: '4px 14px',
+                  fontSize: '0.75rem',
                   cursor: 'pointer', maxWidth: '40vw',
                   whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis'
                 }}

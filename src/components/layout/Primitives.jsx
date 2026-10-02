@@ -45,7 +45,7 @@ export function Page({ children, sidebar, header, sidebarCollapsed, onSidebarTog
 
       {/* HEADER — full-width, fixed at top, never scrolls */}
       {header && (
-        <div style={{ flexShrink: 0, zIndex: 'var(--ds-zIndex-sticky)' }}>
+        <div style={{ flexShrink: 0, position: 'relative', zIndex: 'var(--ds-zIndex-sticky)', background: 'var(--ds-color-bg-canvas)' }}>
           {header}
         </div>
       )}

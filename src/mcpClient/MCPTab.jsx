@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import { CodeBlock } from "../components/ui/Content.jsx";
 import { Callout } from "../components/ui/Core.jsx";
 import {
-  JumpNav,
-  COURSE_SECTIONS,
   ArchitectureSim,
   NmCalculator,
   ProtocolWalk,
@@ -32,7 +30,7 @@ export const COLORS = {
 
 export function Section({ n, title, kicker, children }) {
   return (
-    <section id={`mcp-sec-${n}`} style={{ display: "flex", flexDirection: "column", gap: 14, scrollMarginTop: 70 }}>
+    <section id={`mcp-sec-${n}`} style={{ display: "flex", flexDirection: "column", gap: 14, scrollMarginTop: 150 }}>
       <div style={{ display: "flex", alignItems: "baseline", gap: 10 }}>
         <span style={{ fontFamily: mono, fontSize: 11, fontWeight: 700, color: COLORS.amber, letterSpacing: "0.08em" }}>
           {String(n).padStart(2, "0")}
@@ -155,7 +153,6 @@ export function MCPTab() {
 
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 40 }}>
-      <JumpNav sections={COURSE_SECTIONS} />
 
       {/* 1. WHAT MCP IS */}
       <Section
