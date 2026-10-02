@@ -21,7 +21,7 @@ export default function ModelValidationTab() {
     <div style={{ paddingBottom: 'var(--ds-space-12)' }}>
       <Hero moduleId="frontiers_production" moduleLabel="Production & Frontiers [GenAI Model Validation]"
         title="Validate Systems You Can't Inspect — The Banking Playbook"
-        description="No dev sample, vendor core, silent drift: SR 11-7's three pillars survive, but evidence changes completely. Tier by travel × acts × materiality, then dimension-battery, robustness, and judge-the-judge. Based on Ananya Bhattacharyya (TDS)."
+        description="No dev sample, vendor core, silent drift: SR 11-7's three pillars survive, but evidence changes completely. Tier by travel × acts × materiality, then dimension-battery, robustness, and judge-the-judge."
         metrics={[{ label: 'Pillars', value: '3 (SR 11-7)' }, { label: 'Breaks', value: '5 structural' }, { label: 'Tiers', value: 'Low/Med/High' }, { label: 'Rule', value: 'System, not model' }]} />
       <Container size="wide">
         <div style={{ marginBottom: 'var(--ds-space-6)' }}><DiagramImage moduleId="frontiers_production" src="/assets/model_validation.svg" alt="Model validation playbook" title="Pillars + Breaks + Tiering" caption="Same questions as 2011, all-new evidence: dimensions, perturbations, validated judges." background="#090d16" maxWidth={1100} /></div>

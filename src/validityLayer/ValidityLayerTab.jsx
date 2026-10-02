@@ -18,7 +18,7 @@ export default function ValidityLayerTab() {
     <div style={{ paddingBottom: 'var(--ds-space-12)' }}>
       <Hero moduleId="context_memory" moduleLabel="Context & Memory Engineering [Validity Layer]"
         title="Presence Isn't Validity — Check Before Acting"
-        description="Flight $420 → $610 mid-plan: the baseline burns 2 doomed steps and misses tight budgets; the validity-aware executor checks state first and finishes. Four states, two executors, one law (PFW = closure − 1). Based on Emmimal P Alexander (TDS)."
+        description="Flight $420 → $610 mid-plan: the baseline burns 2 doomed steps and misses tight budgets; the validity-aware executor checks state first and finishes. Four states, two executors, one law (PFW = closure − 1)."
         metrics={[{ label: 'States', value: '4, not 2' }, { label: 'Doomed Work', value: '2 → 0' }, { label: 'Budget Gap', value: '6–8' }, { label: 'Law Holds', value: '96/96' }]} />
       <Container size="wide">
         <div style={{ marginBottom: 'var(--ds-space-6)' }}><DiagramImage moduleId="context_memory" src="/assets/validity_layer.svg" alt="Validity layer" title="Baseline vs Aware + 4 States" caption="Same fault, two policies; states decide act/verify/replan before execution." background="#090d16" maxWidth={1100} /></div>

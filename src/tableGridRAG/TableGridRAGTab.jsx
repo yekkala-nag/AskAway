@@ -32,7 +32,7 @@ export default function TableGridRAGTab() {
         moduleId="rag_architecture"
         moduleLabel="RAG Architectures & Pipelines [Tables: Don't Flatten the Grid]"
         title="Tables in PDFs: Restore the Grid, Don't Flatten It"
-        description="The number lives at row × column. Flatten to text and the intersection is gone. Diagnostic table_df_meta + 5 composable ops (O1–O5) + dispatcher keep tables as data. Based on Kezhan Shi's Enterprise Document Intelligence bonus (TDS B4)."
+        description="The number lives at row × column. Flatten to text and the intersection is gone. Diagnostic table_df_meta + 5 composable ops (O1–O5) + dispatcher keep tables as data."
         metrics={[
           { label: 'Pattern', value: 'Diagnose → Compose Ops' },
           { label: 'Levels', value: 'A · B · C · D' },

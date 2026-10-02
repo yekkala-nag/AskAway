@@ -1,6 +1,5 @@
 // ============================================================================
 // TOPIC MODELING TECHNIQUES FOR 2026 ENGINE
-// Based on Towards Data Science (Petr Koráb, Martin Feldkircher, Márton Kardos)
 // Seeded KeyNMF, LLM Summarization Preprocessing, Zero-Shot LLM Topic Labeling & 25-Yr Trend Tracking
 // ============================================================================
 

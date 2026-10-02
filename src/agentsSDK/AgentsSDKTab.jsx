@@ -20,7 +20,7 @@ export default function AgentsSDKTab() {
     <div style={{ paddingBottom: 'var(--ds-space-12)' }}>
       <Hero moduleId="agents_frameworks" moduleLabel="Agent Systems & Frameworks [Agents SDK Patterns]"
         title="Handoff Transfers, Tools Consult — Pick per Query Shape"
-        description="Triage nurse routes to weather/air-quality specialists via transfer_to_* functions; custom handoffs add names, callbacks, Pydantic inputs; orchestrator merges both via as_tool(). Trace dashboard arbitrates. Based on Iqbal Rahmadhan (TDS, OpenAI Agents SDK + Streamlit)."
+        description="Triage nurse routes to weather/air-quality specialists via transfer_to_* functions; custom handoffs add names, callbacks, Pydantic inputs; orchestrator merges both via as_tool(). Trace dashboard arbitrates."
         metrics={[{ label: 'Patterns', value: '2 + custom' }, { label: 'Trace Split', value: '1.7s → 7.2s' }, { label: 'Fix', value: 'Explicit lat/lon' }, { label: 'Rule', value: 'Clarify, never force' }]} />
       <Container size="wide">
         <div style={{ marginBottom: 'var(--ds-space-6)' }}><DiagramImage moduleId="agents_frameworks" src="/assets/agents_sdk.svg" alt="Agents SDK patterns" title="Transfer vs Consult" caption="Control moves in handoffs; orchestrator keeps it in tools. Traces prove which ran." background="#090d16" maxWidth={1100} /></div>

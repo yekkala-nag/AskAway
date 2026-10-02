@@ -1,6 +1,5 @@
 // ============================================================================
 // TIME SERIES ANOMALY DETECTION USING AUTOENCODERS ENGINE
-// Based on Piero Paialunga's TDS Deep Dive (2024-2026)
 // ============================================================================
 
 export const ANOMALY_DETECTION_THEORY = [
@@ -76,7 +75,6 @@ export const SIMULATE_AUTOENCODER_RECONSTRUCTION = (signalPoints, isAnomalous, t
 
 export const PYTORCH_1DCNN_AUTOENCODER_CODE = `# ============================================================================
 # TIME SERIES ANOMALY DETECTION USING 1D CNN AUTOENCODER (PYTORCH)
-# Based on Piero Paialunga's TDS Guide (2024)
 # ============================================================================
 
 import numpy as np

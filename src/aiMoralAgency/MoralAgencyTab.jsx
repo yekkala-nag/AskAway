@@ -87,7 +87,7 @@ export default function MoralAgencyTab() {
                 <div>
                   <h3 style={{ margin: 0 }}>🧠 The Three Tiers of Caring in Synthetic Intelligence</h3>
                   <p style={{ margin: '4px 0 0 0', color: 'var(--ds-color-text-secondary)', fontSize: 'var(--ds-font-size-bodySm)' }}>
-                    Based on Javier Marín Valenzuela's framework separating subjective biological feelings from computational ethical alignment.
+                    A framework separating subjective biological feelings from computational ethical alignment.
                   </p>
                 </div>
 

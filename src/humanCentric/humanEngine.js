@@ -1,5 +1,5 @@
 // ============================================================================
-// HUMAN-CENTRIC AI ENGINE (Mark Graus — do-no-harm manifesto, TDS)
+// HUMAN-CENTRIC AI ENGINE (do-no-harm manifesto)
 // Compartmentalization, user-centric limits, non-voluntary exposure,
 // FAccT critique, compliance-insufficient, VSD, concentric rollout
 // Responsible AI & Security Compliant: Zero PII / synthetic demo data only
@@ -44,7 +44,7 @@ export const ROLLOUT_GATE = (auto = 1, external = 1) => {
 
 export const PYTHON_HUMAN_CODE = `# ============================================================================
 # CONCENTRIC ROLLOUT GATE: support->automation x internal->customer
-# (M. Graus: compliance is the floor, not the ceiling)
+# (compliance is the floor, not the ceiling)
 # ============================================================================
 def rollout_zone(autonomy: int, external: int) -> dict:
     # autonomy 0=advise..3=auto-decide | external 0=internal..3=customers

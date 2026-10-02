@@ -20,7 +20,7 @@ export default function AgentFanoutTab() {
     <div style={{ paddingBottom: 'var(--ds-space-12)' }}>
       <Hero moduleId="rag_architecture" moduleLabel="RAG Architectures & Pipelines [Retrieval Under Agent Fan-Out]"
         title="Hundreds of Agents Don't Add Load — They Multiply It"
-        description="Retrieve→reason→reformulate→retrieve: 200 agents become 800 freshness-sensitive QPS. Latency stacks per hop, caches serve fast-wrong, reformulations drift. Bigger DBs don't fix validity problems. Based on Vespa.ai/GigaOm session."
+        description="Retrieve→reason→reformulate→retrieve: 200 agents become 800 freshness-sensitive QPS. Latency stacks per hop, caches serve fast-wrong, reformulations drift. Bigger DBs don't fix validity problems."
         metrics={[{ label: 'Multiplier', value: '3–8x per task' }, { label: 'Watch', value: 'p95, not avg' }, { label: 'Cache Trap', value: 'Fast-wrong' }, { label: 'Fix', value: 'Unify layer' }]} />
       <Container size="wide">
         <div style={{ marginBottom: 'var(--ds-space-6)' }}><DiagramImage moduleId="rag_architecture" src="/assets/agent_fanout.svg" alt="Agent fan-out load" title="Stacking + Staleness + Drift" caption="Naive fixes miss; unified layer with freshness budgets holds." background="#090d16" maxWidth={1100} /></div>

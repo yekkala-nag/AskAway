@@ -1,6 +1,5 @@
 // ============================================================================
 // EFFICIENT KNOWLEDGE BASE ENGINE FOR AI MODELS
-// Based on Towards Data Science / Nidhin Karunakaran Ponon (Meta / Big Data Architect)
 // ============================================================================
 
 export const TOP_10_SEED_QUESTIONS = [

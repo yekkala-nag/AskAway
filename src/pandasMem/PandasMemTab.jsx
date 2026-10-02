@@ -21,7 +21,7 @@ export default function PandasMemTab() {
     <div style={{ paddingBottom: 'var(--ds-space-12)' }}>
       <Hero moduleId="data_platform" moduleLabel="Data & Platform Layers [Pandas Memory]"
         title="137MB → ~15MB: Seven Cuts, Zero Dependencies"
-        description="Inplace over copies, usecols over everything, downcast/category/sparse dtypes, dtypes-at-read, chunksize streaming — with every caveat attached. Based on Avi Chawla's reference frame (TDS)."
+        description="Inplace over copies, usecols over everything, downcast/category/sparse dtypes, dtypes-at-read, chunksize streaming — with every caveat attached."
         metrics={[{ label: 'Reference', value: '137 MB' }, { label: 'Best Cut', value: 'usecols 9x' }, { label: 'Category', value: '−75%' }, { label: 'Escape', value: 'Chunks' }]} />
       <Container size="wide">
         <div style={{ marginBottom: 'var(--ds-space-6)' }}><DiagramImage moduleId="data_platform" src="/assets/pandas_mem.svg" alt="Pandas memory techniques" title="Seven Cuts + Order" caption="Subset at read, tighten after, stream the tail — measure with .info()." background="#090d16" maxWidth={1100} /></div>

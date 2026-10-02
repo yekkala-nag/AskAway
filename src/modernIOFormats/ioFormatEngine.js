@@ -1,6 +1,6 @@
 // ============================================================================
 // FAST DATA I/O: GOODBYE CSV, HELLO PARQUET, ARROW & DUCKDB ENGINE
-// Based on Avi Chawla's data engineering benchmarks:
+// Data engineering benchmarks:
 // Serialized CSV Caveats, Columnar Compression, Predicate Pushdown, Zero-Copy IPC
 // ============================================================================
 

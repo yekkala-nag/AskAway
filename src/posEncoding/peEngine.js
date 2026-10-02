@@ -1,5 +1,5 @@
 // ============================================================================
-// POSITIONAL ENCODING ENGINE (Gurjinder Kaur — order restores meaning, TDS)
+// POSITIONAL ENCODING ENGINE (order restores meaning)
 // Scalar→embed→QKV→shuffle test→sinusoidal clocks→lags→variants
 // Responsible AI & Security Compliant: Zero PII / synthetic demo data only
 // ============================================================================

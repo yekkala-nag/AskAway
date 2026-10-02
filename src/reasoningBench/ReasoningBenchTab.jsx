@@ -36,7 +36,7 @@ export default function ReasoningBenchTab() {
         moduleId="frontiers_production"
         moduleLabel="Production & Frontiers [Apple Research Lab]"
         title="Rethinking LLM Benchmarks: Measuring True Reasoning Beyond Training Data"
-        description="Are models like GPT-4o, Claude 3.5, and Llama 3 genuine abstract reasoners or sophisticated statistical pattern matchers? Based on Apple's landmark GSM-Symbolic research study (Mirzadeh et al., 2024 / Maxime Jabarian TDS analysis)."
+        description="Are models like GPT-4o, Claude 3.5, and Llama 3 genuine abstract reasoners or sophisticated statistical pattern matchers? Based on Apple's landmark GSM-Symbolic research study."
         metrics={[
           { label: 'Benchmark Suite', value: 'GSM-Symbolic' },
           { label: 'Noise Sensitivity', value: 'GSM-NoOp Test' },

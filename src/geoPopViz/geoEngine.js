@@ -1,5 +1,5 @@
 // ============================================================================
-// GEO POPULATION VIZ ENGINE (Parvathy Krishnan — WorldPop vs Facebook, TDS)
+// GEO POPULATION VIZ ENGINE (WorldPop vs Facebook)
 // GADM boundaries, raster vs vector, masking, choropleth, source comparison
 // Responsible AI & Security Compliant: Zero PII / synthetic demo data only
 // ============================================================================

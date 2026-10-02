@@ -19,7 +19,7 @@ export default function HumanCentricTab() {
     <div style={{ paddingBottom: 'var(--ds-space-12)' }}>
       <Hero moduleId="foundations" moduleLabel="Foundations & Architecture [Human-Centric AI]"
         title="Satisfied ≠ Unharmed — Design for Humans, Not Metrics"
-        description="Compartmentalized metrics, smoker-satisfied filter bubbles, non-voluntary exposure, FAccT and compliance falling short — answered by value-sensitive design and concentric rollout (support→automation, internal→customer). Based on Mark Graus's manifesto (TDS)."
+        description="Compartmentalized metrics, smoker-satisfied filter bubbles, non-voluntary exposure, FAccT and compliance falling short — answered by value-sensitive design and concentric rollout (support→automation, internal→customer)."
         metrics={[{ label: 'Axes', value: '2 rollout' }, { label: 'Zones', value: 'Green/Amber/Red' }, { label: 'Duty', value: 'Pareto no-harm' }, { label: 'Horizon', value: '10-year defense' }]} />
       <Container size="wide">
         <div style={{ marginBottom: 'var(--ds-space-6)' }}><DiagramImage moduleId="foundations" src="/assets/human_centric.svg" alt="Human-centric AI" title="Blind Spots → Rollout Discipline" caption="Satisfaction misleads, compliance trails, values must be designed in." background="#090d16" maxWidth={1100} /></div>

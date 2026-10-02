@@ -1,6 +1,6 @@
 // ============================================================================
 // GENERATING STRUCTURED OUTPUTS FROM LLMS: ENGINE
-// Based on Towards Data Science / Ibrahim Habib (Prompting vs API vs Constrained Decoding)
+// Prompting vs API vs Constrained Decoding
 // ============================================================================
 
 export const EXTRACTION_SCENARIOS = [

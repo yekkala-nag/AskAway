@@ -449,7 +449,7 @@ export default function ThreeLayersTab() {
           <span>🎴</span> 3 Engineering Layers Study Flashcards
         </h2>
         <p style={{ color: "#9ca3af", fontSize: "0.85rem", marginBottom: "1.5rem" }}>
-          Master key concepts from Angela Shi's Towards Data Science manifesto. Click to flip cards.
+          Master key concepts with these study flashcards. Click to flip cards.
         </p>
 
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "1.2rem" }}>

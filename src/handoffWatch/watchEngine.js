@@ -1,5 +1,5 @@
 // ============================================================================
-// HANDOFF WATCHDOG ENGINE (Benjamin Nweke — Intermediate State Evals, TDS)
+// HANDOFF WATCHDOG ENGINE (Intermediate State Evals)
 // Plausible-but-wrong handoffs: grade seams, not just final text
 // Responsible AI & Security Compliant: Zero PII / synthetic demo data only
 // ============================================================================
@@ -55,7 +55,7 @@ export const GRADE_HANDOFF = (scenario = "empty200", floor = 0.35) => {
 };
 
 export const PYTHON_WATCHDOG_CODE = `# ============================================================================
-# INTERMEDIATE STATE EVALS: schema + narrow grader + gate (B. Nweke, TDS)
+# INTERMEDIATE STATE EVALS: schema + narrow grader + gate
 # ============================================================================
 from pydantic import BaseModel, Field
 import logging

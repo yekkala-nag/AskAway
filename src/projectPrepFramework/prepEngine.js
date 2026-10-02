@@ -141,7 +141,6 @@ export const ESTIMATE_REVERSAL = (kind = "contract", stageFound = "production") 
 
 export const PYTHON_PREP_CODE = `# ============================================================================
 # PROJECT PREPARATION FRAMEWORK — SCAFFOLD 6 DOCS + RACI + READINESS SCORE
-# Based on: How to Solve the Right Problem in the Age of Agentic AI (TDS)
 # ============================================================================
 from dataclasses import dataclass, field
 from pathlib import Path

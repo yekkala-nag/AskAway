@@ -19,7 +19,7 @@ export default function VramConductorTab() {
     <div style={{ paddingBottom: 'var(--ds-space-12)' }}>
       <Hero moduleId="foundations" moduleLabel="Foundations & Architecture [VRAM Conductor]"
         title="Refusing Impossible Work Beats Optimizing Possible Work"
-        description="Three terminals, one GTX 1080, two cudaMalloc funerals — because KV cache reserves up front with no shared accounting. A 1,500-line C++ daemon (90% ledger, mutex, book-before-build, KV swap) admits all three. Based on Anubhab Banerjee (TDS)."
+        description="Three terminals, one GTX 1080, two cudaMalloc funerals — because KV cache reserves up front with no shared accounting. A 1,500-line C++ daemon (90% ledger, mutex, book-before-build, KV swap) admits all three."
         metrics={[{ label: 'Ledger', value: '90% cap' }, { label: 'Naive', value: '1 survivor' }, { label: 'Daemon', value: '3 alive' }, { label: 'Steady', value: '926 MiB' }]} />
       <Container size="wide">
         <div style={{ marginBottom: 'var(--ds-space-6)' }}><DiagramImage moduleId="foundations" src="/assets/vram_conductor.svg" alt="VRAM conductor" title="Naive OOM vs Ledger" caption="Pre-reservation without accounting is a coin flip past 80% full." background="#090d16" maxWidth={1100} /></div>

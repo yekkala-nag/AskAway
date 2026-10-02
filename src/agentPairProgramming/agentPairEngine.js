@@ -1,6 +1,6 @@
 // ============================================================================
 // WORKING WITH AI CODING AGENTS ENGINE
-// Based on Sara A. Metwalli's methodology: Context Bounding, Test-Driven Verification,
+// Methodology: Context Bounding, Test-Driven Verification,
 // Problem Decomposition, and Keeping the Human-in-the-Loop
 // ============================================================================
 

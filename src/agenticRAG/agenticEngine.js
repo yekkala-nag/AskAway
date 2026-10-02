@@ -1,6 +1,6 @@
 // ============================================================================
 // AGENTIC RAG ENGINE: 6 SYNTHETIC POLICY DOCUMENTS & INTERACTIVE TOOL SANDBOX
-// Based on "Agentic RAG: Let the Agent Search" (Shuai Guo, TDS / OpenAI Agents SDK)
+// Agentic RAG: let the agent search (OpenAI Agents SDK)
 // ============================================================================
 
 export const POLICY_DOCUMENTS = {

@@ -1,5 +1,5 @@
 // ============================================================================
-// PROMPT DEPENDENCY GRAPH ENGINE (Emmimal P Alexander — TDS)
+// PROMPT DEPENDENCY GRAPH ENGINE
 // Reachable (structural ceiling) vs Candidate (section-aware eval set)
 // Responsible AI & Security Compliant: Zero PII / synthetic demo data only
 // ============================================================================
@@ -103,9 +103,8 @@ export const COMPUTE_IMPACT = (component, section) => {
 };
 
 export const PYTHON_PROMPT_GRAPH_CODE = `# ============================================================================
-# PROMPT DEPENDENCY GRAPH — REACHABLE vs CANDIDATE (Emmimal P Alexander, TDS)
+# PROMPT DEPENDENCY GRAPH — REACHABLE vs CANDIDATE
 # Pure-Python change impact analysis for composable prompts. Full repo:
-# https://github.com/Emmimal/prompt-dependency-graph/
 # ============================================================================
 from dataclasses import dataclass, field
 

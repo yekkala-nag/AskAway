@@ -87,45 +87,6 @@ const DECISION_AREAS = [
   },
 ];
 
-const READING_LIST = [
-  {
-    title: 'Tool Calling vs Code Execution for AI Agents',
-    url: 'https://machinelearningmastery.com/tool-calling-vs-code-execution-for-ai-agents-choosing-the-right-action-primitive/',
-    tag: 'Action Primitives',
-    desc: 'When to use structured tool calls vs sandboxed code execution — the decision framework for agent actions.',
-  },
-  {
-    title: 'RAG vs Fine-Tuning for Domain Adaptation',
-    url: 'https://machinelearningmastery.com/rag-vs-fine-tuning-for-domain-adaptation-when-to-use-which/',
-    tag: 'Adaptation',
-    desc: 'The practical guide to choosing between retrieval augmentation and fine-tuning for your domain.',
-  },
-  {
-    title: 'Agent or Workflow? A Practical Test',
-    url: 'https://machinelearningmastery.com/agent-or-workflow-a-practical-test-for-knowing-when-you-actually-need-an-ai-agent/',
-    tag: 'Architecture',
-    desc: 'A simple test to determine if your task actually needs an AI agent or just a well-designed workflow.',
-  },
-  {
-    title: 'Monitoring Embedding Drift in Production',
-    url: 'https://machinelearningmastery.com/monitoring-embedding-drift-in-production-scikit-llm-pipelines/',
-    tag: 'Monitoring',
-    desc: 'How to detect and respond to embedding drift before it degrades your RAG pipeline performance.',
-  },
-  {
-    title: 'What Everyone Gets Wrong About Typesafe AI',
-    url: 'https://www.kdnuggets.com/what-everyone-is-getting-wrong-about-typesafe-ais-jev',
-    tag: 'Typesafe AI',
-    desc: 'Common misconceptions about type-safe AI systems and Jevons Engine optimization.',
-  },
-  {
-    title: 'MCP Explained in 5 Minutes',
-    url: 'https://www.kdnuggets.com/mcp-explained-in-5-minutes',
-    tag: 'MCP',
-    desc: 'Quick primer on Model Context Protocol — the standard for agent-tool communication.',
-  },
-];
-
 export default function AiArchDecisionsTab() {
   const [activeCategory, setActiveCategory] = useState('action_primitives');
   const [expandedTool, setExpandedTool] = useState(null);
@@ -141,7 +102,6 @@ export default function AiArchDecisionsTab() {
         metrics={[
           { label: 'Decisions', value: '6' },
           { label: 'Patterns Mapped', value: '24+' },
-          { label: 'Reading', value: '6 articles' },
         ]}
       />
 
@@ -246,45 +206,6 @@ export default function AiArchDecisionsTab() {
           </div>
         </Card>
 
-        {/* Reading List */}
-        <div style={{ marginTop: '24px' }}>
-          <h3 style={{ fontSize: '0.95rem', fontWeight: 700, color: '#1A1D26', marginBottom: '12px' }}>
-            📚 Essential Reading
-          </h3>
-          <Grid columns={{ base: '1fr', md: '1fr 1fr', lg: '1fr 1fr 1fr' }} gap="12px">
-            {READING_LIST.map((article, i) => (
-              <a
-                key={i}
-                href={article.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{
-                  display: 'block', padding: '14px', borderRadius: '8px',
-                  border: '1px solid #E5E7EB', background: '#FFFFFF',
-                  textDecoration: 'none', color: 'inherit',
-                  transition: 'all 0.15s ease', cursor: 'pointer'
-                }}
-                onMouseEnter={e => { e.currentTarget.style.borderColor = '#3A9B9F'; e.currentTarget.style.boxShadow = '0 2px 8px rgba(58,155,159,0.1)'; }}
-                onMouseLeave={e => { e.currentTarget.style.borderColor = '#E5E7EB'; e.currentTarget.style.boxShadow = 'none'; }}
-              >
-                <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '6px' }}>
-                  <Badge variant="subtle" style={{ fontSize: '0.6rem', background: '#F1F3F5', color: '#6B7280', padding: '2px 6px', borderRadius: '4px' }}>
-                    {article.tag}
-                  </Badge>
-                </div>
-                <div style={{ fontSize: '0.82rem', fontWeight: 600, color: '#1A1D26', lineHeight: 1.3, marginBottom: '4px' }}>
-                  {article.title}
-                </div>
-                <div style={{ fontSize: '0.7rem', color: '#9CA3AF', lineHeight: 1.4 }}>
-                  {article.desc}
-                </div>
-                <div style={{ fontSize: '0.62rem', color: '#3A9B9F', marginTop: '6px' }}>
-                  Read article →
-                </div>
-              </a>
-            ))}
-          </Grid>
-        </div>
 
         {/* Quick Reference */}
         <Card style={{

@@ -1,6 +1,6 @@
 // ============================================================================
 // PYTHON PERFORMANCE PROFILING ENGINE
-// Based on Thomas Reid's methodology: Stop Guessing, Start Measuring
+// Methodology: Stop Guessing, Start Measuring
 // cProfile, SnakeViz Call Trees, line_profiler, Scalene, and Vectorized Speedups
 // ============================================================================
 

@@ -1,6 +1,5 @@
 // ============================================================================
 // 3 ENTERPRISE AI USE CASES BEYOND CHATBOTS ENGINE
-// Based on Shaw Talebi's TDS Guide (2024-2026)
 // ============================================================================
 
 export const THREE_USE_CASES_MATRIX = [
@@ -103,7 +102,6 @@ export const PREDICT_LEAD_SCORE = (yearsExp, isITLeader, icpSim) => {
 
 export const PYTHON_AI_USECASES_CODE = `# ============================================================================
 # 3 ENTERPRISE AI USE CASES BEYOND CHATBOTS (PYTHON IMPLEMENTATION)
-# Shaw Talebi (TDS 2024)
 # ============================================================================
 
 import os

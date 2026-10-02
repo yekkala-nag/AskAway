@@ -1,5 +1,5 @@
 // ============================================================================
-// TABLES-IN-PDFS GRID ENGINE (Kezhan Shi — Don't Flatten the Grid, TDS B4)
+// TABLES-IN-PDFS GRID ENGINE
 // Diagnostic table_df_meta + 5 composable ops + dispatcher + question modulator
 // Responsible AI & Security Compliant: Zero PII / synthetic demo tables only
 // ============================================================================
@@ -79,7 +79,7 @@ export const RUN_TABLE_PROJECTION = (stateFilter = "CA", coverageFilter = "prope
 };
 
 export const PYTHON_TABLE_GRID_CODE = `# ============================================================================
-# TABLES IN PDFs: DIAGNOSTIC + 5 COMPOSABLE OPS + DISPATCHER (Kezhan Shi, TDS B4)
+# TABLES IN PDFs: DIAGNOSTIC + 5 COMPOSABLE OPS + DISPATCHER
 # Pattern: diagnostic table_df_meta -> compose [O1..O5] -> question modulator
 # ============================================================================
 from dataclasses import dataclass, field

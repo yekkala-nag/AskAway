@@ -1,6 +1,5 @@
 // ============================================================================
 // REINFORCEMENT LEARNING: 3 BASELINES & CONSUMER BUSINESS ENGINES
-// Based on Wouter van Heeswijk & Raj (Towards Data Science):
 // 3 Non-Negotiable Baselines, Multi-Armed Bandits, Dynamic Pricing & LTV MDP
 // ============================================================================
 

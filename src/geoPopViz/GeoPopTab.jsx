@@ -17,7 +17,7 @@ export default function GeoPopTab() {
     <div style={{ paddingBottom: 'var(--ds-space-12)' }}>
       <Hero moduleId="data_platform" moduleLabel="Data & Platform Layers [Geospatial Population]"
         title="Two Maps, One Vietnam — Grid vs Points, 97M vs 98M"
-        description="WorldPop 100m raster against Facebook 30m vectors, masked by GADM polygons in a notebook anyone can rerun. National agreement, district divergence — the question picks the source. Based on Parvathy Krishnan (TDS / World Bank DT4PAG)."
+        description="WorldPop 100m raster against Facebook 30m vectors, masked by GADM polygons in a notebook anyone can rerun. National agreement, district divergence — the question picks the source."
         metrics={[{ label: 'WP Total', value: '97.34M' }, { label: 'FB Total', value: '98.16M' }, { label: 'GADM L1–L3', value: '63·686·7658' }, { label: 'Rule', value: '45° test' }]} />
       <Container size="wide">
         <div style={{ marginBottom: 'var(--ds-space-6)' }}><DiagramImage moduleId="data_platform" src="/assets/geo_pop.svg" alt="Population maps" title="Raster + Vector → Masked Counts" caption="Same country, two methodologies; divergence lives at district level." background="#090d16" maxWidth={1100} /></div>

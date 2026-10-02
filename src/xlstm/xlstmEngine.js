@@ -1,7 +1,6 @@
 // ============================================================================
 // LSTMs & xLSTMs DEEP DIVE ENGINE
 // Classical LSTM (1997) vs Extended LSTM (xLSTM: sLSTM & mLSTM, Hochreiter 2024)
-// Based on Srijanie Dey, PhD's TDS Guide & Prof. Tom Yeh's Hand Calculations
 // ============================================================================
 
 export const LSTM_VS_XLSTM_MATRIX = [

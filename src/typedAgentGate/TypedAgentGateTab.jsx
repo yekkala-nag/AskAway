@@ -54,7 +54,7 @@ export default function TypedAgentGateTab() {
         moduleId="agents_frameworks"
         moduleLabel="Agent Systems & Frameworks [Governed Agentic Architecture]"
         title="Typed Tools, Hard Bounds & The Downstream Gate"
-        description="Stop giving your AI agent a vague search box and hoping for the best. Discover Miodrag Cekikj's 8-tool semantic contract, the 80-line bounded execution loop, non-negotiable downstream composer gates that enforce contradiction refusal, and the production Escalation Architecture."
+        description="Stop giving your AI agent a vague search box and hoping for the best. Discover the 8-tool semantic contract, the 80-line bounded execution loop, non-negotiable downstream composer gates that enforce contradiction refusal, and the production Escalation Architecture."
         metrics={[
           { label: 'Tool Contract', value: '8 Read-Only Semantic Tools' },
           { label: 'Outer Bounds', value: 'MAX 8 Rounds + Token Budget' },

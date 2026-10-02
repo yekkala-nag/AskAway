@@ -524,7 +524,7 @@ class DeterministicEvalLayer:
                 <div>
                   <h3 style={{ margin: 0 }}>👔 AI Evaluation Framework for Product Managers</h3>
                   <p style={{ margin: '4px 0 0 0', color: 'var(--ds-color-text-secondary)', fontSize: 'var(--ds-font-size-bodySm)' }}>
-                    Based on <em>Towards Data Science</em> (Julia Winn, Product Management Leader). Why PMs—not just model developers—must co-design evaluation datasets, define product goals, set acceptable tradeoff bars, and inspect dataset edge cases.
+                    Why PMs—not just model developers—must co-design evaluation datasets, define product goals, set acceptable tradeoff bars, and inspect dataset edge cases.
                   </p>
                 </div>
 
@@ -721,7 +721,7 @@ class DeterministicEvalLayer:
                 <div>
                   <h3 style={{ margin: 0 }}>🔬 Rethinking LLM Benchmarks: GSM-Symbolic & Reasoning</h3>
                   <p style={{ margin: '4px 0 0 0', color: 'var(--ds-color-text-secondary)', fontSize: 'var(--ds-font-size-bodySm)' }}>
-                    Based on Apple's research paper (<em>GSM-Symbolic: Understanding the Limitations of Mathematical Reasoning in Large Language Models</em>, Mirzadeh et al., 2024 / Maxime Jabarian TDS analysis). Are models true reasoners or pattern matchers?
+                    Apple's GSM-Symbolic research: <em>Understanding the Limitations of Mathematical Reasoning in Large Language Models</em>. Are models true reasoners or pattern matchers?
                   </p>
                 </div>
 

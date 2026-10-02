@@ -283,7 +283,7 @@ export default function TextClassificationDataTab() {
         <div style={{ display: "flex", gap: 12, alignItems: "flex-start", marginBottom: 16 }}>
           <span style={{ fontSize: 28 }}>📰</span>
           <div>
-            <div style={{ color: C.amber, fontFamily: "JetBrains Mono, monospace", fontSize: 10, fontWeight: 700, letterSpacing: "0.1em", marginBottom: 4 }}>TOWARDS DATA SCIENCE · SEPTEMBER 2026</div>
+            <div style={{ color: C.amber, fontFamily: "JetBrains Mono, monospace", fontSize: 10, fontWeight: 700, letterSpacing: "0.1em", marginBottom: 4 }}>AI FIELD NOTES · SEPTEMBER 2026</div>
             <h2 style={{ margin: 0, fontSize: 22, fontWeight: 700, lineHeight: 1.2 }}>How Many Labeled Examples Does a Text Classifier Actually Need?</h2>
           </div>
         </div>

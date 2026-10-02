@@ -1,6 +1,6 @@
 // ============================================================================
 // 1M+ CONTEXT WINDOW LIMITS & WORKING MEMORY ENGINE
-// Based on Tobias Schnabel's TDS Guide & Microsoft Research BAPO Model (2025-2026)
+// Microsoft Research BAPO Model (2025-2026)
 // ============================================================================
 
 export const BAPO_THEORY_STEPS = [
@@ -101,7 +101,7 @@ export const SIMULATE_VARIABLE_TRACKING = (numVars = 6) => {
 
 export const PYTHON_WORKING_MEMORY_CODE = `# ============================================================================
 # WORKING MEMORY BOTTLENECK & ENGINEERING FIXES (PYTHON / BAPO MODEL)
-# Based on Tobias Schnabel (Microsoft Research, TDS 2025)
+# Microsoft Research (2025)
 # ============================================================================
 
 import openai

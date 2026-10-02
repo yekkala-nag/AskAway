@@ -90,7 +90,7 @@ export default function AgentPairTab() {
                 <div>
                   <h3 style={{ margin: 0 }}>🏛️ The 4 Pillars of Productive Agent Pairing</h3>
                   <p style={{ margin: '4px 0 0 0', color: 'var(--ds-color-text-secondary)', fontSize: 'var(--ds-font-size-bodySm)' }}>
-                    Based on Sara A. Metwalli's methodology for eliminating hallucinations and keeping the engineer in the driver's seat.
+                    A methodology for eliminating hallucinations and keeping the engineer in the driver's seat.
                   </p>
                 </div>
 

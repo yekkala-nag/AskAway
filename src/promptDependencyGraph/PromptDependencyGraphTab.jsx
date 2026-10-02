@@ -23,7 +23,7 @@ export default function PromptDependencyGraphTab() {
         moduleId="foundations"
         moduleLabel="Foundations & Architecture [Prompt Dependency Graph]"
         title="One Prompt Change Can Hit 50 Others — Know What to Retest"
-        description="Composable prompts create a blast radius with no compiler to catch it. Pure-Python dependency graph separates Reachable (structural ceiling) from Candidate (section-aware eval set). Based on Emmimal P Alexander's 55-node TDS experiment."
+        description="Composable prompts create a blast radius with no compiler to catch it. Pure-Python dependency graph separates Reachable (structural ceiling) from Candidate (section-aware eval set)."
         metrics={[
           { label: 'Experiment', value: '55 Nodes, Seed 7' },
           { label: 'Best Narrowing', value: '85% → 8 Candidates' },
@@ -158,7 +158,7 @@ export default function PromptDependencyGraphTab() {
             <Card style={{ padding: 'var(--ds-space-5)', background: 'var(--ds-color-bg-canvas)' }}>
               <Stack gap={4}>
                 <div><h3 style={{ margin: 0 }}>🛠️ Pure-Python implementation (repo-faithful)</h3>
-                  <p style={{ margin: '4px 0 0 0', color: 'var(--ds-color-text-secondary)', fontSize: 'var(--ds-font-size-bodySm)' }}>Deterministic (seed 7), reproduced on a second machine. Full code: github.com/Emmimal/prompt-dependency-graph. Runs above are live JS ports of the same BFS.</p></div>
+                  <p style={{ margin: '4px 0 0 0', color: 'var(--ds-color-text-secondary)', fontSize: 'var(--ds-font-size-bodySm)' }}>Deterministic (seed 7), reproduced on a second machine. Runs above are live JS ports of the same BFS.</p></div>
                 <CodeBlock language="python" code={PYTHON_PROMPT_GRAPH_CODE} />
                 <Callout type="success"><strong>Make the cost of change visible:</strong> the graph never says what <i>will</i> break — it draws a defensible evaluation boundary before you pay for the evals.</Callout>
               </Stack>

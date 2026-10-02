@@ -74,51 +74,6 @@ const TOOL_CATEGORIES = [
   },
 ];
 
-const READING_LIST = [
-  {
-    title: 'An Introduction to JEV',
-    url: 'https://towardsdatascience.com/an-introduction-to-jev/',
-    tag: 'Jevons Engine',
-    desc: 'How Jevons Engines optimize AI resource allocation beyond raw compute.',
-  },
-  {
-    title: 'A New Kind of Model for AI Decision-Making',
-    url: 'https://towardsdatascience.com/a-new-kind-of-model-for-ai-decision-making/',
-    tag: 'Decision Models',
-    desc: 'Moving from pattern matching to structured reasoning in AI systems.',
-  },
-  {
-    title: 'ShipAI Auto-Agent Project',
-    url: 'https://towardsdatascience.com/shipai/projects/auto-agent',
-    tag: 'Agents',
-    desc: 'Autonomous agents that ship code, tests, and deployments.',
-  },
-  {
-    title: 'Context Engineering for Enterprise AI',
-    url: '#',
-    tag: 'Context Engineering',
-    desc: 'Turn context into AI value. Improve reasoning and reliability. Reduce agent drift with business context.',
-  },
-  {
-    title: 'Make Your First World Model from Scratch',
-    url: 'https://towardsdatascience.com/how-to-make-your-first-world-model-from-scratch/',
-    tag: 'World Models',
-    desc: 'Hands-on guide to building predictive world models for simulation.',
-  },
-  {
-    title: 'From Words to Vectors',
-    url: 'https://towardsdatascience.com/from-words-to-ectors-what-happens-in-between/',
-    tag: 'Embeddings',
-    desc: 'What happens between tokenization and semantic understanding.',
-  },
-  {
-    title: 'JEV vs LLMs: Generation to Decision-Making',
-    url: 'https://towardsdatascience.com/jev-vs-llms-when-ai-moves-from-generation-to-decision-making/',
-    tag: 'JEV vs LLMs',
-    desc: 'When AI moves from generating content to making decisions.',
-  },
-];
-
 export default function AiGenToolsTab() {
   const [activeCategory, setActiveCategory] = useState('images');
   const [expandedTool, setExpandedTool] = useState(null);
@@ -239,47 +194,6 @@ export default function AiGenToolsTab() {
           </div>
         </Card>
 
-        {/* Reading List */}
-        <div style={{ marginTop: '24px' }}>
-          <h3 style={{ fontSize: '0.95rem', fontWeight: 700, color: '#1A1D26', marginBottom: '12px' }}>
-            📚 Essential Reading
-          </h3>
-          <Grid columns={{ base: '1fr', md: '1fr 1fr', lg: '1fr 1fr 1fr' }} gap="12px">
-            {READING_LIST.map((article, i) => (
-              <a
-                key={i}
-                href={article.url}
-                target={article.url !== '#' ? '_blank' : undefined}
-                rel={article.url !== '#' ? 'noopener noreferrer' : undefined}
-                style={{
-                  display: 'block', padding: '14px', borderRadius: '8px',
-                  border: '1px solid #E5E7EB', background: '#FFFFFF',
-                  textDecoration: 'none', color: 'inherit',
-                  transition: 'all 0.15s ease', cursor: 'pointer'
-                }}
-                onMouseEnter={e => { e.currentTarget.style.borderColor = '#3A9B9F'; e.currentTarget.style.boxShadow = '0 2px 8px rgba(58,155,159,0.1)'; }}
-                onMouseLeave={e => { e.currentTarget.style.borderColor = '#E5E7EB'; e.currentTarget.style.boxShadow = 'none'; }}
-              >
-                <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '6px' }}>
-                  <Badge variant="subtle" style={{ fontSize: '0.6rem', background: '#F1F3F5', color: '#6B7280', padding: '2px 6px', borderRadius: '4px' }}>
-                    {article.tag}
-                  </Badge>
-                </div>
-                <div style={{ fontSize: '0.82rem', fontWeight: 600, color: '#1A1D26', lineHeight: 1.3, marginBottom: '4px' }}>
-                  {article.title}
-                </div>
-                <div style={{ fontSize: '0.7rem', color: '#9CA3AF', lineHeight: 1.4 }}>
-                  {article.desc}
-                </div>
-                {article.url !== '#' && (
-                  <div style={{ fontSize: '0.62rem', color: '#3A9B9F', marginTop: '6px' }}>
-                    Read article →
-                  </div>
-                )}
-              </a>
-            ))}
-          </Grid>
-        </div>
 
         {/* Quick Reference */}
         <Card style={{

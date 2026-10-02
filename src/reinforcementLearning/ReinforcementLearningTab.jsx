@@ -92,7 +92,7 @@ export default function ReinforcementLearningTab() {
                 <div>
                   <h3 style={{ margin: 0 }}>🏛️ The 3 Baseline Policies Your RL Algorithm Must Beat</h3>
                   <p style={{ margin: '4px 0 0 0', color: 'var(--ds-color-text-secondary)', fontSize: 'var(--ds-font-size-bodySm)' }}>
-                    Based on Wouter van Heeswijk's methodology. Before spending thousands of dollars fine-tuning neural architectures, verify your agent beats these 3 foundational baselines across multiple random seeds.
+                    Before spending thousands of dollars fine-tuning neural architectures, verify your agent beats these 3 foundational baselines across multiple random seeds.
                   </p>
                 </div>
 

@@ -23,7 +23,7 @@ export default function CodingEvalsTab() {
     <div style={{ paddingBottom: 'var(--ds-space-12)' }}>
       <Hero moduleId="agents_frameworks" moduleLabel="Agent Systems & Frameworks [Coding-Agent Evals]"
         title="Stop Grading Agents Like Chatbots — Evaluate the Work"
-        description="Agent ≠ model: seven parts, one system score. Executable contracts admit many valid patches; six layers beat pass-rate worship; non-determinism is statistics; open-ended work gets PO simulators. Based on Pete Hampton (TNS) + Anthropic evals engineering."
+        description="Agent ≠ model: seven parts, one system score. Executable contracts admit many valid patches; six layers beat pass-rate worship; non-determinism is statistics; open-ended work gets PO simulators."
         metrics={[{ label: 'Unit', value: 'Whole system' }, { label: 'Layers', value: '6, not 1' }, { label: 'Method', value: 'Contracts' }, { label: 'Bar', value: 'Decisions > demos' }]} />
       <Container size="wide">
         <div style={{ marginBottom: 'var(--ds-space-6)' }}><DiagramImage moduleId="agents_frameworks" src="/assets/coding_evals.svg" alt="Coding agent evals" title="System + Contracts + Layers" caption="Behavior over diffs; distributions over demos; questions rewarded, invented requirements punished." background="#090d16" maxWidth={1100} /></div>

@@ -1,6 +1,6 @@
 // ============================================================================
 // LLM EVALUATION LAYER: THE MISSING QUALITY GATE THAT DECIDES WHAT SHIPS
-// Based on Towards Data Science / Emmimal P. Alexander (Pure-Python Quality Gate)
+// Pure-Python Quality Gate
 // ============================================================================
 
 export const EVAL_SCENARIOS = [
@@ -115,7 +115,6 @@ export const EVALUATION_MATRICES = [
 
 // ============================================================================
 // AI EVALUATION FRAMEWORK FOR PRODUCT MANAGERS (PM CO-DESIGN)
-// Based on Towards Data Science (Julia Winn, Product Management Leader)
 // ============================================================================
 
 export const PM_EVAL_PARADIGMS = [

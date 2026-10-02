@@ -1,6 +1,5 @@
 // ============================================================================
 // LINEAR REGRESSION, COST FUNCTION & GRADIENT DESCENT ENGINE
-// Based on Shreya Rao's TDS Guide (2023-2026)
 // ============================================================================
 
 // Mark's House Pricing Dataset (Size in sq ft vs Price in $1000s)
@@ -132,7 +131,6 @@ export const GENERATE_LOSS_SURFACE_DATA = (wRange = { min: 0, max: 150, step: 5 
 
 export const PYTHON_LINEAR_REGRESSION_CODE = `# ============================================================================
 # LINEAR REGRESSION, COST FUNCTION & GRADIENT DESCENT FROM SCRATCH
-# Based on Shreya Rao's TDS Guide (2023)
 # ============================================================================
 
 import numpy as np

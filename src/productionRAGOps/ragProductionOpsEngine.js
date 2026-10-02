@@ -1,7 +1,7 @@
 /**
  * ragProductionOpsEngine.js
  * Architectural engine for Production RAG & AgentOps
- * Synthesizing empirical findings from Towards Data Science deep-dives
+  * Synthesizing empirical findings from production deep-dives
  */
 
 // ==========================================

@@ -23,21 +23,53 @@ export default function LLMSamplingTab() {
   const [minP, setMinP] = useState(0.05);
   const [repetitionPenalty, setRepetitionPenalty] = useState(1.0);
   const [isGreedy, setIsGreedy] = useState(false);
+  const [rollout, setRollout] = useState([]);
+  const [lastSampledToken, setLastSampledToken] = useState(null);
 
   // Tracer State
   const [tracerStep, setTracerStep] = useState(0);
 
   const activePrompt = SAMPLE_PROMPTS.find(p => p.id === selectedPromptId) || SAMPLE_PROMPTS[0];
+  const vocabSize = activePrompt.vocabCandidates.length;
+  const effectiveTopK = Math.min(topK, vocabSize);
 
   const distribution = CALCULATE_SAMPLING_DISTRIBUTION({
     rawCandidates: activePrompt.vocabCandidates,
     temperature,
-    topK,
+    topK: effectiveTopK,
     topP,
     minP,
     repetitionPenalty,
     isGreedy
   });
+
+  // Live distribution metrics — recompute on every control change
+  const survivingTokens = distribution.filter(d => d.isSurviving);
+  const top1Prob = survivingTokens[0]?.finalProb || 0;
+  const entropyBits = -survivingTokens.reduce(
+    (sum, d) => (d.finalProb > 0 ? sum + d.finalProb * Math.log2(d.finalProb) : sum),
+    0
+  );
+  const perplexity = Math.pow(2, entropyBits);
+  const retainedMass = survivingTokens.reduce((sum, d) => sum + d.rawProb, 0);
+  const minRawLogit = Math.min(...distribution.map(d => d.rawLogit));
+  const maxRawLogit = Math.max(...distribution.map(d => d.rawLogit));
+
+  const sampleNextToken = () => {
+    const pool = distribution.filter(d => d.isSurviving && d.finalProb > 0);
+    if (pool.length === 0) return;
+    let roll = Math.random();
+    let picked = pool[pool.length - 1];
+    for (const candidate of pool) {
+      roll -= candidate.finalProb;
+      if (roll <= 0) {
+        picked = candidate;
+        break;
+      }
+    }
+    setLastSampledToken(picked.token);
+    setRollout(prev => [...prev.slice(-15), picked.token]);
+  };
 
   // Autoregressive steps for Tracer
   const tracerSteps = [
@@ -188,8 +220,8 @@ export default function LLMSamplingTab() {
                   {/* Temperature */}
                   <Card style={{ padding: '12px', background: 'var(--ds-color-bg-surface)' }}>
                     <Flex justify="space-between" align="center" style={{ marginBottom: '6px' }}>
-                      <label style={{ fontSize: '11px', color: '#3A9B9F', fontWeight: 'bold' }}>Temperature (T):</label>
-                      <span style={{ fontSize: '11px', fontFamily: 'monospace', color: 'white' }}>{temperature.toFixed(2)}</span>
+                      <label style={{ fontSize: '11px', color: '#0F766E', fontWeight: 'bold' }}>Temperature (T):</label>
+                      <span style={{ fontSize: '11px', fontFamily: 'monospace', color: 'var(--ds-color-text-primary)', fontWeight: 700 }}>{temperature.toFixed(2)}</span>
                     </Flex>
                     <input
                       type="range"
@@ -212,28 +244,28 @@ export default function LLMSamplingTab() {
                   {/* Top-K */}
                   <Card style={{ padding: '12px', background: 'var(--ds-color-bg-surface)' }}>
                     <Flex justify="space-between" align="center" style={{ marginBottom: '6px' }}>
-                      <label style={{ fontSize: '11px', color: '#3A9B9F', fontWeight: 'bold' }}>Top-K Cutoff:</label>
-                      <span style={{ fontSize: '11px', fontFamily: 'monospace', color: 'white' }}>{topK}</span>
+                      <label style={{ fontSize: '11px', color: '#0F766E', fontWeight: 'bold' }}>Top-K Cutoff:</label>
+                      <span style={{ fontSize: '11px', fontFamily: 'monospace', color: 'var(--ds-color-text-primary)', fontWeight: 700 }}>{effectiveTopK}</span>
                     </Flex>
                     <input
                       type="range"
                       min="1"
-                      max="7"
+                      max={vocabSize}
                       step="1"
-                      value={topK}
+                      value={effectiveTopK}
                       onChange={e => setTopK(parseInt(e.target.value, 10))}
                       style={{ width: '100%' }}
                     />
                     <div style={{ fontSize: '10px', color: 'var(--ds-color-text-tertiary)', marginTop: '4px' }}>
-                      Keeps top {topK} candidate tokens
+                      Keeps top {effectiveTopK} of {vocabSize} candidates
                     </div>
                   </Card>
 
                   {/* Top-P */}
                   <Card style={{ padding: '12px', background: 'var(--ds-color-bg-surface)' }}>
                     <Flex justify="space-between" align="center" style={{ marginBottom: '6px' }}>
-                      <label style={{ fontSize: '11px', color: '#F5A623', fontWeight: 'bold' }}>Top-P (Nucleus):</label>
-                      <span style={{ fontSize: '11px', fontFamily: 'monospace', color: 'white' }}>{topP.toFixed(2)}</span>
+                      <label style={{ fontSize: '11px', color: '#B45309', fontWeight: 'bold' }}>Top-P (Nucleus):</label>
+                      <span style={{ fontSize: '11px', fontFamily: 'monospace', color: 'var(--ds-color-text-primary)', fontWeight: 700 }}>{topP.toFixed(2)}</span>
                     </Flex>
                     <input
                       type="range"
@@ -252,8 +284,8 @@ export default function LLMSamplingTab() {
                   {/* Min-P */}
                   <Card style={{ padding: '12px', background: 'var(--ds-color-bg-surface)' }}>
                     <Flex justify="space-between" align="center" style={{ marginBottom: '6px' }}>
-                      <label style={{ fontSize: '11px', color: '#a78bfa', fontWeight: 'bold' }}>Min-P Threshold:</label>
-                      <span style={{ fontSize: '11px', fontFamily: 'monospace', color: 'white' }}>{minP.toFixed(2)}</span>
+                      <label style={{ fontSize: '11px', color: '#6D28D9', fontWeight: 'bold' }}>Min-P Threshold:</label>
+                      <span style={{ fontSize: '11px', fontFamily: 'monospace', color: 'var(--ds-color-text-primary)', fontWeight: 700 }}>{minP.toFixed(2)}</span>
                     </Flex>
                     <input
                       type="range"
@@ -272,8 +304,8 @@ export default function LLMSamplingTab() {
                   {/* Repetition Penalty */}
                   <Card style={{ padding: '12px', background: 'var(--ds-color-bg-surface)' }}>
                     <Flex justify="space-between" align="center" style={{ marginBottom: '6px' }}>
-                      <label style={{ fontSize: '11px', color: '#fb7185', fontWeight: 'bold' }}>Repetition Penalty:</label>
-                      <span style={{ fontSize: '11px', fontFamily: 'monospace', color: 'white' }}>{repetitionPenalty.toFixed(2)}</span>
+                      <label style={{ fontSize: '11px', color: '#BE123C', fontWeight: 'bold' }}>Repetition Penalty:</label>
+                      <span style={{ fontSize: '11px', fontFamily: 'monospace', color: 'var(--ds-color-text-primary)', fontWeight: 700 }}>{repetitionPenalty.toFixed(2)}</span>
                     </Flex>
                     <input
                       type="range"
@@ -292,62 +324,167 @@ export default function LLMSamplingTab() {
 
                 {/* DISTRIBUTION VISUALIZATION TABLE & BARS */}
                 <div>
-                  <Flex justify="space-between" align="center" style={{ marginBottom: '8px' }}>
-                    <strong style={{ fontSize: '12px', color: 'white' }}>
+                  <Flex justify="space-between" align="center" style={{ marginBottom: '8px', flexWrap: 'wrap', gap: '8px' }}>
+                    <strong style={{ fontSize: '12px', color: 'var(--ds-color-text-primary)' }}>
                       TOKEN CANDIDATE PROBABILITY DISTRIBUTION:
                     </strong>
-                    <div style={{ fontSize: '11px', color: 'var(--ds-color-text-tertiary)' }}>
-                      Surviving Tokens in Sampling Pool: <strong style={{ color: '#3A9B9F' }}>{distribution.filter(d => d.isSurviving).length} / {distribution.length}</strong>
-                    </div>
+                    <Button variant="primary" size="sm" onClick={sampleNextToken}>
+                      🎲 Sample Next Token
+                    </Button>
                   </Flex>
 
-                  <Stack gap={2}>
-                    {distribution.map((item, idx) => (
-                      <Card
-                        key={idx}
+                  {/* LIVE METRICS — recompute on every control change */}
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', gap: '8px', marginBottom: '10px' }}>
+                    {[
+                      { label: 'Entropy', value: `${entropyBits.toFixed(2)} bits`, hint: 'pool uncertainty' },
+                      { label: 'Perplexity', value: perplexity.toFixed(1), hint: 'effective choices (2^H)' },
+                      { label: 'Top-1 Mass', value: `${(top1Prob * 100).toFixed(1)}%`, hint: 'after re-normalization' },
+                      { label: 'Retained Mass', value: `${(retainedMass * 100).toFixed(0)}%`, hint: 'survivors pre re-norm' },
+                      { label: 'Sampling Pool', value: `${survivingTokens.length} / ${distribution.length}`, hint: 'tokens still selectable' }
+                    ].map(stat => (
+                      <div
+                        key={stat.label}
                         style={{
-                          padding: '10px 14px',
-                          background: item.isSurviving ? 'var(--ds-color-bg-surface)' : 'rgba(255,255,255,0.02)',
-                          opacity: item.isSurviving ? 1.0 : 0.35,
-                          borderLeft: `4px solid ${item.isSurviving ? '#5EC4C8' : '#64748b'}`
+                          background: 'var(--ds-color-bg-surface)',
+                          border: '1px solid var(--ds-color-border-subtle)',
+                          borderRadius: '8px',
+                          padding: '8px 10px'
                         }}
                       >
-                        <Flex justify="space-between" align="center" style={{ marginBottom: '4px' }}>
-                          <Flex align="center" gap="8px">
-                            <span style={{ fontFamily: 'monospace', fontSize: '13px', color: item.isSurviving ? '#5EC4C8' : '#94a3b8', fontWeight: 'bold', background: '#090d16', padding: '2px 6px', borderRadius: '3px' }}>
-                              "{item.token}"
-                            </span>
-                            <Badge variant="subtle" style={{ fontSize: '10px' }}>
-                              Logit: {item.rawLogit}
-                            </Badge>
-                            {!item.isKeptByTopK && <Badge variant="outline" style={{ color: '#ef4444', borderColor: '#ef4444' }}>Cut by Top-K</Badge>}
-                            {!item.isKeptByTopP && <Badge variant="outline" style={{ color: '#F5A623', borderColor: '#F5A623' }}>Cut by Top-P</Badge>}
-                            {!item.isKeptByMinP && <Badge variant="outline" style={{ color: '#a78bfa', borderColor: '#a78bfa' }}>Cut by Min-P</Badge>}
+                        <div style={{ fontSize: '10px', textTransform: 'uppercase', letterSpacing: '0.05em', color: 'var(--ds-color-text-tertiary)', fontWeight: 700 }}>
+                          {stat.label}
+                        </div>
+                        <div style={{ fontSize: '16px', fontWeight: 800, color: '#0E9F8A', fontFamily: 'monospace', lineHeight: 1.3, transition: 'all 0.2s ease' }}>
+                          {stat.value}
+                        </div>
+                        <div style={{ fontSize: '9px', color: 'var(--ds-color-text-tertiary)' }}>
+                          {stat.hint}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+
+                  <Stack gap={2}>
+                    {distribution.map((item, idx) => {
+                      const isSampled = item.token === lastSampledToken;
+                      const logitPct = maxRawLogit > minRawLogit
+                        ? Math.max(2, ((item.rawLogit - minRawLogit) / (maxRawLogit - minRawLogit)) * 100)
+                        : 100;
+                      return (
+                        <Card
+                          key={idx}
+                          style={{
+                            padding: '10px 14px',
+                            background: item.isSurviving ? 'var(--ds-color-bg-surface)' : '#FAFBFC',
+                            opacity: item.isSurviving ? 1.0 : 0.45,
+                            borderLeft: `4px solid ${item.isSurviving ? (idx === 0 ? '#0E9F8A' : '#5EC4C8') : '#94A3B8'}`,
+                            outline: isSampled ? '2px solid #0E9F8A' : 'none',
+                            outlineOffset: isSampled ? '1px' : '0px',
+                            transition: 'all 0.25s ease'
+                          }}
+                        >
+                          <Flex justify="space-between" align="center" style={{ marginBottom: '6px' }}>
+                            <Flex align="center" gap="8px" style={{ flexWrap: 'wrap' }}>
+                              <span style={{ fontFamily: 'monospace', fontSize: '13px', color: item.isSurviving ? '#0E9F8A' : '#64748b', fontWeight: 'bold', background: '#090d16', padding: '2px 6px', borderRadius: '3px' }}>
+                                "{item.token}"
+                              </span>
+                              <Badge variant="subtle" style={{ fontSize: '10px' }}>
+                                Logit: {item.rawLogit.toFixed(1)}
+                              </Badge>
+                              {isSampled && (
+                                <Badge variant="outline" style={{ color: '#0E9F8A', borderColor: '#0E9F8A', fontWeight: 700 }}>✓ SAMPLED</Badge>
+                              )}
+                              {isGreedy ? (
+                                !item.isSurviving && <Badge variant="outline" style={{ color: '#64748B', borderColor: '#64748B' }}>Cut by Greedy argmax</Badge>
+                              ) : (
+                                <>
+                                  {!item.isKeptByTopK && <Badge variant="outline" style={{ color: '#ef4444', borderColor: '#ef4444' }}>Cut by Top-K</Badge>}
+                                  {!item.isKeptByTopP && <Badge variant="outline" style={{ color: '#B45309', borderColor: '#B45309' }}>Cut by Top-P</Badge>}
+                                  {!item.isKeptByMinP && <Badge variant="outline" style={{ color: '#6D28D9', borderColor: '#6D28D9' }}>Cut by Min-P</Badge>}
+                                </>
+                              )}
+                            </Flex>
                           </Flex>
 
-                          <div style={{ fontFamily: 'monospace', fontSize: '12px', color: item.isSurviving ? '#5EC4C8' : '#64748b', fontWeight: 'bold' }}>
-                            {(item.finalProb * 100).toFixed(1)}% probability
-                          </div>
-                        </Flex>
+                          {/* Raw logit reference bar — fixed baseline (gray) */}
+                          <Flex align="center" gap="8px" style={{ marginBottom: '4px' }}>
+                            <span style={{ width: '34px', flexShrink: 0, fontSize: '9px', color: 'var(--ds-color-text-tertiary)', fontFamily: 'monospace', textTransform: 'uppercase' }}>logit</span>
+                            <div style={{ flex: 1, height: '4px', background: 'rgba(22, 40, 63, 0.07)', borderRadius: '2px', overflow: 'hidden' }}>
+                              <div
+                                style={{
+                                  width: `${logitPct}%`,
+                                  height: '100%',
+                                  background: '#94A3B8',
+                                  transition: 'width 0.3s ease'
+                                }}
+                              />
+                            </div>
+                          </Flex>
 
-                        {/* Probability Progress Bar */}
-                        <div style={{ width: '100%', height: '6px', background: 'rgba(255,255,255,0.06)', borderRadius: '3px', overflow: 'hidden' }}>
-                          <div
-                            style={{
-                              width: `${item.finalProb * 100}%`,
-                              height: '100%',
-                              background: item.isSurviving ? 'linear-gradient(90deg, #5EC4C8, #5EC4C8)' : '#64748b',
-                              transition: 'width 0.2s ease'
-                            }}
-                          />
-                        </div>
-                      </Card>
-                    ))}
+                          {/* Final probability bar — live-reshaped (teal) */}
+                          <Flex align="center" gap="8px">
+                            <span style={{ width: '34px', flexShrink: 0, fontSize: '9px', color: 'var(--ds-color-text-tertiary)', fontFamily: 'monospace', textTransform: 'uppercase' }}>prob</span>
+                            <div style={{ flex: 1, height: '14px', background: 'rgba(22, 40, 63, 0.06)', borderRadius: '4px', overflow: 'hidden' }}>
+                              <div
+                                style={{
+                                  width: `${item.finalProb * 100}%`,
+                                  height: '100%',
+                                  background: item.isSurviving
+                                    ? (idx === 0
+                                        ? 'linear-gradient(90deg, #14B8A6, #0E9F8A)'
+                                        : 'linear-gradient(90deg, #5EC4C8, #2FA6B5)')
+                                    : '#CBD5E1',
+                                  borderRadius: '4px',
+                                  transition: 'width 0.3s ease, background 0.3s ease'
+                                }}
+                              />
+                            </div>
+                            <span
+                              style={{
+                                width: '86px',
+                                flexShrink: 0,
+                                textAlign: 'right',
+                                fontFamily: 'monospace',
+                                fontSize: '12px',
+                                color: item.isSurviving ? '#0E9F8A' : '#94A3B8',
+                                fontWeight: 700
+                              }}
+                            >
+                              {(item.finalProb * 100).toFixed(1)}%
+                            </span>
+                          </Flex>
+                        </Card>
+                      );
+                    })}
                   </Stack>
+
+                  {/* ROLLOUT STRIP — weighted-random draws from the live distribution */}
+                  {rollout.length > 0 && (
+                    <Card style={{ padding: '10px 12px', background: 'var(--ds-color-bg-surface)', borderLeft: '4px solid #0E9F8A' }}>
+                      <Flex justify="space-between" align="center" style={{ marginBottom: '6px' }}>
+                        <span style={{ fontSize: '11px', fontWeight: 700, color: 'var(--ds-color-text-primary)', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+                          🎲 Weighted Rollout ({rollout.length} draw{rollout.length === 1 ? '' : 's'})
+                        </span>
+                        <button
+                          onClick={() => { setRollout([]); setLastSampledToken(null); }}
+                          style={{
+                            background: 'none', border: '1px solid var(--ds-color-border-subtle)',
+                            borderRadius: '6px', padding: '2px 8px', fontSize: '10px',
+                            color: 'var(--ds-color-text-secondary)', cursor: 'pointer'
+                          }}
+                        >
+                          Clear
+                        </button>
+                      </Flex>
+                      <div style={{ fontFamily: 'monospace', fontSize: '13px', color: 'var(--ds-color-text-primary)', background: '#090d16', padding: '8px 10px', borderRadius: '4px', whiteSpace: 'pre-wrap', minHeight: '18px' }}>
+                        {activePrompt.prompt.slice(-40)}<span style={{ color: '#5EC4C8' }}>{rollout.join('')}</span>
+                      </div>
+                    </Card>
+                  )}
                 </div>
 
                 <Callout type="info">
-                  <strong>How to use this simulator:</strong> Set <code>Temperature = 0</code> to observe <em>Greedy Decoding</em> where only the top token has 100% probability. Raise <code>Temperature = 1.5</code> to watch tail tokens gain probability. Turn on <code>Min-P = 0.10</code> to observe how low-probability hallucinated tokens are cleanly eliminated without arbitrary Top-K cutoffs.
+                  <strong>How to use this simulator:</strong> Set <code>Temperature = 0</code> to observe <em>Greedy Decoding</em> where only the top token has 100% probability. Raise <code>Temperature = 1.5</code> to watch tail tokens gain probability — the gray <em>logit</em> bar stays fixed while the teal <em>prob</em> bar reshapes. Drag <code>Top-K</code>, <code>Top-P</code>, or <code>Min-P</code> and watch the Sampling Pool shrink as cut badges appear. Press <strong>🎲 Sample Next Token</strong> to draw from the live distribution and extend the weighted rollout.
                 </Callout>
               </Stack>
             </Card>
@@ -439,18 +576,18 @@ export default function LLMSamplingTab() {
                         key={i}
                         style={{
                           padding: '8px 12px',
-                          background: item.selected ? 'rgba(16,185,129,0.15)' : 'rgba(255,255,255,0.03)',
-                          border: item.selected ? '1px solid #5EC4C8' : '1px solid rgba(255,255,255,0.06)',
+                          background: item.selected ? 'rgba(16,185,129,0.12)' : '#FAFBFC',
+                          border: item.selected ? '1px solid #0E9F8A' : '1px solid rgba(22, 40, 63, 0.08)',
                           borderRadius: '4px',
                           display: 'flex',
                           justifyContent: 'space-between',
                           alignItems: 'center'
                         }}
                       >
-                        <span style={{ fontFamily: 'monospace', color: item.selected ? '#5EC4C8' : 'white', fontWeight: item.selected ? 'bold' : 'normal' }}>
+                        <span style={{ fontFamily: 'monospace', color: item.selected ? '#0E9F8A' : 'var(--ds-color-text-primary)', fontWeight: item.selected ? 'bold' : 'normal' }}>
                           "{item.token}" {item.selected && '✓ (SAMPLED)'}
                         </span>
-                        <span style={{ fontFamily: 'monospace', color: item.selected ? '#5EC4C8' : 'var(--ds-color-text-tertiary)' }}>
+                        <span style={{ fontFamily: 'monospace', color: 'var(--ds-color-text-secondary)' }}>
                           {(item.prob * 100).toFixed(0)}%
                         </span>
                       </div>

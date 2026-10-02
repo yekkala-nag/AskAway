@@ -126,6 +126,21 @@ const EXTRA_FRAMEWORKS = [
     compatibleMethodologyIds: ['structured_output', 'few_zero_one_shot', 'constraint_based', 'tool_assisted'],
     version: 1,
   },
+  {
+    id: 'consistent_ai_images', name: 'Consistent AI Images', kind: 'framework',
+    expansion: 'Concept, References, Visuals, Output',
+    description: 'Four-section template for consistent AI images: state the overarching concept, say exactly what to take from each reference, specify visual details (what goes where, colors, lighting), and lock the output shape/size plus what you will finish yourself.',
+    category: 'Creative', tier: 'Foundation', icon: 'image',
+    template: 'Overarching concept: [What are we making, and what should it communicate?]\nReferences: [For each uploaded image, say exactly what to use from it — palette, subject, camera angle, lighting, composition. Write "None" if there are no references.]\nVisual details: [Get specific about what goes where, plus the colors, lighting, mood, texture, and any details you care about.]\nOutput and finishing: [What shape and size should the image be, and what will you add or edit yourself?]',
+    requiredFields: ['overarching_concept', 'references', 'visual_details', 'output_and_finishing'],
+    optionalFields: [],
+    example: {
+      input: 'concept=launch hero images that communicate calm precision; refs=brand deck (take palette + type only); visuals=navy/cyan grid, single glowing terminal centered, soft rim light; output=1:1 2048px, I add logo + headline myself',
+      output: 'Same palette, lighting, and composition across every image in the series — only the intended variables change',
+    },
+    compatibleMethodologyIds: ['few_zero_one_shot', 'constraint_based', 'iterative', 'retrieval_grounded'],
+    version: 1,
+  },
 ];
 
 /* Methodologies added per taxonomy spec where the 30 do not already
@@ -195,6 +210,19 @@ const EXTRA_METHODOLOGIES = [
     modelCaveats: 'Model cannot self-report true quality — keep a human gate on the final round.',
     conflictsWith: [],
     version: 1, related: ['Reflexion', 'Prompt Chaining', 'RISE'],
+  },
+  {
+    id: 'reference_anchored_images', name: 'Reference-anchored image generation',
+    description: 'Anchor image generation to explicit references and a fixed visual spec so repeated generations stay stylistically consistent.',
+    category: 'Modality',
+    whenToUse: 'Brand assets, product shots, character sheets, or any series of images that must look like one set.',
+    limitations: 'Models blend rather than copy references — they match mood, palette, and composition, not pixel-exact details; conflicting references produce an averaged style.',
+    applicationInstructions: 'State the concept in one sentence, label each reference with exactly what to take from it (palette, subject, camera, lighting), spell out placement/colors/lighting in visual details, then lock output shape and size. Reuse the same four sections for every image in the series and change only what must vary.',
+    requires: ['images'],
+    compatibleFrameworkIds: ['consistent_ai_images', 'role_task_context_output', 'goal_context_constraints_format', 'three_sentence'],
+    modelCaveats: 'Reference fidelity varies by model — keep the same spec (and seed settings where supported) across the series, and review each output against the spec before accepting it.',
+    conflictsWith: [],
+    version: 1, related: ['Multimodal', 'Few/Zero/One-Shot'],
   },
 ];
 

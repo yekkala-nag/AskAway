@@ -78,7 +78,7 @@ export default function AgentPlannerTab() {
           <Callout type="success"><strong>Non-negotiables:</strong> step cap, stall→replan, irreversible plans need approval, critics must be external (tests, tools, second model).</Callout>
         </Stack></Card></Stack>)}
 
-        {/* ─── SUBTAB 4: DYNAMIC SKILL COMPOSITION (TDS GUIDE) ─── */}
+        {/* ─── SUBTAB 4: DYNAMIC SKILL COMPOSITION ─── */}
         {sub === 'dynamic' && (
           <Stack gap={6}>
             <Card style={{ padding: 'var(--ds-space-5)', background: 'var(--ds-color-bg-canvas)' }}>
@@ -86,7 +86,7 @@ export default function AgentPlannerTab() {
                 <div>
                   <h3 style={{ margin: 0 }}>🧬 From Static to Dynamic Skills — Skill Graph Architecture</h3>
                   <p style={{ margin: '4px 0 0 0', color: 'var(--ds-color-text-secondary)', fontSize: 'var(--ds-font-size-bodySm)' }}>
-                    Based on Towards Data Science guide: skills as composable graph nodes, context-aware retrieval, dynamic chaining into macro-skills, and autonomous evolution loops.
+                    A design pattern: skills as composable graph nodes, context-aware retrieval, dynamic chaining into macro-skills, and autonomous evolution loops.
                   </p>
                 </div>
 
@@ -152,7 +152,7 @@ export default function AgentPlannerTab() {
                   <h4 style={{ margin: '0 0 8px 0', color: 'var(--ds-color-text-primary)' }}>🛠️ Dynamic Skills: Graph + Retrieval + Chaining + Evolution</h4>
                   <CodeBlock language="python" code={PYTHON_DYNAMIC_SKILLS_CODE} />
                   <Callout type="success">
-                    <strong>Key insight from TDS:</strong> Static skill libraries don't scale. The graph enables topological planning, retrieval makes 1000s of skills tractable, 
+                    <strong>Key insight:</strong> Static skill libraries don't scale. The graph enables topological planning, retrieval makes 1000s of skills tractable, 
                     chaining builds reusable macro-skills, and the evolution loop turns production traffic into automatic capability improvement.
                   </Callout>
                 </div>

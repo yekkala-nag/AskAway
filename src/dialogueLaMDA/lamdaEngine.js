@@ -1,6 +1,6 @@
 // ============================================================================
 // GOOGLE LAMDA & OPEN-DOMAIN DIALOGUE ARCHITECTURE ENGINE
-// Based on Alberto Romero's analysis of Google's conversational AI:
+// Analysis of Google's conversational AI:
 // Sensibleness, Specificity, Interestingness (SSI), Safety, and Tool Groundedness
 // ============================================================================
 

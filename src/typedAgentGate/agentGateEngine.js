@@ -1,6 +1,6 @@
 // ============================================================================
 // TYPED TOOLS, HARD BOUNDS & DOWNSTREAM COMPOSER GATE ENGINE
-// Implementation of Miodrag Cekikj's 8-Tool Semantic Contract,
+// Implementation of the 8-Tool Semantic Contract,
 // 80-Line Bounded Loop, Composer Gate Refusal, and Escalation Architecture
 // ============================================================================
 

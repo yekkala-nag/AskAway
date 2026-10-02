@@ -65,7 +65,7 @@ export default function TSAnomalyTab() {
         moduleId="data_platform"
         moduleLabel="Data & Platform Layers [Time Series Deep Learning]"
         title="Hands-on Time Series Anomaly Detection using Autoencoders in Python"
-        description="Piero Paialunga's end-to-end framework for detecting anomalous time-series signals in finance, engineering, and seismic monitoring using 1D Convolutional Autoencoders and Mean Squared Error (MSE) percentile thresholding."
+        description="An end-to-end framework for detecting anomalous time-series signals in finance, engineering, and seismic monitoring using 1D Convolutional Autoencoders and Mean Squared Error (MSE) percentile thresholding."
         metrics={[
           { label: 'Model Type', value: '1D CNN Autoencoder' },
           { label: 'Training Set', value: 'Normal Signals Only' },

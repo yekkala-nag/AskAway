@@ -1,5 +1,5 @@
 // ============================================================================
-// ENTERPRISE-GRADE AI ENGINE (Caroline Zaborowski — end-to-end thinking, TDS)
+// ENTERPRISE-GRADE AI ENGINE (end-to-end thinking)
 // Mundane beats moonshots; data diligence; bias; good-enough; MLOps; buy-in
 // Responsible AI & Security Compliant: Zero PII / synthetic demo data only
 // ============================================================================

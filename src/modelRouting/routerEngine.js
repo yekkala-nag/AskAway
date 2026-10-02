@@ -1,5 +1,5 @@
 // ============================================================================
-// ADAPTIVE MODEL ROUTING ENGINE (Partha Sarkar — JIT planning + 0-6 scoring)
+// ADAPTIVE MODEL ROUTING ENGINE (JIT planning + 0-6 scoring)
 // Complexity × reasoning × context → fast/balanced/powerful per task
 // Responsible AI & Security Compliant: Zero PII / synthetic demo data only
 // ============================================================================
@@ -45,7 +45,7 @@ export const SCORE_TASK = (cx = 0, rs = 1, ctx = 1) => {
 
 export const PYTHON_ROUTER_CODE = `# ============================================================================
 # ADAPTIVE ROUTER: qualitative LLM grades + deterministic context measure
-# (P. Sarkar: classify cheap, execute right-sized)
+# (classify cheap, execute right-sized)
 # ============================================================================
 SCORES = {"low": 0, "medium": 1, "high": 2}
 TIERS = {"fast": (0, 2), "balanced": (3, 4), "powerful": (5, 6)}

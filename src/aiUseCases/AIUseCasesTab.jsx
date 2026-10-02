@@ -73,7 +73,7 @@ export default function AIUseCasesTab() {
         moduleId="data_platform"
         moduleLabel="Data & Platform Layers [Enterprise AI Strategy]"
         title="3 AI Use Cases (That Are Not a Chatbot)"
-        description="Shaw Talebi's framework for driving tangible business value beyond unpredictable AI chatbots: LLM Feature Engineering, Structuring Unstructured Data via Embeddings, and Predictive Lead Scoring Models."
+        description="A framework for driving tangible business value beyond unpredictable AI chatbots: LLM Feature Engineering, Structuring Unstructured Data via Embeddings, and Predictive Lead Scoring Models."
         metrics={[
           { label: 'Use Case 1', value: 'LLM Feature Extraction' },
           { label: 'Use Case 2', value: 'Vector Embeddings' },

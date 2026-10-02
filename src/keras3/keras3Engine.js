@@ -1,7 +1,6 @@
 // ============================================================================
 // KERAS 3.0 MULTI-BACKEND DEEP LEARNING ENGINE
 // Supporting PyTorch, JAX, and TensorFlow Backends + End-to-End NMT Project
-// Based on Peng Qian's TDS Guide (2024-2026)
 // ============================================================================
 
 export const BACKEND_COMPARISON_MATRIX = [

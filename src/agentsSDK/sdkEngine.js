@@ -1,5 +1,5 @@
 // ============================================================================
-// AGENTS SDK PATTERNS ENGINE (Iqbal Rahmadhan — handoff vs agents-as-tools)
+// AGENTS SDK PATTERNS ENGINE (handoff vs agents-as-tools)
 // Triage nurse, transfer_to_* functions, custom handoffs, orchestrator tools
 // Responsible AI & Security Compliant: Zero PII / synthetic demo data only
 // ============================================================================
@@ -60,7 +60,7 @@ export const PICK_PATTERN = (domains = 1, combine = false, precise = false, audi
 };
 
 export const PYTHON_SDK_CODE = `# ============================================================================
-# AGENTS SDK: triage handoff + orchestrator tools (I. Rahmadhan, TDS)
+# AGENTS SDK: triage handoff + orchestrator tools
 # ============================================================================
 from agents import Agent, Runner, function_tool, handoff
 from pydantic import BaseModel

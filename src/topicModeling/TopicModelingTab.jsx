@@ -540,7 +540,7 @@ export default function TopicModelingTab() {
                   language="python"
                   code={`# ============================================================================
 # TOPIC MODELING TECHNIQUES FOR 2026: SEEDED KEYNMF & LLM PREPROCESSING
-# Reference: Towards Data Science / Turftopic Engine
+# Reference: Turftopic Engine
 # ============================================================================
 
 import pandas as pd

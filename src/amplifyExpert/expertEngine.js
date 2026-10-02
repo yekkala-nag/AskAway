@@ -1,5 +1,5 @@
 // ============================================================================
-// AMPLIFY THE EXPERT ENGINE (Angela & Kezhan Shi — EDI manifesto M1, TDS)
+// AMPLIFY THE EXPERT ENGINE (EDI manifesto M1)
 // Thesis, two camps, ML-decade parallel, 4 conditions, 3 disciplines,
 // 4 bricks, 6 counter-positions
 // Responsible AI & Security Compliant: Zero PII / synthetic demo data only

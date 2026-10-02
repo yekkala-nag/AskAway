@@ -19,7 +19,7 @@ export default function VerifiedPipesTab() {
     <div style={{ paddingBottom: 'var(--ds-space-12)' }}>
       <Hero moduleId="agents_frameworks" moduleLabel="Agent Systems & Frameworks [Verified Pipelines]"
         title="Review Is Theater at Agent Volume — Pipelines Verify"
-        description="PRs up 98%, incidents per PR up 243%: no human audits a 40k-line agent PR they didn't reason through, and AI-reviewing-AI shares the blind spots. Policy-as-code gates verify every deployment; humans handle only exceptions. Based on DORA 2026 / Octopus / Farcic–Bristowe debate."
+        description="PRs up 98%, incidents per PR up 243%: no human audits a 40k-line agent PR they didn't reason through, and AI-reviewing-AI shares the blind spots. Policy-as-code gates verify every deployment; humans handle only exceptions."
         metrics={[{ label: 'PR Volume', value: '+98%' }, { label: 'Incidents/PR', value: '+243%' }, { label: 'AI Usage', value: '90%' }, { label: 'Fix', value: 'Gates, not gazes' }]} />
       <Container size="wide">
         <div style={{ marginBottom: 'var(--ds-space-6)' }}><DiagramImage moduleId="agents_frameworks" src="/assets/verified_pipes.svg" alt="Verified pipelines" title="Theater vs Gates" caption="Volume broke review's assumptions; author-agnostic gates restore trust." background="#090d16" maxWidth={1100} /></div>

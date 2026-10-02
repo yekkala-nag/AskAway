@@ -1,5 +1,5 @@
 // ============================================================================
-// FUNCTOOLS TRICKS ENGINE (Christopher Tao — total_ordering/partial/dispatch)
+// FUNCTOOLS TRICKS ENGINE (total_ordering/partial/dispatch)
 // Plus lru_cache lineage; perf caveats included
 // Responsible AI & Security Compliant: Zero PII / synthetic demo data only
 // ============================================================================
@@ -40,7 +40,7 @@ export const LINES_SAVED = (use = ["total_ordering", "partial", "singledispatch"
 };
 
 export const PYTHON_FUNCTOOLS_CODE = `# ============================================================================
-# FUNCTOOLS TRIO: total_ordering + partial + singledispatch (C. Tao, TDS)
+# FUNCTOOLS TRIO: total_ordering + partial + singledispatch
 # ============================================================================
 from functools import total_ordering, partial, singledispatch
 import re

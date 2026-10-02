@@ -20,7 +20,7 @@ export default function VibeCodeTab() {
     <div style={{ paddingBottom: 'var(--ds-space-12)' }}>
       <Hero moduleId="agents_frameworks" moduleLabel="Agent Systems & Frameworks [Vibe-Coding Economics]"
         title="Two Hours to Build, $52 a Day to Regret"
-        description="Ukuflow: free to build on credits, −$48/day to run for 200 users. Overkill solution, shrinking beginner market, untested assumption — corrected by static-first pages and a minimum viable offer. Based on Thuwarakesh Murallie (TDS)."
+        description="Ukuflow: free to build on credits, −$48/day to run for 200 users. Overkill solution, shrinking beginner market, untested assumption — corrected by static-first pages and a minimum viable offer."
         metrics={[{ label: 'Build', value: '$0' }, { label: 'Run (1 day)', value: '$52' }, { label: 'Net', value: '−$48/day' }, { label: 'Fix', value: 'Static-first' }]} />
       <Container size="wide">
         <div style={{ marginBottom: 'var(--ds-space-6)' }}><DiagramImage moduleId="agents_frameworks" src="/assets/vibe_code.svg" alt="Vibe code economics" title="Agent-per-search vs Static-first" caption="Same beginners served; one bleeds $17k/yr, the other costs ~$0." background="#090d16" maxWidth={1100} /></div>

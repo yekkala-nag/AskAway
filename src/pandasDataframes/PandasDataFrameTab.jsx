@@ -77,13 +77,12 @@ export default function PandasDataFrameTab() {
       {/* HERO HEADER */}
       <Hero
         moduleId="data_platform"
-        moduleLabel="Data & Platform Layers [Ibrahim Salami / Wes McKinney]"
+        moduleLabel="Data & Platform Layers [Pandas]"
         title="The Absolute Beginner’s Guide to Pandas DataFrames"
         description="Comprehensive interactive guide bridging SQL database tables, Python data structures, NumPy ndarrays, and Pandas DataFrames. Learn 2D tabular memory layout, vectorization, and production creation workflows."
         metrics={[
           { label: 'Core Object', value: 'pd.DataFrame' },
           { label: 'Underlying Engine', value: 'NumPy 2D ndarray' },
-          { label: 'Reference Book', value: 'Wes McKinney' },
           { label: 'Responsible AI', value: '0 PII / 0 Author Info' }
         ]}
       />
@@ -148,7 +147,7 @@ export default function PandasDataFrameTab() {
                 <div>
                   <h3 style={{ margin: 0 }}>📊 SQL Tables vs Python In-Memory Data Structures</h3>
                   <p style={{ margin: '4px 0 0 0', color: 'var(--ds-color-text-secondary)', fontSize: 'var(--ds-font-size-bodySm)' }}>
-                    Coming from SQL, data is stored in static database tables and columns. In Python data analysis (reference: Wes McKinney's <em>Python for Data Analysis</em>), the core building blocks are in-memory data structures: Lists, NumPy Arrays, and Pandas DataFrames.
+                    Coming from SQL, data is stored in static database tables and columns. In Python data analysis, the core building blocks are in-memory data structures: Lists, NumPy Arrays, and Pandas DataFrames.
                   </p>
                 </div>
 

@@ -20,7 +20,7 @@ export default function AmplifyExpertTab() {
     <div style={{ paddingBottom: 'var(--ds-space-12)' }}>
       <Hero moduleId="rag_architecture" moduleLabel="RAG Architectures & Pipelines [Amplify the Expert]"
         title="Amplify the Expert — Scale Judgment, Don't Replace It"
-        description="Enterprise RAG that mirrors trusted expert method (keywords → TOC → cited answers) instead of opaque vectors. Four conditions decide fit; three disciplines and six positions follow mechanically. The EDI series manifesto by Angela & Kezhan Shi (TDS)."
+        description="Enterprise RAG that mirrors trusted expert method (keywords → TOC → cited answers) instead of opaque vectors. Four conditions decide fit; three disciplines and six positions follow mechanically."
         metrics={[{ label: 'Thesis', value: '1 sentence' }, { label: 'Conditions', value: '4 gates' }, { label: 'Disciplines', value: '3' }, { label: 'Positions', value: '6 follow' }]} />
       <Container size="wide">
         <div style={{ marginBottom: 'var(--ds-space-6)' }}><DiagramImage moduleId="rag_architecture" src="/assets/amplify_expert.svg" alt="Amplify the expert" title="Two Camps + Bridge" caption="Opaque pipelines lose trust; Ctrl+F doesn't scale. The bridge scales trusted method." background="#090d16" maxWidth={1100} /></div>

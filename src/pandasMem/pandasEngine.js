@@ -1,5 +1,5 @@
 // ============================================================================
-// PANDAS MEMORY ENGINE (Avi Chawla — 7 techniques, TDS)
+// PANDAS MEMORY ENGINE (7 techniques)
 // inplace, usecols, dtype downgrade/category/sparse, dtype-at-read, chunks
 // Responsible AI & Security Compliant: Zero PII / synthetic demo data only
 // ============================================================================
@@ -37,7 +37,7 @@ export const MEMORY_PLAN = (rowsK = 100, cols = 25, catPct = 40, nanPct = 20, us
 };
 
 export const PYTHON_PANDAS_CODE = `# ============================================================================
-# PANDAS MEMORY: the seven, composed (A. Chawla, TDS)
+# PANDAS MEMORY: the seven, composed
 # ============================================================================
 import pandas as pd
 import numpy as np

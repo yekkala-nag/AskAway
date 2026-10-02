@@ -44,10 +44,10 @@ describe('promptTaxonomy', () => {
       assert.ok(f.example.input && f.example.output, `no example: ${f.id}`);
       for (const mid of f.compatibleMethodologyIds) assert.ok(getMethodologyItem(mid), `${f.id} → dangling methodology ${mid}`);
     }
-    for (const name of ['Three-Sentence Prompt', 'Role–Task–Context–Output', 'Goal–Context–Constraints–Format', 'Understand–Plan–Execute–Validate', 'Problem–Options–Decision–Action', 'Input–Process–Output']) {
+    for (const name of ['Three-Sentence Prompt', 'Role–Task–Context–Output', 'Goal–Context–Constraints–Format', 'Understand–Plan–Execute–Validate', 'Problem–Options–Decision–Action', 'Input–Process–Output', 'Consistent AI Images']) {
       assert.ok(findFrameworkByName(name), `missing requested framework: ${name}`);
     }
-    for (const name of ['Retrieval-grounded prompting', 'Constraint-based prompting', 'Structured-output prompting', 'Tool-assisted prompting', 'Iterative prompting']) {
+    for (const name of ['Retrieval-grounded prompting', 'Constraint-based prompting', 'Structured-output prompting', 'Tool-assisted prompting', 'Iterative prompting', 'Reference-anchored image generation']) {
       assert.ok(METHODOLOGY_CATALOG.some((m) => m.name === name), `missing requested methodology: ${name}`);
     }
   });

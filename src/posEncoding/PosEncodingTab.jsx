@@ -19,7 +19,7 @@ export default function PosEncodingTab() {
     <div style={{ paddingBottom: 'var(--ds-space-12)' }}>
       <Hero moduleId="foundations" moduleLabel="Foundations & Architecture [Positional Encoding]"
         title="Order Changes Meaning — Give Attention a Clock"
-        description="Five weekday temps through scalar→embed→QKV: shuffle them and attention can't tell. Sinusoidal clocks restore order and relative distance (t−1, t−7, t−30). Based on Gurjinder Kaur's visual guide (TDS)."
+        description="Five weekday temps through scalar→embed→QKV: shuffle them and attention can't tell. Sinusoidal clocks restore order and relative distance (t−1, t−7, t−30)."
         metrics={[{ label: 'Pipeline', value: '5 steps' }, { label: 'PE Needs', value: '5 properties' }, { label: 'Key Lags', value: 't−1 · t−7' }, { label: 'Beyond', value: 'RoPE/learned' }]} />
       <Container size="wide">
         <div style={{ marginBottom: 'var(--ds-space-6)' }}><DiagramImage moduleId="foundations" src="/assets/pos_encoding.svg" alt="Positional encoding" title="Shuffle Blindness → Clocks → Lags" caption="Same values, new order, identical attention — until h = e + p." background="#090d16" maxWidth={1100} /></div>

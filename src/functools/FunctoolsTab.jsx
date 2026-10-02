@@ -18,7 +18,7 @@ export default function FunctoolsTab() {
     <div style={{ paddingBottom: 'var(--ds-space-12)' }}>
       <Hero moduleId="data_platform" moduleLabel="Data & Platform Layers [functools Power Tricks]"
         title="Three Decorators That Delete Boilerplate"
-        description="total_ordering derives 6 comparisons from 2 methods, partial freezes arguments into families, singledispatch routes by type instead of if-chains. Stdlib only, readable always — caveats attached. Based on Christopher Tao (TDS)."
+        description="total_ordering derives 6 comparisons from 2 methods, partial freezes arguments into families, singledispatch routes by type instead of if-chains. Stdlib only, readable always — caveats attached."
         metrics={[{ label: 'Tricks', value: '3 + lru' }, { label: 'Line Cut', value: '~60%' }, { label: 'Deps', value: 'Zero' }, { label: 'Rule', value: 'Caveats first' }]} />
       <Container size="wide">
         <div style={{ marginBottom: 'var(--ds-space-6)' }}><DiagramImage moduleId="data_platform" src="/assets/functools.svg" alt="functools tricks" title="Delete Boilerplate, Keep Warnings" caption="Each trick's savings paired with the caveat that bites." background="#090d16" maxWidth={1100} /></div>

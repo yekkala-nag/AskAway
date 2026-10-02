@@ -1,5 +1,5 @@
 // ============================================================================
-// MODEL VALIDATION PLAYBOOK ENGINE (Ananya Bhattacharyya — SR 11-7 for GenAI)
+// MODEL VALIDATION PLAYBOOK ENGINE (SR 11-7 for GenAI)
 // Three pillars, five breaks, tiering, dimensions, judge-the-judge, monitoring
 // Responsible AI & Security Compliant: Zero PII / synthetic demo data only
 // ============================================================================

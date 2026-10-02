@@ -1,6 +1,5 @@
 // ============================================================================
 // THE 2026 GOAL TRACKER & DATA-DRIVEN VISION BOARD ENGINE
-// Based on Towards Data Science (Sabrine Bendimerad)
 // Python + Streamlit + Neon Serverless PostgreSQL Architecture
 // ============================================================================
 

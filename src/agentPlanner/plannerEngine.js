@@ -1,7 +1,7 @@
 // ============================================================================
 // AGENT PLANNING PATTERNS ENGINE — ReAct vs Plan-Execute vs Reflexion vs ToT
 // Responsible AI & Security Compliant: Zero PII / synthetic demo data only
-// Extended with: Dynamic Skill Composition (TDS) — skill graphs, context-aware
+// Extended with: Dynamic Skill Composition — skill graphs, context-aware
 // skill retrieval, skill chaining, and skill evolution loops
 // ============================================================================
 
@@ -58,7 +58,7 @@ def needs_approval(steps) -> bool:
 `;
 
 // ============================================================================
-// DYNAMIC SKILL COMPOSITION — From Static to Dynamic Skills (TDS Guide)
+// DYNAMIC SKILL COMPOSITION — From Static to Dynamic Skills
 // Skill graphs, context-aware retrieval, chaining, and evolution loops
 // ============================================================================
 

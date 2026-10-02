@@ -1,6 +1,6 @@
 // ============================================================================
 // PROXY-POINTER RAG ENGINE: STRUCTURE MEETS SCALE (100% ACCURACY)
-// Towards Data Science / Gemini Embeddings + Pointer Map Architecture
+// Gemini Embeddings + Pointer Map Architecture
 // ============================================================================
 
 export const SAMPLE_MARKDOWN_DOC = `# Cloud Identity & Access Management (IAM)

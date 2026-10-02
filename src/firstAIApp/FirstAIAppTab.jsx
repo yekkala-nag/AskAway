@@ -94,7 +94,7 @@ export default function FirstAIAppTab() {
                 <div>
                   <h3 style={{ margin: 0 }}>🚀 The 5 Milestones: From "Toy Script" to Real-World AI App</h3>
                   <p style={{ margin: '4px 0 0 0', color: 'var(--ds-color-text-secondary)', fontSize: 'var(--ds-font-size-bodySm)' }}>
-                    Based on Ibrahim Salami's architectural reflections. Building an AI app isn't just about calling a model—it's about managing infrastructure, secrets, and structured data safely.
+                    Building an AI app isn't just about calling a model—it's about managing infrastructure, secrets, and structured data safely.
                   </p>
                 </div>
 

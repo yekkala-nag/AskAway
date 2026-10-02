@@ -24,7 +24,7 @@ export default function ModelRoutingTab() {
     <div style={{ paddingBottom: 'var(--ds-space-12)' }}>
       <Hero moduleId="agents_frameworks" moduleLabel="Agent Systems & Frameworks [Adaptive Model Routing]"
         title="Pay Only for the Thinking Each Task Needs"
-        description="Static flagship-everywhere wastes 90%+ on easy work. JIT per-agent planning plus a cheap classifier scoring complexity × reasoning × accumulated context routes every sub-task to fast, balanced, or powerful. Based on Partha Sarkar (TDS)."
+        description="Static flagship-everywhere wastes 90%+ on easy work. JIT per-agent planning plus a cheap classifier scoring complexity × reasoning × accumulated context routes every sub-task to fast, balanced, or powerful."
         metrics={[{ label: 'Score', value: '0–6 sum' }, { label: 'Best Saving', value: '~94%' }, { label: 'Classifier', value: 'Flash-lite' }, { label: 'Rule', value: 'Never downgrade dense' }]} />
       <Container size="wide">
         <div style={{ marginBottom: 'var(--ds-space-6)' }}><DiagramImage moduleId="agents_frameworks" src="/assets/model_routing.svg" alt="Adaptive model routing" title="0–6 Score → Three Tiers" caption="Same agent, 14x cost jumps between steps; dense critique honestly stays pro." background="#090d16" maxWidth={1100} /></div>

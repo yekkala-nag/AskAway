@@ -1,5 +1,5 @@
 // ============================================================================
-// VIBE-CODE ECONOMICS ENGINE (Thuwarakesh Murallie — Ukuflow $52/day, TDS)
+// VIBE-CODE ECONOMICS ENGINE (Ukuflow $52/day)
 // Unit economics, minimum viable offer, static-first correction
 // Responsible AI & Security Compliant: Zero PII / synthetic demo data only
 // ============================================================================

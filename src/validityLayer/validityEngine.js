@@ -1,5 +1,5 @@
 // ============================================================================
-// VALIDITY LAYER ENGINE (Emmimal P Alexander — context vs state, TDS)
+// VALIDITY LAYER ENGINE (context vs state)
 // ACTIVE/STALE/SUPERSEDED/UNKNOWN + baseline vs validity-aware executors
 // Responsible AI & Security Compliant: Zero PII / synthetic demo data only
 // ============================================================================
@@ -48,7 +48,7 @@ export const RUN_VALIDITY = (faultAt = 1, budget = 8) => {
 };
 
 export const PYTHON_VALIDITY_CODE = `# ============================================================================
-# VALIDITY LAYER: states + two deterministic executors (E. Alexander, TDS)
+# VALIDITY LAYER: states + two deterministic executors
 # Presence is not validity. Check before acting, not after failing.
 # ============================================================================
 from enum import Enum

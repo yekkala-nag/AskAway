@@ -1,6 +1,5 @@
 // ============================================================================
 // AI ALIGNMENT & MORAL AGENCY ENGINE
-// Based on Javier Marín Valenzuela's philosophical & technical treatise:
 // Functional Caring vs Experiential Caring vs Artificial Moral Agency
 // ============================================================================
 

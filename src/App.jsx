@@ -1250,7 +1250,7 @@ export const FilteringTab = ({ s }) => {
       <div style={{ background: "linear-gradient(135deg,#f0f4f8,#f2f8f0,#faf6ef)", border: "1px solid #e0dcd4", borderRadius: 6, padding: "2rem", marginBottom: "1.5rem", position: "relative", overflow: "hidden" }}>
         <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 2, background: "linear-gradient(90deg,#5EC4C8,#F0A89A,#C9B8E8)" }} />
         <div style={{ position: "absolute", right: "1rem", top: "1rem", fontFamily: "Playfair Display, serif", fontSize: "8rem", fontWeight: 900, color: "rgba(201,168,76,0.04)", lineHeight: 1, pointerEvents: "none" }}>SQL</div>
-        <div style={{ fontFamily: "Syne, sans-serif", fontSize: "0.58rem", fontWeight: 700, letterSpacing: "0.3em", textTransform: "uppercase", color: "#3A9B9F", marginBottom: "0.75rem" }}>Mental Model · Enterprise RAG · TDS 2026</div>
+        <div style={{ fontFamily: "Syne, sans-serif", fontSize: "0.58rem", fontWeight: 700, letterSpacing: "0.3em", textTransform: "uppercase", color: "#3A9B9F", marginBottom: "0.75rem" }}>Mental Model · Enterprise RAG · 2026</div>
         <h2 style={{ fontFamily: "Playfair Display, serif", fontSize: "1.6rem", fontWeight: 900, lineHeight: 1.1, marginBottom: "0.75rem" }}>
           Retrieval Is <em style={{ color: "#C47A6A", fontStyle: "italic" }}>Filtering</em>,<br />Not Search
         </h2>
@@ -1718,7 +1718,7 @@ export const MultiAgentTab = ({ s }) => {
       <div style={{ background: "linear-gradient(135deg,#f0f4f8,#f6f0fa,#faf6ef)", border: "1px solid #e0dcd4", borderRadius: 6, padding: "2rem", marginBottom: "1.5rem", position: "relative", overflow: "hidden" }}>
         <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 2, background: "linear-gradient(90deg,#5EC4C8,#C9B8E8,#F0A89A,#5EC4C8)" }} />
         <div style={{ position: "absolute", right: "1.5rem", top: "1rem", fontFamily: "Playfair Display, serif", fontSize: "7rem", fontWeight: 900, color: "rgba(155,127,212,0.04)", lineHeight: 1, pointerEvents: "none" }}>5×</div>
-        <div style={{ fontFamily: "Syne, sans-serif", fontSize: "0.58rem", fontWeight: 700, letterSpacing: "0.3em", textTransform: "uppercase", color: "#7A6BA8", marginBottom: "0.75rem" }}>Case Study · Text-to-SQL · TDS 2026</div>
+        <div style={{ fontFamily: "Syne, sans-serif", fontSize: "0.58rem", fontWeight: 700, letterSpacing: "0.3em", textTransform: "uppercase", color: "#7A6BA8", marginBottom: "0.75rem" }}>Case Study · Text-to-SQL · 2026</div>
         <h2 style={{ fontFamily: "Playfair Display, serif", fontSize: "1.6rem", fontWeight: 900, lineHeight: 1.1, marginBottom: "0.75rem" }}>
           Why One Agent<br /><em style={{ color: "#7A6BA8", fontStyle: "italic" }}>Isn't Enough</em>
         </h2>
@@ -2176,7 +2176,7 @@ export const VagueQuestionsTab = ({ s }) => {
       <div style={{ background: "linear-gradient(135deg,#f0f4f8,#eff8f4,#faf6ef)", border: "1px solid #e0dcd4", borderRadius: 6, padding: "2rem", marginBottom: "1.5rem", position: "relative", overflow: "hidden" }}>
         <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 2, background: "linear-gradient(90deg,#5EC4C8,#F0A89A,#C9B8E8,#5EC4C8)" }} />
         <div style={{ position: "absolute", right: "1.5rem", top: "0.5rem", fontFamily: "Playfair Display, serif", fontSize: "7rem", fontWeight: 900, color: "rgba(201,168,76,0.04)", lineHeight: 1, pointerEvents: "none" }}>?</div>
-        <div style={{ fontFamily: "Syne, sans-serif", fontSize: "0.58rem", fontWeight: 700, letterSpacing: "0.3em", textTransform: "uppercase", color: "#C47A6A", marginBottom: "0.75rem" }}>Enterprise RAG · Question Parsing · TDS 2026</div>
+        <div style={{ fontFamily: "Syne, sans-serif", fontSize: "0.58rem", fontWeight: 700, letterSpacing: "0.3em", textTransform: "uppercase", color: "#C47A6A", marginBottom: "0.75rem" }}>Enterprise RAG · Question Parsing · 2026</div>
         <h2 style={{ fontFamily: "Playfair Display, serif", fontSize: "1.6rem", fontWeight: 900, lineHeight: 1.1, marginBottom: "0.75rem" }}>
           Vague Questions:<br /><em style={{ color: "#C47A6A", fontStyle: "italic" }}>Clarify Once, Learn the Default</em>
         </h2>
@@ -2673,7 +2673,7 @@ export const ContextGraphTab = ({ s }) => {
       <div style={{ background: "linear-gradient(135deg,#eff8f4,#f0f4f8,#faf6ef)", border: "1px solid #e0dcd4", borderRadius: 6, padding: "2rem", marginBottom: "1.5rem", position: "relative", overflow: "hidden" }}>
         <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 2, background: "linear-gradient(90deg,#5EC4C8,#C9B8E8,#F0A89A,#F0A89A)" }} />
         <div style={{ position: "absolute", right: "1.5rem", top: "0.5rem", fontFamily: "Playfair Display, serif", fontSize: "7rem", fontWeight: 900, color: "rgba(74,154,74,0.04)", lineHeight: 1, pointerEvents: "none" }}>⬡</div>
-        <div style={{ fontFamily: "Syne, sans-serif", fontSize: "0.58rem", fontWeight: 700, letterSpacing: "0.3em", textTransform: "uppercase", color: "#3A9B9F", marginBottom: "0.75rem" }}>Multi-Agent Memory · Benchmark · TDS June 2026</div>
+        <div style={{ fontFamily: "Syne, sans-serif", fontSize: "0.58rem", fontWeight: 700, letterSpacing: "0.3em", textTransform: "uppercase", color: "#3A9B9F", marginBottom: "0.75rem" }}>Multi-Agent Memory · Benchmark · June 2026</div>
         <h2 style={{ fontFamily: "Playfair Display, serif", fontSize: "1.6rem", fontWeight: 900, lineHeight: 1.1, marginBottom: "0.75rem" }}>
           Vector RAG Isn't Enough:<br /><em style={{ color: "#3A9B9F", fontStyle: "italic" }}>A Context Graph for Multi-Agent Memory</em>
         </h2>
@@ -3136,7 +3136,7 @@ export const ContextEngineeringTab = ({ s }) => {
       <div style={{ background: "linear-gradient(135deg,#f0f4f8,#f2f8f0,#faf6ef)", border: "1px solid #e0dcd4", borderRadius: 6, padding: "2rem", marginBottom: "1.5rem", position: "relative", overflow: "hidden" }}>
         <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 2, background: "linear-gradient(90deg,#5EC4C8,#F0A89A,#C9B8E8,#F0A89A,#5EC4C8)" }} />
         <div style={{ position: "absolute", right: "1.5rem", top: "0.5rem", fontFamily: "Playfair Display, serif", fontSize: "6rem", fontWeight: 900, color: "rgba(201,168,76,0.04)", lineHeight: 1, pointerEvents: "none" }}>CTX</div>
-        <div style={{ fontFamily: "Syne, sans-serif", fontSize: "0.58rem", fontWeight: 700, letterSpacing: "0.3em", textTransform: "uppercase", color: "#C47A6A", marginBottom: "0.75rem" }}>Enterprise RAG · Vol.1 #7bis · TDS June 2026</div>
+        <div style={{ fontFamily: "Syne, sans-serif", fontSize: "0.58rem", fontWeight: 700, letterSpacing: "0.3em", textTransform: "uppercase", color: "#C47A6A", marginBottom: "0.75rem" }}>Enterprise RAG · Vol.1 #7bis · June 2026</div>
         <h2 style={{ fontFamily: "Playfair Display, serif", fontSize: "1.6rem", fontWeight: 900, lineHeight: 1.1, marginBottom: "0.75rem" }}>
           Context Engineering for RAG:<br /><em style={{ color: "#C47A6A", fontStyle: "italic" }}>The Four Typed Inputs Behind Every Answer</em>
         </h2>
@@ -3810,7 +3810,7 @@ export const MemoryEngineeringTab = ({ s }) => {
       <div style={{ background: "linear-gradient(135deg,#f0f4f8,#f2f8f0,#faf6ef)", border: "1px solid #e0dcd4", borderRadius: 6, padding: "2rem", marginBottom: "1.5rem", position: "relative", overflow: "hidden" }}>
         <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 2, background: "linear-gradient(90deg,#5EC4C8,#F0A89A,#F0A89A,#5EC4C8)" }} />
         <div style={{ position: "absolute", right: "1.5rem", top: "0.5rem", fontFamily: "Playfair Display, serif", fontSize: "6rem", fontWeight: 900, color: "rgba(201,168,76,0.04)", lineHeight: 1, pointerEvents: "none" }}>RAM</div>
-        <div style={{ fontFamily: "Syne, sans-serif", fontSize: "0.58rem", fontWeight: 700, letterSpacing: "0.3em", textTransform: "uppercase", color: "#C47A6A", marginBottom: "0.75rem" }}>Data Engineering · ETL · Memory Optimisation · TDS July 2026</div>
+        <div style={{ fontFamily: "Syne, sans-serif", fontSize: "0.58rem", fontWeight: 700, letterSpacing: "0.3em", textTransform: "uppercase", color: "#C47A6A", marginBottom: "0.75rem" }}>Data Engineering · ETL · Memory Optimisation · July 2026</div>
         <h2 style={{ fontFamily: "Playfair Display, serif", fontSize: "1.6rem", fontWeight: 900, lineHeight: 1.1, marginBottom: "0.75rem" }}>
           When Memory Becomes the<br /><em style={{ color: "#C47A6A", fontStyle: "italic" }}>New Bottleneck</em>
         </h2>
@@ -4352,7 +4352,7 @@ export const ClaudeWorkflowsTab = ({ s }) => {
       <div style={{ background: "linear-gradient(135deg,#f0f4f8,#f6f0fa,#faf6ef)", border: "1px solid #e0dcd4", borderRadius: 6, padding: "2rem", marginBottom: "1.5rem", position: "relative", overflow: "hidden" }}>
         <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 2, background: "linear-gradient(90deg,#5EC4C8,#9B89C4,#C9B8E8,#5EC4C8,#F0A89A)" }} />
         <div style={{ position: "absolute", right: "1.5rem", top: "0.5rem", fontFamily: "Playfair Display, serif", fontSize: "5rem", fontWeight: 900, color: "rgba(201,168,76,0.04)", lineHeight: 1, pointerEvents: "none" }}>10×</div>
-        <div style={{ fontFamily: "Syne, sans-serif", fontSize: "0.58rem", fontWeight: 700, letterSpacing: "0.3em", textTransform: "uppercase", color: "#9B89C4", marginBottom: "0.75rem" }}>Beginner Guide · Geeky Gadgets · July 2026</div>
+        <div style={{ fontFamily: "Syne, sans-serif", fontSize: "0.58rem", fontWeight: 700, letterSpacing: "0.3em", textTransform: "uppercase", color: "#9B89C4", marginBottom: "0.75rem" }}>Beginner Guide · July 2026</div>
         <h2 style={{ fontFamily: "Playfair Display, serif", fontSize: "1.6rem", fontWeight: 900, lineHeight: 1.1, marginBottom: "0.75rem" }}>
           Claude Workflows:<br /><em style={{ color: "#9B89C4", fontStyle: "italic" }}>10 Features to Try First</em>
         </h2>
@@ -6852,7 +6852,7 @@ export const ProductionRAGTab = ({ s }) => {
       <div style={{ background: "linear-gradient(135deg,#eff8f4,#f6f0fa,#faf6ef)", border: "1px solid #e0dcd4", borderRadius: 6, padding: "2rem", marginBottom: "1.5rem", position: "relative", overflow: "hidden" }}>
         <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 2, background: "linear-gradient(90deg,#5EC4C8,#F0A89A,#C9B8E8,#F0A89A,#5EC4C8)" }} />
         <div style={{ position: "absolute", right: "1.5rem", top: "0.5rem", fontFamily: "Playfair Display, serif", fontSize: "5rem", fontWeight: 900, color: "rgba(42,138,132,0.05)", lineHeight: 1, pointerEvents: "none" }}>PDF</div>
-        <div style={{ fontFamily: "Syne, sans-serif", fontSize: "0.58rem", fontWeight: 700, letterSpacing: "0.3em", textTransform: "uppercase", color: "#3A9B9F", marginBottom: "0.75rem" }}>Enterprise Document Intelligence · Vol.1 #9A · TDS July 7, 2026</div>
+        <div style={{ fontFamily: "Syne, sans-serif", fontSize: "0.58rem", fontWeight: 700, letterSpacing: "0.3em", textTransform: "uppercase", color: "#3A9B9F", marginBottom: "0.75rem" }}>Enterprise Document Intelligence · Vol.1 #9A · July 7, 2026</div>
         <h2 style={{ fontFamily: "Playfair Display, serif", fontSize: "1.6rem", fontWeight: 900, lineHeight: 1.1, marginBottom: "0.75rem" }}>
           Production RAG for PDFs:<br /><em style={{ color: "#3A9B9F", fontStyle: "italic" }}>Relational Parsing, TOC Retrieval, Typed Answers</em>
         </h2>
@@ -7563,7 +7563,7 @@ export const RAGBeyondTab = ({ s }) => {
       <div style={{ background: "linear-gradient(135deg,#f4f2fa,#faf6ef,#f2f8f0)", border: "1px solid #e0dcd4", borderRadius: 6, padding: "2rem", marginBottom: "1.5rem", position: "relative", overflow: "hidden" }}>
         <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 2, background: "linear-gradient(90deg,#F0A89A,#F0A89A,#C9B8E8,#5EC4C8,#5EC4C8)" }} />
         <div style={{ position: "absolute", right: "1.5rem", top: "0.5rem", fontFamily: "Playfair Display, serif", fontSize: "5rem", fontWeight: 900, color: "rgba(155,127,212,0.05)", lineHeight: 1, pointerEvents: "none" }}>→</div>
-        <div style={{ fontFamily: "Syne, sans-serif", fontSize: "0.58rem", fontWeight: 700, letterSpacing: "0.3em", textTransform: "uppercase", color: "#C47A6A", marginBottom: "0.75rem" }}>TDS · Anubhab Banerjee · July 10, 2026 · 8 min</div>
+        <div style={{ fontFamily: "Syne, sans-serif", fontSize: "0.58rem", fontWeight: 700, letterSpacing: "0.3em", textTransform: "uppercase", color: "#C47A6A", marginBottom: "0.75rem" }}>AI FIELD NOTES · July 10, 2026 · 8 min</div>
         <div style={{ padding: "0.5rem 0.9rem", background: "rgba(155,127,212,0.07)", border: "1px solid #C9B8E830", borderRadius: 3, marginBottom: "0.75rem", display: "inline-block" }}>
           <span style={{ fontFamily: "Playfair Display, serif", fontSize: "0.72rem", color: "#7A6BA8", fontStyle: "italic" }}>"One thought, delivered two ways. Both work. Only one of them is honest."</span>
         </div>
@@ -7700,7 +7700,7 @@ export const RAGBeyondTab = ({ s }) => {
             <div style={{ fontFamily: "Playfair Display, serif", fontSize: "1rem", fontWeight: 900, color: "#C47A6A", lineHeight: 1.6, fontStyle: "italic" }}>
               "A larger context is a better book.<br />It is not a way to teleport your last thought."
             </div>
-            <div style={{ fontSize: "0.6rem", color: "#1E293B", marginTop: "0.5rem", fontFamily: "Syne, sans-serif" }}>— Anubhab Banerjee, TDS July 10 2026</div>
+            <div style={{ fontSize: "0.6rem", color: "#1E293B", marginTop: "0.5rem", fontFamily: "Syne, sans-serif" }}>AI Field Notes · July 10 2026</div>
           </div>
 
           {/* Three concrete scenarios — from article */}
@@ -8259,7 +8259,7 @@ export const HierarchicalRetrievalTab = ({ s }) => {
       <div style={{ background: "linear-gradient(135deg,#eff8f4,#f0f4f8,#faf6ef)", border: "1px solid #e0dcd4", borderRadius: 6, padding: "2rem", marginBottom: "1.5rem", position: "relative", overflow: "hidden" }}>
         <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 2, background: "linear-gradient(90deg,#5EC4C8,#F0A89A,#C9B8E8,#F0A89A,#5EC4C8)" }} />
         <div style={{ position: "absolute", right: "1.5rem", top: "0.5rem", fontFamily: "Playfair Display, serif", fontSize: "5rem", fontWeight: 900, color: "rgba(42,138,132,0.05)", lineHeight: 1, pointerEvents: "none" }}>TOC</div>
-        <div style={{ fontFamily: "Syne, sans-serif", fontSize: "0.58rem", fontWeight: 700, letterSpacing: "0.3em", textTransform: "uppercase", color: "#3A9B9F", marginBottom: "0.75rem" }}>Enterprise Document Intelligence · Vol.1 #7quater · TDS July 9, 2026 · Kezhan Shi</div>
+        <div style={{ fontFamily: "Syne, sans-serif", fontSize: "0.58rem", fontWeight: 700, letterSpacing: "0.3em", textTransform: "uppercase", color: "#3A9B9F", marginBottom: "0.75rem" }}>Enterprise Document Intelligence · Vol.1 #7quater · July 9, 2026</div>
         <h2 style={{ fontFamily: "Playfair Display, serif", fontSize: "1.6rem", fontWeight: 900, lineHeight: 1.1, marginBottom: "0.75rem" }}>
           Loop Engineering for<br /><em style={{ color: "#3A9B9F", fontStyle: "italic" }}>Hierarchical Retrieval</em>
         </h2>
@@ -8878,7 +8878,7 @@ export const RedesignWorkTab = ({ s }) => {
       <div style={{ background: "linear-gradient(135deg,#f2f8f0,#faf6ef,#f4f2fa)", border: "1px solid #e0dcd4", borderRadius: 6, padding: "2rem", marginBottom: "1.5rem", position: "relative", overflow: "hidden" }}>
         <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 2, background: "linear-gradient(90deg,#F0A89A,#5EC4C8,#C9B8E8,#F0A89A,#5EC4C8)" }} />
         <div style={{ position: "absolute", right: "1.5rem", top: "0.5rem", fontFamily: "Playfair Display, serif", fontSize: "4.5rem", fontWeight: 900, color: "rgba(201,168,76,0.05)", lineHeight: 1, pointerEvents: "none" }}>🏗️</div>
-        <div style={{ fontFamily: "Syne, sans-serif", fontSize: "0.58rem", fontWeight: 700, letterSpacing: "0.3em", textTransform: "uppercase", color: "#C47A6A", marginBottom: "0.75rem" }}>Agentic AI · Enterprise Strategy · TDS · Weiwei Hu · Jul 8, 2026 · 7 min</div>
+        <div style={{ fontFamily: "Syne, sans-serif", fontSize: "0.58rem", fontWeight: 700, letterSpacing: "0.3em", textTransform: "uppercase", color: "#C47A6A", marginBottom: "0.75rem" }}>Agentic AI · Enterprise Strategy · Jul 8, 2026 · 7 min</div>
         <h2 style={{ fontFamily: "Playfair Display, serif", fontSize: "1.6rem", fontWeight: 900, lineHeight: 1.1, marginBottom: "0.75rem" }}>
           Redesign Work Before<br /><em style={{ color: "#C47A6A", fontStyle: "italic" }}>You Add More AI Agents</em>
         </h2>
@@ -10120,7 +10120,7 @@ export const AgenticRAGTab = ({ s }) => {
       <div style={{ background: "linear-gradient(135deg,#f0f4f8,#f2f8f0,#faf6ef)", border: "1px solid #e0dcd4", borderRadius: 6, padding: "2rem", marginBottom: "1.5rem", position: "relative", overflow: "hidden" }}>
         <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 2, background: "linear-gradient(90deg,#F0A89A,#5EC4C8,#C9B8E8,#F0A89A,#5EC4C8)" }} />
         <div style={{ position: "absolute", right: "1.5rem", top: "0.5rem", fontFamily: "Playfair Display, serif", fontSize: "5rem", fontWeight: 900, color: "rgba(42,138,132,0.05)", lineHeight: 1, pointerEvents: "none" }}>🔍</div>
-        <div style={{ fontFamily: "Syne, sans-serif", fontSize: "0.58rem", fontWeight: 700, letterSpacing: "0.3em", textTransform: "uppercase", color: "#3A9B9F", marginBottom: "0.75rem" }}>TDS · Shuai Guo · Jul 13, 2026 · 6 min · OpenAI Agents SDK</div>
+        <div style={{ fontFamily: "Syne, sans-serif", fontSize: "0.58rem", fontWeight: 700, letterSpacing: "0.3em", textTransform: "uppercase", color: "#3A9B9F", marginBottom: "0.75rem" }}>AI FIELD NOTES · Jul 13, 2026 · 6 min · OpenAI Agents SDK</div>
         <h2 style={{ fontFamily: "Playfair Display, serif", fontSize: "1.6rem", fontWeight: 900, lineHeight: 1.1, marginBottom: "0.75rem" }}>
           Agentic RAG:<br /><em style={{ color: "#3A9B9F", fontStyle: "italic" }}>Let the Agent Search</em>
         </h2>
@@ -10676,7 +10676,7 @@ const SixReasonsDiagram = () => (
         </g>
       );
     })}
-    <text x="130" y="86" textAnchor="middle" fontSize="3.5" fill="#334155" fontFamily="Syne, sans-serif">"Classical ML models were the cutting edge across many industries for over a decade" — Stephanie Kirmer</text>
+    <text x="130" y="86" textAnchor="middle" fontSize="3.5" fill="#334155" fontFamily="Syne, sans-serif">"Classical ML models were the cutting edge across many industries for over a decade"</text>
   </svg>
 );
 
@@ -10702,7 +10702,7 @@ export const ClassicalMLTab = ({ s }) => {
       <div style={{ background: "linear-gradient(135deg,#eff8f4,#faf6ef,#f4f2fa)", border: "1px solid #e0dcd4", borderRadius: 6, padding: "2rem", marginBottom: "1.5rem", position: "relative", overflow: "hidden" }}>
         <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 2, background: "linear-gradient(90deg,#5EC4C8,#F0A89A,#C9B8E8,#F0A89A,#5EC4C8)" }} />
         <div style={{ position: "absolute", right: "1.5rem", top: "0.5rem", fontFamily: "Playfair Display, serif", fontSize: "5rem", fontWeight: 900, color: "rgba(42,138,132,0.06)", lineHeight: 1, pointerEvents: "none" }}>📊</div>
-        <div style={{ fontFamily: "Syne, sans-serif", fontSize: "0.58rem", fontWeight: 700, letterSpacing: "0.3em", textTransform: "uppercase", color: "#3A9B9F", marginBottom: "0.75rem" }}>TDS · Stephanie Kirmer · Jul 17, 2026 · 9 min</div>
+        <div style={{ fontFamily: "Syne, sans-serif", fontSize: "0.58rem", fontWeight: 700, letterSpacing: "0.3em", textTransform: "uppercase", color: "#3A9B9F", marginBottom: "0.75rem" }}>AI FIELD NOTES · Jul 17, 2026 · 9 min</div>
         <h2 style={{ fontFamily: "Playfair Display, serif", fontSize: "1.6rem", fontWeight: 900, lineHeight: 1.1, marginBottom: "0.75rem" }}>
           Using Classical ML<br /><em style={{ color: "#3A9B9F", fontStyle: "italic" }}>to Empower AI Agents</em>
         </h2>
@@ -11198,7 +11198,7 @@ export const HallucinationLoopTab = ({ s }) => {
       <div style={{ background: "linear-gradient(135deg,#faf0ee,#f4f2fa,#faf6ef)", border: "1px solid #e0dcd4", borderRadius: 6, padding: "2rem", marginBottom: "1.5rem", position: "relative", overflow: "hidden" }}>
         <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 2, background: "linear-gradient(90deg,#F0A89A,#F0A89A,#C9B8E8,#5EC4C8,#5EC4C8)" }} />
         <div style={{ position: "absolute", right: "1.5rem", top: "0.5rem", fontFamily: "Playfair Display, serif", fontSize: "5rem", fontWeight: 900, color: "rgba(196,87,42,0.06)", lineHeight: 1, pointerEvents: "none" }}>🚨</div>
-        <div style={{ fontFamily: "Syne, sans-serif", fontSize: "0.58rem", fontWeight: 700, letterSpacing: "0.3em", textTransform: "uppercase", color: "#C47A6A", marginBottom: "0.75rem" }}>The New Stack · Emmanuel Akita · Jul 9, 2026 · 7 min · Post-Mortem</div>
+        <div style={{ fontFamily: "Syne, sans-serif", fontSize: "0.58rem", fontWeight: 700, letterSpacing: "0.3em", textTransform: "uppercase", color: "#C47A6A", marginBottom: "0.75rem" }}>AI FIELD NOTES · Jul 9, 2026 · 7 min · Post-Mortem</div>
         <h2 style={{ fontFamily: "Playfair Display, serif", fontSize: "1.6rem", fontWeight: 900, lineHeight: 1.1, marginBottom: "0.75rem" }}>
           The Silent Hallucination Loop:<br /><em style={{ color: "#C47A6A", fontStyle: "italic" }}>How a Pipeline Poisoned Its Own Vector Store</em>
         </h2>
@@ -11762,7 +11762,7 @@ export const FiveAssetsTab = ({ s }) => {
       <div style={{ background: "linear-gradient(135deg,#eff8f4,#faf6ef,#f4f2fa)", border: "1px solid #e0dcd4", borderRadius: 6, padding: "2rem", marginBottom: "1.5rem", position: "relative", overflow: "hidden" }}>
         <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 2, background: "linear-gradient(90deg,#5EC4C8,#F0A89A,#C9B8E8,#F0A89A,#5EC4C8)" }} />
         <div style={{ position: "absolute", right: "1.5rem", top: "0.5rem", fontFamily: "Playfair Display, serif", fontSize: "5rem", fontWeight: 900, color: "rgba(42,138,132,0.06)", lineHeight: 1, pointerEvents: "none" }}>📦</div>
-        <div style={{ fontFamily: "Syne, sans-serif", fontSize: "0.58rem", fontWeight: 700, letterSpacing: "0.3em", textTransform: "uppercase", color: "#3A9B9F", marginBottom: "0.75rem" }}>TDS · Weiwei Hu · Jul 16, 2026 · 10 min · Companion to "Redesign Work First"</div>
+        <div style={{ fontFamily: "Syne, sans-serif", fontSize: "0.58rem", fontWeight: 700, letterSpacing: "0.3em", textTransform: "uppercase", color: "#3A9B9F", marginBottom: "0.75rem" }}>AI FIELD NOTES · Jul 16, 2026 · 10 min · Companion piece</div>
         <h2 style={{ fontFamily: "Playfair Display, serif", fontSize: "1.6rem", fontWeight: 900, lineHeight: 1.1, marginBottom: "0.75rem" }}>
           5 Assets to Prepare Before<br /><em style={{ color: "#3A9B9F", fontStyle: "italic" }}>Your AI Agents Take On More Work</em>
         </h2>
@@ -12219,7 +12219,7 @@ export const AIDataPlatformTab = ({ s }) => {
       <div style={{ background: "linear-gradient(135deg,#f4f2fa,#eff8f4,#faf6ef)", border: "1px solid #e0dcd4", borderRadius: 6, padding: "2rem", marginBottom: "1.5rem", position: "relative", overflow: "hidden" }}>
         <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 2, background: "linear-gradient(90deg,#5EC4C8,#9B89C4,#C9B8E8,#F0A89A,#5EC4C8)" }} />
         <div style={{ position: "absolute", right: "1.5rem", top: "0.5rem", fontFamily: "Playfair Display, serif", fontSize: "5rem", fontWeight: 900, color: "rgba(155,127,212,0.06)", lineHeight: 1, pointerEvents: "none" }}>🏛️</div>
-        <div style={{ fontFamily: "Syne, sans-serif", fontSize: "0.58rem", fontWeight: 700, letterSpacing: "0.3em", textTransform: "uppercase", color: "#C9B8E8", marginBottom: "0.75rem" }}>TDS · Jiayan Yin · Jul 18, 2026 · 14 min</div>
+        <div style={{ fontFamily: "Syne, sans-serif", fontSize: "0.58rem", fontWeight: 700, letterSpacing: "0.3em", textTransform: "uppercase", color: "#C9B8E8", marginBottom: "0.75rem" }}>AI FIELD NOTES · Jul 18, 2026 · 14 min</div>
         <h2 style={{ fontFamily: "Playfair Display, serif", fontSize: "1.55rem", fontWeight: 900, lineHeight: 1.15, marginBottom: "0.75rem" }}>
           Many Companies Use AI.<br /><em style={{ color: "#C9B8E8", fontStyle: "italic" }}>Few Know How to Build an AI-Native Data Platform.</em>
         </h2>
@@ -12753,7 +12753,7 @@ export const QuestionParsingLoopTab = ({ s }) => {
       <div style={{ background: "linear-gradient(135deg,#eff8f4,#faf6ef,#f4f2fa)", border: "1px solid #e0dcd4", borderRadius: 6, padding: "2rem", marginBottom: "1.5rem", position: "relative", overflow: "hidden" }}>
         <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 2, background: "linear-gradient(90deg,#5EC4C8,#F0A89A,#C9B8E8,#F0A89A,#5EC4C8)" }} />
         <div style={{ position: "absolute", right: "1.5rem", top: "0.5rem", fontFamily: "Playfair Display, serif", fontSize: "5rem", fontWeight: 900, color: "rgba(42,138,132,0.06)", lineHeight: 1, pointerEvents: "none" }}>🔂</div>
-        <div style={{ fontFamily: "Syne, sans-serif", fontSize: "0.58rem", fontWeight: 700, letterSpacing: "0.3em", textTransform: "uppercase", color: "#3A9B9F", marginBottom: "0.75rem" }}>Enterprise Document Intelligence · Vol.1 #6quinquies · Kezhan Shi · Jul 19, 2026 · 13 min</div>
+        <div style={{ fontFamily: "Syne, sans-serif", fontSize: "0.58rem", fontWeight: 700, letterSpacing: "0.3em", textTransform: "uppercase", color: "#3A9B9F", marginBottom: "0.75rem" }}>Enterprise Document Intelligence · Vol.1 #6quinquies · Jul 19, 2026 · 13 min</div>
         <h2 style={{ fontFamily: "Playfair Display, serif", fontSize: "1.55rem", fontWeight: 900, lineHeight: 1.15, marginBottom: "0.75rem" }}>
           Loop Engineering for RAG<br />Question Parsing: <em style={{ color: "#3A9B9F", fontStyle: "italic" }}>The Small Loop That Runs Before Retrieval</em>
         </h2>
@@ -13214,7 +13214,7 @@ export const FourPDFsTab = ({ s }) => {
       <div style={{ background: "linear-gradient(135deg,#eff8f4,#faf6ef,#f4f2fa)", border: "1px solid #e0dcd4", borderRadius: 6, padding: "2rem", marginBottom: "1.5rem", position: "relative", overflow: "hidden" }}>
         <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 2, background: "linear-gradient(90deg,#5EC4C8,#F0A89A,#F0A89A,#C9B8E8,#5EC4C8)" }} />
         <div style={{ position: "absolute", right: "1.5rem", top: "0.5rem", fontFamily: "Playfair Display, serif", fontSize: "5rem", fontWeight: 900, color: "rgba(42,138,132,0.06)", lineHeight: 1, pointerEvents: "none" }}>📚</div>
-        <div style={{ fontFamily: "Syne, sans-serif", fontSize: "0.58rem", fontWeight: 700, letterSpacing: "0.3em", textTransform: "uppercase", color: "#3A9B9F", marginBottom: "0.75rem" }}>Enterprise Document Intelligence · Vol.1 #9B · TDS · Companion to Article 9A</div>
+        <div style={{ fontFamily: "Syne, sans-serif", fontSize: "0.58rem", fontWeight: 700, letterSpacing: "0.3em", textTransform: "uppercase", color: "#3A9B9F", marginBottom: "0.75rem" }}>Enterprise Document Intelligence · Vol.1 #9B · Companion piece</div>
         <h2 style={{ fontFamily: "Playfair Display, serif", fontSize: "1.55rem", fontWeight: 900, lineHeight: 1.15, marginBottom: "0.75rem" }}>
           One RAG Pipeline,<br />Four Very Different PDFs — <em style={{ color: "#3A9B9F", fontStyle: "italic" }}>Same Four Bricks, Every Answer Typed and Cited</em>
         </h2>
@@ -13616,7 +13616,7 @@ export const HallucBricksTab = ({ s }) => {
       <div style={{ background: "linear-gradient(135deg,#faf0ee,#f4f2fa,#eff8f4)", border: "1px solid #e0dcd4", borderRadius: 6, padding: "2rem", marginBottom: "1.5rem", position: "relative", overflow: "hidden" }}>
         <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 2, background: "linear-gradient(90deg,#5EC4C8,#F0A89A,#C9B8E8,#F0A89A)" }} />
         <div style={{ position: "absolute", right: "1.5rem", top: "0.5rem", fontFamily: "Playfair Display, serif", fontSize: "5rem", fontWeight: 900, color: "rgba(196,87,42,0.06)", lineHeight: 1, pointerEvents: "none" }}>🧱</div>
-        <div style={{ fontFamily: "Syne, sans-serif", fontSize: "0.58rem", fontWeight: 700, letterSpacing: "0.3em", textTransform: "uppercase", color: "#C47A6A", marginBottom: "0.75rem" }}>Enterprise Document Intelligence · Vol.1 #9bis · TDS · Companion to Article 9A</div>
+        <div style={{ fontFamily: "Syne, sans-serif", fontSize: "0.58rem", fontWeight: 700, letterSpacing: "0.3em", textTransform: "uppercase", color: "#C47A6A", marginBottom: "0.75rem" }}>Enterprise Document Intelligence · Vol.1 #9bis · Companion piece</div>
         <h2 style={{ fontFamily: "Playfair Display, serif", fontSize: "1.55rem", fontWeight: 900, lineHeight: 1.15, marginBottom: "0.75rem" }}>
           Prompt Engineering Isn't Enough:<br />How Four Bricks of <em style={{ color: "#C47A6A", fontStyle: "italic" }}>Context Engineering Stop RAG Hallucinations</em>
         </h2>
@@ -14002,7 +14002,7 @@ export const GenPatternsTab = ({ s }) => {
       <div style={{ background: "linear-gradient(135deg,#eff8f4,#faf6ef,#f4f2fa)", border: "1px solid #e0dcd4", borderRadius: 6, padding: "2rem", marginBottom: "1.5rem", position: "relative", overflow: "hidden" }}>
         <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 2, background: "linear-gradient(90deg,#5EC4C8,#F0A89A,#C9B8E8,#F0A89A,#5EC4C8)" }} />
         <div style={{ position: "absolute", right: "1.5rem", top: "0.5rem", fontFamily: "Playfair Display, serif", fontSize: "5rem", fontWeight: 900, color: "rgba(42,138,132,0.06)", lineHeight: 1, pointerEvents: "none" }}>🧬</div>
-        <div style={{ fontFamily: "Syne, sans-serif", fontSize: "0.58rem", fontWeight: 700, letterSpacing: "0.3em", textTransform: "uppercase", color: "#3A9B9F", marginBottom: "0.75rem" }}>Enterprise Document Intelligence · Vol.1 #8ter · Kezhan Shi · Jul 23, 2026 · 11 min</div>
+        <div style={{ fontFamily: "Syne, sans-serif", fontSize: "0.58rem", fontWeight: 700, letterSpacing: "0.3em", textTransform: "uppercase", color: "#3A9B9F", marginBottom: "0.75rem" }}>Enterprise Document Intelligence · Vol.1 #8ter · Jul 23, 2026 · 11 min</div>
         <h2 style={{ fontFamily: "Playfair Display, serif", fontSize: "1.55rem", fontWeight: 900, lineHeight: 1.15, marginBottom: "0.75rem" }}>
           Most RAG Hallucinations Are<br /><em style={{ color: "#3A9B9F", fontStyle: "italic" }}>Extraction Errors:</em> Seven Patterns for a Typed Generation Contract
         </h2>
@@ -14200,7 +14200,7 @@ export const TokenBillTab = ({ s }) => {
         <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 3, background: "linear-gradient(90deg, #F0A89A, #F0A89A, #5EC4C8, #C9B8E8)" }} />
         <div style={{ position: "absolute", right: "2rem", top: "1rem", fontFamily: "Playfair Display, serif", fontSize: "6rem", fontWeight: 900, color: "rgba(201,168,76,0.05)", lineHeight: 1, pointerEvents: "none" }}>💸</div>
         <div style={{ fontFamily: "Syne, sans-serif", fontSize: "0.6rem", fontWeight: 700, letterSpacing: "0.3em", textTransform: "uppercase", color: "#C47A6A", marginBottom: "0.75rem" }}>
-          Production Cost & Architecture Optimization · Towards Data Science Guide
+          Production Cost & Architecture Optimization
         </div>
         <h2 style={{ fontFamily: "Playfair Display, serif", fontSize: "1.8rem", fontWeight: 900, color: "#ffffff", lineHeight: 1.2, marginBottom: "0.75rem" }}>
           The 3× Token Bill We Didn't See Coming:<br />
@@ -15010,7 +15010,7 @@ async def safe_llm_invoke(agent, payload):
 
           <div style={{ background: "#ffffff", border: "1px solid #e0dcd4", borderRadius: 8, padding: "1.2rem", marginBottom: "1.5rem" }}>
             <blockquote style={{ borderLeft: "3px solid #5EC4C8", paddingLeft: "0.8rem", margin: "0 0 1rem 0", fontStyle: "italic", fontSize: "0.7rem", color: "#1E293B" }}>
-              "Manual inspection of data has probably the highest value-to-prestige ratio of any activity in machine learning." — Greg Brockman
+              "Manual inspection of data has probably the highest value-to-prestige ratio of any activity in machine learning."
             </blockquote>
 
             <p style={{ fontSize: "0.65rem", color: "#334155", lineHeight: 1.6, marginBottom: "1rem" }}>
@@ -15238,7 +15238,7 @@ export const ContextMeasureTab = ({ s }) => {
       <div style={{ background: "linear-gradient(135deg,#f4f2fa,#eff8f4,#faf6ef)", border: "1px solid #e0dcd4", borderRadius: 6, padding: "2rem", marginBottom: "1.5rem", position: "relative", overflow: "hidden" }}>
         <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 2, background: "linear-gradient(90deg,#5EC4C8,#F0A89A,#C9B8E8,#F0A89A,#5EC4C8)" }} />
         <div style={{ position: "absolute", right: "1.5rem", top: "0.5rem", fontFamily: "Playfair Display, serif", fontSize: "5rem", fontWeight: 900, color: "rgba(155,127,212,0.06)", lineHeight: 1, pointerEvents: "none" }}>📐</div>
-        <div style={{ fontFamily: "Syne, sans-serif", fontSize: "0.58rem", fontWeight: 700, letterSpacing: "0.3em", textTransform: "uppercase", color: "#7A6BA8", marginBottom: "0.75rem" }}>arXiv:2607.14275 · Fouad Bousetouane · University of Chicago · Jul 15, 2026</div>
+        <div style={{ fontFamily: "Syne, sans-serif", fontSize: "0.58rem", fontWeight: 700, letterSpacing: "0.3em", textTransform: "uppercase", color: "#7A6BA8", marginBottom: "0.75rem" }}>arXiv:2607.14275 · Jul 15, 2026</div>
         <h2 style={{ fontFamily: "Playfair Display, serif", fontSize: "1.55rem", fontWeight: 900, lineHeight: 1.15, marginBottom: "0.75rem" }}>
           AI Agents Do Not Fail Alone:<br /><em style={{ color: "#7A6BA8", fontStyle: "italic" }}>The Context Fails First</em>
         </h2>
@@ -15695,7 +15695,7 @@ export const UnhobblingTab = ({ s }) => {
       <div style={{ background: "linear-gradient(135deg,#eff8f4,#f4f2fa,#faf6ef)", border: "1px solid #e0dcd4", borderRadius: 6, padding: "2rem", marginBottom: "1.5rem", position: "relative", overflow: "hidden" }}>
         <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 2, background: "linear-gradient(90deg,#5EC4C8,#9B89C4,#C9B8E8,#F0A89A,#5EC4C8)" }} />
         <div style={{ position: "absolute", right: "1.5rem", top: "0.5rem", fontFamily: "Playfair Display, serif", fontSize: "5rem", fontWeight: 900, color: "rgba(42,138,132,0.06)", lineHeight: 1, pointerEvents: "none" }}>🔓</div>
-        <div style={{ fontFamily: "Syne, sans-serif", fontSize: "0.58rem", fontWeight: 700, letterSpacing: "0.3em", textTransform: "uppercase", color: "#5EC4C8", marginBottom: "0.75rem" }}>Anthropic · Thariq Shihipar · claude.com/blog · Jul 24, 2026 · 5 min</div>
+        <div style={{ fontFamily: "Syne, sans-serif", fontSize: "0.58rem", fontWeight: 700, letterSpacing: "0.3em", textTransform: "uppercase", color: "#5EC4C8", marginBottom: "0.75rem" }}>AI FIELD NOTES · Jul 24, 2026 · 5 min</div>
         <h2 style={{ fontFamily: "Playfair Display, serif", fontSize: "1.55rem", fontWeight: 900, lineHeight: 1.15, marginBottom: "0.75rem" }}>
           The New Rules of Context Engineering<br />for <em style={{ color: "#5EC4C8", fontStyle: "italic" }}>Claude 5-Generation Models</em>
         </h2>
@@ -16263,7 +16263,7 @@ export const ActiveLearningTab = ({ s }) => {
       <div style={{ background: "linear-gradient(135deg,#eff8f4,#faf6ef,#f4f2fa)", border: "1px solid #e0dcd4", borderRadius: 6, padding: "2rem", marginBottom: "1.5rem", position: "relative", overflow: "hidden" }}>
         <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 2, background: "linear-gradient(90deg,#5EC4C8,#F0A89A,#C9B8E8,#F0A89A,#5EC4C8)" }} />
         <div style={{ position: "absolute", right: "1.5rem", top: "0.5rem", fontFamily: "Playfair Display, serif", fontSize: "5rem", fontWeight: 900, color: "rgba(42,138,132,0.06)", lineHeight: 1, pointerEvents: "none" }}>🎯</div>
-        <div style={{ fontFamily: "Syne, sans-serif", fontSize: "0.58rem", fontWeight: 700, letterSpacing: "0.3em", textTransform: "uppercase", color: "#3A9B9F", marginBottom: "0.75rem" }}>TOWARDS DATA SCIENCE</div>
+        <div style={{ fontFamily: "Syne, sans-serif", fontSize: "0.58rem", fontWeight: 700, letterSpacing: "0.3em", textTransform: "uppercase", color: "#3A9B9F", marginBottom: "0.75rem" }}>AI FIELD NOTES</div>
         <h2 style={{ fontFamily: "Playfair Display, serif", fontSize: "1.55rem", fontWeight: 900, lineHeight: 1.15, marginBottom: "0.75rem" }}>
           Reducing Human Annotation<br />with <em style={{ color: "#3A9B9F", fontStyle: "italic" }}>ML Active Learning</em>
         </h2>
@@ -16316,7 +16316,7 @@ export const ActiveLearningTab = ({ s }) => {
       {/* ─── STEP-BY-STEP IMPLEMENTATION ─── */}
       {section === "stepbystep" && (
         <div>
-          <div style={s.sectionLabel("#5EC4C8")}>Step-by-Step Python Implementation Guide (TDS Publication)</div>
+          <div style={s.sectionLabel("#5EC4C8")}>Step-by-Step Python Implementation Guide</div>
           
           {/* Strategy Tabs Selector */}
           <div style={{ display: "flex", gap: "0.6rem", marginBottom: "1.5rem" }}>
@@ -17037,7 +17037,7 @@ export const CompanyBrainTab = ({ s }) => {
       <div style={{ background: "linear-gradient(135deg,#eff8f4,#faf6ef,#f4f2fa)", border: "1px solid #e0dcd4", borderRadius: 6, padding: "2rem", marginBottom: "1.5rem", position: "relative", overflow: "hidden" }}>
         <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 2, background: "linear-gradient(90deg,#5EC4C8,#F0A89A,#C9B8E8,#F0A89A,#5EC4C8)" }} />
         <div style={{ position: "absolute", right: "1.5rem", top: "0.5rem", fontFamily: "Playfair Display, serif", fontSize: "5rem", fontWeight: 900, color: "rgba(42,138,132,0.06)", lineHeight: 1, pointerEvents: "none" }}>🧠</div>
-        <div style={{ fontFamily: "Syne, sans-serif", fontSize: "0.58rem", fontWeight: 700, letterSpacing: "0.3em", textTransform: "uppercase", color: "#3A9B9F", marginBottom: "0.75rem" }}>TOWARDS DATA SCIENCE</div>
+        <div style={{ fontFamily: "Syne, sans-serif", fontSize: "0.58rem", fontWeight: 700, letterSpacing: "0.3em", textTransform: "uppercase", color: "#3A9B9F", marginBottom: "0.75rem" }}>AI FIELD NOTES</div>
         <h2 style={{ fontFamily: "Playfair Display, serif", fontSize: "1.55rem", fontWeight: 900, lineHeight: 1.15, marginBottom: "0.75rem" }}>
           How to Build a <em style={{ color: "#3A9B9F", fontStyle: "italic" }}>Context Layer</em><br />and a Company Brain
         </h2>
@@ -17873,7 +17873,7 @@ export const AgentTasksTab = ({ s }) => {
       <div style={{ background: "linear-gradient(135deg,#eff8f4,#faf6ef,#f4f2fa)", border: "1px solid #e0dcd4", borderRadius: 6, padding: "2rem", marginBottom: "1.5rem", position: "relative", overflow: "hidden" }}>
         <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 2, background: "linear-gradient(90deg,#5EC4C8,#F0A89A,#C9B8E8,#F0A89A,#5EC4C8)" }} />
         <div style={{ position: "absolute", right: "1.5rem", top: "0.5rem", fontFamily: "Playfair Display, serif", fontSize: "5rem", fontWeight: 900, color: "rgba(42,138,132,0.06)", lineHeight: 1, pointerEvents: "none" }}>📋</div>
-        <div style={{ fontFamily: "Syne, sans-serif", fontSize: "0.58rem", fontWeight: 700, letterSpacing: "0.3em", textTransform: "uppercase", color: "#3A9B9F", marginBottom: "0.75rem" }}>TOWARDS DATA SCIENCE</div>
+        <div style={{ fontFamily: "Syne, sans-serif", fontSize: "0.58rem", fontWeight: 700, letterSpacing: "0.3em", textTransform: "uppercase", color: "#3A9B9F", marginBottom: "0.75rem" }}>AI FIELD NOTES</div>
         <h2 style={{ fontFamily: "Playfair Display, serif", fontSize: "1.55rem", fontWeight: 900, lineHeight: 1.15, marginBottom: "0.75rem" }}>
           How to Organize All of Your <em style={{ color: "#3A9B9F", fontStyle: "italic" }}>Coding Agent Tasks</em>
         </h2>
@@ -18316,7 +18316,7 @@ export const PromptMgmtTab = ({ s }) => {
       <div style={{ background: "linear-gradient(135deg,#eff8f4,#faf6ef,#f4f2fa)", border: "1px solid #e0dcd4", borderRadius: 6, padding: "2rem", marginBottom: "1.5rem", position: "relative", overflow: "hidden" }}>
         <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 2, background: "linear-gradient(90deg,#5EC4C8,#9B89C4,#C9B8E8,#F0A89A,#5EC4C8)" }} />
         <div style={{ position: "absolute", right: "1.5rem", top: "0.5rem", fontFamily: "Playfair Display, serif", fontSize: "5rem", fontWeight: 900, color: "rgba(42,138,132,0.06)", lineHeight: 1, pointerEvents: "none" }}>🛡️</div>
-        <div style={{ fontFamily: "Syne, sans-serif", fontSize: "0.58rem", fontWeight: 700, letterSpacing: "0.3em", textTransform: "uppercase", color: "#5EC4C8", marginBottom: "0.75rem" }}>TOWARDS DATA SCIENCE</div>
+        <div style={{ fontFamily: "Syne, sans-serif", fontSize: "0.58rem", fontWeight: 700, letterSpacing: "0.3em", textTransform: "uppercase", color: "#5EC4C8", marginBottom: "0.75rem" }}>AI FIELD NOTES</div>
         <h2 style={{ fontFamily: "Playfair Display, serif", fontSize: "1.55rem", fontWeight: 900, lineHeight: 1.15, marginBottom: "0.75rem" }}>
           Prompt Engineering Is Solved — <em style={{ color: "#5EC4C8", fontStyle: "italic" }}>Prompt Management Isn't</em>
         </h2>
@@ -19820,7 +19820,7 @@ print(result.final_output.model_dump_json(indent=2))`} />
         <div style={s.card}>
           <div style={s.sectionLabel("#5EC4C8")}>Interactive Diagnostic: When to Use "Agents as Tools"</div>
           <p style={{ fontSize: "0.72rem", color: "#64748b", marginBottom: "1.5rem", lineHeight: 1.7 }}>
-            Answer these 3 core questions from the Towards Data Science article to determine if your scenario is a fit for the Agent-as-a-Tool pattern.
+            Answer these 3 core questions to determine if your scenario is a fit for the Agent-as-a-Tool pattern.
           </p>
 
           <div style={{ display: "flex", flexDirection: "column", gap: "1.2rem" }}>

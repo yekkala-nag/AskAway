@@ -29,7 +29,7 @@ export default function ProjectPrepFrameworkTab() {
         moduleId="agents_frameworks"
         moduleLabel="Agent Systems & Frameworks [Solve the Right Problem]"
         title="Solve the Right Problem Before Agents Build the Wrong One Fast"
-        description="Agentic AI makes implementation cheap — so problem definition becomes the bottleneck. 6 short docs that make decisions explicit, durable and usable by humans + agents. Based on Mike Huls' Project Preparation Framework (TDS)."
+        description="Agentic AI makes implementation cheap — so problem definition becomes the bottleneck. 6 short docs that make decisions explicit, durable and usable by humans + agents."
         metrics={[
           { label: 'Framework', value: '6 Docs, Sequential' },
           { label: 'Core Rule', value: 'Scrutiny ∝ Reversal Cost' },
@@ -197,7 +197,7 @@ export default function ProjectPrepFrameworkTab() {
                   ))}
                 </Grid>
                 <CodeBlock language="python" code={PYTHON_PREP_CODE} />
-                <Callout type="success"><strong>Source:</strong> Mike Huls, TDS Sep 2026 + Project Preparation Framework repo (templates for each doc). Contribute war stories upstream.</Callout>
+                <Callout type="success"><strong>Templates:</strong> Each document ships with a ready-to-fill template. Contribute war stories upstream.</Callout>
               </Stack>
             </Card>
           </Stack>

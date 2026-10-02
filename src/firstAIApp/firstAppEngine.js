@@ -1,6 +1,5 @@
 // ============================================================================
 // BUILDING YOUR FIRST AI APP: ARCHITECTURE & INFRASTRUCTURE ENGINE
-// Based on Ibrahim Salami's publication (Towards Data Science):
 // Client Libraries, API Key Security, JSON Response Anatomy, Error Triaging, and Map-Reduce Chunking
 // ============================================================================
 

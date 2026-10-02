@@ -71,7 +71,7 @@ export default function ContextLimitsTab() {
         moduleId="context_memory"
         moduleLabel="Context & Memory Engineering [Microsoft Research]"
         title="Your 1M+ Context Window LLM Is Less Powerful Than You Think"
-        description="Tobias Schnabel's Microsoft Research framework introducing the Bounded Attention Prefix Oracle (BAPO) model. Discover why effective LLM working memory collapses long before hitting 1M-2M token context window limits, and how to fix it."
+        description="A Microsoft Research framework introducing the Bounded Attention Prefix Oracle (BAPO) model. Discover why effective LLM working memory collapses long before hitting 1M-2M token context window limits, and how to fix it."
         metrics={[
           { label: 'Raw Context', value: '1M – 2M Tokens' },
           { label: 'Working Memory', value: 'N = 5 to 10 Vars' },

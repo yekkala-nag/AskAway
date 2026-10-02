@@ -20,7 +20,7 @@ export default function HandoffWatchTab() {
     <div style={{ paddingBottom: 'var(--ds-space-12)' }}>
       <Hero moduleId="agents_frameworks" moduleLabel="Agent Systems & Frameworks [Handoff Watchdogs]"
         title="Your Final Output Can Lie — Grade the Seams"
-        description="Support-triage pipeline, three nodes deep: a 200-OK empty payload sails through tone checks and ships a polite wrong refund. Intermediate State Evals put a cheap watchdog between nodes so corruption halts where it enters. Based on Benjamin Nweke (TDS)."
+        description="Support-triage pipeline, three nodes deep: a 200-OK empty payload sails through tone checks and ships a polite wrong refund. Intermediate State Evals put a cheap watchdog between nodes so corruption halts where it enters."
         metrics={[{ label: 'Silent Share', value: '~40% of failures' }, { label: 'Grader', value: 'Local 1B, 1 Q' }, { label: 'Floor', value: '0.35, tuned' }, { label: 'Rule', value: 'Fail closed' }]} />
       <Container size="wide">
         <div style={{ marginBottom: 'var(--ds-space-6)' }}><DiagramImage moduleId="agents_frameworks" src="/assets/handoff_watchdog.svg" alt="Handoff watchdog" title="Seam Grading + Costs" caption="Empty-200 passes tone checks; watchdog halts at the seam with payload attached." background="#090d16" maxWidth={1100} /></div>

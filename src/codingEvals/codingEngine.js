@@ -1,5 +1,5 @@
 // ============================================================================
-// CODING-AGENT EVALS ENGINE (Pete Hampton — evaluate the work, TNS)
+// CODING-AGENT EVALS ENGINE (evaluate the work)
 // Agent≠model, executable contracts, six layers, statistics, open-ended bounds
 // Responsible AI & Security Compliant: Zero PII / synthetic demo data only
 // ============================================================================
@@ -62,7 +62,7 @@ export const TRIAL_STATS = (runs = 10, p = 0.7, budgetOk = 0.8, serious = 0) => 
 
 export const PYTHON_CODING_EVAL_CODE = `# ============================================================================
 # CODING-AGENT EVALS: executable contracts + six layers + trial stats
-# (P. Hampton: stop grading agents like chatbots)
+# (stop grading agents like chatbots)
 # ============================================================================
 import math
 

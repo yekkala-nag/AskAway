@@ -1,5 +1,5 @@
 // ============================================================================
-// TRPO → GRPO ENGINE (Maxime Wolf — RL training of LLMs, TDS)
+// TRPO → GRPO ENGINE (RL training of LLMs)
 // Pretrain→SFT→RLHF; maze analogy; KL trust regions; clipped PPO;
 // value-model discounting; GRPO group z-scores (DeepSeek)
 // Responsible AI & Security Compliant: Zero PII / synthetic demo data only

@@ -20,7 +20,7 @@ export default function EnterpriseGradeTab() {
     <div style={{ paddingBottom: 'var(--ds-space-12)' }}>
       <Hero moduleId="frontiers_production" moduleLabel="Production & Frontiers [Enterprise-Grade AI]"
         title="Mundane Beats Moonshots — End-to-End or End of Story"
-        description="87% of AI projects never reach production. Forecasting, anomaly detection, classification on diligent data; bias traps dodged; good-enough benchmarked; four drifts watched; buy-in earned. Based on Caroline Zaborowski (TDS)."
+        description="87% of AI projects never reach production. Forecasting, anomaly detection, classification on diligent data; bias traps dodged; good-enough benchmarked; four drifts watched; buy-in earned."
         metrics={[{ label: 'Win Zone', value: 'Mundane 3' }, { label: 'Fail Rate', value: '87% stall' }, { label: 'Edge', value: '10–20%' }, { label: 'Bar', value: '85 to ship' }]} />
       <Container size="wide">
         <div style={{ marginBottom: 'var(--ds-space-6)' }}><DiagramImage moduleId="frontiers_production" src="/assets/enterprise_grade.svg" alt="Enterprise grade AI" title="Diligence → Benchmark → Watch → Buy-in" caption="Data diligence up front, good-enough in the middle, drift watch forever." background="#090d16" maxWidth={1100} /></div>

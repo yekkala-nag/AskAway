@@ -240,7 +240,7 @@ export default function DataCentricAITab() {
         <div style={{ display: "flex", gap: 12, alignItems: "flex-start", marginBottom: 16 }}>
           <span style={{ fontSize: 28 }}>📰</span>
           <div>
-            <div style={{ color: C.emerald, fontFamily: "JetBrains Mono, monospace", fontSize: 10, fontWeight: 700, letterSpacing: "0.1em", marginBottom: 4 }}>TOWARDS DATA SCIENCE · AUGUST 2021</div>
+            <div style={{ color: C.emerald, fontFamily: "JetBrains Mono, monospace", fontSize: 10, fontWeight: 700, letterSpacing: "0.1em", marginBottom: 4 }}>AI FIELD NOTES · AUGUST 2021</div>
             <h2 style={{ margin: 0, fontSize: 22, fontWeight: 700, lineHeight: 1.2 }}>Rethinking How We Approach AI Problems</h2>
           </div>
         </div>

@@ -1,6 +1,6 @@
 // ============================================================================
 // FRAUD DETECTION ML: 6 MODELS & PRODUCTION TRADEOFFS ENGINE
-// Based on Benjamin Nweke's NairaShield banking study:
+// Banking fraud study:
 // Evaluation Metrics vs Real-World Production SLA, Explainability & Cost Matrix
 // ============================================================================
 

@@ -19,7 +19,7 @@ export default function RLTrainingTab() {
     <div style={{ paddingBottom: 'var(--ds-space-12)' }}>
       <Hero moduleId="foundations" moduleLabel="Foundations & Architecture [RL Training: TRPO → GRPO]"
         title="How Rewards Reshape Policies — TRPO to GRPO"
-        description="Pretrain → SFT → RLHF. Tokens are actions, reward models score, and three algorithms balance stability vs efficiency: TRPO's hard KL, PPO's clip, GRPO's group z-scores that delete the value model. Based on Maxime Wolf (TDS) — the DeepSeek story."
+        description="Pretrain → SFT → RLHF. Tokens are actions, reward models score, and three algorithms balance stability vs efficiency: TRPO's hard KL, PPO's clip, GRPO's group z-scores that delete the value model."
         metrics={[{ label: 'Stages', value: '3' }, { label: 'Ladder', value: 'TRPO·PPO·GRPO' }, { label: 'GRPO Saves', value: 'Value model' }, { label: 'Math', value: 'Minimal' }]} />
       <Container size="wide">
         <div style={{ marginBottom: 'var(--ds-space-6)' }}><DiagramImage moduleId="foundations" src="/assets/trpo_grpo.svg" alt="TRPO to GRPO" title="Trust Regions Get Cheaper" caption="Same RL roots; each step drops machinery while keeping stability." background="#0F1219" maxWidth={1100} /></div>

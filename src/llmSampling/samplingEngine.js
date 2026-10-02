@@ -10,13 +10,13 @@ export const SAMPLE_PROMPTS = [
     title: "1. Deterministic Python Code Generation",
     prompt: "def compute_fibonacci(n: int) -> list[int]:\n    \"\"\"Return first n Fibonacci numbers.\"\"\"\n    if n <= 0:\n        return",
     vocabCandidates: [
-      { token: " []", rawLogit: 9.8, category: "correct" },
-      { token: " [0]", rawLogit: 6.2, category: "alternative" },
+      { token: " []", rawLogit: 6.4, category: "correct" },
+      { token: " [0]", rawLogit: 5.9, category: "alternative" },
       { token: " None", rawLogit: 5.1, category: "alternative" },
-      { token: " raise", rawLogit: 3.4, category: "alternative" },
-      { token: " False", rawLogit: 1.2, category: "rare" },
-      { token: " print", rawLogit: -0.5, category: "hallucination" },
-      { token: " banana", rawLogit: -4.8, category: "nonsense" }
+      { token: " raise", rawLogit: 4.6, category: "alternative" },
+      { token: " False", rawLogit: 3.2, category: "rare" },
+      { token: " print", rawLogit: 1.8, category: "hallucination" },
+      { token: " banana", rawLogit: -0.5, category: "nonsense" }
     ]
   },
   {
@@ -24,13 +24,13 @@ export const SAMPLE_PROMPTS = [
     title: "2. Creative World-Building Narrative",
     prompt: "Beyond the shattered crystal gates of the ancient citadel, the obsidian dragon spread its",
     vocabCandidates: [
-      { token: " wings", rawLogit: 8.5, category: "predictable" },
-      { token: " crystalline", rawLogit: 7.8, category: "creative" },
-      { token: " shadow", rawLogit: 7.4, category: "creative" },
-      { token: " talons", rawLogit: 6.1, category: "alternative" },
-      { token: " fiery", rawLogit: 5.5, category: "alternative" },
-      { token: " spreadsheet", rawLogit: -1.2, category: "hallucination" },
-      { token: " syntax", rawLogit: -5.0, category: "nonsense" }
+      { token: " wings", rawLogit: 6.2, category: "predictable" },
+      { token: " crystalline", rawLogit: 5.9, category: "creative" },
+      { token: " shadow", rawLogit: 5.6, category: "creative" },
+      { token: " talons", rawLogit: 4.7, category: "alternative" },
+      { token: " fiery", rawLogit: 4.1, category: "alternative" },
+      { token: " spreadsheet", rawLogit: 1.4, category: "hallucination" },
+      { token: " syntax", rawLogit: -0.8, category: "nonsense" }
     ]
   },
   {
@@ -38,12 +38,12 @@ export const SAMPLE_PROMPTS = [
     title: "3. Enterprise Financial GAAP Analysis",
     prompt: "Based on the Q3 balance sheet, the total operating margin contracted by 140 bps due to higher",
     vocabCandidates: [
-      { token: " cost", rawLogit: 8.9, category: "correct" },
-      { token: " SG&A", rawLogit: 8.2, category: "correct" },
-      { token: " logistics", rawLogit: 7.1, category: "alternative" },
-      { token: " headcount", rawLogit: 6.3, category: "alternative" },
-      { token: " unicorn", rawLogit: -2.1, category: "nonsense" },
-      { token: " delicious", rawLogit: -4.5, category: "nonsense" }
+      { token: " cost", rawLogit: 6.0, category: "correct" },
+      { token: " SG&A", rawLogit: 5.7, category: "correct" },
+      { token: " logistics", rawLogit: 5.2, category: "alternative" },
+      { token: " headcount", rawLogit: 4.4, category: "alternative" },
+      { token: " unicorn", rawLogit: 1.6, category: "nonsense" },
+      { token: " delicious", rawLogit: -0.6, category: "nonsense" }
     ]
   }
 ];
@@ -138,16 +138,19 @@ export const CALCULATE_SAMPLING_DISTRIBUTION = ({
       }
     });
 
-    return processed.map((c, idx) => ({
-      ...c,
-      scaledLogit: idx === maxIdx ? 100 : -100,
-      rawProb: idx === maxIdx ? 1.0 : 0.0,
-      finalProb: idx === maxIdx ? 1.0 : 0.0,
-      isKeptByTopK: true,
-      isKeptByTopP: idx === maxIdx,
-      isKeptByMinP: idx === maxIdx,
-      isSampled: idx === maxIdx
-    }));
+    return processed
+      .map((c, idx) => ({
+        ...c,
+        scaledLogit: idx === maxIdx ? 100 : -100,
+        rawProb: idx === maxIdx ? 1.0 : 0.0,
+        finalProb: idx === maxIdx ? 1.0 : 0.0,
+        isKeptByTopK: true,
+        isKeptByTopP: idx === maxIdx,
+        isKeptByMinP: idx === maxIdx,
+        isSampled: idx === maxIdx,
+        isSurviving: idx === maxIdx
+      }))
+      .sort((a, b) => b.rawLogit - a.rawLogit);
   }
 
   // Step 2: Temperature Scaling (z_i / T)

@@ -1,6 +1,6 @@
 // ============================================================================
 // LLM REASONING & GSM-SYMBOLIC BENCHMARK ENGINE
-// Based on Apple Research (Mirzadeh et al., 2024) & Maxime Jabarian TDS Study
+// Based on Apple Research (Mirzadeh et al., 2024)
 // Rethinking LLM Benchmarks: Measuring True Reasoning Beyond Training Data
 // ============================================================================
 

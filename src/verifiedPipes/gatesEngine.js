@@ -1,5 +1,5 @@
 // ============================================================================
-// VERIFIED PIPELINES ENGINE (DORA/Octopus/V. Farcic — review vs pipeline)
+// VERIFIED PIPELINES ENGINE (review vs pipeline)
 // PRs 2x, bugs +54%, incidents/PR +243%; policy-as-code over theater review
 // Responsible AI & Security Compliant: Zero PII / synthetic demo data only
 // ============================================================================
@@ -47,7 +47,7 @@ export const ESCAPE_MODEL = (prsPerWeek = 100, reviewCover = 30, gateStrict = 70
 };
 
 export const PYTHON_GATES_CODE = `# ============================================================================
-# VERIFIED PIPELINE: policy-as-code gates, author-agnostic (Farcic/Bristowe)
+# VERIFIED PIPELINE: policy-as-code gates
 # ============================================================================
 def gate(pr: dict) -> list[str]:
     blocks = []

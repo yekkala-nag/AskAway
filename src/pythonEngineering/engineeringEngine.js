@@ -1,6 +1,5 @@
 // ============================================================================
 // 5 COMPUTATIONAL ENGINEERING SIMULATORS ENGINE (PYTHON & NUMERICAL METHODS)
-// Based on Andrew Joseph Davies (Towards Data Science):
 // FEA Truss Solver, PID Controller, Damped Harmonic Oscillator, NACA Airfoil, Rankine Cycle
 // ============================================================================
 

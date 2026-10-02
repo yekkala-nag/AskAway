@@ -140,7 +140,7 @@ export default function LinearRegressionTab() {
         moduleId="data_platform"
         moduleLabel="Data & Platform Layers [Machine Learning Foundations]"
         title="Back to Basics: Linear Regression, Cost Function, and Gradient Descent"
-        description="Shreya Rao's foundational deep-dive into machine learning optimization: solving Mark's 2,400 sq ft house pricing problem using linear line fitting y_hat = w*x + b, Mean Squared Error (MSE) cost functions, and Gradient Descent optimization."
+        description="A foundational deep-dive into machine learning optimization: solving Mark's 2,400 sq ft house pricing problem using linear line fitting y_hat = w*x + b, Mean Squared Error (MSE) cost functions, and Gradient Descent optimization."
         metrics={[
           { label: 'Model Type', value: 'Linear Regression' },
           { label: 'Line Equation', value: 'y_hat = w*x + b' },

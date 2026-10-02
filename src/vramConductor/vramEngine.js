@@ -1,5 +1,5 @@
 // ============================================================================
-// VRAM CONDUCTOR ENGINE (Anubhab Banerjee — lmxd admission control, TDS)
+// VRAM CONDUCTOR ENGINE (lmxd admission control)
 // KV-upfront OOM, 90% ledger, book-before-build, KV swap, layer streaming
 // Responsible AI & Security Compliant: Zero PII / synthetic demo data only
 // ============================================================================

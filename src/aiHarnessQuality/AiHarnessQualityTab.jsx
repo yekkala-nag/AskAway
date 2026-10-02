@@ -73,27 +73,6 @@ const TOPIC_AREAS = [
   },
 ];
 
-const READING_LIST = [
-  {
-    title: 'When the Correct Answer is Nothing',
-    url: 'https://towardsdatascience.com/when-the-correct-answer-is-nothing-what-does-your-pipeline-return/',
-    tag: 'Null Returns',
-    desc: 'What your pipeline should return when retrieval finds nothing — and why "I don\'t know" is a feature, not a bug.',
-  },
-  {
-    title: 'Beyond RAGs: Building Actually Truthful AI Harnesses',
-    url: 'https://towardsdatascience.com/beyond-rags-building-actually-truthful-ai-harnesses/',
-    tag: 'AI Harnesses',
-    desc: 'Moving from retrieval-augmented generation to constrained, verifiable AI systems that stay truthful.',
-  },
-  {
-    title: 'How to Maximize Your Coding Agent Subscriptions',
-    url: 'https://towardsdatascience.com/how-to-maximize-your-coding-agent-subscriptions/',
-    tag: 'Coding Agents',
-    desc: 'Strategic use of Copilot, Cursor, and Claude to get the most value from AI coding tools.',
-  },
-];
-
 export default function AiHarnessQualityTab() {
   const [activeCategory, setActiveCategory] = useState('harnesses');
   const [expandedTool, setExpandedTool] = useState(null);
@@ -210,45 +189,6 @@ export default function AiHarnessQualityTab() {
           </div>
         </Card>
 
-        {/* Reading List */}
-        <div style={{ marginTop: '24px' }}>
-          <h3 style={{ fontSize: '0.95rem', fontWeight: 700, color: '#1A1D26', marginBottom: '12px' }}>
-            📚 Essential Reading
-          </h3>
-          <Grid columns={{ base: '1fr', md: '1fr 1fr', lg: '1fr 1fr 1fr' }} gap="12px">
-            {READING_LIST.map((article, i) => (
-              <a
-                key={i}
-                href={article.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{
-                  display: 'block', padding: '14px', borderRadius: '8px',
-                  border: '1px solid #E5E7EB', background: '#FFFFFF',
-                  textDecoration: 'none', color: 'inherit',
-                  transition: 'all 0.15s ease', cursor: 'pointer'
-                }}
-                onMouseEnter={e => { e.currentTarget.style.borderColor = '#3A9B9F'; e.currentTarget.style.boxShadow = '0 2px 8px rgba(58,155,159,0.1)'; }}
-                onMouseLeave={e => { e.currentTarget.style.borderColor = '#E5E7EB'; e.currentTarget.style.boxShadow = 'none'; }}
-              >
-                <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '6px' }}>
-                  <Badge variant="subtle" style={{ fontSize: '0.6rem', background: '#F1F3F5', color: '#6B7280', padding: '2px 6px', borderRadius: '4px' }}>
-                    {article.tag}
-                  </Badge>
-                </div>
-                <div style={{ fontSize: '0.82rem', fontWeight: 600, color: '#1A1D26', lineHeight: 1.3, marginBottom: '4px' }}>
-                  {article.title}
-                </div>
-                <div style={{ fontSize: '0.7rem', color: '#9CA3AF', lineHeight: 1.4 }}>
-                  {article.desc}
-                </div>
-                <div style={{ fontSize: '0.62rem', color: '#3A9B9F', marginTop: '6px' }}>
-                  Read article →
-                </div>
-              </a>
-            ))}
-          </Grid>
-        </div>
 
         {/* Quick Reference */}
         <Card style={{

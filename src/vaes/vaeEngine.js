@@ -1,7 +1,7 @@
 // ============================================================================
 // VARIATIONAL AUTOENCODERS (VAEs) ENGINE
 // Theory, ELBO Derivation & Reparameterization Trick
-// Based on Slava Efimov's TDS Deep Dive & Kingma & Welling (2013)
+// Based on Kingma & Welling (2013)
 // ============================================================================
 
 export const VAE_VS_VANILLA_COMPARISON = [
