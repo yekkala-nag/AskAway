@@ -1,7 +1,24 @@
 import React from "react";
-import { COLORS } from "../loopEngineering/loopTheme.js";
+import { CodeBlock } from "../components/ui/Content.jsx";
+import { Callout } from "../components/ui/Core.jsx";
 
-const mono = "'JetBrains Mono', monospace";
+const mono = "var(--ds-font-family-mono)";
+
+const COLORS = {
+  bg: "var(--ds-color-bg-canvas)",
+  surface: "var(--ds-color-bg-surface)",
+  surface2: "var(--ds-color-bg-surfaceHover)",
+  surface3: "var(--ds-color-module-agents-light)",
+  border: "var(--ds-color-border-subtle)",
+  borderStrong: "var(--ds-color-border-default)",
+  text: "var(--ds-color-text-primary)",
+  muted: "var(--ds-color-text-secondary)",
+  amber: "var(--ds-color-module-agents-dark)",
+  sky: "var(--ds-color-module-foundations-dark)",
+  emerald: "var(--ds-color-state-success-light)",
+  rose: "var(--ds-color-state-error-light)",
+  violet: "var(--ds-color-module-context-dark)",
+};
 
 function Section({ n, title, kicker, children }) {
   return (
@@ -10,7 +27,7 @@ function Section({ n, title, kicker, children }) {
         <span style={{ fontFamily: mono, fontSize: 11, fontWeight: 700, color: COLORS.amber, letterSpacing: "0.08em" }}>
           {String(n).padStart(2, "0")}
         </span>
-        <h2 style={{ margin: 0, fontSize: 18, fontWeight: 700, color: COLORS.text, letterSpacing: "-0.01em" }}>{title}</h2>
+        <h2 style={{ margin: 0, fontSize: 18, fontWeight: 700, color: COLORS.text, letterSpacing: "var(--ds-font-letterSpacing-snug)" }}>{title}</h2>
       </div>
       {kicker && <p style={{ margin: 0, fontSize: 13, lineHeight: 1.7, color: COLORS.muted }}>{kicker}</p>}
       {children}
@@ -20,7 +37,7 @@ function Section({ n, title, kicker, children }) {
 
 function Card({ title, accent = COLORS.sky, children, pad = "16px 18px" }) {
   return (
-    <div style={{ background: COLORS.surface, border: `1px solid ${COLORS.border}`, borderRadius: 12, padding: pad }}>
+    <div style={{ background: COLORS.surface, border: `1px solid ${COLORS.border}`, borderRadius: "var(--ds-radius-lg)", padding: pad }}>
       {title && (
         <div style={{ color: accent, fontFamily: mono, fontSize: 10, fontWeight: 700, letterSpacing: "0.1em", marginBottom: 10 }}>
           {title}
@@ -33,7 +50,7 @@ function Card({ title, accent = COLORS.sky, children, pad = "16px 18px" }) {
 
 function Table({ head, rows, widths }) {
   return (
-    <div style={{ overflowX: "auto", border: `1px solid ${COLORS.border}`, borderRadius: 10 }}>
+    <div style={{ overflowX: "auto", border: `1px solid ${COLORS.border}`, borderRadius: "var(--ds-radius-md)" }}>
       <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 12, minWidth: 420 }}>
         <thead>
           <tr style={{ background: COLORS.surface2 }}>
@@ -48,11 +65,11 @@ function Table({ head, rows, widths }) {
         </thead>
         <tbody>
           {rows.map((r, i) => (
-            <tr key={i} style={{ background: i % 2 ? COLORS.surface : "transparent" }}>
+            <tr key={i} style={{ background: i % 2 ? COLORS.bg : "transparent" }}>
               {r.map((c, j) => (
                 <td key={j} style={{
                   padding: "9px 12px", color: j === 0 ? COLORS.text : COLORS.muted,
-                  borderBottom: i === rows.length - 1 ? "none" : `1px solid ${COLORS.border}66`,
+                  borderBottom: i === rows.length - 1 ? "none" : `1px solid ${COLORS.border}`,
                   fontWeight: j === 0 ? 600 : 400, lineHeight: 1.55, verticalAlign: "top",
                 }}>{c}</td>
               ))}
@@ -64,29 +81,12 @@ function Table({ head, rows, widths }) {
   );
 }
 
-function Code({ children, label }) {
-  return (
-    <div style={{ border: `1px solid ${COLORS.border}`, borderRadius: 10, overflow: "hidden" }}>
-      {label && (
-        <div style={{ background: COLORS.surface2, padding: "6px 12px", fontFamily: mono, fontSize: 10, color: COLORS.muted, borderBottom: `1px solid ${COLORS.border}` }}>
-          {label}
-        </div>
-      )}
-      <pre style={{
-        margin: 0, background: "#0A0F1A", color: "#B7C5DA", padding: "14px 16px",
-        fontFamily: mono, fontSize: 11.5, lineHeight: 1.65, overflowX: "auto", whiteSpace: "pre",
-      }}>{children}</pre>
-    </div>
-  );
+function Code({ children, label, lang = "text" }) {
+  return <CodeBlock code={children} language={lang} filename={label} showLineNumbers={false} />;
 }
 
 function Check({ children }) {
-  return (
-    <div style={{ background: COLORS.surface2, border: `1px solid ${COLORS.violet}44`, borderRadius: 10, padding: "12px 16px" }}>
-      <div style={{ color: COLORS.violet, fontFamily: mono, fontSize: 10, fontWeight: 700, letterSpacing: "0.1em", marginBottom: 6 }}>CHECK YOURSELF</div>
-      <div style={{ color: COLORS.muted, fontSize: 12.5, lineHeight: 1.7 }}>{children}</div>
-    </div>
-  );
+  return <Callout type="tip" title="CHECK YOURSELF">{children}</Callout>;
 }
 
 function Bullets({ items, accent = COLORS.amber }) {

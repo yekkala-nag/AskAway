@@ -22,21 +22,21 @@ function McpClientPanel() {
       sub="A web frontend drives a protocol engine that negotiates transports, calls tools, and normalizes responses from remote servers."
     >
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))', gap: 12 }}>
-        <GlassCard color="#5EC4C8" icon="send" title="1. Web UI Frontend">
+        <GlassCard color="#3A9B9F" icon="send" title="1. Web UI Frontend">
           <ul style={pts}>
             <li>Topic input for queries</li>
             <li>API key manager</li>
             <li>Server selector</li>
           </ul>
         </GlassCard>
-        <GlassCard color="#E8C558" icon="cpu" title="2. Transport & Protocol Engine">
+        <GlassCard color="#D97706" icon="cpu" title="2. Transport & Protocol Engine">
           <ul style={pts}>
             <li>JSON-RPC 2.0 handshake</li>
             <li>Stdio / server-sent-event transports</li>
             <li>Dynamic tool calling + structured responses</li>
           </ul>
         </GlassCard>
-        <GlassCard color="#A78BFA" icon="globe" title="3. Remote Tool Servers">
+        <GlassCard color="#9B89C4" icon="globe" title="3. Remote Tool Servers">
           <ul style={pts}>
             <li>Code summarizer service</li>
             <li>Model recommender service</li>
@@ -126,17 +126,7 @@ export default function MCPClientTab() {
         </div>
 
         {/* ─── SUBTAB 1: MCP COURSE ─── */}
-        {activeSubTab === 'course' && (
-          <div style={{
-            background: '#080D1A',
-            border: '1px solid #243358',
-            borderRadius: 'var(--ds-radius-lg)',
-            padding: '28px 24px 40px',
-            boxShadow: '0 8px 32px rgba(0, 0, 0, 0.35)'
-          }}>
-            <MCPTab />
-          </div>
-        )}
+        {activeSubTab === 'course' && <MCPTab />}
 
         {/* ─── SUBTAB 2: CLIENT VS SERVER PROTOCOL ─── */}
         {activeSubTab === 'protocol' && (
@@ -152,9 +142,9 @@ export default function MCPClientTab() {
 
                 <Stack gap={3}>
                   {MCP_CLIENT_PROTOCOL_CONCEPTS.map((c, idx) => (
-                    <Card key={idx} style={{ padding: '14px', background: 'var(--ds-color-bg-surface)', borderLeft: '4px solid #5EC4C8' }}>
+                    <Card key={idx} style={{ padding: '14px', background: 'var(--ds-color-bg-surface)', borderLeft: '4px solid var(--ds-color-module-foundations-primary)' }}>
                       <Flex justify="space-between" align="center" style={{ marginBottom: '8px' }}>
-                        <strong style={{ fontSize: 'var(--ds-font-size-bodySm)', color: '#3A9B9F' }}>{c.concept}</strong>
+                        <strong style={{ fontSize: 'var(--ds-font-size-bodySm)', color: 'var(--ds-color-module-foundations-dark)' }}>{c.concept}</strong>
                         <Badge variant="subtle" style={{ fontSize: '9px', fontFamily: 'monospace' }}>JSON-RPC 2.0</Badge>
                       </Flex>
 
@@ -166,11 +156,11 @@ export default function MCPClientTab() {
 
                         <div>
                           <div style={{ fontSize: '11px', color: 'var(--ds-color-text-tertiary)' }}>Client Responsibility (Streamlit):</div>
-                          <div style={{ fontSize: 'var(--ds-font-size-caption)', color: '#3A9B9F' }}>{c.clientRole}</div>
+                          <div style={{ fontSize: 'var(--ds-font-size-caption)', color: 'var(--ds-color-module-foundations-dark)' }}>{c.clientRole}</div>
                         </div>
                       </Grid>
 
-                      <div style={{ marginTop: '8px', fontSize: '11px', color: '#F5A623', fontStyle: 'italic' }}>
+                      <div style={{ marginTop: '8px', fontSize: '11px', color: 'var(--ds-color-state-warning-light)', fontStyle: 'italic' }}>
                         Analogy: {c.analogy}
                       </div>
                     </Card>
@@ -195,11 +185,11 @@ export default function MCPClientTab() {
 
                 <Grid columns={{ base: '1fr', md: '1fr 1fr 1fr' }} gap="var(--ds-space-3)">
                   {REMOTE_SERVERS_CATALOG.map((srv) => (
-                    <Card key={srv.id} style={{ padding: '14px', background: 'var(--ds-color-bg-surface)', borderLeft: '4px solid #5EC4C8' }}>
-                      <strong style={{ fontSize: 'var(--ds-font-size-bodySm)', color: '#3A9B9F', display: 'block', marginBottom: '4px' }}>
+                    <Card key={srv.id} style={{ padding: '14px', background: 'var(--ds-color-bg-surface)', borderLeft: '4px solid var(--ds-color-module-foundations-primary)' }}>
+                      <strong style={{ fontSize: 'var(--ds-font-size-bodySm)', color: 'var(--ds-color-module-foundations-dark)', display: 'block', marginBottom: '4px' }}>
                         {srv.name}
                       </strong>
-                      <div style={{ fontFamily: 'monospace', fontSize: '10px', color: '#3A9B9F', marginBottom: '8px', wordBreak: 'break-all' }}>
+                      <div style={{ fontFamily: 'monospace', fontSize: '10px', color: 'var(--ds-color-module-foundations-dark)', marginBottom: '8px', wordBreak: 'break-all' }}>
                         {srv.url}
                       </div>
                       <p style={{ fontSize: 'var(--ds-font-size-caption)', color: 'var(--ds-color-text-secondary)', margin: '0 0 8px 0' }}>
@@ -233,8 +223,8 @@ export default function MCPClientTab() {
 
                 <Grid columns={{ base: '1fr', md: '1fr 2fr' }} gap="var(--ds-space-4)">
                   {/* Streamlit Sidebar Controls Mock */}
-                  <Card style={{ padding: '14px', background: '#090d16', border: '1px solid var(--ds-color-border-subtle)' }}>
-                    <strong style={{ fontSize: '11px', color: '#F5A623', display: 'block', marginBottom: '10px' }}>
+                  <Card style={{ padding: '14px', background: 'var(--ds-color-brand-editor)', border: '1px solid var(--ds-color-border-subtle)' }}>
+                    <strong style={{ fontSize: '11px', color: 'var(--ds-color-state-warning-dark)', display: 'block', marginBottom: '10px' }}>
                       STREAMLIT SIDEBAR CONTROLS:
                     </strong>
 
@@ -246,7 +236,7 @@ export default function MCPClientTab() {
                         <select
                           value={selectedServerId}
                           onChange={e => setSelectedServerId(e.target.value)}
-                          style={{ width: '100%', background: 'var(--ds-color-bg-surface)', color: 'white', border: '1px solid var(--ds-color-border-subtle)', borderRadius: '4px', padding: '6px', fontSize: '11px' }}
+                          style={{ width: '100%', background: 'var(--ds-color-bg-surface)', color: 'var(--ds-color-text-primary)', border: '1px solid var(--ds-color-border-subtle)', borderRadius: '4px', padding: '6px', fontSize: '11px' }}
                         >
                           {REMOTE_SERVERS_CATALOG.map(s => (
                             <option key={s.id} value={s.id}>{s.name}</option>
@@ -262,33 +252,40 @@ export default function MCPClientTab() {
                           type="text"
                           value={userTopicInput}
                           onChange={e => setUserTopicInput(e.target.value)}
-                          style={{ width: '100%', background: 'var(--ds-color-bg-surface)', color: 'white', border: '1px solid var(--ds-color-border-subtle)', borderRadius: '4px', padding: '6px', fontSize: '11px' }}
+                          style={{ width: '100%', background: 'var(--ds-color-bg-surface)', color: 'var(--ds-color-text-primary)', border: '1px solid var(--ds-color-border-subtle)', borderRadius: '4px', padding: '6px', fontSize: '11px' }}
                         />
                       </div>
                     </Stack>
                   </Card>
 
                   {/* Streamlit Main App Render */}
-                  <Card style={{ padding: '14px', background: 'var(--ds-color-bg-surface)', borderLeft: '4px solid #5EC4C8' }}>
+                  <Card style={{ padding: '14px', background: 'var(--ds-color-bg-surface)', borderLeft: '4px solid var(--ds-color-module-foundations-primary)' }}>
                     <Flex justify="space-between" align="center" style={{ marginBottom: '8px' }}>
-                      <strong style={{ fontSize: 'var(--ds-font-size-bodySm)', color: '#3A9B9F' }}>
+                      <strong style={{ fontSize: 'var(--ds-font-size-bodySm)', color: 'var(--ds-color-module-foundations-dark)' }}>
                         STREAMLIT MAIN APP RENDER
                       </strong>
-                      <Badge variant="subtle" style={{ background: 'rgba(46,204,140,0.15)', color: '#3A9B9F', fontSize: '9px' }}>
+                      <Badge variant="subtle" style={{ background: 'var(--ds-color-module-foundations-light)', color: 'var(--ds-color-module-foundations-dark)', fontSize: '9px' }}>
                         CONNECTED: {simResult.server.id.toUpperCase()}
                       </Badge>
                     </Flex>
 
-                    <Card style={{ padding: '10px', background: '#090d16', color: '#3A9B9F', fontFamily: 'monospace', fontSize: '11px', marginBottom: '10px' }}>
-                      {JSON.stringify(simResult.simulatedResponse, null, 2)}
-                    </Card>
+                    <CodeBlock
+                      code={JSON.stringify(simResult.simulatedResponse, null, 2)}
+                      language="json"
+                      filename="RESPONSE"
+                      showLineNumbers={false}
+                      style={{ marginBottom: '10px' }}
+                    />
 
                     <div style={{ fontSize: '10px', color: 'var(--ds-color-text-tertiary)', marginBottom: '4px' }}>
                       Generated MCP Protocol JSON-RPC 2.0 Request Payload:
                     </div>
-                    <Card style={{ padding: '8px', background: 'rgba(255,255,255,0.03)', color: '#F5A623', fontFamily: 'monospace', fontSize: '10px' }}>
-                      {JSON.stringify(simResult.jsonRpcPayload, null, 2)}
-                    </Card>
+                    <CodeBlock
+                      code={JSON.stringify(simResult.jsonRpcPayload, null, 2)}
+                      language="json"
+                      filename="JSON-RPC REQUEST"
+                      showLineNumbers={false}
+                    />
                   </Card>
                 </Grid>
               </Stack>
