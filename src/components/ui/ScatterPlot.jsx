@@ -1,5 +1,8 @@
 import React from 'react';
-import { Card } from './Core.jsx';
+import { SHOWCASE, frameStyles, FrameHeader } from './SpectrumFrame.jsx';
+import { spectrumAccentForModule } from '../../design-system/diagramTokens.js';
+
+const ACCENT = spectrumAccentForModule('foundations');
 
 const ScatterPlot = ({
   points,
@@ -48,11 +51,12 @@ const ScatterPlot = ({
   const yTicks = 5;
   const yTickValues = Array.from({ length: yTicks }, (_, i) => minY + (yRange * i) / (yTicks - 1));
 
+  const frame = frameStyles(ACCENT);
+
   return (
-    <Card style={{ padding: 'var(--ds-space-4)', background: 'var(--ds-color-bg-surface)', width: '100%' }}>
-      <div style={{ fontSize: 'var(--ds-font-size-caption)', color: 'var(--ds-color-text-tertiary)', marginBottom: 'var(--ds-space-2)', fontWeight: 600 }}>
-        {title} (ŷ = {slopeW.toFixed(1)}·x + {interceptB.toFixed(1)})
-      </div>
+    <div style={{ ...frame.figure, width: '100%' }}>
+      <FrameHeader color={ACCENT} icon="chart" title={`${title} (ŷ = ${slopeW.toFixed(1)}·x + ${interceptB.toFixed(1)})`} />
+      <div style={{ padding: 'var(--ds-space-4)', background: SHOWCASE.bg }}>
       <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`} style={{ display: 'block', background: 'var(--ds-color-bg-canvas)', borderRadius: 'var(--ds-radius-sm)' }}>
         <defs>
           <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
@@ -213,7 +217,8 @@ const ScatterPlot = ({
           Price ($1000s)
         </text>
       </svg>
-    </Card>
+      </div>
+    </div>
   );
 };
 

@@ -1,5 +1,8 @@
 import React from 'react';
-import { Card } from './Core.jsx';
+import { SHOWCASE, frameStyles, FrameHeader } from './SpectrumFrame.jsx';
+import { spectrumAccentForModule } from '../../design-system/diagramTokens.js';
+
+const ACCENT = spectrumAccentForModule('foundations');
 
 const LossCurveChart = ({
   data,
@@ -38,14 +41,15 @@ const LossCurveChart = ({
   const xTicks = 5;
   const xTickIndices = Array.from({ length: xTicks }, (_, i) => Math.round(i * (data.length - 1) / (xTicks - 1)));
 
+  const frame = frameStyles(ACCENT);
+
   return (
-    <Card style={{ padding: 'var(--ds-space-4)', background: 'var(--ds-color-bg-surface)', width: '100%' }}>
-      <div style={{ fontSize: 'var(--ds-font-size-caption)', color: 'var(--ds-color-text-tertiary)', marginBottom: 'var(--ds-space-2)', fontWeight: 600 }}>
-        {title} ({metric.toUpperCase()})
-      </div>
+    <div style={{ ...frame.figure, width: '100%' }}>
+      <FrameHeader color={ACCENT} icon="chart" title={`${title} (${metric.toUpperCase()})`} />
+      <div style={{ padding: 'var(--ds-space-4)', background: SHOWCASE.bg }}>
       <div style={{ width: '100%', maxWidth: 600 }}>
         <svg viewBox={`0 0 ${viewBoxWidth} ${viewBoxHeight}`} preserveAspectRatio="xMidYMid meet" style={{ display: 'block', width: '100%', height: 'auto', background: 'var(--ds-color-bg-canvas)', borderRadius: 'var(--ds-radius-sm)' }} role="img" aria-label={`${metric.toUpperCase()} loss curve vs intercept b at fixed slope w=${currentW}`}>
-          <title>{metric.toUpperCase()} Loss vs Intercept (b)</title>
+          <title>{`${metric.toUpperCase()} Loss vs Intercept (b)`}</title>
           <desc>Parabolic curve showing how loss changes as intercept b varies from 0 to 200, with current position marked</desc>
           <defs>
             <linearGradient id="lossGradient" x1="0%" y1="0%" x2="0%" y2="100%">
@@ -121,11 +125,12 @@ const LossCurveChart = ({
           </text>
         </svg>
       </div>
-      <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: 'var(--ds-space-2)', fontSize: 'var(--ds-font-size-caption)', color: 'var(--ds-color-text-tertiary)' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: 'var(--ds-space-2)', fontSize: 'var(--ds-font-size-caption)', color: SHOWCASE.sub }}>
         <span>w (slope) fixed at: {currentW}</span>
         <span>Range: b ∈ [0, 200]</span>
       </div>
-    </Card>
+      </div>
+    </div>
   );
 };
 

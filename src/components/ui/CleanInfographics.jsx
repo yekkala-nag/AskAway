@@ -1,5 +1,6 @@
 import React from 'react';
 import { FRAMEWORKS } from '../../services/frameworkLibrary.js';
+import { SPECTRUM_STEPS, PALETTE } from '../../design-system/spectrum.js';
 
 /* Clean native recreations of reference infographics.
  * No raster images, no watermarks, no brand names, no attributions, no social UI.
@@ -209,7 +210,7 @@ export function LearningPromptsGrid() {
     { t: 'Mental Associations (Mnemonics)', d: 'Encode key ideas with memory hooks to improve recall under time pressure.', p: 'Prompt: \u201CCreate 5 mnemonics for [topic] and a 60-second recall drill I can repeat daily.\u201D' },
   ];
   const icons = ['book', 'link', 'target', 'smile', 'calendar', 'help', 'nodes', 'users', 'bulb'];
-  const palette = ['#5EC4C8', '#6A9BD8', '#A78BFA', '#7FB069', '#E8C558', '#E08A4C', '#F0A89A', '#9B89C4', '#34D399'];
+  const palette = PALETTE;
   return (
     <Panel
       title="9 Prompt Patterns for Learning Anything Faster"
@@ -229,7 +230,7 @@ export function PromptFrameworksGrid() {
   // Framework data lives in services/frameworkLibrary.js (single source).
   const items = FRAMEWORKS;
   const icons = ['clip', 'target', 'smile', 'search', 'eye', 'star', 'refresh', 'branch'];
-  const palette = ['#5EC4C8', '#6A9BD8', '#A78BFA', '#7FB069', '#E8C558', '#E08A4C', '#F0A89A', '#9B89C4'];
+  const palette = PALETTE;
   return (
     <Panel
       title="30 Prompt Frameworks & Reasoning Methodologies"
@@ -319,7 +320,7 @@ export function EvalMethodsGrid() {
     { t: 'Trajectory Accuracy', d: 'Measures how closely an agent\u2019s step-by-step execution path matches the expected path.' },
   ];
   const icons = ['gauge', 'file', 'check', 'cpu', 'nodes', 'eye', 'chat', 'shield', 'award', 'branch', 'send'];
-  const palette = ['#5EC4C8', '#6A9BD8', '#A78BFA', '#7FB069', '#E8C558', '#E08A4C', '#F0A89A', '#9B89C4', '#34D399', '#F472B6', '#38BDF8'];
+  const palette = PALETTE;
   return (
     <Panel
       title="11 Evaluation Methods — From Overlap to Trajectory Accuracy"
@@ -387,16 +388,25 @@ export function DataReadinessJourney() {
   );
 }
 
+const LAYER_DETAIL = {
+  7: 'General intelligence across tasks — not yet achieved.',
+  6: 'Plans, uses tools, and takes actions.',
+  5: 'Creates text, images, audio, and code.',
+  4: 'Many-layer nets for vision, speech, language.',
+  3: 'Interconnected learned representations.',
+  2: 'Learns patterns from data.',
+  1: 'Rules, logic, search.',
+};
+
 /** Single source of truth for the 7-layer stack (also rendered by LayersShowcasePanel). */
-export const SEVEN_LAYERS = [
-  { n: 7, t: 'General Intelligence', d: 'General intelligence across tasks — not yet achieved.', c: '#A78BFA', icon: 'star' },
-  { n: 6, t: 'Agentic AI', d: 'Plans, uses tools, and takes actions.', c: '#6A9BD8', icon: 'cpu' },
-  { n: 5, t: 'Generative AI', d: 'Creates text, images, audio, and code.', c: '#5EC4C8', icon: 'zap', flag: 'current frontier' },
-  { n: 4, t: 'Deep Learning', d: 'Many-layer nets for vision, speech, language.', c: '#7FB069', icon: 'layers' },
-  { n: 3, t: 'Neural Networks', d: 'Interconnected learned representations.', c: '#E8C558', icon: 'nodes' },
-  { n: 2, t: 'Machine Learning', d: 'Learns patterns from data.', c: '#E08A4C', icon: 'chart' },
-  { n: 1, t: 'Classical AI', d: 'Rules, logic, search.', c: '#C96A5A', icon: 'branch' },
-];
+export const SEVEN_LAYERS = [...SPECTRUM_STEPS].reverse().map((s) => ({
+  n: s.n,
+  t: s.name,
+  d: LAYER_DETAIL[s.n],
+  c: s.color,
+  icon: s.icon,
+  ...(s.flag ? { flag: s.flag } : {}),
+}));
 
 export function SevenLayersStack() {
   return (
@@ -464,13 +474,8 @@ export function TokenOptimizationFlow() {
 
 export function ToolSelectionFramework() {
   const cats = ['Image generation', 'Website building', 'Video creation', 'Coding assistance', 'Writing assistance', 'Conversational search', 'Presentation generation', 'Spreadsheet formulas', 'Voice generation', 'Design editing'];
-  const catLook = [
-    { c: '#5EC4C8', icon: 'eye' }, { c: '#6A9BD8', icon: 'globe' },
-    { c: '#A78BFA', icon: 'play' }, { c: '#7FB069', icon: 'code' },
-    { c: '#E8C558', icon: 'pen' }, { c: '#E08A4C', icon: 'search' },
-    { c: '#F0A89A', icon: 'slides' }, { c: '#9B89C4', icon: 'table' },
-    { c: '#34D399', icon: 'mic' }, { c: '#38BDF8', icon: 'layers' },
-  ];
+  const catIcons = ['eye', 'globe', 'play', 'code', 'pen', 'search', 'slides', 'table', 'mic', 'layers'];
+  const catLook = catIcons.map((icon, i) => ({ c: PALETTE[i % PALETTE.length], icon }));
   return (
     <Panel
       title="Free-Tier AI Tool Selection Framework"

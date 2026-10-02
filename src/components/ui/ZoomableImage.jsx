@@ -1,14 +1,20 @@
 import { useState, useEffect, useCallback } from "react";
+import { spectrumAccentForModule } from "../../design-system/diagramTokens.js";
+import { SHOWCASE, frameStyles, FrameChip, FrameHeader, FrameCaption, iconForModule } from "./SpectrumFrame.jsx";
 
 /**
  * ZoomableImage — interactive figure with a zoom/pan lightbox AND optional
  * clickable annotation hotspots overlaid on the image.
  *
+ * Rendered inside the shared showcase frame (navy ground, spectrum-tinted
+ * gradient header, glowing colored border, icon chip, pill badge).
+ *
  * Props:
  *  - src, alt, title, caption, maxWidth, background
  *  - hotspots: [{ x: number(0-100), y: number(0-100), label, title, body, color? }]
  *      x/y are percentage positions of the marker on the image.
- *  - accent: module primary color used for hotspot markers/lightbox chrome.
+ *  - accent: module key ('rag', 'context', ...) or a #RRGGBB hex. Drives the
+ *      frame chrome and hotspot markers.
  */
 
 let keyframesInjected = false;
@@ -31,14 +37,10 @@ function ensureKeyframes() {
   document.head.appendChild(style);
 }
 
-const ACCENTS = {
-  rag: "#C47A6A",
-  foundations: "#3A9B9F",
-  context: "#9B89C4",
-  agents: "#DC2626",
-  platform: "#5EC4C8",
-  frontiers: "#5EC4C8",
-};
+const resolveAccent = (accent) =>
+  /^#[0-9A-Fa-f]{3,8}$/.test(accent || "")
+    ? accent
+    : spectrumAccentForModule(accent || "foundations");
 
 const lbBtn = (w, h = 36) => ({
   width: w,
@@ -61,9 +63,9 @@ export default function ZoomableImage({
   title,
   caption,
   maxWidth = 1100,
-  background = "#ffffff",
+  background = SHOWCASE.bg,
   hotspots = [],
-  accent = "#3A9B9F",
+  accent = "foundations",
   reduceMotion = false,
 }) {
   const [zoomed, setZoomed] = useState(false);
@@ -73,7 +75,9 @@ export default function ZoomableImage({
 
   useEffect(() => ensureKeyframes(), []);
 
-  const accentColor = ACCENTS[accent] || accent;
+  const accentColor = resolveAccent(accent);
+  const frame = frameStyles(accentColor);
+  const glyph = /^#/.test(accent || "") ? "image" : iconForModule(accent);
   const open = useCallback(() => { setScale(1); setZoomed(true); }, []);
   const close = useCallback(() => setZoomed(false), []);
   const zoomIn = (e) => { if (e) e.stopPropagation(); setScale((s) => Math.min(+(s + 0.25).toFixed(2), 4)); };
@@ -91,32 +95,21 @@ export default function ZoomableImage({
         title="Click to view fullscreen"
         style={{
           margin: 0,
-          background,
-          border: "1px solid #e0dcd4",
-          borderRadius: 8,
-          overflow: "hidden",
+          ...frame.figure,
           cursor: "pointer",
-          boxShadow: "0 2px 4px rgba(0,0,0,0.03)",
           transition: "box-shadow 0.2s, transform 0.2s",
           position: "relative",
         }}
-        onMouseEnter={(e) => { e.currentTarget.style.boxShadow = "0 8px 24px rgba(0,0,0,0.08)"; }}
-        onMouseLeave={(e) => { e.currentTarget.style.boxShadow = "0 2px 4px rgba(0,0,0,0.03)"; }}
+        onMouseEnter={(e) => { e.currentTarget.style.boxShadow = frame.figureHover; }}
+        onMouseLeave={(e) => { e.currentTarget.style.boxShadow = frame.figureRest; }}
       >
         {(title || caption) && (
-          <div style={{
-            display: "flex", justifyContent: "space-between", alignItems: "center",
-            padding: "0.55rem 0.9rem", background: "#f7f5f0", borderBottom: "1px solid #e0dcd4",
-            fontFamily: "Syne, sans-serif", fontSize: "0.68rem", fontWeight: 700, color: "#1a1a2e",
-          }}>
-            <span style={{ display: "flex", alignItems: "center", gap: "0.45rem" }}>
-              <span style={{ color: accentColor }}>🖼️</span>
-              {title || "Interactive Figure"}
-            </span>
-            <span style={{ color: "#7A6BA8", fontSize: "0.58rem", letterSpacing: "0.1em", textTransform: "uppercase" }}>
-              {hasHotspots ? "⠿ Hotspots · ⤢ Fullscreen" : "⤢ Fullscreen"}
-            </span>
-          </div>
+          <FrameHeader
+            color={accentColor}
+            icon={glyph}
+            title={title || "Interactive Figure"}
+            hint={hasHotspots ? "⠿ Hotspots · ⤢ Fullscreen" : "⤢ Fullscreen"}
+          />
         )}
 
         <div style={{ position: "relative", display: "flex", justifyContent: "center", alignItems: "center", padding: "1.25rem", background }}>
@@ -182,14 +175,7 @@ export default function ZoomableImage({
           )}
         </div>
 
-        {caption && (
-          <figcaption style={{
-            padding: "0.5rem 0.9rem", borderTop: "1px solid #e0dcd4", background: "#f7f5f0",
-            fontSize: "0.62rem", color: "#334155", fontStyle: "italic", lineHeight: 1.5,
-          }}>
-            {caption}
-          </figcaption>
-        )}
+        {caption && <FrameCaption color={accentColor}>{caption}</FrameCaption>}
       </figure>
 
       {hasHotspots && (
@@ -255,26 +241,27 @@ export default function ZoomableImage({
             onClick={(e) => e.stopPropagation()}
             style={{
               display: "flex", justifyContent: "space-between", alignItems: "center",
-              padding: "0.75rem 1.5rem", background: "#14161f", borderBottom: "1px solid #2a2d3d",
+              padding: "0.75rem 1.5rem", background: `linear-gradient(90deg, ${frame.variant.edge}, #14161f 55%)`, borderBottom: "1px solid #2a2d3d",
               boxShadow: "0 4px 12px rgba(0,0,0,0.3)",
             }}
           >
-            <span style={{ fontFamily: "Syne, sans-serif", fontSize: "0.95rem", fontWeight: 800, color: "#fff", letterSpacing: "0.03em" }}>
+            <span style={{ display: "flex", alignItems: "center", gap: 10, fontFamily: "Syne, sans-serif", fontSize: "0.95rem", fontWeight: 800, color: "#fff", letterSpacing: "0.03em" }}>
+              <FrameChip color={accentColor} icon={glyph} size={30} />
               {title || alt}
             </span>
             <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
               <button onClick={zoomOut} title="Zoom Out" style={lbBtn(36)}>➖</button>
-              <button onClick={reset} title="Reset" style={{ ...lbBtn(64), fontFamily: "DM Mono, monospace", fontSize: "0.8rem", color: scale !== 1 ? "#F0A89A" : "#a0a5ba" }}>{Math.round(scale * 100)}%</button>
+              <button onClick={reset} title="Reset" style={{ ...lbBtn(64), fontFamily: "DM Mono, monospace", fontSize: "0.8rem", color: scale !== 1 ? accentColor : "#a0a5ba" }}>{Math.round(scale * 100)}%</button>
               <button onClick={zoomIn} title="Zoom In" style={lbBtn(36)}>➕</button>
               <div style={{ width: 1, height: 24, background: "#3a3e54", margin: "0 6px" }} />
-              <button onClick={close} title="Close" style={{ ...lbBtn(80), background: "#F0A89A", border: "none", color: "#fff", fontWeight: 800 }}>✕ Close</button>
+              <button onClick={close} title="Close" style={{ ...lbBtn(80), background: accentColor, border: "none", color: "#fff", fontWeight: 800 }}>✕ Close</button>
             </div>
           </div>
           <div
             onClick={(e) => e.stopPropagation()}
             style={{ flex: 1, overflow: "auto", background: "#0d0f17", display: "flex", alignItems: "center", justifyContent: "center", padding: "1rem", position: "relative" }}
           >
-            <div style={{ background: "#fff", borderRadius: 8, padding: "1.5rem", boxShadow: "0 20px 50px rgba(0,0,0,0.6)", zoom: scale, width: "100%", maxWidth: 1600, display: "flex", justifyContent: "center", position: "relative" }}>
+            <div style={{ background, border: `1px solid ${frame.variant.edge}`, borderRadius: 12, padding: "1.5rem", boxShadow: `0 20px 50px rgba(0,0,0,0.6), 0 0 32px ${frame.variant.glow}`, zoom: scale, width: "100%", maxWidth: 1600, display: "flex", justifyContent: "center", position: "relative" }}>
               {src ? <img src={src} alt={alt} loading="lazy" decoding="async" style={{ width: "100%", maxWidth: "100%", height: "auto", objectFit: "contain", display: "block" }} /> : null}
               {hasHotspots && src && hotspots.map((h, i) => (
                 <span key={i} title={h.label} style={{ position: "absolute", left: `${h.x}%`, top: `${h.y}%`, transform: "translate(-50%,-50%)", width: 18, height: 18, borderRadius: "50%", border: "2px solid #fff", background: h.color || accentColor, color: "#fff", fontSize: "10px", fontWeight: 800, display: "flex", alignItems: "center", justifyContent: "center" }}>{i + 1}</span>

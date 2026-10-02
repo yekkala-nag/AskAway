@@ -5,6 +5,28 @@
 export { tokens, generateCSSVariables, getModuleColors, getStateColor } from './tokens.js';
 export { globalStyles } from './globalStyles.js';
 
+// Spectrum — 7-step warm→cool ramp + showcase frame chrome
+export {
+  SPECTRUM,
+  SPECTRUM_STEPS,
+  PALETTE,
+  SHOWCASE,
+  withAlpha,
+  spectrumVariant,
+  spectrumColor,
+  frameStyles,
+} from './spectrum.js';
+export {
+  DIAGRAM_ACCENTS,
+  DIAGRAM_SPECTRUM_STEP,
+  DIAGRAM_STATUS,
+  DIAGRAM_BG,
+  diagramAccentForModule,
+  spectrumAccentForModule,
+  spectrumStepForModule,
+  normalizeModuleId,
+} from './diagramTokens.js';
+
 // Layout primitives
 export { Page, Container, Section, Grid, Flex, Stack } from '../components/layout/Primitives.jsx';
 

@@ -1,5 +1,9 @@
 import React from 'react';
-import { Card } from './Core.jsx';
+import { SHOWCASE, frameStyles, FrameHeader } from './SpectrumFrame.jsx';
+import { spectrumAccentForModule } from '../../design-system/diagramTokens.js';
+
+const ACCENT = spectrumAccentForModule('foundations');
+const SERIES = '#A78BFA';
 
 const LossHistoryChart = ({
   history,
@@ -31,19 +35,20 @@ const LossHistoryChart = ({
   const xTicks = Math.min(6, history.length);
   const xTickSteps = Array.from({ length: xTicks }, (_, i) => Math.round(i * maxStep / (xTicks - 1)));
 
+  const frame = frameStyles(ACCENT);
+
   return (
-    <Card style={{ padding: 'var(--ds-space-4)', background: 'var(--ds-color-bg-surface)', width: '100%' }}>
-      <div style={{ fontSize: 'var(--ds-font-size-caption)', color: 'var(--ds-color-text-tertiary)', marginBottom: 'var(--ds-space-2)', fontWeight: 600 }}>
-        {title}
-      </div>
+    <div style={{ ...frame.figure, width: '100%' }}>
+      <FrameHeader color={ACCENT} icon="chart" title={title} />
+      <div style={{ padding: 'var(--ds-space-4)', background: SHOWCASE.bg }}>
       <div style={{ width: '100%', maxWidth: 600 }}>
         <svg viewBox={`0 0 ${viewBoxWidth} ${viewBoxHeight}`} preserveAspectRatio="xMidYMid meet" style={{ display: 'block', width: '100%', height: 'auto', background: 'var(--ds-color-bg-canvas)', borderRadius: 'var(--ds-radius-sm)' }} role="img" aria-label="MSE loss convergence over gradient descent steps">
           <title>MSE Loss Convergence History</title>
           <desc>Line chart showing how MSE loss decreases over gradient descent iterations</desc>
           <defs>
             <linearGradient id="historyGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" stopColor="#8b5cf6" stopOpacity="0.3" />
-              <stop offset="100%" stopColor="#8b5cf6" stopOpacity="0" />
+              <stop offset="0%" stopColor={SERIES} stopOpacity="0.3" />
+              <stop offset="100%" stopColor={SERIES} stopOpacity="0" />
             </linearGradient>
           </defs>
 
@@ -86,7 +91,7 @@ const LossHistoryChart = ({
           {/* Curve line */}
           <path
             d={`M${path}`}
-            stroke="#8b5cf6"
+            stroke={SERIES}
             strokeWidth="2.5"
             fill="none"
             strokeLinecap="round"
@@ -100,8 +105,8 @@ const LossHistoryChart = ({
               cx={xScale(d.step, maxStep)}
               cy={yScale(d.mse)}
               r={i === history.length - 1 ? 5 : 3}
-              fill={i === history.length - 1 ? '#8b5cf6' : 'var(--ds-color-bg-canvas)'}
-              stroke="#8b5cf6"
+              fill={i === history.length - 1 ? SERIES : 'var(--ds-color-bg-canvas)'}
+              stroke={SERIES}
               strokeWidth={i === history.length - 1 ? 0 : 2}
             />
           ))}
@@ -115,11 +120,12 @@ const LossHistoryChart = ({
           </text>
         </svg>
       </div>
-      <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: 'var(--ds-space-2)', fontSize: 'var(--ds-font-size-caption)', color: 'var(--ds-color-text-tertiary)' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: 'var(--ds-space-2)', fontSize: 'var(--ds-font-size-caption)', color: SHOWCASE.sub }}>
         <span>Steps: {history.length}</span>
         <span>Final MSE: {history[history.length - 1]?.mse?.toFixed(1) ?? 'N/A'}</span>
       </div>
-    </Card>
+      </div>
+    </div>
   );
 };
 

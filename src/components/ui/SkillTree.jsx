@@ -7,6 +7,8 @@ import React, { useState } from 'react';
 import { UMBRELLA_TOPICS, getTabsForUmbrella, getTabById } from '../../registry/tabsRegistry.js';
 import { getTopicMeta, getPrereqIds, sortTopicsLikeJourney } from '../../registry/curriculum.js';
 import { getMasteryScore, isMastered, isProven, isClaimed } from '../../services/mastery.js';
+import { frameStyles } from './SpectrumFrame.jsx';
+import { spectrumAccentForModule } from '../../design-system/diagramTokens.js';
 
 const COL_X = { 1: 150, 2: 430, 3: 710 };
 const NODE_W = 250;
@@ -29,6 +31,7 @@ function isReady(id) {
 export function SkillTree({ onSelectTab }) {
   const [umbrella, setUmbrella] = useState('rag_architecture');
   const mod = UMBRELLA_TOPICS.find(u => u.id === umbrella);
+  const frame = frameStyles(spectrumAccentForModule(umbrella));
   const tabs = sortTopicsLikeJourney(getTabsForUmbrella(umbrella));
   const byLevel = { 1: [], 2: [], 3: [] };
   tabs.forEach(t => {
@@ -61,7 +64,8 @@ export function SkillTree({ onSelectTab }) {
           </button>
         ))}
       </div>
-      <div style={{ overflowX: 'auto', border: '1px solid var(--ds-color-border-subtle)', borderRadius: '10px', background: 'var(--ds-color-bg-canvas)' }}>
+      <div style={{ ...frame.figure, padding: 6 }}>
+      <div style={{ overflowX: 'auto', border: '1px solid rgba(0,0,0,0.06)', borderRadius: '8px', background: 'var(--ds-color-bg-canvas)' }}>
         <svg viewBox={`0 0 860 ${H}`} style={{ minWidth: '620px', width: '100%', height: 'auto', display: 'block' }} role="img" aria-label={`Skill tree for ${mod.title}`}>
           <defs>
             <filter id="readyGlow" x="-40%" y="-40%" width="180%" height="180%">
@@ -110,6 +114,7 @@ export function SkillTree({ onSelectTab }) {
             );
           })}
         </svg>
+      </div>
       </div>
       <div style={{ display: 'flex', gap: '14px', flexWrap: 'wrap', marginTop: '8px', fontSize: '0.7rem', color: 'var(--ds-color-text-tertiary)' }}>
         <span><span style={{ color: '#5EC4C8' }}>●</span> proven</span>

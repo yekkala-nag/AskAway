@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { diagramAccentForModule } from "../../design-system/diagramTokens.js";
+import { SHOWCASE, frameStyles, FrameChip, FramePill, FrameHeader, FrameCaption, iconForModule } from "./SpectrumFrame.jsx";
 
-// Renders a self-contained SVG diagram (in /assets/*.svg) inside a clean,
-// themeable figure card with an optional caption. Click opens it in the
+// Renders a self-contained SVG diagram (in /assets/*.svg) inside the shared
+// showcase frame: navy ground, spectrum-tinted gradient header, glowing
+// colored border, icon chip, uppercase pill. Click opens it in the
 // fullscreen ZoomableFigure-style lightbox (reusing the same zoom/pan pattern).
 //
 // P2: loading shimmer (no layout shift), fade-in on load, error fallback
@@ -14,7 +16,7 @@ const DiagramImage = ({
   caption,
   title,
   maxWidth = 1100,
-  background = "#ffffff",
+  background = SHOWCASE.bg,
   accent,
   moduleId,
 }) => {
@@ -26,6 +28,7 @@ const DiagramImage = ({
   const [retryCount, setRetryCount] = useState(0);
 
   const tint = accent || (moduleId ? diagramAccentForModule(moduleId) : "#5EC4C8");
+  const frame = frameStyles(tint);
 
   const open = () => { if (!failed) { setScale(1); setZoomed(true); } };
   const close = () => setZoomed(false);
@@ -47,31 +50,22 @@ const DiagramImage = ({
         title={failed ? alt : "Click to view fullscreen"}
         style={{
           margin: 0,
-          background,
-          border: "1px solid #E8E8EC",
-          borderRadius: 8,
-          overflow: "hidden",
+          ...frame.figure,
           cursor: failed ? "default" : "pointer",
-          boxShadow: "0 2px 4px rgba(0,0,0,0.03)",
           transition: "box-shadow 0.2s, transform 0.2s",
         }}
-        onMouseEnter={(e) => { e.currentTarget.style.boxShadow = "0 8px 24px rgba(0,0,0,0.08)"; }}
-        onMouseLeave={(e) => { e.currentTarget.style.boxShadow = "0 2px 4px rgba(0,0,0,0.03)"; }}
+        onMouseEnter={(e) => { e.currentTarget.style.boxShadow = frame.figureHover; }}
+        onMouseLeave={(e) => { e.currentTarget.style.boxShadow = frame.figureRest; }}
       >
         {(title || caption) && (
-          <div style={{
-            display: "flex", justifyContent: "space-between", alignItems: "center",
-            padding: "0.55rem 0.9rem", background: "#F5F5F7", borderBottom: "1px solid #E8E8EC",
-            fontFamily: "Syne, sans-serif", fontSize: "0.68rem", fontWeight: 700, color: "#2D2D3A",
-          }}>
-            <span style={{ display: "flex", alignItems: "center", gap: "0.45rem" }}>
-              <span style={{ color: tint }}>🖼️</span>
-              {title || "Figure"}
-            </span>
-            {!failed && <span style={{ color: tint, fontSize: "0.58rem", letterSpacing: "0.1em", textTransform: "uppercase" }}>⤢ Fullscreen</span>}
-          </div>
+          <FrameHeader
+            color={tint}
+            icon={iconForModule(moduleId)}
+            title={title || "Figure"}
+            right={!failed ? <FramePill color={tint}>⤢ Fullscreen</FramePill> : null}
+          />
         )}
-        <div style={{ display: "flex", justifyContent: "center", alignItems: "center", padding: "1.25rem", position: "relative", minHeight: 200 }}>
+        <div style={{ display: "flex", justifyContent: "center", alignItems: "center", padding: "1.25rem", position: "relative", minHeight: 200, background }}>
           {!loaded && !failed && (
             <div aria-hidden="true" style={{ position: "absolute", inset: "1.25rem", borderRadius: 6, overflow: "hidden", background: "rgba(0,0,0,0.06)" }}>
               <div style={{
@@ -83,7 +77,7 @@ const DiagramImage = ({
             </div>
           )}
           {failed ? (
-            <div style={{ textAlign: "center", padding: "2rem 1rem", color: "#4A4A5A" }}>
+            <div style={{ textAlign: "center", padding: "2rem 1rem", color: SHOWCASE.sub }}>
               <div style={{ fontSize: "1.6rem", marginBottom: "6px" }}>⚠️</div>
               <div style={{ fontSize: "0.85rem", fontWeight: 700, color: "#ef4444", marginBottom: "4px" }}>
                 {retryCount > 0 ? "Asset malformed. Retry failed." : "Diagram failed to load"}
@@ -96,7 +90,7 @@ const DiagramImage = ({
               <button
                 type="button"
                 onClick={retry}
-                style={{ padding: "6px 16px", borderRadius: "6px", border: "1px solid #E8E8EC", background: "#F5F5F7", cursor: "pointer", fontSize: "0.75rem", fontWeight: 600, color: "#1E293B" }}
+                style={{ padding: "6px 16px", borderRadius: "6px", border: `1px solid ${frame.variant.edge}`, background: SHOWCASE.surfaceStrong, cursor: "pointer", fontSize: "0.75rem", fontWeight: 600, color: SHOWCASE.text }}
               >
                 Retry
               </button>
@@ -119,14 +113,7 @@ const DiagramImage = ({
             />
           )}
         </div>
-        {caption && (
-          <figcaption style={{
-            padding: "0.5rem 0.9rem", borderTop: "1px solid #E8E8EC", background: "#F5F5F7",
-            fontSize: "0.62rem", color: "#4A4A5A", fontStyle: "italic", lineHeight: 1.5,
-          }}>
-            {caption}
-          </figcaption>
-        )}
+        {caption && <FrameCaption color={tint}>{caption}</FrameCaption>}
       </figure>
 
       {zoomed && (
@@ -146,22 +133,23 @@ const DiagramImage = ({
               boxShadow: "0 4px 12px rgba(0,0,0,0.3)",
             }}
           >
-            <span style={{ fontFamily: "Syne, sans-serif", fontSize: "0.95rem", fontWeight: 800, color: "#F5F5F7", letterSpacing: "0.03em" }}>
+            <span style={{ display: "flex", alignItems: "center", gap: 10, fontFamily: "Syne, sans-serif", fontSize: "0.95rem", fontWeight: 800, color: "#F5F5F7", letterSpacing: "0.03em" }}>
+              <FrameChip color={tint} icon={iconForModule(moduleId)} size={30} />
               {title || alt}
             </span>
             <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
               <button onClick={zoomOut} title="Zoom Out" style={lb(36)}>➖</button>
-              <button onClick={reset} title="Reset" style={{ ...lb(64), fontFamily: "DM Mono, monospace", fontSize: "0.8rem", color: scale !== 1 ? "#C47A6A" : "#B8B8C4" }}>{Math.round(scale * 100)}%</button>
+              <button onClick={reset} title="Reset" style={{ ...lb(64), fontFamily: "DM Mono, monospace", fontSize: "0.8rem", color: scale !== 1 ? tint : "#B8B8C4" }}>{Math.round(scale * 100)}%</button>
               <button onClick={zoomIn} title="Zoom In" style={lb(36)}>➕</button>
               <div style={{ width: 1, height: 24, background: "rgba(255,255,255,0.15)", margin: "0 6px" }} />
-              <button onClick={close} title="Close" style={{ ...lb(80), background: "#C47A6A", border: "none", color: "#FFFFFF", fontWeight: 800 }}>✕ Close</button>
+              <button onClick={close} title="Close" style={{ ...lb(80), background: tint, border: "none", color: "#FFFFFF", fontWeight: 800 }}>✕ Close</button>
             </div>
           </div>
           <div
             onClick={(e) => e.stopPropagation()}
             style={{ flex: 1, overflow: "auto", background: "#0F1219", display: "flex", alignItems: "center", justifyContent: "center", padding: "1rem" }}
           >
-            <div style={{ background: "#FFFFFF", borderRadius: 8, padding: "1.5rem", boxShadow: "0 20px 50px rgba(0,0,0,0.6)", zoom: scale, width: "100%", maxWidth: 1600, display: "flex", justifyContent: "center" }}>
+            <div style={{ background, border: `1px solid ${frame.variant.edge}`, borderRadius: 12, padding: "1.5rem", boxShadow: `0 20px 50px rgba(0,0,0,0.6), 0 0 32px ${frame.variant.glow}`, zoom: scale, width: "100%", maxWidth: 1600, display: "flex", justifyContent: "center" }}>
               <img src={src} alt={alt} loading="lazy" decoding="async" style={{ width: "100%", maxWidth: "100%", height: "auto", objectFit: "contain", display: "block" }} />
             </div>
           </div>

@@ -2,6 +2,8 @@ import { useState, useEffect, useRef, useCallback, Suspense } from "react";
 import { TABS_REGISTRY, CATEGORIES, UMBRELLA_TOPICS, getTabById } from "./registry/tabsRegistry.js";
 import { s } from "./styles/legacyStyles.js";
 import DiagramImage from "./components/ui/DiagramImage.jsx";
+import { SHOWCASE, frameStyles, FrameChip, FrameHeader, iconForModule } from "./components/ui/SpectrumFrame.jsx";
+import { spectrumAccentForModule } from "./design-system/diagramTokens.js";
 import { LcelPipelinePanel, StateGraphPanel, RagIndexRetrievePanel, HybridRetrievalPanel, MultiAgentPatternsPanel, ContextGraphMemoryPanel, ContextEngineeringPanel, MemoryEngineeringPanel, MarketEventPanel, ComplianceGatesPanel, PilotImpactPanel, ContextQualityPanel, AdvisorCopilotPanel, TokenCostRouterPanel, RetryIsolationPanel, AgentInWorkflowPanel, DebuggingLoopPanel, GlassCard } from "./components/ui/CleanInfographics.jsx";
 import LangChainVsLangGraphComparison from "./components/ui/LangChainVsLangGraphComparison.jsx";
 import StrandsAgentCoreTab from "./strandsAgentCore/StrandsAgentCoreTab.jsx";
@@ -163,9 +165,11 @@ const COMPARISON = [
 // ─── HELPERS ─────────────────────────────────────────────────────
 // ─── ZOOMABLE FIGURE WRAPPER ──────────────────────────────────────
 // Wraps any SVG diagram with a maximize/restore control + fullscreen modal.
-const ZoomableFigure = ({ title, children, dark = false }) => {
+const ZoomableFigure = ({ title, children, dark = false, accent, moduleId }) => {
   const [zoomed, setZoomed] = useState(false);
   const [scale, setScale]   = useState(1.0);
+  const tint = accent || (moduleId ? spectrumAccentForModule(moduleId) : spectrumAccentForModule("foundations"));
+  const frame = frameStyles(tint);
 
   const openModal = () => {
     setScale(1.0);
@@ -223,60 +227,52 @@ const ZoomableFigure = ({ title, children, dark = false }) => {
   return (
     <>
       {/* INLINE CARD */}
-      <div style={{
-        borderRadius: 8,
-        border: dark ? "1px solid rgba(255,255,255,0.12)" : "1px solid #e0dcd4",
-        background: dark ? "#090d16" : "#ffffff",
-        overflow: "hidden",
-        marginBottom: "0.75rem",
-        boxShadow: dark ? "0 4px 14px rgba(0,0,0,0.4)" : "0 2px 4px rgba(0,0,0,0.03)"
-      }}>
-        {/* Inline Card Header - Clean, No Zoom Text */}
-        <div style={{
-          display: "flex", justifyContent: "space-between", alignItems: "center",
-          padding: "0.5rem 0.9rem",
-          background: dark ? "#0d111d" : "#f7f5f0",
-          borderBottom: dark ? "1px solid rgba(255,255,255,0.08)" : "1px solid #e0dcd4",
-          fontFamily: "Syne, sans-serif", fontSize: "0.7rem", fontWeight: 700,
-          color: dark ? "#94A3B8" : "#1E293B"
-        }}>
-          <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
-            <span style={{ color: "#3A9B9F" }}>🔍</span>
-            <span style={{ color: dark ? "#F8FAFC" : "#1a1a2e" }}>{title || "Figure / Workflow"}</span>
-          </div>
+      <div style={{ ...frame.figure, marginBottom: "0.75rem" }}>
+        {/* Inline Card Header — showcase chrome: chip + title + expand pill */}
+        <FrameHeader
+          color={tint}
+          icon={iconForModule(moduleId)}
+          title={title || "Figure / Workflow"}
+          right={
+            <button
+              onClick={openModal}
+              title="Expand to Fullscreen View"
+              style={{
+                padding: "4px 10px", height: 26, borderRadius: 6,
+                background: "rgba(255,255,255,0.08)", border: `1px solid ${frame.variant.chip}`,
+                color: tint, cursor: "pointer", fontWeight: 700, fontSize: "0.65rem",
+                display: "flex", alignItems: "center", gap: "4px",
+                transition: "all 0.15s ease", flexShrink: 0, fontFamily: "inherit"
+              }}
+              onMouseEnter={e => { e.currentTarget.style.background = tint; e.currentTarget.style.color = "#fff"; }}
+              onMouseLeave={e => { e.currentTarget.style.background = "rgba(255,255,255,0.08)"; e.currentTarget.style.color = tint; }}
+            >
+              <span>⤢</span> Fullscreen
+            </button>
+          }
+        />
 
-          <button
-            onClick={openModal}
-            title="Expand to Fullscreen View"
-            style={{
-              padding: "4px 10px", height: 26, borderRadius: 4,
-              background: dark ? "#161b2c" : "#ffffff",
-              border: dark ? "1px solid rgba(94, 196, 200, 0.4)" : "1px solid #d0ccc4",
-              color: "#5EC4C8", cursor: "pointer", fontWeight: 700, fontSize: "0.65rem", display: "flex", alignItems: "center", gap: "4px",
-              boxShadow: "0 1px 2px rgba(0,0,0,0.05)", transition: "all 0.15s ease"
-            }}
-            onMouseEnter={e => { e.currentTarget.style.background = "#5EC4C8"; e.currentTarget.style.color = "#fff"; }}
-            onMouseLeave={e => { e.currentTarget.style.background = dark ? "#161b2c" : "#ffffff"; e.currentTarget.style.color = "#5EC4C8"; }}
-          >
-            <span>⤢</span> Fullscreen
-          </button>
-        </div>
-
-        {/* Inline Viewport */}
+        {/* Inline Viewport — navy mount, white canvas for light-styled children */}
         <div
           onClick={openModal}
           title="Click to view fullscreen modal"
           style={{
             width: "100%",
-            padding: "1rem",
-            background: dark ? "#090d16" : "#ffffff",
+            padding: "0.7rem",
+            background: SHOWCASE.bg,
             cursor: "pointer",
             display: "flex",
             justifyContent: "center",
             alignItems: "center"
           }}
         >
-          <div style={{ width: "100%", maxWidth: "100%" }}>
+          <div style={{
+            width: "100%", maxWidth: "100%",
+            background: dark ? "transparent" : "#ffffff",
+            border: dark ? "none" : "1px solid rgba(0,0,0,0.06)",
+            borderRadius: 8,
+            boxSizing: "border-box"
+          }}>
             {children}
           </div>
         </div>
@@ -298,12 +294,12 @@ const ZoomableFigure = ({ title, children, dark = false }) => {
             onClick={e => e.stopPropagation()}
             style={{
               display: "flex", justifyContent: "space-between", alignItems: "center",
-              padding: "0.75rem 1.5rem", background: "#14161f",
+              padding: "0.75rem 1.5rem", background: `linear-gradient(90deg, ${frame.variant.edge}, #14161f 55%)`,
               borderBottom: "1px solid #2a2d3d", boxShadow: "0 4px 12px rgba(0,0,0,0.3)"
             }}
           >
             <div style={{ display: "flex", alignItems: "center", gap: "0.6rem" }}>
-              <span style={{ fontSize: "1.2rem", color: "#3A9B9F" }}>🔍</span>
+              <FrameChip color={tint} icon={iconForModule(moduleId)} size={30} />
               <span style={{ fontFamily: "Syne, sans-serif", fontSize: "0.95rem", fontWeight: 800, color: "#ffffff", letterSpacing: "0.03em" }}>
                 {title || "Diagram Inspection"}
               </span>
@@ -318,7 +314,7 @@ const ZoomableFigure = ({ title, children, dark = false }) => {
                   width: 36, height: 36, borderRadius: 6, background: "#222533", border: "1px solid #3a3e54",
                   color: "#ffffff", cursor: "pointer", fontWeight: 800, fontSize: "1rem", display: "flex", alignItems: "center", justifyContent: "center"
                 }}
-                onMouseEnter={e => { e.currentTarget.style.background = "#F0A89A"; }}
+                onMouseEnter={e => { e.currentTarget.style.background = tint; }}
                 onMouseLeave={e => { e.currentTarget.style.background = "#222533"; }}
               >
                 ➖
@@ -329,10 +325,10 @@ const ZoomableFigure = ({ title, children, dark = false }) => {
                 title="Reset Zoom (100%)"
                 style={{
                   padding: "0 12px", height: 36, borderRadius: 6, background: "#222533", border: "1px solid #3a3e54",
-                  color: scale !== 1 ? "#F0A89A" : "#a0a5ba", cursor: "pointer", fontWeight: 700, fontSize: "0.8rem", fontFamily: "DM Mono, monospace"
+                  color: scale !== 1 ? tint : "#a0a5ba", cursor: "pointer", fontWeight: 700, fontSize: "0.8rem", fontFamily: "DM Mono, monospace"
                 }}
-                onMouseEnter={e => { e.currentTarget.style.background = "#F0A89A"; e.currentTarget.style.color = "#fff"; }}
-                onMouseLeave={e => { e.currentTarget.style.background = "#222533"; e.currentTarget.style.color = scale !== 1 ? "#F0A89A" : "#a0a5ba"; }}
+                onMouseEnter={e => { e.currentTarget.style.background = tint; e.currentTarget.style.color = "#fff"; }}
+                onMouseLeave={e => { e.currentTarget.style.background = "#222533"; e.currentTarget.style.color = scale !== 1 ? tint : "#a0a5ba"; }}
               >
                 {Math.round(scale * 100)}%
               </button>
@@ -344,7 +340,7 @@ const ZoomableFigure = ({ title, children, dark = false }) => {
                   width: 36, height: 36, borderRadius: 6, background: "#222533", border: "1px solid #3a3e54",
                   color: "#ffffff", cursor: "pointer", fontWeight: 800, fontSize: "1rem", display: "flex", alignItems: "center", justifyContent: "center"
                 }}
-                onMouseEnter={e => { e.currentTarget.style.background = "#5EC4C8"; }}
+                onMouseEnter={e => { e.currentTarget.style.background = tint; }}
                 onMouseLeave={e => { e.currentTarget.style.background = "#222533"; }}
               >
                 ➕
@@ -356,7 +352,7 @@ const ZoomableFigure = ({ title, children, dark = false }) => {
                 onClick={closeModal}
                 title="Close Fullscreen (Esc)"
                 style={{
-                  padding: "0 16px", height: 36, borderRadius: 6, background: "#F0A89A", border: "none",
+                  padding: "0 16px", height: 36, borderRadius: 6, background: tint, border: "none",
                   color: "#ffffff", cursor: "pointer", fontWeight: 800, fontSize: "0.85rem", display: "flex", alignItems: "center", gap: "6px"
                 }}
               >
@@ -403,9 +399,10 @@ const ZoomableFigure = ({ title, children, dark = false }) => {
               className="zoomable-modal-content"
               style={{
                 background: "#ffffff",
-                borderRadius: 8,
+                border: `1px solid ${frame.variant.edge}`,
+                borderRadius: 12,
                 padding: "1.5rem",
-                boxShadow: "0 20px 50px rgba(0,0,0,0.6)",
+                boxShadow: `0 20px 50px rgba(0,0,0,0.6), 0 0 32px ${frame.variant.glow}`,
                 zoom: scale,
                 width: "100%",
                 maxWidth: "1600px",

@@ -6,11 +6,13 @@ import { useState, useRef, useEffect, useCallback } from 'react';
 import { getModuleColors } from '../../design-system/tokens.js';
 import { Container } from '../layout/Primitives.jsx';
 import { Button, Badge, Divider } from './Core.jsx';
+import { SHOWCASE, frameStyles, FrameHeader, FrameCaption, iconForModule } from './SpectrumFrame.jsx';
+import { spectrumAccentForModule } from '../../design-system/diagramTokens.js';
 
 // ============================================
 // Diagram — Interactive SVG with fullscreen zoom
 // ============================================
-export function Diagram({ src, alt, caption, title, maxWidth = '1280px', style, ...props }) {
+export function Diagram({ src, alt, caption, title, maxWidth = '1280px', accent = '#5EC4C8', moduleId, style, ...props }) {
   const [zoomed, setZoomed] = useState(false);
   const [scale, setScale] = useState(1);
   const isMountedRef = useRef(false);
@@ -34,6 +36,8 @@ export function Diagram({ src, alt, caption, title, maxWidth = '1280px', style, 
   const zoomIn = (e) => { e?.stopPropagation(); setScale(s => Math.min(s + 0.25, 3)); };
   const zoomOut = (e) => { e?.stopPropagation(); setScale(s => Math.max(s - 0.25, 0.5)); };
   const reset = (e) => { e?.stopPropagation(); setScale(1); };
+  const tint = moduleId ? spectrumAccentForModule(moduleId) : accent;
+  const frame = frameStyles(tint);
 
   useEffect(() => {
     if (!zoomed || !isMountedRef.current) return;
@@ -50,45 +54,26 @@ export function Diagram({ src, alt, caption, title, maxWidth = '1280px', style, 
       <figure style={{ margin: 0, ...style }} {...props}>
         <div
           style={{
-            background: 'var(--ds-color-bg-surface)',
-            border: '1px solid var(--ds-color-border-subtle)',
-            borderRadius: 'var(--ds-radius-lg)',
-            overflow: 'hidden',
+            ...frame.figure,
             cursor: 'zoom-in',
             transition: 'box-shadow var(--ds-motion-duration-base)',
           }}
           onClick={open}
-          onMouseEnter={e => e.currentTarget.style.boxShadow = 'var(--ds-shadow-md)'}
-          onMouseLeave={e => e.currentTarget.style.boxShadow = 'none'}
+          onMouseEnter={e => e.currentTarget.style.boxShadow = frame.figureHover}
+          onMouseLeave={e => e.currentTarget.style.boxShadow = frame.figureRest}
         >
           {(title || caption) && (
-            <div style={{
-              display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-              padding: 'var(--ds-space-3) var(--ds-space-4)',
-              background: 'var(--ds-color-bg-surfaceHover)',
-              borderBottom: '1px solid var(--ds-color-border-subtle)',
-              fontSize: 'var(--ds-font-size-bodySm)',
-              fontWeight: 'var(--ds-font-weight-medium)',
-              color: 'var(--ds-color-text-secondary)',
-            }}>
-              <span style={{ display: 'flex', alignItems: 'center', gap: 'var(--ds-space-2)' }}>
-                <span style={{ fontSize: '1.1em' }}>🔍</span>
-                {title || 'Diagram'}
-              </span>
-              <span style={{ display: 'flex', alignItems: 'center', gap: 'var(--ds-space-1)', color: 'var(--ds-color-text-tertiary)' }}>
-                <kbd style={{ fontSize: 'var(--ds-font-size-caption)', padding: '1px 4px', background: 'var(--ds-color-bg-surface)', borderRadius: 'var(--ds-radius-sm)', border: '1px solid var(--ds-color-border-subtle)' }}>⌘</kbd>
-                <span>Click to zoom</span>
-              </span>
-            </div>
+            <FrameHeader
+              color={tint}
+              icon={iconForModule(moduleId)}
+              title={title || 'Diagram'}
+              hint="⌘ Click to zoom"
+            />
           )}
-          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', padding: 'var(--ds-space-4)', minHeight: '200px' }}>
+          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', padding: 'var(--ds-space-4)', minHeight: '200px', background: SHOWCASE.bg }}>
             <img src={src} alt={alt} style={{ width: '100%', maxWidth, height: 'auto', display: 'block' }} />
           </div>
-          {caption && (
-            <figcaption style={{ padding: 'var(--ds-space-3) var(--ds-space-4)', borderTop: '1px solid var(--ds-color-border-subtle)', background: 'var(--ds-color-bg-surfaceHover)', fontSize: 'var(--ds-font-size-bodySm)', color: 'var(--ds-color-text-tertiary)', fontStyle: 'italic', lineHeight: 'var(--ds-font-lineHeight-normal)' }}>
-              {caption}
-            </figcaption>
-          )}
+          {caption && <FrameCaption color={tint}>{caption}</FrameCaption>}
         </div>
       </figure>
 
