@@ -4,7 +4,7 @@ import { Callout } from "../components/ui/Core.jsx";
 
 const mono = "var(--ds-font-family-mono)";
 
-const COLORS = {
+export const COLORS = {
   bg: "var(--ds-color-bg-canvas)",
   surface: "var(--ds-color-bg-surface)",
   surface2: "var(--ds-color-bg-surfaceHover)",
@@ -20,7 +20,7 @@ const COLORS = {
   violet: "var(--ds-color-module-context-dark)",
 };
 
-function Section({ n, title, kicker, children }) {
+export function Section({ n, title, kicker, children }) {
   return (
     <section style={{ display: "flex", flexDirection: "column", gap: 14 }}>
       <div style={{ display: "flex", alignItems: "baseline", gap: 10 }}>
@@ -35,7 +35,7 @@ function Section({ n, title, kicker, children }) {
   );
 }
 
-function Card({ title, accent = COLORS.sky, children, pad = "16px 18px" }) {
+export function Card({ title, accent = COLORS.sky, children, pad = "16px 18px" }) {
   return (
     <div style={{ background: COLORS.surface, border: `1px solid ${COLORS.border}`, borderRadius: "var(--ds-radius-lg)", padding: pad }}>
       {title && (
@@ -48,7 +48,7 @@ function Card({ title, accent = COLORS.sky, children, pad = "16px 18px" }) {
   );
 }
 
-function Table({ head, rows, widths }) {
+export function Table({ head, rows, widths }) {
   return (
     <div style={{ overflowX: "auto", border: `1px solid ${COLORS.border}`, borderRadius: "var(--ds-radius-md)" }}>
       <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 12, minWidth: 420 }}>
@@ -81,15 +81,15 @@ function Table({ head, rows, widths }) {
   );
 }
 
-function Code({ children, label, lang = "text" }) {
+export function Code({ children, label, lang = "text" }) {
   return <CodeBlock code={children} language={lang} filename={label} showLineNumbers={false} />;
 }
 
-function Check({ children }) {
+export function Check({ children }) {
   return <Callout type="tip" title="CHECK YOURSELF">{children}</Callout>;
 }
 
-function Bullets({ items, accent = COLORS.amber }) {
+export function Bullets({ items, accent = COLORS.amber }) {
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 7 }}>
       {items.map((t, i) => (
@@ -102,7 +102,7 @@ function Bullets({ items, accent = COLORS.amber }) {
   );
 }
 
-function Steps({ items }) {
+export function Steps({ items }) {
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
       {items.map((t, i) => (

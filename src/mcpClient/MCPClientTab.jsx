@@ -10,6 +10,7 @@ import {
   PYTHON_STREAMLIT_MCP_CODE
 } from './mcpClientEngine.js';
 import MCPTab from './MCPTab.jsx';
+import McpIntegrationGuide from './McpIntegrationGuide.jsx';
 
 const { Container, Grid, Flex, Stack } = Primitives;
 
@@ -49,7 +50,7 @@ function McpClientPanel() {
 }
 
 export default function MCPClientTab() {
-  const [activeSubTab, setActiveSubTab] = useState('course'); // 'course' | 'protocol' | 'catalog' | 'simulator' | 'code'
+  const [activeSubTab, setActiveSubTab] = useState('course'); // 'course' | 'guide' | 'protocol' | 'catalog' | 'simulator' | 'code'
 
   // Simulator state
   const [selectedServerId, setSelectedServerId] = useState('huggingface');
@@ -92,10 +93,11 @@ export default function MCPClientTab() {
         }}>
           {[
             { id: 'course', icon: '📘', label: '1. MCP Course', desc: 'Protocol, architecture, security, production' },
-            { id: 'protocol', icon: '🔌', label: '2. Client vs Server Protocol', desc: 'JSON-RPC 2.0 & SSE Transports' },
-            { id: 'catalog', icon: '🌐', label: '3. Remote MCP Servers Catalog', desc: 'DeepWiki, HuggingFace & Supabase' },
-            { id: 'simulator', icon: '💻', label: '4. Streamlit Client App Simulator', desc: 'Interactive UI tool runner' },
-            { id: 'code', icon: '🛠️', label: '5. Production Python & Streamlit Code', desc: 'OpenAI & dotenv bindings' }
+            { id: 'guide', icon: '🧭', label: '2. Integration Guide', desc: 'MCP inside AskAway — SDK, governance, use cases' },
+            { id: 'protocol', icon: '🔌', label: '3. Client vs Server Protocol', desc: 'JSON-RPC 2.0 & SSE Transports' },
+            { id: 'catalog', icon: '🌐', label: '4. Remote MCP Servers Catalog', desc: 'DeepWiki, HuggingFace & Supabase' },
+            { id: 'simulator', icon: '💻', label: '5. Streamlit Client App Simulator', desc: 'Interactive UI tool runner' },
+            { id: 'code', icon: '🛠️', label: '6. Production Python & Streamlit Code', desc: 'OpenAI & dotenv bindings' }
           ].map(tab => (
             <button
               key={tab.id}
@@ -128,7 +130,10 @@ export default function MCPClientTab() {
         {/* ─── SUBTAB 1: MCP COURSE ─── */}
         {activeSubTab === 'course' && <MCPTab />}
 
-        {/* ─── SUBTAB 2: CLIENT VS SERVER PROTOCOL ─── */}
+        {/* ─── SUBTAB 2: INTEGRATION GUIDE ─── */}
+        {activeSubTab === 'guide' && <McpIntegrationGuide />}
+
+        {/* ─── SUBTAB 3: CLIENT VS SERVER PROTOCOL ─── */}
         {activeSubTab === 'protocol' && (
           <Stack gap={6}>
             <Card style={{ padding: 'var(--ds-space-5)', background: 'var(--ds-color-bg-canvas)' }}>
@@ -171,7 +176,7 @@ export default function MCPClientTab() {
           </Stack>
         )}
 
-        {/* ─── SUBTAB 3: REMOTE MCP SERVERS CATALOG ─── */}
+        {/* ─── SUBTAB 4: REMOTE MCP SERVERS CATALOG ─── */}
         {activeSubTab === 'catalog' && (
           <Stack gap={6}>
             <Card style={{ padding: 'var(--ds-space-5)', background: 'var(--ds-color-bg-canvas)' }}>
@@ -209,7 +214,7 @@ export default function MCPClientTab() {
           </Stack>
         )}
 
-        {/* ─── SUBTAB 4: STREAMLIT CLIENT APP SIMULATOR ─── */}
+        {/* ─── SUBTAB 5: STREAMLIT CLIENT APP SIMULATOR ─── */}
         {activeSubTab === 'simulator' && (
           <Stack gap={6}>
             <Card style={{ padding: 'var(--ds-space-5)', background: 'var(--ds-color-bg-canvas)' }}>
@@ -293,7 +298,7 @@ export default function MCPClientTab() {
           </Stack>
         )}
 
-        {/* ─── SUBTAB 5: PRODUCTION PYTHON & STREAMLIT CODE ─── */}
+        {/* ─── SUBTAB 6: PRODUCTION PYTHON & STREAMLIT CODE ─── */}
         {activeSubTab === 'code' && (
           <Stack gap={6}>
             <Card style={{ padding: 'var(--ds-space-5)', background: 'var(--ds-color-bg-canvas)' }}>
