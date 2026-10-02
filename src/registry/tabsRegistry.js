@@ -19,7 +19,7 @@ export const UMBRELLA_TOPICS = [
     color: "#5EC4C8",
     dark: "#1F6B6E",
     description: "Roadmap stages 1–4: orientation, how LLMs work, prompting, models — home of the AI Engineer Roadmap",
-    tabs: ["fnd_start_hub", "fnd_internals_hub", "fnd_prompts_hub", "fnd_mlsoc_hub", "fnd_multimodal_hub", "airoadmap", "overview", "glossary", "reinforcementlearning", "trpo2grpo", "aimoralagency", "humancentric", "dialoguelamda", "modellandscape", "tokenization", "quantserve", "vramconductor", "promptfundamentals", "llmsampling", "selfattention", "posencoding", "archconcepts", "promptmgmt", "promptdependencygraph", "promptcontracts", "promptregression", "structuredoutputs", "topicmodeling", "workflows", "unhobbling", "aiharness", "promptlearning", "visionlanguage", "diffusionmodels", "speechvoice", "datacentricai", "threesentenceprompt"]
+    tabs: ["fnd_start_hub", "fnd_internals_hub", "fnd_prompts_hub", "fnd_mlsoc_hub", "fnd_multimodal_hub", "airoadmap", "overview", "glossary", "reinforcementlearning", "trpo2grpo", "aimoralagency", "humancentric", "dialoguelamda", "modellandscape", "tokenization", "quantserve", "vramconductor", "promptfundamentals", "llmsampling", "selfattention", "posencoding", "archconcepts", "promptmgmt", "promptdependencygraph", "promptcontracts", "promptregression", "structuredoutputs", "topicmodeling", "workflows", "unhobbling", "aiharness", "promptlearning", "visionlanguage", "diffusionmodels", "speechvoice", "datacentricai", "prompt_studio", "prompt_frameworks", "prompt_methodologies", "threesentenceprompt"]
   },
   {
     id: "data_platform",
@@ -1511,6 +1511,33 @@ export const TABS_REGISTRY = [
     icon: "✍️",
     keywords: ["prompt engineering", "3 sentences", "plan-first", "better prompts", "AI productivity", "brain dump", "messy prompts", "course correction", "framework", "methodology", "prompt patterns", "prompt framework", "prompt methodology", "quality controller", "prompt optimizer"],
     component: lazy(() => import("../threeSentencePrompt/ThreeSentencePromptTab.jsx"))
+  },
+  {
+    id: "prompt_studio",
+    label: "Prompt Studio",
+    umbrellaId: "foundations",
+    category: "Foundations",
+    icon: "🧪",
+    keywords: ["prompt studio", "combine prompts", "compose prompt", "build prompt", "prompt builder", "framework + methodology", "generate prompt", "prompt composition", "prompt testing", "prompt evaluation"],
+    component: lazy(() => import("../promptStudio/PromptStudioTab.jsx"))
+  },
+  {
+    id: "prompt_frameworks",
+    label: "Prompt Frameworks",
+    umbrellaId: "foundations",
+    category: "Foundations",
+    icon: "📐",
+    keywords: ["prompt frameworks", "structure a prompt", "blueprint", "RTCO", "role task context output", "goal context constraints format", "input process output", "problem options decision action", "understand plan execute validate", "prompt template", "prompt structure"],
+    component: lazy(() => import("../promptStudio/PromptFrameworksTab.jsx"))
+  },
+  {
+    id: "prompt_methodologies",
+    label: "Prompt Methodologies",
+    umbrellaId: "foundations",
+    category: "Foundations",
+    icon: "🧩",
+    keywords: ["prompt methodologies", "prompting techniques", "few-shot", "zero-shot", "decomposition", "retrieval-grounded", "self-critique", "constraint-based", "structured-output", "tool-assisted", "iterative prompting", "chain of thought"],
+    component: lazy(() => import("../promptStudio/PromptMethodologiesTab.jsx"))
   },
   {
     id: "finassistproject",

@@ -1,5 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import { PromptFrameworksGrid } from "../components/ui/CleanInfographics.jsx";
+import { FRAMEWORKS } from "../services/frameworkLibrary.js";
+import { recommendFrameworks } from "../services/frameworkRecommender.js";
+import PromptWorkbench from "../components/workbench/PromptWorkbench.jsx";
 
 const C = {
   bg: "#0F1219",
@@ -328,6 +331,9 @@ function PatternPicker() {
   const matchedPatterns = selected
     ? PATTERNS.filter((p) => selected.matched.includes(p.id))
     : [];
+  const librarySuggestions = selected
+    ? recommendFrameworks(selected.label, { limit: 2 }).recommendations
+    : [];
 
   return (
     <div style={sectionStyle}>
@@ -384,6 +390,18 @@ function PatternPicker() {
               </div>
             ))}
           </div>
+          {librarySuggestions.length > 0 && (
+            <div style={{ color: C.muted, fontSize: 11, marginTop: 12, lineHeight: 1.7 }}>
+              From the 30-framework library:{" "}
+              {librarySuggestions.map((r, i) => (
+                <span key={r.name}>
+                  {i > 0 ? " · " : ""}
+                  <strong style={{ color: C.teal }}>{r.name}</strong>
+                  <span style={{ color: C.muted }}> ({r.tier} — {r.reasons[0]})</span>
+                </span>
+              ))}
+            </div>
+          )}
         </div>
       )}
     </div>
@@ -567,6 +585,15 @@ function PromptSimulator() {
     "I need to build a RAG system for our customer support docs. We have about 500 PDFs. The current search is terrible. I was thinking about embeddings but I'm not sure about chunking. Also we need to handle tables in the PDFs. Our budget is limited so probably open source. The team knows Python but not ML. Deadline is Q2."
   );
   const [showAppend, setShowAppend] = useState(false);
+  const [fwName, setFwName] = useState("");
+  const suggestions = useMemo(() => recommendFrameworks(input, { limit: 2 }), [input]);
+
+  function applyFramework(name) {
+    setFwName(name);
+    if (!name) return;
+    const fw = FRAMEWORKS.find((f) => f.a === name);
+    if (fw) setInput((prev) => `${fw.t}\n\n${prev}`);
+  }
 
   const withoutPlan = {
     risk: "AI assumed you need production-grade table extraction (expensive), missed that you need internal search improvement first, and created a scope too large for Q2.",
@@ -611,6 +638,50 @@ function PromptSimulator() {
             boxSizing: "border-box",
           }}
         />
+      </div>
+
+      <div style={{ marginBottom: 16 }}>
+        <div style={{ color: C.muted, fontSize: 11, marginBottom: 6 }}>PREPEND A FRAMEWORK TEMPLATE (from the 30-framework library)</div>
+        <select
+          value={fwName}
+          onChange={(e) => applyFramework(e.target.value)}
+          style={{
+            width: "100%",
+            padding: "10px 14px",
+            borderRadius: 8,
+            background: C.s2,
+            border: `1px solid ${C.border}`,
+            color: C.text,
+            fontSize: 12,
+            outline: "none",
+            ...mono,
+          }}
+        >
+          <option value="">-- No framework (raw prompt) --</option>
+          {FRAMEWORKS.map((f) => (
+            <option key={f.a} value={f.a}>
+              {f.a} · {f.tier} — {f.b}
+            </option>
+          ))}
+        </select>
+        {suggestions.recommendations.length > 0 && (
+          <div style={{ color: C.muted, fontSize: 11, marginTop: 8, lineHeight: 1.6 }}>
+            Suggested for your text:{" "}
+            {suggestions.recommendations.map((r, i) => (
+              <span key={r.name}>
+                {i > 0 ? " · " : ""}
+                <button
+                  onClick={() => applyFramework(r.name)}
+                  title={r.reasons.join(' ')}
+                  style={{ background: "none", border: "none", padding: 0, color: C.teal, fontSize: 11, cursor: "pointer", textDecoration: "underline", fontFamily: "inherit" }}
+                >
+                  {r.name}
+                </button>
+                <span style={{ color: C.muted }}> ({r.reasons[0]})</span>
+              </span>
+            ))}
+          </div>
+        )}
       </div>
 
       <div style={{ display: "flex", gap: 8, marginBottom: 16 }}>
@@ -2509,6 +2580,7 @@ export default function ThreeSentencePromptTab() {
       <PatternPicker />
       <ComparisonTable />
       <PromptSimulator />
+      <PromptWorkbench />
       <WhyItWorks />
       <TokenSavings />
       <RealExamples />
