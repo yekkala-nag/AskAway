@@ -2471,6 +2471,18 @@ function PromptOptimizer() {
 /* ─── Main Export ─────────────────────────────────────── */
 
 export default function ThreeSentencePromptTab() {
+  const [tab, setTab] = useState("overview");
+
+  const tabs = [
+    { id: "overview", label: "Overview" },
+    { id: "learn", label: "Learn" },
+    { id: "patterns", label: "Patterns" },
+    { id: "playground", label: "Playground" },
+    { id: "toolkit", label: "Toolkit" },
+    { id: "examples", label: "Examples" },
+    { id: "advanced", label: "Advanced" },
+  ];
+
   function copyThreeSentences() {
     navigator.clipboard.writeText(THREE_SENTENCES);
   }
@@ -2486,6 +2498,45 @@ export default function ThreeSentencePromptTab() {
         margin: "0 auto",
       }}
     >
+      {/* Sub-tab bar (Loop Engineering pattern) */}
+      <div
+        style={{
+          background: C.surface,
+          border: `1px solid ${C.border}`,
+          borderRadius: 10,
+          padding: "0 12px",
+          margin: 0,
+        }}
+      >
+        <div style={{ display: "flex", gap: 0, overflowX: "auto", WebkitOverflowScrolling: "touch" }}>
+          {tabs.map((t) => (
+            <button
+              key={t.id}
+              onClick={() => setTab(t.id)}
+              aria-current={tab === t.id ? "page" : undefined}
+              style={{
+                background: "none",
+                border: "none",
+                borderBottom: `2px solid ${tab === t.id ? C.teal : "transparent"}`,
+                color: tab === t.id ? C.teal : C.muted,
+                padding: "10px 12px",
+                fontSize: 12,
+                fontWeight: tab === t.id ? 600 : 400,
+                cursor: "pointer",
+                transition: "all 0.15s",
+                whiteSpace: "nowrap",
+                flexShrink: 0,
+                fontFamily: "inherit",
+              }}
+            >
+              {t.label}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {tab === "overview" && (
+        <>
       {/* Hero */}
       <div style={sectionStyle}>
         <div style={{ display: "flex", gap: 12, alignItems: "flex-start", marginBottom: 16 }}>
@@ -2514,7 +2565,6 @@ export default function ThreeSentencePromptTab() {
       </div>
 
       {/* The 3 sentences - hero card */}
-      <PromptFrameworksGrid />
       <div
         style={{
           ...sectionStyle,
@@ -2571,21 +2621,7 @@ export default function ThreeSentencePromptTab() {
         </div>
       </div>
 
-      {/* All sections in order */}
-      <FrameworkPipeline />
-      <StageLibrary />
-      <TaskControlsMatrix />
-      <PromptOptimizer />
-      <PatternLibrary />
-      <PatternPicker />
-      <ComparisonTable />
-      <PromptSimulator />
-      <PromptWorkbench />
       <WhyItWorks />
-      <TokenSavings />
-      <RealExamples />
-      <PromptRecipeBook />
-      <AdvancedVersion />
 
       {/* Takeaway */}
       <div style={{ ...sectionStyle, border: `1px solid ${C.teal}33` }}>
@@ -2597,6 +2633,44 @@ export default function ThreeSentencePromptTab() {
           costs 30 seconds to paste and saves 5-15 minutes per complex interaction.
         </div>
       </div>
+        </>
+      )}
+
+      {tab === "learn" && (
+        <>
+          <FrameworkPipeline />
+          <StageLibrary />
+          <TaskControlsMatrix />
+          <PromptFrameworksGrid />
+        </>
+      )}
+
+      {tab === "patterns" && (
+        <>
+          <PatternPicker />
+          <PatternLibrary />
+          <ComparisonTable />
+        </>
+      )}
+
+      {tab === "playground" && (
+        <>
+          <PromptSimulator />
+          <PromptOptimizer />
+        </>
+      )}
+
+      {tab === "toolkit" && <PromptWorkbench />}
+
+      {tab === "examples" && (
+        <>
+          <RealExamples />
+          <PromptRecipeBook />
+          <TokenSavings />
+        </>
+      )}
+
+      {tab === "advanced" && <AdvancedVersion />}
     </div>
   );
 }
