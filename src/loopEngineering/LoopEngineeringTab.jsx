@@ -1,21 +1,40 @@
 import React, { useState } from "react";
 import OReillyRadarTab from "./OReillyRadarTab.jsx";
 import GraphEngineeringTab from "./GraphEngineeringTab.jsx";
+import { COLORS } from "./loopTheme.js";
 
-const COLORS = {
-  bg: "#080D1A",
-  surface: "#0F1629",
-  surface2: "#162040",
-  surface3: "#1E2D52",
-  border: "#243358",
-  text: "#E2E8F0",
-  muted: "#7A8BA8",
-  amber: "#F59E0B",
-  sky: "#5EC4C8",
-  emerald: "#5EC4C8",
-  rose: "#F43F5E",
-  violet: "#A78BFA",
-};
+const TAB_GROUPS = [
+  {
+    id: "pattern",
+    label: "Pattern",
+    items: [
+      { id: "patterns", label: "Patterns" },
+      { id: "blocks", label: "6 Blocks" },
+      { id: "graphs", label: "Graph Engineering" },
+      { id: "realworld", label: "Real World" },
+    ],
+  },
+  {
+    id: "style",
+    label: "Style",
+    items: [
+      { id: "library", label: "Loop Library" },
+      { id: "guide", label: "Practical Guide" },
+      { id: "commands", label: "Commands" },
+      { id: "basics", label: "Claude Basics" },
+    ],
+  },
+  {
+    id: "more",
+    label: "More",
+    items: [
+      { id: "overview", label: "Overview" },
+      { id: "start", label: "Start Here" },
+      { id: "oreilly", label: "Architecture" },
+      { id: "addy", label: "Loop Design" },
+    ],
+  },
+];
 
 const BLOCKS = [
   {
@@ -1566,20 +1585,32 @@ export function LoopEngineeringTab({ onSelectTab, setActiveTab }) {
   const [tab, setTab] = useState("overview");
   const [expandedBlock, setExpandedBlock] = useState(null);
 
-  const tabs = [
-    { id: "overview", label: "Overview" },
-    { id: "basics", label: "Claude Basics" },
-    { id: "blocks", label: "6 Blocks" },
-    { id: "patterns", label: "Patterns" },
-    { id: "library", label: "Loop Library" },
-    { id: "guide", label: "Practical Guide" },
-    { id: "oreilly", label: "Architecture" },
-    { id: "graphs", label: "Graph Engineering" },
-    { id: "addy", label: "Loop Design" },
-    { id: "commands", label: "Commands" },
-    { id: "realworld", label: "Real World" },
-    { id: "start", label: "Start Here" },
-  ];
+  const activeGroup = TAB_GROUPS.find(g => g.items.some(i => i.id === tab)) || TAB_GROUPS[3];
+  const groupTab = id => {
+    const g = TAB_GROUPS.find(x => x.id === id);
+    if (g) setTab(g.items[0].id);
+  };
+
+  const tabButton = (id, label, active) => (
+    <button
+      key={id}
+      onClick={() => setTab(id)}
+      style={{
+        background: "none",
+        border: "none",
+        borderBottom: `2px solid ${active ? COLORS.amber : "transparent"}`,
+        color: active ? COLORS.amber : COLORS.muted,
+        padding: "8px 12px",
+        fontSize: 12,
+        fontWeight: active ? 600 : 400,
+        cursor: "pointer",
+        transition: "all 0.15s",
+        fontFamily: "Inter, sans-serif",
+        whiteSpace: "nowrap",
+        flexShrink: 0,
+      }}
+    >{label}</button>
+  );
 
   return (
     <div style={{
@@ -1610,28 +1641,37 @@ export function LoopEngineeringTab({ onSelectTab, setActiveTab }) {
             <span style={{ color: COLORS.border }}>|</span>
             <span style={{ color: COLORS.muted, fontSize: 13 }}>Engineering Strategy &amp; Autonomous Agent Loops</span>
           </div>
+          {/* Group tabs */}
           <div style={{ display: "flex", gap: 0, marginTop: 14, overflowX: "auto", WebkitOverflowScrolling: "touch" }}>
-            {tabs.map(t => (
+            {TAB_GROUPS.map(g => (
               <button
-                key={t.id}
-                onClick={() => setTab(t.id)}
+                key={g.id}
+                onClick={() => groupTab(g.id)}
                 style={{
                   background: "none",
                   border: "none",
-                  borderBottom: `2px solid ${tab === t.id ? COLORS.amber : "transparent"}`,
-                  color: tab === t.id ? COLORS.amber : COLORS.muted,
-                  padding: "8px 12px",
-                  fontSize: 12,
-                  fontWeight: tab === t.id ? 600 : 400,
+                  borderBottom: `2px solid ${activeGroup.id === g.id ? COLORS.amber : "transparent"}`,
+                  color: activeGroup.id === g.id ? COLORS.amber : COLORS.muted,
+                  padding: "8px 14px",
+                  fontSize: 13,
+                  fontWeight: activeGroup.id === g.id ? 700 : 500,
                   cursor: "pointer",
                   transition: "all 0.15s",
                   fontFamily: "Inter, sans-serif",
                   whiteSpace: "nowrap",
                   flexShrink: 0,
+                  letterSpacing: "0.01em",
                 }}
-              >{t.label}</button>
+              >{g.label}</button>
             ))}
           </div>
+
+          {/* Section tabs (hidden for single-item groups) */}
+          {activeGroup.items.length > 1 && (
+            <div style={{ display: "flex", gap: 0, marginTop: 2, overflowX: "auto", WebkitOverflowScrolling: "touch" }}>
+              {activeGroup.items.map(i => tabButton(i.id, i.label, tab === i.id))}
+            </div>
+          )}
         </div>
       </div>
 
@@ -1707,7 +1747,7 @@ export function LoopEngineeringTab({ onSelectTab, setActiveTab }) {
                 { n: "69", label: "Library loops", color: COLORS.amber },
                 { n: "8", label: "Named patterns", color: COLORS.sky },
                 { n: "8", label: "Failure modes", color: COLORS.rose },
-                { n: "10", label: "Tabs of content", color: COLORS.emerald },
+                { n: "12", label: "Tabs of content", color: COLORS.emerald },
               ].map(s => (
                 <div key={s.label} style={{ background: COLORS.surface, border: `1px solid ${COLORS.border}`, borderRadius: 10, padding: "12px 10px", textAlign: "center" }}>
                   <div style={{ color: s.color, fontFamily: "monospace", fontSize: 22, fontWeight: 700, lineHeight: 1 }}>{s.n}</div>

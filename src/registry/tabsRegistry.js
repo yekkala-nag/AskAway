@@ -1005,11 +1005,11 @@ export const TABS_REGISTRY = [
   },
   {
     id: "mcpclient",
-    label: "MCP Client & Streamlit Apps",
+    label: "MCP: Model Context Protocol",
     umbrellaId: "agents_frameworks",
     category: "Agents & Frameworks",
-    icon: "💻",
-    keywords: ["mcp client", "streamlit", "remote mcp server", "deepwiki", "huggingface", "json-rpc 2.0", "stdio", "sse", "tool calling"],
+    icon: "🔌",
+    keywords: ["mcp", "model context protocol", "mcp server", "mcp client", "tools", "resources", "prompts", "streamlit", "remote mcp server", "deepwiki", "huggingface", "json-rpc 2.0", "stdio", "streamable http", "tool calling"],
     component: lazy(() => import("../mcpClient/MCPClientTab.jsx"))
   },
   {

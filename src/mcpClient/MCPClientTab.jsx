@@ -9,6 +9,7 @@ import {
   RUN_STREAMLIT_MCP_SIMULATOR,
   PYTHON_STREAMLIT_MCP_CODE
 } from './mcpClientEngine.js';
+import MCPTab from './MCPTab.jsx';
 
 const { Container, Grid, Flex, Stack } = Primitives;
 
@@ -48,7 +49,7 @@ function McpClientPanel() {
 }
 
 export default function MCPClientTab() {
-  const [activeSubTab, setActiveSubTab] = useState('protocol'); // 'protocol' | 'catalog' | 'simulator' | 'code'
+  const [activeSubTab, setActiveSubTab] = useState('course'); // 'course' | 'protocol' | 'catalog' | 'simulator' | 'code'
 
   // Simulator state
   const [selectedServerId, setSelectedServerId] = useState('huggingface');
@@ -61,14 +62,14 @@ export default function MCPClientTab() {
       {/* HERO HEADER */}
       <Hero
         moduleId="agents_frameworks"
-        moduleLabel="Agent Systems & Frameworks [MCP Client Architecture]"
-        title="MCP Client Development with Streamlit"
-        description="Build interactive AI web application clients using Streamlit that connect to remote Model Context Protocol (MCP) servers (DeepWiki, HuggingFace, Supabase) for dynamic tool calling and resource discovery."
+        moduleLabel="Agent Systems & Frameworks [Model Context Protocol]"
+        title="Model Context Protocol (MCP)"
+        description="The open standard for connecting AI apps to tools and data: protocol course (architecture, primitives, security, production) plus a hands-on Streamlit MCP client that talks to remote servers (DeepWiki, HuggingFace, Supabase)."
         metrics={[
           { label: 'Protocol', value: 'Model Context Protocol' },
-          { label: 'Frontend Framework', value: 'Streamlit Python' },
-          { label: 'Transport Layer', value: 'Stdio & SSE Streams' },
-          { label: 'Tool Dispatch', value: 'JSON-RPC 2.0' }
+          { label: 'Message format', value: 'JSON-RPC 2.0' },
+          { label: 'Transports', value: 'stdio & Streamable HTTP' },
+          { label: 'Primitives', value: 'Tools · Resources · Prompts' }
         ]}
       />
 
@@ -90,10 +91,11 @@ export default function MCPClientTab() {
           overflowX: 'auto'
         }}>
           {[
-            { id: 'protocol', icon: '🔌', label: '1. Client vs Server Protocol', desc: 'JSON-RPC 2.0 & SSE Transports' },
-            { id: 'catalog', icon: '🌐', label: '2. Remote MCP Servers Catalog', desc: 'DeepWiki, HuggingFace & Supabase' },
-            { id: 'simulator', icon: '💻', label: '3. Streamlit Client App Simulator', desc: 'Interactive UI tool runner' },
-            { id: 'code', icon: '🛠️', label: '4. Production Python & Streamlit Code', desc: 'OpenAI & dotenv bindings' }
+            { id: 'course', icon: '📘', label: '1. MCP Course', desc: 'Protocol, architecture, security, production' },
+            { id: 'protocol', icon: '🔌', label: '2. Client vs Server Protocol', desc: 'JSON-RPC 2.0 & SSE Transports' },
+            { id: 'catalog', icon: '🌐', label: '3. Remote MCP Servers Catalog', desc: 'DeepWiki, HuggingFace & Supabase' },
+            { id: 'simulator', icon: '💻', label: '4. Streamlit Client App Simulator', desc: 'Interactive UI tool runner' },
+            { id: 'code', icon: '🛠️', label: '5. Production Python & Streamlit Code', desc: 'OpenAI & dotenv bindings' }
           ].map(tab => (
             <button
               key={tab.id}
@@ -123,7 +125,20 @@ export default function MCPClientTab() {
           ))}
         </div>
 
-        {/* ─── SUBTAB 1: CLIENT VS SERVER PROTOCOL ─── */}
+        {/* ─── SUBTAB 1: MCP COURSE ─── */}
+        {activeSubTab === 'course' && (
+          <div style={{
+            background: '#080D1A',
+            border: '1px solid #243358',
+            borderRadius: 'var(--ds-radius-lg)',
+            padding: '28px 24px 40px',
+            boxShadow: '0 8px 32px rgba(0, 0, 0, 0.35)'
+          }}>
+            <MCPTab />
+          </div>
+        )}
+
+        {/* ─── SUBTAB 2: CLIENT VS SERVER PROTOCOL ─── */}
         {activeSubTab === 'protocol' && (
           <Stack gap={6}>
             <Card style={{ padding: 'var(--ds-space-5)', background: 'var(--ds-color-bg-canvas)' }}>
@@ -166,7 +181,7 @@ export default function MCPClientTab() {
           </Stack>
         )}
 
-        {/* ─── SUBTAB 2: REMOTE MCP SERVERS CATALOG ─── */}
+        {/* ─── SUBTAB 3: REMOTE MCP SERVERS CATALOG ─── */}
         {activeSubTab === 'catalog' && (
           <Stack gap={6}>
             <Card style={{ padding: 'var(--ds-space-5)', background: 'var(--ds-color-bg-canvas)' }}>
@@ -204,7 +219,7 @@ export default function MCPClientTab() {
           </Stack>
         )}
 
-        {/* ─── SUBTAB 3: STREAMLIT CLIENT APP SIMULATOR ─── */}
+        {/* ─── SUBTAB 4: STREAMLIT CLIENT APP SIMULATOR ─── */}
         {activeSubTab === 'simulator' && (
           <Stack gap={6}>
             <Card style={{ padding: 'var(--ds-space-5)', background: 'var(--ds-color-bg-canvas)' }}>
@@ -281,7 +296,7 @@ export default function MCPClientTab() {
           </Stack>
         )}
 
-        {/* ─── SUBTAB 4: PRODUCTION PYTHON & STREAMLIT CODE ─── */}
+        {/* ─── SUBTAB 5: PRODUCTION PYTHON & STREAMLIT CODE ─── */}
         {activeSubTab === 'code' && (
           <Stack gap={6}>
             <Card style={{ padding: 'var(--ds-space-5)', background: 'var(--ds-color-bg-canvas)' }}>
