@@ -7,7 +7,12 @@ import {
   ANONYMIZE_PII_AND_AUTHORS,
   CHECK_COPYRIGHT_AND_IP,
   PROMPT_INJECTION_DEFENSE,
-  PYTHON_GUARDRAILS_CODE
+  PYTHON_GUARDRAILS_CODE,
+  THREAT_MAP,
+  OUTPUT_CHECKS,
+  AGENT_GUARDRAILS,
+  FRAMEWORK_TABLE,
+  PAIRED_GUARDRAILS_OBS_CODE
 } from './guardrailsEngine.js';
 
 const { Container, Grid, Flex, Stack } = Primitives;
@@ -57,7 +62,7 @@ function GuardrailsPanel() {
 }
 
 export default function GuardrailsTab() {
-  const [activeSubTab, setActiveSubTab] = useState('redaction'); // 'redaction' | 'copyright' | 'injection' | 'code'
+  const [activeSubTab, setActiveSubTab] = useState('threat'); // see NAV below
 
   // Redaction state
   const [piiInputText, setPiiInputText] = useState(
@@ -112,10 +117,14 @@ export default function GuardrailsTab() {
           overflowX: 'auto'
         }}>
           {[
-            { id: 'redaction', icon: '🛡️', label: '1. PII & Author Redaction', desc: 'Anonymize names, emails & PII' },
-            { id: 'copyright', icon: '🚫', label: '2. Copyright & IP Guardrail', desc: 'Prevent verbatim IP leakage' },
-            { id: 'injection', icon: '🔒', label: '3. Prompt Injection Defense', desc: 'Block jailbreaks & leaks' },
-            { id: 'code', icon: '🛠️', label: '4. Production Security Engine', desc: 'Python Guardrails pipeline' }
+            { id: 'threat', icon: '🗺️', label: '1. Threat Map', desc: '5 layers, where attacks land' },
+            { id: 'redaction', icon: '🛡️', label: '2. PII & Author Redaction', desc: 'Anonymize names, emails & PII' },
+            { id: 'copyright', icon: '🚫', label: '3. Copyright & IP Guardrail', desc: 'Prevent verbatim IP leakage' },
+            { id: 'injection', icon: '🔒', label: '4. Prompt Injection Defense', desc: 'Block jailbreaks & leaks' },
+            { id: 'output', icon: '📤', label: '5. Output Guardrails', desc: 'Validate, ground, redact, gate' },
+            { id: 'agent', icon: '🤖', label: '6. Agent & Tool Guardrails', desc: 'Permissions, gates, budgets' },
+            { id: 'frameworks', icon: '🧰', label: '7. Frameworks Landscape', desc: 'NeMo, Guardrails AI, providers' },
+            { id: 'code', icon: '🛠️', label: '8. Hands-On: Guardrails + Obs', desc: 'Python pipeline as traced spans' }
           ].map(tab => (
             <button
               key={tab.id}
@@ -145,7 +154,39 @@ export default function GuardrailsTab() {
           ))}
         </div>
 
-        {/* ─── SUBTAB 1: PII & AUTHOR REDACTION ─── */}
+        {/* ─── SUBTAB 1: THREAT MAP ─── */}
+        {activeSubTab === 'threat' && (
+          <Stack gap={6}>
+            <Card style={{ padding: 'var(--ds-space-5)', background: 'var(--ds-color-bg-canvas)' }}>
+              <Stack gap={4}>
+                <div>
+                  <h3 style={{ margin: 0 }}>🗺️ Where attacks actually land: the 5-layer threat map</h3>
+                  <p style={{ margin: '4px 0 0 0', color: 'var(--ds-color-text-secondary)', fontSize: 'var(--ds-font-size-bodySm)' }}>
+                    Guardrail sections 2–6 map onto these layers. Start here: know the entry points before you pick the filters.
+                  </p>
+                </div>
+                <Stack gap={3}>
+                  {THREAT_MAP.map((t, i) => (
+                    <Card key={i} style={{ padding: '14px', background: 'var(--ds-color-bg-surface)', borderLeft: '3px solid #E8836A' }}>
+                      <div style={{ fontSize: '13px', color: 'white', fontWeight: 'bold' }}>{i + 1}. {t.layer} layer</div>
+                      <div style={{ fontSize: '12px', color: 'var(--ds-color-text-secondary)', margin: '4px 0' }}>
+                        <strong style={{ color: '#E8836A' }}>Threats:</strong> {t.threats}
+                      </div>
+                      <div style={{ fontSize: '12px', color: '#5EC4C8' }}>
+                        <strong>First defense:</strong> {t.first}
+                      </div>
+                    </Card>
+                  ))}
+                </Stack>
+                <Callout type="warning">
+                  <strong>The layer everyone forgets:</strong> downstream. An output that passes every check still becomes dangerous the moment a system executes it as code, SQL, or a memory write — re-run the same guardrails on anything the output triggers.
+                </Callout>
+              </Stack>
+            </Card>
+          </Stack>
+        )}
+
+        {/* ─── SUBTAB 2: PII & AUTHOR REDACTION ─── */}
         {activeSubTab === 'redaction' && (
           <Stack gap={6}>
             <Card style={{ padding: 'var(--ds-space-5)', background: 'var(--ds-color-bg-canvas)' }}>
@@ -342,19 +383,107 @@ export default function GuardrailsTab() {
           </Stack>
         )}
 
-        {/* ─── SUBTAB 4: PRODUCTION PYTHON GUARDRAILS ─── */}
+        {/* ─── SUBTAB 5: OUTPUT GUARDRAILS ─── */}
+        {activeSubTab === 'output' && (
+          <Stack gap={6}>
+            <Card style={{ padding: 'var(--ds-space-5)', background: 'var(--ds-color-bg-canvas)' }}>
+              <Stack gap={4}>
+                <div>
+                  <h3 style={{ margin: 0 }}>📤 Output Guardrails: nothing ships unvalidated</h3>
+                  <p style={{ margin: '4px 0 0 0', color: 'var(--ds-color-text-secondary)', fontSize: 'var(--ds-font-size-bodySm)' }}>
+                    Input filters stop attacks; output checks stop the model's own failure modes. Five checks, roughly in order of cheapness:
+                  </p>
+                </div>
+                <Grid columns={{ base: '1fr', md: '1fr 1fr' }} gap="var(--ds-space-2)">
+                  {OUTPUT_CHECKS.map((o, i) => (
+                    <Card key={i} style={{ padding: '14px', background: 'var(--ds-color-bg-surface)', borderLeft: '3px solid #3A9B9F' }}>
+                      <div style={{ fontSize: '12.5px', color: 'white', fontWeight: 'bold' }}>{o.check}</div>
+                      <div style={{ fontSize: '11.5px', color: 'var(--ds-color-text-secondary)', margin: '4px 0' }}>How: {o.how}</div>
+                      <div style={{ fontSize: '11.5px', color: '#5EC4C8' }}>Stops: {o.stops}</div>
+                    </Card>
+                  ))}
+                </Grid>
+                <Callout type="info">
+                  <strong>Order matters:</strong> validate structure first (cheapest, most deterministic), then redact PII, then the expensive model-based checks (grounding, toxicity) last — a malformed output never reaches a judge.
+                </Callout>
+              </Stack>
+            </Card>
+          </Stack>
+        )}
+
+        {/* ─── SUBTAB 6: AGENT & TOOL GUARDRAILS ─── */}
+        {activeSubTab === 'agent' && (
+          <Stack gap={6}>
+            <Card style={{ padding: 'var(--ds-space-5)', background: 'var(--ds-color-bg-canvas)' }}>
+              <Stack gap={4}>
+                <div>
+                  <h3 style={{ margin: 0 }}>🤖 Agent & Tool Guardrails: restraining an API caller with a hallucinating brain</h3>
+                  <p style={{ margin: '4px 0 0 0', color: 'var(--ds-color-text-secondary)', fontSize: 'var(--ds-font-size-bodySm)' }}>
+                    Agents turn model text into real actions. The threat model shifts from "what it says" to "what it does" — five controls that hold up:
+                  </p>
+                </div>
+                <Stack gap={3}>
+                  {AGENT_GUARDRAILS.map((g, i) => (
+                    <Card key={i} style={{ padding: '14px', background: 'var(--ds-color-bg-surface)', borderLeft: '3px solid #A78BFA' }}>
+                      <div style={{ fontSize: '13px', color: 'white', fontWeight: 'bold' }}>{g.guard}</div>
+                      <div style={{ fontSize: '12px', color: '#5EC4C8', fontFamily: 'monospace', margin: '4px 0' }}>{g.rule}</div>
+                      <div style={{ fontSize: '12px', color: 'var(--ds-color-text-secondary)' }}>
+                        {g.stops ? <>Stops: {g.stops}</> : <>Why: {g.why}</>}
+                      </div>
+                    </Card>
+                  ))}
+                </Stack>
+                <Callout type="warning">
+                  <strong>Pair with the Agent Memory tab:</strong> an agent that can write memory needs the same gates on its write path — poisoned inputs become persistent instructions if you skip this.
+                </Callout>
+              </Stack>
+            </Card>
+          </Stack>
+        )}
+
+        {/* ─── SUBTAB 7: FRAMEWORKS LANDSCAPE ─── */}
+        {activeSubTab === 'frameworks' && (
+          <Stack gap={6}>
+            <Card style={{ padding: 'var(--ds-space-5)', background: 'var(--ds-color-bg-canvas)' }}>
+              <Stack gap={4}>
+                <div>
+                  <h3 style={{ margin: 0 }}>🧰 Guardrails frameworks: four honest options</h3>
+                  <p style={{ margin: '4px 0 0 0', color: 'var(--ds-color-text-secondary)', fontSize: 'var(--ds-font-size-bodySm)' }}>
+                    No framework ships complete coverage — pick by the layer you most need and the control you're willing to give up:
+                  </p>
+                </div>
+                <Grid columns={{ base: '1fr', md: '1fr 1fr' }} gap="var(--ds-space-2)">
+                  {FRAMEWORK_TABLE.map((f, i) => (
+                    <Card key={i} style={{ padding: '14px', background: 'var(--ds-color-bg-surface)', borderLeft: '3px solid #F5A623' }}>
+                      <div style={{ fontSize: '12.5px', color: 'white', fontWeight: 'bold' }}>{f.dim}</div>
+                      <div style={{ fontSize: '11.5px', color: 'var(--ds-color-text-secondary)', marginTop: '4px' }}>{f.note}</div>
+                    </Card>
+                  ))}
+                </Grid>
+                <Callout type="info">
+                  <strong>Rule of thumb:</strong> start with plain-code checks for the layers you must audit (PII, injection), add a framework for dialog/structure rails as the surface grows, and keep provider policies as the last line — not the only line.
+                </Callout>
+              </Stack>
+            </Card>
+          </Stack>
+        )}
+
+        {/* ─── SUBTAB 8: PRODUCTION PYTHON GUARDRAILS + OBS ─── */}
         {activeSubTab === 'code' && (
           <Stack gap={6}>
             <Card style={{ padding: 'var(--ds-space-5)', background: 'var(--ds-color-bg-canvas)' }}>
               <Stack gap={4}>
                 <div>
-                  <h3 style={{ margin: 0 }}>🛠️ Production Responsible AI & Guardrails Python Pipeline</h3>
+                  <h3 style={{ margin: 0 }}>🛠️ Hands-on: guardrails instrumented as observability spans</h3>
                   <p style={{ margin: '4px 0 0 0', color: 'var(--ds-color-text-secondary)', fontSize: 'var(--ds-font-size-bodySm)' }}>
-                    Complete multi-layer Python class incorporating regex PII anonymization, author metadata redaction, copyright substring matching, and prompt injection pattern detection.
+                    Part 1: the complete multi-layer Python guardrails pipeline (PII anonymization, copyright matching, injection detection). Part 2: the same checks wrapped in OTel spans so blocked outputs still leave a trace — pairing this tab with AI Observability.
                   </p>
                 </div>
 
                 <CodeBlock language="python" code={PYTHON_GUARDRAILS_CODE} />
+
+                <div style={{ fontSize: '13px', color: 'white', fontWeight: 'bold', marginTop: 8 }}>Part 2 — guardrail verdicts as trace attributes (pair with the Observability tab)</div>
+                <CodeBlock language="python" code={PAIRED_GUARDRAILS_OBS_CODE} />
 
                 <Callout type="success">
                   <strong>Responsible AI Standards Compliant:</strong> Zero raw author details or unredacted personal identifiers stored or displayed across all lab features.

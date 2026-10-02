@@ -19,7 +19,7 @@ export const UMBRELLA_TOPICS = [
     color: "#5EC4C8",
     dark: "#1F6B6E",
     description: "Roadmap stages 1–4: orientation, how LLMs work, prompting, models — home of the AI Engineer Roadmap",
-    tabs: ["fnd_start_hub", "fnd_internals_hub", "fnd_prompts_hub", "fnd_mlsoc_hub", "fnd_multimodal_hub", "airoadmap", "overview", "glossary", "reinforcementlearning", "trpo2grpo", "aimoralagency", "humancentric", "dialoguelamda", "modellandscape", "tokenization", "quantserve", "vramconductor", "promptfundamentals", "llmsampling", "selfattention", "posencoding", "archconcepts", "promptmgmt", "promptdependencygraph", "promptcontracts", "promptregression", "structuredoutputs", "topicmodeling", "workflows", "unhobbling", "aiharness", "promptlearning", "visionlanguage", "diffusionmodels", "speechvoice", "datacentricai", "prompt_studio", "prompt_frameworks", "prompt_methodologies", "threesentenceprompt"]
+    tabs: ["fnd_start_hub", "fnd_internals_hub", "fnd_prompts_hub", "fnd_mlsoc_hub", "fnd_multimodal_hub", "airoadmap", "overview", "glossary", "reinforcementlearning", "trpo2grpo", "aimoralagency", "humancentric", "dialoguelamda", "modellandscape", "tokenization", "quantserve", "vramconductor", "promptfundamentals", "lstm", "llmsampling", "selfattention", "posencoding", "archconcepts", "promptmgmt", "promptdependencygraph", "promptcontracts", "promptregression", "structuredoutputs", "topicmodeling", "workflows", "unhobbling", "aiharness", "promptlearning", "visionlanguage", "diffusionmodels", "speechvoice", "datacentricai", "prompt_studio", "prompt_frameworks", "prompt_methodologies", "threesentenceprompt"]
   },
   {
     id: "data_platform",
@@ -55,7 +55,7 @@ export const UMBRELLA_TOPICS = [
     color: "#F0A89A",
     dark: "#C47A6A",
     description: "Roadmap stage 7: agents, MCP and production deployment",
-    tabs: ["agt_found_hub", "agt_safety_hub", "agt_multi_hub", "agt_prod_hub", "fiveassets", "redesign", "projectprepframework", "agentplanner", "agenthitl", "agenta2a", "agentsandbox", "agentevals", "handoffwatch", "verifiedpipes", "codingevals", "claudecode100", "typedagentgate", "agentpairprogramming", "vibecode", "agentsastools", "toolcalling", "agenttasks", "cliagent", "codingagentsnonprog", "multiagent", "multiagentcoord", "modelrouting", "langchain", "langgraph", "frameworkcompare", "agentdebugging", "agentscale", "modeldeploy", "aiproductbuilder", "mcpclient", "agentsdk", "loopengineering", "finassistproject", "zerocostmultiagent", "capstone2"]
+    tabs: ["agt_found_hub", "agt_safety_hub", "agt_multi_hub", "agt_prod_hub", "fiveassets", "redesign", "projectprepframework", "agentplanner", "agenthitl", "agenta2a", "agentsandbox", "agentevals", "handoffwatch", "verifiedpipes", "codingevals", "claudecode100", "typedagentgate", "agentpairprogramming", "vibecode", "agentsastools", "toolcalling", "agenttasks", "agentmemory", "cliagent", "codingagentsnonprog", "multiagent", "multiagentcoord", "modelrouting", "langchain", "langgraph", "frameworkcompare", "agentdebugging", "agentscale", "modeldeploy", "aiproductbuilder", "mcpclient", "agentsdk", "loopengineering", "finassistproject", "zerocostmultiagent", "capstone2"]
   },
   {
     id: "frontiers_production",
@@ -204,6 +204,15 @@ export const TABS_REGISTRY = [
     icon: "🎛️",
     keywords: ["logits", "sampling", "temperature", "top-p", "top-k", "min-p", "nucleus sampling", "greedy decoding", "repetition penalty", "softmax", "beam search", "autoregressive", "generation mechanics", "llm generation"],
     component: lazy(() => import("../llmSampling/LLMSamplingTab.jsx"))
+  },
+  {
+    id: "lstm",
+    label: "LSTMs: Foundations & Transformers' Rise",
+    umbrellaId: "foundations",
+    category: "Foundations",
+    icon: "🔁",
+    keywords: ["lstm", "gru", "rnn", "vanishing gradient", "exploding gradient", "gates", "forget gate", "cell state", "sequence model", "recurrent network", "transformers won"],
+    component: lazy(() => import("../lstmFoundations/LSTMTab.jsx"))
   },
   {
     id: "selfattention",
@@ -930,6 +939,15 @@ export const TABS_REGISTRY = [
     icon: "🕸️",
     keywords: ["langgraph", "state graph", "nodes", "edges", "hitl", "human in the loop", "checkpointing", "cyclic", "multi-agent", "lang graph"],
     component: lazy(() => import("../App.jsx").then(m => ({ default: m.LangGraphTab })))
+  },
+  {
+    id: "agentmemory",
+    label: "Agent Memory: Short & Long-Term",
+    umbrellaId: "agents_frameworks",
+    category: "Agents & Frameworks",
+    icon: "💾",
+    keywords: ["agent memory", "short-term memory", "long-term memory", "conversation buffer", "summarization", "vector store memory", "episodic", "semantic", "procedural", "memory poisoning", "memory lifecycle", "forgetting"],
+    component: lazy(() => import("../agentMemory/AgentMemoryTab.jsx"))
   },
   {
     id: "frameworkcompare",

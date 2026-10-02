@@ -175,3 +175,60 @@ sanitized, stats = guard.sanitize_input_pii_and_authors(sample_input)
 print("Sanitized Stream:", sanitized)
 print("Security Stats:", stats)
 `;
+
+// ── Curriculum: threat map → guardrail layers ───────────────────────────────
+export const THREAT_MAP = [
+  { layer: "Input", threats: "jailbreaks, direct/indirect injection, PII entering the prompt, oversized payloads", first: "filter + redact before the model sees anything" },
+  { layer: "Retrieval", threats: "poisoned corpus, untrusted docs smuggling instructions, exfil via retrieved content", first: "trust scores on sources; retrieved text is data, never instructions" },
+  { layer: "Tool / agent", threats: "over-privileged tools, destructive actions, secret leakage, runaway loops", first: "least privilege, confirm destructive calls, budget the loop" },
+  { layer: "Model output", threats: "hallucinated claims, PII echo, copyrighted verbatim text, unsafe advice, schema violations", first: "validate + redact + gate before anything downstream sees it" },
+  { layer: "Downstream", threats: "unchecked output becoming code/SQL/API calls, poisoned writes back into memory", first: "same guardrails re-run on anything the output triggers" }
+];
+
+export const OUTPUT_CHECKS = [
+  { check: "Schema / contract validation", how: "JSON-schema, enum, length bounds — reject and repair", stops: "malformed tool calls, broken UI rendering" },
+  { check: "PII + secret echo", how: "regex + NER pass on output — redact or block", stops: "model repeating an email it saw in retrieval" },
+  { check: "Grounding / faithfulness", how: "claim-vs-context check; citations must resolve", stops: "confident hallucination presented as fact" },
+  { check: "Toxicity / safety filter", how: "classifier on the completion; threshold + escalate", stops: "unsafe content reaching users" },
+  { check: "Copyright / IP scan", how: "n-gram match vs protected corpus (see section 3)", stops: "verbatim leakage of protected text" }
+];
+
+export const AGENT_GUARDRAILS = [
+  { guard: "Least-privilege tools", rule: "read-only by default; write/delete requires explicit allow-list per task", why: "an agent is an API caller with a hallucinating brain" },
+  { guard: "Human gate on irreversible actions", rule: "deploy, payment, delete, email-send → confirm", why: "cost of a wrong action >> cost of a pause" },
+  { guard: "Argument validation at the boundary", rule: "schema-check every tool call before execution; reject unknown fields", stops: "prompt-injected arguments reaching real systems" },
+  { guard: "Secret brokering", rule: "scoped, expiring credentials minted per call — never raw secrets in context", why: "context is visible to the model and the trace" },
+  { guard: "Loop budgets", rule: "max steps, max tokens, stall detection → abort with audit entry", why: "runaway loops burn money and can brute-force past other guards" }
+];
+
+export const FRAMEWORK_TABLE = [
+  { dim: "NVIDIA NeMo Guardrails", note: "Colang dialog rails, input/output/safety rails; strongest when dialogue flow matters; NVIDIA stack gravity" },
+  { dim: "Guardrails AI (guardrailsai)", note: "Validators per output field + typed Rail specs; great structure guarantees, lighter security coverage" },
+  { dim: "Provider content policies", note: "API-level refusals + safety classes (OpenAI/Azure/Anthropic/Google); zero code, least control, vendor-coupled" },
+  { dim: "Plain code + regex/NER (this lab)", note: "Transparent, auditable, dependency-free; you own coverage and maintenance" }
+];
+
+// ── Hands-on: guardrails instrumented with observability spans ─────────────
+export const PAIRED_GUARDRAILS_OBS_CODE = `# Guardrail events AS spans — blocked output still produces a trace
+from opentelemetry import trace
+tracer = trace.get_tracer("rag")
+
+def guarded_generate(prompt: str, user_input: str) -> str:
+    with tracer.start_as_current_span("guardrails.run") as span:
+        verdict, kind = scan_prompt_injection(user_input)   # lab's layer-3 check
+        span.set_attribute("guardrails.injection", verdict)
+        span.set_attribute("guardrails.threat_type", kind)
+
+        if not verdict:                                     # blocked → alert span
+            span.set_attribute("outcome", "blocked")
+            span.set_status(StatusCode.ERROR)
+            raise PermissionError(f"blocked: {kind}")
+
+        text = generate(prompt, user_input)                 # your model call
+        span.set_attribute("guardrails.pii_out", count_pii(text))
+        span.set_attribute("outcome", "sanitized")          # 200 OK with a verdict
+        return redact(text)
+
+# Alert rules join here: blocked-rate > baseline, pii_out > 0,
+# or band-slip on the scores you log in the same trace (obs tab).
+`;
