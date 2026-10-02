@@ -189,19 +189,11 @@ export function OverviewTab({ onSelectTab, setActiveTab: setGlobalActiveTab }) {
         moduleLabel="AskAway · Engineering Platform"
         title={
           <span style={{ display: 'inline-flex', alignItems: 'center', gap: '14px', flexWrap: 'wrap' }}>
-            <span style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              width: '50px',
-              height: '50px',
-              borderRadius: '14px',
-              background: 'linear-gradient(135deg, #FFFFFF 0%, #E7F0F5 100%)',
-              border: '1px solid rgba(20, 184, 166, 0.4)',
-              boxShadow: '0 4px 18px rgba(20, 184, 166, 0.25), inset 0 0 12px rgba(20, 184, 166, 0.1)',
-              flexShrink: 0
-            }}>
-              <AskAwayLogo size={38} />
+            <span style={{ display: 'inline-flex', alignItems: 'center', flexShrink: 0 }}>
+              <AskAwayLogo
+                size={46}
+                style={{ filter: 'drop-shadow(0 3px 8px rgba(22, 40, 63, 0.18))' }}
+              />
             </span>
             <span>AskAway</span>
           </span>

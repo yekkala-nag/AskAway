@@ -786,20 +786,19 @@ export function TopBar({ activeTab, onSelectTab, onSearchOpen, onToggleSidebar, 
             </button>
           )}
 
-          {/* Enlarged Logo Container */}
+          {/* Brand mark — official logo, borderless on the white header card */}
           <div style={{
             width: '46px',
             height: '46px',
-            borderRadius: '12px',
-            background: 'linear-gradient(135deg, #FFFFFF 0%, #E7F0F5 100%)',
-            border: '1px solid rgba(20, 184, 166, 0.4)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            flexShrink: 0,
-            boxShadow: '0 4px 12px rgba(20, 184, 166, 0.2), inset 0 0 12px rgba(20, 184, 166, 0.1)'
+            flexShrink: 0
           }}>
-            <AskAwayLogo size={36} />
+            <AskAwayLogo
+              size={44}
+              style={{ filter: 'drop-shadow(0 2px 6px rgba(22, 40, 63, 0.16))' }}
+            />
           </div>
 
           {/* Brand Title & Tagline */}
