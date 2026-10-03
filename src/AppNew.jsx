@@ -408,13 +408,31 @@ export default function App() {
         mobileOpen={mobileOpen}
         onCloseMobile={() => setMobileOpen(false)}
         header={
-          <TopBar
-            activeTab={activeTab}
-            onSelectTab={handleTabSelect}
-            onSearchOpen={handleSearchOpen}
-            onToggleSidebar={() => setMobileOpen(!mobileOpen)}
-            sidebarCollapsed={!mobileOpen}
-          />
+          <>
+            <a
+              href="#main-content"
+              className="ds-skip-link"
+              onClick={(e) => {
+                // Move focus as well as scroll, so the next Tab continues inside main
+                const main = document.getElementById('main-content');
+                if (main) {
+                  e.preventDefault();
+                  main.focus({ preventScroll: false });
+                  main.scrollIntoView({ block: 'start', behavior: 'smooth' });
+                }
+              }}
+            >
+              Skip to main content
+            </a>
+            <TopBar
+              activeTab={activeTab}
+              onSelectTab={handleTabSelect}
+              onSearchOpen={handleSearchOpen}
+              onToggleSidebar={() => setMobileOpen(!mobileOpen)}
+              sidebarCollapsed={!mobileOpen}
+              mobileOpen={mobileOpen}
+            />
+          </>
         }
         sidebar={
           <Sidebar
@@ -456,9 +474,8 @@ export default function App() {
                   href="https://github.com/nyakkala"
                   target="_blank"
                   rel="noopener noreferrer"
+                  className="ds-hoverable"
                   style={{ color: 'inherit', textDecoration: 'none', borderBottom: '1px dotted var(--ds-color-text-tertiary)' }}
-                  onMouseEnter={(e) => (e.currentTarget.style.color = '#5EC4C8')}
-                  onMouseLeave={(e) => (e.currentTarget.style.color = 'inherit')}
                   title="View Curator Profile"
                 >
                   Nagaraj Y
@@ -470,27 +487,24 @@ export default function App() {
               <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', justifyContent: 'center', marginTop: '4px', fontSize: '12px' }}>
                 <button
                   onClick={() => openLegal('privacy')}
-                  style={{ background: 'none', border: 'none', padding: 0, color: 'var(--ds-color-text-tertiary)', textDecoration: 'underline', cursor: 'pointer', fontSize: '12px' }}
-                  onMouseEnter={(e) => (e.currentTarget.style.color = '#5EC4C8')}
-                  onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--ds-color-text-tertiary)')}
+                  className="ds-hoverable"
+                  style={{ background: 'none', border: 'none', padding: '0 4px', color: 'var(--ds-color-text-tertiary)', textDecoration: 'underline', cursor: 'pointer', fontSize: '12px' }}
                 >
                   Privacy Policy
                 </button>
                 <span style={{ color: 'var(--ds-color-border-subtle)' }}>•</span>
                 <button
                   onClick={() => openLegal('terms')}
-                  style={{ background: 'none', border: 'none', padding: 0, color: 'var(--ds-color-text-tertiary)', textDecoration: 'underline', cursor: 'pointer', fontSize: '12px' }}
-                  onMouseEnter={(e) => (e.currentTarget.style.color = '#5EC4C8')}
-                  onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--ds-color-text-tertiary)')}
+                  className="ds-hoverable"
+                  style={{ background: 'none', border: 'none', padding: '0 4px', color: 'var(--ds-color-text-tertiary)', textDecoration: 'underline', cursor: 'pointer', fontSize: '12px' }}
                 >
                   Terms of Service
                 </button>
                 <span style={{ color: 'var(--ds-color-border-subtle)' }}>•</span>
                 <button
                   onClick={() => openLegal('trademarks')}
-                  style={{ background: 'none', border: 'none', padding: 0, color: 'var(--ds-color-text-tertiary)', textDecoration: 'underline', cursor: 'pointer', fontSize: '12px' }}
-                  onMouseEnter={(e) => (e.currentTarget.style.color = '#5EC4C8')}
-                  onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--ds-color-text-tertiary)')}
+                  className="ds-hoverable"
+                  style={{ background: 'none', border: 'none', padding: '0 4px', color: 'var(--ds-color-text-tertiary)', textDecoration: 'underline', cursor: 'pointer', fontSize: '12px' }}
                 >
                   Trademarks & Fair Use
                 </button>

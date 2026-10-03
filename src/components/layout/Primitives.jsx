@@ -3,6 +3,7 @@
  */
 
 import { useState, useEffect, useRef } from 'react';
+import { useModalA11y } from '../../hooks/useModalA11y.js';
 
 // ============================================
 // Page — Root layout with sidebar + main
@@ -18,20 +19,26 @@ export function Page({ children, sidebar, header, sidebarCollapsed, onSidebarTog
       setIsMobile(window.innerWidth <= 768);
     };
     handleResize();
-    window.addEventListener('resize', handleResize);
+    window.addEventListener('resize', handleResize, { passive: true });
     return () => window.removeEventListener('resize', handleResize);
   }, []);
+
+  // Mobile drawer: trap focus while open, restore it on close (desktop unaffected)
+  const drawerOpen = isMobile && !!mobileOpen;
+  const { ref: drawerRef, onBackdrop } = useModalA11y(drawerOpen, onCloseMobile, { dismissable: true, autofocus: true });
 
   const sidebarWidth = isMobile
     ? (mobileOpen ? '320px' : '0px')
     : (sidebarCollapsed ? '72px' : '320px');
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', height: '100vh', overflow: 'hidden', background: 'var(--ds-color-bg-canvas)', position: 'relative' }}>
+    <div className="app-page" style={{ display: 'flex', flexDirection: 'column', overflow: 'hidden', background: 'var(--ds-color-bg-canvas)', position: 'relative' }}>
       {/* MOBILE BACKDROP OVERLAY */}
       {isMobile && mobileOpen && (
         <div
-          onClick={onCloseMobile}
+          onClick={onBackdrop}
+          role="presentation"
+          aria-hidden="true"
           style={{
             position: 'fixed',
             top: 0, left: 0, right: 0, bottom: 0,
@@ -55,8 +62,13 @@ export function Page({ children, sidebar, header, sidebarCollapsed, onSidebarTog
 
         {/* SIDEBAR CONTAINER */}
         <div
+          ref={drawerRef}
+          id="main-sidebar"
           aria-hidden={isMobile && !mobileOpen}
           inert={isMobile && !mobileOpen ? true : undefined}
+          role={drawerOpen ? 'dialog' : undefined}
+          aria-modal={drawerOpen ? true : undefined}
+          aria-label={drawerOpen ? 'Navigation menu' : undefined}
           style={{
             height: '100%',
             position: isMobile ? 'fixed' : 'relative',
@@ -76,7 +88,7 @@ export function Page({ children, sidebar, header, sidebarCollapsed, onSidebarTog
         </div>
 
         <main id="main-content" tabIndex={-1} style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column', overflow: 'hidden', outline: 'none' }} role="main">
-          <div style={{ flex: 1, overflowY: 'auto', minHeight: 0 }}>
+          <div data-scroll style={{ flex: 1, overflowY: 'auto', minHeight: 0 }}>
             {children}
           </div>
         </main>

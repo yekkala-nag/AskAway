@@ -189,6 +189,7 @@ body {
   color: var(--ds-color-text-primary);
   background: var(--ds-color-bg-canvas);
   min-height: 100vh;
+  min-height: 100dvh;
 }
 
 /* Typography — Clean hierarchy */
@@ -230,10 +231,83 @@ img, video, iframe, canvas, svg {
 /* Selection */
 ::selection { background: rgba(58,155,159,0.15); color: #1A6B6E; }
 
-/* Focus visible for all interactive */
-:focus-visible {
+/* Focus visible — high-contrast, smooth-transitioning ring for keyboard users.
+   :focus-visible only matches on keyboard/AT focus, so mouse & touch users
+   never see the ring (WCAG 2.4.7 / 2.4.11 Focus Appearance). */
+:where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
   outline: 2px solid var(--ds-color-border-focus);
   outline-offset: 2px;
+  box-shadow: 0 0 0 4px rgba(58, 155, 159, 0.28);
+  transition: outline-color var(--ds-motion-duration-fast) var(--ds-motion-easing-standard),
+              box-shadow var(--ds-motion-duration-fast) var(--ds-motion-easing-standard);
+}
+/* Programmatic focus targets (skip-link destinations) must not flash a ring */
+#main-content:focus,
+#main-content:focus-visible { outline: none; box-shadow: none; }
+
+/* Skip link — visually hidden until focused (WCAG 2.4.1 Bypass Blocks) */
+.ds-skip-link {
+  position: fixed;
+  top: -100px;
+  left: 12px;
+  z-index: 200;
+  padding: 12px 20px;
+  background: var(--ds-color-bg-surface);
+  color: var(--ds-color-text-link);
+  font-weight: var(--ds-font-weight-semibold);
+  font-size: var(--ds-font-size-body);
+  border: 2px solid var(--ds-color-border-focus);
+  border-radius: var(--ds-radius-md);
+  box-shadow: var(--ds-shadow-lg);
+  text-decoration: none;
+  transition: top var(--ds-motion-duration-fast) var(--ds-motion-easing-standard);
+}
+.ds-skip-link:focus {
+  top: 12px;
+}
+
+/* Scroll regions: fluid anchor/in-page scrolling, contained overscroll
+   (no scroll-chaining jank back to the page behind the region) */
+[data-scroll] {
+  scroll-behavior: smooth;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+}
+@media (prefers-reduced-motion: reduce) {
+  [data-scroll] { scroll-behavior: auto; }
+}
+
+/* App shell height — dvh keeps layout steady when the iOS/Android
+   virtual keyboard or URL bar changes viewport height */
+.app-page {
+  height: 100vh;
+  height: 100dvh;
+}
+
+/* Hover styles only where a real hover-capable, fine pointer exists —
+   prevents "stuck" hover states on iOS/Android touch (WCAG 1.4.13-ish hygiene) */
+@media not (hover: hover) and (pointer: coarse) {
+  .aw-chip:hover,
+  .aw-search-pill:hover {
+    transform: none;
+    box-shadow: none;
+  }
+}
+/* Class-based hover replacement for inline onMouseEnter color flips */
+@media (hover: hover) and (pointer: fine) {
+  .ds-hoverable:hover { color: #5EC4C8 !important; }
+}
+
+/* Keyboard focus ring for composite input wrappers (search fields).
+   :has(:focus-visible) keeps the ring keyboard-only — mouse/tap focus
+   on the field does not paint it. */
+.ds-field-focus {
+  transition: box-shadow var(--ds-motion-duration-fast) var(--ds-motion-easing-standard),
+              border-color var(--ds-motion-duration-fast) var(--ds-motion-easing-standard);
+}
+.ds-field-focus:has(:focus-visible) {
+  border-color: var(--ds-color-border-focus) !important;
+  box-shadow: 0 0 0 3px rgba(58, 155, 159, 0.28);
 }
 
 /* Reduced motion */
@@ -256,6 +330,29 @@ img, video, iframe, canvas, svg {
   
   button, select, input {
     touch-action: manipulation;
+  }
+}
+
+/* Touch targets (coarse pointers: phones & tablets)
+   - WCAG 2.2 AA Target Size (Minimum) floor: 24×24 for everything
+   - Chrome/navigation surfaces: full 44×44 per the mobile brief.
+     Layout only — never intercepts pointer events, so native touch
+     scrolling and taps keep working exactly as before. */
+@media (pointer: coarse) {
+  button, [role="button"], input[type="button"], input[type="submit"], input[type="reset"] {
+    min-height: 24px;
+    min-width: 24px;
+    touch-action: manipulation;
+  }
+  header button,
+  aside button,
+  aside a[href],
+  .bottom-nav button,
+  footer button,
+  footer a[href],
+  .command-palette button {
+    min-height: 44px;
+    min-width: 44px;
   }
 }
 

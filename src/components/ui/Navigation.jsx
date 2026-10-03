@@ -237,8 +237,28 @@ export function Sidebar({
 
   let totalVisibleTabs = 0;
 
+  // Roving focus: ArrowDown/ArrowUp move between visible controls.
+  // Never hijacks caret movement in text fields, never blocks touch
+  // scrolling (arrows don't fire on touch), never fires without a target.
+  const handleNavKeyDown = (e) => {
+    if (e.key !== 'ArrowDown' && e.key !== 'ArrowUp') return;
+    const isField = /^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName);
+    if (isField && e.key !== 'ArrowDown') return;
+    const items = Array.from(
+      e.currentTarget.querySelectorAll('button:not([disabled]), a[href], input, select, textarea')
+    ).filter(el => el.offsetParent !== null);
+    const idx = items.indexOf(document.activeElement);
+    const nextIdx = idx === -1
+      ? (e.key === 'ArrowDown' ? 0 : items.length - 1)
+      : idx + (e.key === 'ArrowDown' ? 1 : -1);
+    if (nextIdx < 0 || nextIdx >= items.length) return;
+    e.preventDefault();
+    items[nextIdx].focus();
+  };
+
   return (
     <aside
+      onKeyDown={handleNavKeyDown}
       style={{
         width: '100%',
         height: '100%',
@@ -303,13 +323,13 @@ export function Sidebar({
       {/* 2. SEARCH INPUT */}
       {!collapsed && (
         <div style={{ padding: '12px 16px 8px', flexShrink: 0 }}>
-          <div style={{
+          <div className="ds-field-focus" style={{
             position: 'relative', display: 'flex', alignItems: 'center',
             background: '#F1F3F5', border: '1px solid #E5E7EB',
             borderRadius: '8px', padding: '7px 10px 7px 32px',
             transition: 'all 0.15s ease'
           }}>
-            <span style={{ position: 'absolute', left: '10px', color: '#9CA3AF', fontSize: '0.8rem', pointerEvents: 'none' }}>
+            <span aria-hidden="true" style={{ position: 'absolute', left: '10px', color: '#9CA3AF', fontSize: '0.8rem', pointerEvents: 'none' }}>
               🔍
             </span>
             <input
@@ -375,7 +395,7 @@ export function Sidebar({
       )}
 
       {/* 5. MODULE ACCORDIONS */}
-      <nav style={{
+      <nav aria-label="Curriculum modules" style={{
         flex: 1, overflowY: 'auto', padding: collapsed ? '8px 8px' : '4px 16px 16px',
         display: 'flex', flexDirection: 'column', gap: '2px', scrollbarWidth: 'thin'
       }}>
@@ -413,6 +433,22 @@ export function Sidebar({
               {/* MODULE HEADER */}
               <button
                 onClick={() => collapsed ? onToggleCollapse?.() : toggleModule(moduleId)}
+                onKeyDown={(e) => {
+                  if (e.key === 'ArrowRight' && !isSearchMode) {
+                    if (!isExpanded) {
+                      e.preventDefault();
+                      toggleModule(moduleId);
+                    } else {
+                      const first = e.currentTarget.parentElement?.querySelectorAll('button')[1];
+                      if (first) { e.preventDefault(); first.focus(); }
+                    }
+                  } else if (e.key === 'ArrowLeft' && !isSearchMode && isExpanded && !collapsed) {
+                    e.preventDefault();
+                    toggleModule(moduleId);
+                  }
+                }}
+                aria-expanded={isExpanded}
+                aria-controls={isExpanded && !collapsed ? `sidebar-mod-${moduleId}` : undefined}
                 title={module.title}
                 style={{
                   width: '100%', display: 'flex', alignItems: 'center',
@@ -471,12 +507,14 @@ export function Sidebar({
 
               {/* NESTED TOPICS */}
               {!collapsed && isExpanded && (
-                <div style={{
-                  display: 'flex', flexDirection: 'column', gap: '1px',
-                  padding: '2px 0 2px 12px',
-                  borderLeft: '2px solid #E5E7EB', marginLeft: '11px',
-                  marginTop: '2px', marginBottom: '4px'
-                }}>
+                <div
+                  id={`sidebar-mod-${moduleId}`}
+                  style={{
+                    display: 'flex', flexDirection: 'column', gap: '1px',
+                    padding: '2px 0 2px 12px',
+                    borderLeft: '2px solid #E5E7EB', marginLeft: '11px',
+                    marginTop: '2px', marginBottom: '4px'
+                  }}>
                   {getGroupedTabsForUmbrella(moduleId, isSearchMode ? tabs : rawTabs).map(group => {
                     if (group.child && PILOT_COLLAPSED_CHILDREN.includes(group.child.id) && !isSearchMode) {
                       return (
@@ -616,7 +654,7 @@ export function Sidebar({
 // ============================================
 // TopBar — Clean EdTech Breadcrumb Navigation
 // ============================================
-export function TopBar({ activeTab, onSelectTab, onSearchOpen, onToggleSidebar, sidebarCollapsed }) {
+export function TopBar({ activeTab, onSelectTab, onSearchOpen, onToggleSidebar, sidebarCollapsed, mobileOpen }) {
   const currentModule = getUmbrellaForTab(activeTab) || UMBRELLA_TOPICS[0];
   const currentTab = getTabById(activeTab) || { id: activeTab, label: activeTab, icon: '📝' };
   const siblingTabs = getTabsForUmbrella(currentModule.id);
@@ -750,6 +788,15 @@ export function TopBar({ activeTab, onSelectTab, onSearchOpen, onToggleSidebar, 
         {/* Left: Enlarged Logo + Title + Tagline */}
         <div
           onClick={() => onSelectTab && onSelectTab('overview')}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              onSelectTab && onSelectTab('overview');
+            }
+          }}
+          role="button"
+          tabIndex={0}
+          aria-label="AskAway home — go to Overview"
           style={{
             display: 'flex',
             alignItems: 'center',
@@ -768,6 +815,8 @@ export function TopBar({ activeTab, onSelectTab, onSearchOpen, onToggleSidebar, 
                 onToggleSidebar();
               }}
               aria-label="Toggle navigation menu"
+              aria-expanded={!!mobileOpen}
+              aria-controls="main-sidebar"
               style={{
                 alignItems: 'center',
                 justifyContent: 'center',
@@ -1020,9 +1069,19 @@ export function TopBar({ activeTab, onSelectTab, onSearchOpen, onToggleSidebar, 
         </div>
       </div>
 
-      {/* POSITION BAR — prev/next navigation */}
+      {/* POSITION BAR — prev/next navigation (Arrow Left/Right = carousel pattern) */}
       {activeChild && (
-        <div style={{
+        <div
+          role="group"
+          aria-label="Topic position navigation"
+          onKeyDown={(e) => {
+            if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+            if (e.target?.tagName !== 'BUTTON') return;
+            const sel = e.key === 'ArrowLeft' ? '.aw-btn-prev' : '.aw-btn-next';
+            const btn = e.currentTarget.querySelector(sel);
+            if (btn && !btn.disabled) { e.preventDefault(); btn.click(); }
+          }}
+          style={{
           padding: '6px 20px',
           display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '8px',
           borderTop: '1px solid #F1F3F5', background: '#FAFBFC'
@@ -1128,6 +1187,7 @@ export function CommandPalette({ isOpen, onClose, tabs, onSelectTab }) {
   const [query, setQuery] = useState('');
   const [selectedIndex, setSelectedIndex] = useState(0);
   const inputRef = useRef(null);
+  const optionRefs = useRef([]);
   const { ref: dialogRef } = useModalA11y(isOpen, onClose, { dismissable: false, autofocus: false });
 
   const queryStr = (query || '').trim().toLowerCase();
@@ -1151,12 +1211,22 @@ export function CommandPalette({ isOpen, onClose, tabs, onSelectTab }) {
     }
   }, [isOpen]);
 
+  // Keyboard selection must always be visible (WAI-ARIA combobox pattern)
+  useEffect(() => {
+    const el = optionRefs.current[selectedIndex];
+    if (el && typeof el.scrollIntoView === 'function') {
+      el.scrollIntoView({ block: 'nearest' });
+    }
+  }, [selectedIndex, isOpen]);
+
   useEffect(() => {
     const handleKey = (e) => {
       if (!isOpen) return;
       if (e.key === 'Escape') onClose();
       else if (e.key === 'ArrowDown') { e.preventDefault(); setSelectedIndex(i => Math.min(i + 1, Math.max(0, filteredTabs.length - 1))); }
       else if (e.key === 'ArrowUp') { e.preventDefault(); setSelectedIndex(i => Math.max(i - 1, 0)); }
+      else if (e.key === 'Home') { e.preventDefault(); setSelectedIndex(0); }
+      else if (e.key === 'End') { e.preventDefault(); setSelectedIndex(Math.max(0, filteredTabs.length - 1)); }
       else if (e.key === 'Enter') { e.preventDefault(); if (filteredTabs[selectedIndex]) { onSelectTab(filteredTabs[selectedIndex].id); onClose(); } }
     };
     document.addEventListener('keydown', handleKey);
@@ -1190,11 +1260,17 @@ export function CommandPalette({ isOpen, onClose, tabs, onSelectTab }) {
       role="dialog" aria-modal="true" aria-label="Command palette"
     >
       <div style={{ padding: '12px', borderBottom: '1px solid #E5E7EB' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '10px', background: '#F1F3F5', border: '1px solid #E5E7EB', borderRadius: '8px', padding: '8px 12px' }}>
-          <span style={{ color: '#9CA3AF', fontSize: '0.9rem' }}>🔍</span>
+        <div className="ds-field-focus" style={{ display: 'flex', alignItems: 'center', gap: '10px', background: '#F1F3F5', border: '1px solid #E5E7EB', borderRadius: '8px', padding: '8px 12px' }}>
+          <span aria-hidden="true" style={{ color: '#9CA3AF', fontSize: '0.9rem' }}>🔍</span>
           <input
             ref={inputRef}
             type="text"
+            role="combobox"
+            aria-expanded="true"
+            aria-controls="cp-listbox"
+            aria-autocomplete="list"
+            aria-activedescendant={filteredTabs.length ? `cp-opt-${selectedIndex}` : undefined}
+            aria-label="Search topics"
             placeholder="Search topics (e.g., QLoRA, Graph RAG, LangChain)..."
             value={query}
             onChange={e => { setQuery(e.target.value); setSelectedIndex(0); }}
@@ -1203,15 +1279,19 @@ export function CommandPalette({ isOpen, onClose, tabs, onSelectTab }) {
           <kbd style={{ fontSize: '0.6rem', padding: '2px 6px', background: '#FFFFFF', borderRadius: '4px', border: '1px solid #E5E7EB', color: '#9CA3AF', fontWeight: 600 }}>⌘K</kbd>
         </div>
       </div>
-      <div style={{ maxHeight: '380px', overflowY: 'auto' }}>
+      <div id="cp-listbox" role="listbox" aria-label="Topics" style={{ maxHeight: '380px', overflowY: 'auto' }}>
         {filteredTabs.length === 0 ? (
-          <div style={{ padding: '32px', textAlign: 'center', color: '#9CA3AF', fontSize: '0.85rem' }}>
+          <div role="presentation" style={{ padding: '32px', textAlign: 'center', color: '#9CA3AF', fontSize: '0.85rem' }}>
             No results for "{query}"
           </div>
         ) : (
           filteredTabs.map((tab, i) => (
             <button
               key={tab.id}
+              id={`cp-opt-${i}`}
+              role="option"
+              aria-selected={i === selectedIndex}
+              ref={el => { optionRefs.current[i] = el; }}
               onClick={() => { onSelectTab(tab.id); onClose(); }}
               style={{
                 width: '100%', display: 'flex', alignItems: 'center', gap: '12px',
