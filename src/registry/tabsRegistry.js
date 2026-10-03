@@ -28,7 +28,7 @@ export const UMBRELLA_TOPICS = [
     color: "#3A9B9F",
     dark: "#1F6B6E",
     description: "Roadmap stage 5: embeddings, vector search and document pipelines that feed retrieval",
-    tabs: ["data_found_hub", "data_docs_hub", "data_ml_hub", "data_scale_hub", "threelayers", "docstruct", "agenticparsing", "knowledgebase", "vectordbops", "datapipeline", "aidataplat", "medallionarch", "aitestdatabottleneck", "classicalml", "frauddetectionml", "modernioformats", "pythonprofiling", "pythonengineering", "nsquaredpizza", "functools", "activelearn", "goaltracker", "vaes", "keras3", "byol", "xlstm", "timeseriesanomaly", "aiusecases", "linearregression", "pandasdataframes", "pandasmem", "geopopviz", "datahumanization", "llmfinetuning", "multilingualclassification", "textclusteringhdbscan"]
+    tabs: ["data_found_hub", "data_docs_hub", "data_ml_hub", "data_scale_hub", "threelayers", "docstruct", "agenticparsing", "knowledgebase", "vectordbops", "datapipeline", "aidataplat", "medallionarch", "aitestdatabottleneck", "classicalml", "frauddetectionml", "modernioformats", "pythonprofiling", "pythonengineering", "nsquaredpizza", "functools", "activelearn", "goaltracker", "vaes", "keras3", "byol", "xlstm", "timeseriesanomaly", "aiusecases", "agenticuiworkflow", "linearregression", "pandasdataframes", "pandasmem", "geopopviz", "datahumanization", "llmfinetuning", "multilingualclassification", "textclusteringhdbscan"]
   },
   {
     id: "rag_architecture",
@@ -37,7 +37,7 @@ export const UMBRELLA_TOPICS = [
     color: "#F0A89A",
     dark: "#C47A6A",
     description: "Roadmap stage 6: RAG systems end to end",
-    tabs: ["rag_core_hub", "rag_precision_hub", "rag_advanced_hub", "rag_practice_hub", "rag", "pipeline", "completepipeline", "qparseloop", "filtering", "hierrag", "prodrag", "routercheap", "rerankers", "rageval", "multilingualrag", "multimodalrag", "texttosql", "crossdocjoins", "genpatterns", "fourpdfs", "agentfanout", "hallucbricks", "workflowloop", "proxypointer", "agenticrag", "ragcasestudies", "interviewprep", "rowlevelrag", "tablegridrag", "graphtraversalknowledge", "graphrag_system1", "ragcorpusshapes", "amplifyexpert", "ragchunking", "textclassificationdata", "capstone1", "capstone3"]
+    tabs: ["rag_core_hub", "rag_precision_hub", "rag_advanced_hub", "rag_practice_hub", "rag", "pipeline", "completepipeline", "qparseloop", "filtering", "hierrag", "prodrag", "routercheap", "rerankers", "rageval", "multilingualrag", "multimodalrag", "texttosql", "crossdocjoins", "genpatterns", "fourpdfs", "agentfanout", "hallucbricks", "workflowloop", "proxypointer", "agenticrag", "ragcasestudies", "interviewprep", "rowlevelrag", "tablegridrag", "graphtraversalknowledge", "graphrag_system1", "temporalgraphrag", "ragcorpusshapes", "amplifyexpert", "ragchunking", "textclassificationdata", "capstone1", "capstone3"]
   },
   {
     id: "context_memory",
@@ -55,7 +55,7 @@ export const UMBRELLA_TOPICS = [
     color: "#F0A89A",
     dark: "#C47A6A",
     description: "Roadmap stage 7: agents, MCP and production deployment",
-    tabs: ["agt_found_hub", "agt_safety_hub", "agt_multi_hub", "agt_prod_hub", "fiveassets", "redesign", "projectprepframework", "agentplanner", "agenthitl", "agenta2a", "agentsandbox", "agentevals", "handoffwatch", "verifiedpipes", "codingevals", "claudecode100", "typedagentgate", "agentpairprogramming", "vibecode", "agentsastools", "toolcalling", "agenttasks", "agentmemory", "cliagent", "codingagentsnonprog", "multiagent", "multiagentcoord", "modelrouting", "decision_layer", "langchain", "langgraph", "frameworkcompare", "agentdebugging", "agentscale", "modeldeploy", "aiproductbuilder", "mcpclient", "agentsdk", "loopengineering", "finassistproject", "zerocostmultiagent", "capstone2"]
+    tabs: ["agt_found_hub", "agt_safety_hub", "agt_multi_hub", "agt_prod_hub", "fiveassets", "redesign", "projectprepframework", "agentplanner", "agenthitl", "agentcontrolplane", "agentlifecycle", "agenta2a", "agentsandbox", "agentevals", "handoffwatch", "verifiedpipes", "codingevals", "claudecode100", "typedagentgate", "agentpairprogramming", "vibecode", "agentsastools", "toolcalling", "agenttasks", "agentmemory", "cliagent", "codingagentsnonprog", "multiagent", "multiagentcoord", "modelrouting", "decision_layer", "langchain", "langgraph", "frameworkcompare", "agentdebugging", "agentscale", "modeldeploy", "aiproductbuilder", "mcpclient", "agentsdk", "loopengineering", "finassistproject", "zerocostmultiagent", "capstone2"]
   },
   {
     id: "frontiers_production",
@@ -64,7 +64,7 @@ export const UMBRELLA_TOPICS = [
     color: "#9B89C4",
     dark: "#6B5E94",
     description: "Roadmap stage 8: evals, cost, observability — ship and stay reliable",
-    tabs: ["fr_eval_hub", "fr_ops_hub", "fr_frontiers_hub", "aigentools", "aiharnessquality", "aiarchdecisions", "firstaiapp", "enterpriseadvancedplaybook", "tokenorchestrationplaybook", "productionragops", "enterpriseaiops", "enterprisegrade", "finops", "observability", "slmedge", "tokenbill", "llmevals", "modelvalidation", "reasoningbench", "practices", "powerfeatures", "ragbeyond", "frontiers", "progress", "guardrails", "agentguardrails", "llmreliability"]
+    tabs: ["fr_eval_hub", "fr_ops_hub", "fr_frontiers_hub", "aigentools", "aiharnessquality", "aiarchdecisions", "firstaiapp", "enterpriseadvancedplaybook", "tokenorchestrationplaybook", "productionragops", "enterpriseaiops", "enterprisegrade", "finops", "observability", "slmedge", "tokenbill", "llmevals", "modelvalidation", "reasoningbench", "practices", "powerfeatures", "ragbeyond", "frontiers", "progress", "guardrails", "agentguardrails", "agentobservability", "costtollbooth", "llmreliability"]
   }
 ];
 
@@ -613,6 +613,15 @@ export const TABS_REGISTRY = [
     component: lazy(() => import("../graphragSystem1/GraphRagSystem1Tab.jsx"))
   },
   {
+    id: "temporalgraphrag",
+    label: "Temporal Graph RAG: Facts With Dates",
+    umbrellaId: "rag_architecture",
+    category: "RAG Systems",
+    icon: "⏳",
+    keywords: ["temporal graphrag", "knowledge quads", "recency weight", "half life decay", "date filter", "fact timeline", "time aware retrieval", "valid interval", "future leakage"],
+    component: lazy(() => import("../temporalGraphRag/TemporalGraphRagTab.jsx"))
+  },
+  {
     id: "ragcorpusshapes",
     label: "Three Kinds of RAG Corpus & Selection",
     umbrellaId: "rag_architecture",
@@ -786,6 +795,24 @@ export const TABS_REGISTRY = [
     icon: "🛂",
     keywords: ["human in the loop", "hitl", "approval gate", "autonomy ladder", "escalation", "audit", "risk score"],
     component: lazy(() => import("../agentHITL/AgentHITLTab.jsx"))
+  },
+  {
+    id: "agentcontrolplane",
+    label: "The Agent Control Plane",
+    umbrellaId: "agents_frameworks",
+    category: "Agents & Frameworks",
+    icon: "🎛️",
+    keywords: ["control plane", "planning plane", "execution plane", "action proposal", "consequence tier", "authority vs capability", "approval bound to digest", "audit ledger", "untrusted content quarantine"],
+    component: lazy(() => import("../agentControlPlane/AgentControlPlaneTab.jsx"))
+  },
+  {
+    id: "agentlifecycle",
+    label: "Agent Development Lifecycle",
+    umbrellaId: "agents_frameworks",
+    category: "Agents & Frameworks",
+    icon: "🔄",
+    keywords: ["agent lifecycle", "double loop learning", "behavioral contract", "consumer driven contract", "shadow mode", "pass at k", "review capacity", "promotion gate", "verification vs validation"],
+    component: lazy(() => import("../agentLifecycle/AgentLifecycleTab.jsx"))
   },
   {
     id: "agenta2a",
@@ -1276,6 +1303,15 @@ export const TABS_REGISTRY = [
     component: lazy(() => import("../aiUseCases/AIUseCasesTab.jsx"))
   },
   {
+    id: "agenticuiworkflow",
+    label: "Agentic UI: Analytics in the Inbox",
+    umbrellaId: "data_platform",
+    category: "Data & Platform Layers",
+    icon: "📧",
+    keywords: ["agentic ui", "email workflow", "no code automation", "purchase order parsing", "wagner whitin", "lot sizing", "demand planning", "optimization endpoint", "csv attachment"],
+    component: lazy(() => import("../agenticUiWorkflow/AgenticUiWorkflowTab.jsx"))
+  },
+  {
     id: "linearregression",
     label: "Linear Regression & Gradient Descent",
     umbrellaId: "data_platform",
@@ -1483,6 +1519,24 @@ export const TABS_REGISTRY = [
     icon: "🚧",
     keywords: ["agent guardrails", "lethal trifecta", "indirect prompt injection", "action selector", "plan then execute", "code then execute", "dual agent", "map reduce isolation", "context minimization", "untrusted content", "recipient hijack", "quarantined reader"],
     component: lazy(() => import("../agentGuardrails/AgentGuardrailsTab.jsx"))
+  },
+  {
+    id: "agentobservability",
+    label: "Agent Observability: Traces, Spans, Alerts",
+    umbrellaId: "frontiers_production",
+    category: "Advanced & Frontiers",
+    icon: "📡",
+    keywords: ["agent observability", "trace waterfall", "span inspection", "duplicate spans", "runaway loops", "trace sampling", "retention tiers", "privacy rules", "alert thresholds"],
+    component: lazy(() => import("../agentObservability/AgentObservabilityTab.jsx"))
+  },
+  {
+    id: "costtollbooth",
+    label: "Token Economics: The Cost Tollbooth",
+    umbrellaId: "frontiers_production",
+    category: "Advanced & Frontiers",
+    icon: "💰",
+    keywords: ["token cost", "cache pricing", "prompt caching", "conversation replay", "cache windows", "token trimming", "cost ladder", "price tiers", "deterministic cost math"],
+    component: lazy(() => import("../costTollBooth/CostTollBoothTab.jsx"))
   },
   {
     id: "llmreliability",

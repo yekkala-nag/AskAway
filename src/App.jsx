@@ -3309,7 +3309,7 @@ messages = [
 
       {/* CONTEXT SCOPE EXPLORER */}
       <div style={s.sectionLabel("#F0A89A")}>Context Scope — The Anchor/Context Tradeoff (Live Demo)</div>
-      <p style={{ fontSize: "0.7rem", color: "#334155", lineHeight: 1.7, marginBottom: "1rem", maxWidth: 540 }}>Same anchor, four context-scope choices side by side — the tradeoff between cost and completeness, as seen in the shipai live demo.</p>
+      <p style={{ fontSize: "0.7rem", color: "#334155", lineHeight: 1.7, marginBottom: "1rem", maxWidth: 540 }}>Same anchor, four context-scope choices side by side — the tradeoff between cost and completeness, as seen in a live workflow demo.</p>
       <div style={{ background: "#ffffff", border: "1px solid #e0dcd4", borderRadius: 6, padding: "1.5rem", marginBottom: "1.5rem" }}>
         <div style={{ display: "flex", gap: "0.5rem", marginBottom: "1.2rem", flexWrap: "wrap" }}>
           {SCOPE_OPTIONS.map(o => (

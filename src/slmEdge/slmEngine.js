@@ -4,7 +4,7 @@
 // ============================================================================
 
 export const DISTILL_TABLE = [
-  { method: "Logit KD (Hinton)", how: "Student mimics teacher soft targets + temp", keeps: "~90% quality at 10% size", needs: "Teacher logits access" },
+  { method: "Logit KD (teacher–student)", how: "Student mimics teacher soft targets + temp", keeps: "~90% quality at 10% size", needs: "Teacher logits access" },
   { method: "SeqKD /MiniLLM", how: "Train on teacher generations (reverse KL)", keeps: "Better for open-ended gen", needs: "Teacher generation budget" },
   { method: "Speculative draft", how: "Small drafts, big verifies (not training)", keeps: "2–3x speedup, same quality", needs: "Same tokenizer pair" }
 ];
