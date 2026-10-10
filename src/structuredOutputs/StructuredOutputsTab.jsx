@@ -6,7 +6,8 @@ import { Panel, GlassCard } from '../components/ui/CleanInfographics.jsx';
 import {
   EXTRACTION_SCENARIOS,
   FSM_DECODING_STEPS,
-  PARADIGM_COMPARISON
+  PARADIGM_COMPARISON,
+  GROUNDED_GENERATION_LINK
 } from './structuredEngine.js';
 
 const { Container, Section, Grid, Flex, Stack } = Primitives;
@@ -182,6 +183,11 @@ export default function StructuredOutputsTab() {
                     </Stack>
                   </Card>
                 </Grid>
+
+                <Card style={{ padding: '10px 12px', background: 'var(--ds-color-bg-surface)', borderLeft: '3px solid #3A9B9F' }}>
+                  <strong style={{ fontSize: '12px', color: 'var(--ds-color-text-primary)' }}>{GROUNDED_GENERATION_LINK.title}</strong>
+                  <div style={{ fontSize: '11px', color: 'var(--ds-color-text-secondary)', marginTop: '2px' }}>{GROUNDED_GENERATION_LINK.body}</div>
+                </Card>
               </Stack>
             </Card>
           </Stack>

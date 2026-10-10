@@ -916,4 +916,66 @@ export function RUN_FALLBACK_CASCADE_SIMULATION(scenarioId, manualCircuitTrip = 
   };
 }
 
+// 17. Hype Defense: five-layer value chain + triage + claim decoder
+
+export const HYPE_VALUE_CHAIN = [
+  { id: 'chips', layer: '1. Chips & hardware', role: 'Makers of accelerators and silicon capacity.' },
+  { id: 'clouds', layer: '2. Clouds & labs', role: 'Providers of large-scale training and hosted inference.' },
+  { id: 'platforms', layer: '3. Platforms', role: 'Gateways, vector stores, and evaluation tooling.' },
+  { id: 'builders', layer: '4. Builders', role: 'Teams wiring models into products and workflows.' },
+  { id: 'adopters', layer: '5. Adopters', role: 'End customers who must operate, pay for, and defend the outcome.' },
+];
+
+export const HYPE_CONSUMER_ODDS = [
+  {
+    id: 'illusion',
+    name: 'Accessibility illusion',
+    detail: 'A chat box looks like a finished product, so buyers mistake a demo for deployed capability.',
+    stat: 'Industry surveys report most teams experiment while only a minority reaches production deployment.',
+  },
+  {
+    id: 'lastmile',
+    name: 'Last-mile gap',
+    detail: 'Evaluation, access control, cost guardrails, and incident handling fall on the adopter, not the demo.',
+    stat: 'Industry surveys report pilot win rates far above sustained production win rates.',
+  },
+  {
+    id: 'paynow',
+    name: 'Pay now vs prove later',
+    detail: 'Contracts and usage meters start immediately while evidence of value arrives quarters later.',
+    stat: 'Industry surveys report buyers paying full price before independent verification completes.',
+  },
+];
+
+export const HYPE_FOUNDATIONS = [
+  {
+    id: 'math',
+    name: 'Math first — or trusted secondhand',
+    detail: 'Work the numbers yourself when you can; otherwise rely only on independently verifiable measurements.',
+  },
+  {
+    id: 'systems',
+    name: 'Systems thinking',
+    detail: 'Judge the whole pipeline — retrieval, policy, cost, and operations — never the model call alone.',
+  },
+];
+
+export const HYPE_CLAIM_DECODER = [
+  { pattern: 'Benchmark on clean data', example: 'Scores 95% on a curated set', question: 'What happens on our messy inputs with duplicates and missing fields?' },
+  { pattern: 'Survivor case study', example: 'One team saved a fortune', question: 'How many comparable teams tried and saw no gain?' },
+  { pattern: 'Demo, not workflow', example: 'Watch it answer in seconds', question: 'Who handles approvals, errors, retries, and audit in production?' },
+  { pattern: 'Rebranded old tool', example: 'All-new intelligence layer', question: 'What changed besides the label — model, data, eval, or only marketing?' },
+  { pattern: 'Anthropomorphic headcount framing', example: 'Does the work of ten analysts', question: 'Which named tasks, at what error rate, with what human review cost?' },
+];
+
+export function triageHypeClaim({ isNew, isRelevant }) {
+  if (isNew && isRelevant) {
+    return { verdict: 'go-deep', nextStep: 'Reproduce on your data with an independent eval before committing.' };
+  }
+  if (!isNew && !isRelevant) {
+    return { verdict: 'park', nextStep: 'File it away; revisit only if the use case changes.' };
+  }
+  return { verdict: 'revisit-with-evidence', nextStep: 'Ask for messy-data results or a production reference, then re-triage.' };
+}
+
 

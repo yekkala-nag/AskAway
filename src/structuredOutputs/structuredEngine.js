@@ -209,8 +209,7 @@ export const FSM_DECODING_STEPS = [
   }
 ];
 
-export const PARADIGM_COMPARISON = [
-  {
+export const PARADIGM_COMPARISON = [  {
     paradigm: "1. Prompting & Re-prompting (Instructor / Pydantic)",
     mechanism: "Prompt instructions + client-side Pydantic validation + retry loop",
     syntaxGuarantee: "❌ No (72% - 85% first-pass pass rate)",
@@ -235,3 +234,9 @@ export const PARADIGM_COMPARISON = [
     localModelSupport: "✅ Native (llama.cpp, vLLM, transformers, SGLang)"
   }
 ];
+
+export const GROUNDED_GENERATION_LINK = {
+  id: "grounded-generation-link",
+  title: "Grounded generation for training rows",
+  body: "Generate training rows from your documents through grammar-constrained decoding so small local models hit the schema."
+};

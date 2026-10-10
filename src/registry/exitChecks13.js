@@ -1,0 +1,51 @@
+/**
+ * Exit-check bank M — Overview + Foundations internals + Prompting + GraphRAG System 1.
+ * Same shape as exitChecks3.js: tabid -> [ { q, o: [4], a: index, e }, x3 ].
+ */
+export const EXIT_CHECKS_M = {
+  overview: [
+    { q: 'The overview hub organizes the curriculum into four pillars covering…', o: ['Sports, music, film, and cooking', 'Foundations, retrieval, agents, and production ops', 'Hardware vendors and pricing tiers', 'One single track with no branches'], a: 1, e: 'Four balanced pillars span fundamentals through enterprise operations.' },
+    { q: 'The 30-second diagnostic personalizes your path from…', o: ['Your experience level plus your engineering objective', 'Your age and location', 'A coin flip', 'The time of day you study'], a: 0, e: 'Experience plus goal selects the recommended track and starting topic.' },
+    { q: 'The adaptive dashboard tracks mastery with…', o: ['Mastery rings plus next-best steps and spaced review', 'Only a static reading list', 'Advertisements', 'Nothing — it never updates'], a: 0, e: 'Rings, next-best reasons, and review queue are driven by your evidence.' },
+  ],
+  grokking: [
+    { q: 'In the clock-math run, training accuracy hits ~100% within 1k steps while test accuracy…', o: ['Also hits 100% immediately', 'Stays near 10% until around 9k steps, then jumps near 100% by ~20k', 'Falls to zero forever', 'Oscillates randomly with no pattern'], a: 1, e: 'Memorization is instant; generalization clicks thousands of steps later.' },
+    { q: 'What does the network build underneath the flat plateau…', o: ['Nothing at all', 'A general circle-position plus rotation circuit that eventually outcompetes the memorized lookup', 'A bigger lookup table only', 'A random number generator'], a: 1, e: 'Addition becomes rotation on a circle; the general circuit wins late.' },
+    { q: 'Why does a standard patience-based early stop misjudge this run…', o: ['It reads the flat scoreboard as no progress and discards a run that would generalize', 'It waits too long every time', 'It needs more GPUs', 'It only works on text data'], a: 0, e: 'Flat test accuracy hides construction; the fix is fresh-pair probes, not just train scores.' },
+  ],
+  lstm: [
+    { q: 'The plain-RNN failure the LSTM fixes is…', o: ['Too few layers', 'Gradients multiplied once per step vanish or explode over long sequences', 'Missing activation functions', 'Slow disk I/O'], a: 1, e: 'Repeated multiplication by the same weights kills early-step learning.' },
+    { q: 'Given prior cell 1.00 with forget 0.90, input 0.60, candidate 0.40, the new cell state is…', o: ['0.57', '0.90', '1.00', '1.14'], a: 3, e: 'c = 0.90 x 1.00 + 0.60 x 0.40 = 1.14; 0.57 is the hidden state after the output gate.' },
+    { q: 'Why did attention-based models displace LSTMs at scale…', o: ['They use no training data', 'They process all positions in parallel with direct token-to-token paths instead of forced sequential steps', 'They have fewer uses', 'They cannot do classification'], a: 1, e: 'Parallelism plus path-length-1 edges beat sequential recurrence at internet scale.' },
+  ],
+  system1head: [
+    { q: 'The head-swap recipe in this tab is…', o: ['Train everything from scratch', 'Freeze the 1.5B backbone and train only a 3,074-parameter decision head', 'Delete the backbone entirely', 'Fine-tune with no labels'], a: 1, e: 'The backbone supplies features; the tiny head learns the boundary.' },
+    { q: 'Each verdict costs one forward pass and returns…', o: ['A paragraph of prose', 'A calibrated match/mismatch pair with confidence from softmax', 'Ten generated tokens', 'A random guess'], a: 1, e: 'One pass, typed output — the interface a CI hook or editor plugin wants.' },
+    { q: 'The demo run plus quantization story shows…', o: ['10 of 27 functions flagged with exit-code verdicts, and int8 shrinking ~6.17 GB toward ~0.93 GB', 'Zero findings and a larger model', 'Only slower inference', 'No measurable result'], a: 0, e: 'Semantic mismatches surface as exit codes while the footprint collapses.' },
+  ],
+  graphrag_system1: [
+    { q: 'The three decision primitives are…', o: ['A calibrated boolean, a closed-set choice, and an ordinal score', 'Three different chat prompts', 'Three vector databases', 'Three hardware tiers'], a: 0, e: 'noul decides booleans, choice picks from a fixed set, score ranks and prunes.' },
+    { q: 'The entity-merge gate routes pairs by…', o: ['Merging everything always', 'Never merging anything', 'Auto-merge at or above 0.92, gray band 0.50 to threshold to adjudication, below 0.50 distinct', 'Random thresholds per query'], a: 2, e: 'Calibrated probability maps straight to merge, gray-band review, or distinct.' },
+    { q: 'Subgraph pruning enforces token budgets because…', o: ['It rewrites the query in prose', 'It deletes the whole graph', 'It adds more tokens', 'The relevance floor drops low-score nodes from context entirely'], a: 3, e: 'A floor like 0.65 turns lower rank into exclusion, with per-node token accounting.' },
+  ],
+  threesentenceprompt: [
+    { q: 'The three appended sentences ask the model to…', o: ['Write faster with no checks', 'Review the full message, restate the goal plus propose a plan, then stop and wait for approval', 'Ignore attachments', 'Answer in exactly three words'], a: 1, e: 'Understand, plan, then gate on approval before executing.' },
+    { q: 'The stop-and-wait gate matters because…', o: ['It breaks sequential momentum so a wrong interpretation gets corrected in a short plan instead of a long response', 'It decorates the prompt', 'It deletes context', 'It doubles token use always'], a: 0, e: 'A short plan catches the mismatch before thousands of tokens are spent.' },
+    { q: 'The pattern library and picker teach…', o: ['Only one fixed template', 'No reusable patterns', 'Situational moves like plan-then-execute, options-before-commitment, and staged output matched to vague, decision, or quality-critical work', 'Copying full responses verbatim'], a: 2, e: 'Eight control/quality/analysis patterns map to situations via the picker.' },
+  ],
+  slashcommands: [
+    { q: 'A slash command works as…', o: ['Another paragraph of instructions', 'A one-token contract for the response shape placed before the request', 'A file attachment', 'A password'], a: 1, e: 'Command declares shape; the request supplies the topic.' },
+    { q: 'Which mapping of command to output shape is right…', o: ['Compression to a few bullets with no preamble', 'Tables for debugging walkthroughs only', 'Critique mode writes flattery', 'Guided walkthroughs dump final answers'], a: 0, e: 'Each of the nine commands fixes a different contract: bullets, tables, critique lists, counter-cases, walkthroughs.' },
+    { q: 'Custom-command hygiene from the DIY section says…', o: ['Stack as many commands as possible per message', 'One command per message, trigger plus fixed contract, kept short with lowercase names', 'Put commands at the end hidden in prose', 'Change shape and topic together every time'], a: 1, e: 'Short trigger plus contract in custom instructions; commands change shape, not topic.' },
+  ],
+  prompt_studio: [
+    { q: 'Prompt Studio composes a prompt in four steps…', o: ['Framework selection, methodology application, input definition, editable generated prompt', 'Login, payment, download, logout', 'Random generation with no inputs', 'One textbox with no structure'], a: 0, e: 'Structure plus techniques plus inputs assemble into editable text.' },
+    { q: 'Conditional input fields appear when…', o: ['Never — all fields always show', 'The selected techniques require them, e.g. source material for retrieval-grounded or schema for structured output', 'The user pays extra', 'At random'], a: 1, e: 'Reserved fields stay hidden until a methodology that needs them is selected.' },
+    { q: 'Composition and evaluation in the studio are…', o: ['A live model call that executes the prompt', 'Deterministic text assembly with static checks — conflicts, missing fields, and unresolved placeholders flagged', 'An unreviewable black box', 'Skipped entirely'], a: 1, e: 'No model is called; the report lists passes, conflicts, and gaps statically.' },
+  ],
+  prompt_frameworks: [
+    { q: 'Frameworks differ from methodologies in that frameworks…', o: ['Are techniques for reasoning', 'Are reusable structural blueprints with defined sections and sequence', 'Never have templates', 'Cannot combine with anything'], a: 1, e: 'Structure the prompt; techniques slot inside the structure.' },
+    { q: 'Each catalog entry carries…', o: ['Only a title', 'An editable template with bracketed placeholders, required and optional fields, an example, and compatible techniques', 'A price tag', 'No metadata'], a: 1, e: 'Detail view shows template, fields, example input/output, and method links.' },
+    { q: 'Browsing and tiering support the workflow by…', o: ['Search plus Foundation/Structured/Advanced tiers, then one-click open in the studio with or without top techniques', 'Deleting all entries', 'Locking users out of the studio', 'Hiding all templates'], a: 0, e: 'Search and tier filter lead to open-in-studio composition.' },
+  ],
+};

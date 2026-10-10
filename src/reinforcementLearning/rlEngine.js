@@ -108,6 +108,181 @@ export const SIMULATE_DYNAMIC_PRICING_MDP = (basePrice = 100, inventory = 50, da
   };
 };
 
+// ============================================================================
+// MULTI-ARMED BANDIT: EXPLORE VS EXPLOIT (deterministic, node-importable)
+// Epsilon-greedy vs greedy simulation with seeded RNG, running-mean
+// estimation, reward-model taxonomy, and exploration crossover detection.
+// ============================================================================
+
+export const BANDIT_REWARD_MODELS = [
+  {
+    id: "fixed",
+    name: "Fixed reward probabilities",
+    description: "Each arm pays out with a constant hidden probability. The agent's estimates converge to the true rates.",
+    example: "Two headlines with steady click rates of 30% and 70%."
+  },
+  {
+    id: "adversarial",
+    name: "Adversarial shifting rewards",
+    description: "An opposing process moves reward mass away from the most-pulled arm, punishing premature exploitation.",
+    example: "A competitor copies your best-performing offer within days."
+  },
+  {
+    id: "random-process",
+    name: "Random-process drift",
+    description: "True rates wander over time as a random process, so the agent must keep exploring forever.",
+    example: "Seasonal demand drifting week by week."
+  }
+];
+
+// Deterministic seeded RNG (mulberry32) in pure JS. Same seed -> same stream.
+export function createSeededRng(seed) {
+  var a = Number(seed);
+  if (!isFinite(a)) a = 0;
+  a = a >>> 0;
+  return function () {
+    a |= 0;
+    a = (a + 0x6D2B79F5) | 0;
+    var t = Math.imul(a ^ (a >>> 15), 1 | a);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+
+// Running-mean estimator: fold a new binary reward into the current mean.
+// pullCount = number of previous pulls of this arm.
+export function updateRunningMean(currentMean, pullCount, reward) {
+  var mean = Number(currentMean);
+  if (!isFinite(mean)) mean = 0;
+  var count = Math.floor(Number(pullCount));
+  if (!isFinite(count) || count < 0) count = 0;
+  var r = Number(reward);
+  if (!isFinite(r)) r = 0;
+  return mean + (r - mean) / (count + 1);
+}
+
+export function meanOfRewards(rewards) {
+  if (!Array.isArray(rewards) || rewards.length === 0) return 0;
+  var sum = 0;
+  for (var i = 0; i < rewards.length; i++) sum += Number(rewards[i]) || 0;
+  return sum / rewards.length;
+}
+
+// Deterministic spread of true rates across N arms, from 0.30 up to 0.80.
+export function defaultTrueRates(numArms) {
+  var n = Math.floor(Number(numArms));
+  if (!isFinite(n) || n < 1) n = 2;
+  if (n === 1) return [0.5];
+  var rates = [];
+  for (var i = 0; i < n; i++) {
+    rates.push(Number((0.3 + (0.5 * i) / (n - 1)).toFixed(4)));
+  }
+  return rates;
+}
+
+// Simulate one epsilon-greedy session over Bernoulli arms.
+// epsilon = 0 is pure greedy exploitation; epsilon > 0 mixes in exploration.
+export function runBanditSession(config) {
+  var cfg = config || {};
+  var trueRates = Array.isArray(cfg.trueRates) && cfg.trueRates.length > 0 ? cfg.trueRates.slice() : [0.3, 0.7];
+  var steps = cfg.steps === undefined ? 200 : Math.floor(Number(cfg.steps));
+  if (!isFinite(steps) || steps < 1) steps = 1;
+  var epsilon = cfg.epsilon === undefined ? 0.1 : Number(cfg.epsilon);
+  if (!isFinite(epsilon) || epsilon < 0) epsilon = 0;
+  if (epsilon > 1) epsilon = 1;
+  var seed = cfg.seed === undefined ? 7 : Number(cfg.seed);
+  if (!isFinite(seed)) seed = 7;
+
+  var rng = createSeededRng(seed);
+  var k = trueRates.length;
+  var estimates = [];
+  var counts = [];
+  for (var i = 0; i < k; i++) {
+    estimates.push(0);
+    counts.push(0);
+  }
+  var choices = [];
+  var rewards = [];
+  var total = 0;
+
+  for (var t = 0; t < steps; t++) {
+    var action;
+    if (rng() < epsilon) {
+      action = Math.floor(rng() * k);
+    } else {
+      action = 0;
+      for (var j = 1; j < k; j++) {
+        if (estimates[j] > estimates[action]) action = j;
+      }
+    }
+    var reward = rng() < trueRates[action] ? 1 : 0;
+    estimates[action] = updateRunningMean(estimates[action], counts[action], reward);
+    counts[action] += 1;
+    choices.push(action);
+    rewards.push(reward);
+    total += reward;
+  }
+
+  return {
+    trueRates: trueRates,
+    steps: steps,
+    epsilon: epsilon,
+    seed: seed,
+    choices: choices,
+    rewards: rewards,
+    estimatedValues: estimates,
+    pullCounts: counts,
+    totalReward: total,
+    winRate: total / steps
+  };
+}
+
+export function cumulativeSum(values) {
+  var out = [];
+  var acc = 0;
+  for (var i = 0; i < values.length; i++) {
+    acc += Number(values[i]) || 0;
+    out.push(acc);
+  }
+  return out;
+}
+
+// Exploration-vs-exploitation crossover: first step index where the trailing
+// series B overtakes the early leader A. Returns -1 when B never overtakes A.
+export function findCrossoverStep(cumulativeA, cumulativeB) {
+  var n = Math.min(cumulativeA.length, cumulativeB.length);
+  for (var i = 0; i < n; i++) {
+    if (cumulativeB[i] > cumulativeA[i]) return i;
+  }
+  return -1;
+}
+
+// Head-to-head: greedy (epsilon 0) vs epsilon-greedy on identical arms.
+export function comparePolicies(config) {
+  var cfg = config || {};
+  var greedy = runBanditSession({
+    trueRates: cfg.trueRates,
+    steps: cfg.steps,
+    epsilon: 0,
+    seed: cfg.seed
+  });
+  var exploratory = runBanditSession({
+    trueRates: cfg.trueRates,
+    steps: cfg.steps,
+    epsilon: cfg.epsilon === undefined ? 0.1 : cfg.epsilon,
+    seed: cfg.seed
+  });
+  var crossoverStep = findCrossoverStep(cumulativeSum(greedy.rewards), cumulativeSum(exploratory.rewards));
+  return {
+    greedy: greedy,
+    exploratory: exploratory,
+    greedyWinRate: greedy.winRate,
+    exploratoryWinRate: exploratory.winRate,
+    winRateDelta: exploratory.winRate - greedy.winRate,
+    crossoverStep: crossoverStep
+  };
+}
+
 export const PYTHON_PPO_PRICING_SCRIPT = `# ============================================================================
 # PRODUCTION REINFORCEMENT LEARNING GYM ENVIRONMENT & PPO AGENT
 # Demonstrates Gymnasium custom environment for dynamic retail pricing

@@ -19,7 +19,7 @@ export const UMBRELLA_TOPICS = [
     color: "#5EC4C8",
     dark: "#1F6B6E",
     description: "Roadmap stages 1–4: orientation, how LLMs work, prompting, models — home of the AI Engineer Roadmap",
-    tabs: ["fnd_start_hub", "fnd_internals_hub", "fnd_prompts_hub", "fnd_mlsoc_hub", "fnd_multimodal_hub", "airoadmap", "overview", "glossary", "reinforcementlearning", "trpo2grpo", "aimoralagency", "humancentric", "dialoguelamda", "modellandscape", "tokenization", "quantserve", "vramconductor", "promptfundamentals", "lstm", "llmsampling", "grokking", "selfattention", "posencoding", "archconcepts", "system1head", "promptmgmt", "promptdependencygraph", "promptcontracts", "promptregression", "structuredoutputs", "topicmodeling", "workflows", "unhobbling", "aiharness", "promptlearning", "visionlanguage", "diffusionmodels", "speechvoice", "datacentricai", "prompt_studio", "prompt_frameworks", "prompt_methodologies", "threesentenceprompt", "slashcommands"]
+    tabs: ["fnd_start_hub", "fnd_internals_hub", "fnd_prompts_hub", "fnd_mlsoc_hub", "fnd_multimodal_hub", "airoadmap", "overview", "glossary", "reinforcementlearning", "trpo2grpo", "aimoralagency", "humancentric", "dialoguelamda", "modellandscape", "tokenization", "quantserve", "vramconductor", "promptfundamentals", "lstm", "llmsampling", "grokking", "selfattention", "posencoding", "archconcepts", "system1head", "promptmgmt", "promptdependencygraph", "promptcontracts", "promptregression", "structuredoutputs", "topicmodeling", "workflows", "unhobbling", "aiharness", "promptlearning", "visionlanguage", "diffusionmodels", "speechvoice", "datacentricai", "prompt_studio", "prompt_frameworks", "prompt_methodologies", "threesentenceprompt", "slashcommands", "ailearning", "reversalcurse"]
   },
   {
     id: "data_platform",
@@ -28,7 +28,7 @@ export const UMBRELLA_TOPICS = [
     color: "#3A9B9F",
     dark: "#1F6B6E",
     description: "Roadmap stage 5: embeddings, vector search and document pipelines that feed retrieval",
-    tabs: ["data_found_hub", "data_docs_hub", "data_ml_hub", "data_scale_hub", "threelayers", "docstruct", "agenticparsing", "knowledgebase", "vectordbops", "datapipeline", "aidataplat", "medallionarch", "aitestdatabottleneck", "classicalml", "frauddetectionml", "modernioformats", "pythonprofiling", "pythonengineering", "nsquaredpizza", "functools", "activelearn", "goaltracker", "vaes", "keras3", "byol", "xlstm", "timeseriesanomaly", "aiusecases", "agenticuiworkflow", "linearregression", "pandasdataframes", "pandasmem", "geopopviz", "datahumanization", "llmfinetuning", "multilingualclassification", "textclusteringhdbscan"]
+    tabs: ["data_found_hub", "data_docs_hub", "data_ml_hub", "data_scale_hub", "threelayers", "docstruct", "agenticparsing", "knowledgebase", "vectordbops", "datapipeline", "aidataplat", "medallionarch", "aitestdatabottleneck", "classicalml", "frauddetectionml", "modernioformats", "pythonprofiling", "pythonengineering", "nsquaredpizza", "functools", "activelearn", "goaltracker", "vaes", "keras3", "byol", "xlstm", "timeseriesanomaly", "aiusecases", "agenticuiworkflow", "linearregression", "pandasdataframes", "pandasmem", "geopopviz", "datahumanization", "llmfinetuning", "multilingualclassification", "textclusteringhdbscan", "forecasttraps"]
   },
   {
     id: "rag_architecture",
@@ -55,7 +55,7 @@ export const UMBRELLA_TOPICS = [
     color: "#F0A89A",
     dark: "#C47A6A",
     description: "Roadmap stage 7: agents, MCP and production deployment",
-    tabs: ["agt_found_hub", "agt_safety_hub", "agt_multi_hub", "agt_prod_hub", "fiveassets", "redesign", "projectprepframework", "agentplanner", "agenthitl", "agentcontrolplane", "agentlifecycle", "agenta2a", "agentsandbox", "agentevals", "handoffwatch", "verifiedpipes", "codingevals", "claudecode100", "typedagentgate", "agentpairprogramming", "vibecode", "agentsastools", "toolcalling", "agenttasks", "agentmemory", "cliagent", "codingagentsnonprog", "multiagent", "multiagentcoord", "modelrouting", "decision_layer", "langchain", "langgraph", "frameworkcompare", "agentdebugging", "agentscale", "modeldeploy", "aiproductbuilder", "mcpclient", "agentsdk", "loopengineering", "finassistproject", "zerocostmultiagent", "capstone2"]
+    tabs: ["agt_found_hub", "agt_safety_hub", "agt_multi_hub", "agt_prod_hub", "fiveassets", "redesign", "projectprepframework", "agentplanner", "agenthitl", "agentcontrolplane", "agentlifecycle", "agenta2a", "agentsandbox", "agentevals", "handoffwatch", "verifiedpipes", "codingevals", "claudecode100", "typedagentgate", "agentpairprogramming", "vibecode", "agentsastools", "toolcalling", "agenttasks", "agentmemory", "cliagent", "codingagentsnonprog", "multiagent", "multiagentcoord", "modelrouting", "decision_layer", "langchain", "langgraph", "frameworkcompare", "agentdebugging", "agentscale", "modeldeploy", "aiproductbuilder", "mcpclient", "agentsdk", "loopengineering", "finassistproject", "zerocostmultiagent", "capstone2", "functionalscars", "refactorhealth", "agentcreativity", "agentorgchart", "synasyncagent"]
   },
   {
     id: "frontiers_production",
@@ -1935,6 +1935,78 @@ export const TABS_REGISTRY = [
     icon: "🧭",
     keywords: ["RAG vs fine-tuning", "agent vs workflow", "tool calling", "code execution", "MCP", "embedding drift", "typesafe AI", "JEV", "architecture decisions"],
     component: lazy(() => import("../aiArchDecisions/AiArchDecisionsTab.jsx"))
+  },
+  {
+    id: "functionalscars",
+    label: "Functional Scars: Corrections That Run",
+    umbrellaId: "agents_frameworks",
+    category: "Agents & Frameworks",
+    icon: "🪝",
+    keywords: ["functional scars", "enforcement hooks", "correction layers", "pre-call denial", "post-call check", "false positive cost", "scar contract", "retirement date"],
+    component: lazy(() => import("../functionalScars/FunctionalScarsTab.jsx"))
+  },
+  {
+    id: "refactorhealth",
+    label: "Refactoring Health Score",
+    umbrellaId: "agents_frameworks",
+    category: "Agents & Frameworks",
+    icon: "📏",
+    keywords: ["refactoring health", "code health score", "duplication", "dead code", "complexity hotspots", "per-commit measurement", "anti-gaming", "stop conditions"],
+    component: lazy(() => import("../refactorHealth/RefactorHealthTab.jsx"))
+  },
+  {
+    id: "agentcreativity",
+    label: "Agent Creativity: Novelty + Impact",
+    umbrellaId: "agents_frameworks",
+    category: "Agents & Frameworks",
+    icon: "💡",
+    keywords: ["agent creativity", "self novelty", "human novelty", "impact score", "feasibility gate", "explore exploit", "novelty rubric", "dual optimization"],
+    component: lazy(() => import("../agentCreativity/AgentCreativityTab.jsx"))
+  },
+  {
+    id: "agentorgchart",
+    label: "AI Org Chart: Hire, Don't Prompt",
+    umbrellaId: "agents_frameworks",
+    category: "Agents & Frameworks",
+    icon: "🏢",
+    keywords: ["org chart", "ai hires", "worker role responsibility", "one desk per agent", "kanban workflow", "review economics", "accountability", "role tightness"],
+    component: lazy(() => import("../agentOrgChart/AgentOrgChartTab.jsx"))
+  },
+  {
+    id: "synasyncagent",
+    label: "Sync vs Async Agent Execution",
+    umbrellaId: "agents_frameworks",
+    category: "Agents & Frameworks",
+    icon: "🔀",
+    keywords: ["synchronous execution", "asynchronous execution", "fire and forget", "job queue", "state checkpointing", "timeout trap", "pattern picker", "background workers"],
+    component: lazy(() => import("../syncAsyncAgent/SyncAsyncAgentTab.jsx"))
+  },
+  {
+    id: "forecasttraps",
+    label: "Forecasting Traps: Leakage Lab",
+    umbrellaId: "data_platform",
+    category: "Data & Platform Layers",
+    icon: "🪤",
+    keywords: ["forecasting traps", "time leakage", "reporting delay", "walk-forward", "noise floor", "residual plot", "availability audit", "trust checklist"],
+    component: lazy(() => import("../forecastTraps/ForecastTrapsTab.jsx"))
+  },
+  {
+    id: "ailearning",
+    label: "Learn Faster with AI",
+    umbrellaId: "foundations",
+    category: "Foundations",
+    icon: "🎓",
+    keywords: ["ai learning", "voice exploration", "reusable skills", "spaced repetition", "active recall", "forgetting curve", "triage filter", "study planner"],
+    component: lazy(() => import("../aiLearning/AiLearningTab.jsx"))
+  },
+  {
+    id: "reversalcurse",
+    label: "The Reversal Curse",
+    umbrellaId: "foundations",
+    category: "Foundations",
+    icon: "↔️",
+    keywords: ["reversal curse", "one-way memory", "directional recall", "embedding updates", "ask both directions", "symmetric facts", "retrieval fix"],
+    component: lazy(() => import("../reversalCurse/ReversalCurseTab.jsx"))
   }
 ];
 

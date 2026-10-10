@@ -3,6 +3,227 @@ import { CodeBlock } from './Content.jsx';
 import { Container, Section, Grid, Flex, Stack } from '../layout/Primitives.jsx';
 import { Card, Badge, Button, Callout } from './Core.jsx';
 import { getModuleColors } from '../../design-system/tokens.js';
+import { GATE_TRIGGERS, DECISION_NODES, STYLE_MATRIX, TOKEN_MULTIPLIER_PARALLEL_CREW, evaluateGate, estimateTokenCost, recommendStyle } from '../../frameworkCompare/decisionEngine.js';
+
+// Palette: TEAL #3A9B9F / TEAL_DARK #1A6B6E / PURPLE #5B4B8A / RED #B4553A / AMBER #B9821F
+const DECISION_ACCENT = '#3A9B9F';
+const DECISION_ACCENT_DARK = '#1A6B6E';
+
+// ============================================================================
+// DECISION TREE — interactive gate + 3 nodes -> generic style recommendation
+// ============================================================================
+function DecisionTreeSection() {
+  const [gateChecked, setGateChecked] = useState({});
+  const [mentalModel, setMentalModel] = useState('states');
+  const [durability, setDurability] = useState('ephemeral');
+  const [ecosystem, setEcosystem] = useState('flexible');
+  const [baseTokens, setBaseTokens] = useState(1000);
+
+  const toggleGate = (id) => {
+    setGateChecked(prev => ({ ...prev, [id]: !prev[id] }));
+  };
+
+  const activeIds = GATE_TRIGGERS.filter(t => gateChecked[t.id]).map(t => t.id);
+  const gate = evaluateGate(activeIds);
+  const rec = recommendStyle({ mentalModel, durability, ecosystem });
+  const cost = estimateTokenCost(baseTokens, TOKEN_MULTIPLIER_PARALLEL_CREW);
+
+  const setNodeValue = (nodeId, value) => {
+    if (nodeId === 'mental-model') setMentalModel(value);
+    else if (nodeId === 'durability') setDurability(value);
+    else if (nodeId === 'ecosystem') setEcosystem(value);
+  };
+  const nodeValue = (nodeId) => {
+    if (nodeId === 'mental-model') return mentalModel;
+    if (nodeId === 'durability') return durability;
+    return ecosystem;
+  };
+
+  return (
+    <Section variant="bordered" style={{ marginBottom: 'var(--ds-space-6)', borderColor: 'rgba(58, 155, 159, 0.35)' }}>
+      <Section.Header>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <h2 style={{ fontSize: 'var(--ds-font-size-h3)', margin: 0, color: 'var(--ds-color-text-primary)' }}>
+            Decision Tree: Single Agent or Multi-Agent?
+          </h2>
+          <Badge variant="success" size="sm" dot>Interactive</Badge>
+        </div>
+        <p style={{ color: 'var(--ds-color-text-secondary)', fontSize: '0.85rem', margin: '4px 0 0 0' }}>
+          Answer the gate plus three decision nodes to land on one of five generic coordination styles.
+        </p>
+      </Section.Header>
+      <Section.Body>
+        {/* Inline SVG decision-tree diagram */}
+        <div style={{ background: 'var(--ds-color-bg-surface)', border: '1px solid var(--ds-color-border-subtle)', borderRadius: 'var(--ds-radius-md)', padding: '12px', marginBottom: 'var(--ds-space-4)', overflowX: 'auto' }}>
+          <svg viewBox="0 0 640 190" style={{ width: '100%', minWidth: 520, height: 'auto' }} role="img" aria-label="Decision tree diagram">
+            {/* Node 0 diamond */}
+            <g>
+              <polygon points="90,20 160,60 90,100 20,60" fill="rgba(58,155,159,0.12)" stroke="#3A9B9F" strokeWidth="2" />
+              <text x="90" y="55" textAnchor="middle" fill="var(--ds-color-text-primary)" fontSize="11" fontWeight="bold">Node 0: Gate</text>
+              <text x="90" y="70" textAnchor="middle" fill="var(--ds-color-text-secondary)" fontSize="9">any of 4 triggers?</text>
+            </g>
+            {/* Gate branches */}
+            <line x1="160" y1="60" x2="220" y2="30" stroke="#B4553A" strokeWidth="1.5" />
+            <text x="192" y="38" fill="var(--ds-color-text-tertiary)" fontSize="9">none</text>
+            <line x1="160" y1="60" x2="220" y2="95" stroke="#3A9B9F" strokeWidth="1.5" />
+            <text x="192" y="90" fill="var(--ds-color-text-tertiary)" fontSize="9">any</text>
+            {/* Single-agent terminal */}
+            <g>
+              <rect x="220" y="12" width="120" height="36" rx="6" fill="rgba(180,85,58,0.12)" stroke="#B4553A" strokeWidth="1.5" />
+              <text x="280" y="27" textAnchor="middle" fontSize="10" fontWeight="bold" fill="var(--ds-color-text-primary)">Single agent</text>
+              <text x="280" y="40" textAnchor="middle" fontSize="9" fill="var(--ds-color-text-secondary)">minimal style</text>
+            </g>
+            {/* 3 decision nodes */}
+            <g>
+              <rect x="220" y="77" width="120" height="36" rx="6" fill="rgba(91,75,138,0.12)" stroke="#5B4B8A" strokeWidth="1.5" />
+              <text x="280" y="92" textAnchor="middle" fontSize="10" fontWeight="bold" fill="var(--ds-color-text-primary)">3 decision nodes</text>
+              <text x="280" y="105" textAnchor="middle" fontSize="9" fill="var(--ds-color-text-secondary)">model · durability · eco</text>
+            </g>
+            {/* Fan out to 5 styles */}
+            <line x1="340" y1="95" x2="400" y2="20" stroke="#3A9B9F" strokeWidth="1.2" />
+            <line x1="340" y1="95" x2="400" y2="48" stroke="#5B4B8A" strokeWidth="1.2" />
+            <line x1="340" y1="95" x2="400" y2="76" stroke="#B9821F" strokeWidth="1.2" />
+            <line x1="340" y1="95" x2="400" y2="104" stroke="#1A6B6E" strokeWidth="1.2" />
+            <line x1="340" y1="95" x2="400" y2="132" stroke="#B4553A" strokeWidth="1.2" />
+            {[
+              { y: 8, label: 'State machine' },
+              { y: 36, label: 'Role-based org chart' },
+              { y: 64, label: 'Conversational debate' },
+              { y: 92, label: 'Type-safe Python' },
+              { y: 120, label: 'Minimal native SDK' }
+            ].map((s, i) => (
+              <g key={i}>
+                <rect x="400" y={s.y} width="220" height="24" rx="5" fill="var(--ds-color-bg-canvas)" stroke="var(--ds-color-border-default)" strokeWidth="1" />
+                <text x="510" y={s.y + 16} textAnchor="middle" fontSize="10" fill="var(--ds-color-text-primary)">{s.label}</text>
+              </g>
+            ))}
+            <text x="90" y="130" textAnchor="middle" fontSize="9" fill="var(--ds-color-text-tertiary)">4 gate triggers</text>
+            <text x="90" y="143" textAnchor="middle" fontSize="9" fill="var(--ds-color-text-tertiary)">context · parallel · divergent · critic</text>
+            <text x="280" y="132" textAnchor="middle" fontSize="9" fill="var(--ds-color-text-tertiary)">cost: parallel crew ≈ 4x tokens</text>
+          </svg>
+        </div>
+
+        <Grid columns={{ base: '1fr', lg: '1fr 1fr' }} gap="var(--ds-space-4)">
+          <div>
+            {/* Node-0 gate checkboxes */}
+            <h3 style={{ fontSize: '0.95rem', margin: '0 0 8px 0', color: 'var(--ds-color-text-primary)' }}>Node 0 — Do you need multiple agents?</h3>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginBottom: '16px' }}>
+              {GATE_TRIGGERS.map(t => (
+                <label key={t.id} style={{ display: 'flex', gap: '10px', alignItems: 'flex-start', background: 'var(--ds-color-bg-surface)', border: gateChecked[t.id] ? '2px solid #3A9B9F' : '1px solid var(--ds-color-border-default)', borderRadius: '8px', padding: '10px 12px', cursor: 'pointer' }}>
+                  <input type="checkbox" checked={!!gateChecked[t.id]} onChange={() => toggleGate(t.id)} style={{ marginTop: 3, accentColor: '#3A9B9F' }} />
+                  <span>
+                    <span style={{ display: 'block', fontWeight: 700, fontSize: '0.82rem', color: 'var(--ds-color-text-primary)' }}>{t.label}</span>
+                    <span style={{ display: 'block', fontSize: '0.78rem', color: 'var(--ds-color-text-secondary)', lineHeight: 1.45 }}>{t.description}</span>
+                  </span>
+                </label>
+              ))}
+            </div>
+            {/* 3 decision nodes */}
+            {DECISION_NODES.map(node => (
+              <div key={node.id} style={{ marginBottom: '14px' }}>
+                <div style={{ fontWeight: 700, fontSize: '0.82rem', color: 'var(--ds-color-text-primary)', marginBottom: 2 }}>{node.label}</div>
+                <div style={{ fontSize: '0.78rem', color: 'var(--ds-color-text-secondary)', marginBottom: 6 }}>{node.question}</div>
+                <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
+                  {node.options.map(opt => (
+                    <button
+                      key={opt.value}
+                      onClick={() => setNodeValue(node.id, opt.value)}
+                      title={opt.hint}
+                      style={{
+                        padding: '6px 12px', borderRadius: '6px', cursor: 'pointer', fontSize: '0.78rem', fontWeight: 700,
+                        border: nodeValue(node.id) === opt.value ? '2px solid #1A6B6E' : '1px solid var(--ds-color-border-default)',
+                        background: nodeValue(node.id) === opt.value ? 'rgba(26,107,110,0.10)' : 'var(--ds-color-bg-surface)',
+                        color: nodeValue(node.id) === opt.value ? '#1A6B6E' : 'var(--ds-color-text-primary)'
+                      }}
+                    >
+                      {opt.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+          <div>
+            {/* Recommendation readout */}
+            <Card style={{ padding: '16px', borderLeft: '4px solid ' + DECISION_ACCENT, marginBottom: '12px' }}>
+              <div style={{ fontSize: '0.75rem', fontWeight: 700, letterSpacing: '0.08em', color: 'var(--ds-color-text-tertiary)', marginBottom: 4 }}>GATE VERDICT</div>
+              <div style={{ fontSize: '0.9rem', fontWeight: 800, color: gate.needsMultiAgent ? '#1A6B6E' : '#B4553A', marginBottom: 4 }}>
+                {gate.needsMultiAgent ? 'Multi-agent justified' : 'Stay single-agent'}
+              </div>
+              <div style={{ fontSize: '0.82rem', color: 'var(--ds-color-text-secondary)' }}>{gate.guidance}</div>
+            </Card>
+            <Card style={{ padding: '16px', borderLeft: '4px solid ' + DECISION_ACCENT_DARK, marginBottom: '12px' }}>
+              <div style={{ fontSize: '0.75rem', fontWeight: 700, letterSpacing: '0.08em', color: 'var(--ds-color-text-tertiary)', marginBottom: 4 }}>RECOMMENDED STYLE</div>
+              <div style={{ fontSize: '1.05rem', fontWeight: 800, color: 'var(--ds-color-text-primary)', marginBottom: 4 }}>{rec.styleName}</div>
+              <div style={{ fontSize: '0.82rem', color: 'var(--ds-color-text-secondary)', marginBottom: 8 }}>{rec.rationale}</div>
+              <div style={{ fontSize: '0.8rem', color: 'var(--ds-color-text-primary)', marginBottom: 4 }}><strong>Best fit:</strong> {rec.bestFit}</div>
+              <div style={{ fontSize: '0.8rem', color: 'var(--ds-color-text-primary)' }}><strong>Watch out:</strong> {rec.watchOut}</div>
+            </Card>
+            <Card style={{ padding: '16px' }}>
+              <div style={{ fontSize: '0.75rem', fontWeight: 700, letterSpacing: '0.08em', color: 'var(--ds-color-text-tertiary)', marginBottom: 6 }}>TOKEN COST MODEL</div>
+              <label style={{ fontSize: '0.78rem', color: 'var(--ds-color-text-secondary)', display: 'block', marginBottom: 4 }}>
+                Single-agent baseline tokens: {baseTokens}
+              </label>
+              <input type="range" min="200" max="5000" step="100" value={baseTokens} onChange={e => setBaseTokens(Number(e.target.value))} style={{ width: '100%', accentColor: '#3A9B9F' }} />
+              <div style={{ fontSize: '0.82rem', color: 'var(--ds-color-text-primary)', marginTop: 8 }}>
+                Parallel crew ≈ {cost.multiplier}x → <strong>{cost.totalTokens.toLocaleString()} tokens</strong>
+              </div>
+              <div style={{ fontSize: '0.78rem', color: 'var(--ds-color-text-secondary)' }}>
+                Overhead vs single-agent: +{cost.overheadVsSingle.toLocaleString()} tokens. Each extra agent re-reads shared context.
+              </div>
+            </Card>
+          </div>
+        </Grid>
+      </Section.Body>
+    </Section>
+  );
+}
+
+// ============================================================================
+// FIVE-STYLE MATRIX — style x strength x limitation x best for
+// ============================================================================
+function FiveStyleMatrixSection() {
+  return (
+    <Section variant="bordered" style={{ marginBottom: 'var(--ds-space-6)' }}>
+      <Section.Header>
+        <h2 style={{ fontSize: 'var(--ds-font-size-h3)', margin: 0, color: 'var(--ds-color-text-primary)' }}>
+          Five-Style Matrix
+        </h2>
+        <p style={{ color: 'var(--ds-color-text-secondary)', fontSize: '0.85rem', margin: '4px 0 0 0' }}>
+          Compare the five generic coordination styles head to head.
+        </p>
+      </Section.Header>
+      <Section.Body>
+        <div style={{ overflowX: 'auto' }}>
+          <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.8rem', minWidth: 640 }}>
+            <thead>
+              <tr style={{ background: 'var(--ds-color-bg-canvas)' }}>
+                {['Style', 'Strength', 'Limitation', 'Best for'].map(h => (
+                  <th key={h} style={{ textAlign: 'left', padding: '10px 12px', color: 'var(--ds-color-text-primary)', borderBottom: '2px solid #3A9B9F', fontSize: '0.75rem', letterSpacing: '0.06em', textTransform: 'uppercase' }}>{h}</th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {STYLE_MATRIX.map(s => (
+                <tr key={s.id} style={{ borderBottom: '1px solid var(--ds-color-border-subtle)' }}>
+                  <td style={{ padding: '10px 12px', fontWeight: 800, color: s.color, whiteSpace: 'nowrap' }}>{s.name}</td>
+                  <td style={{ padding: '10px 12px', color: 'var(--ds-color-text-secondary)', lineHeight: 1.5 }}>{s.strength}</td>
+                  <td style={{ padding: '10px 12px', color: 'var(--ds-color-text-secondary)', lineHeight: 1.5 }}>{s.limitation}</td>
+                  <td style={{ padding: '10px 12px', color: 'var(--ds-color-text-primary)', lineHeight: 1.5 }}>{s.bestFor}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <div style={{ marginTop: '12px' }}>
+          <Callout type="info" title="How to read this matrix">
+            <span style={{ fontSize: '0.82rem' }}>Start at Node 0. If no trigger fires, stay single-agent. Otherwise pick the row whose strength matches your decision-node answers, and respect its watch-out guardrail.</span>
+          </Callout>
+        </div>
+      </Section.Body>
+    </Section>
+  );
+}
 
 // ============================================================================
 // SIMULATION SCENARIO DATA DEFINITIONS
@@ -816,6 +1037,12 @@ export function LangChainVsLangGraphComparison() {
           </Grid>
         </Section.Body>
       </Section>
+
+      {/* ========================================================================= */}
+      {/* DECISION TREE + FIVE-STYLE MATRIX (generic coordination styles) */}
+      {/* ========================================================================= */}
+      <DecisionTreeSection />
+      <FiveStyleMatrixSection />
 
       {/* ========================================================================= */}
       {/* CODE EXAMPLES SIDE-BY-SIDE */}

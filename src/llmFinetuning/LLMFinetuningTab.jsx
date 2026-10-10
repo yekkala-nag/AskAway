@@ -19,7 +19,10 @@ import {
   AGENTIC_FINE_TUNING_PIPELINE,
   AGENTIC_FINE_TUNING_CHALLENGES,
   AGENTIC_FINE_TUNING_RECIPES,
-  PYTHON_AGENTIC_QLORA_SCRIPT
+  PYTHON_AGENTIC_QLORA_SCRIPT,
+  TOOL_CALLING_RECIPE,
+  TOOL_CALLING_DATASET_SHAPE,
+  GROUNDED_EXTRACTION_PIPELINE
 } from './finetuningEngine.js';
 
 const { Container, Grid, Flex, Stack } = Primitives;
@@ -602,6 +605,29 @@ export default function LLMFinetuningTab() {
                 <Callout type="info">
                   <strong>Instruction Backtranslation Secret:</strong> Take raw, uncurated enterprise text documents, prompt a model to generate realistic user questions for each section, verify semantic answers, and use the synthetic pairs for Supervised Fine-Tuning (SFT).
                 </Callout>
+
+                <Card style={{ padding: '14px', background: 'var(--ds-color-bg-surface)', borderLeft: '4px solid #3A9B9F' }}>
+                  <strong style={{ fontSize: 'var(--ds-font-size-bodySm)', color: '#3A9B9F', display: 'block', marginBottom: '6px' }}>
+                    {GROUNDED_EXTRACTION_PIPELINE.title}
+                  </strong>
+                  <p style={{ fontSize: 'var(--ds-font-size-caption)', color: 'var(--ds-color-text-secondary)', margin: '0 0 8px 0' }}>
+                    {GROUNDED_EXTRACTION_PIPELINE.framing}
+                  </p>
+                  <Grid columns={{ base: '1fr', md: '1fr 1fr 1fr' }} gap="var(--ds-space-2)">
+                    {GROUNDED_EXTRACTION_PIPELINE.stages.map((s, i) => (
+                      <Card key={i} style={{ padding: '10px', background: 'var(--ds-color-bg-canvas)', borderLeft: '3px solid #1A6B6E' }}>
+                        <div style={{ fontSize: '12px', color: 'var(--ds-color-text-primary)', fontWeight: 'bold' }}>{s.step}</div>
+                        <div style={{ fontSize: '11px', color: 'var(--ds-color-text-secondary)' }}>{s.detail}</div>
+                      </Card>
+                    ))}
+                  </Grid>
+                  <div style={{ fontSize: '11px', color: 'var(--ds-color-text-tertiary)', margin: '8px 0 4px 0' }}>Row types exploded from each chunk:</div>
+                  <ul style={{ margin: 0, paddingLeft: '18px', fontSize: '11px', color: 'var(--ds-color-text-secondary)' }}>
+                    {GROUNDED_EXTRACTION_PIPELINE.rowTypes.map((r, i) => (
+                      <li key={i}><strong style={{ color: 'var(--ds-color-text-primary)' }}>{r.type}</strong> — {r.use}</li>
+                    ))}
+                  </ul>
+                </Card>
               </Stack>
             </Card>
           </Stack>
@@ -821,6 +847,51 @@ export default function LLMFinetuningTab() {
                       </tbody>
                     </table>
                   </div>
+                </div>
+
+                {/* Tool-Calling Recipe */}
+                <div style={{ marginTop: 'var(--ds-space-4)' }}>
+                  <h4 style={{ margin: '0 0 8px 0', color: 'var(--ds-color-text-primary)' }}>🔧 {TOOL_CALLING_RECIPE.title}</h4>
+                  <Card style={{ padding: '14px', background: 'var(--ds-color-bg-surface)', borderLeft: '4px solid #3A9B9F' }}>
+                    <Stack gap={3}>
+                      <div style={{ fontSize: '11px', color: 'var(--ds-color-text-secondary)' }}>
+                        Start from a <strong style={{ color: 'var(--ds-color-text-primary)' }}>{TOOL_CALLING_RECIPE.base}</strong> with a{' '}
+                        <strong style={{ color: 'var(--ds-color-text-primary)' }}>{TOOL_CALLING_RECIPE.trainer}</strong>. Hyperparameter recipe: rank {TOOL_CALLING_RECIPE.rank}, alpha {TOOL_CALLING_RECIPE.alpha} ({TOOL_CALLING_RECIPE.alphaRule}), {TOOL_CALLING_RECIPE.dropoutReason} (dropout {TOOL_CALLING_RECIPE.dropout}), target modules {TOOL_CALLING_RECIPE.targetModules.join('/')}, tiny batch ({TOOL_CALLING_RECIPE.perDeviceBatch} per-device × {TOOL_CALLING_RECIPE.gradAccumSteps} accum = {TOOL_CALLING_RECIPE.effectiveBatch} effective), {TOOL_CALLING_RECIPE.trainStepsNote} ({TOOL_CALLING_RECIPE.trainSteps} steps), small LR ({TOOL_CALLING_RECIPE.learningRate}).
+                      </div>
+                      <div>
+                        <div style={{ fontSize: '11px', color: 'var(--ds-color-text-tertiary)', marginBottom: '4px' }}>3-PART DATASET SHAPE:</div>
+                        <Grid columns={{ base: '1fr', md: '1fr 1fr 1fr' }} gap="var(--ds-space-2)">
+                          {TOOL_CALLING_DATASET_SHAPE.map((p, i) => (
+                            <Card key={i} style={{ padding: '10px', background: 'var(--ds-color-bg-canvas)', borderLeft: '3px solid #5B4B8A' }}>
+                              <div style={{ fontSize: '12px', color: '#3A9B9F', fontWeight: 'bold', fontFamily: 'monospace' }}>{p.role}</div>
+                              <div style={{ fontSize: '11px', color: 'var(--ds-color-text-secondary)', margin: '4px 0' }}>{p.contains}</div>
+                              <div style={{ fontSize: '10px', color: 'var(--ds-color-text-tertiary)', fontFamily: 'monospace', whiteSpace: 'pre-wrap' }}>{p.example}</div>
+                            </Card>
+                          ))}
+                        </Grid>
+                      </div>
+                      <Grid columns={{ base: '1fr', md: '1fr 1fr' }} gap="var(--ds-space-2)">
+                        <Card style={{ padding: '10px', background: 'var(--ds-color-bg-canvas)', borderLeft: '3px solid #B9821F' }}>
+                          <div style={{ fontSize: '11px', color: '#B9821F', fontWeight: 'bold' }}>Data-quality rule</div>
+                          <div style={{ fontSize: '11px', color: 'var(--ds-color-text-secondary)' }}>{TOOL_CALLING_RECIPE.dataQualityRule}.</div>
+                        </Card>
+                        <Card style={{ padding: '10px', background: 'var(--ds-color-bg-canvas)', borderLeft: '3px solid #1A6B6E' }}>
+                          <div style={{ fontSize: '11px', color: '#3A9B9F', fontWeight: 'bold' }}>Health check</div>
+                          <div style={{ fontSize: '11px', color: 'var(--ds-color-text-secondary)' }}>Healthy: {TOOL_CALLING_RECIPE.healthCheckHealthy}; {TOOL_CALLING_RECIPE.healthCheckWarning}.</div>
+                        </Card>
+                      </Grid>
+                      <Grid columns={{ base: '1fr', md: '1fr 1fr' }} gap="var(--ds-space-2)">
+                        <Card style={{ padding: '10px', background: 'var(--ds-color-bg-canvas)', borderLeft: '3px solid #B4553A' }}>
+                          <div style={{ fontSize: '11px', color: '#B4553A', fontWeight: 'bold' }}>Base-model failure signature</div>
+                          <div style={{ fontSize: '11px', color: 'var(--ds-color-text-secondary)' }}>{TOOL_CALLING_RECIPE.baseFailureSignature}: {TOOL_CALLING_RECIPE.baseFailureExample}</div>
+                        </Card>
+                        <Card style={{ padding: '10px', background: 'var(--ds-color-bg-canvas)', borderLeft: '3px solid #5B4B8A' }}>
+                          <div style={{ fontSize: '11px', color: '#5B4B8A', fontWeight: 'bold' }}>Inference detail</div>
+                          <div style={{ fontSize: '11px', color: 'var(--ds-color-text-secondary)' }}>Low temperature ({TOOL_CALLING_RECIPE.inferenceTemperature}), short max tokens ({TOOL_CALLING_RECIPE.inferenceMaxTokens}), {TOOL_CALLING_RECIPE.inferenceDecodeNote}.</div>
+                        </Card>
+                      </Grid>
+                    </Stack>
+                  </Card>
                 </div>
 
                 {/* Agentic QLoRA Code */}

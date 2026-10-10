@@ -307,8 +307,12 @@ import { EXIT_CHECKS_H } from './exitChecks8.js';
 import { EXIT_CHECKS_I } from './exitChecks9.js';
 import { EXIT_CHECKS_J } from './exitChecks10.js';
 import { EXIT_CHECKS_K } from './exitChecks11.js';
+import { EXIT_CHECKS_L } from './exitChecks12.js';
+import { EXIT_CHECKS_M } from './exitChecks13.js';
+import { EXIT_CHECKS_N } from './exitChecks14.js';
+import { EXIT_CHECKS_O } from './exitChecks15.js';
 
-const ALL_CHECKS = { ...EXIT_CHECKS, ...EXIT_CHECKS_B, ...EXIT_CHECKS_C, ...EXIT_CHECKS_D, ...EXIT_CHECKS_E, ...EXIT_CHECKS_F, ...EXIT_CHECKS_G, ...EXIT_CHECKS_H, ...EXIT_CHECKS_I, ...EXIT_CHECKS_J, ...EXIT_CHECKS_K };
+const ALL_CHECKS = { ...EXIT_CHECKS, ...EXIT_CHECKS_B, ...EXIT_CHECKS_C, ...EXIT_CHECKS_D, ...EXIT_CHECKS_E, ...EXIT_CHECKS_F, ...EXIT_CHECKS_G, ...EXIT_CHECKS_H, ...EXIT_CHECKS_I, ...EXIT_CHECKS_J, ...EXIT_CHECKS_K, ...EXIT_CHECKS_L, ...EXIT_CHECKS_M, ...EXIT_CHECKS_N, ...EXIT_CHECKS_O };
 
 export function getExitCheck(tabId) {
   return ALL_CHECKS[tabId] || null;

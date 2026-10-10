@@ -160,6 +160,81 @@ def handle(proposal: dict) -> dict:
     # Broker — not the planner — holds the constrained authority.
     return broker.execute(p, authority=scoped_credential(p, ttl_seconds=60))`;
 
+// ── Fleet scale: five pillars (one agent → agent fleet) ──
+
+export const FLEET_SPRAWL = {
+  headline: 'Agents multiply faster than governance',
+  forecast: 'Industry analyst forecasts report agent counts growing several-fold year over year while governance staffing stays flat — the fleet outruns the review queue.',
+  drivers: [
+    'Every team ships its own helper, scheduler, and triage bot',
+    'Copied prompts carry copied credentials and scopes',
+    'Shadow agents run outside the approval ledger',
+  ],
+};
+
+export const FLEET_PILLARS = [
+  { id: 'lifecycle', name: 'Lifecycle', detail: 'Inventory every agent, owner, version, and retirement path — no orphaned runners.' },
+  { id: 'security', name: 'Security', detail: 'Attribute-based access and per-request guardrails, enforced outside the model.' },
+  { id: 'observability', name: 'Observability', detail: 'One queryable trace per call: name, args, errors, tokens, latency.' },
+  { id: 'risk', name: 'Risk', detail: 'Tier each action by consequence; escalate on identity, untrusted-content, and scope signals.' },
+  { id: 'cost', name: 'Cost', detail: 'Routing plus budgets turn spend into a controllable signal instead of a surprise invoice.' },
+];
+
+export const FLEET_COST_TABLE = [
+  { dimension: 'Policy changes', oneAgent: 'Edit one prompt', fleet: 'One rule republished to every agent' },
+  { dimension: 'Credential scope', oneAgent: 'Single key to rotate', fleet: 'Short-lived per-request credentials everywhere' },
+  { dimension: 'Debugging', oneAgent: 'Read one log', fleet: 'One query across unified traces' },
+  { dimension: 'Model spend', oneAgent: 'Fixed choice', fleet: 'Routed per task with budget guardrails' },
+  { dimension: 'Failure blast radius', oneAgent: 'One conversation breaks', fleet: 'Contained to one scoped call by default' },
+];
+
+export const GLOBAL_POLICIES = [
+  {
+    id: 'abab',
+    name: 'Attribute-based access',
+    detail: 'One rule written against tags (team, data class, environment) applies everywhere, down to tool-level permissioning.',
+  },
+  {
+    id: 'guardrails',
+    name: 'Per-request guardrails',
+    detail: 'Every request is screened: block or mask sensitive data, injection payloads, and unsafe content before dispatch.',
+  },
+];
+
+export const ROUTER_TIERS = [
+  { id: 'light', name: 'Light tier', maxComplexity: 0.34, costPer1k: 0.02, latencyMs: 120 },
+  { id: 'standard', name: 'Standard tier', maxComplexity: 0.67, costPer1k: 0.12, latencyMs: 450 },
+  { id: 'reasoning', name: 'Reasoning tier', maxComplexity: 1, costPer1k: 0.6, latencyMs: 1400 },
+];
+
+export function routeFleetTask(complexity, tokens = 1000) {
+  const c = Math.min(1, Math.max(0, complexity));
+  const tier = ROUTER_TIERS.find((t) => c <= t.maxComplexity) || ROUTER_TIERS[ROUTER_TIERS.length - 1];
+  const costUsd = Number(((tokens / 1000) * tier.costPer1k).toFixed(4));
+  return { tier: tier.id, tierName: tier.name, costUsd, latencyMs: tier.latencyMs, tokens };
+}
+
+export const BUDGET_THRESHOLDS = [
+  { status: 'within', below: 0.75, action: 'No action — spend is inside budget.' },
+  { status: 'nudge-to-cheaper', below: 0.9, action: 'Nudge new tasks to a cheaper tier.' },
+  { status: 'alert', below: 1, action: 'Alert the owner; require acknowledgement.' },
+  { status: 'block', below: Infinity, action: 'Block non-approved dispatches until budget resets.' },
+];
+
+export function evaluateFleetBudget({ spend, budget }) {
+  const ratio = budget > 0 ? spend / budget : 0;
+  const band = BUDGET_THRESHOLDS.find((t) => ratio < t.below) || BUDGET_THRESHOLDS[BUDGET_THRESHOLDS.length - 1];
+  return { ratio: Number(ratio.toFixed(4)), status: band.status, action: band.action };
+}
+
+export const TRACE_FIELDS = ['name', 'args', 'errors', 'tokens', 'latency'];
+
+export const FLEET_TRACE_SAMPLE = [
+  { name: 'lookup_order', args: '{order_id: 881}', errors: 'none', tokens: 420, latency: '180ms' },
+  { name: 'draft_reply', args: '{tone: neutral}', errors: 'none', tokens: 960, latency: '520ms' },
+  { name: 'queue_refund_review', args: '{order_id: 881, amount: 42}', errors: 'approval_required', tokens: 610, latency: '240ms' },
+  { name: 'send_approved_notice', args: '{channel: email}', errors: 'denied: scope', tokens: 300, latency: '95ms' },
+];
 export const CODE_STATEMACHINE = `# "Tool call succeeded" is not a business result.
 from enum import Enum
 

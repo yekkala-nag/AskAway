@@ -21,7 +21,12 @@ import {
   ENTERPRISE_PROMPT_TEMPLATES,
   RAG_ACCURACY_PRO_TIPS,
   FALLBACK_SCENARIOS,
-  RUN_FALLBACK_CASCADE_SIMULATION
+  RUN_FALLBACK_CASCADE_SIMULATION,
+  HYPE_VALUE_CHAIN,
+  HYPE_CONSUMER_ODDS,
+  HYPE_FOUNDATIONS,
+  HYPE_CLAIM_DECODER,
+  triageHypeClaim
 } from './enterpriseAIOpsEngine.js';
 import {
   AdvancedRAGPipelineDiagram,
@@ -33,9 +38,57 @@ import {
 
 const { Container, Grid, Flex, Stack } = Primitives;
 
+const HYPE_TEAL = '#3A9B9F';
+const HYPE_TEAL_DARK = '#1A6B6E';
+const HYPE_PURPLE = '#5B4B8A';
+const HYPE_RED = '#B4553A';
+const HYPE_AMBER = '#B9821F';
+
+function HypeChainDiagram() {
+  const layers = [
+    { title: 'CHIPS', body: ['accelerators', '& capacity'], color: HYPE_PURPLE },
+    { title: 'CLOUDS & LABS', body: ['training', '& inference'], color: HYPE_PURPLE },
+    { title: 'PLATFORMS', body: ['gateways', '& eval tooling'], color: HYPE_TEAL },
+    { title: 'BUILDERS', body: ['products', '& workflows'], color: HYPE_TEAL_DARK },
+    { title: 'ADOPTERS', body: ['operate · pay', '· defend'], color: HYPE_RED },
+  ];
+  return (
+    <svg viewBox="0 0 980 240" width="100%" role="img"
+      aria-label="Five-layer value chain: chips to clouds and labs to platforms to builders to adopters, with value captured at the top and risk landing on adopters">
+      <defs>
+        <marker id="arrHype" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+          <path d="M0,0 L10,5 L0,10 z" fill="#94A3B8" />
+        </marker>
+      </defs>
+      {layers.map((l, i) => {
+        const x = 14 + i * 192;
+        return (
+          <g key={l.title}>
+            <rect x={x} y={36} width={168} height={118} rx="12" fill="#FFFFFF" stroke={l.color} strokeWidth="2" />
+            <text x={x + 84} y={62} textAnchor="middle" fontSize="12" fontWeight="800" fill={l.color}>{l.title}</text>
+            {l.body.map((line, j) => (
+              <text key={j} x={x + 84} y={88 + j * 17} textAnchor="middle" fontSize="10.5" fill="#4B5563">{line}</text>
+            ))}
+            <text x={x + 84} y={140} textAnchor="middle" fontSize="10.5" fontWeight="700" fill={l.color}>Layer {i + 1} of 5</text>
+            {i < layers.length - 1 && (
+              <path d={'M ' + (x + 172) + ' 95 L ' + (x + 198) + ' 95'} stroke="#94A3B8" strokeWidth="2" markerEnd="url(#arrHype)" />
+            )}
+          </g>
+        );
+      })}
+      <text x="490" y="196" textAnchor="middle" fontSize="13" fontWeight="800" fill="#1A1D26">
+        Value is captured at the top · risk lands on the adopter at the bottom
+      </text>
+      <text x="490" y="220" textAnchor="middle" fontSize="11.5" fill="#6B7280">
+        The further down the chain, the more verification you owe yourself
+      </text>
+    </svg>
+  );
+}
+
 export default function EnterpriseAIOpsTab() {
   const [activeSubTab, setActiveSubTab] = useState('framework'); 
-  // 'framework' | 'pipeline' | 'mapreduce' | 'router' | 'calculator' | 'code'
+  // 'framework' | 'pipeline' | 'mapreduce' | 'router' | 'calculator' | 'resources' | 'code' | 'hype'
 
   // Subtab 2: Pipeline Simulator State
   const [selectedDatasetId, setSelectedDatasetId] = useState('legal_msa');
@@ -74,6 +127,11 @@ export default function EnterpriseAIOpsTab() {
   const [maxAllowedTokens, setMaxAllowedTokens] = useState(80);
 
   const preflightResult = RUN_PREFLIGHT_TOKEN_SIMULATION(preflightPrompt, preflightContext, maxAllowedTokens);
+
+  // Subtab 8: Hype Defense triage simulator state
+  const [hypeIsNew, setHypeIsNew] = useState(true);
+  const [hypeIsRelevant, setHypeIsRelevant] = useState(false);
+  const hypeTriage = triageHypeClaim({ isNew: hypeIsNew, isRelevant: hypeIsRelevant });
 
   return (
     <div style={{ paddingBottom: 'var(--ds-space-12)' }}>
@@ -130,7 +188,8 @@ export default function EnterpriseAIOpsTab() {
             { id: 'router', icon: '🔀', label: '4. Dynamic Model Routing', desc: 'Live complexity classifier & cascade simulator' },
             { id: 'calculator', icon: '💰', label: '5. Token FinOps Calculator', desc: 'ROI, annual cost & quota modeling' },
             { id: 'resources', icon: '📚', label: '6. Playbook & Benchmarks', desc: 'Cost-benefit, Claude vs GPT vs Gemini, DBs & Rerankers' },
-            { id: 'code', icon: '🛠️', label: '7. AI Gateway & Python Code', desc: 'LiteLLM, semantic cache & scripts' }
+            { id: 'code', icon: '🛠️', label: '7. AI Gateway & Python Code', desc: 'LiteLLM, semantic cache & scripts' },
+            { id: 'hype', icon: '🛡️', label: '8. Hype Defense', desc: 'Value chain, triage & claim decoder' }
           ].map(tab => (
             <button
               key={tab.id}
@@ -1325,6 +1384,122 @@ def set_semantic_cache(prompt: str, response: str):
             </Card>
           </Stack>
         )}
+
+        {/* ─── SUBTAB 8: HYPE DEFENSE ─── */}
+        {activeSubTab === 'hype' && (
+          <Stack gap={6}>
+                <Callout variant="info">
+                  <strong>Hype defense posture:</strong> Most of the value chain sits above you — chips, hosted inference, platforms, builders — while the operating risk, the bill, and the incident land on the adopter. Verify before you buy.
+                </Callout>
+
+                <Card style={{ padding: 'var(--ds-space-5)', background: 'var(--ds-color-bg-surface)' }}>
+                  <h3 style={{ margin: '0 0 4px 0' }}>The five-layer value chain</h3>
+                  <p style={{ margin: '0 0 12px 0', color: 'var(--ds-color-text-secondary)', fontSize: 'var(--ds-font-size-bodySm)' }}>
+                    Each layer sells to the one below it. Margin concentrates at the top; integration work and failure modes accumulate at the bottom.
+                  </p>
+                  <HypeChainDiagram />
+                  <div style={{ marginTop: 12, display: 'flex', flexDirection: 'column', gap: 6 }}>
+                    {HYPE_VALUE_CHAIN.map((l) => (
+                      <div key={l.id} style={{ fontSize: 12.5, color: 'var(--ds-color-text-secondary)' }}>
+                        <strong style={{ color: 'var(--ds-color-text-primary)' }}>{l.layer}:</strong> {l.role}
+                      </div>
+                    ))}
+                  </div>
+                </Card>
+
+                <Card style={{ padding: 'var(--ds-space-5)', background: 'var(--ds-color-bg-surface)' }}>
+                  <h3 style={{ margin: '0 0 4px 0' }}>Why the odds stack against consumers</h3>
+                  <p style={{ margin: '0 0 12px 0', color: 'var(--ds-color-text-secondary)', fontSize: 'var(--ds-font-size-bodySm)' }}>
+                    Three structural disadvantages every adopter should price in before signing.
+                  </p>
+                  <Grid cols={3} gap={4}>
+                    {HYPE_CONSUMER_ODDS.map((o) => (
+                      <div key={o.id} style={{ background: 'var(--ds-color-bg-canvas)', border: '1px solid var(--ds-color-border-subtle)', borderRadius: 8, padding: 14 }}>
+                        <div style={{ fontSize: 13.5, fontWeight: 700, color: HYPE_RED, marginBottom: 6 }}>{o.name}</div>
+                        <div style={{ fontSize: 12.5, color: 'var(--ds-color-text-secondary)', lineHeight: 1.55 }}>{o.detail}</div>
+                        <div style={{ fontSize: 11.5, color: 'var(--ds-color-text-tertiary)', marginTop: 8, fontStyle: 'italic' }}>{o.stat}</div>
+                      </div>
+                    ))}
+                  </Grid>
+                </Card>
+
+                <Grid cols={2} gap={4}>
+                  {HYPE_FOUNDATIONS.map((f) => (
+                    <Card key={f.id} style={{ padding: 'var(--ds-space-4)', background: 'var(--ds-color-bg-surface)' }}>
+                      <h3 style={{ margin: '0 0 6px 0', color: HYPE_TEAL_DARK }}>{f.name}</h3>
+                      <p style={{ margin: 0, color: 'var(--ds-color-text-secondary)', fontSize: 'var(--ds-font-size-bodySm)' }}>{f.detail}</p>
+                    </Card>
+                  ))}
+                </Grid>
+
+                <Card style={{ padding: 'var(--ds-space-5)', background: 'var(--ds-color-bg-surface)' }}>
+                  <h3 style={{ margin: '0 0 4px 0' }}>Triage simulator — is it new? is it relevant?</h3>
+                  <p style={{ margin: '0 0 14px 0', color: 'var(--ds-color-text-secondary)', fontSize: 'var(--ds-font-size-bodySm)' }}>
+                    Answer two questions about any claim. New and relevant earns a deep dive; neither means park it; anything in between waits for evidence.
+                  </p>
+                  <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginBottom: 14 }}>
+                    <button
+                      onClick={() => setHypeIsNew(!hypeIsNew)}
+                      style={{
+                        flex: 1, minWidth: 200, padding: '9px 13px', borderRadius: 9, cursor: 'pointer', fontSize: 12.5, textAlign: 'left',
+                        border: '1.5px solid ' + (hypeIsNew ? HYPE_TEAL : 'var(--ds-color-border-subtle)'),
+                        background: hypeIsNew ? '#E3F2F2' : 'var(--ds-color-bg-canvas)',
+                        color: hypeIsNew ? HYPE_TEAL_DARK : 'var(--ds-color-text-secondary)',
+                        fontWeight: hypeIsNew ? 600 : 400,
+                      }}>
+                      {hypeIsNew ? '▲ ' : '  '}Is it new?
+                    </button>
+                    <button
+                      onClick={() => setHypeIsRelevant(!hypeIsRelevant)}
+                      style={{
+                        flex: 1, minWidth: 200, padding: '9px 13px', borderRadius: 9, cursor: 'pointer', fontSize: 12.5, textAlign: 'left',
+                        border: '1.5px solid ' + (hypeIsRelevant ? HYPE_TEAL : 'var(--ds-color-border-subtle)'),
+                        background: hypeIsRelevant ? '#E3F2F2' : 'var(--ds-color-bg-canvas)',
+                        color: hypeIsRelevant ? HYPE_TEAL_DARK : 'var(--ds-color-text-secondary)',
+                        fontWeight: hypeIsRelevant ? 600 : 400,
+                      }}>
+                      {hypeIsRelevant ? '▲ ' : '  '}Is it relevant?
+                    </button>
+                  </div>
+                  <div style={{
+                    padding: 16, borderRadius: 12, background: 'var(--ds-color-bg-canvas)',
+                    borderLeft: '6px solid ' + (hypeTriage.verdict === 'go-deep' ? HYPE_TEAL_DARK : hypeTriage.verdict === 'park' ? HYPE_AMBER : HYPE_PURPLE),
+                  }}>
+                    <div style={{ fontSize: 22, fontWeight: 800, color: 'var(--ds-color-text-primary)' }}>{hypeTriage.verdict}</div>
+                    <div style={{ marginTop: 6, fontSize: 12.5, color: 'var(--ds-color-text-secondary)' }}>{hypeTriage.nextStep}</div>
+                  </div>
+                </Card>
+
+                <Card style={{ padding: 'var(--ds-space-5)', background: 'var(--ds-color-bg-surface)' }}>
+                  <div style={{ marginBottom: 14 }}>
+                    <h3 style={{ margin: 0, color: HYPE_TEAL_DARK }}>Claim decoder — pattern → deflating question</h3>
+                    <p style={{ margin: '4px 0 0 0', color: 'var(--ds-color-text-secondary)', fontSize: 13 }}>
+                      Five recurring claim shapes and the single question that punctures each one.
+                    </p>
+                  </div>
+                  <div style={{ overflowX: 'auto', background: '#090d16', padding: 14, borderRadius: 8, border: '1px solid var(--ds-color-border-subtle)' }}>
+                    <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 12, fontFamily: 'monospace' }}>
+                      <thead>
+                        <tr style={{ borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
+                          <th style={{ textAlign: 'left', padding: 8, color: HYPE_TEAL }}>Claim pattern</th>
+                          <th style={{ textAlign: 'left', padding: 8, color: HYPE_TEAL }}>Typical wording</th>
+                          <th style={{ textAlign: 'left', padding: 8, color: HYPE_TEAL }}>Deflating question</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {HYPE_CLAIM_DECODER.map((row, idx) => (
+                          <tr key={idx} style={{ borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
+                            <td style={{ padding: '10px 8px', fontWeight: 'bold', color: '#f8fafc' }}>{row.pattern}</td>
+                            <td style={{ padding: '10px 8px', color: '#cbd5e1' }}>{row.example}</td>
+                            <td style={{ padding: '10px 8px', color: HYPE_TEAL }}>{row.question}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </Card>
+              </Stack>
+            )}
       </Container>
     </div>
   );

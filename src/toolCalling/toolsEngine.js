@@ -88,3 +88,57 @@ def validate_call(schema: dict, args: dict) -> list[str]:
 # Anthropic: same contract, input_schema envelope + tool_use blocks.
 # Writes need idempotency keys; reads stay read-only.
 `;
+
+// ── Cross-link: when prompting is not enough ────────────────────────────────
+export const SCHEMA_BRIDGE_WEIGHTS_CARD = {
+  id: "schema-bridge-needs-weights",
+  title: "When the schema bridge needs weights",
+  signs: ["persistent chatty wrappers", "near-miss tool choice"],
+  message: "Prompting is not enough when wrappers persist or the model keeps near-missing the right tool — fine-tune behaviour at the weight level.",
+  fineTuneTabName: "Model Fine-Tuning, LoRA & QLoRA: End-to-End Architecture"
+};
+
+// ── First Agent Loop: request → validate → execute → respond ────────────────
+export const AGENT_LOOP_STAGES = [
+  { id: "request", label: "Request", detail: "Model emits a tool call with arguments." },
+  { id: "validate", label: "Validate", detail: "Schema check rejects malformed calls pre-execution." },
+  { id: "execute", label: "Execute", detail: "Run the tool and capture the observation." },
+  { id: "respond", label: "Respond", detail: "Model reads the result and answers or loops again." }
+];
+
+export const AGENT_LOOP_MODES = [
+  { mode: "single-tool", detail: "One request → validate → execute → respond pass solves the task." },
+  { mode: "loop-until-done", detail: "Repeat the cycle until done or the iteration cap stops the run." }
+];
+
+export const AGENT_LOOP_MEMORY = [
+  { strategy: "trim", constraint: "Drop oldest turns to fit the window; keeps recent context." },
+  { strategy: "summarize", constraint: "Compress history into a short recap; keeps gist, loses detail." },
+  { strategy: "persist", constraint: "Write key facts to durable store; survives across sessions." }
+];
+
+export const AGENT_LOOP_FAILURES = [
+  { failure: "no tool requested", triage: "Reprompt with tool list; check tool_choice is not forced off." },
+  { failure: "wrong args", triage: "Tighten schema enums and required fields; revalidate before execute." },
+  { failure: "misread result", triage: "Feed the observation back verbatim and ask for a grounded answer." }
+];
+
+export const RUN_AGENT_LOOP = (neededSteps = 3, cap = 5) => {
+  const need = Math.max(0, Math.floor(neededSteps));
+  const limit = Math.max(0, Math.floor(cap));
+  const stepsTaken = Math.min(need, limit);
+  const completed = need <= limit;
+  const transcript = [];
+  for (let i = 1; i <= stepsTaken; i++) {
+    transcript.push(`iteration ${i}: request → validate → execute → respond`);
+  }
+  return {
+    needed: need,
+    cap: limit,
+    stepsTaken,
+    completed,
+    fallback: completed ? null : "stopped after max iterations",
+    transcript,
+    lesson: completed ? "Loop finished within cap." : "Cap stops runaway loops — return a safe fallback."
+  };
+};

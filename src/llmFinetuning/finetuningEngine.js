@@ -723,3 +723,78 @@ response = llm.create_chat_completion(
 )
 print(response)
 `;
+
+// ============================================================================
+// MERGE 1(a) — TOOL-CALLING RECIPE (generic terms only, node-importable)
+// Hyperparameter recipe + 3-part dataset shape + quality rule + health check
+// + base-model failure signature + inference detail. No vendor/library names.
+// ============================================================================
+
+export const TOOL_CALLING_RECIPE = {
+  id: "tool-calling-recipe",
+  title: "Tool-Calling Recipe",
+  base: "4-bit quantised base",
+  trainer: "fused-kernel trainer",
+  rank: 16,
+  alpha: 32,
+  alphaRule: "2×rank",
+  dropout: 0,
+  dropoutReason: "zero dropout for fused kernels",
+  targetModules: ["q", "k", "v", "o", "gate", "up", "down"],
+  perDeviceBatch: 2,
+  gradAccumSteps: 8,
+  effectiveBatch: 16,
+  trainSteps: 60,
+  trainStepsNote: "~tens of steps",
+  learningRate: 0.0002,
+  dataQualityRule: "hundreds of clean examples beat thousands of noisy ones",
+  healthCheckHealthy: "loss settling low-but-not-zero",
+  healthCheckWarning: "instant-zero means memorization",
+  baseFailureSignature: "chatty wrapper around the call",
+  baseFailureExample: "Sure! Here is your call for you: { tool call } — hope that helps!",
+  inferenceTemperature: 0.1,
+  inferenceMaxTokens: 128,
+  inferenceDecodeNote: "decode-only-new-tokens"
+};
+
+export const TOOL_CALLING_DATASET_SHAPE = [
+  {
+    role: "system",
+    contains: "tool signatures + strict-JSON-only instruction",
+    example: "Available tools: get_weather(latitude: number, longitude: number). Reply with strict JSON only — no prose."
+  },
+  {
+    role: "user",
+    contains: "plain task request",
+    example: "What is the weather at latitude 35.68, longitude 139.69?"
+  },
+  {
+    role: "assistant",
+    contains: "exact JSON tool call",
+    example: '{"name": "get_weather", "arguments": {"latitude": 35.68, "longitude": 139.69}}'
+  }
+];
+
+// ============================================================================
+// MERGE 1(b) — GROUNDED EXTRACTION PIPELINE (extractor-not-generator)
+// chunk → intermediate structured output → explode into rows.
+// ============================================================================
+
+export const GROUNDED_EXTRACTION_PIPELINE = {
+  id: "grounded-extraction-pipeline",
+  title: "Grounded Extraction Pipeline",
+  stages: [
+    { step: "1. Chunk", detail: "Split YOUR documents into short passages." },
+    { step: "2. Intermediate structured output", detail: "Extract bullets, entities and facts per chunk." },
+    { step: "3. Explode into rows", detail: "Turn each fact into instruction / input / output rows." }
+  ],
+  framing: "Be an extractor-not-generator: ground every row in YOUR documents to cut hallucination and cost.",
+  rowTypes: [
+    { type: "bullets", use: "Atomic facts per chunk." },
+    { type: "QA pairs", use: "Question plus grounded answer from one passage." },
+    { type: "rephrase", use: "Same fact restated for robustness." },
+    { type: "triplets", use: "Subject / relation / object rows." },
+    { type: "title", use: "Short heading per passage." },
+    { type: "summary", use: "One-paragraph compression per chunk." }
+  ]
+};

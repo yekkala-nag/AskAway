@@ -28,6 +28,15 @@ export const EXPERIMENTS = [
   { q: "ML reproducibility", adap: "$1.41", full: "~$1.62", save: "~13%", why: "Honestly dense — all powerful, no apology" }
 ];
 
+// ── Prompt complexity vs model capacity ─────────────────────────────────────
+// Conflict-resolution and multi-source reasoning carry instruction-following
+// load that only larger tiers absorb; route those shapes upward.
+export const COMPLEXITY_CAPACITY_ROWS = [
+  { shape: "Single-source lookup / formatting", minTier: "Fast", why: "No conflicts to resolve — cheap tier suffices" },
+  { shape: "Multi-source comparison", minTier: "Balanced", why: "Weighing sources needs room for weighing, not just fetching" },
+  { shape: "Conflict-resolution / dense critique across sources", minTier: "Powerful", why: "Enforcement lives in the prompt — small tiers regress under that load" }
+];
+
 // ── Simulator: score a task ─────────────────────────────────────────────────
 const PRICES = { fast: 0.0012, balanced: 0.011, powerful: 0.14 };
 export const SCORE_TASK = (cx = 0, rs = 1, ctx = 1) => {
