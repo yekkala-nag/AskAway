@@ -10,14 +10,18 @@ import {
   BANDIT_REWARD_MODELS,
   updateRunningMean,
   defaultTrueRates,
-  comparePolicies
+  comparePolicies,
+  QLEARN_REWARDS,
+  QLEARN_INVALID_PENALTY,
+  runQLearningSession,
+  topQEntries
 } from './rlEngine.js';
 
 const { Container, Grid, Flex, Stack } = Primitives;
 
 export default function ReinforcementLearningTab() {
   const [activeSubTab, setActiveSubTab] = useState('baselines'); 
-  // 'baselines' | 'simulator' | 'consumer' | 'code' | 'bandit'
+  // 'baselines' | 'simulator' | 'consumer' | 'code' | 'bandit' | 'qlearn'
 
   // Dynamic Pricing Simulator State
   const [basePrice, setBasePrice] = useState(120);
@@ -36,6 +40,16 @@ export default function ReinforcementLearningTab() {
   const banditRates = defaultTrueRates(banditArms);
   const banditComparison = comparePolicies({ trueRates: banditRates, steps: banditSteps, epsilon: banditEpsilon, seed: banditSeed });
   const banditModelInfo = BANDIT_REWARD_MODELS.find(m => m.id === banditModel) || BANDIT_REWARD_MODELS[0];
+
+  // Tabular Q-Learning Tic-Tac-Toe Simulator State
+  const [qlearnEpisodes, setQlearnEpisodes] = useState(2000);
+  const [qlearnAlpha, setQlearnAlpha] = useState(0.2);
+  const [qlearnGamma, setQlearnGamma] = useState(0.9);
+  const [qlearnEpsilon, setQlearnEpsilon] = useState(0.15);
+  const [qlearnSeed, setQlearnSeed] = useState(21);
+
+  const qlearnSession = runQLearningSession({ episodes: qlearnEpisodes, alpha: qlearnAlpha, gamma: qlearnGamma, epsilon: qlearnEpsilon, seed: qlearnSeed });
+  const qlearnTop = topQEntries(qlearnSession.table, 8);
 
   const workedMeans = (seq) => {
     const means = [];
@@ -84,7 +98,8 @@ export default function ReinforcementLearningTab() {
             { id: 'simulator', icon: '⚡', label: '2. Dynamic Pricing MDP Simulator', desc: 'RL policy vs heuristic price curve' },
             { id: 'consumer', icon: '🛍️', label: '3. Consumer Business RL Matrix', desc: 'Pricing, NBA, LTV, and supply chain' },
             { id: 'code', icon: '🛠️', label: '4. Gymnasium & PPO Script', desc: 'Production custom Gym environment' },
-            { id: 'bandit', icon: '🎰', label: '5. Bandit · Explore vs Exploit', desc: 'Epsilon-greedy simulator and reward taxonomy' }
+            { id: 'bandit', icon: '🎰', label: '5. Bandit · Explore vs Exploit', desc: 'Epsilon-greedy simulator and reward taxonomy' },
+            { id: 'qlearn', icon: '🧠', label: '6. Q-Learning · Tic-Tac-Toe', desc: 'Q-table training curve and inspector' }
           ].map(tab => (
             <button
               key={tab.id}
@@ -455,6 +470,242 @@ export default function ReinforcementLearningTab() {
                     <p style={{ fontSize: '12px', color: 'var(--ds-color-text-tertiary)', margin: 0 }}>Example: {banditModelInfo.example}</p>
                   </Card>
                 </div>
+              </Stack>
+            </Card>
+          </Stack>
+        )}
+
+        {/* ─── SUBTAB 6: Q-LEARNING TIC-TAC-TOE ─── */}
+        {activeSubTab === 'qlearn' && (
+          <Stack gap={6}>
+            <Card style={{ padding: 'var(--ds-space-5)', background: 'var(--ds-color-bg-canvas)' }}>
+              <Stack gap={4}>
+                <div>
+                  <h3 style={{ margin: 0, color: 'var(--ds-color-text-primary)' }}>🧠 Q-Learning · Tic-Tac-Toe</h3>
+                  <p style={{ margin: '4px 0 0 0', color: 'var(--ds-color-text-secondary)', fontSize: 'var(--ds-font-size-bodySm)' }}>
+                    A Q-table maps every board-and-move pair to an expected long-term payoff — no neural network needed for small games.
+                    The agent starts with zero knowledge and plays thousands of episodes against a fixed random opponent.
+                    Per-block wins climb and losses fall: that is the learning-curve signature. Exploration uses epsilon-greedy, covered in the bandit subtab.
+                  </p>
+                </div>
+
+                {/* Q-TABLE + UPDATE RULE EXPLAINER */}
+                <Grid columns={{ base: '1fr', md: '1fr 1fr' }} gap="var(--ds-space-3)">
+                  <Card style={{ padding: '14px 16px', background: 'var(--ds-color-bg-surface)', borderLeft: '4px solid #3A9B9F' }}>
+                    <strong style={{ fontSize: '13px', color: '#1A6B6E', display: 'block', marginBottom: '6px' }}>📊 The Q-table</strong>
+                    <p style={{ fontSize: '12px', color: 'var(--ds-color-text-secondary)', margin: 0 }}>
+                      Each entry answers: from this board, how good is this move in the long run? Unknown pairs start at 0 and get overwritten by experience.
+                      Illustrative scale: a forced winning move converges near +1.00, a dead losing move sinks below −1.00.
+                    </p>
+                  </Card>
+                  <Card style={{ padding: '14px 16px', background: 'var(--ds-color-bg-surface)', borderLeft: '4px solid #5B4B8A' }}>
+                    <strong style={{ fontSize: '13px', color: '#5B4B8A', display: 'block', marginBottom: '6px' }}>🔁 The Q-learning update</strong>
+                    <p style={{ fontSize: '12px', color: 'var(--ds-color-text-secondary)', margin: '0 0 6px 0' }}>
+                      new value = old value + alpha × (reward + gamma × best next value − old value).
+                    </p>
+                    <p style={{ fontSize: '12px', color: 'var(--ds-color-text-secondary)', margin: 0 }}>
+                      Alpha (learning rate) sets how strongly new experience overwrites the old value; gamma (discount) sets how much future rewards count.
+                      Try alpha 0.05 for slow cautious learning, or gamma 0.0 to make the agent short-sighted.
+                    </p>
+                  </Card>
+                </Grid>
+
+                {/* REWARD SHAPING */}
+                <Card style={{ padding: '14px 16px', background: 'var(--ds-color-bg-surface)', borderLeft: '4px solid #B9821F' }}>
+                  <strong style={{ fontSize: '13px', color: '#B9821F', display: 'block', marginBottom: '6px' }}>🏆 Reward shaping used here</strong>
+                  <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', fontSize: '12px' }}>
+                    <Badge variant="outline">Win {QLEARN_REWARDS.win > 0 ? '+' : ''}{QLEARN_REWARDS.win}</Badge>
+                    <Badge variant="outline">Draw {QLEARN_REWARDS.draw > 0 ? '+' : ''}{QLEARN_REWARDS.draw}</Badge>
+                    <Badge variant="outline">Loss {QLEARN_REWARDS.loss}</Badge>
+                    <Badge variant="outline">Invalid move {QLEARN_INVALID_PENALTY} (large penalty so illegal moves train out fast)</Badge>
+                  </div>
+                </Card>
+
+                {/* SLIDER CONTROLS */}
+                <Grid columns={{ base: '1fr', sm: '1fr 1fr 1fr 1fr 1fr' }} gap="var(--ds-space-3)">
+                  <div>
+                    <label style={{ fontSize: '11px', color: 'var(--ds-color-text-tertiary)', display: 'block', marginBottom: '4px' }}>
+                      Episodes: {qlearnEpisodes}
+                    </label>
+                    <input
+                      type="range"
+                      min="200"
+                      max="5000"
+                      step="200"
+                      value={qlearnEpisodes}
+                      onChange={e => setQlearnEpisodes(Number(e.target.value))}
+                      style={{ width: '100%', accentColor: '#3A9B9F' }}
+                    />
+                  </div>
+
+                  <div>
+                    <label style={{ fontSize: '11px', color: 'var(--ds-color-text-tertiary)', display: 'block', marginBottom: '4px' }}>
+                      Alpha (learning rate): {qlearnAlpha.toFixed(2)}
+                    </label>
+                    <input
+                      type="range"
+                      min="0"
+                      max="1"
+                      step="0.05"
+                      value={qlearnAlpha}
+                      onChange={e => setQlearnAlpha(Number(e.target.value))}
+                      style={{ width: '100%', accentColor: '#3A9B9F' }}
+                    />
+                  </div>
+
+                  <div>
+                    <label style={{ fontSize: '11px', color: 'var(--ds-color-text-tertiary)', display: 'block', marginBottom: '4px' }}>
+                      Gamma (discount): {qlearnGamma.toFixed(2)}
+                    </label>
+                    <input
+                      type="range"
+                      min="0"
+                      max="1"
+                      step="0.05"
+                      value={qlearnGamma}
+                      onChange={e => setQlearnGamma(Number(e.target.value))}
+                      style={{ width: '100%', accentColor: '#5B4B8A' }}
+                    />
+                  </div>
+
+                  <div>
+                    <label style={{ fontSize: '11px', color: 'var(--ds-color-text-tertiary)', display: 'block', marginBottom: '4px' }}>
+                      Epsilon (exploration): {qlearnEpsilon.toFixed(2)}
+                    </label>
+                    <input
+                      type="range"
+                      min="0"
+                      max="0.5"
+                      step="0.01"
+                      value={qlearnEpsilon}
+                      onChange={e => setQlearnEpsilon(Number(e.target.value))}
+                      style={{ width: '100%', accentColor: '#B4553A' }}
+                    />
+                  </div>
+
+                  <div>
+                    <label style={{ fontSize: '11px', color: 'var(--ds-color-text-tertiary)', display: 'block', marginBottom: '4px' }}>
+                      Seed (deterministic):
+                    </label>
+                    <input
+                      type="number"
+                      value={qlearnSeed}
+                      onChange={e => setQlearnSeed(Number(e.target.value) || 0)}
+                      style={{ width: '100%', background: 'var(--ds-color-bg-surface)', color: 'var(--ds-color-text-primary)', border: '1px solid var(--ds-color-border-subtle)', borderRadius: '4px', padding: '8px', fontSize: '12px' }}
+                    />
+                  </div>
+                </Grid>
+
+                {/* LEARNING-CURVE BARS: WINS / DRAWS / LOSSES PER BLOCK */}
+                <div>
+                  <h4 style={{ margin: '0 0 8px 0', color: 'var(--ds-color-text-primary)', fontSize: '13px' }}>📈 Learning curve: wins climb, losses fall per block</h4>
+                  <div style={{ display: 'flex', gap: '12px', fontSize: '11px', color: 'var(--ds-color-text-secondary)', marginBottom: '8px' }}>
+                    <span><strong style={{ color: '#3A9B9F' }}>■</strong> Wins ({qlearnSession.wins})</span>
+                    <span><strong style={{ color: '#B9821F' }}>■</strong> Draws ({qlearnSession.draws})</span>
+                    <span><strong style={{ color: '#B4553A' }}>■</strong> Losses ({qlearnSession.losses})</span>
+                  </div>
+                  <Stack gap={2}>
+                    {qlearnSession.blocks.map(blk => (
+                      <div key={blk.block} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                        <div style={{ width: '56px', fontSize: '11px', color: 'var(--ds-color-text-tertiary)', flexShrink: 0 }}>Block {blk.block}</div>
+                        <div style={{ flex: 1, display: 'flex', height: '14px', borderRadius: '7px', overflow: 'hidden', background: 'var(--ds-color-bg-canvas)' }}>
+                          <div title={'Wins: ' + blk.wins} style={{ width: (blk.wins / blk.episodes * 100) + '%', background: '#3A9B9F' }} />
+                          <div title={'Draws: ' + blk.draws} style={{ width: (blk.draws / blk.episodes * 100) + '%', background: '#B9821F' }} />
+                          <div title={'Losses: ' + blk.losses} style={{ width: (blk.losses / blk.episodes * 100) + '%', background: '#B4553A' }} />
+                        </div>
+                        <div style={{ width: '118px', fontSize: '11px', color: 'var(--ds-color-text-secondary)', fontFamily: 'monospace', flexShrink: 0 }}>{blk.wins}W · {blk.draws}D · {blk.losses}L</div>
+                      </div>
+                    ))}
+                  </Stack>
+                </div>
+
+                {/* INVALID-MOVE RATE + TABLE SIZE READOUTS */}
+                <Grid columns={{ base: '1fr', md: '1fr 1fr' }} gap="var(--ds-space-3)">
+                  <Card style={{ padding: '16px', background: '#0F1219', borderTop: '3px solid #B4553A' }}>
+                    <div style={{ fontSize: '11px', color: 'var(--ds-color-text-tertiary)' }}>INVALID-MOVE RATE (ILLEGAL ATTEMPTS / AGENT MOVES)</div>
+                    <div style={{ fontSize: '20px', color: '#B4553A', fontWeight: 'bold', marginTop: '4px' }}>
+                      {(qlearnSession.invalidMoveRate * 100).toFixed(1)}%
+                    </div>
+                    <div style={{ fontSize: '11px', color: 'var(--ds-color-text-tertiary)', marginTop: '4px' }}>
+                      {qlearnSession.totalInvalids} illegal attempts across {qlearnSession.totalAgentMoves} agent moves — the penalty trains them out.
+                    </div>
+                  </Card>
+
+                  <Card style={{ padding: '16px', background: '#0F1219', borderTop: '3px solid #3A9B9F' }}>
+                    <div style={{ fontSize: '11px', color: 'var(--ds-color-text-tertiary)' }}>Q-TABLE SIZE (LEARNED BOARD-AND-MOVE PAIRS)</div>
+                    <div style={{ fontSize: '20px', color: '#3A9B9F', fontWeight: 'bold', marginTop: '4px' }}>
+                      {qlearnSession.tableSize.toLocaleString()} entries
+                    </div>
+                    <div style={{ fontSize: '11px', color: 'var(--ds-color-text-tertiary)', marginTop: '4px' }}>
+                      Grows with episodes as the agent visits new positions.
+                    </div>
+                  </Card>
+                </Grid>
+
+                {/* MINI Q-TABLE INSPECTOR + FINAL POSITION BOARD */}
+                <Grid columns={{ base: '1fr', md: '1.4fr 1fr' }} gap="var(--ds-space-3)">
+                  <div>
+                    <h4 style={{ margin: '0 0 8px 0', color: 'var(--ds-color-text-primary)', fontSize: '13px' }}>🔍 Mini Q-table inspector (top entries by value)</h4>
+                    <div style={{ overflowX: 'auto' }}>
+                      <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '12px', minWidth: 320 }}>
+                        <thead>
+                          <tr style={{ background: 'var(--ds-color-bg-surface)' }}>
+                            {['Board state', 'Move', 'Q-value'].map(h => (
+                              <th key={h} style={{ textAlign: 'left', padding: '8px 10px', color: 'var(--ds-color-text-primary)', borderBottom: '2px solid #3A9B9F', fontSize: '11px' }}>{h}</th>
+                            ))}
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {qlearnTop.map(row => (
+                            <tr key={row.key} style={{ borderBottom: '1px solid var(--ds-color-border-subtle)' }}>
+                              <td style={{ padding: '8px 10px', color: 'var(--ds-color-text-secondary)', fontFamily: 'monospace' }}>{row.state}</td>
+                              <td style={{ padding: '8px 10px', color: '#1A6B6E', fontWeight: 700 }}>cell {row.action}</td>
+                              <td style={{ padding: '8px 10px', color: 'var(--ds-color-text-primary)', fontFamily: 'monospace' }}>{row.value.toFixed(4)}</td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                    <p style={{ fontSize: '11px', color: 'var(--ds-color-text-tertiary)', margin: '6px 0 0 0' }}>
+                      Board digits: 1 = agent (X), 2 = opponent (O), 0 = empty, read left-to-right top-to-bottom. Values near +1.00 mark winning moves.
+                    </p>
+                  </div>
+
+                  <div>
+                    <h4 style={{ margin: '0 0 8px 0', color: 'var(--ds-color-text-primary)', fontSize: '13px' }}>🏁 Final position of the last episode</h4>
+                    <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
+                      <svg width="132" height="132" viewBox="0 0 132 132" role="img" aria-label="Final board position">
+                        {qlearnSession.finalBoard.map((cell, idx) => {
+                          const cx = (idx % 3) * 44;
+                          const cy = Math.floor(idx / 3) * 44;
+                          return (
+                            <g key={idx}>
+                              <rect x={cx + 2} y={cy + 2} width="40" height="40" rx="6" fill="var(--ds-color-bg-surface)" stroke="var(--ds-color-border-subtle)" />
+                              {cell === 1 && (
+                                <g stroke="#1A6B6E" strokeWidth="4" strokeLinecap="round">
+                                  <line x1={cx + 12} y1={cy + 12} x2={cx + 32} y2={cy + 32} />
+                                  <line x1={cx + 32} y1={cy + 12} x2={cx + 12} y2={cy + 32} />
+                                </g>
+                              )}
+                              {cell === 2 && <circle cx={cx + 22} cy={cy + 22} r="10" fill="none" stroke="#5B4B8A" strokeWidth="4" />}
+                            </g>
+                          );
+                        })}
+                      </svg>
+                      <div>
+                        <Badge variant="outline">Last game: {qlearnSession.finalResult === 'win' ? 'agent wins' : qlearnSession.finalResult}</Badge>
+                        <p style={{ fontSize: '11px', color: 'var(--ds-color-text-tertiary)', margin: '8px 0 0 0' }}>
+                          X (teal) is the learning agent, O (purple) the fixed random opponent. Change the seed to deal a different final position.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </Grid>
+
+                <Callout type="success">
+                  <span><strong>Next step — self-play:</strong> this agent trains against a fixed random opponent, so it plateaus once random play is solved.
+                  The natural follow-up is a learning opponent (self-play): both sides update Q-tables, and strategies keep improving against each other.</span>
+                </Callout>
               </Stack>
             </Card>
           </Stack>

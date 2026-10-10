@@ -283,6 +283,250 @@ export function comparePolicies(config) {
   };
 }
 
+// ============================================================================
+// TABULAR Q-LEARNING: TIC-TAC-TOE (deterministic, node-importable)
+// Every board-and-move pair maps to an expected long-term payoff in a plain
+// object table - no neural network needed for small games. The agent starts
+// with zero knowledge and plays thousands of episodes against a fixed random
+// opponent; per-block wins climb and losses fall (the learning-curve
+// signature). Epsilon-greedy exploration supplies the explore-vs-exploit
+// tradeoff (see bandit subtab). Seeded RNG reuse keeps sessions deterministic.
+// ============================================================================
+
+// Reward shaping: win +1, draw +0.5, loss -1, illegal move gets a large
+// negative penalty so invalid moves train out fast. Ongoing moves score 0;
+// the discount gamma carries future reward backwards through the update.
+export const QLEARN_REWARDS = {
+  win: 1,
+  draw: 0.5,
+  loss: -1,
+  invalid: -5,
+  ongoing: 0
+};
+export const QLEARN_INVALID_PENALTY = -5;
+
+// Board cells: 0 = empty, 1 = learning agent (X), 2 = random opponent (O).
+export function encodeBoard(board) {
+  var out = '';
+  for (var i = 0; i < 9; i++) out += board[i] ? String(board[i]) : '0';
+  return out;
+}
+
+export function availableMoves(board) {
+  var moves = [];
+  for (var i = 0; i < 9; i++) if (!board[i]) moves.push(i);
+  return moves;
+}
+
+var QLEARN_WIN_LINES = [
+  [0, 1, 2], [3, 4, 5], [6, 7, 8],
+  [0, 3, 6], [1, 4, 7], [2, 5, 8],
+  [0, 4, 8], [2, 4, 6]
+];
+
+// Returns 'X' | 'O' | 'draw' | null (game still in progress).
+export function checkWinner(board) {
+  for (var i = 0; i < QLEARN_WIN_LINES.length; i++) {
+    var line = QLEARN_WIN_LINES[i];
+    var a = board[line[0]];
+    if (a !== 0 && a === board[line[1]] && a === board[line[2]]) {
+      return a === 1 ? 'X' : 'O';
+    }
+  }
+  for (var j = 0; j < 9; j++) if (!board[j]) return null;
+  return 'draw';
+}
+
+// Q-table helpers on a plain object table keyed by state + ':' + action.
+// Unknown entries read as 0 (agent starts with zero knowledge).
+export function qGet(table, stateKey, action) {
+  var v = table ? table[stateKey + ':' + action] : undefined;
+  return (typeof v === 'number' && isFinite(v)) ? v : 0;
+}
+
+export function qSet(table, stateKey, action, value) {
+  var v = Number(value);
+  table[stateKey + ':' + action] = isFinite(v) ? v : 0;
+  return table;
+}
+
+// Q-learning update: how strongly new experience (alpha) overwrites the old
+// value, and how much future rewards count (gamma times best next value).
+export function qUpdate(prevQ, reward, nextMax, alpha, gamma) {
+  var q = Number(prevQ);
+  if (!isFinite(q)) q = 0;
+  var r = Number(reward);
+  if (!isFinite(r)) r = 0;
+  var nm = Number(nextMax);
+  if (!isFinite(nm)) nm = 0;
+  var a = alpha === undefined ? 0.2 : Number(alpha);
+  if (!isFinite(a) || a < 0) a = 0;
+  if (a > 1) a = 1;
+  var g = gamma === undefined ? 0.9 : Number(gamma);
+  if (!isFinite(g) || g < 0) g = 0;
+  if (g > 1) g = 1;
+  return q + a * (r + g * nm - q);
+}
+
+// Best Q-value over all 9 cells in a state (unknown cells read as 0).
+function qMaxValue(table, stateKey) {
+  var best = qGet(table, stateKey, 0);
+  for (var a = 1; a < 9; a++) {
+    var v = qGet(table, stateKey, a);
+    if (v > best) best = v;
+  }
+  return best;
+}
+
+// Train a tabular agent: thousands of episodes against a fixed random
+// opponent. The agent may attempt any of the 9 cells; illegal attempts earn
+// the large invalid penalty (same-board update) and the turn is retried, so
+// the invalid-move rate starts high and trains down. Deterministic per seed.
+export function runQLearningSession(config) {
+  var cfg = config || {};
+  var episodes = cfg.episodes === undefined ? 2000 : Math.floor(Number(cfg.episodes));
+  if (!isFinite(episodes) || episodes < 1) episodes = 1;
+  if (episodes > 20000) episodes = 20000;
+  var alpha = cfg.alpha === undefined ? 0.2 : Number(cfg.alpha);
+  if (!isFinite(alpha) || alpha < 0) alpha = 0;
+  if (alpha > 1) alpha = 1;
+  var gamma = cfg.gamma === undefined ? 0.9 : Number(cfg.gamma);
+  if (!isFinite(gamma) || gamma < 0) gamma = 0;
+  if (gamma > 1) gamma = 1;
+  var epsilon = cfg.epsilon === undefined ? 0.15 : Number(cfg.epsilon);
+  if (!isFinite(epsilon) || epsilon < 0) epsilon = 0;
+  if (epsilon > 1) epsilon = 1;
+  var seed = cfg.seed === undefined ? 21 : Number(cfg.seed);
+  if (!isFinite(seed)) seed = 21;
+
+  var rng = createSeededRng(seed);
+  var table = {};
+  var blockCount = episodes >= 10 ? 10 : episodes;
+  var blockSize = Math.ceil(episodes / blockCount);
+  var blocks = [];
+  for (var b = 0; b < blockCount; b++) {
+    blocks.push({ block: b + 1, episodes: 0, wins: 0, draws: 0, losses: 0, invalids: 0 });
+  }
+  var wins = 0;
+  var draws = 0;
+  var losses = 0;
+  var totalInvalids = 0;
+  var totalAgentMoves = 0;
+  var finalBoard = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+  var finalResult = null;
+
+  for (var ep = 0; ep < episodes; ep++) {
+    var board = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+    var bi = Math.min(blockCount - 1, Math.floor(ep / blockSize));
+    var epInvalids = 0;
+    var result = null;
+    var guard = 0;
+    while (result === null && guard < 500) {
+      guard++;
+      var stateKey = encodeBoard(board);
+      var action;
+      if (rng() < epsilon) {
+        action = Math.floor(rng() * 9);
+      } else {
+        action = 0;
+        var bestV = qGet(table, stateKey, 0);
+        for (var a = 1; a < 9; a++) {
+          var v = qGet(table, stateKey, a);
+          if (v > bestV) {
+            bestV = v;
+            action = a;
+          }
+        }
+      }
+      totalAgentMoves++;
+      if (board[action] !== 0) {
+        epInvalids++;
+        var prevInvalid = qGet(table, stateKey, action);
+        var nextMaxSame = qMaxValue(table, stateKey);
+        qSet(table, stateKey, action, qUpdate(prevInvalid, QLEARN_INVALID_PENALTY, nextMaxSame, alpha, gamma));
+        continue;
+      }
+      board[action] = 1;
+      var w = checkWinner(board);
+      if (w === 'X' || w === 'draw') {
+        var rWin = w === 'X' ? QLEARN_REWARDS.win : QLEARN_REWARDS.draw;
+        var prevWin = qGet(table, stateKey, action);
+        qSet(table, stateKey, action, qUpdate(prevWin, rWin, 0, alpha, gamma));
+        result = w === 'X' ? 'win' : 'draw';
+      } else {
+        var options = availableMoves(board);
+        var pick = options[Math.floor(rng() * options.length)];
+        board[pick] = 2;
+        var w2 = checkWinner(board);
+        if (w2 === 'O' || w2 === 'draw') {
+          var rEnd = w2 === 'O' ? QLEARN_REWARDS.loss : QLEARN_REWARDS.draw;
+          var prevEnd = qGet(table, stateKey, action);
+          qSet(table, stateKey, action, qUpdate(prevEnd, rEnd, 0, alpha, gamma));
+          result = w2 === 'O' ? 'loss' : 'draw';
+        } else {
+          var nextKey = encodeBoard(board);
+          var prevMid = qGet(table, stateKey, action);
+          qSet(table, stateKey, action, qUpdate(prevMid, QLEARN_REWARDS.ongoing, qMaxValue(table, nextKey), alpha, gamma));
+        }
+      }
+    }
+    if (result === null) result = 'draw';
+    if (result === 'win') {
+      wins++;
+      blocks[bi].wins++;
+    } else if (result === 'draw') {
+      draws++;
+      blocks[bi].draws++;
+    } else {
+      losses++;
+      blocks[bi].losses++;
+    }
+    blocks[bi].episodes++;
+    blocks[bi].invalids += epInvalids;
+    totalInvalids += epInvalids;
+    finalBoard = board.slice();
+    finalResult = result;
+  }
+
+  return {
+    episodes: episodes,
+    alpha: alpha,
+    gamma: gamma,
+    epsilon: epsilon,
+    seed: seed,
+    blocks: blocks,
+    wins: wins,
+    draws: draws,
+    losses: losses,
+    tableSize: Object.keys(table).length,
+    invalidMoveRate: totalAgentMoves > 0 ? totalInvalids / totalAgentMoves : 0,
+    totalInvalids: totalInvalids,
+    totalAgentMoves: totalAgentMoves,
+    table: table,
+    finalBoard: finalBoard,
+    finalResult: finalResult
+  };
+}
+
+// Top Q-table entries sorted by value descending (mini table inspector).
+export function topQEntries(table, limit) {
+  var n = limit === undefined ? 8 : Math.floor(Number(limit));
+  if (!isFinite(n) || n < 1) n = 1;
+  var rows = [];
+  for (var key in table) {
+    if (!Object.prototype.hasOwnProperty.call(table, key)) continue;
+    var sep = key.lastIndexOf(':');
+    rows.push({
+      key: key,
+      state: key.slice(0, sep),
+      action: Number(key.slice(sep + 1)),
+      value: Number(table[key])
+    });
+  }
+  rows.sort(function (x, y) { return y.value - x.value; });
+  return rows.slice(0, n);
+}
+
 export const PYTHON_PPO_PRICING_SCRIPT = `# ============================================================================
 # PRODUCTION REINFORCEMENT LEARNING GYM ENVIRONMENT & PPO AGENT
 # Demonstrates Gymnasium custom environment for dynamic retail pricing

@@ -81,7 +81,10 @@ export const EXIT_CHECKS = {
   agentevals: [
     { q: 'pass^3 of 0.51 from p=0.8 shows…', o: ['Flakiness repetition exposes', 'Great consistency', 'Security posture', 'Low cost'], a: 0, e: 'All-k-must-pass punishes agents that work “usually”.' },
     { q: 'Indirect prompt injection arrives via…', o: ['Retrieved docs hiding instructions', 'The system prompt', 'Model weights', 'Network latency'], a: 0, e: 'Tool output is the classic vector — quarantine and hierarchize.' },
-    { q: 'Ship needs…', o: ['pass^k ≥ 0.7 AND security ≥ 0.9', 'Either axis alone', 'Speed records', 'Manager approval'], a: 0, e: 'Consistent-but-porous and solid-but-flaky both gate.' }
+    { q: 'Ship needs…', o: ['pass^k ≥ 0.7 AND security ≥ 0.9', 'Either axis alone', 'Speed records', 'Manager approval'], a: 0, e: 'Consistent-but-porous and solid-but-flaky both gate.' },
+    { q: 'High syntax + low output consistency (Q1) is dangerous because…', o: ['Look-alike solutions behave differently — small edits change results', 'It wastes tokens', 'It is slow', 'It needs bigger models'], a: 0, e: 'Similar code, different behavior: the worst quadrant for trust.' },
+    { q: 'Q4 (varied code, same behavior) is most trustworthy since…', o: ['Many independent roads reaching one answer beats memorized repetition', 'It uses less compute', 'Syntax scores are higher', 'Temperature is zero'], a: 0, e: 'Convergent behavior without copying signals real understanding.' },
+    { q: 'Output consistency is only as good as…', o: ['The behavior suite — weak tests plus unrunnable code fake the score', 'The model size', 'The prompt length', 'The temperature'], a: 0, e: 'Count unrunnable samples separately; cover edge cases.' }
   ],
   vectordbops: [
     { q: 'HNSW costs ~1.35x RAM for…', o: ['0.95–0.99 recall at high QPS', 'Exact recall always', 'Zero RAM', 'No tuning'], a: 0, e: 'Graph index trades memory for speed; measure recall@k yourself.' },

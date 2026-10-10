@@ -6,7 +6,10 @@ export const EXIT_CHECKS_B = {
   reinforcementlearning: [
     { q: 'An MDP frames problems as…', o: ['States, actions, rewards, transitions', 'Prompts and completions', 'Tables and joins', 'Pixels and labels'], a: 0, e: 'Markov framing turns sequential decisions into optimizable policies.' },
     { q: 'PPO stays stable by…', o: ['Clipping policy updates to a trust region', 'Bigger learning rates', 'No clipping', 'Random restarts'], a: 0, e: 'Clipped surrogates prevent destructively large steps.' },
-    { q: 'Consumer RL (pricing, NBA) differs by…', o: ['Reward design + constraints dominate algorithms', 'Using no data', 'Ignoring latency', 'Bigger models only'], a: 0, e: 'In production RL, the reward IS the product spec.' }
+    { q: 'Consumer RL (pricing, NBA) differs by…', o: ['Reward design + constraints dominate algorithms', 'Using no data', 'Ignoring latency', 'Bigger models only'], a: 0, e: 'In production RL, the reward IS the product spec.' },
+    { q: 'A Q-table stores…', o: ['Expected long-term payoff per board-and-move pair', 'The rules of the game', 'Win counts only', 'Random seeds'], a: 0, e: 'Tabular values replace the network for small games.' },
+    { q: 'Alpha and gamma control…', o: ['How fast new experience overwrites old values vs how much future rewards count', 'Board size vs move count', 'Wins vs draws', 'Speed vs memory'], a: 0, e: 'Alpha weights the update; gamma discounts the future.' },
+    { q: 'Heavy invalid-move penalties…', o: ['Train illegal moves out fast via strongly negative rewards', 'Slow learning', 'Break exploration', 'Only affect draws'], a: 0, e: 'Shaped rewards teach legality before strategy.' }
   ],
   aimoralagency: [
     { q: 'Functional vs experiential caring…', o: ['Behaves caringly vs feels concern', 'Fast vs slow models', 'Open vs closed weights', 'Same thing'], a: 0, e: 'Alignment evaluates behavior; experience claims are untestable.' },
