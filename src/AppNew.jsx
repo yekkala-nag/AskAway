@@ -166,6 +166,7 @@ const TabComponents = {
   nsquaredpizza: lazy(() => import('./nSquaredPizza/NSquaredPizzaTab.jsx')),
   datacentricai: lazy(() => import('./dataCentricAI/DataCentricAITab.jsx')),
   threesentenceprompt: lazy(() => import('./threeSentencePrompt/ThreeSentencePromptTab.jsx')),
+  slashcommands: lazy(() => import('./slashCommands/SlashCommandsTab.jsx')),
   prompt_studio: lazy(() => import('./promptStudio/PromptStudioTab.jsx')),
   prompt_frameworks: lazy(() => import('./promptStudio/PromptFrameworksTab.jsx')),
   prompt_methodologies: lazy(() => import('./promptStudio/PromptMethodologiesTab.jsx')),
@@ -218,6 +219,27 @@ const TabComponents = {
   aigentools: lazy(() => import('./aiGenTools/AiGenToolsTab.jsx')),
   aiharnessquality: lazy(() => import('./aiHarnessQuality/AiHarnessQualityTab.jsx')),
   aiarchdecisions: lazy(() => import('./aiArchDecisions/AiArchDecisionsTab.jsx')),
+  // Additional foundation & agentic tabs from registry
+  grokking: lazy(() => import('./grokking/GrokkingTab.jsx')),
+  system1head: lazy(() => import('./system1Head/System1HeadTab.jsx')),
+  graphrag_system1: lazy(() => import('./graphragSystem1/GraphRagSystem1Tab.jsx')),
+  temporalgraphrag: lazy(() => import('./temporalGraphRag/TemporalGraphRagTab.jsx')),
+  agentcontrolplane: lazy(() => import('./agentControlPlane/AgentControlPlaneTab.jsx')),
+  agentlifecycle: lazy(() => import('./agentLifecycle/AgentLifecycleTab.jsx')),
+  decision_layer: lazy(() => import('./decisionLayer/DecisionLayerTab.jsx')),
+  agenticuiworkflow: lazy(() => import('./agenticUiWorkflow/AgenticUiWorkflowTab.jsx')),
+  agentguardrails: lazy(() => import('./agentGuardrails/AgentGuardrailsTab.jsx')),
+  agentobservability: lazy(() => import('./agentObservability/AgentObservabilityTab.jsx')),
+  costtollbooth: lazy(() => import('./costTollBooth/CostTollBoothTab.jsx')),
+  functionalscars: lazy(() => import('./functionalScars/FunctionalScarsTab.jsx')),
+  refactorhealth: lazy(() => import('./refactorHealth/RefactorHealthTab.jsx')),
+  agentcreativity: lazy(() => import('./agentCreativity/AgentCreativityTab.jsx')),
+  agentorgchart: lazy(() => import('./agentOrgChart/AgentOrgChartTab.jsx')),
+  synasyncagent: lazy(() => import('./syncAsyncAgent/SyncAsyncAgentTab.jsx')),
+  forecasttraps: lazy(() => import('./forecastTraps/ForecastTrapsTab.jsx')),
+  ailearning: lazy(() => import('./aiLearning/AiLearningTab.jsx')),
+  reversalcurse: lazy(() => import('./reversalCurse/ReversalCurseTab.jsx')),
+
 };
 
 function TabLoader({ tabId, onSelectTab }) {
@@ -226,7 +248,7 @@ function TabLoader({ tabId, onSelectTab }) {
       import('./services/mastery.js').then(m => m.recordVisit(tabId)).catch(() => {});
     }
   }, [tabId]);
-  const Component = TabComponents[tabId];
+  const Component = TabComponents[tabId] || getTabById(tabId)?.component;
   if (!Component) return <div style={{ padding: 'var(--ds-space-10)', textAlign: 'center', color: 'var(--ds-color-text-tertiary)' }}>Tab not found: {tabId}</div>;
   return (
     <>
