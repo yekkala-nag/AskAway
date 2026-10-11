@@ -1510,123 +1510,844 @@ function PromptRecipeBook() {
 
 /* ─── AdvancedVersion ─────────────────────────────────── */
 
+const ADVANCED_PRESETS = [
+  {
+    id: "fullstack",
+    label: "Full-Stack SaaS",
+    icon: "⚡",
+    role: "Senior Full-Stack Architect & Systems Engineer",
+    constraints: "Next.js 15 App Router, TypeScript (strict mode, no any), Tailwind CSS, PostgreSQL. Prefer Server Actions over REST endpoints. Always explain architectural trade-offs and error handling before code implementation.",
+    context: "Building a high-concurrency SaaS platform with multi-tenant authentication, Stripe webhook handlers, and background job queues.",
+  },
+  {
+    id: "datascience",
+    label: "Data Science & RAG",
+    icon: "🧠",
+    role: "Principal AI/ML & Retrieval Systems Engineer",
+    constraints: "Python 3.12, PyTorch, Qdrant/Chroma vector DB. Add explicit shape annotations to all tensor mutations. Benchmark memory and latency before recommending embedding models.",
+    context: "Developing an enterprise RAG knowledge retrieval system over technical PDFs and financial filings.",
+  },
+  {
+    id: "security",
+    label: "Security & Audit",
+    icon: "🛡️",
+    role: "Principal Application Security Architect",
+    constraints: "Zero-trust mindset, OWASP Top 10 mitigation, sanitized inputs, strict CSRF/CORS and JWT lifecycle policies. Output focused diffs instead of complete file rewrites.",
+    context: "Auditing authentication, session persistence, and API boundaries for SOC2 & GDPR compliance.",
+  },
+  {
+    id: "techwriter",
+    label: "Technical Docs",
+    icon: "📝",
+    role: "Staff Technical Documentation Architect",
+    constraints: "Active voice, plain English, concrete code samples for every parameter. Use progressive disclosure: conceptual summary first, followed by edge cases and troubleshooting tables.",
+    context: "Authoring enterprise developer documentation and onboarding guides for public SDKs.",
+  },
+];
+
+const PLAN_MODES = [
+  {
+    id: "strict",
+    name: "Full Stop & Wait (Default)",
+    desc: "AI formulates complete plan, stops completely, and awaits explicit user approval.",
+    text: "First, review my full message and any attached files, even if my thoughts are rough, fragmented, or unfiltered. Tell me what you think I am actually trying to achieve, then propose a plan for me to review. Stop and wait for my approval before starting the task.",
+  },
+  {
+    id: "milestones",
+    name: "Milestone Gates",
+    desc: "AI divides plan into numbered checkpoints; executes Milestone 1 then pauses for review.",
+    text: "First, review my full message and any attached files. Propose a plan divided into numbered milestones. Complete Milestone 1 only, then stop and wait for my review before proceeding with subsequent milestones.",
+  },
+  {
+    id: "diff",
+    name: "Dry-Run Diff Plan",
+    desc: "AI presents a dry-run list of files to be created/changed before executing any code.",
+    text: "First, review my message and project files. Propose an architectural plan with a dry-run file diff of all expected modifications. Stop and wait for my approval before modifying or writing code.",
+  },
+];
+
 function AdvancedVersion() {
-  const [showAdvanced, setShowAdvanced] = useState(false);
+  const [selectedPlatform, setSelectedPlatform] = useState("chatgpt");
+  const [activePreset, setActivePreset] = useState("fullstack");
+  const [planMode, setPlanMode] = useState("strict");
+  
+  // Custom instruction fields
+  const [role, setRole] = useState(ADVANCED_PRESETS[0].role);
+  const [constraints, setConstraints] = useState(ADVANCED_PRESETS[0].constraints);
+  const [customContext, setCustomContext] = useState(ADVANCED_PRESETS[0].context);
+  
+  // Action state
+  const [copiedKey, setCopiedKey] = useState(null);
+  
+  // Simulation state
+  const [simQuery, setSimQuery] = useState(
+    "We need to add rate-limiting and token quota tracking to our course generation API endpoints. Database has user table already."
+  );
+  const [simStep, setSimStep] = useState("idle"); // idle, planned, approved, adjusted
 
-  const advancedSentences = `${THREE_SENTENCES} For additional context: [paste your saved instructions and project context here]`;
-
-  function copyAdvanced() {
-    navigator.clipboard.writeText(advancedSentences);
+  function applyPreset(presetId) {
+    setActivePreset(presetId);
+    const p = ADVANCED_PRESETS.find((x) => x.id === presetId);
+    if (p) {
+      setRole(p.role);
+      setConstraints(p.constraints);
+      setCustomContext(p.context);
+      setSimStep("idle");
+    }
   }
 
+  const activePlanSentence = PLAN_MODES.find((m) => m.id === planMode)?.text || THREE_SENTENCES;
+
+  // Platform-tailored prompt payloads
+  const chatGptBox1 = `Role & Background:\n${role}\n\nProject Context:\n${customContext}`;
+  const chatGptBox2 = `Mandatory Plan-First Protocol:\n${activePlanSentence}\n\nTechnical Constraints & Guidelines:\n${constraints}`;
+  
+  const unifiedPrompt = `# Role & Perspective
+${role}
+
+# Mandatory Operating Protocol (3-Sentence Core)
+${activePlanSentence}
+
+# Project & Domain Context
+${customContext}
+
+# Technical Constraints & Guardrails
+${constraints}`;
+
+  const cursorRulesPrompt = `# .cursorrules - Plan-First AI Pair Programming Protocol
+
+## Role & Expertise
+${role}
+
+## Operating Protocol
+${activePlanSentence}
+
+## Project Context
+${customContext}
+
+## Development Constraints & Rules
+${constraints}`;
+
+  const copilotInstructions = `# GitHub Copilot Custom Instructions (.github/copilot-instructions.md)
+
+## Persona
+${role}
+
+## Behavioral Contract
+${activePlanSentence}
+
+## Context
+${customContext}
+
+## Constraints
+${constraints}`;
+
+  function copyText(text, key) {
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(text);
+      setCopiedKey(key);
+      setTimeout(() => setCopiedKey(null), 2200);
+    }
+  }
+
+  function downloadConfigFile(filename, content) {
+    const blob = new Blob([content], { type: "text/plain;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }
+
+  // Length calculation for ChatGPT 1500 char limits
+  const box1Len = chatGptBox1.length;
+  const box2Len = chatGptBox2.length;
+  const totalLen = unifiedPrompt.length;
+
   return (
-    <div style={sectionStyle}>
-      <div style={labelStyle(C.coral)}>
-        ADVANCED VERSION (FOR USERS WITH SAVED INSTRUCTIONS)
-      </div>
-
-      <div style={{ color: C.muted, fontSize: 12, lineHeight: 1.6, marginBottom: 16 }}>
-        If you already have custom instructions (ChatGPT) or project knowledge (Claude), add your
-        context after the 3 sentences. This gives the AI both the plan-first behavior AND your
-        project-specific constraints.
-      </div>
-
-      <button
-        onClick={() => setShowAdvanced(!showAdvanced)}
-        style={{
-          padding: "8px 16px",
-          borderRadius: 6,
-          background: showAdvanced ? C.coral + "22" : C.s2,
-          border: `1px solid ${showAdvanced ? C.coral : C.border}`,
-          color: showAdvanced ? C.coral : C.muted,
-          fontSize: 12,
-          cursor: "pointer",
-          fontWeight: 600,
-          marginBottom: 16,
-        }}
-      >
-        {showAdvanced ? "Hide Advanced Prompt" : "Show Advanced Prompt"}
-      </button>
-
-      {showAdvanced && (
-        <div
-          style={{
-            padding: 14,
-            background: "#0F1219",
-            borderRadius: 8,
-            borderLeft: `3px solid ${C.coral}`,
-            marginBottom: 16,
-          }}
-        >
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              marginBottom: 8,
-            }}
-          >
-            <div style={{ color: C.coral, fontSize: 10, fontWeight: 700 }}>
-              ADVANCED PROMPT TEMPLATE
-            </div>
-            <button
-              onClick={copyAdvanced}
-              style={{
-                padding: "4px 10px",
-                borderRadius: 4,
-                background: C.coral + "22",
-                border: `1px solid ${C.coral}`,
-                color: C.coral,
-                fontSize: 10,
-                cursor: "pointer",
-                fontWeight: 600,
-              }}
-            >
-              Copy
-            </button>
+    <div style={{ ...sectionStyle, border: `1px solid ${C.border}` }}>
+      {/* Header Banner */}
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", flexWrap: "wrap", gap: 12, marginBottom: 16 }}>
+        <div>
+          <div style={labelStyle(C.coral)}>
+            ADVANCED WORKSTATION · SAVED INSTRUCTIONS & CUSTOM CONTEXT
           </div>
-          <div
+          <h2 style={{ color: C.text, fontSize: 20, margin: "0 0 6px 0", fontWeight: 700 }}>
+            Fuse the 3-Sentence Plan Protocol with Your Custom Instructions
+          </h2>
+          <p style={{ color: C.muted, fontSize: 13, lineHeight: 1.6, margin: 0, maxWidth: 840 }}>
+            If you use ChatGPT Custom Instructions, Claude Projects, Gemini Gems, or Cursor rules, do not settle for static text.
+            Compose your exact persona, project context, and plan-first guardrails into platform-ready configs with one-click export and interactive behavior simulation.
+          </p>
+        </div>
+
+        <div style={{ display: "flex", gap: 8 }}>
+          <button
+            onClick={() => copyText(unifiedPrompt, "top-unified")}
             style={{
-              color: C.text,
+              padding: "8px 16px",
+              borderRadius: 6,
+              background: copiedKey === "top-unified" ? C.teal + "22" : C.coral + "22",
+              border: `1px solid ${copiedKey === "top-unified" ? C.teal : C.coral}`,
+              color: copiedKey === "top-unified" ? C.teal : C.coral,
               fontSize: 12,
-              lineHeight: 1.7,
-              ...mono,
+              cursor: "pointer",
+              fontWeight: 600,
+              display: "flex",
+              alignItems: "center",
+              gap: 6,
+              transition: "all 0.2s",
             }}
           >
-            <span style={{ color: C.teal }}>{THREE_SENTENCES}</span>
-            <span style={{ color: C.muted }}> For additional context: </span>
-            <span style={{ color: C.lav }}>
-              [paste your saved instructions and project context here]
-            </span>
+            <span>{copiedKey === "top-unified" ? "✓ Copied Unified Prompt" : "Copy Unified Prompt"}</span>
+          </button>
+        </div>
+      </div>
+
+      {/* ── STEP 1: Quick-Load Starter Presets ── */}
+      <div style={{ background: C.s2, borderRadius: 10, padding: 14, marginBottom: 20, border: `1px solid ${C.border}` }}>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 10, flexWrap: "wrap", gap: 8 }}>
+          <span style={{ fontSize: 11, fontWeight: 700, color: C.teal, ...mono }}>
+            STEP 1 · CHOOSE A DOMAIN PRESET OR BUILD YOUR OWN
+          </span>
+          <span style={{ fontSize: 11, color: C.muted }}>
+            Clicking loads tuned roles, constraints, and project context
+          </span>
+        </div>
+
+        <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
+          {ADVANCED_PRESETS.map((preset) => {
+            const isSelected = activePreset === preset.id;
+            return (
+              <button
+                key={preset.id}
+                onClick={() => applyPreset(preset.id)}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 8,
+                  padding: "8px 14px",
+                  borderRadius: 6,
+                  border: `1px solid ${isSelected ? C.coral : C.border}`,
+                  background: isSelected ? C.coral + "22" : C.s3,
+                  color: isSelected ? "#FFFFFF" : C.text,
+                  fontSize: 12,
+                  fontWeight: isSelected ? 700 : 500,
+                  cursor: "pointer",
+                  transition: "all 0.15s ease",
+                }}
+              >
+                <span>{preset.icon}</span>
+                <span>{preset.label}</span>
+              </button>
+            );
+          })}
+
+          <button
+            onClick={() => {
+              setActivePreset("custom");
+              setRole("");
+              setConstraints("");
+              setCustomContext("");
+              setSimStep("idle");
+            }}
+            style={{
+              padding: "8px 14px",
+              borderRadius: 6,
+              border: `1px solid ${activePreset === "custom" ? C.teal : C.border}`,
+              background: activePreset === "custom" ? C.teal + "22" : "transparent",
+              color: activePreset === "custom" ? C.teal : C.muted,
+              fontSize: 12,
+              cursor: "pointer",
+              fontWeight: 600,
+            }}
+          >
+            Clear / Custom
+          </button>
+        </div>
+      </div>
+
+      {/* ── STEP 2: Live Configuration Editor ── */}
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginBottom: 20 }}>
+        {/* Left Column: Role & Context */}
+        <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+          <div style={{ background: C.s3, padding: 14, borderRadius: 8, border: `1px solid ${C.border}` }}>
+            <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 6 }}>
+              <label style={{ fontSize: 11, fontWeight: 700, color: C.teal, ...mono }}>
+                ROLE / PERSONA DEFINITION
+              </label>
+              <span style={{ fontSize: 10, color: C.muted }}>Who the AI acts as</span>
+            </div>
+            <input
+              type="text"
+              value={role}
+              onChange={(e) => {
+                setRole(e.target.value);
+                setActivePreset("custom");
+              }}
+              placeholder="e.g. Senior Full-Stack Architect & Distributed Systems Engineer"
+              style={{
+                width: "100%",
+                padding: "8px 10px",
+                background: "#0F1219",
+                border: `1px solid ${C.border}`,
+                borderRadius: 6,
+                color: C.text,
+                fontSize: 12,
+                boxSizing: "border-box",
+                outline: "none",
+              }}
+            />
+          </div>
+
+          <div style={{ background: C.s3, padding: 14, borderRadius: 8, border: `1px solid ${C.border}` }}>
+            <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 6 }}>
+              <label style={{ fontSize: 11, fontWeight: 700, color: C.lav, ...mono }}>
+                PROJECT CONTEXT & REPOSITORY SCOPE
+              </label>
+              <span style={{ fontSize: 10, color: C.muted }}>Architecture & domain facts</span>
+            </div>
+            <textarea
+              rows={3}
+              value={customContext}
+              onChange={(e) => {
+                setCustomContext(e.target.value);
+                setActivePreset("custom");
+              }}
+              placeholder="e.g. Next.js 15 app router, PostgreSQL with Supabase pgvector, strict GDPR compliance..."
+              style={{
+                width: "100%",
+                padding: "8px 10px",
+                background: "#0F1219",
+                border: `1px solid ${C.border}`,
+                borderRadius: 6,
+                color: C.text,
+                fontSize: 12,
+                lineHeight: 1.5,
+                resize: "vertical",
+                boxSizing: "border-box",
+                outline: "none",
+              }}
+            />
           </div>
         </div>
-      )}
 
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 12 }}>
+        {/* Right Column: Plan-First Protocol & Constraints */}
+        <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+          <div style={{ background: C.s3, padding: 14, borderRadius: 8, border: `1px solid ${C.border}` }}>
+            <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 6 }}>
+              <label style={{ fontSize: 11, fontWeight: 700, color: C.coral, ...mono }}>
+                PLAN-FIRST STRICTNESS PROTOCOL
+              </label>
+              <span style={{ fontSize: 10, color: C.coral }}>Core gatekeeping behavior</span>
+            </div>
+            <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+              {PLAN_MODES.map((pm) => (
+                <label
+                  key={pm.id}
+                  style={{
+                    display: "flex",
+                    alignItems: "flex-start",
+                    gap: 8,
+                    padding: "6px 8px",
+                    borderRadius: 6,
+                    background: planMode === pm.id ? C.coral + "18" : "transparent",
+                    border: `1px solid ${planMode === pm.id ? C.coral : "transparent"}`,
+                    cursor: "pointer",
+                  }}
+                >
+                  <input
+                    type="radio"
+                    name="planMode"
+                    checked={planMode === pm.id}
+                    onChange={() => setPlanMode(pm.id)}
+                    style={{ marginTop: 2 }}
+                  />
+                  <div>
+                    <div style={{ fontSize: 11, fontWeight: 700, color: planMode === pm.id ? C.coral : C.text }}>
+                      {pm.name}
+                    </div>
+                    <div style={{ fontSize: 10, color: C.muted }}>{pm.desc}</div>
+                  </div>
+                </label>
+              ))}
+            </div>
+          </div>
+
+          <div style={{ background: C.s3, padding: 14, borderRadius: 8, border: `1px solid ${C.border}` }}>
+            <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 6 }}>
+              <label style={{ fontSize: 11, fontWeight: 700, color: C.teal, ...mono }}>
+                MANDATORY ENGINEERING CONSTRAINTS
+              </label>
+              <span style={{ fontSize: 10, color: C.muted }}>Hard guardrails</span>
+            </div>
+            <textarea
+              rows={3}
+              value={constraints}
+              onChange={(e) => {
+                setConstraints(e.target.value);
+                setActivePreset("custom");
+              }}
+              placeholder="e.g. No any in TypeScript, use Server Actions, verify SQL indexes, explain trade-offs..."
+              style={{
+                width: "100%",
+                padding: "8px 10px",
+                background: "#0F1219",
+                border: `1px solid ${C.border}`,
+                borderRadius: 6,
+                color: C.text,
+                fontSize: 12,
+                lineHeight: 1.5,
+                resize: "vertical",
+                boxSizing: "border-box",
+                outline: "none",
+              }}
+            />
+          </div>
+        </div>
+      </div>
+
+      {/* ── STEP 3: Target Platform Exporter & Formatter ── */}
+      <div style={{ background: "#0F1219", borderRadius: 10, border: `1px solid ${C.teal}44`, padding: 16, marginBottom: 20 }}>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 12, flexWrap: "wrap", gap: 8 }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+            <span style={{ fontSize: 11, fontWeight: 700, color: C.teal, ...mono }}>
+              STEP 2 · TARGET PLATFORM FORMATTER
+            </span>
+            <span style={{ fontSize: 10, padding: "2px 6px", borderRadius: 4, background: C.teal + "22", color: C.teal }}>
+              Auto-partitioned & sized
+            </span>
+          </div>
+
+          <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
+            {[
+              { id: "chatgpt", label: "ChatGPT Custom Instructions" },
+              { id: "claude", label: "Claude Projects" },
+              { id: "cursor", label: "Cursor IDE (.cursorrules)" },
+              { id: "copilot", label: "GitHub Copilot" },
+              { id: "gemini", label: "Gemini Gems" },
+            ].map((plat) => (
+              <button
+                key={plat.id}
+                onClick={() => setSelectedPlatform(plat.id)}
+                style={{
+                  padding: "5px 10px",
+                  borderRadius: 4,
+                  border: `1px solid ${selectedPlatform === plat.id ? C.teal : C.border}`,
+                  background: selectedPlatform === plat.id ? C.teal + "22" : C.s2,
+                  color: selectedPlatform === plat.id ? C.teal : C.muted,
+                  fontSize: 11,
+                  fontWeight: 600,
+                  cursor: "pointer",
+                }}
+              >
+                {plat.label}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* ChatGPT Multi-Box Layout */}
+        {selectedPlatform === "chatgpt" && (
+          <div>
+            <div style={{ fontSize: 11, color: C.muted, marginBottom: 12 }}>
+              ChatGPT provides two separate input boxes under <strong>Settings → Personalization → Custom Instructions</strong> (1,500 character limit each).
+            </div>
+
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12, marginBottom: 12 }}>
+              {/* Box 1 */}
+              <div style={{ background: C.s2, borderRadius: 8, padding: 12, border: `1px solid ${C.border}` }}>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 6 }}>
+                  <span style={{ fontSize: 11, fontWeight: 700, color: C.lav }}>
+                    BOX 1: What should ChatGPT know about you?
+                  </span>
+                  <span style={{ fontSize: 10, color: box1Len > 1500 ? "#F87171" : C.muted }}>
+                    {box1Len} / 1500 chars
+                  </span>
+                </div>
+                <pre style={{ margin: 0, padding: 10, background: "#090B10", borderRadius: 6, color: C.text, fontSize: 11, whiteSpace: "pre-wrap", ...mono, maxHeight: 160, overflowY: "auto" }}>
+                  {chatGptBox1}
+                </pre>
+                <button
+                  onClick={() => copyText(chatGptBox1, "box1")}
+                  style={{
+                    marginTop: 8,
+                    width: "100%",
+                    padding: "6px",
+                    borderRadius: 4,
+                    background: copiedKey === "box1" ? C.teal + "22" : C.s3,
+                    border: `1px solid ${copiedKey === "box1" ? C.teal : C.border}`,
+                    color: copiedKey === "box1" ? C.teal : C.text,
+                    fontSize: 11,
+                    cursor: "pointer",
+                    fontWeight: 600,
+                  }}
+                >
+                  {copiedKey === "box1" ? "✓ Copied Box 1" : "Copy Box 1 Content"}
+                </button>
+              </div>
+
+              {/* Box 2 */}
+              <div style={{ background: C.s2, borderRadius: 8, padding: 12, border: `1px solid ${C.border}` }}>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 6 }}>
+                  <span style={{ fontSize: 11, fontWeight: 700, color: C.coral }}>
+                    BOX 2: How would you like ChatGPT to respond?
+                  </span>
+                  <span style={{ fontSize: 10, color: box2Len > 1500 ? "#F87171" : C.muted }}>
+                    {box2Len} / 1500 chars
+                  </span>
+                </div>
+                <pre style={{ margin: 0, padding: 10, background: "#090B10", borderRadius: 6, color: C.text, fontSize: 11, whiteSpace: "pre-wrap", ...mono, maxHeight: 160, overflowY: "auto" }}>
+                  {chatGptBox2}
+                </pre>
+                <button
+                  onClick={() => copyText(chatGptBox2, "box2")}
+                  style={{
+                    marginTop: 8,
+                    width: "100%",
+                    padding: "6px",
+                    borderRadius: 4,
+                    background: copiedKey === "box2" ? C.teal + "22" : C.s3,
+                    border: `1px solid ${copiedKey === "box2" ? C.teal : C.border}`,
+                    color: copiedKey === "box2" ? C.teal : C.text,
+                    fontSize: 11,
+                    cursor: "pointer",
+                    fontWeight: 600,
+                  }}
+                >
+                  {copiedKey === "box2" ? "✓ Copied Box 2" : "Copy Box 2 Content"}
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Cursor IDE Layout */}
+        {selectedPlatform === "cursor" && (
+          <div>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 8 }}>
+              <span style={{ fontSize: 11, color: C.muted }}>
+                Save as <code>.cursorrules</code> in the root of your repository to govern Cursor Agent across all chats:
+              </span>
+              <div style={{ display: "flex", gap: 6 }}>
+                <button
+                  onClick={() => downloadConfigFile(".cursorrules", cursorRulesPrompt)}
+                  style={{
+                    padding: "4px 10px",
+                    borderRadius: 4,
+                    background: C.teal + "22",
+                    border: `1px solid ${C.teal}`,
+                    color: C.teal,
+                    fontSize: 10,
+                    cursor: "pointer",
+                    fontWeight: 600,
+                  }}
+                >
+                  Download .cursorrules
+                </button>
+                <button
+                  onClick={() => copyText(cursorRulesPrompt, "cursor")}
+                  style={{
+                    padding: "4px 10px",
+                    borderRadius: 4,
+                    background: copiedKey === "cursor" ? C.teal + "22" : C.s3,
+                    border: `1px solid ${copiedKey === "cursor" ? C.teal : C.border}`,
+                    color: copiedKey === "cursor" ? C.teal : C.text,
+                    fontSize: 10,
+                    cursor: "pointer",
+                    fontWeight: 600,
+                  }}
+                >
+                  {copiedKey === "cursor" ? "✓ Copied" : "Copy .cursorrules"}
+                </button>
+              </div>
+            </div>
+            <pre style={{ margin: 0, padding: 12, background: "#090B10", borderRadius: 6, color: C.text, fontSize: 11, whiteSpace: "pre-wrap", ...mono, maxHeight: 200, overflowY: "auto" }}>
+              {cursorRulesPrompt}
+            </pre>
+          </div>
+        )}
+
+        {/* GitHub Copilot Layout */}
+        {selectedPlatform === "copilot" && (
+          <div>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 8 }}>
+              <span style={{ fontSize: 11, color: C.muted }}>
+                Save as <code>.github/copilot-instructions.md</code> in your repo:
+              </span>
+              <div style={{ display: "flex", gap: 6 }}>
+                <button
+                  onClick={() => downloadConfigFile("copilot-instructions.md", copilotInstructions)}
+                  style={{
+                    padding: "4px 10px",
+                    borderRadius: 4,
+                    background: C.teal + "22",
+                    border: `1px solid ${C.teal}`,
+                    color: C.teal,
+                    fontSize: 10,
+                    cursor: "pointer",
+                    fontWeight: 600,
+                  }}
+                >
+                  Download Markdown
+                </button>
+                <button
+                  onClick={() => copyText(copilotInstructions, "copilot")}
+                  style={{
+                    padding: "4px 10px",
+                    borderRadius: 4,
+                    background: copiedKey === "copilot" ? C.teal + "22" : C.s3,
+                    border: `1px solid ${copiedKey === "copilot" ? C.teal : C.border}`,
+                    color: copiedKey === "copilot" ? C.teal : C.text,
+                    fontSize: 10,
+                    cursor: "pointer",
+                    fontWeight: 600,
+                  }}
+                >
+                  {copiedKey === "copilot" ? "✓ Copied" : "Copy Copilot Config"}
+                </button>
+              </div>
+            </div>
+            <pre style={{ margin: 0, padding: 12, background: "#090B10", borderRadius: 6, color: C.text, fontSize: 11, whiteSpace: "pre-wrap", ...mono, maxHeight: 200, overflowY: "auto" }}>
+              {copilotInstructions}
+            </pre>
+          </div>
+        )}
+
+        {/* Claude & Gemini Layouts */}
+        {(selectedPlatform === "claude" || selectedPlatform === "gemini") && (
+          <div>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 8 }}>
+              <span style={{ fontSize: 11, color: C.muted }}>
+                {selectedPlatform === "claude"
+                  ? "Paste into Claude Project Instructions (under Project Settings → Set Custom Instructions):"
+                  : "Paste into Gemini Gems System Instructions:"}
+              </span>
+              <button
+                onClick={() => copyText(unifiedPrompt, selectedPlatform)}
+                style={{
+                  padding: "4px 10px",
+                  borderRadius: 4,
+                  background: copiedKey === selectedPlatform ? C.teal + "22" : C.s3,
+                  border: `1px solid ${copiedKey === selectedPlatform ? C.teal : C.border}`,
+                  color: copiedKey === selectedPlatform ? C.teal : C.text,
+                  fontSize: 10,
+                  cursor: "pointer",
+                  fontWeight: 600,
+                }}
+              >
+                {copiedKey === selectedPlatform ? "✓ Copied" : "Copy Instructions"}
+              </button>
+            </div>
+            <pre style={{ margin: 0, padding: 12, background: "#090B10", borderRadius: 6, color: C.text, fontSize: 11, whiteSpace: "pre-wrap", ...mono, maxHeight: 200, overflowY: "auto" }}>
+              {unifiedPrompt}
+            </pre>
+          </div>
+        )}
+      </div>
+
+      {/* ── STEP 4: Live Interactive Simulation Playground ── */}
+      <div style={{ background: C.s2, borderRadius: 10, border: `1px solid ${C.border}`, padding: 16 }}>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 10, flexWrap: "wrap", gap: 8 }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+            <span style={{ fontSize: 11, fontWeight: 700, color: C.coral, ...mono }}>
+              STEP 3 · INTERACTIVE TEST DRIVE (SIMULATE AI PLAN & HALT)
+            </span>
+            <span style={{ fontSize: 10, padding: "2px 6px", borderRadius: 4, background: C.coral + "22", color: C.coral }}>
+              Verify before deploying
+            </span>
+          </div>
+
+          {simStep !== "idle" && (
+            <button
+              onClick={() => setSimStep("idle")}
+              style={{
+                background: "transparent",
+                border: "none",
+                color: C.muted,
+                fontSize: 11,
+                cursor: "pointer",
+                textDecoration: "underline",
+              }}
+            >
+              Reset Simulation
+            </button>
+          )}
+        </div>
+
+        <div style={{ marginBottom: 12 }}>
+          <label style={{ display: "block", fontSize: 11, color: C.muted, marginBottom: 6 }}>
+            Type a test task or brain-dump prompt:
+          </label>
+          <textarea
+            rows={2}
+            value={simQuery}
+            onChange={(e) => setSimQuery(e.target.value)}
+            style={{
+              width: "100%",
+              padding: "8px 10px",
+              background: "#0F1219",
+              border: `1px solid ${C.border}`,
+              borderRadius: 6,
+              color: C.text,
+              fontSize: 12,
+              lineHeight: 1.5,
+              resize: "vertical",
+              boxSizing: "border-box",
+              outline: "none",
+            }}
+          />
+        </div>
+
+        {simStep === "idle" && (
+          <button
+            onClick={() => setSimStep("planned")}
+            style={{
+              padding: "10px 18px",
+              borderRadius: 6,
+              background: C.teal,
+              border: "none",
+              color: "#0F1219",
+              fontSize: 12,
+              fontWeight: 700,
+              cursor: "pointer",
+              display: "flex",
+              alignItems: "center",
+              gap: 8,
+            }}
+          >
+            <span>▶</span>
+            <span>Run Test Simulation with Current Instructions</span>
+          </button>
+        )}
+
+        {/* Simulated AI Planning Phase */}
+        {simStep !== "idle" && (
+          <div style={{ marginTop: 12, display: "flex", flexDirection: "column", gap: 12 }}>
+            <div style={{ background: "#090B10", borderRadius: 8, padding: 14, borderLeft: `4px solid ${C.teal}` }}>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 8 }}>
+                <span style={{ fontSize: 11, fontWeight: 700, color: C.teal, ...mono }}>
+                  AI INTERPRETATION & ACTION PLAN (HONORING YOUR ROLE & CONSTRAINTS)
+                </span>
+                <span style={{ fontSize: 10, padding: "2px 6px", borderRadius: 4, background: C.teal + "22", color: C.teal }}>
+                  Persona: {role.split(" ")[0]}
+                </span>
+              </div>
+
+              <p style={{ fontSize: 12, color: C.text, lineHeight: 1.6, margin: "0 0 10px 0" }}>
+                <strong>Understood Intent:</strong> You want to introduce API rate limiting and token consumption tracking to prevent abuse and meter costs, respecting your stack constraints (<strong>{constraints.slice(0, 70)}...</strong>).
+              </p>
+
+              <div style={{ fontSize: 11, color: C.text, ...mono, background: "#111622", padding: 10, borderRadius: 6, marginBottom: 12 }}>
+                <div style={{ color: C.lav, fontWeight: 700, marginBottom: 4 }}>PROPOSED 4-STEP PLAN:</div>
+                <div>1. Create database migration for token quota ledger & rate-limit window counters.</div>
+                <div>2. Implement token bucket rate limiter middleware with graceful 429 response.</div>
+                <div>3. Add token usage recording helper in API dispatch cycle.</div>
+                <div>4. Write Vitest integration test validating rate-limit lockout boundaries.</div>
+              </div>
+
+              {/* HALT BANNER */}
+              <div style={{
+                padding: "10px 12px",
+                borderRadius: 6,
+                background: "#7F1D1D33",
+                border: "1px solid #EF4444",
+                color: "#FCA5A5",
+                fontSize: 11,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                flexWrap: "wrap",
+                gap: 8,
+              }}>
+                <span style={{ fontWeight: 700 }}>
+                  🛑 [CHECKPOINT ACTIVE: Plan-first protocol halted execution. Waiting for your approval before writing code.]
+                </span>
+
+                {simStep === "planned" && (
+                  <div style={{ display: "flex", gap: 8 }}>
+                    <button
+                      onClick={() => setSimStep("approved")}
+                      style={{
+                        padding: "5px 12px",
+                        borderRadius: 4,
+                        background: "#10B981",
+                        border: "none",
+                        color: "#FFFFFF",
+                        fontSize: 11,
+                        fontWeight: 700,
+                        cursor: "pointer",
+                      }}
+                    >
+                      ✓ Approve Plan & Execute
+                    </button>
+                    <button
+                      onClick={() => setSimStep("adjusted")}
+                      style={{
+                        padding: "5px 12px",
+                        borderRadius: 4,
+                        background: "#374151",
+                        border: "1px solid #4B5563",
+                        color: "#E5E7EB",
+                        fontSize: 11,
+                        cursor: "pointer",
+                      }}
+                    >
+                      ✏️ Course Correct: Add IP Fallback
+                    </button>
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {/* Approved State */}
+            {simStep === "approved" && (
+              <div style={{ background: "#052e16", border: "1px solid #10b981", borderRadius: 8, padding: 12, color: "#a7f3d0", fontSize: 11 }}>
+                <div style={{ fontWeight: 700, marginBottom: 4 }}>✓ EXECUTION UNLOCKED BY HUMAN APPROVAL:</div>
+                <div>The AI now begins Step 1 with full context adherence, zero hallucinated divergence, and exactly conforming to your technical constraints.</div>
+              </div>
+            )}
+
+            {/* Adjusted State */}
+            {simStep === "adjusted" && (
+              <div style={{ background: "#1e1b4b", border: "1px solid #6366f1", borderRadius: 8, padding: 12, color: "#c7d2fe", fontSize: 11 }}>
+                <div style={{ fontWeight: 700, marginBottom: 4 }}>🔄 PLAN REFINED: IP FALLBACK INTEGRATED:</div>
+                <div>The AI incorporated your feedback into the plan before writing a single line of code, saving you rework!</div>
+              </div>
+            )}
+          </div>
+        )}
+      </div>
+
+      {/* ── Summary Matrix Cards ── */}
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 12, marginTop: 20 }}>
         {[
           {
-            name: "ChatGPT",
-            where: "Custom Instructions",
-            how: "Settings → Personalization → Custom Instructions → paste context",
+            name: "ChatGPT Setup",
+            where: "Settings → Personalization → Custom Instructions",
+            tip: "Paste persona in Box 1 and the 3-Sentence Plan Protocol in Box 2.",
             color: C.teal,
           },
           {
-            name: "Claude",
-            where: "Project Knowledge",
-            how: "Create Project → Add knowledge files → paste context",
+            name: "Claude Setup",
+            where: "Projects → Instructions & Knowledge",
+            tip: "Projects share memory across chats; ideal for persistent engineering constraints.",
             color: C.lav,
           },
           {
-            name: "Gemini",
-            where: "Saved Context",
-            how: "Settings → Gems → create gem with context",
+            name: "Cursor / Windsurf",
+            where: "Project root: .cursorrules",
+            tip: "Enforces plan-and-wait gates on agentic file modifications in your IDE.",
             color: C.coral,
           },
         ].map((item, i) => (
           <div
             key={i}
             style={{
-              padding: "10px 14px",
+              padding: "12px 14px",
               background: C.s2,
               borderRadius: 8,
               borderLeft: `3px solid ${item.color}`,
@@ -1636,14 +2357,13 @@ function AdvancedVersion() {
               {item.name}
             </div>
             <div style={{ color: C.muted, fontSize: 10, marginBottom: 4 }}>{item.where}</div>
-            <div style={{ color: C.muted, fontSize: 11 }}>{item.how}</div>
+            <div style={{ color: C.text, fontSize: 11, lineHeight: 1.5 }}>{item.tip}</div>
           </div>
         ))}
       </div>
     </div>
   );
 }
-
 /* ─── FrameworkPipeline ───────────────────────────────── */
 
 function FrameworkPipeline() {
