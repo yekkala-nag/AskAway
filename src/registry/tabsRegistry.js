@@ -37,7 +37,7 @@ export const UMBRELLA_TOPICS = [
     color: "#F0A89A",
     dark: "#C47A6A",
     description: "Roadmap stage 6: RAG systems end to end",
-    tabs: ["rag_core_hub", "rag_precision_hub", "rag_advanced_hub", "rag_practice_hub", "rag", "pipeline", "completepipeline", "qparseloop", "filtering", "hierrag", "prodrag", "routercheap", "rerankers", "rageval", "multilingualrag", "multimodalrag", "texttosql", "crossdocjoins", "genpatterns", "fourpdfs", "agentfanout", "hallucbricks", "workflowloop", "proxypointer", "agenticrag", "ragcasestudies", "interviewprep", "rowlevelrag", "tablegridrag", "graphtraversalknowledge", "graphrag_system1", "temporalgraphrag", "ragcorpusshapes", "amplifyexpert", "ragchunking", "textclassificationdata", "capstone1", "capstone3"]
+    tabs: ["rag_core_hub", "rag_precision_hub", "rag_advanced_hub", "rag_practice_hub", "rag", "pipeline", "completepipeline", "qparseloop", "filtering", "hierrag", "prodrag", "routercheap", "rerankers", "rageval", "multilingualrag", "multimodalrag", "texttosql", "crossdocjoins", "genpatterns", "fourpdfs", "agentfanout", "hallucbricks", "workflowloop", "proxypointer", "agenticrag", "ragcasestudies", "interviewprep", "rowlevelrag", "tablegridrag", "graphtraversalknowledge", "graphrag_system1", "temporalgraphrag", "ragcorpusshapes", "amplifyexpert", "ragchunking", "zerorag", "textclassificationdata", "capstone1", "capstone3"]
   },
   {
     id: "context_memory",
@@ -55,7 +55,7 @@ export const UMBRELLA_TOPICS = [
     color: "#F0A89A",
     dark: "#C47A6A",
     description: "Roadmap stage 7: agents, MCP and production deployment",
-    tabs: ["agt_found_hub", "agt_safety_hub", "agt_multi_hub", "agt_prod_hub", "fiveassets", "redesign", "projectprepframework", "agentplanner", "agenthitl", "agentcontrolplane", "agentlifecycle", "agenta2a", "agentsandbox", "agentevals", "handoffwatch", "verifiedpipes", "codingevals", "claudecode100", "typedagentgate", "agentpairprogramming", "vibecode", "agentsastools", "toolcalling", "agenttasks", "agentmemory", "cliagent", "codingagentsnonprog", "multiagent", "multiagentcoord", "modelrouting", "decision_layer", "langchain", "langgraph", "frameworkcompare", "agentdebugging", "agentscale", "modeldeploy", "aiproductbuilder", "mcpclient", "agentsdk", "loopengineering", "finassistproject", "zerocostmultiagent", "capstone2", "functionalscars", "refactorhealth", "agentcreativity", "agentorgchart", "synasyncagent"]
+    tabs: ["agt_found_hub", "agt_safety_hub", "agt_multi_hub", "agt_prod_hub", "fiveassets", "redesign", "projectprepframework", "agentplanner", "agenthitl", "agentcontrolplane", "agentlifecycle", "agenta2a", "agentsandbox", "agentevals", "handoffwatch", "verifiedpipes", "codingevals", "claudecode100", "typedagentgate", "agentpairprogramming", "vibecode", "agentsastools", "toolcalling", "agenttasks", "agentmemory", "cliagent", "codingagentsnonprog", "multiagent", "multiagentcoord", "modelrouting", "decision_layer", "langchain", "langgraph", "frameworkcompare", "agentdebugging", "agentscale", "modeldeploy", "aiproductbuilder", "mcpclient", "agentsdk", "loopengineering", "finassistproject", "zerocostmultiagent", "capstone2", "functionalscars", "refactorhealth", "agentcreativity", "agentorgchart", "synasyncagent", "agentpatterns"]
   },
   {
     id: "frontiers_production",
@@ -64,7 +64,7 @@ export const UMBRELLA_TOPICS = [
     color: "#9B89C4",
     dark: "#6B5E94",
     description: "Roadmap stage 8: evals, cost, observability — ship and stay reliable",
-    tabs: ["fr_eval_hub", "fr_ops_hub", "fr_frontiers_hub", "aigentools", "aiharnessquality", "aiarchdecisions", "firstaiapp", "enterpriseadvancedplaybook", "tokenorchestrationplaybook", "productionragops", "enterpriseaiops", "enterprisegrade", "finops", "observability", "slmedge", "tokenbill", "llmevals", "modelvalidation", "reasoningbench", "practices", "powerfeatures", "ragbeyond", "frontiers", "progress", "guardrails", "agentguardrails", "agentobservability", "costtollbooth", "llmreliability"]
+    tabs: ["fr_eval_hub", "fr_ops_hub", "fr_frontiers_hub", "aigentools", "aiharnessquality", "aiarchdecisions", "firstaiapp", "enterpriseadvancedplaybook", "tokenorchestrationplaybook", "productionragops", "enterpriseaiops", "enterprisegrade", "finops", "observability", "slmedge", "tokenbill", "llmevals", "modelvalidation", "reasoningbench", "practices", "powerfeatures", "ragbeyond", "frontiers", "progress", "guardrails", "agentguardrails", "agentobservability", "costtollbooth", "llmreliability", "evalharness"]
   }
 ];
 
@@ -2007,6 +2007,33 @@ export const TABS_REGISTRY = [
     icon: "↔️",
     keywords: ["reversal curse", "one-way memory", "directional recall", "embedding updates", "ask both directions", "symmetric facts", "retrieval fix"],
     component: lazy(() => import("../reversalCurse/ReversalCurseTab.jsx"))
+  },
+  {
+    id: "zerorag",
+    label: "Zero-Infra RAG",
+    umbrellaId: "rag_architecture",
+    category: "RAG Systems",
+    icon: "🧰",
+    keywords: ["zero infra rag", "no vector db", "cosine knn", "brute force retrieval", "chunk overlap", "abstain", "grounded generation", "right-size the store"],
+    component: lazy(() => import("../zeroRag/ZeroRagTab.jsx"))
+  },
+  {
+    id: "evalharness",
+    label: "Custom Eval Harness",
+    umbrellaId: "frontiers_production",
+    category: "Advanced & Frontiers",
+    icon: "🧪",
+    keywords: ["eval harness", "golden dataset", "judge cascade", "deterministic judge", "llm judge", "jsonl log", "re-score without re-run", "concurrency cap", "crash safe"],
+    component: lazy(() => import("../evalHarness/EvalHarnessTab.jsx"))
+  },
+  {
+    id: "agentpatterns",
+    label: "Agent Architecture Patterns",
+    umbrellaId: "agents_frameworks",
+    category: "Agents & Frameworks",
+    icon: "🏗️",
+    keywords: ["react loop", "sequential pipeline", "adaptive router", "supervisor worker", "reflection loop", "autonomous swarm", "context engineering", "state projection", "prompt caching", "trajectory metrics", "circuit breaker"],
+    component: lazy(() => import("../agentPatterns/AgentPatternsTab.jsx"))
   }
 ];
 

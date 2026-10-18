@@ -12,6 +12,9 @@ import {
   CODE_SELECTOR,
   CODE_DUAL,
   CODE_MAPREDUCE,
+  DUAL_FLOW,
+  DUAL_LIMITS,
+  EXFIL_URL_EXAMPLE,
 } from './agentGuardrailsEngine.js';
 
 const { Container, Stack, Grid } = Primitives;
@@ -21,6 +24,10 @@ const PURPLE_DARK = '#5B4B8A';
 const TEAL = '#3A9B9F';
 const TEAL_DARK = '#1A6B6E';
 const RED = '#B4553A';
+const AMBER = '#B9821F';
+
+const ACTOR_COLORS = { controller: TEAL_DARK, privileged: PURPLE_DARK, quarantined: RED };
+const ACTOR_LABELS = { controller: 'controller', privileged: 'privileged LLM', quarantined: 'quarantined LLM' };
 
 const SUBTABS = [
   { id: 'threat', icon: '⚠️', label: '1. Threat Model', desc: 'Lethal trifecta + incidents' },
@@ -28,6 +35,7 @@ const SUBTABS = [
   { id: 'builder', icon: '🏗️', label: '3. Stack Builder', desc: 'Toggle patterns, watch coverage' },
   { id: 'stack', icon: '🔬', label: '4. Research Agent Stack', desc: 'Patterns per pipeline stage' },
   { id: 'code', icon: '🛡️', label: '5. Code', desc: 'Gate, dual agent, map-reduce' },
+  { id: 'dualflow', icon: '🔀', label: '6. Dual-LLM Flow', desc: 'Controller, privileged, quarantined' },
 ];
 
 function TrifectaDiagram() {
@@ -147,6 +155,207 @@ function StackBuilder() {
         )}
       </Stack>
     </Card>
+  );
+}
+
+function wrapLabel(text, max = 17) {
+  const lines = [];
+  let line = '';
+  for (const w of text.split(' ')) {
+    const next = line ? `${line} ${w}` : w;
+    if (next.length > max) { lines.push(line); line = w; } else { line = next; }
+  }
+  if (line) lines.push(line);
+  return lines.slice(0, 3);
+}
+
+function SubstitutionDemo() {
+  const [substituted, setSubstituted] = useState(false);
+  const template = 'Damage report: $VAR1 — confidence $VAR2';
+  const resolved = 'Damage report: scratched rear bumper — confidence 0.87';
+  const shown = substituted ? resolved : template;
+
+  return (
+    <Card style={{ padding: 'var(--ds-space-5)', background: 'var(--ds-color-bg-surface)' }}>
+      <Stack gap={4}>
+        <div>
+          <h3 style={{ margin: 0 }}>Variables stay masked until display time</h3>
+          <p style={{ margin: '4px 0 0 0', color: 'var(--ds-color-text-secondary)', fontSize: 'var(--ds-font-size-bodySm)' }}>
+            The plan is written as $VAR slots from the start; the controller holds the bytes and performs the substitution only when rendering the final output. Toggle it and watch which layer is holding what.
+          </p>
+        </div>
+
+        <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+          {[0, 1, 2, 3, 4].map((i) => (
+            <Badge key={i} variant="default" style={{
+              background: substituted ? (i === 4 ? '#E3F2F2' : '#EEF1F4') : (i <= 3 ? '#F5F3FA' : '#EEF1F4'),
+              color: substituted ? (i === 4 ? TEAL_DARK : '#6B7280') : (i <= 3 ? PURPLE_DARK : '#6B7280'),
+              border: `1px solid ${substituted ? (i === 4 ? TEAL : '#EEF1F4') : (i <= 3 ? '#C9C0E0' : '#EEF1F4')}`,
+            }}>
+              step {i + 1}: {i === 4 ? (substituted ? 'substituted' : 'masked') : (i === 3 ? '$VAR1 filled' : 'slots only')}
+            </Badge>
+          ))}
+        </div>
+
+        <div>
+          <div style={{ fontSize: 11.5, fontWeight: 700, color: PURPLE_DARK, marginBottom: 4 }}>
+            Plan + template as stored (structure from code)
+          </div>
+          <div style={{
+            fontFamily: 'ui-monospace, monospace', fontSize: 13, padding: '10px 12px', borderRadius: 8,
+            background: '#F5F3FA', border: '1px solid #C9C0E0', color: PURPLE_DARK, wordBreak: 'break-word',
+          }}>{template}</div>
+        </div>
+
+        <div>
+          <div style={{ fontSize: 11.5, fontWeight: 700, color: TEAL_DARK, marginBottom: 4 }}>
+            Rendered at display time (what the human sees)
+          </div>
+          <div style={{
+            fontFamily: 'ui-monospace, monospace', fontSize: 13, padding: '10px 12px', borderRadius: 8,
+            background: substituted ? '#E3F2F2' : '#EEF1F4',
+            border: `1px solid ${substituted ? TEAL : '#EEF1F4'}`,
+            color: substituted ? TEAL_DARK : '#6B7280', wordBreak: 'break-word',
+          }}>{shown}</div>
+        </div>
+
+        <div style={{ display: 'flex', gap: 8, alignItems: 'center', flexWrap: 'wrap' }}>
+          <button onClick={() => setSubstituted((s) => !s)}
+            style={{
+              padding: '8px 14px', borderRadius: 8, cursor: 'pointer', fontSize: 12.5, fontWeight: 600,
+              border: `1px solid ${substituted ? PURPLE_DARK : TEAL}`,
+              background: substituted ? PURPLE_DARK : TEAL, color: '#FFFFFF',
+            }}>
+            {substituted ? 'Mask again (planning time)' : 'Substitute at display time'}
+          </button>
+          <span style={{ fontSize: 11.5, color: 'var(--ds-color-text-secondary)' }}>
+            The privileged plan never held the bytes; the quarantined reader never saw the template.
+          </span>
+        </div>
+      </Stack>
+    </Card>
+  );
+}
+
+function DualFlowPanel() {
+  const [active, setActive] = useState(0);
+  const step = DUAL_FLOW[active];
+  const bw = 172, gap = 24, x0 = 12, boxY = 52, boxH = 88;
+  const titles = ['Receive request', 'Plan with $VAR slots', 'Execute the tool', 'Summarize content', 'Substitute at display'];
+
+  return (
+    <Stack gap={6}>
+      <Card style={{ padding: 'var(--ds-space-5)', background: 'var(--ds-color-bg-surface)' }}>
+        <Stack gap={4}>
+          <div>
+            <h3 style={{ margin: 0 }}>Five steps, three actors — click a step</h3>
+            <p style={{ margin: '4px 0 0 0', color: 'var(--ds-color-text-secondary)', fontSize: 'var(--ds-font-size-bodySm)' }}>
+              The controller is code, not a model. The privileged head plans but never touches raw data; the quarantined head reads raw data but can plan nothing.
+            </p>
+          </div>
+
+          <svg viewBox="0 0 980 168" width="100%" role="img"
+            aria-label="Five-step flow: the controller receives the request, a privileged LLM plans a tool call with variable slots, the controller executes the tool and stores the result, a quarantined LLM summarizes untrusted content, and the controller substitutes variables at display time">
+            <defs>
+              <marker id="dualArrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+                <path d="M0,0 L10,5 L0,10 z" fill="#94A3B8" />
+              </marker>
+            </defs>
+            {DUAL_FLOW.map((s, i) => {
+              const x = x0 + i * (bw + gap);
+              const color = ACTOR_COLORS[s.actor];
+              const isActive = i === active;
+              const lines = wrapLabel(titles[i]);
+              return (
+                <g key={s.step} onClick={() => setActive(i)} tabIndex={0} role="button"
+                  aria-label={`Step ${s.step}: ${titles[i]} by ${ACTOR_LABELS[s.actor]}`}
+                  onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setActive(i); } }}
+                  style={{ cursor: 'pointer' }}>
+                  <rect x={x + 8} y={14} width={bw - 16} height={22} rx="11" fill={color} />
+                  <text x={x + bw / 2} y={29} textAnchor="middle" fontSize="10.5" fontWeight="700" fill="#FFFFFF">
+                    {ACTOR_LABELS[s.actor]}
+                  </text>
+                  <rect x={x} y={boxY} width={bw} height={boxH} rx="10"
+                    fill={isActive ? '#F7F6FA' : '#FFFFFF'} stroke={color}
+                    strokeWidth={isActive ? 2.4 : 1.4} />
+                  <text x={x + 12} y={boxY + 22} fontSize="11" fontWeight="700" fill={color}>STEP {s.step}</text>
+                  {lines.map((ln, li) => (
+                    <text key={li} x={x + 12} y={boxY + 44 + li * 16} fontSize="12.5"
+                      fontWeight={isActive ? 700 : 600} fill="#1A1D26">{ln}</text>
+                  ))}
+                  {i < DUAL_FLOW.length - 1 && (
+                    <path d={`M ${x + bw + 4} ${boxY + boxH / 2} L ${x + bw + gap - 8} ${boxY + boxH / 2}`}
+                      stroke="#94A3B8" strokeWidth="1.6" markerEnd="url(#dualArrow)" />
+                  )}
+                </g>
+              );
+            })}
+          </svg>
+
+          <div style={{
+            padding: 'var(--ds-space-4)', borderRadius: 'var(--ds-radius-md)',
+            background: 'var(--ds-color-bg-canvas)', border: `1px solid var(--ds-color-border-subtle)`,
+            borderLeft: `4px solid ${ACTOR_COLORS[step.actor]}`,
+          }}>
+            <div style={{ display: 'flex', gap: 8, alignItems: 'center', flexWrap: 'wrap', marginBottom: 6 }}>
+              <Badge variant="default" style={{ background: ACTOR_COLORS[step.actor], color: '#FFFFFF' }}>
+                step {step.step} · {ACTOR_LABELS[step.actor]}
+              </Badge>
+              <strong style={{ fontSize: 13 }}>{step.action}</strong>
+            </div>
+            <div style={{ fontSize: 12, lineHeight: 1.7, color: 'var(--ds-color-text-secondary)' }}>
+              <strong style={{ color: 'var(--ds-color-text-primary)' }}>Sees: </strong>{step.sees}
+            </div>
+          </div>
+
+          <Callout type="info" title="Who is allowed to be wrong">
+            The privileged head is the only one that can act, so it is the only one that must never see attacker text; the quarantined head sees nothing but attacker text, so it is the only one that can be fully confused. The controller — plain code — owns the boundary between them.
+          </Callout>
+        </Stack>
+      </Card>
+
+      <SubstitutionDemo />
+
+      <Card style={{ padding: 'var(--ds-space-5)', background: 'var(--ds-color-bg-surface)' }}>
+        <h3 style={{ margin: '0 0 4px 0' }}>What the split does not buy you</h3>
+        <p style={{ margin: '0 0 12px 0', color: 'var(--ds-color-text-secondary)', fontSize: 'var(--ds-font-size-bodySm)' }}>
+          Three limits worth writing down before someone treats the pattern as a shield.
+        </p>
+        <Grid columns={{ base: '1fr', md: '1fr 1fr 1fr' }} gap="var(--ds-space-3)">
+          {DUAL_LIMITS.map((l) => (
+            <div key={l.limit} style={{
+              padding: 'var(--ds-space-4)', borderRadius: 'var(--ds-radius-md)',
+              border: `1.5px solid ${AMBER}`, background: '#FFFDF7',
+            }}>
+              <div style={{ fontSize: 13, fontWeight: 700, color: RED, marginBottom: 6 }}>{l.limit}</div>
+              <div style={{ fontSize: 11.5, lineHeight: 1.65, color: 'var(--ds-color-text-secondary)' }}>{l.detail}</div>
+              <div style={{ fontSize: 11.5, lineHeight: 1.65, marginTop: 8, paddingTop: 8, borderTop: '1px solid #F0E2C4' }}>
+                <strong style={{ color: TEAL_DARK }}>Mitigation: </strong>
+                <span style={{ color: 'var(--ds-color-text-secondary)' }}>{l.mitigation}</span>
+              </div>
+            </div>
+          ))}
+        </Grid>
+      </Card>
+
+      <Card style={{ padding: 'var(--ds-space-5)', background: 'var(--ds-color-bg-surface)' }}>
+        <Stack gap={3}>
+          <div>
+            <h3 style={{ margin: 0 }}>{EXFIL_URL_EXAMPLE.title}</h3>
+            <p style={{ margin: '4px 0 0 0', color: 'var(--ds-color-text-secondary)', fontSize: 'var(--ds-font-size-bodySm)' }}>
+              {EXFIL_URL_EXAMPLE.detail}
+            </p>
+          </div>
+          <div style={{
+            fontFamily: 'ui-monospace, monospace', fontSize: 13, padding: '10px 12px', borderRadius: 8,
+            background: '#FBEAE4', border: `1px solid ${RED}`, color: RED, wordBreak: 'break-all',
+          }}>{EXFIL_URL_EXAMPLE.request}</div>
+          <Callout type="warning" title="Opaque to the plan, still a leak">
+            {EXFIL_URL_EXAMPLE.blindSpot} {EXFIL_URL_EXAMPLE.mitigation}
+          </Callout>
+        </Stack>
+      </Card>
+    </Stack>
   );
 }
 
@@ -299,6 +508,8 @@ export default function AgentGuardrailsTab() {
             </Card>
           </Stack>
         )}
+
+        {activeSubTab === 'dualflow' && <DualFlowPanel />}
       </Container>
     </div>
   );

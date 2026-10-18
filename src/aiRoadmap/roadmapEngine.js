@@ -126,3 +126,63 @@ def build_plan(background="dev", goal="rag", hrs_per_week=6):
 if __name__ == "__main__":
     print(build_plan("dev", "rag", 6))
 `;
+
+// ── AI ENGINEERING SKILLS map — 4 branches × 20 skills, every skill → real tabs ──
+export const SKILLS_MAP = [
+  {
+    id: "build", title: "Building & deploying AI applications", icon: "🏗️",
+    blurb: "The core craft: models, grounding, agents, evals, production, and the ML beneath them.",
+    skills: [
+      { name: "LLM foundations", blurb: "Tokens, attention, sampling, model families — know what the model does before steering it.", tabs: ["tokenization", "llmsampling", "selfattention", "archconcepts", "modellandscape"] },
+      { name: "Grounding models with data", blurb: "Retrieve before you generate: chunk, embed, search, rerank, cite.", tabs: ["knowledgebase", "rag", "ragchunking", "filtering", "rerankers"] },
+      { name: "Building agentic systems", blurb: "Assets, planners, tools, multi-agent coordination, protocol wiring.", tabs: ["fiveassets", "agentplanner", "agentsastools", "multiagent", "agentpatterns", "mcpclient"] },
+      { name: "Evaluation-driven development", blurb: "Golden sets, judges, trajectories — measure before you ship, re-score after you improve.", tabs: ["llmevals", "agentevals", "rageval", "evalharness", "promptregression"] },
+      { name: "Operating in production", blurb: "Observe, price, gate, recover: reliability is the feature.", tabs: ["productionragops", "observability", "finops", "modeldeploy", "agentobservability", "enterprisegrade"] },
+      { name: "Machine learning foundations", blurb: "The classical layer beneath the hype: supervised, self-supervised, RL.", tabs: ["linearregression", "classicalml", "activelearn", "reinforcementlearning"] },
+    ],
+  },
+  {
+    id: "swe", title: "Software engineering fundamentals", icon: "🧱",
+    blurb: "AI apps are still apps: ship code, manage data, design, secure, scale.",
+    skills: [
+      { name: "Building full-stack applications", blurb: "API keys to UI: the working loop of a real product.", tabs: ["firstaiapp", "pythonengineering", "workflows"] },
+      { name: "Managing data", blurb: "Frames, pipelines, lakehouse, documents — data in, decisions out.", tabs: ["pandasdataframes", "datapipeline", "aidataplat", "medallionarch"] },
+      { name: "Designing system architectures", blurb: "Pick the shape: RAG vs tuning, workflow vs agent, graphs vs chains.", tabs: ["aiarchdecisions", "frameworkcompare", "langgraph", "agenticuiworkflow"] },
+      { name: "Making systems secure and reliable", blurb: "Guardrails, scars, reliability contracts — trust is engineered.", tabs: ["guardrails", "agentguardrails", "functionalscars", "llmreliability", "agentlifecycle"] },
+      { name: "Scaling and operating in production", blurb: "Throughput, cost ceilings, index ops, fleet control.", tabs: ["agentscale", "costtollbooth", "tokenorchestrationplaybook", "vectordbops", "agentcontrolplane"] },
+    ],
+  },
+  {
+    id: "agents", title: "Using coding agents", icon: "🤖",
+    blurb: "Direct the machine that writes the machine: foundations, direction, autonomy, review, environment.",
+    skills: [
+      { name: "Directing the workflow", blurb: "Slash commands, session shape, loop design — steer instead of micro-manage.", tabs: ["cliagent", "slashcommands", "loopengineering"] },
+      { name: "Enabling agent autonomy", blurb: "Graded freedom: sandboxes, HITL gates, handoff watchdogs, sync/async control.", tabs: ["agentsandbox", "agenthitl", "handoffwatch", "synasyncagent"] },
+      { name: "Reviewing the work", blurb: "Contracts, evals, refactor health — the diff is not the review.", tabs: ["codingevals", "agentpairprogramming", "refactorhealth", "typedagentgate"] },
+      { name: "Customizing the agent and its environment", blurb: "Skills, MCP, SDK hooks: make the agent fit your repo, not the reverse.", tabs: ["claudecode100", "agentsdk", "aigentools", "mcpclient"] },
+      { name: "Coding agent foundations", blurb: "What a coding agent actually is: tools, commands, permission model.", tabs: ["vibecode", "agentsastools", "toolcalling", "codingagentsnonprog"] },
+    ],
+  },
+  {
+    id: "shape", title: "Shaping the build", icon: "🧭",
+    blurb: "The human loop: drive iteration, decide, communicate, own the outcome.",
+    skills: [
+      { name: "Driving the build loop", blurb: "Planner → loop → checkpoint: keep momentum without thrash.", tabs: ["agentplanner", "goaltracker", "loopengineering"] },
+      { name: "Making product decisions", blurb: "Typed decisions, routing, architecture bets — choose deliberately.", tabs: ["aiproductbuilder", "decision_layer", "modelrouting", "aiarchdecisions"] },
+      { name: "Communicating and leading", blurb: "Tell the story: studies, caps, humanized data.", tabs: ["ragcasestudies", "interviewprep", "datahumanization", "capstone2"] },
+      { name: "High agency ownership", blurb: "Learn how to learn with AI; own the moral weight of what you ship.", tabs: ["ailearning", "progress", "aimoralagency"] },
+    ],
+  },
+];
+
+export const SKILLS_WORKFLOW = [
+  { n: 1, name: "Diagnose", detail: "Quiz places per-area levels; prove out of anything you already know." },
+  { n: 2, name: "Walk the branches", detail: "Skills map first, 8-stage path for depth — chips show live mastery." },
+  { n: 3, name: "Prove", detail: "Exit checks convert visits into proven mastery." },
+  { n: 4, name: "Apply", detail: "Capstones + planners turn proven topics into built artifacts." },
+  { n: 5, name: "Review", detail: "Spaced queue resurfaces proven topics at ~14 days." },
+];
+
+export function skillTopicCount(map = SKILLS_MAP) {
+  return map.reduce((sum, b) => sum + b.skills.reduce((s, sk) => s + sk.tabs.length, 0), 0);
+}

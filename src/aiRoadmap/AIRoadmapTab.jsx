@@ -3,7 +3,7 @@ import * as Primitives from '../components/layout/Primitives.jsx';
 import { Hero, CodeBlock } from '../components/ui/Content.jsx';
 import { Card, Badge, Button, Callout } from '../components/ui/Core.jsx';
 import DiagramImage from '../components/ui/DiagramImage.jsx';
-import { ROADMAP_STAGES, ROADMAP_NODE_MAP, BUILD_PLAN, PYTHON_ROADMAP_CODE } from './roadmapEngine.js';
+import { ROADMAP_STAGES, ROADMAP_NODE_MAP, BUILD_PLAN, PYTHON_ROADMAP_CODE, SKILLS_MAP, SKILLS_WORKFLOW, skillTopicCount } from './roadmapEngine.js';
 import { getTabById } from '../registry/tabsRegistry.js';
 import { getMasteryScore, isMastered } from '../services/mastery.js';
 import { subscribeToAdaptiveProgress } from '../services/adaptiveLearning.js';
@@ -17,8 +17,102 @@ function stageScore(tabs) {
   return Math.round(tabs.reduce((a, id) => a + getMasteryScore(id), 0) / tabs.length);
 }
 
+const BRANCH_TINTS = ['rgba(180,85,58,0.07)', 'rgba(91,75,138,0.07)', 'rgba(58,155,159,0.07)', 'rgba(185,130,31,0.07)'];
+const BRANCH_EDGE = ['#B4553A', '#5B4B8A', '#3A9B9F', '#B9821F'];
+
+function SkillChip({ id, onGo }) {
+  const t = getTabById(id) || { label: id, icon: '📝' };
+  const m = isMastered(id);
+  return (
+    <button
+      onClick={() => onGo(id)}
+      title={`${t.label}${m ? ' — proven ✓' : ''}`}
+      style={{
+        display: 'inline-flex', alignItems: 'center', gap: '5px',
+        padding: '3px 8px', borderRadius: '12px', cursor: 'pointer',
+        background: m ? 'rgba(94,196,200,0.14)' : 'var(--ds-color-bg-surface)',
+        border: `1px solid ${m ? '#5EC4C8' : 'var(--ds-color-border-subtle)'}`,
+        color: 'var(--ds-color-text-primary)', fontSize: '11px'
+      }}>
+      <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: m ? '#5EC4C8' : '#B8B8C4', flexShrink: 0 }} />
+      <span>{t.icon} {t.label}</span>
+    </button>
+  );
+}
+
+function SkillsMap({ go }) {
+  return (
+    <Stack gap={4}>
+      <Card style={{ padding: 'var(--ds-space-4)', background: 'var(--ds-color-bg-canvas)', textAlign: 'center' }}>
+        <div style={{
+          display: 'inline-block', padding: '10px 26px', borderRadius: 12,
+          background: '#14161D', color: 'white', fontWeight: 800,
+          letterSpacing: '0.14em', fontSize: 13,
+        }}>AI ENGINEERING SKILLS</div>
+        <svg viewBox="0 0 960 54" style={{ width: '100%', maxWidth: 960, height: 54, display: 'block', margin: '0 auto' }} aria-hidden="true">
+          <line x1={480} y1={0} x2={480} y2={20} stroke="#8A8A96" strokeWidth={1.5} />
+          <line x1={120} y1={20} x2={840} y2={20} stroke="#8A8A96" strokeWidth={1.5} />
+          {[120, 360, 600, 840].map((x) => (
+            <g key={x}>
+              <line x1={x} y1={20} x2={x} y2={44} stroke="#8A8A96" strokeWidth={1.5} />
+              <circle cx={x} cy={44} r={4} fill="#3A9B9F" />
+            </g>
+          ))}
+        </svg>
+      </Card>
+      <Grid columns={4} gap="var(--ds-space-4)">
+        {SKILLS_MAP.map((branch, bi) => (
+          <div key={branch.id} style={{
+            display: 'flex', flexDirection: 'column', gap: 10,
+            padding: 12, borderRadius: 14,
+            background: BRANCH_TINTS[bi], border: `1px solid ${BRANCH_EDGE[bi]}33`,
+          }}>
+            <div style={{
+              padding: '10px 12px', borderRadius: 10, background: 'var(--ds-color-bg-surface)',
+              border: `1.5px solid ${BRANCH_EDGE[bi]}`,
+            }}>
+              <div style={{ fontSize: 13, fontWeight: 800, color: 'var(--ds-color-text-primary)', lineHeight: 1.35 }}>
+                {branch.icon} {branch.title}
+              </div>
+              <div style={{ fontSize: 11, color: 'var(--ds-color-text-secondary)', marginTop: 4 }}>{branch.blurb}</div>
+            </div>
+            {branch.skills.map((skill) => {
+              const score = stageScore(skill.tabs);
+              const done = skill.tabs.filter(isMastered).length;
+              return (
+                <Card key={skill.name} style={{
+                  padding: '10px 12px', background: 'var(--ds-color-bg-surface)',
+                  border: `1px solid var(--ds-color-border-subtle)`,
+                  borderLeft: `3px solid ${score === 100 ? '#5EC4C8' : BRANCH_EDGE[bi]}`,
+                }}>
+                  <Flex justify="space-between" align="center" gap="6px" style={{ flexWrap: 'wrap' }}>
+                    <strong style={{ fontSize: 12.5, color: 'var(--ds-color-text-primary)' }}>{skill.name}</strong>
+                    <span style={{ fontSize: 10.5, color: 'var(--ds-color-text-tertiary)', fontFamily: 'ui-monospace, monospace' }}>
+                      {done}/{skill.tabs.length} · {score}
+                    </span>
+                  </Flex>
+                  <div style={{ height: 4, borderRadius: 2, background: '#E8E8EC', overflow: 'hidden', margin: '5px 0 7px' }}>
+                    <div style={{ height: '100%', width: `${score}%`, background: score === 100 ? '#5EC4C8' : BRANCH_EDGE[bi], transition: 'width .3s' }} />
+                  </div>
+                  <div style={{ fontSize: 11, color: 'var(--ds-color-text-secondary)', marginBottom: 7, lineHeight: 1.45 }}>{skill.blurb}</div>
+                  <Flex gap="5px" style={{ flexWrap: 'wrap' }}>
+                    {skill.tabs.map((id) => <SkillChip key={id} id={id} onGo={go} />)}
+                  </Flex>
+                </Card>
+              );
+            })}
+          </div>
+        ))}
+      </Grid>
+      <Callout type="success" title="Four branches, one walk">
+        Build the app, engineer the foundation, direct the coding agents, shape the build — every skill chip opens a real topic with an exit check, and dots fill as mastery is proven across the whole map.
+      </Callout>
+    </Stack>
+  );
+}
+
 export default function AIRoadmapTab({ onSelectTab }) {
-  const [sub, setSub] = useState('map');
+  const [sub, setSub] = useState('skills');
   const [tick, setTick] = useState(0);
   const [bg, setBg] = useState('dev');
   const [goal, setGoal] = useState('rag');
@@ -34,14 +128,14 @@ export default function AIRoadmapTab({ onSelectTab }) {
     <div style={{ paddingBottom: 'var(--ds-space-12)' }}>
       <Hero
         moduleId="foundations"
-        moduleLabel="Curriculum Map · AI Engineer Roadmap (roadmap.sh adapted)"
-        title="Become an AI Engineer — One Map, Eight Stages"
-        description="roadmap.sh's AI Engineer path rebuilt as a living map: every node below opens a real topic, dots fill as you prove mastery, and the planner turns background + goal + pace into your week-by-week schedule."
+        moduleLabel="Curriculum Map · AI Engineering Skills + 8-Stage Path"
+        title="AI Engineer Workflow — Four Branches, One Map"
+        description="The AI engineering skills map rebuilt as a living curriculum: four branches, twenty skills, every skill wired to real topics with live mastery dots — plus the eight-stage deep path, week planner, node mapping, and the five-step workflow that walks it all."
         metrics={[
-          { label: 'Stages', value: '8' },
-          { label: 'Mapped Topics', value: '35+' },
-          { label: 'Reviews', value: 'Exit-checked' },
-          { label: 'Plan', value: 'Auto-built' }
+          { label: 'Skill branches', value: `${SKILLS_MAP.length}` },
+          { label: 'Skills', value: `${SKILLS_MAP.reduce((a, b) => a + b.skills.length, 0)}` },
+          { label: 'Mapped topics', value: `${skillTopicCount()}` },
+          { label: 'Workflow steps', value: `${SKILLS_WORKFLOW.length}` }
         ]}
         actions={[
           { label: '🧭 Build My Plan', variant: 'primary', onClick: () => { setSub('plan'); document.getElementById('roadmap-planner')?.scrollIntoView({ behavior: 'smooth' }); } },
@@ -62,16 +156,21 @@ export default function AIRoadmapTab({ onSelectTab }) {
         </div>
 
         <div style={NAV}>{[
-          { id: 'map', icon: '🗺️', label: '1. Interactive Map', desc: '8 stages, live mastery' },
-          { id: 'plan', icon: '📅', label: '2. Week Planner', desc: 'Background × goal × pace' },
-          { id: 'table', icon: '📊', label: '3. Node Mapping', desc: 'roadmap.sh → our tabs' },
-          { id: 'code', icon: '🛠️', label: '4. Workflow + Code', desc: 'How to walk it' }
+          { id: 'skills', icon: '🌳', label: '1. Skills Map', desc: '4 branches · 20 skills' },
+          { id: 'map', icon: '🗺️', label: '2. Stage Path', desc: '8 stages, live mastery' },
+          { id: 'plan', icon: '📅', label: '3. Week Planner', desc: 'Background × goal × pace' },
+          { id: 'table', icon: '📊', label: '4. Node Mapping', desc: 'roadmap.sh → our tabs' },
+          { id: 'code', icon: '🛠️', label: '5. Workflow', desc: 'Diagnose → Review' }
         ].map(t => (
           <button key={t.id} onClick={() => setSub(t.id)} style={navBtn(sub, t.id)}>
             <div style={{ display: 'flex', gap: '8px', fontSize: 'var(--ds-font-size-body)' }}><span>{t.icon}</span><span>{t.label}</span></div>
             <div style={{ fontSize: 'var(--ds-font-size-caption)', opacity: 0.75 }}>{t.desc}</div>
           </button>
         ))}</div>
+
+        {sub === 'skills' && (
+          <SkillsMap go={go} />
+        )}
 
         {sub === 'map' && (
           <Stack gap={4}>
@@ -211,17 +310,15 @@ export default function AIRoadmapTab({ onSelectTab }) {
           <Stack gap={6}>
             <Card style={{ padding: 'var(--ds-space-5)', background: 'var(--ds-color-bg-canvas)' }}>
               <Stack gap={4}>
-                <div><h3 style={{ margin: 0 }}>🛠️ The walking workflow + planner code</h3></div>
-                <Grid columns={{ base: '1fr', md: '1fr 1fr 1fr 1fr' }} gap="var(--ds-space-2)">
-                  {[
-                    ['1 · Diagnose', 'Quiz places per-area levels; skips what you prove.'],
-                    ['2 · Walk stages', 'Follow the serpentine; chips show live mastery.'],
-                    ['3 · Prove', 'Exit checks convert visits into proven mastery.'],
-                    ['4 · Review', 'Spaced queue resurfaces proven topics at ~14 days.']
-                  ].map(([t, d], i) => (
-                    <Card key={i} style={{ padding: '12px', background: 'var(--ds-color-bg-surface)', borderLeft: '3px solid #5EC4C8' }}>
-                      <div style={{ fontSize: '12px', color: 'var(--ds-color-text-primary)', fontWeight: 'bold' }}>{t}</div>
-                      <div style={{ fontSize: '11px', color: 'var(--ds-color-text-secondary)' }}>{d}</div>
+                <div><h3 style={{ margin: 0 }}>🛠️ The walking workflow + planner code</h3>
+                  <p style={{ margin: '4px 0 0 0', color: 'var(--ds-color-text-secondary)', fontSize: 'var(--ds-font-size-bodySm)' }}>
+                    Five steps repeat across all four skill branches: prove what you know, walk what you don’t, convert visits into mastery, build artifacts, review on a spaced queue.
+                  </p></div>
+                <Grid columns={5} gap="var(--ds-space-2)">
+                  {SKILLS_WORKFLOW.map((s) => (
+                    <Card key={s.n} style={{ padding: '12px', background: 'var(--ds-color-bg-surface)', borderLeft: '3px solid #5EC4C8' }}>
+                      <div style={{ fontSize: '12px', color: 'var(--ds-color-text-primary)', fontWeight: 'bold' }}>{s.n} · {s.name}</div>
+                      <div style={{ fontSize: '11px', color: 'var(--ds-color-text-secondary)' }}>{s.detail}</div>
                     </Card>
                   ))}
                 </Grid>

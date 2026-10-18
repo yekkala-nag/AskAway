@@ -45,7 +45,10 @@ export const EXIT_CHECKS = {
   rerankers: [
     { q: 'Cross-encoder rerank over top-50 mainly lifts…', o: ['Top-k precision', 'Embedding speed', 'Chunk size', 'Prompt length'], a: 0, e: 'Joint scoring rescues buried truths and buries distractors.' },
     { q: 'HyDE helps most when queries are…', o: ['Short/vague with vocabulary mismatch', 'Long and precise', 'Already perfect', 'Non-English only'], a: 0, e: 'Draft-answer embeddings bridge the query↔document wording gap.' },
-    { q: 'ColBERT late interaction suits…', o: ['Term-heavy / long docs via token MaxSim', 'Tiny corpora', 'Image search', 'No-index setups'], a: 0, e: 'Token-level matching without joint encoding cost.' }
+    { q: 'ColBERT late interaction suits…', o: ['Term-heavy / long docs via token MaxSim', 'Tiny corpora', 'Image search', 'No-index setups'], a: 0, e: 'Token-level matching without joint encoding cost.' },
+    { q: 'The recall ceiling says a perfect reranker can never exceed…', o: ['The recall of the stages upstream of it', 'Its own parameter count', '100% by definition', 'The embedding model’s benchmark score'], a: 0, e: 'Retrieval is a funnel: end recall ≈ product of stage recalls; rankers cannot rank what was never surfaced.' },
+    { q: 'Sliding each stage’s recall in the funnel shows the strongest lever is…', o: ['The stage with the lowest recall (the bottleneck)', 'Always the cross-encoder', 'The stage with the most candidates', 'The cheapest stage'], a: 0, e: 'Improving a 0.96 stage moves the product less than fixing the 0.70 one.' },
+    { q: 'For agent-driven search, a recall gap is worse than for humans because…', o: ['Agents rerun search–evaluate–decide loops, compounding missing candidates into extra iterations, latency, and tokens', 'Agents prefer lexical search', 'Humans read slower', 'Agents cannot use rerankers'], a: 0, e: 'Each missed passage forces another loop — recall failures multiply cost.' }
   ],
   promptcontracts: [
     { q: 'A prompt contract pins…', o: ['Sections, version, I/O schema, capabilities', 'Only the model name', 'Token limits', 'The temperature'], a: 0, e: 'Four parts make change legality checkable in CI.' },

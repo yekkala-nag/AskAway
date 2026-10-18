@@ -62,3 +62,44 @@ def retrieve_then_rerank(query: str, corpus: list[str], k: int = 5):
 
 # ColBERT: replace cross.predict with token MaxSim; HyDE: embed LLM draft as query.
 `;
+
+// ── Retrieval funnel: recall ceiling + staged narrowing ─────────────────────
+// No reranker can rank a document retrieval never surfaced.
+
+export const FUNNEL_STAGES = [
+  { stage: 'Lexical match', how: 'Exact-term scoring over the whole corpus', candidatesOut: 1000, recall: 0.92, cost: '$', ms: 5 },
+  { stage: 'Vector search', how: 'Embedding neighbors over the lexical shortlist + index', candidatesOut: 400, recall: 0.90, cost: '$', ms: 12 },
+  { stage: 'Hybrid fusion', how: 'Blend lexical and vector ranks; dedupe; metadata filters', candidatesOut: 150, recall: 0.96, cost: '$', ms: 3 },
+  { stage: 'Cross-encoder rerank', how: 'Expensive joint query+doc scoring on finalists only', candidatesOut: 10, recall: 0.98, cost: '$$$', ms: 90 },
+];
+
+// End-to-end recall ≈ product of per-stage recalls (stages are conditional gates).
+export function funnelRecall(recalls) {
+  if (!Array.isArray(recalls) || recalls.length === 0) return 0;
+  return Math.round(recalls.reduce((p, r) => p * r, 1) * 10000) / 10000;
+}
+
+export function bottleneckStage(recalls) {
+  let min = 0;
+  recalls.forEach((r, i) => { if (r < recalls[min]) min = i; });
+  return min;
+}
+
+export function rerankCeiling(recalls) {
+  // Ceiling = recall of everything upstream of the reranker.
+  const upstream = recalls.slice(0, -1);
+  return funnelRecall(upstream.length ? upstream : recalls);
+}
+
+export const FUNNEL_CODE = `# Retrieval as a funnel: cheap-and-wide first, expensive-and-narrow last
+def funnel(query, k=10):
+    stage1 = lexical_search(query, top_n=1000)     # ms, nearly free
+    stage2 = vector_search(query, top_n=400)       # index lookup
+    stage3 = hybrid_fuse(stage1, stage2, n=150)    # rank blend + dedupe
+    stage4 = cross_encoder(query, stage3, n=10)    # $$$ but only 150 pairs
+    return stage4[:k]
+
+# End recall = product of stage recalls.
+# A perfect reranker over stage3 still tops out at stage3's recall.
+# If agents iterate: every missing doc = another search-evaluate loop.
+`;

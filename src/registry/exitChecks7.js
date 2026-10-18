@@ -16,7 +16,10 @@ export const EXIT_CHECKS_G = {
   enterprisegrade: [
     { q: 'Best enterprise AI bets…', o: ['Mundane forecast/anomaly/classify plays', 'Moonshots only', 'Chatbots only', 'Art generation'], a: 0, e: '10–20% compounding edges beat revolutions.' },
     { q: 'Apple Card lesson…', o: ['Proxy features re-infer dropped attributes', 'Gender inputs required', 'Models are fair', 'Data volume fixes bias'], a: 0, e: 'Suppression never removes the signal.' },
-    { q: 'Label-free drift canaries…', o: ['Feature + prediction drift', 'Concept drift', 'Label drift', 'No drift'], a: 0, e: 'Ground truth arrives late; proxies carry the near term.' }
+    { q: 'Label-free drift canaries…', o: ['Feature + prediction drift', 'Concept drift', 'Label drift', 'No drift'], a: 0, e: 'Ground truth arrives late; proxies carry the near term.' },
+    { q: 'The six data requirements begin with…', o: ['Semantic clarity — one term, one meaning, enforced at write time', 'Bigger models', 'More GPUs', 'Longer prompts'], a: 0, e: 'Without shared meaning, entity resolution and everything downstream inherits the ambiguity.' },
+    { q: 'Temporal awareness exists so agents…', o: ['See when facts became and stopped being true — stale context is visible, not silent', 'Run faster queries', 'Skip governance', 'Avoid vector search'], a: 0, e: 'Valid time on every fact kills confident answers built on last quarter’s numbers.' },
+    { q: 'Why can’t vector-only retrieval carry multi-step agent reasoning?', o: ['Nearest neighbors cannot join entities, filter by valid time, or traverse relations', 'Vectors are too large', 'Embeddings expire', 'Agents refuse embeddings'], a: 0, e: 'Operational reasoning needs joins, time, and graphs — a contextual layer, not a bigger index.' }
   ],
   functools: [
     { q: '@total_ordering needs…', o: ['__eq__ plus one ordering method', 'All six dunders', 'No methods', 'Only __init__'], a: 0, e: 'Derives the rest — too slow for hot paths.' },

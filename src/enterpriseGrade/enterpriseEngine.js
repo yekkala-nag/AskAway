@@ -72,3 +72,30 @@ def drift_watch(kind: str) -> str:
     return ("needs labels (slow signal)" if kind in needs_labels
             else "label-free early canary")
 `;
+
+// ── Six data requirements: contextual data layer for agents ─────────────────
+// Demos die beneath the model, at the data layer.
+
+export const SIX_REQUIREMENTS = [
+  { n: 1, name: 'Semantic clarity', detail: 'One term, one meaning across every system the agent touches — mapped, versioned, and enforced at write time.', failureWithout: 'Two systems mean different things by "active customer"; the agent blends them and answers inconsistently.' },
+  { n: 2, name: 'Entity resolution & relationships', detail: 'The same order appearing in two systems resolves to one entity, linked into a traversable graph of relations.', failureWithout: 'The agent counts one customer twice, or cannot join an order to its account at all.' },
+  { n: 3, name: 'Temporal awareness', detail: 'Every fact carries when it became true and when it was recorded; stale context is visible, not silent.', failureWithout: 'Agents reason over last quarter’s balances as if they were current — confidently and silently.' },
+  { n: 4, name: 'Auditability & governance', detail: 'Policy is enforced inside the pipeline path — row filters, purpose limits, approvals — not in a policy document.', failureWithout: 'Governance drifts: the doc says one thing, the query path does another.' },
+  { n: 5, name: 'Agentic integration', detail: 'Agents read and write the same contextual layer instead of rebuilding context from raw logs per query.', failureWithout: 'Each query re-derives context: latency tax, compounded inference cost, inconsistent snapshots.' },
+  { n: 6, name: 'Unified persistence', detail: 'One layer serves vector retrieval, graph traversal, and transactional reads without triple stores to keep in sync.', failureWithout: 'Indexes, graphs, and tables diverge; every sync window is an inconsistency window.' },
+];
+
+export const CONTEXT_TAX = [
+  { signal: 'Context rebuild per query', fragmented: 'Re-join 4 systems, every call — seconds + 4 round trips', persisted: 'One lookup against the resolved layer', exampleCost: '+1.8s p95, ×4 calls' },
+  { signal: 'Staleness window', fragmented: 'Whatever each sync schedule allows', persisted: 'Valid-time on the fact itself', exampleCost: 'Silent wrong answers' },
+  { signal: 'Governance reach', fragmented: 'Policy docs + per-app code', persisted: 'Enforced once in the pipeline', exampleCost: 'Drift per app' },
+  { signal: 'Vector-only retrieval', fragmented: 'Nearest neighbors cannot join, filter by time, or traverse relations', persisted: 'Retrieval + graph + filters on one layer', exampleCost: 'Multi-step reasoning stalls' },
+];
+
+export const REQUIREMENTS_CODE = `# Contextual layer: persist business context, do not re-derive it per query
+ctx = layer.resolve(order_id)          # entities joined + valid-time stamped
+if policy.allows(actor, purpose):      # governance in the query path
+    facts = ctx.retrieve(query, k=10)  # vector + filter + graph, one store
+    graph = ctx.neighbors(entity, hops=2)
+# Agents read AND write here — context survives the session.
+`;

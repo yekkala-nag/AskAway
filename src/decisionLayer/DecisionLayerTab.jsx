@@ -12,6 +12,11 @@ import {
   EVAL_DIMENSIONS,
   CODE_CONTRACT,
   CODE_SELECTIVE,
+  QUESTION_TYPES,
+  WHEN_TO_USE,
+  predicateToAction,
+  DECISIONS_CODE,
+  TYPED_NOTES,
 } from './decisionLayerEngine.js';
 
 const { Container, Stack, Grid } = Primitives;
@@ -21,6 +26,7 @@ const PURPLE_DARK = '#5B4B8A';
 const TEAL = '#3A9B9F';
 const TEAL_DARK = '#1A6B6E';
 const RED = '#B4553A';
+const AMBER = '#B9821F';
 const ROUTE_COLORS = { retrieval: '#3A9B9F', billing: '#B4553A', security: '#5B4B8A', human_review: '#94A3B8' };
 
 const SUBTABS = [
@@ -29,6 +35,7 @@ const SUBTABS = [
   { id: 'simulator', icon: '🎚️', label: '3. Policy Simulator', desc: 'Threshold, margin, abstain' },
   { id: 'contract', icon: '📋', label: '4. Contract & Eval', desc: '5 steps, 4 dimensions' },
   { id: 'code', icon: '🛠️', label: '5. Code', desc: 'Typed decision + selective risk' },
+  { id: 'typed', icon: '🎯', label: '6. Typed Questions', desc: 'Predicate, choice, score' },
 ];
 
 function Lane({ y, title, color, nodes, dashedAfter }) {
@@ -192,6 +199,170 @@ function PolicySim() {
   );
 }
 
+function TypedQuestionsPanel() {
+  const [prob, setProb] = useState(0.74);
+  const [threshold, setThreshold] = useState(0.70);
+  const action = useMemo(() => predicateToAction(prob, threshold), [prob, threshold]);
+
+  const shapeMeta = {
+    predicate: { icon: '🎚️', color: TEAL_DARK, headline: 'A dial, not a switch' },
+    choice: { icon: '🧾', color: PURPLE_DARK, headline: 'One pick from a list' },
+    score: { icon: '📊', color: AMBER, headline: 'One level on a rubric' },
+  };
+
+  const shapeColumns = [
+    { key: 'shape', header: 'Shape', render: (v, row) => (
+      <strong style={{ color: shapeMeta[v].color }}>{shapeMeta[v].icon} {v}</strong>
+    ) },
+    { key: 'returns', header: 'What comes back', sortable: false },
+    { key: 'yourCodeOwns', header: 'What your code owns', sortable: false },
+    { key: 'example', header: 'Example', render: (v) => (
+      <span style={{ fontFamily: 'ui-monospace, monospace', fontSize: 11.5 }}>{v}</span>
+    ) },
+  ];
+
+  const useColumns = [
+    { key: 'approach', header: 'Option', render: (v) => <strong style={{ color: TEAL_DARK }}>{v}</strong> },
+    { key: 'use', header: 'Use it for', sortable: false },
+    { key: 'avoid', header: 'Avoid it for', sortable: false },
+    { key: 'tell', header: 'The tell', render: (v) => <span style={{ color: PURPLE_DARK }}>{v}</span> },
+  ];
+
+  return (
+    <Stack gap={6}>
+      <Card style={{ padding: 'var(--ds-space-5)', background: 'var(--ds-color-bg-surface)' }}>
+        <h3 style={{ margin: '0 0 4px 0' }}>Three question shapes — bounded answers, no freeform generation</h3>
+        <p style={{ margin: '0 0 12px 0', color: 'var(--ds-color-text-secondary)', fontSize: 'var(--ds-font-size-bodySm)' }}>
+          Fast typed-decision endpoints exist for questions with defined answers. Each shape returns something typed; the judgment about what to do with it stays in your code.
+        </p>
+        <Grid columns={{ base: '1fr', md: '1fr 1fr 1fr' }} gap="var(--ds-space-3)">
+          {QUESTION_TYPES.map((q) => (
+            <div key={q.shape} style={{
+              padding: 'var(--ds-space-4)', borderRadius: 'var(--ds-radius-md)',
+              border: `1.5px solid ${shapeMeta[q.shape].color}`, background: 'var(--ds-color-bg-canvas)',
+            }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 6 }}>
+                <span style={{ fontSize: 16 }}>{shapeMeta[q.shape].icon}</span>
+                <strong style={{ fontSize: 14, color: shapeMeta[q.shape].color }}>{q.shape}</strong>
+                <span style={{ fontSize: 11, color: 'var(--ds-color-text-tertiary)' }}>{shapeMeta[q.shape].headline}</span>
+              </div>
+              <div style={{ fontSize: 12, lineHeight: 1.6, color: 'var(--ds-color-text-secondary)' }}>{q.returns}</div>
+              <div style={{ fontSize: 11.5, lineHeight: 1.6, color: 'var(--ds-color-text-secondary)', marginTop: 8, paddingTop: 8, borderTop: '1px solid var(--ds-color-border-subtle)' }}>
+                <strong style={{ color: shapeMeta[q.shape].color }}>Your code owns: </strong>{q.yourCodeOwns}
+              </div>
+              <div style={{ fontFamily: 'ui-monospace, monospace', fontSize: 11, color: 'var(--ds-color-text-tertiary)', marginTop: 8 }}>{q.example}</div>
+            </div>
+          ))}
+        </Grid>
+        <Table columns={shapeColumns} data={QUESTION_TYPES} sortable={false} style={{ marginTop: 12 }} />
+      </Card>
+
+      <Card style={{ padding: 'var(--ds-space-5)', background: 'var(--ds-color-bg-surface)' }}>
+        <Stack gap={4}>
+          <div>
+            <h3 style={{ margin: 0 }}>Predicate → action: where the threshold lives</h3>
+            <p style={{ margin: '4px 0 0 0', color: 'var(--ds-color-text-secondary)', fontSize: 'var(--ds-font-size-bodySm)' }}>
+              The endpoint returns 0–1. Drag the probability across your threshold and watch the verdict flip — the crossing is decided by policy code you can test, not by the model.
+            </p>
+          </div>
+
+          <Grid columns={{ base: '1fr', md: '1fr 1fr' }} gap="var(--ds-space-4)">
+            <div>
+              <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 4 }}>
+                <span style={{ fontSize: 12.5, fontWeight: 600 }}>Returned probability</span>
+                <span style={{ fontFamily: 'ui-monospace, monospace', fontSize: 13, fontWeight: 700, color: TEAL_DARK }}>{prob.toFixed(2)}</span>
+              </div>
+              <input type="range" min={0} max={1} step={0.01} value={prob}
+                onChange={(e) => setProb(parseFloat(e.target.value))}
+                style={{ width: '100%', accentColor: TEAL, cursor: 'pointer' }} aria-label="Returned probability" />
+            </div>
+            <div>
+              <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 4 }}>
+                <span style={{ fontSize: 12.5, fontWeight: 600 }}>Your threshold (policy)</span>
+                <span style={{ fontFamily: 'ui-monospace, monospace', fontSize: 13, fontWeight: 700, color: PURPLE_DARK }}>{threshold.toFixed(2)}</span>
+              </div>
+              <input type="range" min={0.5} max={0.95} step={0.01} value={threshold}
+                onChange={(e) => setThreshold(parseFloat(e.target.value))}
+                style={{ width: '100%', accentColor: PURPLE, cursor: 'pointer' }} aria-label="Policy threshold" />
+            </div>
+          </Grid>
+
+          <div style={{ position: 'relative', height: 30, borderRadius: 8, background: '#EEF1F4', overflow: 'hidden' }}>
+            <div style={{
+              position: 'absolute', left: 0, top: 0, bottom: 0, width: `${action.probability == null ? 0 : action.probability * 100}%`,
+              background: action.pass ? TEAL : RED, transition: 'width var(--ds-motion-duration-base)',
+            }} />
+            <div style={{ position: 'absolute', top: 0, bottom: 0, left: `${threshold * 100}%`, width: 3, background: PURPLE_DARK }} />
+            <span style={{
+              position: 'absolute', left: 8, top: 6, fontSize: 11.5, fontWeight: 700,
+              color: action.pass ? '#FFFFFF' : 'var(--ds-color-text-primary)',
+            }}>
+              probability {action.probability == null ? 'refused' : action.probability.toFixed(2)}
+            </span>
+            <span style={{
+              position: 'absolute', right: 8, top: 6, fontSize: 11, fontWeight: 600, color: PURPLE_DARK,
+            }}>
+              threshold {action.thresholdUsed.toFixed(2)}
+            </span>
+          </div>
+
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, alignItems: 'center' }}>
+            <Badge variant="default" style={{
+              background: action.pass ? '#E3F2F2' : '#FBEAE4', color: action.pass ? TEAL_DARK : RED,
+              border: `1px solid ${action.pass ? TEAL : RED}`,
+            }}>
+              {action.pass ? `pass → take the action (≥ ${action.thresholdUsed.toFixed(2)})` : `hold → fallback (< ${action.thresholdUsed.toFixed(2)})`}
+            </Badge>
+            <Badge variant="default" style={{ background: '#F5F3FA', color: PURPLE_DARK, border: '1px solid #C9C0E0' }}>
+              predicateToAction({action.probability == null ? 'null' : action.probability.toFixed(2)}, {action.thresholdUsed.toFixed(2)}).pass = {String(action.pass)}
+            </Badge>
+          </div>
+
+          {action.warning && (
+            <div style={{
+              fontSize: 12, color: '#6B4A0F', background: '#FFF4E5', border: `1px solid ${AMBER}`,
+              borderRadius: 8, padding: '8px 12px',
+            }}>
+              ⚠ {action.warning}
+            </div>
+          )}
+        </Stack>
+      </Card>
+
+      <Grid columns={{ base: '1fr', md: '1fr 1fr' }} gap="var(--ds-space-4)">
+        <Callout type="warning" title="Answers can refuse — check the type first">
+          A typed answer is not guaranteed: the endpoint may refuse instead of returning a probability, a choice, or a level. Branch on the answer type before reading any field, and give refusal its own fallback — a missing field read on a refused answer is a crash or a silent wrong route.
+        </Callout>
+        <Callout type="info" title="Always leave a “general” option out">
+          A choice list is a closed world: if the message fits none of your options and you did not include a general/other choice, unmatched inputs have nowhere to go — they get forced into the nearest wrong bucket. Add the escape option, then test your choices against real messages, not synthetic ones.
+        </Callout>
+      </Grid>
+
+      <Card style={{ padding: 'var(--ds-space-5)', background: 'var(--ds-color-bg-surface)' }}>
+        <h3 style={{ margin: '0 0 4px 0' }}>Which tool for which question</h3>
+        <p style={{ margin: '0 0 12px 0', color: 'var(--ds-color-text-secondary)', fontSize: 'var(--ds-font-size-bodySm)' }}>
+          The decision endpoint is one option, not the default. The tell in the last column is what actually decides it.
+        </p>
+        <Table columns={useColumns} data={WHEN_TO_USE} sortable={false} />
+        <Grid columns={{ base: '1fr', md: '1fr 1fr 1fr' }} gap="var(--ds-space-3)" style={{ marginTop: 12 }}>
+          {TYPED_NOTES.map((n) => (
+            <div key={n.title} style={{
+              padding: 'var(--ds-space-3)', borderRadius: 'var(--ds-radius-md)',
+              background: 'var(--ds-color-bg-canvas)', border: '1px solid var(--ds-color-border-subtle)',
+            }}>
+              <div style={{ fontSize: 12.5, fontWeight: 700, color: TEAL_DARK, marginBottom: 4 }}>{n.title}</div>
+              <div style={{ fontSize: 11.5, lineHeight: 1.6, color: 'var(--ds-color-text-secondary)' }}>{n.detail}</div>
+            </div>
+          ))}
+        </Grid>
+        <div style={{ marginTop: 12 }}>
+          <CodeBlock language="javascript" code={DECISIONS_CODE} />
+        </div>
+      </Card>
+    </Stack>
+  );
+}
+
 export default function DecisionLayerTab() {
   const [activeSubTab, setActiveSubTab] = useState('stack');
 
@@ -341,6 +512,8 @@ export default function DecisionLayerTab() {
             </Card>
           </Stack>
         )}
+
+        {activeSubTab === 'typed' && <TypedQuestionsPanel />}
       </Container>
     </div>
   );

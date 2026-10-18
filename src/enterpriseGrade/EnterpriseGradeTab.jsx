@@ -3,9 +3,67 @@ import * as Primitives from '../components/layout/Primitives.jsx';
 import { Hero, CodeBlock } from '../components/ui/Content.jsx';
 import { Card, Badge, Button, Callout } from '../components/ui/Core.jsx';
 import DiagramImage from '../components/ui/DiagramImage.jsx';
-import { VALUE_PLAYS, DATA_DILIGENCE, BIAS_TRAPS, DEPLOY_QUESTIONS, DRIFT_TYPES, READINESS_SCORE, PYTHON_ENTERPRISE_CODE } from './enterpriseEngine.js';
+import { VALUE_PLAYS, DATA_DILIGENCE, BIAS_TRAPS, DEPLOY_QUESTIONS, DRIFT_TYPES, READINESS_SCORE, PYTHON_ENTERPRISE_CODE, SIX_REQUIREMENTS, CONTEXT_TAX, REQUIREMENTS_CODE } from './enterpriseEngine.js';
 
 const { Container, Grid, Flex, Stack } = Primitives;
+
+function RequirementsPanel() {
+  const [sel, setSel] = React.useState(1);
+  const activeReq = SIX_REQUIREMENTS.find((r) => r.n === sel) || SIX_REQUIREMENTS[0];
+  return (
+    <Stack gap={4}>
+      <svg viewBox="0 0 760 130" style={{ width: '100%', height: 'auto' }} role="img" aria-label="six data requirements grid">
+        {SIX_REQUIREMENTS.map((r, i) => {
+          const x = 8 + i * 125;
+          const on = r.n === sel;
+          return (
+            <g key={r.n} style={{ cursor: 'pointer' }} onClick={() => setSel(r.n)} role="button" tabIndex={0}
+              onKeyDown={(e) => { if (e.key === 'Enter') setSel(r.n); }}>
+              <rect x={x} y={26} width={114} height={70} rx={12}
+                fill={on ? '#E8F3F3' : 'var(--ds-color-bg-surfaceHover)'}
+                stroke={on ? '#3A9B9F' : 'var(--ds-color-border-subtle)'} strokeWidth={on ? 2 : 1.5} />
+              <text x={x + 12} y={52} fontSize={14} fontWeight={800} fill={on ? '#1A6B6E' : '#5B4B8A'}>0{r.n}</text>
+              <text x={x + 12} y={74} fontSize={10.5} fill="var(--ds-color-text-primary)">
+                {r.name.length > 18 ? `${r.name.slice(0, 17)}…` : r.name}
+              </text>
+            </g>
+          );
+        })}
+      </svg>
+      <Grid columns={{ base: '1fr', md: '1fr 1fr' }} gap="var(--ds-space-4)">
+        <Card style={{ padding: 'var(--ds-space-4)', background: 'var(--ds-color-bg-surfaceHover)' }}>
+          <Badge variant="default">requirement 0{activeReq.n}</Badge>
+          <div style={{ fontSize: 16, fontWeight: 800, color: '#1A6B6E', margin: '6px 0 4px' }}>{activeReq.name}</div>
+          <div style={{ fontSize: 12.5, color: 'var(--ds-color-text-secondary)' }}>{activeReq.detail}</div>
+        </Card>
+        <Card style={{ padding: 'var(--ds-space-4)', background: '#FDF0EC', border: '1.5px solid #B4553A' }}>
+          <div style={{ fontSize: 11, fontWeight: 700, color: '#B4553A' }}>WITHOUT IT</div>
+          <div style={{ fontSize: 12.5, color: 'var(--ds-color-text-primary)', marginTop: 6 }}>{activeReq.failureWithout}</div>
+        </Card>
+      </Grid>
+      <div style={{ overflowX: 'auto' }}>
+        <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '11.5px' }}>
+          <thead><tr style={{ borderBottom: '2px solid var(--ds-color-border-subtle)', color: 'var(--ds-color-text-secondary)' }}>
+            <th style={{ textAlign: 'left', padding: 8 }}>Signal</th>
+            <th style={{ textAlign: 'left', padding: 8 }}>Fragmented stack</th>
+            <th style={{ textAlign: 'left', padding: 8 }}>Persisted layer</th>
+            <th style={{ padding: 8 }}>Hidden cost</th>
+          </tr></thead>
+          <tbody>{CONTEXT_TAX.map((t, i) => (
+            <tr key={i} style={{ borderBottom: '1px solid var(--ds-color-border-subtle)' }}>
+              <td style={{ padding: 8, color: 'white', fontWeight: 700 }}>{t.signal}</td>
+              <td style={{ padding: 8, color: 'var(--ds-color-text-secondary)' }}>{t.fragmented}</td>
+              <td style={{ padding: 8, color: '#5EC4C8' }}>{t.persisted}</td>
+              <td style={{ padding: 8, textAlign: 'center', color: '#F5A623' }}>{t.exampleCost}</td>
+            </tr>))}</tbody>
+        </table>
+      </div>
+      <Callout type="tip" title="Vector-only retrieval hits a wall">
+        Nearest neighbors cannot join entities, filter by valid time, or traverse relations. Once an agent reasons across steps — not just retrieves a passage — it needs a contextual layer, not a bigger index.
+      </Callout>
+    </Stack>
+  );
+}
 const NAV = { display: 'flex', gap: 'var(--ds-space-2)', marginBottom: 'var(--ds-space-6)', background: 'var(--ds-color-bg-surface)', padding: 'var(--ds-space-2)', borderRadius: 'var(--ds-radius-lg)', border: '1px solid var(--ds-color-border-subtle)', overflowX: 'auto' };
 const navBtn = (a, b) => ({ flex: 1, minWidth: '200px', padding: 'var(--ds-space-3) var(--ds-space-4)', borderRadius: 'var(--ds-radius-md)', border: 'none', background: a === b ? 'var(--ds-color-module-foundations-primary)' : 'transparent', color: a === b ? 'white' : 'var(--ds-color-text-secondary)', cursor: 'pointer', textAlign: 'left' });
 const FLAGS = [['data', 'Data diligence'], ['bias', 'Bias tested'], ['perf', 'Good-enough bench'], ['deploy', 'Deploy answers'], ['monitor', 'Monitoring live'], ['buyin', 'Buy-in secured']];
@@ -27,7 +85,8 @@ export default function EnterpriseGradeTab() {
         <div style={NAV}>{[
           { id: 'plays', icon: '🏭', label: '1. Plays + Data', desc: 'Value + diligence' },
           { id: 'sim', icon: '🔬', label: '2. Readiness Sim', desc: 'Score your program' },
-          { id: 'code', icon: '🛠️', label: '3. Gate Code', desc: 'Weighted ship gate' }].map(t => (
+          { id: 'code', icon: '🛠️', label: '3. Gate Code', desc: 'Weighted ship gate' },
+          { id: 'agentdata', icon: '🗄️', label: '4. Agent Data Layer', desc: 'Six requirements' }].map(t => (
           <button key={t.id} onClick={() => setSub(t.id)} style={navBtn(sub, t.id)}><div style={{ display: 'flex', gap: '8px', fontSize: 'var(--ds-font-size-body)' }}><span>{t.icon}</span><span>{t.label}</span></div><div style={{ fontSize: 'var(--ds-font-size-caption)', opacity: 0.75 }}>{t.desc}</div></button>))}
         </div>
         {sub === 'plays' && (<Stack gap={6}><Card style={{ padding: 'var(--ds-space-5)', background: 'var(--ds-color-bg-canvas)' }}><Stack gap={3}>
@@ -71,6 +130,14 @@ export default function EnterpriseGradeTab() {
           <div><h3 style={{ margin: 0 }}>🛠️ Readiness gate + drift sketch</h3></div>
           <CodeBlock language="python" code={PYTHON_ENTERPRISE_CODE} />
           <Callout type="success"><strong>Root-cause speed is the MLOps KPI:</strong> tools differ, but time-to-cause decides impact. Monitor integrity, health, and all four drifts — then buy-in follows results.</Callout>
+        </Stack></Card></Stack>)}
+        {sub === 'agentdata' && (<Stack gap={6}><Card style={{ padding: 'var(--ds-space-5)', background: 'var(--ds-color-bg-canvas)' }}><Stack gap={4}>
+          <div><h3 style={{ margin: 0 }}>🗄️ Six data requirements — where demos melt</h3>
+            <p style={{ margin: '4px 0 0 0', fontSize: 12, color: 'var(--ds-color-text-secondary)' }}>
+              Pilot agents fail beneath the model: fragmented context, stale facts, governance in a doc. Click a requirement to see what breaks without it.
+            </p></div>
+          <RequirementsPanel />
+          <CodeBlock language="python" code={REQUIREMENTS_CODE} />
         </Stack></Card></Stack>)}
       </Container>
     </div>
