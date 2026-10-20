@@ -242,6 +242,7 @@ export const TOPIC_META = {
   pythonengineering: { c: 'data_scale', l: 2, p: ['pythonprofiling'] },
   nsquaredpizza: { c: 'data_scale', l: 2, p: ['pythonengineering'] },
   functools: { c: 'data_scale', l: 2, p: [] },
+  pydescriptors: { c: 'data_scale', l: 2, p: ['functools'] },
   llmfinetuning: { c: 'data_scale', l: 3, p: ['quantserve'] },
   // ── Production & Frontiers (20) ──
   practices: { c: 'fr_eval', l: 1, p: [] },

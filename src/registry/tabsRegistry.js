@@ -28,7 +28,7 @@ export const UMBRELLA_TOPICS = [
     color: "#3A9B9F",
     dark: "#1F6B6E",
     description: "Roadmap stage 5: embeddings, vector search and document pipelines that feed retrieval",
-    tabs: ["data_found_hub", "data_docs_hub", "data_ml_hub", "data_scale_hub", "threelayers", "docstruct", "agenticparsing", "knowledgebase", "vectordbops", "datapipeline", "aidataplat", "medallionarch", "aitestdatabottleneck", "classicalml", "frauddetectionml", "modernioformats", "pythonprofiling", "pythonengineering", "nsquaredpizza", "functools", "activelearn", "goaltracker", "vaes", "keras3", "byol", "xlstm", "timeseriesanomaly", "aiusecases", "agenticuiworkflow", "linearregression", "pandasdataframes", "pandasmem", "geopopviz", "datahumanization", "llmfinetuning", "multilingualclassification", "textclusteringhdbscan", "forecasttraps"]
+    tabs: ["data_found_hub", "data_docs_hub", "data_ml_hub", "data_scale_hub", "threelayers", "docstruct", "agenticparsing", "knowledgebase", "vectordbops", "datapipeline", "aidataplat", "medallionarch", "aitestdatabottleneck", "classicalml", "frauddetectionml", "modernioformats", "pythonprofiling", "pythonengineering", "nsquaredpizza", "functools", "pydescriptors", "activelearn", "goaltracker", "vaes", "keras3", "byol", "xlstm", "timeseriesanomaly", "aiusecases", "agenticuiworkflow", "linearregression", "pandasdataframes", "pandasmem", "geopopviz", "datahumanization", "llmfinetuning", "multilingualclassification", "textclusteringhdbscan", "forecasttraps"]
   },
   {
     id: "rag_architecture",
@@ -1238,6 +1238,15 @@ export const TABS_REGISTRY = [
     icon: "🐍",
     keywords: ["functools", "total_ordering", "partial", "singledispatch", "lru_cache", "decorators", "python tricks"],
     component: lazy(() => import("../functools/FunctoolsTab.jsx"))
+  },
+  {
+    id: "pydescriptors",
+    label: "Python Descriptors",
+    umbrellaId: "data_platform",
+    category: "Data & Platform Layers",
+    icon: "🪝",
+    keywords: ["python descriptors", "controlled attributes", "validated attribute", "computed attribute", "lazy loading", "__get__", "__set__", "__set_name__", "attribute protocol", "data descriptor"],
+    component: lazy(() => import("../pyDescriptors/PyDescriptorsTab.jsx"))
   },
   {
     id: "activelearn",
