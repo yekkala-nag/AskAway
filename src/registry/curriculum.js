@@ -147,6 +147,7 @@ export const TOPIC_META = {
   capstone3: { c: 'rag_advanced', l: 3, p: ['agenticrag'] },
   ragcasestudies: { c: 'rag_practice', l: 2, p: ['prodrag'] },
   interviewprep: { c: 'rag_practice', l: 2, p: ['rag'] },
+  raginterview: { c: 'rag_practice', l: 2, p: ['rag'] },
   capstone1: { c: 'rag_practice', l: 1, p: ['pipeline'] },
   // ── Context & Memory (10) ──
   ctxeng: { c: 'ctx_craft', l: 1, p: [] },

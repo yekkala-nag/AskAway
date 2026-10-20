@@ -37,7 +37,7 @@ export const UMBRELLA_TOPICS = [
     color: "#F0A89A",
     dark: "#C47A6A",
     description: "Roadmap stage 6: RAG systems end to end",
-    tabs: ["rag_core_hub", "rag_precision_hub", "rag_advanced_hub", "rag_practice_hub", "rag", "pipeline", "completepipeline", "qparseloop", "filtering", "hierrag", "prodrag", "routercheap", "rerankers", "rageval", "multilingualrag", "multimodalrag", "texttosql", "crossdocjoins", "genpatterns", "fourpdfs", "agentfanout", "hallucbricks", "workflowloop", "proxypointer", "agenticrag", "ragcasestudies", "interviewprep", "rowlevelrag", "tablegridrag", "graphtraversalknowledge", "graphrag_system1", "temporalgraphrag", "ragcorpusshapes", "amplifyexpert", "ragchunking", "zerorag", "textclassificationdata", "capstone1", "capstone3"]
+    tabs: ["rag_core_hub", "rag_precision_hub", "rag_advanced_hub", "rag_practice_hub", "rag", "pipeline", "completepipeline", "qparseloop", "filtering", "hierrag", "prodrag", "routercheap", "rerankers", "rageval", "multilingualrag", "multimodalrag", "texttosql", "crossdocjoins", "genpatterns", "fourpdfs", "agentfanout", "hallucbricks", "workflowloop", "proxypointer", "agenticrag", "ragcasestudies", "interviewprep", "raginterview", "rowlevelrag", "tablegridrag", "graphtraversalknowledge", "graphrag_system1", "temporalgraphrag", "ragcorpusshapes", "amplifyexpert", "ragchunking", "zerorag", "textclassificationdata", "capstone1", "capstone3"]
   },
   {
     id: "context_memory",
@@ -503,6 +503,15 @@ export const TABS_REGISTRY = [
     icon: "🎯",
     keywords: ["interview", "questions", "rag interview", "q&a", "study plan"],
     component: lazy(() => import("../tabs/InterviewPrepTab.jsx"))
+  },
+  {
+    id: "raginterview",
+    label: "30 Senior RAG Answers",
+    umbrellaId: "rag_architecture",
+    category: "RAG Systems",
+    icon: "🎓",
+    keywords: ["rag interview", "senior answers", "pro insight", "lost in the middle", "hybrid search", "rrf", "reranker", "ragas metrics", "hallucination gate", "production rag"],
+    component: lazy(() => import("../ragInterview/RagInterviewTab.jsx"))
   },
   {
     id: "capstone1",

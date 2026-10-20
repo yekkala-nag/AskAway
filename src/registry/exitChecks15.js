@@ -1,5 +1,5 @@
 /**
- * Exit-check bank O — 8 tabs lacking quizzes.
+ * Exit-check bank O — tabs lacking quizzes.
  * Same shape as exitChecks3.js: tabid -> [ { q, o:[x4], a, e }, x3 ].
  */
 export const EXIT_CHECKS_O = {
@@ -60,5 +60,10 @@ export const EXIT_CHECKS_O = {
     { q: 'The sequential pipeline’s key context move is…', o: ['State projection — each specialist sees only its slice, never the prior step’s raw logs', 'Sharing the full chat with every node', 'Deleting all state', 'Doubling the prompt each step'], a: 0, e: 'The writer never reads the scraped pages; token cost stays flat and “lost in the middle” shrinks.' },
     { q: 'Where should a fixed iteration cap and identical-call warning live?', o: ['The circuit breaker around the loop — trip at N or on repeated identical tool calls', 'Inside the model’s weights', 'In the temperature setting', 'Nowhere — loops self-terminate'], a: 0, e: 'Hard caps plus warning injection stop the classic stuck-on-a-failing-tool spiral.' },
     { q: 'Strategic reflection recommends LLM critics…', o: ['Only on final high-stakes output; deterministic checks (JSON validation, tests) mid-pipeline', 'On every single node', 'Never', 'Only on the swarm'], a: 0, e: 'Critique-everywhere is slow and expensive; reserve model critics where errors actually matter — a supervisor already critiques its workers.' },
+  ],
+  raginterview: [
+    { q: 'The hidden 7th pipeline component that separates a demo from a production system is…', o: ['Evaluation & observability — golden dataset plus tracing so every change is measured', 'A bigger context window', 'A darker dashboard theme', 'More prompt adjectives'], a: 0, e: 'Without eval and traces you are flying blind and cannot prove a change improved anything.' },
+    { q: 'In the lost-in-the-middle simulator, attention to a chunk in the middle of the prompt is…', o: ['Weakest — the U-shaped curve favors the start and end, so rerank to top 3–5 and restate the best chunk last', 'Highest of all positions', 'Identical everywhere', 'Only a problem above 100 tokens'], a: 0, e: 'Attention peaks at the edges (~100%) and dips to ~30% in the middle — position is a design choice.' },
+    { q: 'Reciprocal Rank Fusion ranks a document highly when…', o: ['It ranks well in BOTH the dense and sparse lists — no score normalization needed, just one constant k≈60', 'It has the longest text', 'It was indexed first', 'Its embedding has the most dimensions'], a: 0, e: 'RRF sums 1/(k+rank) across lists, rewarding agreement between retrievers for free.' },
   ],
 };
