@@ -165,6 +165,7 @@ export const TOPIC_META = {
   fiveassets: { c: 'agt_found', l: 1, p: [] },
   redesign: { c: 'agt_found', l: 1, p: [] },
   projectprepframework: { c: 'agt_found', l: 1, p: ['fiveassets'] },
+  interviewmindset: { c: 'agt_found', l: 1, p: [] },
   agentsastools: { c: 'agt_found', l: 1, p: ['fiveassets'] },
   toolcalling: { c: 'agt_found', l: 1, p: ['agentsastools'] },
   agenttasks: { c: 'agt_found', l: 1, p: ['fiveassets'] },

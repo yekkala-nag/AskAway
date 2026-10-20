@@ -55,7 +55,7 @@ export const UMBRELLA_TOPICS = [
     color: "#F0A89A",
     dark: "#C47A6A",
     description: "Roadmap stage 7: agents, MCP and production deployment",
-    tabs: ["agt_found_hub", "agt_safety_hub", "agt_multi_hub", "agt_prod_hub", "fiveassets", "redesign", "projectprepframework", "agentplanner", "agenthitl", "agentcontrolplane", "agentlifecycle", "agenta2a", "agentsandbox", "agentevals", "handoffwatch", "verifiedpipes", "codingevals", "claudecode100", "typedagentgate", "agentpairprogramming", "vibecode", "agentsastools", "toolcalling", "agenttasks", "agentmemory", "cliagent", "codingagentsnonprog", "multiagent", "multiagentcoord", "modelrouting", "decision_layer", "langchain", "langgraph", "frameworkcompare", "agentdebugging", "agentscale", "modeldeploy", "aiproductbuilder", "mcpclient", "agentsdk", "loopengineering", "finassistproject", "zerocostmultiagent", "capstone2", "functionalscars", "refactorhealth", "agentcreativity", "agentorgchart", "synasyncagent", "agentpatterns"]
+    tabs: ["agt_found_hub", "agt_safety_hub", "agt_multi_hub", "agt_prod_hub", "fiveassets", "redesign", "projectprepframework", "agentplanner", "agenthitl", "agentcontrolplane", "agentlifecycle", "agenta2a", "agentsandbox", "agentevals", "handoffwatch", "verifiedpipes", "codingevals", "claudecode100", "typedagentgate", "agentpairprogramming", "vibecode", "agentsastools", "toolcalling", "agenttasks", "agentmemory", "cliagent", "codingagentsnonprog", "multiagent", "multiagentcoord", "modelrouting", "decision_layer", "langchain", "langgraph", "frameworkcompare", "agentdebugging", "agentscale", "modeldeploy", "aiproductbuilder", "mcpclient", "agentsdk", "loopengineering", "finassistproject", "zerocostmultiagent", "capstone2", "functionalscars", "refactorhealth", "agentcreativity", "agentorgchart", "synasyncagent", "agentpatterns", "interviewmindset"]
   },
   {
     id: "frontiers_production",
@@ -786,6 +786,15 @@ export const TABS_REGISTRY = [
     icon: "🧭",
     keywords: ["solve the right problem", "project preparation framework", "agentic ai", "PID", "discovery report", "functional requirements", "technical requirements", "governance RACI", "roadmap", "reversibility"],
     component: lazy(() => import("../projectPrepFramework/ProjectPrepFrameworkTab.jsx"))
+  },
+  {
+    id: "interviewmindset",
+    label: "Interview Mindset",
+    umbrellaId: "agents_frameworks",
+    category: "Agents & Frameworks",
+    icon: "🎯",
+    keywords: ["interview mindset", "coding interview", "system design round", "behavioral interview", "STAR method", "ai-assisted coding", "trade-offs", "hints", "verification", "big tech loop", "bluffing", "hiring"],
+    component: lazy(() => import("../interviewMindset/InterviewMindsetTab.jsx"))
   },
   {
     id: "agentplanner",
