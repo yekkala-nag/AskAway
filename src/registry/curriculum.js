@@ -108,9 +108,12 @@ export const TOPIC_META = {
   slashcommands: { c: 'fnd_prompts', l: 1, p: ['promptfundamentals'] },
   prompt_studio: { c: 'fnd_prompts', l: 2, p: ['promptfundamentals'] },
   prompt_frameworks: { c: 'fnd_prompts', l: 2, p: ['prompt_studio'] },
+  promptalignment: { c: 'fnd_prompts', l: 2, p: ['promptfundamentals'] },
+  mlproblems: { c: 'fnd_start', l: 1, p: [] },
   prompt_methodologies: { c: 'fnd_prompts', l: 2, p: ['prompt_studio'] },
   aimoralagency: { c: 'fnd_mlsoc', l: 2, p: ['reinforcementlearning'] },
   humancentric: { c: 'fnd_mlsoc', l: 2, p: ['aimoralagency'] },
+  aigap: { c: 'fnd_mlsoc', l: 1, p: [] },
   dialoguelamda: { c: 'fnd_mlsoc', l: 2, p: ['selfattention'] },
   // ── RAG (26) ──
   rag: { c: 'rag_core', l: 1, p: [] },

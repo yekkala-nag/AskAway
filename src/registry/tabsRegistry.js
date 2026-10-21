@@ -19,7 +19,7 @@ export const UMBRELLA_TOPICS = [
     color: "#5EC4C8",
     dark: "#1F6B6E",
     description: "Roadmap stages 1–4: orientation, how LLMs work, prompting, models — home of the AI Engineer Roadmap",
-    tabs: ["fnd_start_hub", "fnd_internals_hub", "fnd_prompts_hub", "fnd_mlsoc_hub", "fnd_multimodal_hub", "airoadmap", "overview", "glossary", "reinforcementlearning", "trpo2grpo", "aimoralagency", "humancentric", "dialoguelamda", "modellandscape", "tokenization", "quantserve", "vramconductor", "promptfundamentals", "lstm", "llmsampling", "grokking", "selfattention", "posencoding", "archconcepts", "system1head", "promptmgmt", "promptdependencygraph", "promptcontracts", "promptregression", "structuredoutputs", "topicmodeling", "workflows", "unhobbling", "aiharness", "promptlearning", "visionlanguage", "diffusionmodels", "speechvoice", "datacentricai", "prompt_studio", "prompt_frameworks", "prompt_methodologies", "threesentenceprompt", "slashcommands", "ailearning", "reversalcurse"]
+    tabs: ["fnd_start_hub", "fnd_internals_hub", "fnd_prompts_hub", "fnd_mlsoc_hub", "fnd_multimodal_hub", "airoadmap", "overview", "glossary", "reinforcementlearning", "trpo2grpo", "aimoralagency", "humancentric", "dialoguelamda", "modellandscape", "tokenization", "quantserve", "vramconductor", "promptfundamentals", "lstm", "llmsampling", "grokking", "selfattention", "posencoding", "archconcepts", "system1head", "promptmgmt", "promptdependencygraph", "promptcontracts", "promptregression", "structuredoutputs", "topicmodeling", "workflows", "unhobbling", "aiharness", "promptlearning", "visionlanguage", "diffusionmodels", "speechvoice", "datacentricai", "prompt_studio", "prompt_frameworks", "prompt_methodologies", "threesentenceprompt", "slashcommands", "ailearning", "reversalcurse", "aigap", "promptalignment", "mlproblems"]
   },
   {
     id: "data_platform",
@@ -141,6 +141,15 @@ export const TABS_REGISTRY = [
     icon: "🧡",
     keywords: ["human-centric", "manifesto", "do no harm", "value-sensitive design", "filter bubble", "facct", "compliance"],
     component: lazy(() => import("../humanCentric/HumanCentricTab.jsx"))
+  },
+  {
+    id: "aigap",
+    label: "Bridging the AI Gap",
+    umbrellaId: "foundations",
+    category: "Foundations",
+    icon: "🌉",
+    keywords: ["ai understanding gap", "ai adoption", "show don't tell", "context engineering", "skeptic", "red team prompt", "grounding", "reconciliation", "verifiable wins", "anti-hype", "guardrails", "micro-wins"],
+    component: lazy(() => import("../aiGap/AiGapTab.jsx"))
   },
   {
     id: "dialoguelamda",
@@ -1682,6 +1691,24 @@ export const TABS_REGISTRY = [
     icon: "📐",
     keywords: ["prompt frameworks", "structure a prompt", "blueprint", "RTCO", "role task context output", "goal context constraints format", "input process output", "problem options decision action", "understand plan execute validate", "prompt template", "prompt structure", "image prompt", "consistent ai images", "image generation prompt", "text to image prompt", "visual prompt"],
     component: lazy(() => import("../promptStudio/PromptFrameworksTab.jsx"))
+  },
+  {
+    id: "promptalignment",
+    label: "Alignment & Approval Frameworks",
+    umbrellaId: "foundations",
+    category: "Foundations",
+    icon: "🧾",
+    keywords: ["prompt framework", "approval request", "task completion report", "token utilization report", "alignment protocol", "pre-flight check", "meta-prompt", "two-phase prompt", "clarifying questions", "budget report", "action required"],
+    component: lazy(() => import("../promptAlignment/PromptAlignmentTab.jsx"))
+  },
+  {
+    id: "mlproblems",
+    label: "Practical ML Problem Framing",
+    umbrellaId: "foundations",
+    category: "Foundations",
+    icon: "📐",
+    keywords: ["machine learning problem", "problem framing", "classification", "regression", "clustering", "rule extraction", "given identify benefit", "problem taxonomy", "is this ml", "spam detection", "fraud detection", "decision tree", "problem type", "ai effect", "ai-complete"],
+    component: lazy(() => import("../mlProblems/MLProblemsTab.jsx"))
   },
   {
     id: "prompt_methodologies",
