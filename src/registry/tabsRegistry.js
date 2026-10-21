@@ -19,7 +19,7 @@ export const UMBRELLA_TOPICS = [
     color: "#5EC4C8",
     dark: "#1F6B6E",
     description: "Roadmap stages 1–4: orientation, how LLMs work, prompting, models — home of the AI Engineer Roadmap",
-    tabs: ["fnd_start_hub", "fnd_internals_hub", "fnd_prompts_hub", "fnd_mlsoc_hub", "fnd_multimodal_hub", "airoadmap", "overview", "glossary", "reinforcementlearning", "trpo2grpo", "aimoralagency", "humancentric", "dialoguelamda", "modellandscape", "tokenization", "quantserve", "vramconductor", "promptfundamentals", "lstm", "llmsampling", "grokking", "selfattention", "posencoding", "archconcepts", "system1head", "promptmgmt", "promptdependencygraph", "promptcontracts", "promptregression", "structuredoutputs", "topicmodeling", "workflows", "unhobbling", "aiharness", "promptlearning", "visionlanguage", "diffusionmodels", "speechvoice", "datacentricai", "prompt_studio", "prompt_frameworks", "prompt_methodologies", "threesentenceprompt", "slashcommands", "ailearning", "reversalcurse", "aigap", "promptalignment", "mlproblems"]
+    tabs: ["fnd_start_hub", "fnd_internals_hub", "fnd_prompts_hub", "fnd_mlsoc_hub", "fnd_multimodal_hub", "airoadmap", "overview", "glossary", "reinforcementlearning", "trpo2grpo", "aimoralagency", "humancentric", "dialoguelamda", "modellandscape", "tokenization", "quantserve", "vramconductor", "promptfundamentals", "lstm", "llmsampling", "grokking", "selfattention", "posencoding", "archconcepts", "system1head", "promptmgmt", "promptdependencygraph", "promptcontracts", "promptregression", "structuredoutputs", "topicmodeling", "workflows", "unhobbling", "aiharness", "promptlearning", "visionlanguage", "diffusionmodels", "speechvoice", "datacentricai", "threesentenceprompt", "slashcommands", "ailearning", "reversalcurse", "aigap", "promptalignment", "mlproblems"]
   },
   {
     id: "data_platform",
@@ -1662,7 +1662,7 @@ export const TABS_REGISTRY = [
     umbrellaId: "foundations",
     category: "Foundations",
     icon: "✍️",
-    keywords: ["prompt engineering", "3 sentences", "plan-first", "better prompts", "AI productivity", "brain dump", "messy prompts", "course correction", "framework", "methodology", "prompt patterns", "prompt framework", "prompt methodology", "quality controller", "prompt optimizer"],
+    keywords: ["prompt engineering", "3 sentences", "plan-first", "better prompts", "AI productivity", "brain dump", "messy prompts", "course correction", "framework", "methodology", "prompt patterns", "prompt framework", "prompt methodology", "quality controller", "prompt optimizer", "prompt studio", "prompt composition", "framework catalog", "few-shot", "grounding", "prompt builder", "prompt evaluation", "structure a prompt", "blueprint", "RTCO", "prompt template", "image prompt", "consistent ai images", "text to image prompt"],
     component: lazy(() => import("../threeSentencePrompt/ThreeSentencePromptTab.jsx"))
   },
   {
@@ -1673,24 +1673,6 @@ export const TABS_REGISTRY = [
     icon: "⌨️",
     keywords: ["slash commands", "response shape", "prompt shorthand", "tldr", "table mode", "critic mode", "rubber duck", "devils advocate", "custom commands", "prompt contracts", "bullets mode", "clarifying questions"],
     component: lazy(() => import("../slashCommands/SlashCommandsTab.jsx"))
-  },
-  {
-    id: "prompt_studio",
-    label: "Prompt Studio",
-    umbrellaId: "foundations",
-    category: "Foundations",
-    icon: "🧪",
-    keywords: ["prompt studio", "combine prompts", "compose prompt", "build prompt", "prompt builder", "framework + methodology", "generate prompt", "prompt composition", "prompt testing", "prompt evaluation"],
-    component: lazy(() => import("../promptStudio/PromptStudioTab.jsx"))
-  },
-  {
-    id: "prompt_frameworks",
-    label: "Prompt Frameworks",
-    umbrellaId: "foundations",
-    category: "Foundations",
-    icon: "📐",
-    keywords: ["prompt frameworks", "structure a prompt", "blueprint", "RTCO", "role task context output", "goal context constraints format", "input process output", "problem options decision action", "understand plan execute validate", "prompt template", "prompt structure", "image prompt", "consistent ai images", "image generation prompt", "text to image prompt", "visual prompt"],
-    component: lazy(() => import("../promptStudio/PromptFrameworksTab.jsx"))
   },
   {
     id: "promptalignment",
@@ -1709,15 +1691,6 @@ export const TABS_REGISTRY = [
     icon: "📐",
     keywords: ["machine learning problem", "problem framing", "classification", "regression", "clustering", "rule extraction", "given identify benefit", "problem taxonomy", "is this ml", "spam detection", "fraud detection", "decision tree", "problem type", "ai effect", "ai-complete"],
     component: lazy(() => import("../mlProblems/MLProblemsTab.jsx"))
-  },
-  {
-    id: "prompt_methodologies",
-    label: "Prompt Methodologies",
-    umbrellaId: "foundations",
-    category: "Foundations",
-    icon: "🧩",
-    keywords: ["prompt methodologies", "prompting techniques", "few-shot", "zero-shot", "decomposition", "retrieval-grounded", "self-critique", "constraint-based", "structured-output", "tool-assisted", "iterative prompting", "chain of thought", "image consistency", "reference images", "consistent ai images", "image generation"],
-    component: lazy(() => import("../promptStudio/PromptMethodologiesTab.jsx"))
   },
   {
     id: "finassistproject",

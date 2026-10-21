@@ -3,11 +3,6 @@
  * Same shape as exitChecks3.js: tabid -> [ { q, o: [4], a, e }, x3 ].
  */
 export const EXIT_CHECKS_N = {
-  prompt_methodologies: [
-    { q: 'Methodologies vs frameworks: what is the split taught in this tab?', o: ['Methodologies are domain jargon with no reuse', 'Frameworks structure a prompt; methodologies are task approaches that slot into any structure', 'Frameworks are deprecated by methodologies', 'They are identical lists with different names'], a: 1, e: 'Pick a structure first, then layer a technique (examples, grounding, decomposition, refinement) inside it.' },
-    { q: 'A grounding-type methodology requires source documents as input. What must the prompt demand?', o: ['Answer only from the supplied material, cite each claim, say "not found" when absent', 'Paraphrase from memory and skip citations', 'Paste whole documents without filtering', 'Never mention sources to save tokens'], a: 0, e: 'Supplied-evidence answers need closed-world instructions plus per-claim citation.' },
-    { q: 'Why does each methodology card show limitations, requires, and model caveats?', o: ['Decoration for the gallery view', 'To pad the card layout', 'So you check fit (when-not-to-use), missing inputs, and recall/long-context risks before applying it', 'Because every technique works everywhere'], a: 3, e: 'When-to-use, required inputs, and caveats decide whether the technique fits the task.' },
-  ],
   multiagentcoord: [
     { q: 'Single-model failure vs coordinator behavior on conflicting evidence…', o: ['Both average all findings into one score', 'Single model averages away contradictions into "probably OK"; the coordinator names the contradiction and returns a decision brief', 'Coordinator deletes minority findings', 'Single model always abstains'], a: 1, e: 'Name contradictions (with freshness gaps) instead of averaging them.' },
     { q: 'Each specialist returns a typed finding. What fields let the coordinator compare?', o: ['Font size, color, and author bio', 'Claim, evidence, confidence, freshness in days, and verdict', 'Only a free-text paragraph', 'A single thumbs-up emoji'], a: 1, e: 'Typed findings with confidence + freshness make contradictions computable.' },

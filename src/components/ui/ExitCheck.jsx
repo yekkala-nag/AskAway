@@ -23,7 +23,14 @@ function shuffleFor(id, n) {
 }
 
 export function ExitCheck({ open, tabId, onClose, onSelectTab }) {
-  const questions = getExitCheck(tabId) || [];
+  // Banks may hold more than three questions (e.g. merged sub-topic banks).
+  // Deterministically sample three per topic so the pass bar stays meaningful.
+  const questions = useMemo(() => {
+    const all = getExitCheck(tabId) || [];
+    if (all.length <= 3) return all;
+    const pick = shuffleFor(`${tabId}:pick`, all.length).slice(0, 3).sort((a, b) => a - b);
+    return pick.map((i) => all[i]);
+  }, [tabId]);
   const [answers, setAnswers] = useState({});
   const [done, setDone] = useState(false);
   const [score, setScore] = useState(null);

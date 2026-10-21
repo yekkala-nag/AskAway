@@ -167,9 +167,6 @@ const TabComponents = {
   datacentricai: lazy(() => import('./dataCentricAI/DataCentricAITab.jsx')),
   threesentenceprompt: lazy(() => import('./threeSentencePrompt/ThreeSentencePromptTab.jsx')),
   slashcommands: lazy(() => import('./slashCommands/SlashCommandsTab.jsx')),
-  prompt_studio: lazy(() => import('./promptStudio/PromptStudioTab.jsx')),
-  prompt_frameworks: lazy(() => import('./promptStudio/PromptFrameworksTab.jsx')),
-  prompt_methodologies: lazy(() => import('./promptStudio/PromptMethodologiesTab.jsx')),
 
   visionlanguage: lazy(() => import('./visionLanguageModels/VisionLanguageTab.jsx')),
   diffusionmodels: lazy(() => import('./diffusionModels/DiffusionTab.jsx')),
@@ -300,11 +297,29 @@ function TabError({ tabId }) {
 // ============================================
 // Main App Component
 // ============================================
+
+// Legacy top-level tabs folded into threesentenceprompt sub-tabs.
+// Maps old ?tab= ids to [tabId, subTab] so bookmarks keep working.
+const LEGACY_TAB_FOLD = {
+  prompt_studio: ['threesentenceprompt', 'studio'],
+  prompt_frameworks: ['threesentenceprompt', 'frameworks'],
+  prompt_methodologies: ['threesentenceprompt', 'methods'],
+};
+
+function resolveTabFromUrl() {
+  const tab = new URLSearchParams(window.location.search).get('tab');
+  if (!tab) return 'overview';
+  if (TABS_REGISTRY.some(t => t.id === tab)) return tab;
+  const folded = LEGACY_TAB_FOLD[tab];
+  if (folded) {
+    try { sessionStorage.setItem('askaway_3sp_subtab', folded[1]); } catch (e) { /* private mode */ }
+    return folded[0];
+  }
+  return 'overview';
+}
+
 export default function App() {
-  const [activeTab, setActiveTab] = useState(() => {
-    const tab = new URLSearchParams(window.location.search).get('tab');
-    return tab && TABS_REGISTRY.some(t => t.id === tab) ? tab : 'overview';
-  });
+  const [activeTab, setActiveTab] = useState(resolveTabFromUrl);
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [commandPaletteOpen, setCommandPaletteOpen] = useState(false);

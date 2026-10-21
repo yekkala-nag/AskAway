@@ -1,8 +1,11 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import { PromptFrameworksGrid } from "../components/ui/CleanInfographics.jsx";
 import { FRAMEWORKS } from "../services/frameworkLibrary.js";
 import { recommendFrameworks } from "../services/frameworkRecommender.js";
 import PromptWorkbench from "../components/workbench/PromptWorkbench.jsx";
+import PromptFrameworksTab from "../promptStudio/PromptFrameworksTab.jsx";
+import PromptMethodologiesTab from "../promptStudio/PromptMethodologiesTab.jsx";
+import PromptStudioTab from "../promptStudio/PromptStudioTab.jsx";
 
 const C = {
   bg: "#0F1219",
@@ -3190,8 +3193,30 @@ function PromptOptimizer() {
 
 /* ─── Main Export ─────────────────────────────────────── */
 
+const STUDIO_SUBTABS = new Set(["frameworks", "methods", "studio"]);
+const LEGACY_SUBTAB_KEY = "askaway_3sp_subtab";
+
+/** Map cross-page onSelectTab ids from the studio pages onto local sub-tabs. */
+function mapStudioNav(tabId) {
+  if (tabId === "prompt_frameworks") return "frameworks";
+  if (tabId === "prompt_methodologies") return "methods";
+  if (tabId === "prompt_studio") return "studio";
+  return null;
+}
+
 export default function ThreeSentencePromptTab() {
   const [tab, setTab] = useState("overview");
+
+  // Deep-link handoff from legacy ?tab=prompt_studio|frameworks|methods redirects
+  useEffect(() => {
+    try {
+      const sub = sessionStorage.getItem(LEGACY_SUBTAB_KEY);
+      if (sub && STUDIO_SUBTABS.has(sub)) {
+        setTab(sub);
+        sessionStorage.removeItem(LEGACY_SUBTAB_KEY);
+      }
+    } catch (e) { /* private mode */ }
+  }, []);
 
   const tabs = [
     { id: "overview", label: "Overview" },
@@ -3201,7 +3226,15 @@ export default function ThreeSentencePromptTab() {
     { id: "toolkit", label: "Toolkit" },
     { id: "examples", label: "Examples" },
     { id: "advanced", label: "Advanced" },
+    { id: "frameworks", label: "Frameworks" },
+    { id: "methods", label: "Methods" },
+    { id: "studio", label: "Studio" },
   ];
+
+  const handleStudioNav = (target) => {
+    const sub = mapStudioNav(target);
+    if (sub) setTab(sub);
+  };
 
   function copyThreeSentences() {
     navigator.clipboard.writeText(THREE_SENTENCES);
@@ -3210,11 +3243,11 @@ export default function ThreeSentencePromptTab() {
   return (
     <div
       style={{
-        padding: "24px 32px",
+        padding: STUDIO_SUBTABS.has(tab) ? "24px 20px" : "24px 32px",
         display: "flex",
         flexDirection: "column",
         gap: 28,
-        maxWidth: 880,
+        maxWidth: STUDIO_SUBTABS.has(tab) ? 1180 : 880,
         margin: "0 auto",
       }}
     >
@@ -3391,6 +3424,10 @@ export default function ThreeSentencePromptTab() {
       )}
 
       {tab === "advanced" && <AdvancedVersion />}
+
+      {tab === "frameworks" && <PromptFrameworksTab onSelectTab={handleStudioNav} />}
+      {tab === "methods" && <PromptMethodologiesTab onSelectTab={handleStudioNav} />}
+      {tab === "studio" && <PromptStudioTab onSelectTab={handleStudioNav} />}
     </div>
   );
 }

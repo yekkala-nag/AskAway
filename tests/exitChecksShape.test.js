@@ -21,8 +21,7 @@ test('representative tabs across all banks resolve with 3+ questions', () => {
     'grokking', 'lstm', 'system1head', 'graphrag_system1',
     'multiagentcoord', 'decision_layer', 'agentmemory', 'modeldeploy',
     'agentguardrails', 'progress', 'aiarchdecisions', 'overview',
-    'threesentenceprompt', 'slashcommands', 'prompt_studio',
-    'prompt_frameworks', 'prompt_methodologies', 'textclassificationdata',
+    'threesentenceprompt', 'slashcommands', 'textclassificationdata',
     'nsquaredpizza', 'datacentricai', 'multilingualclassification',
     'textclusteringhdbscan', 'finassistproject', 'zerocostmultiagent',
     'aigentools', 'aiharnessquality'
