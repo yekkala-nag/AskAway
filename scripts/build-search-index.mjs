@@ -166,6 +166,13 @@ async function main() {
       MAX_BODY
     );
 
+    // Result kind — used by the UI for the "simulator" badge
+    const simPattern = /\b(simulator|simulation|sim)\b/i;
+    const kind =
+      simPattern.test(tab.label || '') || keywords.some((k) => simPattern.test(k))
+        ? 'simulator'
+        : 'topic';
+
     const auto = {
       id: tab.id,
       title: tab.label,
@@ -176,6 +183,7 @@ async function main() {
       summary,
       body,
       related: [],
+      kind,
     };
 
     const prev = existing[tab.id];

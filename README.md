@@ -40,10 +40,10 @@ The index lazy-loads on first search open — nothing search-related is in the m
 
 | File | Role |
 | --- | --- |
-| `src/search/search-index.json` | One metadata record per tab: `{ id, title, module, tags[], aliases[], summary, body?, related[], rank? }` — **hand-editable** |
+| `src/search/search-index.json` | One metadata record per tab: `{ id, title, module, tags[], aliases[], summary, body?, related[], rank?, kind? }` — **hand-editable** |
 | `src/search/synonyms.js` | Synonym/abbreviation groups + stop words (query-time only) |
 | `src/search/engine.js` | MiniSearch factory: boosts (title > tags = aliases > summary > body), prefix, fuzzy, soft-verb handling, RRF fusion |
-| `src/search/searchService.js` | Lazy-loading browser singleton (also hosts the off-by-default semantic search flag) |
+| `src/search/search.js` | Public API: `search` / `similar` / `suggest` / `filterTabIds` / `ensureReady`; lazy-loads the index and hosts the off-by-default semantic flag |
 | `src/search/similar.json` | Generated top-5 similar tabs per tab (do not hand-edit) |
 | `scripts/build-search-index.mjs` | Generates/refreshes `search-index.json` from the registry + tab source |
 | `scripts/build-similar.mjs` | Embeds tabs and writes `similar.json` (cached, idempotent) |
@@ -56,7 +56,7 @@ The index lazy-loads on first search open — nothing search-related is in the m
    - `tags` / `aliases` — extra words people search for (aliases are great for abbreviations and alternate names)
    - `summary` — one line shown under each result
    - `related` — curated related tab ids (these rank above generated neighbors)
-   - `rank` — optional score multiplier (e.g. `1.4`) for canonical overview tabs
+   - `rank` — optional score multiplier (e.g. `1.8` for the `rag` hub) for canonical overview tabs
 4. Run `node scripts/build-similar.mjs` to refresh similar-topic neighbors (see below).
 
 ### How to add synonyms
@@ -79,32 +79,27 @@ node scripts/build-similar.mjs --lexical        # …otherwise (or with this fla
 - Vectors are cached in `scripts/.embedding-cache.json` (gitignored) keyed by content hash — only changed tabs are re-embedded; output is deterministic (no timestamps).
 - Manual `related[]` links from `search-index.json` always rank ahead of generated neighbors.
 
-Optional runtime **semantic query search** (off by default): set `VITE_SEMANTIC_SEARCH=1` and call `setSemanticEmbedder(fn)` from `searchService.js` with a `(text) => Promise<number[]>` function; results merge with keyword hits via reciprocal rank fusion.
+Optional runtime **semantic query search** (off by default): set `VITE_SEMANTIC_SEARCH=1` and call `setSemanticEmbedder(fn)` from `search.js` with a `(text) => Promise<number[]>` function; results merge with keyword hits via reciprocal rank fusion.
 
 ### Search test checklist (expected top result)
 
-| # | Query | Expected top result |
+| # | Query | Expected in top 3 |
 | --- | --- | --- |
-| 1 | `rag` | `rag` (9 RAG Architectures) |
-| 2 | `mcp` | `mcpclient` |
-| 3 | `model context protocol` | `mcpclient` |
-| 4 | `stop hallucinations` | `hallucination` (Silent Hallucination Loop) |
-| 5 | `reduce hallucinations` | `hallucination` |
-| 6 | `how do agents remember things` | `agentmemory` |
-| 7 | `agent memory` | `agentmemory` |
-| 8 | `fine tune llm` | `llmfinetuning` |
-| 9 | `qlora` | `llmfinetuning` |
-| 10 | `vector database` | `vectordbops` |
-| 11 | `chunking` | `ragchunking` |
-| 12 | `lstm` | `lstm` |
-| 13 | `human in the loop` | `agenthitl` |
-| 14 | `prompt injection` | `guardrails` |
-| 15 | `reranking` | `rerankers` |
-| 16 | `memroy` (typo) | `agentmemory` |
-| 17 | `guadrails` (typo) | `guardrails` |
-| 18 | `hallucnation` (typo) | `hallucination` |
-| 19 | `strucutred outputs` (typo) | `structuredoutputs` |
-| 20 | `grapph rag` (typo) | `rag` or another graph-RAG tab in top 3 |
+| 1 | `rag` | `rag` |
+| 2 | `retreival` (typo) | `rag` or `filtering` |
+| 3 | `MCP` | `mcpclient` |
+| 4 | `model context protocol` | `mcpclient` |
+| 5 | `guardrails` | `guardrails` |
+| 6 | `lstm` | `lstm` |
+| 7 | `how do agents remember things` | `agentmemory` |
+| 8 | `reduce hallucinations` | `hallucination` |
+| 9 | `hybrid search bm25` | `rag` or `filtering` |
+| 10 | `finops cost` | `finops` |
+| 11 | `observability` | `observability` |
+| 12 | `multi agent swarm` | `multiagent` family (incl. `zerocostmultiagent`, `multiagentcoord`) |
+| 13 | `chunking` | `ragchunking` |
+| 14 | `langgraph` | `langgraph` |
+| 15 | `tensor` | `keras3`, `archconcepts`, or `selfattention` |
 
 These are asserted by `tests/searchEngine.test.js` (run with `npm test`).
 

@@ -22,8 +22,8 @@ export default function RelatedTopics({ tabId, onSelectTab }) {
         ? requestIdleCallback
         : (cb) => setTimeout(cb, 300);
     const handle = schedule(() => {
-      import('../../search/searchService.js')
-        .then((m) => m.getRelatedTopics(tabId, { limit: 6 }))
+      import('../../search/search.js')
+        .then((m) => m.similar(tabId, { limit: 6 }))
         .then((res) => {
           if (!cancelled) setItems(res);
         })

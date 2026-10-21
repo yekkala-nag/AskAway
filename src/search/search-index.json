@@ -18,7 +18,8 @@
       "aliases": [],
       "summary": "No exception is thrown — the model sounds right, so the bad answer is embedded back into the vector store as 'ground truth'.",
       "body": "active learning · annotation · uncertainty · The Silent Hallucination Loop · Uncertainty Window Band · KNN Feature Space Density · QBC Disagreement Variance · The Active Learning Loop · Three Techniques · Accuracy vs Labeled Samples",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "agenta2a",
@@ -38,7 +39,8 @@
       "aliases": [],
       "summary": "Chain costs n−1 messages, star 2n, mesh n(n−1)/2 — plus discovery and version skew. Supervisor by default; A2A peers with a pinned registry; chains only for stable flows.",
       "body": "a2a · agent to agent · supervisor · mesh · handoff chain · mcp · blackboard · registry · Agents Talking Is a Cost Decision, Not a Style Choice · Star vs Mesh vs Chain + Registry Rule",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "agentcontrolplane",
@@ -59,7 +61,8 @@
       "aliases": [],
       "summary": "The Control Plane: Permission to Act Is Not the Same as Ability to Act",
       "body": "control plane · planning plane · execution plane · action proposal · consequence tier · authority vs capability · approval bound to digest · audit ledger · untrusted content quarantine · Why classifying the agent instead of the action fails · The Control Plane: Permission to Act Is Not the Same as Ability to Act · Escalate, never auto-demote · Model-as-judge has a ceiling here · Trace first, invoice later",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "agentcreativity",
@@ -79,7 +82,8 @@
       "aliases": [],
       "summary": "A solution counts as creative only when it is both new and good. Track self-novelty, human-novelty, normalized impact, and a feasibility gate — then explore early and exploit late.",
       "body": "agent creativity · self novelty · human novelty · impact score · feasibility gate · explore exploit · novelty rubric · dual optimization · Creative Agents: Original AND Useful",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "agentdebugging",
@@ -95,7 +99,8 @@
       "aliases": [],
       "summary": "",
       "body": "debugging · tool errors · traces · inspection",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "agentevals",
@@ -115,7 +120,8 @@
       "aliases": [],
       "summary": "Single-run pass rates lie: p=0.8 becomes 0.51 at k=3. Four attacks probe injection, exfiltration, drift and jailbreak. Ship needs consistency AND hardness.",
       "body": "agent evals · tau bench · pass^k · red team · prompt injection · jailbreak · goal drift · refusal · Flaky Agents Fail pass^k — Porous Ones Fail Red-Team · Task Battery + Red-Team → Ship/Gate/Rebuild",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "agentfanout",
@@ -135,7 +141,8 @@
       "aliases": [],
       "summary": "Retrieve→reason→reformulate→retrieve: 200 agents become 800 freshness-sensitive QPS. Latency stacks per hop, caches serve fast-wrong, reformulations drift. Bigger DBs don't fix validity problems.",
       "body": "agent fan-out · retrieval load · latency stacking · stale context · relevance drift · unified retrieval · vespa · concurrency · Hundreds of Agents Don't Add Load — They Multiply It · Stacking + Staleness + Drift",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "agentguardrails",
@@ -162,7 +169,8 @@
       "aliases": [],
       "summary": "Who is allowed to be wrong",
       "body": "agent guardrails · lethal trifecta · indirect prompt injection · action selector · plan then execute · code then execute · dual agent · map reduce isolation · context minimization · untrusted content · recipient hijack · quarantined reader · Sandbox escape / variable tampering stays open · Who is allowed to be wrong · Opaque to the plan, still a leak · Architectural Guardrails: Design the Threat Out of the Agent · Assume the prompt will be compromised · Layering is the design",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "agenthitl",
@@ -181,7 +189,8 @@
       "aliases": [],
       "summary": "A 0–9 risk score picks L1 supervised, L2 bounded, or L3 audited autonomy. Four gates cover every act; audit logs all of them — but audit can't un-send, so pair it with gates.",
       "body": "human in the loop · hitl · approval gate · autonomy ladder · escalation · audit · risk score · Humans Decide the Irreversible — Agents Handle the Rest · L1/L2/L3 + Four Gates",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "agenticparsing",
@@ -201,7 +210,8 @@
       "aliases": [],
       "summary": "",
       "body": "agentic parsing · dispatcher · pdf nature · docling · fitz · easyocr · pick richer · brick 1",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "agenticrag",
@@ -221,7 +231,8 @@
       "aliases": [],
       "summary": "Attending Berlin conference. Can I book official hotel above cap, and what approval is needed?",
       "body": "agentic rag · react loop · multi-step search · let the agent search · openai agents sdk · 14 · tools · trace · Agentic RAG: Let the Agent Search",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "agenticuiworkflow",
@@ -242,7 +253,8 @@
       "aliases": [],
       "summary": "Agentic UI: Put the Analytics Where Users Already Work",
       "body": "agentic ui · email workflow · no code automation · purchase order parsing · wagner whitin · lot sizing · demand planning · optimization endpoint · csv attachment · The agent doesn’t do this arithmetic · Agentic UI: Put the Analytics Where Users Already Work · Missing field → clarify, never guess · Boundary rule",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "agentlifecycle",
@@ -263,7 +275,8 @@
       "aliases": [],
       "summary": "More attempts push the two measures apart",
       "body": "agent lifecycle · double loop learning · behavioral contract · consumer driven contract · shadow mode · pass at k · review capacity · promotion gate · verification vs validation · Capacity makes the contract honest · More attempts push the two measures apart · Where the Agent Development Lifecycle Fits: Coordinate, Don’t Merge · Double-loop, in engineering clothes",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "agentmemory",
@@ -287,7 +300,8 @@
       "aliases": [],
       "summary": "How agents remember within a conversation and across them: the context window as working memory, external stores as long-term memory, and the write/retrieve/forget discipline that keeps both honest.",
       "body": "agent memory · short-term memory · long-term memory · conversation buffer · summarization · vector store memory · episodic · semantic · procedural · memory poisoning · memory lifecycle · forgetting · Short-Term & Long-Term Memory for LLM Apps",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "agentobservability",
@@ -308,7 +322,8 @@
       "aliases": [],
       "summary": "Agent Observability: When Failures Are Built to Look Like Success",
       "body": "agent observability · trace waterfall · span inspection · duplicate spans · runaway loops · trace sampling · retention tiers · privacy rules · alert thresholds · Verdict on this run · Agent Observability: When Failures Are Built to Look Like Success · Same input, different path — every time · The shape, before any log line · Strip once, at the Collector",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "agentorgchart",
@@ -328,7 +343,8 @@
       "aliases": [],
       "summary": "Give every agent a seat, a written remit, and one owner per outcome. A person sits at the top, work flows through one board, and the cheapest defect is caught in the spec.",
       "body": "org chart · ai hires · worker role responsibility · one desk per agent · kanban workflow · review economics · accountability · role tightness · Hire Agents Like Staff, Not Spells",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "agentpairprogramming",
@@ -354,7 +370,8 @@
       "aliases": [],
       "summary": "How to Work with AI Coding Agents",
       "body": "ai coding agents · pair programming · task decomposition · test-driven · context injection · vibe coding · human in the loop · token optimization · token savings · /compact · cache read · input output tokens · batch commands · scoped prompts · How to Work with AI Coding Agents",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "agentpatterns",
@@ -377,7 +394,8 @@
       "aliases": [],
       "summary": "Use it when",
       "body": "react loop · sequential pipeline · adaptive router · supervisor worker · reflection loop · autonomous swarm · context engineering · state projection · prompt caching · trajectory metrics · circuit breaker · Context note · Use it when · Avoid it when · Recommendations compose · Human-in-the-loop is a context technique too · Caching is a layout rule, not a switch · Final-answer metrics alone are blind · Warning injection, not a crash · Try the trip on purpose · Agent Architecture Patterns",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "agentplanner",
@@ -397,7 +415,8 @@
       "aliases": [],
       "summary": "ReAct explores, Plan-Execute parallelises, Reflexion retries, Tree-of-Thoughts votes. The pattern is a cost decision; guardrails (caps, stall detection, external verifiers) are non-negotiable.",
       "body": "planner · react · plan execute · reflexion · tree of thoughts · step cap · stall detection · verifier · Match the Loop to the Task — Then Cap It · 4 Patterns + Guardrails",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "agentsandbox",
@@ -417,7 +436,8 @@
       "aliases": [],
       "summary": "T0 read-only up to T3 break-glass. Tool output is data, never instruction. Secrets are brokered 5-minute creds the model never sees. Mutations carry idempotency keys.",
       "body": "sandbox · tool safety · deny by default · confused deputy · idempotency · secrets broker · gvisor · firecracker · Deny by Default — Broker Every Dangerous Call · T0–T3 + Deputy Defence + Secrets",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "agentsastools",
@@ -432,7 +452,8 @@
       "aliases": [],
       "summary": "Automation Boundary Matrix: What to Automate vs Keep Manual",
       "body": "agents as tools · sub-agents · tool calling · Coding Agent CLI & IDE Tooling Comparison · Automation Boundary Matrix: What to Automate vs Keep Manual · Interactive Non-Programming Agent Task Simulator · Lakehouse Formats & Production Quality Controls Matrix · Medallion Data Quality Flow Diagram Across Schemas · Interactive Medallion Retail Pipeline Simulator · 3 Structural Causes of Test Data Bottlenecks · 4 Modern TDM Design Principles & GitHub Actions API Integration · Interactive Ephemeral TDM Pipeline Simulator",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "agentscale",
@@ -447,7 +468,8 @@
       "aliases": [],
       "summary": "",
       "body": "high-scale · millions requests · production",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "agentsdk",
@@ -466,7 +488,8 @@
       "aliases": [],
       "summary": "Triage nurse routes to weather/air-quality specialists via transfer_to_* functions; custom handoffs add names, callbacks, Pydantic inputs; orchestrator merges both via as_tool(). Trace dashboard arbitrates.",
       "body": "agents sdk · handoff · triage · agents as tools · orchestrator · openai agents · streamlit · Handoff Transfers, Tools Consult — Pick per Query Shape · Transfer vs Consult",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "agenttasks",
@@ -483,7 +506,8 @@
       "aliases": [],
       "summary": "HTML Test Report Verification Loop",
       "body": "agent tasks · archetypes · worktree · evaluation · task planning · Git Worktree Isolation · HTML Test Report Verification Loop",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "agentuisupply",
@@ -508,7 +532,8 @@
       "aliases": [],
       "summary": "Scanner evasion is the new normal",
       "body": "supply chain · agentic ui · skill marketplace · plugin security · indirect prompt injection · tool descriptor · memory poisoning · typosquat · provenance · capability sandbox · quarantine reader · ui redressing · supply-chain report · No named vector — still untrusted · Scanner evasion is the new normal · Controls compose; they don't replace each other · Agentic UI & Supply-Chain Risk: The Agent Is Only as Safe as What It Reads",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "agt_found_hub",
@@ -524,7 +549,8 @@
       "aliases": [],
       "summary": "Before autonomy: assets, prep, tools, and knowing what you're building.",
       "body": "assets · tools · prep · process · Agent Foundations",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "agt_multi_hub",
@@ -541,7 +567,8 @@
       "aliases": [],
       "summary": "",
       "body": "orchestration · a2a · langchain · langgraph · mcp",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "agt_prod_hub",
@@ -557,7 +584,8 @@
       "aliases": [],
       "summary": "",
       "body": "cli · pair programming · scale · product",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "agt_safety_hub",
@@ -574,7 +602,8 @@
       "aliases": [],
       "summary": "",
       "body": "planners · hitl · sandboxes · evals · gates",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "aiarchdecisions",
@@ -595,7 +624,8 @@
       "aliases": [],
       "summary": "AI Architecture Decisions — RAG vs Fine-Tune, Agent vs Workflow, Tool Calling",
       "body": "rag vs fine-tuning · agent vs workflow · tool calling · code execution · mcp · embedding drift · typesafe ai · jev · architecture decisions · AI Architecture Decisions — RAG vs Fine-Tune, Agent vs Workflow, Tool Calling",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "aidataplat",
@@ -610,7 +640,8 @@
       "aliases": [],
       "summary": "An AI agent is an autonomous system that perceives its environment, makes decisions, and takes concrete actions to achieve a goal.",
       "body": "data platform · ai-native · bigquery · Analyst Workflow vs Data Agent Workflow · Enterprise AI Data Architecture · Traditional QA Loop vs AI-Powered QA Loop · Six Pillars of AI Governance",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "aigap",
@@ -634,7 +665,8 @@
       "aliases": [],
       "summary": "The Trojan-horse demo",
       "body": "ai understanding gap · ai adoption · show don't tell · context engineering · skeptic · red team prompt · grounding · reconciliation · verifiable wins · anti-hype · guardrails · micro-wins · The free-tier illusion · The Trojan-horse demo · The skeptic becomes the operator · Ask, don’t lecture · Champions are created, not converted · Bridging the AI Understanding Gap — Before It Widens Further",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "aigentools",
@@ -659,7 +691,8 @@
       "aliases": [],
       "summary": "Generate — Images, Workflows, Tables, Animations, Simulators",
       "body": "image generation · text to image · ai workflows · simulators · animations · tables · dall-e · midjourney · stable diffusion · runway · context engineering · jev · world models · Generate — Images, Workflows, Tables, Animations, Simulators",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "aiharness",
@@ -683,7 +716,8 @@
       "aliases": [],
       "summary": "Comprehensive interactive reference for understanding how AI systems are architected, connected, and orchestrated — from raw tensors and transformer layers to training loops, backprop dynamics, and production serving…",
       "body": "ai harness · training loops · transformer architecture · kv cache · gqa · rlhf · dpo · gradient descent · chinchilla · flash attention · evals · failure modes · AI Engineering Guide — Harness & Training Loops · From Objective to Aligned Model",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "aiharnessquality",
@@ -704,7 +738,8 @@
       "aliases": [],
       "summary": "AI Quality — Harnesses, Null Returns, and Coding Agent Value",
       "body": "ai harnesses · null returns · coding agents · guardrails · pipeline returns · output verification · truthful ai · abstention · confidence scoring · AI Quality — Harnesses, Null Returns, and Coding Agent Value",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "ailearning",
@@ -724,7 +759,8 @@
       "aliases": [],
       "summary": "A four-part loop for turning confusion into durable skill: map where you stand, talk through the messy start, package repeatable methods as reusable skills, and lock gains in with spaced recall.",
       "body": "ai learning · voice exploration · reusable skills · spaced repetition · active recall · forgetting curve · triage filter · study planner · Learn Faster with AI: Explore, Systemize, Remember",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "aimoralagency",
@@ -745,7 +781,8 @@
       "aliases": [],
       "summary": "AI Alignment & Moral Agency: Does AI Need to Be Conscious to Care?",
       "body": "moral agency · ai alignment · caring · functional caring · experiential caring · constitutional ai · qualia · consciousness · ethics · AI Alignment & Moral Agency: Does AI Need to Be Conscious to Care?",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "aiproductbuilder",
@@ -762,7 +799,8 @@
       "aliases": [],
       "summary": "Vibe Coding Iteration Loop",
       "body": "product builder · prd · cursorrules · architecture · system spec · AI Product Building Lifecycle · Vibe Coding Iteration Loop",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "airoadmap",
@@ -783,6 +821,7 @@
       "summary": "Animated flow follows the learning order. Below, each stage expands into clickable, mastery-aware topics.",
       "body": "ai engineer roadmap · roadmap.sh · learning path · stages · week planner · home · start here · career path · Four branches, one walk · AI Engineer Workflow — Four Branches, One Map · The Journey: Orient → Ship",
       "related": [],
+      "kind": "topic",
       "rank": 1.4
     },
     {
@@ -798,7 +837,8 @@
       "aliases": [],
       "summary": "4 Modern TDM Design Principles & GitHub Actions API Integration",
       "body": "test data · synthetic data · bottleneck · 3 Structural Causes of Test Data Bottlenecks · 4 Modern TDM Design Principles & GitHub Actions API Integration · Interactive Ephemeral TDM Pipeline Simulator",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "aiusecases",
@@ -817,7 +857,8 @@
       "aliases": [],
       "summary": "Unstructured text becomes structured features, embeddings, and scored priorities.",
       "body": "3 ai use cases · beyond chatbot · feature engineering · text embeddings · lead scoring · unstructured data · enterprise ai · Enterprise AI Architecture — 3 Use Cases Beyond Chatbots · 1. Feature Engineering via LLMs · 2. Structuring via Embeddings · 3. Predictive Lead Scoring · 3 AI Use Cases (That Are Not a Chatbot) · Enterprise AI Sales Architecture",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "amplifyexpert",
@@ -835,7 +876,8 @@
       "aliases": [],
       "summary": "Enterprise RAG that mirrors trusted expert method (keywords → TOC → cited answers) instead of opaque vectors. Four conditions decide fit; three disciplines and six positions follow mechanically.",
       "body": "amplify the expert · manifesto · enterprise rag · two camps · deterministic dispatch · relational · Amplify the Expert — Scale Judgment, Don't Replace It · Two Camps + Bridge",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "archconcepts",
@@ -848,12 +890,16 @@
         "attention",
         "foundations",
         "latent space",
-        "embeddings"
+        "embeddings",
+        "tensor",
+        "tensors",
+        "tensor operations"
       ],
       "aliases": [],
       "summary": "Mixture of Experts — Sparse Routing",
       "body": "architecture · transformer · attention · foundations · latent space · embeddings · Multi-Head Latent Attention (MLA) — Low-Rank KV Compression · Mixture of Experts — Sparse Routing · Dense vs Sparse Parameters · Speculative Decoding — Parallel Verification",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "byol",
@@ -873,7 +919,8 @@
       "aliases": [],
       "summary": "Two augmented views, two networks, zero negative pairs: the online net predicts, the target net drifts slowly behind.",
       "body": "bootstrap your own latent · byol · self-supervised learning · grill et al · deepmind · ema · no negative pairs · online target network · Bootstrap Your Own Latent (BYOL) — Learning Without Labels · Two Views · Online Network (Trains) · Target Network (No Gradients) · MSE Loss, No Negatives · Bootstrap Your Own Latent (BYOL): Self-Supervised Learning without Negative Pairs · BYOL Self-Supervised Architecture · BYOL Forward–Backward Loop",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "capstone1",
@@ -891,7 +938,8 @@
       "aliases": [],
       "summary": "Loop 1 synthesis: one PDF in, grounded cited answers out, wrapped in a simple UI — with measured retrieval and written-down unit math. Portfolio piece #1.",
       "body": "capstone · boss fight · rag chatbot · portfolio · loop 1 · synthesis · Capstone 1: Ship a Single-Document RAG Chatbot",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "capstone2",
@@ -910,7 +958,8 @@
       "aliases": [],
       "summary": "Loop 2 synthesis: a multi-agent system that researches any topic, writes a cited report, and logs every token to a dashboard — then survives a kill-drill. Portfolio piece #2.",
       "body": "capstone · boss fight · multi-agent report · token dashboard · kill drill · loop 2 · synthesis · Capstone 2: Research Agents That Write + Account",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "capstone3",
@@ -929,7 +978,8 @@
       "aliases": [],
       "summary": "Loop 3 synthesis: inherit a hallucinating, expensive agent pipeline. Measure it, guard it, cheapen it, ground it — then hold SLAs for a week with evidence. Portfolio piece #3.",
       "body": "capstone · boss fight · rescue · sla · postmortem · loop 3 · synthesis · Capstone 3: Take a Burning Pipeline and Save It",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "classicalml",
@@ -944,7 +994,8 @@
       "aliases": [],
       "summary": "Six Reasons for Classical ML",
       "body": "classical ml · scikit-learn · xgboost · Agent + Classical ML — Real Estate Example · Six Reasons for Classical ML · Two Ways to Hook Up Your Model",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "claudecode100",
@@ -968,7 +1019,8 @@
       "aliases": [],
       "summary": "Solving 100+ Tasks with Claude Code & Sub-Agents",
       "body": "claude code · 100 tasks · sub-agents · worktree · git worktree · task triage · task bifurcation · html report · verification report · linear · slack bot · autonomous coding · Solving 100+ Tasks with Claude Code & Sub-Agents",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "cliagent",
@@ -985,7 +1037,8 @@
       "aliases": [],
       "summary": "Terminal in, tool calls out, observations back: the whole loop runs on a local model runtime.",
       "body": "cli agent · ollama · python · subprocess · qwen · Local CLI Agent — Full Control, No External APIs · Terminal + System Prompt · Agent Core + Local Model · Subprocess Execution",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "codingagentsnonprog",
@@ -1000,7 +1053,8 @@
       "aliases": [],
       "summary": "",
       "body": "coding agents · non-programmers · no-code",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "codingevals",
@@ -1020,7 +1074,8 @@
       "aliases": [],
       "summary": "Agent ≠ model: seven parts, one system score. Executable contracts admit many valid patches; six layers beat pass-rate worship; non-determinism is statistics; open-ended work gets PO simulators.",
       "body": "coding agents · executable contracts · six layers · trial statistics · swe-bench · terminal-bench · hidden tests · anthropic evals · Stop Grading Agents Like Chatbots — Evaluate the Work · System + Contracts + Layers",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "companybrain",
@@ -1035,7 +1090,8 @@
       "aliases": [],
       "summary": "Multi-Index Projections",
       "body": "company brain · knowledge graph · enterprise · Company Brain End-to-End Architecture · Multi-Index Projections",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "completepipeline",
@@ -1056,7 +1112,8 @@
       "aliases": [],
       "summary": "All 12 steps across ingestion, indexing, retrieval, generation and check — toggle any step off and watch precision, recall, faithfulness, latency and cost move. Deterministic, animated, honest about what each skip costs.",
       "body": "complete pipeline · 12 steps · ingestion · indexing · retrieval · generation · live simulation · infographic · toggle steps · The Complete RAG Pipeline — Run It Live, Break It on Purpose · The Complete RAG Pipeline",
-      "related": []
+      "related": [],
+      "kind": "simulator"
     },
     {
       "id": "contextgraph",
@@ -1071,7 +1128,8 @@
       "aliases": [],
       "summary": "",
       "body": "context graph · memory · state",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "contextlimits",
@@ -1090,7 +1148,8 @@
       "aliases": [],
       "summary": "A million-token window with a handful of working variables: hard tasks decay to guessing unless engineered around.",
       "body": "1m context window · working memory · bapo model · microsoft research · variable tracking · bapo hard · bapo easy · Working Memory Bottlenecks vs 1M+ Context Windows · 1. Input & Capacity · 2. Two Bandwidths · 3. Hard Tasks Decay · 4. Engineering Fixes · Your 1M+ Context Window LLM Is Less Powerful Than You Think · 1M+ Context Window & Working Memory Architecture · Why Big Context ≠ Good Memory",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "costtollbooth",
@@ -1111,7 +1170,8 @@
       "aliases": [],
       "summary": "To think, or not to think",
       "body": "token cost · cache pricing · prompt caching · conversation replay · cache windows · token trimming · cost ladder · price tiers · deterministic cost math · Your AI Bill Is a Toll Booth — Stop Paying Twice · To think, or not to think",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "crossdocjoins",
@@ -1129,7 +1189,8 @@
       "aliases": [],
       "summary": "prime_annuelle and premium_amount are the same column in different costumes. Harvest columns, propose mappings with confidence, confirm ambiguity by human, join on validity — then SUM works across contracts.",
       "body": "cross-doc joins · schema alignment · column mapping · unified schedule · validity join · corpus aggregate · Corpus Questions Need Aligned Schemas, Not Bigger Prompts · EN + FR → Unified Schedule",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "ctx_craft_hub",
@@ -1145,7 +1206,8 @@
       "aliases": [],
       "summary": "The model is only as good as the context you give it — craft it deliberately.",
       "body": "curation · hallucination · measurement · vagueness · Context Craft",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "ctx_long_hub",
@@ -1161,7 +1223,8 @@
       "aliases": [],
       "summary": "Big windows are powerful — and silently lossy in the middle.",
       "body": "limits · compression · tactics · long context · Long Context",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "ctx_memory_hub",
@@ -1177,7 +1240,8 @@
       "aliases": [],
       "summary": "Stateless models forget. Systems remember — if you engineer the memory.",
       "body": "tiers · graphs · company brain · hierarchy · Memory Systems",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "ctxeng",
@@ -1194,7 +1258,8 @@
       "aliases": [],
       "summary": "LangChain's framing: curate what enters and exits the finite context window — the discipline behind every reliable RAG answer.",
       "body": "context engineering · write · select · compress · isolate · The Four Context Strategies",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "ctxmeasure",
@@ -1210,7 +1275,8 @@
       "aliases": [],
       "summary": "The Isolation Principle",
       "body": "context quality · evals · metrics · recall · Context Assembly Function · The Isolation Principle · The Controlled Context Ladder · Correlation Chart — Context Predicts Behavior",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "data_docs_hub",
@@ -1226,7 +1292,8 @@
       "aliases": [],
       "summary": "Every grounded answer starts upstream of retrieval — in parsing, curation, and index ops.",
       "body": "parsing · kbs · vector search · pipelines · Document Intelligence",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "data_found_hub",
@@ -1242,7 +1309,8 @@
       "aliases": [],
       "summary": "",
       "body": "pandas · regression · i/o · storytelling",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "data_ml_hub",
@@ -1259,7 +1327,8 @@
       "aliases": [],
       "summary": "Back to Data Foundations (start of Data & Platform Layers)",
       "body": "ml tools · fraud · vaes · byol · lstms · Back to Data Foundations (start of Data & Platform Layers)",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "data_scale_hub",
@@ -1275,7 +1344,8 @@
       "aliases": [],
       "summary": "Models get the credit; platforms decide whether they survive contact with production.",
       "body": "lakehouse · profiling · finetuning · use cases · Platform & Scale",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "datacentricai",
@@ -1292,7 +1362,8 @@
       "aliases": [],
       "summary": "",
       "body": "data-centric ai · model-centric · label quality · annotation consistency · data governance",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "datahumanization",
@@ -1314,7 +1385,8 @@
       "aliases": [],
       "summary": "Raw KPI dumps overwhelm; human perception needs narrative. Four pillars bridge the gap to decisions.",
       "body": "data humanization · data storytelling · scintillating grid · data artisan · aida · scqa · symptom kpi · humanized insight · roi · data-rich action-poor · Data Humanization & Storytelling Framework · The Paradox · Pillar 1 · Quick Wins · Pillar 2 · Data Artisan · Pillar 3 · Narratives · Pillar 4 · ROI Engine · Enterprise Output · Beyond Numbers: How to Humanize Your Data & Analysis",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "datapipeline",
@@ -1335,7 +1407,8 @@
       "aliases": [],
       "summary": "Partitions from rate math, lineage from OpenLineage, versions from LakeFS/DVC — and new bytes reach retrieval only through a rag-eval Ship gate on a staging branch.",
       "body": "streaming · kafka · flink · lineage · openlineage · dvc · lakefs · partitions · schema registry · Bytes Need Provenance — Stream, Trace, Version, Gate · Stream → Lineage → Versioned Promotion",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "decision_layer",
@@ -1360,7 +1433,8 @@
       "aliases": [],
       "summary": "DECIDE ONCE",
       "body": "decision layer · route routing · abstention · selective prediction · coverage risk · typed scores · threshold policy · margin policy · decoder router · encoder head · route contract · calibration · brier score · DECODE EVERYTHING · DECIDE ONCE · Reading the two numbers together · Answers can refuse — check the type first · Always leave a “general” option out · The Decision Layer: When Every Decision Must Not Be Generation · Decoder router or encoder head — decide by stability · The decision layer composes with either scorer · Abstention is a feature, not an error",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "dialoguelamda",
@@ -1382,7 +1456,8 @@
       "aliases": [],
       "summary": "Open-Domain Dialogue Architecture: Google LaMDA to Gemini",
       "body": "dialogue · lamda · google lamda · ssi · sensibleness · specificity · interestingness · gemini · chatbots · tool grounding · Open-Domain Dialogue Architecture: Google LaMDA to Gemini",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "diffusionmodels",
@@ -1409,7 +1484,8 @@
       "aliases": [],
       "summary": "How Diffusion Models Work: From Noise to High-Fidelity Media",
       "body": "diffusion · diffusion models · dit · diffusion transformers · stable diffusion · flux · sora · cfg · classifier free guidance · latent diffusion · ddpm · ddim · score matching · flow matching · denoising · How Diffusion Models Work: From Noise to High-Fidelity Media",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "docstruct",
@@ -1425,7 +1501,8 @@
       "aliases": [],
       "summary": "",
       "body": "document structure · pdf parsing · toc · loop",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "dupaudit",
@@ -1449,7 +1526,8 @@
       "aliases": [],
       "summary": "Audit integrity",
       "body": "duplicate content · content audit · semantic similarity · probable duplicate · primary duplicate · detect only · jaccard · deduplication · corpus audit · two-phase gate · match type · overlap detection · Detect-only means detect-only · Audit integrity · Duplicate Content Audit: Detect, Don't Fix",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "enterpriseadvancedplaybook",
@@ -1479,7 +1557,8 @@
       "aliases": [],
       "summary": "1 · ReAct",
       "body": "agentic patterns · react · plan and execute · multi-agent · supervisor agent · agent memory · tools · opentelemetry · prometheus · elk · grafana · celery · ray · kafka · consistent hashing · rate limiting · redis cluster · nagaraj y · Enterprise AI Playbook: Agentic Patterns, Observability & Distributed Systems · 1 · ReAct · 2 · Plan-and-Execute · 3 · Multi-Agent Collaboration · 4 · Supervisor-Agent · Business Metrics · Application Metrics · Tracing Layer · Infrastructure Layer · Edge & Streaming · State & Cache · Actor Compute · Multi-Model Execution",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "enterpriseaiops",
@@ -1504,7 +1583,8 @@
       "aliases": [],
       "summary": "Enterprise AI Architecture & Operations: Beating Token Limits at Scale",
       "body": "enterprise ai · ai architecture · ai operations · token limits · token governance · ai gateway · semantic cache · model routing · map reduce · reranker · token compression · finops · lost in the middle · Enterprise AI Architecture & Operations: Beating Token Limits at Scale",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "enterprisegrade",
@@ -1524,7 +1604,8 @@
       "aliases": [],
       "summary": "87% of AI projects never reach production. Forecasting, anomaly detection, classification on diligent data; bias traps dodged; good-enough benchmarked; four drifts watched; buy-in earned.",
       "body": "enterprise grade · end to end · mlops · drift · bias · crisp-dm · readiness · buy-in · Vector-only retrieval hits a wall · Mundane Beats Moonshots — End-to-End or End of Story · Diligence → Benchmark → Watch → Buy-in",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "evalharness",
@@ -1545,7 +1626,8 @@
       "aliases": [],
       "summary": "Public benchmarks measure general capability, not your product's policy or rubric. Build a harness you own: golden dataset, inference runner, judge layer, crash-safe logger — then re-score old outputs instead of…",
       "body": "eval harness · golden dataset · judge cascade · deterministic judge · llm judge · jsonl log · re-score without re-run · concurrency cap · crash safe · Custom Eval Harness: Own Your Four Modules",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "filtering",
@@ -1556,12 +1638,15 @@
         "retrieval",
         "filtering",
         "anchor detection",
-        "bm25"
+        "bm25",
+        "hybrid search",
+        "hybrid retrieval"
       ],
       "aliases": [],
       "summary": "",
       "body": "retrieval · filtering · anchor detection · bm25",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "finassistproject",
@@ -1583,7 +1668,8 @@
       "aliases": [],
       "summary": "",
       "body": "banking ai · mcp · langgraph · compliance · pii redaction · rag · agentic workflow · realtime project · portfolio · finassist",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "finops",
@@ -1602,7 +1688,8 @@
       "aliases": [],
       "summary": "Five levers in order: cache removes calls, routing downgrades the rest, filtering cuts calls, compression shrinks prompts, rerank shrinks context. Model the bill before it models you.",
       "body": "finops · cost governance · token bill · semantic cache · model routing · budgets · savings · Cheapest Token Is the Un-Sent One · Flagship-Only vs Optimized Bill",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "firstaiapp",
@@ -1625,7 +1712,8 @@
       "aliases": [],
       "summary": "Building Your First Real AI App: Architecture, APIs & Infrastructure",
       "body": "first ai app · ai app · api keys · environment variables · summarizer · json response · error triaging · map reduce chunking · openai · shipping · production app · Building Your First Real AI App: Architecture, APIs & Infrastructure",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "fiveassets",
@@ -1641,7 +1729,8 @@
       "aliases": [],
       "summary": "Someone who only collects prompts is asking the model to guess. Models, licenses, and platforms will keep changing. The value comes from turning what your team already knows into work that AI can repeat, people can…",
       "body": "five assets · tools · evals · prompts · Chat Request vs Operational Workflow · Five Assets Pipeline",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "fnd_internals_hub",
@@ -1658,7 +1747,8 @@
       "aliases": [],
       "summary": "",
       "body": "architecture · attention · sampling · tokens · serving",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "fnd_mlsoc_hub",
@@ -1675,7 +1765,8 @@
       "aliases": [],
       "summary": "",
       "body": "alignment · rl · dialogue · topic modeling · ethics",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "fnd_multimodal_hub",
@@ -1691,7 +1782,8 @@
       "aliases": [],
       "summary": "",
       "body": "vision · diffusion · speech · multimodal",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "fnd_prompts_hub",
@@ -1707,7 +1799,8 @@
       "aliases": [],
       "summary": "",
       "body": "prompt engineering · contracts · regression · management",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "fnd_start_hub",
@@ -1723,7 +1816,8 @@
       "aliases": [],
       "summary": "",
       "body": "start · orientation · glossary · first build",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "forecasttraps",
@@ -1743,7 +1837,8 @@
       "aliases": [],
       "summary": "A caveat the model ignores is not a fix",
       "body": "forecasting traps · time leakage · reporting delay · walk-forward · noise floor · residual plot · availability audit · trust checklist · All five answered — now rerun it · A caveat the model ignores is not a fix · Forecast Traps: When the Score Is Reading the Future · The pattern across all four · Put the rule where the model cannot dodge it",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "fourpdfs",
@@ -1758,7 +1853,8 @@
       "aliases": [],
       "summary": "Fixed vs Adapting",
       "body": "four pdfs · benchmarks · evaluation · Four Very Different Documents · Fixed vs Adapting",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "fr_eval_hub",
@@ -1774,7 +1870,8 @@
       "aliases": [],
       "summary": "",
       "body": "evals · reasoning · guardrails · fault tolerance",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "fr_frontiers_hub",
@@ -1790,7 +1887,8 @@
       "aliases": [],
       "summary": "",
       "body": "vision · diffusion · speech · edge slms",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "fr_ops_hub",
@@ -1806,7 +1904,8 @@
       "aliases": [],
       "summary": "",
       "body": "finops · tracing · agentops · playbooks",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "frameworkcompare",
@@ -1825,7 +1924,8 @@
       "aliases": [],
       "summary": "",
       "body": "compare · langchain vs langgraph · comparison · evaluation · frameworks · langchain · langgraph",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "frauddetectionml",
@@ -1847,7 +1947,8 @@
       "aliases": [],
       "summary": "Production ML: 6 Fraud Models & The Metrics vs Production Gap",
       "body": "fraud detection · production ml · nairashield · lightgbm · xgboost · catboost · latency sla · cost matrix · treeshap · explainability · Production ML: 6 Fraud Models & The Metrics vs Production Gap",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "frontiers",
@@ -1862,7 +1963,8 @@
       "aliases": [],
       "summary": "Memento — Case-Based Reasoning Loop",
       "body": "research frontiers · state of art · future · NLA Architecture — Reading Claude's Thoughts · Memento — Case-Based Reasoning Loop · Claude Code Plugin Architecture",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "functionalscars",
@@ -1882,7 +1984,8 @@
       "aliases": [],
       "summary": "Notes and reminders cover the first three layers of a correction. The fourth layer — a small enforcement scar on the action path — is what actually stops the next mistake. Build scars, measure them, and know their…",
       "body": "functional scars · enforcement hooks · correction layers · pre-call denial · post-call check · false positive cost · scar contract · retirement date · Functional Scars: Corrections That Sit on the Action Path",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "functools",
@@ -1901,7 +2004,8 @@
       "aliases": [],
       "summary": "total_ordering derives 6 comparisons from 2 methods, partial freezes arguments into families, singledispatch routes by type instead of if-chains. Stdlib only, readable always — caveats attached.",
       "body": "functools · total_ordering · partial · singledispatch · lru_cache · decorators · python tricks · Three Decorators That Delete Boilerplate · Delete Boilerplate, Keep Warnings",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "genpatterns",
@@ -1916,7 +2020,8 @@
       "aliases": [],
       "summary": "The size of the model determines the number of extraction calls, not the shape of the schema. Big model = one dense call. Small model = a chain of typed extracts with Python computing in the middle and one optional…",
       "body": "generation patterns · contracts · pydantic · A String vs a Typed Contract · Seven Patterns Overview · Decompose vs One Call",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "geopopviz",
@@ -1936,7 +2041,8 @@
       "aliases": [],
       "summary": "WorldPop 100m raster against Facebook 30m vectors, masked by GADM polygons in a notebook anyone can rerun. National agreement, district divergence — the question picks the source.",
       "body": "geospatial · worldpop · facebook hrsl · gadm · raster · choropleth · geopandas · plotly · Two Maps, One Vietnam — Grid vs Points, 97M vs 98M · Raster + Vector → Masked Counts",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "glossary",
@@ -1952,7 +2058,8 @@
       "aliases": [],
       "summary": "",
       "body": "glossary · terms · definitions · concepts",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "goaltracker",
@@ -1973,7 +2080,8 @@
       "aliases": [],
       "summary": "Catalog goals by frequency, persist them in serverless Postgres, and read progress off an analytics dashboard.",
       "body": "goal tracker · vision board · streamlit · neon · postgres · practical lab · habits · 2026 · metrics · Data-Driven Vision Board & Goal Tracker · 1. Goal Catalog · 2. Serverless Database · 3. Execution Dashboard · The 2026 Goal Tracker: Data-Driven Vision Board & Neon Postgres System",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "graphrag_system1",
@@ -2000,7 +2108,8 @@
       "aliases": [],
       "summary": "Why this is a System 1 job",
       "body": "graphrag · system 1 · system 2 · noul · choice primitive · score primitive · calibrated boolean · entity gate · subgraph pruning · ontology choice · gray band · dual engine · micro decisions · token budget · path ranking · Reading the dial · Why this is a System 1 job · GraphRAG With a System 1 Decision Layer · Why the split · Effects are illustrative · Strict engine separation",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "graphtraversalknowledge",
@@ -2020,7 +2129,8 @@
       "aliases": [],
       "summary": "Retire the heuristic router: run vector, keyword, and graph retrieval fused — on bitemporal edges with adjudicated entities.",
       "body": "graph traversal · always fused pipeline · bitemporal edges · entity resolution · two threshold · valid_from · valid_to · discovered contradictions · Always-Fused Graph Traversal Knowledge Layer · 1. Fused Pipeline · 2. Temporal Integrity · 3. Entity Resolution · Making the Knowledge Layer a Graph You Actually Traverse",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "grokking",
@@ -2043,7 +2153,8 @@
       "aliases": [],
       "summary": "Why this generalizes beyond clock math",
       "body": "grokking · delayed generalization · memorization vs generalization · modular addition · training dynamics · early stopping · circuit competition · interpretability · probe accuracy · flat plateau · generalization gap · Grokking: Understanding Arrives After the Scoreboard Gives Up · Why this generalizes beyond clock math",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "guardrails",
@@ -2073,7 +2184,8 @@
       ],
       "summary": "Every prompt runs a threat gauntlet; five guardrails decide whether the output ships sanitized — or gets blocked with an alert.",
       "body": "responsible ai · guardrails · pii redaction · author redaction · copyright protection · ip leak defense · prompt injection · jailbreak defense · llama guard · nemo guardrails · Responsible AI Guardrails & Safety Pipeline · Threats In · The 5-Guardrail Chain · Safe Output Stream · Blocked Alerts · Responsible AI, Security & Guardrails Engineering",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "hallucbricks",
@@ -2088,7 +2200,8 @@
       "aliases": [],
       "summary": "The Pattern Behind All Four Failures",
       "body": "hallucinations · bricks · verification · One Hallucination Per Brick · The Pattern Behind All Four Failures",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "hallucination",
@@ -2103,7 +2216,8 @@
       "aliases": [],
       "summary": "LLM-as-Judge — Confirmation Bias Loop",
       "body": "hallucination loop · silent failure · detection · How the Vector Store Got Poisoned · LLM-as-Judge — Confirmation Bias Loop · Quarantine by Default — Two-Gate Architecture",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "handoffwatch",
@@ -2121,7 +2235,8 @@
       "aliases": [],
       "summary": "Support-triage pipeline, three nodes deep: a 200-OK empty payload sails through tone checks and ships a polite wrong refund. Intermediate State Evals put a cheap watchdog between nodes so corruption halts where it…",
       "body": "handoff watchdog · intermediate state eval · silent failure · empty 200 · plausible but wrong · confidence floor · Your Final Output Can Lie — Grade the Seams · Seam Grading + Costs",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "harmcauses",
@@ -2147,7 +2262,8 @@
       "aliases": [],
       "summary": "AI Harms & Their Technical Causes",
       "body": "ai harms · technical causes · harm taxonomy · cause tracing · mitigation · residual risk · bias · proxy variable · objective misspecification · feedback loop · deskilling · anthropomorphism · upstream fix · downstream fix · Residual risk is a signature, not a rounding error · AI Harms & Their Technical Causes",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "hierrag",
@@ -2163,7 +2279,8 @@
       "aliases": [],
       "summary": "NIST SP 800-53 TOC Tree",
       "body": "hierarchical · table of contents · toc · tree · Retrieval Trilogy — Series Position · NIST SP 800-53 TOC Tree · The Bounded Loop Inside Retrieval · Token Cost — Flat Top-k vs Hierarchical · Token Cost Comparison",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "humancentric",
@@ -2182,7 +2299,8 @@
       "aliases": [],
       "summary": "Compartmentalized metrics, smoker-satisfied filter bubbles, non-voluntary exposure, FAccT and compliance falling short — answered by value-sensitive design and concentric rollout (support→automation, internal→customer).",
       "body": "human-centric · manifesto · do no harm · value-sensitive design · filter bubble · facct · compliance · Satisfied ≠ Unharmed — Design for Humans, Not Metrics · Blind Spots → Rollout Discipline",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "interviewmindset",
@@ -2206,7 +2324,8 @@
       "aliases": [],
       "summary": "You just passed the verification axis",
       "body": "interview mindset · coding interview · system design round · behavioral interview · star method · ai-assisted coding · trade-offs · hints · verification · big tech loop · bluffing · hiring · The hire pattern, one sentence · You just passed the verification axis · One case left unexamined · Topic triage · Practice exactly like the round feels · Senior & manager extra · Senior stories must be lived-in · Interview Mindset: What a Thousand Interviews Actually Grade",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "interviewprep",
@@ -2223,7 +2342,8 @@
       "aliases": [],
       "summary": "A complete, practical Q&A masterclass featuring 32+ high-frequency interview questions, category filters, code snippets, key takeaways, and a 7-day study plan.",
       "body": "interview · questions · rag interview · q&a · study plan · Production RAG Interview Preparation · Key Takeaways for the Interviewer · Common Interview Mistakes to Avoid",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "keras3",
@@ -2237,12 +2357,15 @@
         "tensorflow",
         "nmt",
         "encoder decoder",
-        "multi-backend"
+        "multi-backend",
+        "tensor",
+        "tensors"
       ],
       "aliases": [],
       "summary": "One unified API over three execution backends with seamless switching, running a sequence-to-sequence encoder-decoder translator.",
       "body": "keras 3.0 · pytorch backend · jax backend · tensorflow · nmt · encoder decoder · multi-backend · Multi-Backend Deep Learning for NMT · Encoder — Source Language In · Decoder — Target Language Out · Keras 3.0 Tutorial: End-to-End Multi-Backend Deep Learning Guide",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "knowledgebase",
@@ -2265,7 +2388,8 @@
       "aliases": [],
       "summary": "Ingest broadly, clean ruthlessly, chunk atomically, index by shape, and never stop evaluating freshness.",
       "body": "knowledge base · efficient knowledge base · top 10 questions · cleansing · deduplication · hnsw · ivf · flat · rbac · freshness ttl · 17 · How to Build an Efficient Knowledge Base · Ingestion + Question Seeding · Cleansing & Dedup Engine · Atomic Chunking + RBAC Tags · Index Selection Matrix · Eval Loop + Freshness TTLs · How to Build an Efficient Knowledge Base for AI Models",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "langchain",
@@ -2286,7 +2410,8 @@
       "aliases": [],
       "summary": "",
       "body": "langchain · framework · chains · lcel · pipeline · prompts · models · parsers · lang chain",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "langgraph",
@@ -2308,7 +2433,8 @@
       "aliases": [],
       "summary": "",
       "body": "langgraph · state graph · nodes · edges · hitl · human in the loop · checkpointing · cyclic · multi-agent · lang graph",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "linearregression",
@@ -2328,7 +2454,8 @@
       "aliases": [],
       "summary": "Fit house price to size, measure what the line misses, then walk the loss surface downhill.",
       "body": "linear regression · cost function · gradient descent · mse · mae · house pricing · weight update · optimization · Linear Regression & Gradient Descent · 1. Fit the Line · 2. Cost = MSE · 3. Descend & Update · Back to Basics: Linear Regression, Cost Function, and Gradient Descent · House Price vs Size with Regression Line · MSE Loss Convergence History · Fitting the Best Line, Step by Step",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "llmevals",
@@ -2359,7 +2486,8 @@
       "aliases": [],
       "summary": "LLM Evals Are Based on Vibes: The Missing Quality Gate",
       "body": "llm evals · evals based on vibes · missing layer · attribution · specificity · quality gate · serve retry block · regression · product manager · pm eval · spam filter · tax chatbot · recsys · eval to launch · gsm-symbolic · gsm-noop · apple benchmark · true reasoning · benchmark contamination · LLM Evals Are Based on Vibes: The Missing Quality Gate",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "llmfinetuning",
@@ -2389,7 +2517,8 @@
       "aliases": [],
       "summary": "Decide between encoding and retrieving, freeze the base in 4-bit, train small adapters, merge for inference.",
       "body": "model fine tuning · fine-tuning · fine tuning · llm fine tuning · qlora · lora · peft · 4-bit nf4 · double quantization · paged optimizers · instruction backtranslation · sfttrainer · single gpu · dpo · rlhf · unsloth · axolotl · merge_and_unload · Fine-Tuning & QLoRA End-to-End Pipeline · Fine-Tune vs RAG Decision · QLoRA Intuition · Training Loop & Merge · Model Fine-Tuning, LoRA & QLoRA: End-to-End Architecture",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "llmreliability",
@@ -2410,7 +2539,8 @@
       "aliases": [],
       "summary": "Stochastic outputs go in; five deterministic mechanisms stand between them and production.",
       "body": "llm reliability · fault tolerance · xml tags · markup tags · pydantic validation · exponential backoff · multi-provider fallback · fallback chain · stochastic · LLM Reliability & Fault Tolerance — 5 Mechanisms · Challenges In · 1–2 · Parse & Validate · 3 · System Prompting · 4 · Backoff Retries · 5 · Provider Fallback · Reliable Output · LLM Application Reliability & Fault Tolerance · Retry → Backoff → Provider Failover",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "llmsampling",
@@ -2436,7 +2566,8 @@
       "aliases": [],
       "summary": "How LLMs Generate Text: Logits, Softmax & Sampling",
       "body": "logits · sampling · temperature · top-p · top-k · min-p · nucleus sampling · greedy decoding · repetition penalty · softmax · beam search · autoregressive · generation mechanics · llm generation · How LLMs Generate Text: Logits, Softmax & Sampling",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "longcontext",
@@ -2455,7 +2586,8 @@
       "aliases": [],
       "summary": "Recall is U-shaped: heads and tails stick, middles vanish. Anchor twice, compress on a ladder, and retrieve-then-read the moment you overflow.",
       "body": "long context · lost in the middle · needle haystack · context compression · compaction · retrieve then read · anchors · Long Context Isn't Long Memory — Plan It · U-Curve + Anchors + Compression Ladder",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "loopengineering",
@@ -2479,7 +2611,8 @@
       "aliases": [],
       "summary": "",
       "body": "loop engineering · ralph loop · ralf · ralphex · boris cherny · peter steinberger · goal loop · loop library · 69 loops · claude basics · cross-model review · autonomous agent loops",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "lstm",
@@ -2502,7 +2635,8 @@
       "aliases": [],
       "summary": "The sequence-model background that explains why transformers exist — gates, a worked numeric example, honest trade-offs, and where LSTMs still ship today.",
       "body": "lstm · gru · rnn · vanishing gradient · exploding gradient · gates · forget gate · cell state · sequence model · recurrent network · transformers won · LSTMs: From Vanishing Gradients to Transformers",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "mcpclient",
@@ -2529,7 +2663,8 @@
       "aliases": [],
       "summary": "A web frontend drives a protocol engine that negotiates transports, calls tools, and normalizes responses from remote servers.",
       "body": "mcp · model context protocol · mcp server · mcp client · tools · resources · prompts · streamlit · remote mcp server · deepwiki · huggingface · json-rpc 2.0 · stdio · streamable http · tool calling · MCP Client Development — UI, Transport Engine, Remote Servers · 1. Web UI Frontend · 2. Transport & Protocol Engine · 3. Remote Tool Servers · Model Context Protocol (MCP)",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "medallionarch",
@@ -2546,7 +2681,8 @@
       "aliases": [],
       "summary": "Medallion Data Quality Flow Diagram Across Schemas",
       "body": "medallion · bronze · silver · gold · data lakehouse · Lakehouse Formats & Production Quality Controls Matrix · Medallion Data Quality Flow Diagram Across Schemas · Interactive Medallion Retail Pipeline Simulator · 3 Structural Causes of Test Data Bottlenecks · 4 Modern TDM Design Principles & GitHub Actions API Integration · Interactive Ephemeral TDM Pipeline Simulator",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "memeng",
@@ -2561,7 +2697,8 @@
       "aliases": [],
       "summary": "Speed Diagram",
       "body": "memory engineering · persistent memory · long-term · Memory Diagram · Speed Diagram · Pandas Chunking Flow · Dask Task Graph · Polars Arrow Architecture · Decision Tree — Which Tool for Which Constraint?",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "memhierarchy",
@@ -2581,7 +2718,8 @@
       "aliases": [],
       "summary": "Working context is scarce; episodic, semantic and cold tiers are cheap. Score every event, page like MemGPT, quarantine PII before scoring, and forget by rule — not by accident.",
       "body": "memory hierarchy · working episodic semantic · memgpt · forgetting · salience · pii quarantine · personalization · cold archive · Memory Has Tiers — Route, Page, Forget on Purpose · 4 Tiers + MemGPT Paging + PII Rule",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "mlproblems",
@@ -2608,7 +2746,8 @@
       "aliases": [],
       "summary": "Work backwards from the outcome",
       "body": "machine learning problem · problem framing · classification · regression · clustering · rule extraction · given identify benefit · problem taxonomy · is this ml · spam detection · fraud detection · decision tree · problem type · ai effect · ai-complete · Not (yet) an ML problem · Work backwards from the outcome · Practical ML Problems: Frame, Classify, Then Build",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "modeldeploy",
@@ -2626,7 +2765,8 @@
       "aliases": [],
       "summary": "",
       "body": "model deployment · docker · fastapi · ec2 · containerization · ml deployment",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "modellandscape",
@@ -2655,7 +2795,8 @@
       "aliases": [],
       "summary": "Foundation Model Landscape: Open, Closed, SLMs & Reasoning",
       "body": "model landscape · model selection · decision engine · open weights · closed api · deepseek-v3 · deepseek-r1 · llama 3.3 · claude 3.5 · gpt-4o · slms · small language models · phi-4 · smollm · test-time compute · reasoning models · litellm · Foundation Model Landscape: Open, Closed, SLMs & Reasoning",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "modelrouting",
@@ -2673,7 +2814,8 @@
       "aliases": [],
       "summary": "Static flagship-everywhere wastes 90%+ on easy work. JIT per-agent planning plus a cheap classifier scoring complexity × reasoning × accumulated context routes every sub-task to fast, balanced, or powerful.",
       "body": "model routing · adaptive router · tiers · jit planning · inference cost · fast balanced powerful · Pay Only for the Thinking Each Task Needs · 0–6 Score → Three Tiers",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "modelvalidation",
@@ -2694,7 +2836,8 @@
       "aliases": [],
       "summary": "No dev sample, vendor core, silent drift: SR 11-7's three pillars survive, but evidence changes completely. Tier by travel × acts × materiality, then dimension-battery, robustness, and judge-the-judge.",
       "body": "model validation · sr 11-7 · banking · risk tiering · conceptual soundness · outcomes analysis · monitoring · judge the judge · robustness · Validate Systems You Can't Inspect — The Banking Playbook · Pillars + Breaks + Tiering",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "modernioformats",
@@ -2717,7 +2860,8 @@
       "aliases": [],
       "summary": "Fast Data I/O: Goodbye CSV, Hello Parquet, Arrow & DuckDB",
       "body": "parquet · arrow · feather · duckdb · polars · pd.read_csv · csv · data io · columnar · predicate pushdown · zero-copy · Fast Data I/O: Goodbye CSV, Hello Parquet, Arrow & DuckDB",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "multiagent",
@@ -2732,7 +2876,8 @@
       "aliases": [],
       "summary": "",
       "body": "multi-agent · orchestration · handoffs",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "multiagentcoord",
@@ -2751,7 +2896,8 @@
       "aliases": [],
       "summary": "",
       "body": "multi-agent coordination · specialist agents · coordinator · typed findings · contradiction detection · risk routing · model selection",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "multilingualclassification",
@@ -2771,7 +2917,8 @@
       "aliases": [],
       "summary": "",
       "body": "multilingual · bge-m3 · scikit-llm · ollama · text classification · embeddings · logistic regression · machine learning mastery",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "multilingualrag",
@@ -2790,7 +2937,8 @@
       "aliases": [],
       "summary": "EN-dominant + low volume → translate the query. Latency-sensitive → native multilingual embed. High volume → translate the corpus once. Entities never travel without source spans.",
       "body": "multilingual rag · cross-lingual · translate query · me5 · bge-m3 · fertility · entity drift · One Meaning, Many Token Bills — Route by Corpus · 3 Routes + Failure Modes",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "multimodalrag",
@@ -2811,7 +2959,8 @@
       "aliases": [],
       "summary": "Scans get OCR+layout, tables get grids, charts get DePlot, photos get SigLIP+VQA. Every modality cites geometry — bbox, rect, figure. Captions without verification are hallucinations with coordinates.",
       "body": "multimodal rag · vision rag · clip · siglip · deplot · chart qa · vqa · layout · ocr · Pixels Need Pipelines — Route Every Page by Modality · Modality Router + Citation Invariant",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "nsquaredpizza",
@@ -2831,7 +2980,8 @@
       "aliases": [],
       "summary": "",
       "body": "quadratic memory · n squared · ml memory · pizza problem · cluster matching · bounding · decimation · kd-tree",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "observability",
@@ -2851,7 +3001,8 @@
       "aliases": [],
       "summary": "Traces carry prompts, spans carry scores, versions pin every span. 100% of errors, 5% of success, all of canary — thin sampling is incident blindness.",
       "body": "observability · tracing · opentelemetry · langsmith · langfuse · spans · sampling · monitoring · If It's Not a Span, It Didn't Happen · Signals + Platforms + Sampling",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "overview",
@@ -2868,6 +3019,7 @@
       "summary": "Build, learn, and master the art of Generative AI.",
       "body": "overview · home · introduction · dashboard",
       "related": [],
+      "kind": "topic",
       "rank": 1.4
     },
     {
@@ -2887,7 +3039,8 @@
       "aliases": [],
       "summary": "Heterogeneous lists, vectorized homogeneous arrays, and labeled in-memory tables — plus the three ways frames get built.",
       "body": "pandas dataframes · numpy arrays · ndarrays · dataframe initialization · read_csv · dictionaries · in-memory analytics · Python Data Structures — NumPy vs Pandas DataFrames · 1. Python Lists · 2. NumPy ndarrays · 3. DataFrame Core · 4. Creation Workflows · The Absolute Beginner’s Guide to Pandas DataFrames · Four Ways to Build a DataFrame",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "pandasmem",
@@ -2906,7 +3059,8 @@
       "aliases": [],
       "summary": "Inplace over copies, usecols over everything, downcast/category/sparse dtypes, dtypes-at-read, chunksize streaming — with every caveat attached.",
       "body": "pandas memory · usecols · dtype · category · sparse · chunksize · inplace · 137MB → ~15MB: Seven Cuts, Zero Dependencies · Seven Cuts + Order",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "pipeline",
@@ -2922,7 +3076,8 @@
       "aliases": [],
       "summary": "Each stage filters noise: hybrid fuses dense + sparse retrieval, rerank keeps the top-5, and compression trims tokens before the LLM generates.",
       "body": "pipeline · vector db · embedding · chunking · RAG Pipeline — Seven Stages",
-      "related": []
+      "related": [],
+      "kind": "simulator"
     },
     {
       "id": "posencoding",
@@ -2941,7 +3096,8 @@
       "aliases": [],
       "summary": "Five weekday temps through scalar→embed→QKV: shuffle them and attention can't tell. Sinusoidal clocks restore order and relative distance (t−1, t−7, t−30).",
       "body": "positional encoding · sinusoidal · time series · self-attention order · qkv · rope · lags · Order Changes Meaning — Give Attention a Clock · Shuffle Blindness → Clocks → Lags",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "powerfeatures",
@@ -2956,7 +3112,8 @@
       "aliases": [],
       "summary": "OpenWiki Daily Documentation Loop",
       "body": "power features · advanced · optimizations · From Repeated Prompt → Reusable Command · OpenWiki Daily Documentation Loop · AUTOMEM Benchmark Gains",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "practices",
@@ -2971,7 +3128,8 @@
       "aliases": [],
       "summary": "",
       "body": "best practices · guidelines · checklist",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "prodrag",
@@ -2987,7 +3145,8 @@
       "aliases": [],
       "summary": "Multi-word Keyword Detection",
       "body": "production rag · pdf · extraction · tables · The Full Contract — 4 Bricks, Typed Connections · Multi-word Keyword Detection · LLM TOC Router vs Substring Match · Five Levels of Control",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "productionragops",
@@ -3015,7 +3174,8 @@
       "aliases": [],
       "summary": "{activeAbsenceCase.structuredResponse.justification}",
       "body": "agentops · mlops · earned complexity · rag complexity · faq as rag · semantic cache · noisy text · ocr · typos · levenshtein · symspell · pass^k · tau-bench · compounding errors · hard loop cap · opentelemetry · Production RAG & AgentOps: Earned Complexity, FAQ Caching & Noisy Text · Stateless 85% ≠ system success · Waterfall traces + side-effect gates · Hard cap on retries · Direct match · sim ≥ 0.92 · Adjacent match · sim 0.78–0.92 · Miss · sim < 0.78 · Noise sources · Classical gaps · Deep-learning fixes · Relational Parse Coverage · Validated Concept Vocabulary · Exhaustive Sweep ·…",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "progress",
@@ -3030,7 +3190,8 @@
       "aliases": [],
       "summary": "",
       "body": "progress · tracking · checklist",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "projectprepframework",
@@ -3052,7 +3213,8 @@
       "aliases": [],
       "summary": "Agentic AI makes implementation cheap — so problem definition becomes the bottleneck. 6 short docs that make decisions explicit, durable and usable by humans + agents.",
       "body": "solve the right problem · project preparation framework · agentic ai · pid · discovery report · functional requirements · technical requirements · governance raci · roadmap · reversibility · Solve the Right Problem Before Agents Build the Wrong One Fast · 6-Doc Prep Framework + Cost-of-Change Curve",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "promptalignment",
@@ -3075,7 +3237,8 @@
       "aliases": [],
       "summary": "Failed tasks are visible spend",
       "body": "prompt framework · approval request · task completion report · token utilization report · alignment protocol · pre-flight check · meta-prompt · two-phase prompt · clarifying questions · budget report · action required · Quick version for routine check-ins · Failed tasks are visible spend · Why the explicit gate matters · Prompt Frameworks: Reports, Approvals & Pre-Flight Alignment",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "promptcontracts",
@@ -3094,7 +3257,8 @@
       "aliases": [],
       "summary": "The dependency graph says what to retest; contracts say whether the change may ship at all. Four parts, five breaking rules, one CI gate. Upstream of graphs and golden sets.",
       "body": "prompt contracts · contract validation · version pin · breaking change · section manifest · capability flags · prompt management · Prompt Contracts — May This Change Ship? · 4 Parts → Compatible vs Breaking",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "promptdependencygraph",
@@ -3113,7 +3277,8 @@
       "aliases": [],
       "summary": "Composable prompts create a blast radius with no compiler to catch it. Pure-Python dependency graph separates Reachable (structural ceiling) from Candidate (section-aware eval set).",
       "body": "prompt dependency graph · blast radius · reachable vs candidate · change impact analysis · section dependents · composable prompts · retesting · One Prompt Change Can Hit 50 Others — Know What to Retest · Reachable vs Candidate + Sharing Curve",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "promptfundamentals",
@@ -3138,7 +3303,8 @@
       "aliases": [],
       "summary": "Prompt Engineering: Cognitive Patterns & System Architecture",
       "body": "prompt engineering · zero-shot · few-shot · in-context learning · chain-of-thought · cot · tree-of-thoughts · tot · directional stimulus · delimiters · system prompt · dspy · declarative prompts · Prompt Engineering: Cognitive Patterns & System Architecture",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "promptlearning",
@@ -3159,7 +3325,8 @@
       "aliases": [],
       "summary": "Skip weight gradients: critique outputs in plain language, fold the critique into system instructions, repeat until rules stick.",
       "body": "prompt learning · english feedback · voyager · karpathy · meta-prompt · instruction management · online optimization · critique · evals · Prompt Learning & English Feedback Loop · 1. Three Paradigms · 2. Four-Stage Meta-Cycle · 3. Empirical Scaling · Prompt Learning: Using English Feedback to Optimize LLM Systems",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "promptmgmt",
@@ -3176,7 +3343,8 @@
       "aliases": [],
       "summary": "Dependency Blast Radius Graph",
       "body": "prompts · prompt management · versioning · prompt engineering · templates · Prompt AST Validation Pipeline · Dependency Blast Radius Graph",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "promptregression",
@@ -3195,7 +3363,8 @@
       "aliases": [],
       "summary": "Structurally valid prompts still regress behaviourally. Golden sets, old-vs-new diffs, canaries and citation gates catch it; rollback rungs contain it. Every rollback donates its case back to the suite.",
       "body": "prompt regression · golden set · behavioural diff · canary · rollback · quiet failure · evals · Prompt Regression — Behaviour Fails Quietly · Golden → Diff → Canary → Citations → Rollback",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "proxypointer",
@@ -3215,7 +3384,8 @@
       "aliases": [],
       "summary": "Nine deterministic stages from raw markdown to an indexed pointer map — one LLM call, everything else rules and regex.",
       "body": "proxy pointer · proxy pointer rag · structure meets scale · skeleton tree · breadcrumb injection · faiss pointer map · gemini flash lite noise filter · 15 · Proxy-Pointer Ingestion Pipeline — Skeleton Tree to Pointer Map · Proxy-Pointer Multimodal RAG — Answers Without Multimodal Embeddings · Multimodal Document Ingestion · Dual Indexing · Fast Text Vector Search · Pointer Resolution & Synthesis · Naive Shredding vs Layout Preservation · Naive Path — Shredded Context · Proxy Path — Layout Preserved · Decoupled Vector Space & Pointer Graph · Coordinates, Not Copies · Proxy-Pointer RAG:…",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "pydescriptors",
@@ -3237,7 +3407,8 @@
       "aliases": [],
       "summary": "Writes are rejected on purpose",
       "body": "python descriptors · controlled attributes · validated attribute · computed attribute · lazy loading · __get__ · __set__ · __set_name__ · attribute protocol · data descriptor · Why float(value) on the way in · Writes are rejected on purpose · The bypass is the trick · The one-sentence takeaway · Python Descriptors: Validated, Computed & Lazy Attributes",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "pythonengineering",
@@ -3257,7 +3428,8 @@
       "aliases": [],
       "summary": "5 Computational Engineering Simulators in Python",
       "body": "computational engineering · fea · finite element · pid controller · harmonic oscillator · rankine cycle · scipy · solve_ivp · 5 Computational Engineering Simulators in Python",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "pythonprofiling",
@@ -3278,7 +3450,8 @@
       "aliases": [],
       "summary": "Think Your Python Code Is Slow? Stop Guessing, Start Measuring",
       "body": "python profiling · cprofile · snakeviz · line_profiler · scalene · performance · vectorization · tottime · cumtime · Think Your Python Code Is Slow? Stop Guessing, Start Measuring",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "qparseloop",
@@ -3293,7 +3466,8 @@
       "aliases": [],
       "summary": "The Small Loop — 6 Steps",
       "body": "question parsing · query rewrite · intent · The Three Eras Stack · The Small Loop — 6 Steps · Loop Scope — Inside Question Parsing",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "quantserve",
@@ -3314,7 +3488,8 @@
       "aliases": [],
       "summary": "70B drops 140GB → 35GB at −1–3% quality. VRAM math (weights + KV cache) picks the quant; workload picks vLLM, TensorRT, TGI, or llama.cpp.",
       "body": "quantization · awq · gptq · gguf · vllm · tensorrt · vram · serving · pagedattention · Eval in FP16, Serve in INT4, Edge in GGUF · Quant Ladder + Stack Picks",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "rag",
@@ -3328,7 +3503,12 @@
         "hybrid",
         "self-rag",
         "crag",
-        "graphrag"
+        "graphrag",
+        "retrieval",
+        "retrieval augmented generation",
+        "hybrid search",
+        "hybrid retrieval",
+        "bm25"
       ],
       "aliases": [
         "rag overview",
@@ -3336,12 +3516,15 @@
         "types of rag",
         "rag architectures",
         "naive rag",
-        "hybrid rag"
+        "hybrid rag",
+        "retrieval",
+        "bm25 rag"
       ],
       "summary": "Start with Naive RAG, ship Hybrid as the production baseline, and layer Graph / Agentic / Multimodal for hard enterprise knowledge.",
       "body": "rag · naive · advanced · hybrid · self-rag · crag · graphrag · The RAG Spectrum",
       "related": [],
-      "rank": 1.4
+      "kind": "topic",
+      "rank": 1.8
     },
     {
       "id": "rag_advanced_hub",
@@ -3358,7 +3541,8 @@
       "aliases": [],
       "summary": "",
       "body": "production · agents · graphs · sql · verification",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "rag_core_hub",
@@ -3374,7 +3558,8 @@
       "aliases": [],
       "summary": "The foundation of grounded AI: architectures, pipelines, chunking, and queries.",
       "body": "pipeline · chunking · parsing · retrieval · RAG Core",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "rag_practice_hub",
@@ -3389,7 +3574,8 @@
       "aliases": [],
       "summary": "",
       "body": "case studies · interview prep · capstone",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "rag_precision_hub",
@@ -3405,7 +3591,8 @@
       "aliases": [],
       "summary": "",
       "body": "rerank · eval · tables · multilingual",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "ragbeyond",
@@ -3420,7 +3607,8 @@
       "aliases": [],
       "summary": "The Telephone Game",
       "body": "beyond rag · future architectures · agents · The Great Translation Absurdity · The Telephone Game · Context Window vs Latent Persistence · RAG Latency Budget · State Transfer Workflow · Evolutionary Arc of AI Memory · Layer Accumulation · ILCP — Inductive Latent Context Persistence · Base Station Handover — Mobile Networks · RAG's Role Shift",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "ragcasestudies",
@@ -3440,7 +3628,8 @@
       "aliases": [],
       "summary": "From SLA and requirements to ingestion, orchestration, evals, safeguards, and explicit trade-offs.",
       "body": "case study · sdlc rag · financial rag · devcontext · system design · pseudocode · architecture · blueprints · 9-Step Enterprise RAG System Design Blueprint · S1 · AST Code-Chunking · S2 · Real-Time Incident Context Pack · S3 · Commit-SHA Staleness Control · S4 · Multi-Metric Evaluation Suite · S5 · Multi-Tenant Isolation Topology · Enterprise RAG Case Studies & Blueprints · Lessons Learned from SDLC RAG Production Deployment · Model Candidate Answer Script (Tailored to Selected Scenario) · Real-Time Incident Context-Pack Architecture · From Requirements to Production RAG",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "ragchunking",
@@ -3462,7 +3651,8 @@
       "aliases": [],
       "summary": "Chunking is the single highest-leverage decision in RAG. Explore 8 distinct splitting paradigms—from naive fixed-size windows to AST Markdown structures, Anthropic's Contextual Retrieval, and Jina's bidirectional Late…",
       "body": "chunking · text splitting · late chunking · recursive character splitter · semantic chunking · sentence boundaries · overlap · parent child · contextual retrieval · fixed size · RAG Chunking Strategies: Boundary Integrity to Late Chunking · Chunking Strategy Decision Matrix & Taxonomy · Traditional vs Late Chunking Architecture · Critical Production Engineering Rule: · Engineering Sizing Rule of Thumb:",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "ragcorpusshapes",
@@ -3481,7 +3671,8 @@
       "aliases": [],
       "summary": "A flat pile of vectors fails in predictable ways; three diagnostic questions reveal the corpus shape, and the shape picks the architecture.",
       "body": "rag corpus shapes · flat pile failure modes · unrelated pdfs · homogeneous typed corpus · case file bundles · metadata table indexing · baseline waste · Three Kinds of RAG Corpus & Architecture Selection · 1. Flat-Pile Failure Modes · 2. Three Diagnostic Questions · 3. Architecture Selection · Three Kinds of RAG Corpus, and What It Costs to Build for the Wrong One",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "rageval",
@@ -3501,7 +3692,8 @@
       "aliases": [],
       "summary": "Four numbers separate retrieval faults from generation faults. Faithfulness below 0.85 means the generator is ungrounded; recall below 0.7 means the retriever is blind. Prompt tuning fixes neither.",
       "body": "rag eval · ragas · faithfulness · context precision · context recall · answer relevance · ship gate · evals · RAG Eval Triad — Ship, Gate, or Rebuild? · Triad → Ship/Gate/Rebuild Bands",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "raginterview",
@@ -3523,7 +3715,8 @@
       "aliases": [],
       "summary": "Retrieval quality is the ceiling",
       "body": "rag interview · senior answers · pro insight · lost in the middle · hybrid search · rrf · reranker · ragas metrics · hallucination gate · production rag · How to use this in an interview · Retrieval quality is the ceiling · The three mitigations · Perceived vs. actual latency · 30 RAG Interview Questions — Senior-Level Answers",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "reasoningbench",
@@ -3543,7 +3736,8 @@
       "aliases": [],
       "summary": "Are models like GPT-4o, Claude 3.5, and Llama 3 genuine abstract reasoners or sophisticated statistical pattern matchers? Based on Apple's landmark GSM-Symbolic research study.",
       "body": "gsm-symbolic · gsm-noop · apple benchmark · true reasoning · benchmark contamination · llm reasoning · symbolic mutation · noise collapse · Rethinking LLM Benchmarks: Measuring True Reasoning Beyond Training Data",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "redesign",
@@ -3558,7 +3752,8 @@
       "aliases": [],
       "summary": "Are we buying more AI, or are we redesigning the work that can produce the better business result?",
       "body": "redesign work · process · automation · AI Value Map · Human ↔ Agent Workflow Design · Three Layers of Measurement · The Governance Gap · Standard Attention — Cache Bottleneck · Latent Attention — Compressed Cache",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "refactorhealth",
@@ -3578,7 +3773,8 @@
       "aliases": [],
       "summary": "Health is a weighted sum of three sub-scores. The lowest one tells you where to work. Measure, fix one thing, run tests, commit, and measure again — with proof that every deletion was allowed.",
       "body": "refactoring health · code health score · duplication · dead code · complexity hotspots · per-commit measurement · anti-gaming · stop conditions · Refactor Health: Know Your Score, Work the Weakest Link",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "reinforcementlearning",
@@ -3602,7 +3798,8 @@
       "aliases": [],
       "summary": "Reinforcement Learning: 3 Baseline Policies & Consumer Business Engines",
       "body": "reinforcement learning · rl · baselines · markov decision process · mdp · ppo · dqn · dynamic pricing · consumer rl · next-best-action · ltv · gymnasium · Reinforcement Learning: 3 Baseline Policies & Consumer Business Engines",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "rerankers",
@@ -3623,7 +3820,8 @@
       "aliases": [],
       "summary": "Bi-encoders recall; they don't discriminate. A cross-encoder over the top-50 rescues buried truths (0.58 → 0.95) and buries confident distractors. ColBERT for term-heavy, HyDE for vague.",
       "body": "reranker · cross-encoder · cohere rerank · rankgpt · colbert · late interaction · hyde · query expansion · bge-reranker · The recall ceiling · Agents make recall failures expensive · Retrieve Broad, Rerank Ruthless · Bi-Only vs Cross-Encoder Rerank",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "reversalcurse",
@@ -3642,7 +3840,8 @@
       "aliases": [],
       "summary": "Large-model studies found a stubborn asymmetry: train on facts phrased as “A is B” and the model answers “what is A?” fluently — then fails “what is B?”. The link was written in one direction only, and recall cannot…",
       "body": "reversal curse · one-way memory · directional recall · embedding updates · ask both directions · symmetric facts · retrieval fix · Read the gap · The Reversal Curse: Learned One Way, Lost the Other · Try it on yourself first · Why more parameters cannot help · Contrast with grokking: learned late vs never linked · Operational rule",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "routercheap",
@@ -3666,7 +3865,8 @@
       "aliases": [],
       "summary": "A 0.1ms deterministic score plus a margin gate routes clean answers around the model; only genuine reasoning pays the full pipeline.",
       "body": "zero-model router · fast-path · calling the llm less · latency · cost · line_df · co_occurrence_score · margin · 09ter · frugalgpt · router · fast router · Zero-Model Fast-Path Query Router — Calling the LLM Less · Branch 1 · Fast Path · Branch 2 · Full Reasoning · Academic Lineage: Detection Cascades (Viola-Jones, FrugalGPT, RouteLLM)",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "rowlevelrag",
@@ -3685,7 +3885,8 @@
       "aliases": [],
       "summary": "Whole tables drown the model in irrelevant rows; row-level chunks plus a dual index retrieve exactly what's asked.",
       "body": "row level chunks · table rag · tabular retrieval · serialize_table_rows · pipe parser · docling · dual scale index · Row-Level Table Chunks for RAG · 1. The Mismatch Paradox · 2. Dual-Scale Index Build · 3. Query Dispatcher · Retrieve One Row from a Table, Not the Whole Table",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "selfattention",
@@ -3707,12 +3908,16 @@
         "rope",
         "rotary embeddings",
         "attention weights",
-        "attention heatmap"
+        "attention heatmap",
+        "tensor",
+        "tensors",
+        "tensor math"
       ],
       "aliases": [],
       "summary": "Understand the fundamental mechanism powering modern LLMs. Learn how Query, Key, and Value projections compute token-to-token contextual relevance, how causal masking prevents lookahead leakage, and how MHA evolved into…",
       "body": "self-attention · transformer · query key value · qkv · scaled dot product · mha · gqa · mqa · mla · multi-head attention · grouped query attention · rope · rotary embeddings · attention weights · attention heatmap · Inside Transformer Self-Attention: A Step-by-Step Guide",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "slashcommands",
@@ -3736,7 +3941,8 @@
       "aliases": [],
       "summary": "Slash Commands: One Token of Intent Beats a Stack of Instructions",
       "body": "slash commands · response shape · prompt shorthand · tldr · table mode · critic mode · rubber duck · devils advocate · custom commands · prompt contracts · bullets mode · clarifying questions · Example response shape · Slash Commands: One Token of Intent Beats a Stack of Instructions · Commands change shape, not topic",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "slmedge",
@@ -3757,7 +3963,8 @@
       "aliases": [],
       "summary": "Distill to 10% size at ~90% quality, quantize to GGUF, pass the server golden set, then ship. Local SLM routes and classifies; cloud verifies. Silent downgrades are incidents.",
       "body": "slm · small language models · distillation · phi · smollm · qwen · edge inference · gguf · speculative decoding · Small Models, Same Evals — Fit the Device · Distill → Quantize → Parity-Gate → Fit",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "speechvoice",
@@ -3782,7 +3989,8 @@
       "aliases": [],
       "summary": "Speech AI, Whisper & Real-Time Voice Agents",
       "body": "speech · voice · whisper · asr · tts · speech-to-speech · voice agent · mel-spectrogram · encodec · rvq · audio codec · silero vad · audio tokenization · Speech AI, Whisper & Real-Time Voice Agents",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "structuredoutputs",
@@ -3803,7 +4011,8 @@
       "aliases": [],
       "summary": "From retry loops to server-side enforcement to mathematically guaranteed constrained decoding.",
       "body": "structured outputs · json schema · constrained decoding · fsm · outlines · pydantic · instructor · grammars · logit masking · Generating Structured Outputs — 3 Core Paradigms · 1. Prompt & Re-prompting · 2. Provider Enforcement · 3. Constrained Decoding · Generating Structured Outputs from LLMs · Parse / Validation Error Triggered:",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "subjectleak",
@@ -3828,7 +4037,8 @@
       "aliases": [],
       "summary": "Subject Leakage: When Models See the Same People Twice",
       "body": "data leakage · subject leakage · identity leakage · train test split · segment split · subject blocked · eeg · cross validation · evaluation integrity · inflation · generalization · holdout · loso · Majority of published segment-split studies overestimate · Subject Leakage: When Models See the Same People Twice",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "synasyncagent",
@@ -3848,7 +4058,8 @@
       "aliases": [],
       "summary": "Short jobs can hold the line and answer directly. Long jobs must return a job id, work in the background, and report back. Pick wrong and the connection drops while the tokens keep burning.",
       "body": "synchronous execution · asynchronous execution · fire and forget · job queue · state checkpointing · timeout trap · pattern picker · background workers · Should the Agent Answer Now, or Call You Back? · The gateway-timeout trap · Checkpointing is the superpower · The three-question rule · Duplicate delivery will happen · When it clicks",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "system1head",
@@ -3872,7 +4083,8 @@
       "aliases": [],
       "summary": "Single-Pass Decision Head: One Forward Pass Instead of a Decoding Loop",
       "body": "decision head · classification head · head swap · frozen backbone · single forward pass · system 1 · dynamic quantization · int8 · ci hook · name body match · exit code · selective classifier · Single pass, bounded decision · Single-Pass Decision Head: One Forward Pass Instead of a Decoding Loop · Why freeze the backbone? · Exit code, not prose",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "tablegridrag",
@@ -3894,7 +4106,8 @@
       "aliases": [],
       "summary": "The number lives at row × column. Flatten to text and the intersection is gone. Diagnostic table_df_meta + 5 composable ops (O1–O5) + dispatcher keep tables as data.",
       "body": "tables in pdfs · table_df_meta · table grid · o1 o2 o3 o4 o5 · header propagation · multi-page concat · question projection · columnar extraction · vision fallback · dispatcher · Tables in PDFs: Restore the Grid, Don't Flatten It · Flattening Fails → Diagnostic → Ops → Answer",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "temporalgraphrag",
@@ -3915,7 +4128,8 @@
       "aliases": [],
       "summary": "Temporal Graph RAG: Facts Have a Date of Record",
       "body": "temporal graphrag · knowledge quads · recency weight · half life decay · date filter · fact timeline · time aware retrieval · valid interval · future leakage · All four at once — no date, no ranking · Temporal Graph RAG: Facts Have a Date of Record · Temporal retrieval is upstream of verification",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "textclassificationdata",
@@ -3934,7 +4148,8 @@
       "aliases": [],
       "summary": "",
       "body": "text classification · labeled data · tf-idf · learning curves · data efficiency · zero-shot · llm vs classical",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "textclusteringhdbscan",
@@ -3954,7 +4169,8 @@
       "aliases": [],
       "summary": "",
       "body": "clustering · hdbscan · umap · sentence-transformers · topic discovery · density-based · unsupervised · machine learning mastery",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "texttosql",
@@ -3973,7 +4189,8 @@
       "aliases": [],
       "summary": "Link schema, generate SELECT-only SQL behind four guards, execute with one repair, interpret with SQL+hash citation. Joins carry validity predicates; grain warnings are mandatory.",
       "body": "text to sql · sql agent · schema linking · guarded sql · aggregate · validity join · read-only · Don't Retrieve Aggregates — Compute Them · Link → Guard → Execute → Interpret",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "threelayers",
@@ -3990,7 +4207,8 @@
       "aliases": [],
       "summary": "Prompt, context, and loop — each layer owns a failure mode and a fix.",
       "body": "3 layers · prompt · context · loop · anthropic · Three Engineering Layers of Enterprise RAG · Prompt Engineering · Context Engineering · Loop Engineering",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "threesentenceprompt",
@@ -4031,7 +4249,8 @@
       "aliases": [],
       "summary": "",
       "body": "prompt engineering · 3 sentences · plan-first · better prompts · ai productivity · brain dump · messy prompts · course correction · framework · methodology · prompt patterns · prompt framework · prompt methodology · quality controller · prompt optimizer · prompt studio · prompt composition · framework catalog · few-shot · grounding · prompt builder · prompt evaluation · structure a prompt · blueprint · rtco · prompt template · image prompt · consistent ai images · text to image prompt",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "timeseriesanomaly",
@@ -4050,7 +4269,8 @@
       "aliases": [],
       "summary": "Train on normal signals only. What reconstructs cleanly is normal; what the bottleneck cannot rebuild is anomalous.",
       "body": "time series anomaly · autoencoders · reconstruction error · mse loss · 1d cnn · percentile threshold · unsupervised anomaly detection · 1D Convolutional Autoencoder — Anomaly by Reconstruction Error · Low MSE → OK / Normal · High MSE → Anomaly Alert · Hands-on Time Series Anomaly Detection using Autoencoders in Python · From Normal Signal to Anomaly Alert",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "tokenbill",
@@ -4065,7 +4285,8 @@
       "aliases": [],
       "summary": "Retry Cascade vs Isolated Retry Infographic",
       "body": "token bill · cost optimization · pricing · Dynamic LLM Multi-Agent Cost Architecture · Retry Cascade vs Isolated Retry Infographic",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "tokenization",
@@ -4084,7 +4305,8 @@
       "aliases": [],
       "summary": "BPE merges up, Unigram prunes down, WordPiece likelihood-merges. Fertility decides the multilingual tax: Hindi/Arabic cost ~2x English for identical meaning.",
       "body": "tokenization · bpe · unigram · wordpiece · fertility · multilingual tokens · tiktoken · Tokenization — Where Every Bill Begins · Algos + Fertility Tax",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "tokenorchestrationplaybook",
@@ -4111,7 +4333,8 @@
       "aliases": [],
       "summary": "Local Compose",
       "body": "token playbook · enterprise ai playbook · docker · kubernetes · langsmith · ragas · pytest · asyncio · ainvoke · abatch · redis stack · qdrant · token governance · concurrency · nagaraj y · Enterprise AI Token Management & Orchestration Playbook · Local Compose · Containerized Microservices · Production Deployment · Span Waterfall · ROI Dashboard · Input Pipeline · Three Gauges · Automated Testing",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "toolcalling",
@@ -4131,7 +4354,8 @@
       "aliases": [],
       "summary": "The bridge from data pipelines to agent execution: typed function contracts both sides understand. Build a call, break a call, watch validation decide before anything executes.",
       "body": "function calling · tool calling · json schema · parallel calls · openai tools · anthropic tool use · bridge · data to agents · Wishes In, Actions Out — Schemas In Between · Data → Schema → Action",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "topicmodeling",
@@ -4151,7 +4375,8 @@
       "aliases": [],
       "summary": "Seed phrases condition the topic matrix, LLM summarization removes token noise, and zero-shot labeling tracks topics across a 25-year trend.",
       "body": "topic modeling · keynmf · seeded topic modeling · turftopic · llm summarization · trend tracking · ecb speeches · lda · Seeded Topic Modeling + LLM Integration · Seeded KeyNMF Engine · LLM Summarization Preprocessing · Topic Analyzer & Trend Engine · Topic Modeling Techniques for 2026: Seeded KeyNMF & LLM Integration · 25-Year ECB Topic Dynamics (2002–2026) · From Seed Phrase to 25-Year Trend",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "trpo2grpo",
@@ -4172,7 +4397,8 @@
       "aliases": [],
       "summary": "Pretrain → SFT → RLHF. Tokens are actions, reward models score, and three algorithms balance stability vs efficiency: TRPO's hard KL, PPO's clip, GRPO's group z-scores that delete the value model.",
       "body": "trpo · ppo · grpo · rlhf · reward model · value model · deepseek · kl divergence · policy gradient · How Rewards Reshape Policies — TRPO to GRPO · Trust Regions Get Cheaper",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "typedagentgate",
@@ -4195,7 +4421,8 @@
       "aliases": [],
       "summary": "Typed Tools, Hard Bounds & The Downstream Gate",
       "body": "typed tools · hard bounds · composer gate · agent governance · search box · 8 tools · 80-line loop · contradiction refusal · escalation architecture · graph traversal · time-valid edges · Typed Tools, Hard Bounds & The Downstream Gate",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "unhobbling",
@@ -4211,7 +4438,8 @@
       "aliases": [],
       "summary": "How Your Context Assembles",
       "body": "unhobbling · claude 5 · capabilities · reasoning · 80% Removed, No Measurable Loss · How Your Context Assembles",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "vaes",
@@ -4230,7 +4458,8 @@
       "aliases": [],
       "summary": "The encoder predicts a distribution, the reparameterization trick keeps gradients flowing, the decoder reconstructs — ELBO balances both.",
       "body": "variational autoencoders · vaes · elbo · reparameterization trick · kl divergence · latent space · generative ai · Variational Autoencoder — Encode, Sample, Decode · Reconstruction term · KL term · Variational Autoencoders (VAEs): Theory, ELBO & Reparameterization Trick",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "vague",
@@ -4245,7 +4474,8 @@
       "aliases": [],
       "summary": "",
       "body": "vague questions · clarification · ambiguity",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "validitylayer",
@@ -4263,7 +4493,8 @@
       "aliases": [],
       "summary": "Flight $420 → $610 mid-plan: the baseline burns 2 doomed steps and misses tight budgets; the validity-aware executor checks state first and finishes. Four states, two executors, one law (PFW = closure − 1).",
       "body": "validity layer · stale context · active stale superseded unknown · pre-failure work · baseline vs aware · bitemporal · Presence Isn't Validity — Check Before Acting · Baseline vs Aware + 4 States",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "vectordbops",
@@ -4285,7 +4516,8 @@
       "aliases": [],
       "summary": "RAM math before index choice: vectors × dim × 4 bytes × index multiplier. HNSW by default, IVF at 1–10M, PQ past 100M — and recall@k measured on your filtered queries, never assumed.",
       "body": "vector db · hnsw · ivf · pq · flat index · qdrant · milvus · pgvector · recall@k · ram sizing · Vectors Are Cheap Until They're 20 GB — Size First · Index Ladder + RAM Math",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "verifiedpipes",
@@ -4304,7 +4536,8 @@
       "aliases": [],
       "summary": "PRs up 98%, incidents per PR up 243%: no human audits a 40k-line agent PR they didn't reason through, and AI-reviewing-AI shares the blind spots. Policy-as-code gates verify every deployment; humans handle only…",
       "body": "verified pipelines · human review · policy as code · ai code bugs · dora · review theater · octopus · Review Is Theater at Agent Volume — Pipelines Verify · Theater vs Gates",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "vibecode",
@@ -4321,7 +4554,8 @@
       "aliases": [],
       "summary": "Ukuflow: free to build on credits, −$48/day to run for 200 users. Overkill solution, shrinking beginner market, untested assumption — corrected by static-first pages and a minimum viable offer.",
       "body": "vibe coding · unit economics · ukuflow · minimum viable offer · static first · Two Hours to Build, $52 a Day to Regret · Agent-per-search vs Static-first",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "visionlanguage",
@@ -4348,7 +4582,8 @@
       "aliases": [],
       "summary": "Vision-Language Models (VLMs) & Multimodal Architecture",
       "body": "vlm · vision language models · multimodal · vit · vision transformer · llava · paligemma · clip · siglip · patches · cross-modal connector · q-former · vqa · visual question answering · multimodal rag · Vision-Language Models (VLMs) & Multimodal Architecture",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "vramconductor",
@@ -4367,7 +4602,8 @@
       "aliases": [],
       "summary": "Three terminals, one GTX 1080, two cudaMalloc funerals — because KV cache reserves up front with no shared accounting. A 1,500-line C++ daemon (90% ledger, mutex, book-before-build, KV swap) admits all three.",
       "body": "vram · cuda · admission control · kv cache · layer streaming · llama.cpp · bare metal · Refusing Impossible Work Beats Optimizing Possible Work · Naive OOM vs Ledger",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "workflowloop",
@@ -4390,7 +4626,8 @@
       "aliases": [],
       "summary": "ParsedQuestion + DocumentProfile feed decide_pipeline_patterns() — one rule per activation — emitting ON/OFF flags per retrieval pattern.",
       "body": "workflow loop · dispatcher · when to loop · when to stop · should_continue · pdf_qa_loop · iterate_with_bound · decide.py · 13 · drift · audit · Dispatcher Activation Pipeline · Nested Handler Rings — Control Stays in Code · Same Four Bricks. Five Levels of Control. · Three-Layer State Machine: Dispatcher, Loop & Guardrails · Upfront Dispatcher · Bounded Iteration Loop · Termination Guardrails · Workflow & Loop Engineering — Dispatcher & Feedback Rails · The Dispatcher · Bounded Loop Orchestrator · Cited Answer + Audit Trail · Reset to Pass 1 · Query Drift Defense (expand_query_safely)",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "workflows",
@@ -4406,7 +4643,8 @@
       "aliases": [],
       "summary": "Learning Ramp",
       "body": "workflows · claude · prompt engineering · chaining · The Claude Ecosystem — 10 Workflow Areas · Learning Ramp · Anatomy of a Great Prompt",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "xlstm",
@@ -4427,7 +4665,8 @@
       "aliases": [],
       "summary": "Scalar memory with sigmoid gates — versus exponential gating with a normalizer plus a matrix memory with key/query/value projections.",
       "body": "lstm · xlstm · slstm · mlstm · exponential gating · matrix memory · hochreiter · hand calculation · recurrent neural networks · Classical LSTM vs Extended LSTM (xLSTM) · Classical LSTM · Scalar Memory · sLSTM · Exponential Gating · mLSTM · Matrix Memory · Deep Dive into LSTMs & Extended LSTMs (xLSTM) by Hand ✍️ · From Scalar LSTM to Matrix Memory",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "zerocostmultiagent",
@@ -4449,7 +4688,8 @@
       "aliases": [],
       "summary": "",
       "body": "multi-agent · zero-cost · aging hardware · quantized models · c++ daemons · win32 · swarmforge · o.d.i.n. · lazy loading · hacker noon",
-      "related": []
+      "related": [],
+      "kind": "topic"
     },
     {
       "id": "zerorag",
@@ -4469,7 +4709,8 @@
       "aliases": [],
       "summary": "Brute force is a feature at small scale",
       "body": "zero infra rag · no vector db · cosine knn · brute force retrieval · chunk overlap · abstain · grounded generation · right-size the store · The interface is the architecture · Brute force is a feature at small scale · The abstention prompt pattern · Zero-Infra RAG: The Whole Loop Without a Vector Database",
-      "related": []
+      "related": [],
+      "kind": "topic"
     }
   ]
 }

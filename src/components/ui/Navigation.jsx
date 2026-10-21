@@ -245,11 +245,11 @@ export function Sidebar({
     }
     let cancelled = false;
     const t = setTimeout(() => {
-      import('../../search/searchService.js')
+      import('../../search/search.js')
         .then((m) => m.filterTabIds(queryStr, { limit: 80 }))
         .then((ids) => { if (!cancelled) setFuzzyIds(ids); })
         .catch(() => { if (!cancelled) setFuzzyIds(null); });
-    }, 120);
+    }, 150);
     return () => { cancelled = true; clearTimeout(t); };
   }, [queryStr, isSearchMode]);
 
@@ -426,14 +426,9 @@ export function Sidebar({
           const module = UMBRELLA_TOPICS.find(m => m.id === moduleId);
           if (!module) return null;
           const rawTabs = getTabsForUmbrella(moduleId);
+          // Single search path: ids come from the shared search service.
           const tabs = isSearchMode
-            ? rawTabs.filter(t =>
-                fuzzyIds
-                  ? fuzzyIds.has(t.id)
-                  : (t.label.toLowerCase().includes(queryStr) ||
-                    t.id.toLowerCase().includes(queryStr) ||
-                    (t.keywords && t.keywords.some(k => k.toLowerCase().includes(queryStr))))
-              )
+            ? rawTabs.filter(t => fuzzyIds && fuzzyIds.has(t.id))
             : rawTabs.filter(isHubTab);
 
           const activeMetaForCompat = getTopicMeta(activeTab);
@@ -635,17 +630,23 @@ export function Sidebar({
         {queryStr && totalVisibleTabs === 0 && (
           <div style={{ padding: '24px 12px', textAlign: 'center', color: '#9CA3AF' }}>
             <div style={{ fontSize: '1.2rem', marginBottom: '6px' }}>🔍</div>
-            <div style={{ fontSize: '0.8rem', marginBottom: '8px' }}>No topics match "{queryStr}"</div>
-            <button
-              onClick={() => onSearchChange?.('')}
-              style={{
-                padding: '4px 12px', borderRadius: '6px',
-                border: '1px solid #E5E7EB', background: '#F1F3F5',
-                color: '#4B5563', fontSize: '0.72rem', cursor: 'pointer'
-              }}
-            >
-              Clear Search
-            </button>
+            {fuzzyIds === null ? (
+              <div style={{ fontSize: '0.8rem' }}>Searching…</div>
+            ) : (
+              <>
+                <div style={{ fontSize: '0.8rem', marginBottom: '8px' }}>No topics match "{queryStr}"</div>
+                <button
+                  onClick={() => onSearchChange?.('')}
+                  style={{
+                    padding: '4px 12px', borderRadius: '6px',
+                    border: '1px solid #E5E7EB', background: '#F1F3F5',
+                    color: '#4B5563', fontSize: '0.72rem', cursor: 'pointer'
+                  }}
+                >
+                  Clear Search
+                </button>
+              </>
+            )}
           </div>
         )}
       </nav>
@@ -1210,6 +1211,23 @@ const SEARCH_MODULE_META = Object.fromEntries(
   UMBRELLA_TOPICS.map((m) => [m.id, { title: m.title, icon: m.icon }])
 );
 
+/** Group ranked results by module, preserving each group's internal rank order. */
+function groupResultsByModule(results) {
+  const groups = [];
+  const byModule = new Map();
+  for (const r of results) {
+    const key = r.module || 'other';
+    if (!byModule.has(key)) {
+      const meta = SEARCH_MODULE_META[key] || { title: key, icon: '📦' };
+      const g = { module: key, title: meta.title, icon: meta.icon, items: [] };
+      byModule.set(key, g);
+      groups.push(g);
+    }
+    byModule.get(key).items.push(r);
+  }
+  return groups;
+}
+
 function HighlightedText({ text, terms }) {
   const segments = highlightSegments(text, terms);
   return (
@@ -1231,9 +1249,9 @@ function HighlightedText({ text, terms }) {
 }
 
 function PaletteResultRow({ item, index, isSelected, registryTab, onSelect, onMoreLikeThis }) {
-  const moduleLabel = item.module
-    ? `${UMBRELLA_TOPICS.find((m) => m.id === item.module)?.icon || ''} ${UMBRELLA_TOPICS.find((m) => m.id === item.module)?.title || item.module}`
-    : '';
+  const moduleMeta = item.module ? UMBRELLA_TOPICS.find((m) => m.id === item.module) : null;
+  const moduleLabel = moduleMeta ? `${moduleMeta.icon || ''} ${moduleMeta.title || item.module}` : '';
+  const terms = item.matchedTerms || item.terms || [];
   return (
     <div style={{ display: 'flex', alignItems: 'stretch' }}>
       <button
@@ -1251,11 +1269,23 @@ function PaletteResultRow({ item, index, isSelected, registryTab, onSelect, onMo
         <span style={{ fontSize: '1rem', width: '24px', textAlign: 'center', flexShrink: 0 }}>{registryTab?.icon || '📄'}</span>
         <span style={{ flex: 1, minWidth: 0 }}>
           <span style={{ display: 'block', fontWeight: 600, fontSize: '0.85rem', color: '#1A1D26', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-            <HighlightedText text={item.title || registryTab?.label || item.id} terms={item.terms} />
+            <HighlightedText text={item.title || registryTab?.label || item.id} terms={terms} />
+            {item.type === 'simulator' && (
+              <span
+                style={{
+                  marginLeft: '6px', fontSize: '0.55rem', fontWeight: 700, letterSpacing: '0.04em',
+                  textTransform: 'uppercase', color: '#7A6BA8', background: 'rgba(155,137,196,0.14)',
+                  border: '1px solid rgba(155,137,196,0.28)', borderRadius: '9999px',
+                  padding: '1px 6px', verticalAlign: 'middle'
+                }}
+              >
+                simulator
+              </span>
+            )}
           </span>
           {item.summary ? (
             <span style={{ display: 'block', fontSize: '0.7rem', color: '#6B7280', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', marginTop: '1px' }}>
-              <HighlightedText text={item.summary} terms={item.terms} />
+              <HighlightedText text={item.summary} terms={terms} />
             </span>
           ) : null}
           {moduleLabel ? (
@@ -1287,6 +1317,7 @@ export function CommandPalette({ isOpen, onClose, tabs, onSelectTab }) {
   const [groups, setGroups] = useState([]);
   const [didYouMean, setDidYouMean] = useState(null);
   const [searchLoading, setSearchLoading] = useState(false);
+  const [searchError, setSearchError] = useState(false);
   const [similarTo, setSimilarTo] = useState(null); // { id, title, items }
   const [selectedIndex, setSelectedIndex] = useState(0);
   const inputRef = useRef(null);
@@ -1295,68 +1326,70 @@ export function CommandPalette({ isOpen, onClose, tabs, onSelectTab }) {
   // Preload the index as soon as the palette opens (first-open lazy load)
   useEffect(() => {
     if (isOpen) {
-      import('../../search/searchService.js')
-        .then((m) => m.ensureSearchReady())
+      import('../../search/search.js')
+        .then((m) => m.ensureReady())
         .catch(() => {});
     }
   }, [isOpen]);
 
   // Debounce keystrokes before hitting the index
   useEffect(() => {
-    const t = setTimeout(() => setDebouncedQuery((query || '').trim()), 100);
+    const t = setTimeout(() => setDebouncedQuery((query || '').trim()), 150);
     return () => clearTimeout(t);
   }, [query]);
 
   // Run search (or show default list when the query is empty)
   useEffect(() => {
     let cancelled = false;
-    if (!isOpen) return undefined;
+    if (!isOpen) {
+      return undefined;
+    }
     if (!debouncedQuery) {
       setResults([]);
       setGroups([]);
       setDidYouMean(null);
       setSearchLoading(false);
+      setSearchError(false);
       return undefined;
     }
     setSearchLoading(true);
-    import('../../search/searchService.js')
-      .then((m) => m.searchTopics(debouncedQuery, { limit: 20, moduleMeta: SEARCH_MODULE_META }))
-      .then((res) => {
+    import('../../search/search.js')
+      .then(async (m) => {
+        const [found, suggestion] = await Promise.all([
+          m.search(debouncedQuery, { limit: 20 }),
+          m.suggest(debouncedQuery),
+        ]);
+        return { found, suggestion };
+      })
+      .then(({ found, suggestion }) => {
         if (cancelled) return;
-        setResults(res.results);
-        setGroups(res.groups);
-        setDidYouMean(res.didYouMean);
+        setResults(found);
+        setGroups(groupResultsByModule(found));
+        setDidYouMean(found.length === 0 ? suggestion : null);
+        setSearchError(false);
         setSearchLoading(false);
       })
       .catch(() => {
         if (!cancelled) {
-          // Fallback: plain substring filter over the registry
-          const q = debouncedQuery.toLowerCase();
-          const fallback = tabs
-            .filter((t) =>
-              t.label.toLowerCase().includes(q) ||
-              t.id.toLowerCase().includes(q) ||
-              t.keywords?.some((k) => k.toLowerCase().includes(q))
-            )
-            .slice(0, 20)
-            .map((t) => ({ id: t.id, title: t.label, module: t.umbrellaId, terms: [], summary: '' }));
-          setResults(fallback);
+          // No legacy substring fallback: the service is the single search path.
+          setResults([]);
           setGroups([]);
           setDidYouMean(null);
+          setSearchError(true);
           setSearchLoading(false);
         }
       });
     return () => {
       cancelled = true;
     };
-  }, [debouncedQuery, isOpen, tabs]);
+  }, [debouncedQuery, isOpen]);
 
   // "More like this" mode
   useEffect(() => {
     let cancelled = false;
     if (!similarTo) return undefined;
-    import('../../search/searchService.js')
-      .then((m) => m.getRelatedTopics(similarTo.id, { limit: 8 }))
+    import('../../search/search.js')
+      .then((m) => m.similar(similarTo.id, { limit: 8 }))
       .then((items) => {
         if (!cancelled) setSimilarTo((s) => (s && s.id === similarTo.id ? { ...s, items } : s));
       })
@@ -1385,10 +1418,17 @@ export function CommandPalette({ isOpen, onClose, tabs, onSelectTab }) {
   }, [selectedIndex, isOpen, results, similarTo]);
 
   const defaultItems = !debouncedQuery && !similarTo
-    ? tabs.slice(0, 10).map((t) => ({ id: t.id, title: t.label, module: t.umbrellaId, terms: [], summary: '' }))
+    ? tabs.slice(0, 10).map((t) => ({ id: t.id, title: t.label, module: t.umbrellaId, matchedTerms: [], summary: '' }))
     : [];
   const listItems = similarTo
-    ? (similarTo.items || []).map((r) => ({ id: r.id, title: r.title, module: r.module, terms: [], summary: r.summary || '' }))
+    ? (similarTo.items || []).map((r) => ({
+        id: r.id,
+        title: r.title,
+        module: r.module,
+        matchedTerms: [],
+        summary: r.summary || '',
+        type: r.type,
+      }))
     : (debouncedQuery ? results : defaultItems);
   const listCount = listItems.length;
 
@@ -1468,6 +1508,13 @@ export function CommandPalette({ isOpen, onClose, tabs, onSelectTab }) {
           onMoreLikeThis={() => { setSimilarTo({ id: item.id, title: item.title }); setSelectedIndex(0); }}
         />
       ));
+    }
+    if (searchError) {
+      return (
+        <div role="presentation" style={{ padding: '28px', textAlign: 'center', color: '#9CA3AF', fontSize: '0.82rem' }}>
+          Search is temporarily unavailable. Please retry.
+        </div>
+      );
     }
     if (results.length === 0 && searchLoading) {
       return (

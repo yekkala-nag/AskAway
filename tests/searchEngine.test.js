@@ -77,6 +77,35 @@ for (const { q, expected, expectedInTop3 } of SAMPLE_QUERIES) {
   });
 }
 
+// 15-query acceptance battery: canonical hub must land in the top 3.
+const ACCEPTANCE_QUERIES = [
+  ['rag', ['rag']],
+  ['retreival', ['rag', 'filtering']],
+  ['MCP', ['mcpclient']],
+  ['model context protocol', ['mcpclient']],
+  ['guardrails', ['guardrails']],
+  ['lstm', ['lstm']],
+  ['how do agents remember things', ['agentmemory']],
+  ['reduce hallucinations', ['hallucination']],
+  ['hybrid search bm25', ['rag', 'filtering']],
+  ['finops cost', ['finops']],
+  ['observability', ['observability']],
+  ['multi agent swarm', ['zerocostmultiagent', 'multiagent', 'multiagentcoord']],
+  ['chunking', ['ragchunking']],
+  ['langgraph', ['langgraph']],
+  ['tensor', ['keras3', 'archconcepts', 'selfattention']],
+];
+
+for (const [q, expectedAny] of ACCEPTANCE_QUERIES) {
+  test(`acceptance: ${JSON.stringify(q)}`, () => {
+    const ids = topIds(q);
+    assert.ok(
+      ids.some((id) => expectedAny.includes(id)),
+      `expected one of ${expectedAny.join('/')} in top 3 for "${q}", got ${ids.join(', ')}`
+    );
+  });
+}
+
 test('empty query returns no results', () => {
   assert.deepEqual(engine.search('').results, []);
 });

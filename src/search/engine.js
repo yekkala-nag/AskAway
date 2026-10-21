@@ -1,6 +1,6 @@
 /**
  * Search engine factory — pure, dependency-light (MiniSearch only).
- * Used by the browser via searchService.js and directly by Node tests.
+ * Used by the browser via search.js and directly by Node tests.
  */
 
 import MiniSearch from 'minisearch';
@@ -69,9 +69,10 @@ export function createSearchEngine(records) {
       hits = [];
     }
     // Plain AND-ed original tokens: exact-match intent, fused in below.
-    const plainTokens = tokenize(q)
-      .filter((t) => !STOP_WORDS.has(t))
-      .map((t) => t.replace(/([\\"()])/g, '\\$1'));
+    const queryTokens = new Set(
+      tokenize(q).filter((t) => !STOP_WORDS.has(t))
+    );
+    const plainTokens = [...queryTokens].map((t) => t.replace(/([\\"()])/g, '\\$1'));
     let plainHits = [];
     if (plainTokens.length) {
       try {
@@ -104,7 +105,18 @@ export function createSearchEngine(records) {
     }
 
     // Optional per-record rank multiplier (search-index.json `rank` field,
-    // e.g. 1.4 for canonical overview tabs) + title exact-term bonus.
+    // e.g. 1.8 for the `rag` hub) + title exact-term bonus.
+    // Title credit is limited to tokens the user typed, their prefix
+    // expansions, or a single typo — so a distance-2 fuzzy match
+    // (e.g. "senior" for "tensor") can't win on title alone.
+    const earnsTitleBonus = (term) =>
+      queryTokens.has(term) ||
+      [...queryTokens].some(
+        (qt) =>
+          term.startsWith(qt) ||
+          qt.startsWith(term) ||
+          damerauLevenshtein(term, qt) === 1
+      );
     if (hits.length) {
       hits = hits
         .map((h) => {
@@ -112,7 +124,7 @@ export function createSearchEngine(records) {
           const titleTokens = new Set(tokenize(rec?.title || ''));
           let mult = typeof rec?.rank === 'number' ? rec.rank : 1;
           for (const t of h.terms || []) {
-            if (titleTokens.has(t)) {
+            if (titleTokens.has(t) && earnsTitleBonus(t)) {
               mult *= 1.6;
               break;
             }
