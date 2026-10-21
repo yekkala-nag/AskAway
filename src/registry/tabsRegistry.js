@@ -19,7 +19,7 @@ export const UMBRELLA_TOPICS = [
     color: "#5EC4C8",
     dark: "#1F6B6E",
     description: "Roadmap stages 1–4: orientation, how LLMs work, prompting, models — home of the AI Engineer Roadmap",
-    tabs: ["fnd_start_hub", "fnd_internals_hub", "fnd_prompts_hub", "fnd_mlsoc_hub", "fnd_multimodal_hub", "airoadmap", "overview", "glossary", "reinforcementlearning", "trpo2grpo", "aimoralagency", "humancentric", "dialoguelamda", "modellandscape", "tokenization", "quantserve", "vramconductor", "promptfundamentals", "lstm", "llmsampling", "grokking", "selfattention", "posencoding", "archconcepts", "system1head", "promptmgmt", "promptdependencygraph", "promptcontracts", "promptregression", "structuredoutputs", "topicmodeling", "workflows", "unhobbling", "aiharness", "promptlearning", "visionlanguage", "diffusionmodels", "speechvoice", "datacentricai", "threesentenceprompt", "slashcommands", "ailearning", "reversalcurse", "aigap", "promptalignment", "mlproblems"]
+    tabs: ["fnd_start_hub", "fnd_internals_hub", "fnd_prompts_hub", "fnd_mlsoc_hub", "fnd_multimodal_hub", "airoadmap", "overview", "glossary", "reinforcementlearning", "trpo2grpo", "aimoralagency", "humancentric", "dialoguelamda", "modellandscape", "tokenization", "quantserve", "vramconductor", "promptfundamentals", "lstm", "llmsampling", "grokking", "selfattention", "posencoding", "archconcepts", "system1head", "promptmgmt", "promptdependencygraph", "promptcontracts", "promptregression", "structuredoutputs", "topicmodeling", "workflows", "unhobbling", "aiharness", "promptlearning", "visionlanguage", "diffusionmodels", "speechvoice", "datacentricai", "threesentenceprompt", "slashcommands", "ailearning", "reversalcurse", "aigap", "promptalignment", "dupaudit", "harmcauses", "subjectleak", "mlproblems"]
   },
   {
     id: "data_platform",
@@ -55,7 +55,7 @@ export const UMBRELLA_TOPICS = [
     color: "#F0A89A",
     dark: "#C47A6A",
     description: "Roadmap stage 7: agents, MCP and production deployment",
-    tabs: ["agt_found_hub", "agt_safety_hub", "agt_multi_hub", "agt_prod_hub", "fiveassets", "redesign", "projectprepframework", "agentplanner", "agenthitl", "agentcontrolplane", "agentlifecycle", "agenta2a", "agentsandbox", "agentevals", "handoffwatch", "verifiedpipes", "codingevals", "claudecode100", "typedagentgate", "agentpairprogramming", "vibecode", "agentsastools", "toolcalling", "agenttasks", "agentmemory", "cliagent", "codingagentsnonprog", "multiagent", "multiagentcoord", "modelrouting", "decision_layer", "langchain", "langgraph", "frameworkcompare", "agentdebugging", "agentscale", "modeldeploy", "aiproductbuilder", "mcpclient", "agentsdk", "loopengineering", "finassistproject", "zerocostmultiagent", "capstone2", "functionalscars", "refactorhealth", "agentcreativity", "agentorgchart", "synasyncagent", "agentpatterns", "interviewmindset"]
+    tabs: ["agt_found_hub", "agt_safety_hub", "agt_multi_hub", "agt_prod_hub", "fiveassets", "redesign", "projectprepframework", "agentplanner", "agenthitl", "agentcontrolplane", "agentlifecycle", "agenta2a", "agentsandbox", "agentevals", "handoffwatch", "verifiedpipes", "codingevals", "claudecode100", "typedagentgate", "agentpairprogramming", "vibecode", "agentsastools", "toolcalling", "agenttasks", "agentmemory", "cliagent", "codingagentsnonprog", "multiagent", "multiagentcoord", "modelrouting", "decision_layer", "langchain", "langgraph", "frameworkcompare", "agentdebugging", "agentscale", "modeldeploy", "aiproductbuilder", "mcpclient", "agentsdk", "loopengineering", "finassistproject", "zerocostmultiagent", "capstone2", "functionalscars", "refactorhealth", "agentcreativity", "agentorgchart", "synasyncagent", "agentpatterns", "agentuisupply", "interviewmindset"]
   },
   {
     id: "frontiers_production",
@@ -887,6 +887,15 @@ export const TABS_REGISTRY = [
     component: lazy(() => import("../verifiedPipes/VerifiedPipesTab.jsx"))
   },
   {
+    id: "agentuisupply",
+    label: "Agentic UI & Supply-Chain Risk",
+    umbrellaId: "agents_frameworks",
+    category: "Agents & Frameworks",
+    icon: "🕸️",
+    keywords: ["supply chain", "agentic ui", "skill marketplace", "plugin security", "indirect prompt injection", "tool descriptor", "memory poisoning", "typosquat", "provenance", "capability sandbox", "quarantine reader", "ui redressing", "supply-chain report"],
+    component: lazy(() => import("../agentUiSupply/AgentUiSupplyTab.jsx"))
+  },
+  {
     id: "codingevals",
     label: "Coding-Agent Evals: Evaluate the Work",
     umbrellaId: "agents_frameworks",
@@ -1682,6 +1691,33 @@ export const TABS_REGISTRY = [
     icon: "🧾",
     keywords: ["prompt framework", "approval request", "task completion report", "token utilization report", "alignment protocol", "pre-flight check", "meta-prompt", "two-phase prompt", "clarifying questions", "budget report", "action required"],
     component: lazy(() => import("../promptAlignment/PromptAlignmentTab.jsx"))
+  },
+  {
+    id: "dupaudit",
+    label: "Duplicate Content Audit",
+    umbrellaId: "foundations",
+    category: "Foundations",
+    icon: "🧬",
+    keywords: ["duplicate content", "content audit", "semantic similarity", "probable duplicate", "primary duplicate", "detect only", "jaccard", "deduplication", "corpus audit", "two-phase gate", "match type", "overlap detection"],
+    component: lazy(() => import("../dupaudit/DupAuditTab.jsx"))
+  },
+  {
+    id: "harmcauses",
+    label: "AI Harms & Technical Causes",
+    umbrellaId: "foundations",
+    category: "Foundations",
+    icon: "⚖️",
+    keywords: ["ai harms", "technical causes", "harm taxonomy", "cause tracing", "mitigation", "residual risk", "bias", "proxy variable", "objective misspecification", "feedback loop", "deskilling", "anthropomorphism", "upstream fix", "downstream fix"],
+    component: lazy(() => import("../harmcauses/HarmCausesTab.jsx"))
+  },
+  {
+    id: "subjectleak",
+    label: "Subject Leakage in Evaluation",
+    umbrellaId: "foundations",
+    category: "Foundations",
+    icon: "🧪",
+    keywords: ["data leakage", "subject leakage", "identity leakage", "train test split", "segment split", "subject blocked", "eeg", "cross validation", "evaluation integrity", "inflation", "generalization", "holdout", "loso"],
+    component: lazy(() => import("../subjectLeak/SubjectLeakTab.jsx"))
   },
   {
     id: "mlproblems",
