@@ -16,7 +16,7 @@ An interactive learning platform for AI engineering — **RAG systems, agents, p
 | Web app | React 18, Vite 5 |
 | Tests | Node built-in test runner (`node --test`) |
 | Mobile | Capacitor 8 (Android + iOS) |
-| Deploy | Vercel (`vercel.json` SPA rewrite) |
+| Deploy | Hostinger Cloud (Node.js web app) or Vercel (`vercel.json` SPA rewrite) |
 | Content | 72 diagrams/SVGs in `public/assets/`, design tokens in `src/design-system/` |
 
 ## Getting started
@@ -28,6 +28,26 @@ npm test           # run 67 tests (node --test tests/*.test.js)
 npm run build      # production build → dist/
 npm run preview    # preview the production build
 ```
+
+## Deploy to Hostinger Cloud
+
+Requires a plan with Web Apps: **Business Web Hosting** or **Cloud Startup** and above.
+
+1. hPanel → **Websites → Add Website → Node.js web app** → **Import Git repository**.
+2. Use these deploy settings (Hostinger auto-detects most of them):
+
+   | Field | Value |
+   | --- | --- |
+   | Framework preset | `react` |
+   | Node.js version | `22` (from `engines` / `.nvmrc`) |
+   | Build command | `npm run build` |
+   | Output directory | `dist` |
+   | Entry file | *(leave empty — static frontend)* |
+
+3. Deploy. Hostinger installs dependencies, runs the Vite build, and serves `dist/` from `public_html`.
+4. Push to the connected branch to redeploy.
+
+Do not hand-edit the generated `.htaccess`; redeploys regenerate it. The app uses `?tab=<id>` URLs, so no extra SPA rewrite is required. For archive deploys, exclude `node_modules/` and `dist/` (source is ~19 MB, under the 50 MB limit).
 
 ## Search
 
