@@ -28,6 +28,7 @@ import {
   sortTopicsLikeJourney
 } from '../../registry/curriculum.js';
 import { useModalA11y } from '../../hooks/useModalA11y.js';
+import { highlightSegments } from '../../search/highlight.js';
 import { isMastered } from '../../services/mastery.js';
 import { useCuratedProgress, getCuratedNextTab } from '../overview/OverviewWidgets.jsx';
 
@@ -235,6 +236,23 @@ export function Sidebar({
   const isHubTab = (tabId) => typeof tabId === 'string' && tabId.endsWith('_hub');
   const isSearchMode = queryStr.length > 0;
 
+  // Fuzzy/synonym ids from the shared search engine (lazy-loaded); null until ready
+  const [fuzzyIds, setFuzzyIds] = useState(null);
+  useEffect(() => {
+    if (!isSearchMode) {
+      setFuzzyIds(null);
+      return undefined;
+    }
+    let cancelled = false;
+    const t = setTimeout(() => {
+      import('../../search/searchService.js')
+        .then((m) => m.filterTabIds(queryStr, { limit: 80 }))
+        .then((ids) => { if (!cancelled) setFuzzyIds(ids); })
+        .catch(() => { if (!cancelled) setFuzzyIds(null); });
+    }, 120);
+    return () => { cancelled = true; clearTimeout(t); };
+  }, [queryStr, isSearchMode]);
+
   let totalVisibleTabs = 0;
 
   // Roving focus: ArrowDown/ArrowUp move between visible controls.
@@ -410,9 +428,11 @@ export function Sidebar({
           const rawTabs = getTabsForUmbrella(moduleId);
           const tabs = isSearchMode
             ? rawTabs.filter(t =>
-                t.label.toLowerCase().includes(queryStr) ||
-                t.id.toLowerCase().includes(queryStr) ||
-                (t.keywords && t.keywords.some(k => k.toLowerCase().includes(queryStr)))
+                fuzzyIds
+                  ? fuzzyIds.has(t.id)
+                  : (t.label.toLowerCase().includes(queryStr) ||
+                    t.id.toLowerCase().includes(queryStr) ||
+                    (t.keywords && t.keywords.some(k => k.toLowerCase().includes(queryStr))))
               )
             : rawTabs.filter(isHubTab);
 
@@ -1181,59 +1201,336 @@ export function TopBar({ activeTab, onSelectTab, onSearchOpen, onToggleSidebar, 
 }
 
 // ============================================
-// CommandPalette — Global Search Modal (⌘K)
+// CommandPalette — Global Search Modal (⌘K / Ctrl+K / "/")
+// MiniSearch-powered: fuzzy + prefix + synonyms, grouped by module,
+// highlighted matches, "did you mean", and "More like this".
+// Index lazy-loads on first open via the search service.
 // ============================================
+const SEARCH_MODULE_META = Object.fromEntries(
+  UMBRELLA_TOPICS.map((m) => [m.id, { title: m.title, icon: m.icon }])
+);
+
+function HighlightedText({ text, terms }) {
+  const segments = highlightSegments(text, terms);
+  return (
+    <>
+      {segments.map((seg, i) =>
+        seg.match ? (
+          <mark
+            key={i}
+            style={{ background: 'rgba(58,155,159,0.18)', color: 'inherit', borderRadius: '2px', padding: '0 1px' }}
+          >
+            {seg.text}
+          </mark>
+        ) : (
+          <span key={i}>{seg.text}</span>
+        )
+      )}
+    </>
+  );
+}
+
+function PaletteResultRow({ item, index, isSelected, registryTab, onSelect, onMoreLikeThis }) {
+  const moduleLabel = item.module
+    ? `${UMBRELLA_TOPICS.find((m) => m.id === item.module)?.icon || ''} ${UMBRELLA_TOPICS.find((m) => m.id === item.module)?.title || item.module}`
+    : '';
+  return (
+    <div style={{ display: 'flex', alignItems: 'stretch' }}>
+      <button
+        id={`cp-opt-${index}`}
+        role="option"
+        aria-selected={isSelected}
+        onClick={onSelect}
+        style={{
+          flex: 1, minWidth: 0, display: 'flex', alignItems: 'center', gap: '12px',
+          padding: '9px 12px 9px 16px', background: isSelected ? 'rgba(58,155,159,0.08)' : 'transparent',
+          border: 'none', textAlign: 'left', cursor: 'pointer', transition: 'background 0.1s ease',
+          fontFamily: 'inherit'
+        }}
+      >
+        <span style={{ fontSize: '1rem', width: '24px', textAlign: 'center', flexShrink: 0 }}>{registryTab?.icon || '📄'}</span>
+        <span style={{ flex: 1, minWidth: 0 }}>
+          <span style={{ display: 'block', fontWeight: 600, fontSize: '0.85rem', color: '#1A1D26', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+            <HighlightedText text={item.title || registryTab?.label || item.id} terms={item.terms} />
+          </span>
+          {item.summary ? (
+            <span style={{ display: 'block', fontSize: '0.7rem', color: '#6B7280', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', marginTop: '1px' }}>
+              <HighlightedText text={item.summary} terms={item.terms} />
+            </span>
+          ) : null}
+          {moduleLabel ? (
+            <span style={{ display: 'block', fontSize: '0.65rem', color: '#9CA3AF', marginTop: '1px' }}>{moduleLabel.trim()}</span>
+          ) : null}
+        </span>
+      </button>
+      <button
+        onClick={onMoreLikeThis}
+        title={`More like this: ${item.title || item.id}`}
+        aria-label={`More topics like ${item.title || item.id}`}
+        style={{
+          flexShrink: 0, alignSelf: 'center', margin: '0 10px 0 0',
+          padding: '4px 8px', borderRadius: '6px', fontSize: '0.62rem', fontWeight: 600,
+          color: '#3A9B9F', background: 'transparent', border: '1px solid #E5E7EB', cursor: 'pointer',
+          fontFamily: 'inherit', whiteSpace: 'nowrap'
+        }}
+      >
+        More like this
+      </button>
+    </div>
+  );
+}
+
 export function CommandPalette({ isOpen, onClose, tabs, onSelectTab }) {
   const [query, setQuery] = useState('');
+  const [debouncedQuery, setDebouncedQuery] = useState('');
+  const [results, setResults] = useState([]);
+  const [groups, setGroups] = useState([]);
+  const [didYouMean, setDidYouMean] = useState(null);
+  const [searchLoading, setSearchLoading] = useState(false);
+  const [similarTo, setSimilarTo] = useState(null); // { id, title, items }
   const [selectedIndex, setSelectedIndex] = useState(0);
   const inputRef = useRef(null);
-  const optionRefs = useRef([]);
   const { ref: dialogRef } = useModalA11y(isOpen, onClose, { dismissable: false, autofocus: false });
 
-  const queryStr = (query || '').trim().toLowerCase();
-  const filteredTabs = queryStr
-    ? tabs.filter(t => {
-        const matchLabel = t.label?.toLowerCase().includes(queryStr);
-        const matchId = t.id?.toLowerCase().includes(queryStr);
-        const matchKeywords = t.keywords?.some?.(k => k.toLowerCase().includes(queryStr));
-        const matchCategory = t.category?.toLowerCase().includes(queryStr);
-        const umbrella = t.umbrellaId ? UMBRELLA_TOPICS.find(u => u.id === t.umbrellaId) : null;
-        const matchUmbrella = umbrella?.title?.toLowerCase().includes(queryStr) || umbrella?.description?.toLowerCase().includes(queryStr);
-        return matchLabel || matchId || matchKeywords || matchCategory || matchUmbrella;
-      }).slice(0, 16)
-    : tabs.slice(0, 10);
+  // Preload the index as soon as the palette opens (first-open lazy load)
+  useEffect(() => {
+    if (isOpen) {
+      import('../../search/searchService.js')
+        .then((m) => m.ensureSearchReady())
+        .catch(() => {});
+    }
+  }, [isOpen]);
+
+  // Debounce keystrokes before hitting the index
+  useEffect(() => {
+    const t = setTimeout(() => setDebouncedQuery((query || '').trim()), 100);
+    return () => clearTimeout(t);
+  }, [query]);
+
+  // Run search (or show default list when the query is empty)
+  useEffect(() => {
+    let cancelled = false;
+    if (!isOpen) return undefined;
+    if (!debouncedQuery) {
+      setResults([]);
+      setGroups([]);
+      setDidYouMean(null);
+      setSearchLoading(false);
+      return undefined;
+    }
+    setSearchLoading(true);
+    import('../../search/searchService.js')
+      .then((m) => m.searchTopics(debouncedQuery, { limit: 20, moduleMeta: SEARCH_MODULE_META }))
+      .then((res) => {
+        if (cancelled) return;
+        setResults(res.results);
+        setGroups(res.groups);
+        setDidYouMean(res.didYouMean);
+        setSearchLoading(false);
+      })
+      .catch(() => {
+        if (!cancelled) {
+          // Fallback: plain substring filter over the registry
+          const q = debouncedQuery.toLowerCase();
+          const fallback = tabs
+            .filter((t) =>
+              t.label.toLowerCase().includes(q) ||
+              t.id.toLowerCase().includes(q) ||
+              t.keywords?.some((k) => k.toLowerCase().includes(q))
+            )
+            .slice(0, 20)
+            .map((t) => ({ id: t.id, title: t.label, module: t.umbrellaId, terms: [], summary: '' }));
+          setResults(fallback);
+          setGroups([]);
+          setDidYouMean(null);
+          setSearchLoading(false);
+        }
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [debouncedQuery, isOpen, tabs]);
+
+  // "More like this" mode
+  useEffect(() => {
+    let cancelled = false;
+    if (!similarTo) return undefined;
+    import('../../search/searchService.js')
+      .then((m) => m.getRelatedTopics(similarTo.id, { limit: 8 }))
+      .then((items) => {
+        if (!cancelled) setSimilarTo((s) => (s && s.id === similarTo.id ? { ...s, items } : s));
+      })
+      .catch(() => {});
+    return () => {
+      cancelled = true;
+    };
+  }, [similarTo?.id]);
 
   useEffect(() => {
     if (isOpen) {
       inputRef.current?.focus();
       setQuery('');
+      setDebouncedQuery('');
+      setSimilarTo(null);
       setSelectedIndex(0);
     }
   }, [isOpen]);
 
   // Keyboard selection must always be visible (WAI-ARIA combobox pattern)
   useEffect(() => {
-    const el = optionRefs.current[selectedIndex];
+    const el = document.getElementById(`cp-opt-${selectedIndex}`);
     if (el && typeof el.scrollIntoView === 'function') {
       el.scrollIntoView({ block: 'nearest' });
     }
-  }, [selectedIndex, isOpen]);
+  }, [selectedIndex, isOpen, results, similarTo]);
+
+  const defaultItems = !debouncedQuery && !similarTo
+    ? tabs.slice(0, 10).map((t) => ({ id: t.id, title: t.label, module: t.umbrellaId, terms: [], summary: '' }))
+    : [];
+  const listItems = similarTo
+    ? (similarTo.items || []).map((r) => ({ id: r.id, title: r.title, module: r.module, terms: [], summary: r.summary || '' }))
+    : (debouncedQuery ? results : defaultItems);
+  const listCount = listItems.length;
+
+  useEffect(() => {
+    setSelectedIndex((i) => Math.max(0, Math.min(i, Math.max(0, listCount - 1))));
+  }, [listCount]);
+
+  const selectItem = (item) => {
+    if (!item) return;
+    onSelectTab(item.id);
+    onClose();
+  };
 
   useEffect(() => {
     const handleKey = (e) => {
       if (!isOpen) return;
-      if (e.key === 'Escape') onClose();
-      else if (e.key === 'ArrowDown') { e.preventDefault(); setSelectedIndex(i => Math.min(i + 1, Math.max(0, filteredTabs.length - 1))); }
-      else if (e.key === 'ArrowUp') { e.preventDefault(); setSelectedIndex(i => Math.max(i - 1, 0)); }
+      if (e.key === 'Escape') {
+        if (similarTo) { setSimilarTo(null); setSelectedIndex(0); }
+        else onClose();
+      } else if (e.key === 'ArrowDown') { e.preventDefault(); setSelectedIndex((i) => Math.min(i + 1, Math.max(0, listCount - 1))); }
+      else if (e.key === 'ArrowUp') { e.preventDefault(); setSelectedIndex((i) => Math.max(i - 1, 0)); }
       else if (e.key === 'Home') { e.preventDefault(); setSelectedIndex(0); }
-      else if (e.key === 'End') { e.preventDefault(); setSelectedIndex(Math.max(0, filteredTabs.length - 1)); }
-      else if (e.key === 'Enter') { e.preventDefault(); if (filteredTabs[selectedIndex]) { onSelectTab(filteredTabs[selectedIndex].id); onClose(); } }
+      else if (e.key === 'End') { e.preventDefault(); setSelectedIndex(Math.max(0, listCount - 1)); }
+      else if (e.key === 'Enter') { e.preventDefault(); selectItem(listItems[selectedIndex]); }
     };
     document.addEventListener('keydown', handleKey);
     return () => document.removeEventListener('keydown', handleKey);
-  }, [isOpen, filteredTabs, selectedIndex, onClose, onSelectTab]);
+  }, [isOpen, listItems, listCount, selectedIndex, onClose, onSelectTab, similarTo]);
 
   if (!isOpen) return null;
+
+  // Grouped rendering for search results; flat list for default/similar modes
+  const renderRows = () => {
+    if (similarTo) {
+      return (
+        <>
+          <div style={{ padding: '8px 16px', borderBottom: '1px solid #F1F3F5', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 8 }}>
+            <span style={{ fontSize: '0.72rem', fontWeight: 700, color: '#4B5563', minWidth: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+              More like: {similarTo.title}
+            </span>
+            <button
+              onClick={() => { setSimilarTo(null); setSelectedIndex(0); }}
+              style={{ background: 'none', border: 'none', color: '#3A9B9F', fontWeight: 600, fontSize: '0.72rem', cursor: 'pointer', fontFamily: 'inherit', flexShrink: 0 }}
+            >
+              ← Back to results
+            </button>
+          </div>
+          {listItems.length === 0 ? (
+            <div role="presentation" style={{ padding: '28px', textAlign: 'center', color: '#9CA3AF', fontSize: '0.82rem' }}>
+              No related topics found.
+            </div>
+          ) : (
+            listItems.map((item, i) => (
+              <PaletteResultRow
+                key={item.id}
+                item={item}
+                index={i}
+                isSelected={i === selectedIndex}
+                registryTab={tabs.find((t) => t.id === item.id)}
+                onSelect={() => selectItem(item)}
+                onMoreLikeThis={() => { setSimilarTo({ id: item.id, title: item.title }); setSelectedIndex(0); }}
+              />
+            ))
+          )}
+        </>
+      );
+    }
+    if (!debouncedQuery) {
+      return listItems.map((item, i) => (
+        <PaletteResultRow
+          key={item.id}
+          item={item}
+          index={i}
+          isSelected={i === selectedIndex}
+          registryTab={tabs.find((t) => t.id === item.id)}
+          onSelect={() => selectItem(item)}
+          onMoreLikeThis={() => { setSimilarTo({ id: item.id, title: item.title }); setSelectedIndex(0); }}
+        />
+      ));
+    }
+    if (results.length === 0 && searchLoading) {
+      return (
+        <div role="presentation" style={{ padding: '28px', textAlign: 'center', color: '#9CA3AF', fontSize: '0.82rem' }}>
+          Searching…
+        </div>
+      );
+    }
+    if (results.length === 0) {
+      return (
+        <div role="presentation" style={{ padding: '28px', textAlign: 'center', color: '#9CA3AF', fontSize: '0.82rem' }}>
+          <div>No results for “{debouncedQuery}”</div>
+          {didYouMean?.suggestion && (
+            <div style={{ marginTop: '10px', fontSize: '0.8rem' }}>
+              Did you mean{' '}
+              <button
+                onClick={() => { setQuery(didYouMean.suggestion); setDebouncedQuery(didYouMean.suggestion); setSelectedIndex(0); inputRef.current?.focus(); }}
+                style={{ background: 'none', border: 'none', color: '#3A9B9F', fontWeight: 700, fontSize: '0.82rem', cursor: 'pointer', textDecoration: 'underline', fontFamily: 'inherit' }}
+              >
+                “{didYouMean.suggestion}”
+              </button>
+              ?
+            </div>
+          )}
+        </div>
+      );
+    }
+    // Grouped by module: headers ordered by each group's best rank
+    let flatIdx = 0;
+    const effectiveGroups = groups.length
+      ? groups
+      : [{ module: null, title: '', icon: '', items: results }];
+    return effectiveGroups.map((g) => (
+      <div key={g.module || 'all'}>
+        {g.module ? (
+          <div
+            role="presentation"
+            style={{
+              padding: '8px 16px 4px', fontSize: '0.62rem', fontWeight: 700,
+              letterSpacing: '0.06em', textTransform: 'uppercase', color: '#9CA3AF',
+              background: '#FAFBFC', borderBottom: '1px solid #F1F3F5'
+            }}
+          >
+            {g.icon} {g.title}
+          </div>
+        ) : null}
+        {g.items.map((item) => {
+          const i = flatIdx++;
+          return (
+            <PaletteResultRow
+              key={item.id}
+              item={item}
+              index={i}
+              isSelected={i === selectedIndex}
+              registryTab={tabs.find((t) => t.id === item.id)}
+              onSelect={() => selectItem(item)}
+              onMoreLikeThis={() => { setSimilarTo({ id: item.id, title: item.title || item.id }); setSelectedIndex(0); }}
+            />
+          );
+        })}
+      </div>
+    ));
+  };
 
   return (
     <>
@@ -1269,46 +1566,18 @@ export function CommandPalette({ isOpen, onClose, tabs, onSelectTab }) {
             aria-expanded="true"
             aria-controls="cp-listbox"
             aria-autocomplete="list"
-            aria-activedescendant={filteredTabs.length ? `cp-opt-${selectedIndex}` : undefined}
+            aria-activedescendant={listCount ? `cp-opt-${selectedIndex}` : undefined}
             aria-label="Search topics"
-            placeholder="Search topics (e.g., QLoRA, Graph RAG, LangChain)..."
+            placeholder="Search topics (typos OK — try 'MCP' or 'stop hallucinations')..."
             value={query}
-            onChange={e => { setQuery(e.target.value); setSelectedIndex(0); }}
+            onChange={(e) => { setQuery(e.target.value); setSelectedIndex(0); if (similarTo) setSimilarTo(null); }}
             style={{ background: 'none', border: 'none', outline: 'none', fontSize: '0.88rem', color: '#1A1D26', width: '100%', fontFamily: 'inherit' }}
           />
           <kbd style={{ fontSize: '0.6rem', padding: '2px 6px', background: '#FFFFFF', borderRadius: '4px', border: '1px solid #E5E7EB', color: '#9CA3AF', fontWeight: 600 }}>⌘K</kbd>
         </div>
       </div>
       <div id="cp-listbox" role="listbox" aria-label="Topics" style={{ maxHeight: '380px', overflowY: 'auto' }}>
-        {filteredTabs.length === 0 ? (
-          <div role="presentation" style={{ padding: '32px', textAlign: 'center', color: '#9CA3AF', fontSize: '0.85rem' }}>
-            No results for "{query}"
-          </div>
-        ) : (
-          filteredTabs.map((tab, i) => (
-            <button
-              key={tab.id}
-              id={`cp-opt-${i}`}
-              role="option"
-              aria-selected={i === selectedIndex}
-              ref={el => { optionRefs.current[i] = el; }}
-              onClick={() => { onSelectTab(tab.id); onClose(); }}
-              style={{
-                width: '100%', display: 'flex', alignItems: 'center', gap: '12px',
-                padding: '10px 16px', background: i === selectedIndex ? 'rgba(58,155,159,0.08)' : 'transparent',
-                border: 'none', textAlign: 'left', cursor: 'pointer',
-                transition: 'background 0.1s ease'
-              }}
-            >
-              <span style={{ fontSize: '1rem', width: '24px', textAlign: 'center' }}>{tab.icon}</span>
-              <div style={{ flex: 1 }}>
-                <div style={{ fontWeight: 600, fontSize: '0.85rem', color: '#1A1D26' }}>{tab.label}</div>
-                <div style={{ fontSize: '0.72rem', color: '#9CA3AF' }}>{tab.umbrellaId ? UMBRELLA_TOPICS.find(u => u.id === tab.umbrellaId)?.title : ''}</div>
-              </div>
-              {i === selectedIndex && <span style={{ color: '#3A9B9F', fontSize: '0.85rem' }}>→</span>}
-            </button>
-          ))
-        )}
+        {renderRows()}
       </div>
       <div
         className="bottom-nav"
@@ -1322,7 +1591,7 @@ export function CommandPalette({ isOpen, onClose, tabs, onSelectTab }) {
         }}
       >
         <span style={{ fontSize: '0.72rem', color: '#9CA3AF' }}>
-          {filteredTabs.length} matching topic{filteredTabs.length === 1 ? '' : 's'}
+          {listCount} matching topic{listCount === 1 ? '' : 's'} · ↑↓ navigate · Enter open
         </span>
         <Button variant="ghost" size="sm" onClick={onClose}>Close (Esc)</Button>
       </div>

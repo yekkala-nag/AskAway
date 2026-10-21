@@ -104,7 +104,7 @@ test('command palette implements the ARIA combobox pattern', () => {
   assert.match(navigation, /id="cp-listbox"/);
   assert.match(navigation, /role="listbox"/);
   assert.match(navigation, /role="option"/);
-  assert.match(navigation, /aria-selected=\{i === selectedIndex\}/);
+  assert.match(navigation, /aria-selected=\{isSelected\}/);
   assert.match(navigation, /scrollIntoView\(\{ block: 'nearest' \}\)/);
   assert.match(navigation, /e\.key === 'Home'/);
   assert.match(navigation, /e\.key === 'End'/);

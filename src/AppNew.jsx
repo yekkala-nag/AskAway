@@ -13,6 +13,7 @@ import { TopicFooter } from './components/ui/TopicFooter.jsx';
 import { LegalModal } from './components/ui/LegalModal.jsx';
 import { StorageNoticeBanner } from './components/ui/StorageNoticeBanner.jsx';
 import HubSequenceNav from './components/ui/HubSequenceNav.jsx';
+import RelatedTopics from './components/search/RelatedTopics.jsx';
 import { UMBRELLA_TOPICS, getUmbrellaForTab, getTabsForUmbrella, getTabById, TABS_REGISTRY } from './registry/tabsRegistry.js';
 import ErrorBoundary from './ErrorBoundary.jsx';
 import { s as legacyStyles } from './styles/legacyStyles.js';
@@ -256,6 +257,7 @@ function TabLoader({ tabId, onSelectTab }) {
       </Suspense>
       {/* Pilot: sequential in-hub nav renders only inside collapsed hubs */}
       <HubSequenceNav tabId={tabId} onSelectTab={onSelectTab} />
+      <RelatedTopics tabId={tabId} onSelectTab={onSelectTab} />
       <TopicFooter tabId={tabId} onSelectTab={onSelectTab} />
     </>
   );
@@ -409,6 +411,15 @@ export default function App() {
       if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
         e.preventDefault();
         setCommandPaletteOpen(true);
+      }
+      // "/" opens search unless typing in a field
+      if (e.key === '/' && !e.metaKey && !e.ctrlKey && !e.altKey) {
+        const tag = e.target?.tagName;
+        const isField = tag === 'INPUT' || tag === 'TEXTAREA' || e.target?.isContentEditable;
+        if (!isField) {
+          e.preventDefault();
+          setCommandPaletteOpen(true);
+        }
       }
       if (e.key === 'Escape') {
         setCommandPaletteOpen(false);
