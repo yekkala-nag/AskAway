@@ -29,6 +29,85 @@ npm run build      # production build → dist/
 npm run preview    # preview the production build
 ```
 
+## Search
+
+Global search (⌘K / Ctrl+K / `/`) and the sidebar filter run on **MiniSearch** with
+typo tolerance, prefix matching, synonyms/abbreviations, module-grouped results,
+match highlighting, "did you mean…", and per-tab "Related topics" / "More like this".
+The index lazy-loads on first search open — nothing search-related is in the main bundle.
+
+### Files
+
+| File | Role |
+| --- | --- |
+| `src/search/search-index.json` | One metadata record per tab: `{ id, title, module, tags[], aliases[], summary, body?, related[], rank? }` — **hand-editable** |
+| `src/search/synonyms.js` | Synonym/abbreviation groups + stop words (query-time only) |
+| `src/search/engine.js` | MiniSearch factory: boosts (title > tags = aliases > summary > body), prefix, fuzzy, soft-verb handling, RRF fusion |
+| `src/search/searchService.js` | Lazy-loading browser singleton (also hosts the off-by-default semantic search flag) |
+| `src/search/similar.json` | Generated top-5 similar tabs per tab (do not hand-edit) |
+| `scripts/build-search-index.mjs` | Generates/refreshes `search-index.json` from the registry + tab source |
+| `scripts/build-similar.mjs` | Embeds tabs and writes `similar.json` (cached, idempotent) |
+
+### How to add metadata for a new tab
+
+1. Add the tab to `src/registry/tabsRegistry.js` as usual (never change existing ids — URLs are `?tab=<id>`).
+2. Run `node scripts/build-search-index.mjs` — it drafts a record (title, module, tags from `keywords`, a summary scraped from the tab component). Existing hand-edits are preserved for any key already present; use `--force` to regenerate everything.
+3. Improve the draft by editing the record in `search-index.json`:
+   - `tags` / `aliases` — extra words people search for (aliases are great for abbreviations and alternate names)
+   - `summary` — one line shown under each result
+   - `related` — curated related tab ids (these rank above generated neighbors)
+   - `rank` — optional score multiplier (e.g. `1.4`) for canonical overview tabs
+4. Run `node scripts/build-similar.mjs` to refresh similar-topic neighbors (see below).
+
+### How to add synonyms
+
+Append a group in `src/search/synonyms.js` (lowercase, one array per equivalence class):
+
+```js
+['mcp', 'model context protocol'],                 // abbreviation ↔ expansion
+{ soft: true, terms: ['prevent', 'stop', 'block'] } // soft: boosts only, never drives ranking
+```
+
+### How to regenerate similar.json
+
+```bash
+node scripts/build-similar.mjs                  # OpenAI embeddings if OPENAI_API_KEY is set…
+node scripts/build-similar.mjs --lexical        # …otherwise (or with this flag) offline lexical mode
+```
+
+- The API key is read from `OPENAI_API_KEY` only (never hardcoded; override the model with `EMBEDDING_MODEL`).
+- Vectors are cached in `scripts/.embedding-cache.json` (gitignored) keyed by content hash — only changed tabs are re-embedded; output is deterministic (no timestamps).
+- Manual `related[]` links from `search-index.json` always rank ahead of generated neighbors.
+
+Optional runtime **semantic query search** (off by default): set `VITE_SEMANTIC_SEARCH=1` and call `setSemanticEmbedder(fn)` from `searchService.js` with a `(text) => Promise<number[]>` function; results merge with keyword hits via reciprocal rank fusion.
+
+### Search test checklist (expected top result)
+
+| # | Query | Expected top result |
+| --- | --- | --- |
+| 1 | `rag` | `rag` (9 RAG Architectures) |
+| 2 | `mcp` | `mcpclient` |
+| 3 | `model context protocol` | `mcpclient` |
+| 4 | `stop hallucinations` | `hallucination` (Silent Hallucination Loop) |
+| 5 | `reduce hallucinations` | `hallucination` |
+| 6 | `how do agents remember things` | `agentmemory` |
+| 7 | `agent memory` | `agentmemory` |
+| 8 | `fine tune llm` | `llmfinetuning` |
+| 9 | `qlora` | `llmfinetuning` |
+| 10 | `vector database` | `vectordbops` |
+| 11 | `chunking` | `ragchunking` |
+| 12 | `lstm` | `lstm` |
+| 13 | `human in the loop` | `agenthitl` |
+| 14 | `prompt injection` | `guardrails` |
+| 15 | `reranking` | `rerankers` |
+| 16 | `memroy` (typo) | `agentmemory` |
+| 17 | `guadrails` (typo) | `guardrails` |
+| 18 | `hallucnation` (typo) | `hallucination` |
+| 19 | `strucutred outputs` (typo) | `structuredoutputs` |
+| 20 | `grapph rag` (typo) | `rag` or another graph-RAG tab in top 3 |
+
+These are asserted by `tests/searchEngine.test.js` (run with `npm test`).
+
 ## Mobile (Capacitor)
 
 See [MOBILE_APP_GUIDE.md](MOBILE_APP_GUIDE.md).
@@ -48,12 +127,14 @@ src/
   AppNew.jsx          app shell (sidebar/topbar routing)
   registry/           tabsRegistry.js (tab + category registry), curriculum,
                       exitChecks, diagnostics, antiPatterns, warStories
-  components/         layout/, ui/, overview/, ragPlayground/, workbench/
+  search/             search-index.json, synonyms, MiniSearch engine, similar.json
+  components/         layout/, ui/, overview/, search/, ragPlayground/, workbench/
   services/           prompt/quality/framework logic shared across tabs
   design-system/      tokens, global styles, diagram tokens
   <topic folders>/    ~130 topic modules (Tab.jsx + engine.js)
   hubPages/           hub landing pages grouping related topics
-tests/                11 test suites, 67 assertions
+scripts/              build-search-index.mjs, build-similar.mjs
+tests/                node --test suites (includes search engine tests)
 public/assets/        diagrams and infographics (SVG/PNG)
 android/, ios/        Capacitor native projects
 export_playbook.py    exports playbook content
