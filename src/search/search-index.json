@@ -2,7 +2,7 @@
   "_meta": {
     "description": "AskAway search metadata — one record per tab. Hand-editable; rerun scripts/build-search-index.mjs to add new tabs (existing keys are preserved unless --force).",
     "schema": "{ id, title, module, category?, tags[], aliases[], summary, body?, related[], rank? } — rank (number, e.g. 1.4) is an optional search score multiplier for canonical tabs",
-    "count": 224
+    "count": 226
   },
   "records": [
     {
@@ -231,6 +231,28 @@
       "aliases": [],
       "summary": "Attending Berlin conference. Can I book official hotel above cap, and what approval is needed?",
       "body": "agentic rag · react loop · multi-step search · let the agent search · openai agents sdk · 14 · tools · trace · Agentic RAG: Let the Agent Search",
+      "related": [],
+      "kind": "topic"
+    },
+    {
+      "id": "agenticsoftwarefactory",
+      "title": "Agentic Software Factory",
+      "module": "agents_frameworks",
+      "category": "Agents & Frameworks",
+      "tags": [
+        "agentic software factory",
+        "autonomous agents",
+        "async automation",
+        "agent harness",
+        "continual learning",
+        "specification",
+        "verification",
+        "background agents",
+        "factory hierarchy"
+      ],
+      "aliases": [],
+      "summary": "A software factory combines an agent harness, durable project context, triggers that start work without you, and loops that improve from run evidence. You own specification and verification; implementation can proceed…",
+      "body": "agentic software factory · autonomous agents · async automation · agent harness · continual learning · specification · verification · background agents · factory hierarchy · Delegate Outcomes — Autonomous, Asynchronous, Verifiable · Factory hierarchy of needs",
       "related": [],
       "kind": "topic"
     },
@@ -3963,6 +3985,29 @@
       "aliases": [],
       "summary": "Distill to 10% size at ~90% quality, quantize to GGUF, pass the server golden set, then ship. Local SLM routes and classifies; cloud verifies. Silent downgrades are incidents.",
       "body": "slm · small language models · distillation · phi · smollm · qwen · edge inference · gguf · speculative decoding · Small Models, Same Evals — Fit the Device · Distill → Quantize → Parity-Gate → Fit",
+      "related": [],
+      "kind": "topic"
+    },
+    {
+      "id": "speculativedecoding",
+      "title": "Speculative Decoding",
+      "module": "frontiers_production",
+      "category": "Advanced & Frontiers",
+      "tags": [
+        "speculative decoding",
+        "draft model",
+        "target model",
+        "inference speed",
+        "memory bandwidth",
+        "medusa",
+        "eagle",
+        "prompt lookup decoding",
+        "vllm",
+        "lossless acceleration"
+      ],
+      "aliases": [],
+      "summary": "Autoregressive decoding is memory-bandwidth bound: each token reloads the full weight set. A fast draft proposes a short chain; the target model accepts or rejects in parallel — often 2–3× faster without changing…",
+      "body": "speculative decoding · draft model · target model · inference speed · memory bandwidth · medusa · eagle · prompt lookup decoding · vllm · lossless acceleration · Draft k Tokens, Verify in One Pass — Same Distribution, Faster · Draft → verify loop",
       "related": [],
       "kind": "topic"
     },

@@ -1,10 +1,10 @@
 # AI Interactive RAG
 
-An interactive learning platform for AI engineering — **RAG systems, agents, prompt engineering, LLM evaluation, and production AI** — built as a React + Vite single-page app with 198 lazily-loaded topic tabs, interactive diagrams, pipeline simulators, and quizzes.
+An interactive learning platform for AI engineering — **RAG systems, agents, prompt engineering, LLM evaluation, and production AI** — built as a React + Vite single-page app with 200 lazily-loaded topic tabs, interactive diagrams, pipeline simulators, and quizzes.
 
 ## What's inside
 
-- **198 topic tabs** across 6 umbrella areas: Foundations & Architecture, Data & Platform Layers, RAG Architectures & Pipelines, Context & Memory Engineering, Agent Systems & Frameworks, Production & Frontiers.
+- **200 topic tabs** across 6 umbrella areas: Foundations & Architecture, Data & Platform Layers, RAG Architectures & Pipelines, Context & Memory Engineering, Agent Systems & Frameworks, Production & Frontiers.
 - Each topic lives in its own folder under `src/` as a `*Tab.jsx` component plus an `*Engine.js` data/logic module, all registered in `src/registry/tabsRegistry.js`.
 - Interactive components: RAG pipeline simulator, LangChain/LangGraph comparisons, zoomable figures, prompt workbench, RAG playground, diagnostic quizzes, skill trees.
 - `src/services/` holds reusable logic (prompt composer, quality evaluator, framework recommender, output contracts, mastery tracking) exercised by the test suite.

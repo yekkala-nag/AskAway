@@ -123,7 +123,17 @@ export const EXIT_CHECKS = {
   multimodalrag: [
     { q: 'Charts should be answered via…', o: ['DePlot extraction → table → SQL/text path', 'Pixel reading as prose', 'Guessing trends', 'Ignoring them'], a: 0, e: 'Recover data first; never read numbers as prose when a grid exists.' },
     { q: 'Photo answers must cite…', o: ['Image regions — captions alone hallucinate', 'Nothing', 'The whole doc', 'Model confidence'], a: 0, e: 'Caption detail without verification is hallucination with coordinates.' },
-    { q: 'Vision-LLM budget triggers past…', o: ['30% vision share (O5-style fallback)', '90% share', 'Never', 'Always default'], a: 0, e: 'Vision calls cost ≥10x — fallback, not default.' }
+    { q: 'PDF pipeline stores images by…', o: ['Embedding summaries; docstore holds raw paths for query-time vision', 'Storing only PNG bytes in the vector index', 'Skipping all images', 'OCR alone'], a: 0, e: 'Multi-vector: search text proxies, answer with originals.' }
+  ],
+  agenticsoftwarefactory: [
+    { q: 'A software factory requires…', o: ['Autonomous execution plus asynchronous progress without live attention', 'Only a chat UI', 'No verification', 'Manual step-by-step narration'], a: 0, e: 'Factory = delegate outcome; return evidence or blockers.' },
+    { q: 'Automation layer depends on…', o: ['Harness that can run checks plus direction on what is ready', 'Continual learning only', 'Skipping personalization', 'Human typing every token'], a: 0, e: 'Triggers need runnable harness and brief context.' },
+    { q: 'When the same check fails repeatedly, invest in…', o: ['Continual learning — skills and procedures from run evidence', 'More temperature', 'Shorter prompts only', 'Disabling tests'], a: 0, e: 'Layer 4 closes the loop on factory reliability.' }
+  ],
+  speculativedecoding: [
+    { q: 'Autoregressive decode is usually bound by…', o: ['Memory bandwidth moving weights each token', 'FLOPs only', 'Prompt length only', 'Batch size always'], a: 0, e: 'GPUs wait on weight reloads — not raw math.' },
+    { q: 'Classic speculative decoding preserves…', o: ['The target model output distribution exactly', 'Approximate sampling only', 'Draft model outputs verbatim', 'Nothing — quality always drops'], a: 0, e: 'Reject/resample keeps distribution identical.' },
+    { q: 'Speculative decoding hurts most when…', o: ['Serving is already batch-saturated — draft steals slots', 'Generating long single-stream answers', 'Draft matches target family', 'Acceptance is high'], a: 0, e: 'Latency win vs throughput trade-off in heavy batching.' }
   ],
   texttosql: [
     { q: 'Text-to-SQL loop order…', o: ['Link → guarded generate → execute+repair → interpret', 'Generate → link → ship', 'Execute → guess schema', 'Interpret → generate'], a: 0, e: 'Ground terms first; guards before execution; one repair then escalate.' },

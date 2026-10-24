@@ -13,7 +13,7 @@
 <text x="690" y="135" font-family="Syne, sans-serif" font-weight="800" fill="#7FB069" text-anchor="middle">→ accept</text>
 <text x="690" y="158" font-family="Syne, sans-serif" font-weight="700" fill="#C96A5A" text-anchor="middle">reject + resample</text>
 <rect x="700" y="110" width="330" height="70" rx="10" fill="#0f172a" stroke="#475569" stroke-width="2"/>
-<text x="865" y="140" font-family="Syne, sans-serif" font-size="2–4× throughput, lossless" font-weight="800" fill="#F1F5F9" text-anchor="middle">2–4× throughput, lossless</text>
+<text x="865" y="140" font-family="Syne, sans-serif" font-size="14" font-weight="800" fill="#F1F5F9" text-anchor="middle">2–4× throughput, lossless</text>
 <text x="865" y="162" font-family="Syne, sans-serif" font-weight="600" fill="#94A3B8" text-anchor="middle">quality identical to big model</text>
 <text x="550" y="290" font-family="Syne, sans-serif" font-weight="600" fill="#94A3B8" text-anchor="middle">A cheap model guesses several tokens; the flagship validates them in a single forward pass.</text>
 </svg>

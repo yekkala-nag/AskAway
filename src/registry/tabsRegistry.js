@@ -55,7 +55,7 @@ export const UMBRELLA_TOPICS = [
     color: "#F0A89A",
     dark: "#C47A6A",
     description: "Roadmap stage 7: agents, MCP and production deployment",
-    tabs: ["agt_found_hub", "agt_safety_hub", "agt_multi_hub", "agt_prod_hub", "fiveassets", "redesign", "projectprepframework", "agentplanner", "agenthitl", "agentcontrolplane", "agentlifecycle", "agenta2a", "agentsandbox", "agentevals", "handoffwatch", "verifiedpipes", "codingevals", "claudecode100", "typedagentgate", "agentpairprogramming", "vibecode", "agentsastools", "toolcalling", "agenttasks", "agentmemory", "cliagent", "codingagentsnonprog", "multiagent", "multiagentcoord", "modelrouting", "decision_layer", "langchain", "langgraph", "frameworkcompare", "agentdebugging", "agentscale", "modeldeploy", "aiproductbuilder", "mcpclient", "agentsdk", "loopengineering", "finassistproject", "zerocostmultiagent", "capstone2", "functionalscars", "refactorhealth", "agentcreativity", "agentorgchart", "synasyncagent", "agentpatterns", "agentuisupply", "interviewmindset"]
+    tabs: ["agt_found_hub", "agt_safety_hub", "agt_multi_hub", "agt_prod_hub", "fiveassets", "redesign", "projectprepframework", "agentplanner", "agenthitl", "agentcontrolplane", "agentlifecycle", "agenta2a", "agentsandbox", "agentevals", "handoffwatch", "verifiedpipes", "codingevals", "claudecode100", "typedagentgate", "agentpairprogramming", "vibecode", "agentsastools", "toolcalling", "agenttasks", "agentmemory", "cliagent", "codingagentsnonprog", "multiagent", "multiagentcoord", "modelrouting", "decision_layer", "langchain", "langgraph", "frameworkcompare", "agentdebugging", "agentscale", "modeldeploy", "aiproductbuilder", "mcpclient", "agentsdk", "loopengineering", "agenticsoftwarefactory", "finassistproject", "zerocostmultiagent", "capstone2", "functionalscars", "refactorhealth", "agentcreativity", "agentorgchart", "synasyncagent", "agentpatterns", "agentuisupply", "interviewmindset"]
   },
   {
     id: "frontiers_production",
@@ -64,7 +64,7 @@ export const UMBRELLA_TOPICS = [
     color: "#9B89C4",
     dark: "#6B5E94",
     description: "Roadmap stage 8: evals, cost, observability — ship and stay reliable",
-    tabs: ["fr_eval_hub", "fr_ops_hub", "fr_frontiers_hub", "aigentools", "aiharnessquality", "aiarchdecisions", "firstaiapp", "enterpriseadvancedplaybook", "tokenorchestrationplaybook", "productionragops", "enterpriseaiops", "enterprisegrade", "finops", "observability", "slmedge", "tokenbill", "llmevals", "modelvalidation", "reasoningbench", "practices", "powerfeatures", "ragbeyond", "frontiers", "progress", "guardrails", "agentguardrails", "agentobservability", "costtollbooth", "llmreliability", "evalharness"]
+    tabs: ["fr_eval_hub", "fr_ops_hub", "fr_frontiers_hub", "aigentools", "aiharnessquality", "aiarchdecisions", "firstaiapp", "enterpriseadvancedplaybook", "tokenorchestrationplaybook", "productionragops", "enterpriseaiops", "enterprisegrade", "finops", "observability", "slmedge", "speculativedecoding", "tokenbill", "llmevals", "modelvalidation", "reasoningbench", "practices", "powerfeatures", "ragbeyond", "frontiers", "progress", "guardrails", "agentguardrails", "agentobservability", "costtollbooth", "llmreliability", "evalharness"]
   }
 ];
 
@@ -573,7 +573,7 @@ export const TABS_REGISTRY = [
     umbrellaId: "rag_architecture",
     category: "RAG Systems",
     icon: "🖼️",
-    keywords: ["multimodal rag", "vision rag", "clip", "siglip", "deplot", "chart qa", "vqa", "layout", "ocr"],
+    keywords: ["multimodal rag", "vision rag", "clip", "siglip", "deplot", "chart qa", "vqa", "layout", "ocr", "multi-vector retriever", "pdf pipeline", "image summaries", "partition pdf"],
     component: lazy(() => import("../multimodalRAG/MultimodalRAGTab.jsx"))
   },
   {
@@ -1129,6 +1129,15 @@ export const TABS_REGISTRY = [
     keywords: ["loop engineering", "ralph loop", "ralf", "ralphex", "boris cherny", "peter steinberger", "goal loop", "loop library", "69 loops", "claude basics", "cross-model review", "autonomous agent loops"],
     component: lazy(() => import("../loopEngineering/LoopEngineeringTab.jsx"))
   },
+  {
+    id: "agenticsoftwarefactory",
+    label: "Agentic Software Factory",
+    umbrellaId: "agents_frameworks",
+    category: "Agents & Frameworks",
+    icon: "🏭",
+    keywords: ["agentic software factory", "autonomous agents", "async automation", "agent harness", "continual learning", "specification", "verification", "background agents", "factory hierarchy"],
+    component: lazy(() => import("../agenticSoftwareFactory/AgenticSoftwareFactoryTab.jsx"))
+  },
 
   // ── Umbrella 5 — Data & Platform Layers ─────────────────────
   {
@@ -1438,6 +1447,15 @@ export const TABS_REGISTRY = [
     icon: "📱",
     keywords: ["slm", "small language models", "distillation", "phi", "smollm", "qwen", "edge inference", "gguf", "speculative decoding"],
     component: lazy(() => import("../slmEdge/SlmEdgeTab.jsx"))
+  },
+  {
+    id: "speculativedecoding",
+    label: "Speculative Decoding",
+    umbrellaId: "frontiers_production",
+    category: "Advanced & Frontiers",
+    icon: "⚡",
+    keywords: ["speculative decoding", "draft model", "target model", "inference speed", "memory bandwidth", "medusa", "eagle", "prompt lookup decoding", "vllm", "lossless acceleration"],
+    component: lazy(() => import("../speculativeDecoding/SpeculativeDecodingTab.jsx"))
   },
   {
     id: "visionlanguage",
