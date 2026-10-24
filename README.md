@@ -164,4 +164,5 @@ Specs and engineering notes at the repo root:
 - `CROSS_REFERENCE_LOOP_ENGINEERING.md`, `TOOL_CALLING_AGENT_DEBUGGING.md` — loops and tool calling
 - `ZERO_MODEL_FASTPATH_QUERY_ROUTER.md`, `AI_DATA_AGENT_BIGQUERY.md` — routing and data agents
 - `AI_SLOP_DETECTION_HEURISTICS.md`, `REDESIGN_SPEC.md` — quality heuristics and UI redesign
+- `ENHANCED_CONTENT.md` — AI-generated tables, workflows, code examples, and diagrams for advanced LLM techniques
 - `MOBILE_APP_GUIDE.md` — Capacitor setup

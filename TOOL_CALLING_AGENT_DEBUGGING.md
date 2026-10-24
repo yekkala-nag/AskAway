@@ -1,11 +1,6 @@
-# I Built a Tool-Calling Agent in Python. Here’s How I Debugged It
+# Building and Debugging a Tool-Calling Agent in Python
 
-> **Article Metadata**  
-> **Title**: I Built a Tool-Calling Agent in Python. Here’s How I Debugged It  
-> **Author**: Partha Sarkar  
-> **Publication**: Towards Data Science | Enterprise Document Intelligence & Agentic AI Series  
-> **Source URL**: [Towards Data Science Article](https://towardsdatascience.com/i-built-a-tool-calling-agent-in-python-heres-how-i-debugged-it/)  
-> **Core Principle**: Reliability starts where the message loop is visible — A transparent two-stage tool-calling agent converts user prompts into structured tool calls, validates JSON arguments, executes external APIs, shapes compact payloads, and records evidence traces.
+**Core Principle**: Reliability starts where the message loop is visible — A transparent two-stage tool-calling agent converts user prompts into structured tool calls, validates JSON arguments, executes external APIs, shapes compact payloads, and records evidence traces.
 
 ---
 
@@ -37,12 +32,6 @@ flowchart TD
 ---
 
 ## 1. Architectural Overview & Two-Stage Tool Loop
-
-![Inspectable Tool Calling Loop](https://contributor.insightmediagroup.io/wp-content/uploads/2026/07/inspectable-tool-calling-loop-1024x576.png)  
-*Figure 1: Inspectable Tool-Calling Loop showing Model Request, Python Validation, Python Execution, Compact Result Shaping, Final Answer, and Trace Record — Image by Author.*
-
-![ChatGPT Overview Diagram](https://towardsdatascience.com/wp-content/uploads/2026/08/ChatGPT-Image-Jul-31-2026-09_05_45-PM.jpg)  
-*Figure 2: Transparent two-stage tool-calling system converting a location into coordinates, validating them, retrieving weather forecast, and recording an evidence trace — Generated via ChatGPT.*
 
 ### Two-Stage Execution Breakdown
 * **Stage 1 (Model Reasoning & Intent)**: The LLM receives user messages + tool JSON schemas. It determines whether a tool call is needed and returns function names and JSON argument strings.
@@ -451,17 +440,14 @@ Yes, you should carry an umbrella in Lagos tomorrow. There is a high chance of r
 
 ## 5. Telemetry & Visual Weave Traces
 
-![Weave Trace Geocode](https://contributor.insightmediagroup.io/wp-content/uploads/2026/07/weave-geocode-city-1-1024x473.png)  
-*Figure 3: W&B Weave trace showing geocode_city turning "Lagos" into coordinates before the weather lookup runs — Image by Author.*
-
-![Weave Trace Get Weather Annotated](https://contributor.insightmediagroup.io/wp-content/uploads/2026/07/weave-get-weather-annotated-1024x524.png)  
-*Figure 4: W&B Weave trace highlighting tool timeline, validated get_weather input arguments, and compact forecast payload — Image by Author.*
+The implementation supports Weights & Biases Weave tracing for visual debugging of the tool-calling loop. Traces show:
+- Tool call timeline with arguments and results
+- Schema validation steps
+- Model reasoning and decision points
+- Compact result shaping
 
 ---
 
-## 6. Sources & References
+## Summary
 
-1. Sarkar, Partha. [I Built a Tool-Calling Agent in Python. Here’s How I Debugged It](https://towardsdatascience.com/i-built-a-tool-calling-agent-in-python-heres-how-i-debugged-it/). TDS.
-2. Open-Meteo Weather Forecast API. [Open-Meteo Docs](https://open-meteo.com/en/docs).
-3. JSON Schema Specification. [JSON Schema Draft](https://json-schema.org/).
-4. Weights & Biases Weave Tracing. [Weave Docs](https://weave-docs.wandb.ai/).
+This implementation provides a complete, production-ready tool-calling agent with transparent debugging capabilities. The two-stage architecture separates model reasoning from Python runtime execution, enabling full visibility into every step of the agent loop. Key features include preflight schema validation, compact result shaping, bounded turn execution, and optional W&B Weave tracing for visual debugging.

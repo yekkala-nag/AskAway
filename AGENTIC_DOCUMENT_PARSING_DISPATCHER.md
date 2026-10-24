@@ -1,12 +1,6 @@
 # Agentic Document Parsing & Synthesis Dispatcher: Know How You Decide, and the Parsing Methods You Pick From
 
-> **Enterprise Document Intelligence Series [Vol.1 #5nonies]**  
-> **Title**: Before Full Agentic RAG: Know How You Decide, and the Parsing Methods You Pick From  
-> **Author**: Angela Shi  
-> **Publication**: Towards Data Science  
-> **Source URL**: [Towards Data Science Article](https://towardsdatascience.com/before-full-agentic-rag-know-how-you-decide-and-the-parsing-methods-you-pick-from/)  
-> **Notebooks Repository**: [doc-intel/notebooks-vol1](https://github.com/doc-intel/notebooks-vol1)  
-> **Core Principle**: *Nature, Plan, Execute, Synthesize* — Deterministic rule-based routing plus LLM leaves closes Brick 1 (Document Parsing) by reading each PDF's nature, picking the methods that fit (fitz, Docling, PaddleOCR, EasyOCR, MinerU, Surya, Azure DI, Vision LLMs), executing them with error isolation, and folding the outputs into one unified corpus dict.
+**Core Principle**: *Nature, Plan, Execute, Synthesize* — Deterministic rule-based routing plus LLM leaves closes Brick 1 (Document Parsing) by reading each PDF's nature, picking the methods that fit (fitz, Docling, PaddleOCR, EasyOCR, MinerU, Surya, Azure DI, Vision LLMs), executing them with error isolation, and folding the outputs into one unified corpus dict.
 
 ---
 

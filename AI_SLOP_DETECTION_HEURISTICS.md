@@ -1,10 +1,6 @@
-# Is This Slop? Detecting AI-Generated Content Without a Model
+# Detecting AI-Generated Content Without a Model: Heuristic-Based Detection Engine
 
-> **Article Metadata**  
-> **Title**: Is This Slop? Detecting AI-Generated Content Without a Model  
-> **Publication**: Towards Data Science | Content Intelligence & AI Quality Control Series  
-> **Source URL**: [Towards Data Science Article](https://towardsdatascience.com/is-this-slop-detecting-ai-generated-content-without-a-model-2/)  
-> **Core Principle**: Model-free heuristic detection — Statistical vocabulary frequencies, recurrent name priors, contrastive phrasing, and RLHF distribution collapse expose LLM-generated text without GPU inference.
+**Core Principle**: Model-free heuristic detection — Statistical vocabulary frequencies, recurrent name priors, contrastive phrasing, and RLHF distribution collapse expose LLM-generated text without GPU inference.
 
 ---
 
@@ -33,9 +29,6 @@ flowchart TD
     E -- Score >= 65 --> H[High-Confidence AI Slop Flagged]
 ```
 
-![Academic Vocabulary Spikes](https://contributor.insightmediagroup.io/wp-content/uploads/2026/07/image-441-1024x449.png)  
-*Figure 1: Frequency explosion of words like "delve", "intricate", and "meticulous" in scientific writing post-ChatGPT — Image from Kobak et al. (2024), CC BY-SA 4.0.*
-
 ---
 
 ## 1. Five Heuristic Signal Categories
@@ -53,9 +46,6 @@ LLM_VOCABULARY_TELLS = [
 
 ### 2. Recurrent LLM Name Priors ("The Ghost Couple")
 Models exhibit strong, unprompted probabilistic preferences for specific character names:
-
-![LLM Ghost Couple Name Priors](https://contributor.insightmediagroup.io/wp-content/uploads/2026/07/image-440.png)  
-*Figure 2: Recurrent name priors in LLMs — Adapted from Brzozowski & Chung (2026).*
 
 | Model Architecture | High-Probability Recurrent Name Priors |
 | :--- | :--- |
@@ -151,8 +141,6 @@ class AISlopDetector:
 
 ---
 
-## 3. Sources & References
+## Summary
 
-1. Towards Data Science. [Is This Slop? Detecting AI-Generated Content Without a Model](https://towardsdatascience.com/is-this-slop-detecting-ai-generated-content-without-a-model-2/). TDS.
-2. Kobak et al. (2024). *Delving into ChatGPT usage in academic writing through excess vocabulary*. arXiv:2406.07016.
-3. Brzozowski, M., & Chung, N. C. (2026). *The Ghost Couple: Correlated LLM Name Priors*. arXiv:2606.02184.
+This heuristic-based detection engine provides a model-free approach to identifying AI-generated content by analyzing statistical tells, stylistic signatures, and vocabulary distribution spikes that stem directly from Supervised Fine-Tuning (SFT) and Reinforcement Learning from Human Feedback (RLHF). The composite Slop Index (0-100) categorizes content into Human Authored, Hybrid/Lightly Edited AI, or High-Confidence AI Slop.

@@ -1,12 +1,6 @@
-# Loop Engineering for Cross-References: When RAG Answers ‘see Section 7.2’ Instead of the Actual Answer
+# Loop Engineering for Cross-References: When RAG Answers 'see Section 7.2' Instead of the Actual Answer
 
-> **Article Metadata**  
-> **Title**: Loop Engineering for Cross-References: When RAG Answers ‘see Section 7.2’ Instead of the Actual Answer  
-> **Author**: Angela Shi  
-> **Publication**: Towards Data Science | Enterprise Document Intelligence [Vol.1 #11]  
-> **Source URL**: [Towards Data Science Article](https://towardsdatascience.com/loop-engineering-for-cross-references-when-rag-answers-see-section-7-2-instead-of-the-actual-answer/)  
-> **GitHub Repository**: [doc-intel/notebooks-vol1](https://github.com/doc-intel/notebooks-vol1)  
-> **Core Principle**: Pass 1 flags incompleteness; orchestrator triggers Pass 2; converged answer ships with provenance.
+**Core Principle**: Pass 1 flags incompleteness; orchestrator triggers Pass 2; converged answer ships with provenance.
 
 ---
 
@@ -37,8 +31,7 @@ flowchart TD
     J --> E
 ```
 
-![Cross Reference Orchestrator Loop](https://contributor.insightmediagroup.io/wp-content/uploads/2026/07/image-509-1024x527.png)  
-*Figure 1: Pass 1 flags incompleteness; orchestrator triggers Pass 2; converged answer ships with provenance — Image by Author.*
+---
 
 ---
 
@@ -106,9 +99,6 @@ def decide_next_pass(
 
 ## 4. Pass 2: Reference Resolution Engine
 
-![Deterministic Resolution Join](https://contributor.insightmediagroup.io/wp-content/uploads/2026/07/image-512-1024x327.png)  
-*Figure 2: Resolution engine joins pending references against parse-time registries and TOC data — Image by Author.*
-
 ```python
 class ResolvedReference(BaseModel):
     anchor_text: str
@@ -167,13 +157,7 @@ def resolve_pending(
 
 ---
 
-## 5. Visual Traces & Worked Examples
-
-![Top-1 Initial Retrieval](https://contributor.insightmediagroup.io/wp-content/uploads/2026/07/image-511-791x1024.png)  
-*Figure 3: Pass 1 top-1 retrieved passage containing the forwarding reference pointer — Image by Author.*
-
-![Pass 2 Target Page Resolution](https://contributor.insightmediagroup.io/wp-content/uploads/2026/07/image-513-791x1024.png)  
-*Figure 4: Second-pass fetch retrieving Table 3 row (E) carrying exact BLEU and perplexity metrics — Image by Author.*
+## 5. Worked Examples
 
 ### Comparison of Answers
 
@@ -214,7 +198,6 @@ def resolve_pending(
 
 ---
 
-## 7. Sources & References
+## Summary
 
-1. Shi, Angela. [Loop Engineering for Cross-References: When RAG Answers ‘see Section 7.2’ Instead of the Actual Answer](https://towardsdatascience.com/loop-engineering-for-cross-references-when-rag-answers-see-section-7-2-instead-of-the-actual-answer/). TDS.
-2. Vaswani et al. [Attention Is All You Need](https://arxiv.org/abs/1706.03762). NeurIPS 2017.
+This loop engineering approach solves the cross-reference problem in RAG systems by implementing a lazy 2-pass orchestrator. Instead of retrieving all potentially referenced sections upfront, the system performs an initial retrieval and generation pass, flags unresolved references in a structured output schema, and triggers a targeted second pass only when needed. The resolution engine uses deterministic joins against parse-time registries and TOC data before falling back to LLM resolution for ambiguous anchors.
