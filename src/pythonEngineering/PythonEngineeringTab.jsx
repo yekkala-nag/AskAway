@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import * as Primitives from '../components/layout/Primitives.jsx';
 import { Hero, CodeBlock } from '../components/ui/Content.jsx';
 import { Card, Badge, Button, Callout } from '../components/ui/Core.jsx';
+import ContextManagersPanel from './ContextManagersPanel.jsx';
 import {
   SIMULATE_PID_STEP,
   SIMULATE_HARMONIC_OSCILLATOR,
@@ -13,7 +14,6 @@ const { Container, Grid, Flex, Stack } = Primitives;
 
 export default function PythonEngineeringTab() {
   const [activeSubTab, setActiveSubTab] = useState('pid'); 
-  // 'pid' | 'oscillator' | 'rankine' | 'fea' | 'code'
 
   // PID Controls State
   const [kp, setKp] = useState(2.5);
@@ -37,13 +37,13 @@ export default function PythonEngineeringTab() {
       <Hero
         moduleId="data_platform"
         moduleLabel="Data & Platform Layers [Computational Engineering & Numerical Physics]"
-        title="5 Computational Engineering Simulators in Python"
-        description="Bridge academic engineering science and modern Python development. Explore live, interactive numerical solvers for PID flight control, damped harmonic mechanical vibrations, thermodynamic Rankine power cycles, 2D Truss Finite Element Analysis (FEA), and aerodynamic airfoils."
+        title="Python Engineering Simulators & Resource Lifecycles"
+        description="Explore interactive numerical solvers for PID control, damped vibrations, thermodynamic cycles, and structural analysis, alongside Python context managers for reliable resource setup, transactions, and cleanup."
         metrics={[
           { label: 'Numerical Physics', value: 'ODE Integration (solve_ivp)' },
           { label: 'Control Systems', value: 'Live PID Step-Response Tuner' },
           { label: 'Structural Analysis', value: '2D Truss Stiffness Matrix' },
-          { label: 'Thermodynamics', value: 'Rankine Cycle Thermal η' }
+          { label: 'Python Runtime', value: 'Context Manager Lifecycle' }
         ]}
       />
 
@@ -64,7 +64,8 @@ export default function PythonEngineeringTab() {
             { id: 'oscillator', icon: '〰️', label: '2. Harmonic Oscillator', desc: 'Under/critical/overdamping' },
             { id: 'rankine', icon: '🔥', label: '3. Rankine Steam Cycle', desc: 'Boiler pressure vs thermal η' },
             { id: 'fea', icon: '🏗️', label: '4. 2D Truss FEA Solver', desc: 'Displacements & bar tensions' },
-            { id: 'code', icon: '💻', label: '5. NumPy / SciPy Toolkit', desc: 'Production engineering scripts' }
+            { id: 'code', icon: '💻', label: '5. NumPy / SciPy Toolkit', desc: 'Production engineering scripts' },
+            { id: 'contexts', icon: '♻️', label: '6. Context Managers', desc: 'Scoped setup, cleanup & exceptions' }
           ].map(tab => (
             <button
               key={tab.id}
@@ -379,6 +380,7 @@ where c = cos(θ), s = sin(θ)`}
             </Card>
           </Stack>
         )}
+        {activeSubTab === 'contexts' && <ContextManagersPanel />}
       </Container>
     </div>
   );
