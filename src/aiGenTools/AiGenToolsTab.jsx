@@ -3,6 +3,7 @@ import * as Primitives from '../components/layout/Primitives.jsx';
 import { Hero } from '../components/ui/Content.jsx';
 import { Card, Badge, Button } from '../components/ui/Core.jsx';
 import { ToolSelectionFramework } from '../components/ui/CleanInfographics.jsx';
+import CreationStudio from './CreationStudio.jsx';
 
 const { Container, Grid, Flex, Stack } = Primitives;
 
@@ -85,13 +86,55 @@ export default function AiGenToolsTab() {
         moduleId="frontiers_production"
         moduleLabel="Frontiers & Production [AI Generation Tools]"
         title="Generate — Images, Workflows, Tables, Animations, Simulators"
-        description="AI is no longer just text. Modern systems generate rich, interactive outputs: images, structured data, animated sequences, and live simulators. This tab maps the tooling landscape and connects you to the underlying models and decision-making frameworks."
+        description="Turn clear requirements into images, structured data, workflows, interactive simulations, and animated storyboards. Explore an AI creation studio, compare capability patterns, and learn how to make generated outputs reliable."
         metrics={[
-          { label: 'Categories', value: '5' },
-          { label: 'Tools Mapped', value: '20+' },
-          { label: 'Reading', value: '7 articles' },
+          { label: 'Output Types', value: '5' },
+          { label: 'Interactive Studio', value: 'Included' },
+          { label: 'Structured Outputs', value: 'Validated' },
         ]}
       />
+
+      <Container size="wide">
+        <CreationStudio />
+      </Container>
+
+      <Container size="wide">
+        <Card style={{
+          padding: '22px',
+          marginBottom: '24px',
+          background: 'linear-gradient(135deg, #EFF8F8 0%, #F7F5FB 100%)',
+          border: '1px solid #E5E7EB',
+          borderRadius: '14px',
+        }}>
+          <div style={{ marginBottom: '16px' }}>
+            <h2 style={{ margin: 0, color: '#1A1D26', fontSize: '1.1rem' }}>Three foundations for useful AI outputs</h2>
+            <p style={{ margin: '6px 0 0', color: '#6B7280', fontSize: '0.8rem', lineHeight: 1.5 }}>
+              Good generation starts with prepared context, explicit output contracts, and bounded execution—not just a longer prompt.
+            </p>
+          </div>
+          <Grid columns={{ base: '1fr', md: '1fr 1fr 1fr' }} gap="14px">
+            {[
+              {
+                title: 'Prepare usable context',
+                detail: 'Gather trusted data, shape it for the task, and keep source records distinct from model-generated conclusions.',
+              },
+              {
+                title: 'Define a data contract',
+                detail: 'Specify required fields and types, handle custom values deliberately, then parse and validate before rendering.',
+              },
+              {
+                title: 'Bound the workflow',
+                detail: 'Give each agent a clear task and limited tools; check intermediate results and reserve review for consequential actions.',
+              },
+            ].map((item) => (
+              <div key={item.title} style={{ padding: '14px', borderRadius: '10px', background: '#FFFFFF', border: '1px solid #E5E7EB' }}>
+                <h3 style={{ margin: '0 0 6px', color: '#1A1D26', fontSize: '0.85rem' }}>{item.title}</h3>
+                <p style={{ margin: 0, color: '#6B7280', fontSize: '0.75rem', lineHeight: 1.55 }}>{item.detail}</p>
+              </div>
+            ))}
+          </Grid>
+        </Card>
+      </Container>
 
       <Container size="wide">
         <ToolSelectionFramework />
@@ -206,9 +249,9 @@ export default function AiGenToolsTab() {
           <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
             {[
               { step: '1', label: 'Pick a category above', icon: '👆' },
-              { step: '2', label: 'Try a tool from the list', icon: '🔧' },
-              { step: '3', label: 'Read the context engineering article', icon: '📖' },
-              { step: '4', label: 'Build a workflow that chains generators', icon: '⛓️' },
+              { step: '2', label: 'Describe your required output', icon: '✍️' },
+              { step: '3', label: 'Set a trusted AI endpoint', icon: '🔐' },
+              { step: '4', label: 'Review and refine the result', icon: '✓' },
             ].map((s, i) => (
               <div key={i} style={{
                 flex: 1, minWidth: '160px', padding: '10px 14px',
