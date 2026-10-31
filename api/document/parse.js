@@ -25,10 +25,7 @@ pdfjsLib.GlobalWorkerOptions.workerSrc = '';
 const MAX_PDF_BYTES = 20 * 1024 * 1024; // 20 MB
 const MAX_PAGES = 100;
 
-export const config = {
-  runtime: 'nodejs22.x',
-  maxDuration: 60,
-};
+// Vercel Hobby: maxDuration is configured via vercel.json (not in-function config).
 
 function sendJson(res, status, payload) {
   res.setHeader('Content-Type', 'application/json');

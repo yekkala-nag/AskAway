@@ -10,11 +10,9 @@
   ],
   "functions": {
     "api/ai/chat.js": {
-      "runtime": "nodejs22.x",
       "maxDuration": 60
     },
     "api/document/parse.js": {
-      "runtime": "nodejs22.x",
       "maxDuration": 60
     }
   },

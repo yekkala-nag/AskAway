@@ -30,13 +30,7 @@ const MAX_PAYLOAD_BYTES = 256 * 1024; // 256 KB request cap
 const MAX_OUTPUT_TOKENS = 4096;       // max_tokens cap
 const DEFAULT_MAX_TOKENS = 1000;
 
-export const config = {
-  runtime: 'nodejs22.x',
-  // Vercel Hobby serverless functions have a ~60s maxDuration; SSE streams
-  // that run longer will be cut off by the platform, which is acceptable for
-  // this free-tier design.
-  maxDuration: 60,
-};
+// Vercel Hobby: maxDuration is configured via vercel.json (not in-function config).
 
 function sendJson(res, status, payload) {
   res.setHeader('Content-Type', 'application/json');
