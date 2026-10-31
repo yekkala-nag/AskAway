@@ -1,3 +1,5 @@
+import { callAIProxy } from '../../lib/aiProxy.js';
+
 export async function generateWorkflowFromToc(tocEntries, aiConfig = null) {
   const workflow = {
     title: 'Document Workflow',
@@ -222,31 +224,13 @@ async function callAIForImagePrompts(prompts, tocEntries, aiConfig) {
 }
 
 async function fetchAI(aiConfig, prompt, schema) {
-  if (!aiConfig?.apiKey) throw new Error('No API key configured');
-
-  const { apiKey, endpoint = 'https://api.openai.com/v1/chat/completions', model = 'gpt-4o' } = aiConfig;
-
-  const body = {
-    model,
+  const content = await callAIProxy({
     messages: [
       { role: 'system', content: 'You are a helpful assistant that returns valid JSON matching the provided schema.' },
       { role: 'user', content: prompt },
     ],
-    response_format: { type: 'json_schema', json_schema: { name: 'response', schema } },
-  };
-
-  const res = await fetch(endpoint, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${apiKey}`,
-    },
-    body: JSON.stringify(body),
+    model: aiConfig?.model || 'gpt-4o-mini',
+    apiKey: aiConfig?.apiKey || undefined,
   });
-
-  if (!res.ok) throw new Error(`AI API error: ${res.status}`);
-  const data = await res.json();
-  const content = data.choices?.[0]?.message?.content;
-  if (!content) throw new Error('Empty AI response');
   return JSON.parse(content);
 }

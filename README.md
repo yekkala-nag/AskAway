@@ -49,6 +49,46 @@ Requires a plan with Web Apps: **Business Web Hosting** or **Cloud Startup** and
 
 Do not hand-edit the generated `.htaccess`; redeploys regenerate it. The app uses `?tab=<id>` URLs, so no extra SPA rewrite is required. For archive deploys, exclude `node_modules/` and `dist/` (source is ~19 MB, under the 50 MB limit).
 
+## Deploy to Vercel (recommended for serverless functions)
+
+Vercel is the recommended platform when using the serverless API routes under `api/` (AI proxy, document parse). The `vercel.json` at the repo root configures the build, rewrites, function runtimes, and cache headers.
+
+### Quick start (Vercel CLI)
+
+```bash
+npm i -g vercel
+vercel login
+vercel --prod
+```
+
+### GitHub integration (CI/CD)
+
+1. Push this repo to GitHub.
+2. In Vercel dashboard → **Add New Project** → Import the GitHub repo.
+3. Framework preset: **Vite** (auto-detected).
+4. Build command: `npm run build` (default).
+5. Output directory: `dist` (default).
+6. **Environment Variables** (Project Settings → Environment Variables):
+   - `SUPABASE_URL` — your Supabase project URL
+   - `SUPABASE_SERVICE_ROLE_KEY` — service-role key (server-only)
+   - `OPENAI_API_KEY` — OpenAI API key for the AI proxy (server-only)
+   - Client-side vars (prefixed `VITE_`): `VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY`
+7. Deploy. Vercel runs the build, deploys `dist/` to the edge network, and provisions the Node.js serverless functions under `api/`.
+
+### Vercel Hobby tier limits
+
+| Limit | Value | Notes |
+|-------|-------|-------|
+| Serverless function duration | 60 s | `maxDuration: 60` in `vercel.json` |
+| Function payload size | 4.5 MB | Our PDF parse caps at 20 MB — use smaller files on Hobby; upgrade to Pro for larger |
+| Bandwidth | 100 GB/mo | Static assets cached at edge (`Cache-Control: immutable`) |
+| Function invocations | 100k/mo | Sufficient for moderate AI proxy usage |
+
+### Environment variable hygiene
+
+- **Never** put secrets in `VITE_*` variables — they are embedded in the client bundle.
+- Server-only vars (`SUPABASE_SERVICE_ROLE_KEY`, `OPENAI_API_KEY`) must be set in the Vercel dashboard (Project Settings → Environment Variables), not in `.env` or the repo.
+
 ## Search
 
 Global search (⌘K / Ctrl+K / `/`) and the sidebar filter run on **MiniSearch** with

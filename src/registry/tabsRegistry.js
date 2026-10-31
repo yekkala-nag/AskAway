@@ -18,7 +18,6 @@ export const UMBRELLA_TOPICS = [
     icon: "📚",
     color: "#5EC4C8",
     dark: "#1F6B6E",
-    description: "Roadmap stages 1–4: orientation, how LLMs work, prompting, models — home of the AI Engineer Roadmap",
     tabs: ["fnd_start_hub", "fnd_internals_hub", "fnd_prompts_hub", "fnd_mlsoc_hub", "fnd_multimodal_hub", "airoadmap", "overview", "glossary", "reinforcementlearning", "trpo2grpo", "aimoralagency", "humancentric", "dialoguelamda", "modellandscape", "tokenization", "quantserve", "vramconductor", "promptfundamentals", "lstm", "llmsampling", "grokking", "selfattention", "posencoding", "archconcepts", "system1head", "promptmgmt", "promptdependencygraph", "promptcontracts", "promptregression", "structuredoutputs", "topicmodeling", "workflows", "unhobbling", "aiharness", "promptlearning", "visionlanguage", "diffusionmodels", "speechvoice", "datacentricai", "threesentenceprompt", "slashcommands", "ailearning", "reversalcurse", "aigap", "promptalignment", "dupaudit", "harmcauses", "subjectleak", "mlproblems"]
   },
   {
@@ -27,7 +26,6 @@ export const UMBRELLA_TOPICS = [
     icon: "🏗️",
     color: "#3A9B9F",
     dark: "#1F6B6E",
-    description: "Roadmap stage 5: embeddings, vector search and document pipelines that feed retrieval",
     tabs: ["data_found_hub", "data_docs_hub", "data_ml_hub", "data_scale_hub", "threelayers", "docstruct", "agenticparsing", "knowledgebase", "vectordbops", "datapipeline", "aidataplat", "medallionarch", "aitestdatabottleneck", "classicalml", "frauddetectionml", "modernioformats", "pythonprofiling", "pythonengineering", "nsquaredpizza", "functools", "pydescriptors", "activelearn", "goaltracker", "vaes", "keras3", "byol", "xlstm", "timeseriesanomaly", "aiusecases", "agenticuiworkflow", "linearregression", "pandasdataframes", "pandasmem", "geopopviz", "datahumanization", "llmfinetuning", "multilingualclassification", "textclusteringhdbscan", "forecasttraps"]
   },
   {
@@ -36,7 +34,6 @@ export const UMBRELLA_TOPICS = [
     icon: "⚡",
     color: "#F0A89A",
     dark: "#C47A6A",
-    description: "Roadmap stage 6: RAG systems end to end",
     tabs: ["rag_core_hub", "rag_precision_hub", "rag_advanced_hub", "rag_practice_hub", "rag", "pipeline", "completepipeline", "qparseloop", "filtering", "hierrag", "prodrag", "routercheap", "rerankers", "rageval", "multilingualrag", "multimodalrag", "texttosql", "crossdocjoins", "genpatterns", "fourpdfs", "agentfanout", "hallucbricks", "workflowloop", "proxypointer", "agenticrag", "ragcasestudies", "interviewprep", "raginterview", "rowlevelrag", "tablegridrag", "graphtraversalknowledge", "graphrag_system1", "temporalgraphrag", "ragcorpusshapes", "amplifyexpert", "ragchunking", "zerorag", "textclassificationdata", "capstone1", "capstone3"]
   },
   {
@@ -45,7 +42,6 @@ export const UMBRELLA_TOPICS = [
     icon: "🧠",
     color: "#C9B8E8",
     dark: "#7A6BA8",
-    description: "Memory layer behind stages 6–7: context craft, memory systems, long context",
     tabs: ["ctx_craft_hub", "ctx_memory_hub", "ctx_long_hub", "ctxeng", "ctxmeasure", "memhierarchy", "longcontext", "vague", "hallucination", "contextgraph", "companybrain", "validitylayer", "memeng", "contextlimits"]
   },
   {
@@ -54,7 +50,6 @@ export const UMBRELLA_TOPICS = [
     icon: "🤖",
     color: "#F0A89A",
     dark: "#C47A6A",
-    description: "Roadmap stage 7: agents, MCP and production deployment",
     tabs: ["agt_found_hub", "agt_safety_hub", "agt_multi_hub", "agt_prod_hub", "fiveassets", "redesign", "projectprepframework", "agentplanner", "agenthitl", "agentcontrolplane", "agentlifecycle", "agenta2a", "agentsandbox", "agentevals", "handoffwatch", "verifiedpipes", "codingevals", "claudecode100", "typedagentgate", "agentpairprogramming", "vibecode", "agentsastools", "toolcalling", "agenttasks", "agentmemory", "cliagent", "codingagentsnonprog", "multiagent", "multiagentcoord", "modelrouting", "decision_layer", "langchain", "langgraph", "frameworkcompare", "agentdebugging", "agentscale", "modeldeploy", "aiproductbuilder", "mcpclient", "agentsdk", "loopengineering", "agenticsoftwarefactory", "finassistproject", "zerocostmultiagent", "capstone2", "functionalscars", "refactorhealth", "agentcreativity", "agentorgchart", "synasyncagent", "agentpatterns", "agentuisupply", "interviewmindset"]
   },
   {
@@ -63,7 +58,6 @@ export const UMBRELLA_TOPICS = [
     icon: "🔮",
     color: "#9B89C4",
     dark: "#6B5E94",
-    description: "Roadmap stage 8: evals, cost, observability — ship and stay reliable",
     tabs: ["fr_eval_hub", "fr_ops_hub", "fr_frontiers_hub", "aigentools", "aiharnessquality", "aiarchdecisions", "firstaiapp", "enterpriseadvancedplaybook", "tokenorchestrationplaybook", "productionragops", "enterpriseaiops", "enterprisegrade", "finops", "observability", "slmedge", "speculativedecoding", "tokenbill", "llmevals", "modelvalidation", "reasoningbench", "practices", "powerfeatures", "ragbeyond", "frontiers", "progress", "guardrails", "agentguardrails", "agentobservability", "costtollbooth", "llmreliability", "evalharness"]
   }
 ];
@@ -76,7 +70,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "foundations",
     category: "Foundations",
     icon: "🧭",
-    keywords: ["ai engineer roadmap", "roadmap.sh", "learning path", "stages", "week planner", "home", "start here", "career path"],
     component: lazy(() => import("../aiRoadmap/AIRoadmapTab.jsx"))
   },
   {
@@ -85,7 +78,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "foundations",
     category: "Foundations",
     icon: "🏠",
-    keywords: ["overview", "home", "introduction", "dashboard"],
     component: lazy(() => import("../tabs/OverviewTabNew.jsx").then(m => ({ default: m.OverviewTab })))
   },
   {
@@ -94,7 +86,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "foundations",
     category: "Foundations",
     icon: "📖",
-    keywords: ["glossary", "terms", "definitions", "concepts"],
     component: lazy(() => import("../App.jsx").then(m => ({ default: m.AIGlossaryTab })))
   },
   {
@@ -103,7 +94,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "frontiers_production",
     category: "Advanced & Frontiers",
     icon: "🚀",
-    keywords: ["first ai app", "ai app", "api keys", "environment variables", "summarizer", "json response", "error triaging", "map reduce chunking", "openai", "shipping", "production app"],
     component: lazy(() => import("../firstAIApp/FirstAIAppTab.jsx"))
   },
   {
@@ -112,7 +102,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "foundations",
     category: "Foundations",
     icon: "🎮",
-    keywords: ["reinforcement learning", "rl", "baselines", "markov decision process", "mdp", "ppo", "dqn", "dynamic pricing", "consumer rl", "next-best-action", "ltv", "gymnasium"],
     component: lazy(() => import("../reinforcementLearning/ReinforcementLearningTab.jsx"))
   },
   {
@@ -121,7 +110,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "foundations",
     category: "Foundations",
     icon: "🎓",
-    keywords: ["trpo", "ppo", "grpo", "rlhf", "reward model", "value model", "deepseek", "kl divergence", "policy gradient"],
     component: lazy(() => import("../rlTraining/RLTrainingTab.jsx"))
   },
   {
@@ -130,7 +118,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "foundations",
     category: "Foundations",
     icon: "⚖️",
-    keywords: ["moral agency", "ai alignment", "caring", "functional caring", "experiential caring", "constitutional ai", "qualia", "consciousness", "ethics"],
     component: lazy(() => import("../aiMoralAgency/MoralAgencyTab.jsx"))
   },
   {
@@ -139,7 +126,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "foundations",
     category: "Foundations",
     icon: "🧡",
-    keywords: ["human-centric", "manifesto", "do no harm", "value-sensitive design", "filter bubble", "facct", "compliance"],
     component: lazy(() => import("../humanCentric/HumanCentricTab.jsx"))
   },
   {
@@ -148,7 +134,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "foundations",
     category: "Foundations",
     icon: "🌉",
-    keywords: ["ai understanding gap", "ai adoption", "show don't tell", "context engineering", "skeptic", "red team prompt", "grounding", "reconciliation", "verifiable wins", "anti-hype", "guardrails", "micro-wins"],
     component: lazy(() => import("../aiGap/AiGapTab.jsx"))
   },
   {
@@ -157,7 +142,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "foundations",
     category: "Foundations",
     icon: "💬",
-    keywords: ["dialogue", "lamda", "google lamda", "ssi", "sensibleness", "specificity", "interestingness", "gemini", "chatbots", "tool grounding"],
     component: lazy(() => import("../dialogueLaMDA/DialogueLaMDATab.jsx"))
   },
   {
@@ -166,7 +150,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "foundations",
     category: "Foundations",
     icon: "🏛️",
-    keywords: ["model landscape", "model selection", "decision engine", "open weights", "closed api", "deepseek-v3", "deepseek-r1", "llama 3.3", "claude 3.5", "gpt-4o", "slms", "small language models", "phi-4", "smollm", "test-time compute", "reasoning models", "litellm"],
     component: lazy(() => import("../modelLandscape/ModelLandscapeTab.jsx"))
   },
   {
@@ -175,7 +158,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "foundations",
     category: "Foundations",
     icon: "🔤",
-    keywords: ["tokenization", "bpe", "unigram", "wordpiece", "fertility", "multilingual tokens", "tiktoken"],
     component: lazy(() => import("../tokenization/TokenizationTab.jsx"))
   },
   {
@@ -184,7 +166,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "foundations",
     category: "Foundations",
     icon: "🗜️",
-    keywords: ["quantization", "awq", "gptq", "gguf", "vllm", "tensorrt", "vram", "serving", "pagedattention"],
     component: lazy(() => import("../quantServe/QuantServeTab.jsx"))
   },
   {
@@ -193,7 +174,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "foundations",
     category: "Foundations",
     icon: "🎫",
-    keywords: ["vram", "cuda", "admission control", "kv cache", "layer streaming", "llama.cpp", "bare metal"],
     component: lazy(() => import("../vramConductor/VramConductorTab.jsx"))
   },
   {
@@ -202,7 +182,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "foundations",
     category: "Foundations",
     icon: "💡",
-    keywords: ["prompt engineering", "zero-shot", "few-shot", "in-context learning", "chain-of-thought", "cot", "tree-of-thoughts", "tot", "directional stimulus", "delimiters", "system prompt", "dspy", "declarative prompts"],
     component: lazy(() => import("../promptEngineeringFundamentals/PromptFundamentalsTab.jsx"))
   },
   {
@@ -211,7 +190,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "foundations",
     category: "Foundations",
     icon: "🎛️",
-    keywords: ["logits", "sampling", "temperature", "top-p", "top-k", "min-p", "nucleus sampling", "greedy decoding", "repetition penalty", "softmax", "beam search", "autoregressive", "generation mechanics", "llm generation"],
     component: lazy(() => import("../llmSampling/LLMSamplingTab.jsx"))
   },
   {
@@ -220,7 +198,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "foundations",
     category: "Foundations",
     icon: "🧩",
-    keywords: ["grokking", "delayed generalization", "memorization vs generalization", "modular addition", "training dynamics", "early stopping", "circuit competition", "interpretability", "probe accuracy", "flat plateau", "generalization gap"],
     component: lazy(() => import("../grokking/GrokkingTab.jsx"))
   },
   {
@@ -229,7 +206,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "foundations",
     category: "Foundations",
     icon: "🔁",
-    keywords: ["lstm", "gru", "rnn", "vanishing gradient", "exploding gradient", "gates", "forget gate", "cell state", "sequence model", "recurrent network", "transformers won"],
     component: lazy(() => import("../lstmFoundations/LSTMTab.jsx"))
   },
   {
@@ -238,7 +214,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "foundations",
     category: "Foundations",
     icon: "👁️",
-    keywords: ["self-attention", "transformer", "query key value", "qkv", "scaled dot product", "mha", "gqa", "mqa", "mla", "multi-head attention", "grouped query attention", "rope", "rotary embeddings", "attention weights", "attention heatmap"],
     component: lazy(() => import("../selfAttention/SelfAttentionTab.jsx"))
   },
   {
@@ -247,7 +222,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "foundations",
     category: "Foundations",
     icon: "⏱️",
-    keywords: ["positional encoding", "sinusoidal", "time series", "self-attention order", "qkv", "rope", "lags"],
     component: lazy(() => import("../posEncoding/PosEncodingTab.jsx"))
   },
   {
@@ -256,7 +230,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "foundations",
     category: "Foundations",
     icon: "🔬",
-    keywords: ["architecture", "transformer", "attention", "foundations", "latent space", "embeddings"],
     component: lazy(() => import("../App.jsx").then(m => ({ default: m.ArchConceptsTab })))
   },
   {
@@ -265,7 +238,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "foundations",
     category: "Foundations",
     icon: "⚡",
-    keywords: ["decision head", "classification head", "head swap", "frozen backbone", "single forward pass", "system 1", "dynamic quantization", "int8", "ci hook", "name body match", "exit code", "selective classifier"],
     component: lazy(() => import("../system1Head/System1HeadTab.jsx"))
   },
   {
@@ -274,7 +246,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "foundations",
     category: "Foundations",
     icon: "📝",
-    keywords: ["prompts", "prompt management", "versioning", "prompt engineering", "templates"],
     component: lazy(() => import("../App.jsx").then(m => ({ default: m.PromptMgmtTab })))
   },
   {
@@ -283,7 +254,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "foundations",
     category: "Foundations",
     icon: "📜",
-    keywords: ["prompt contracts", "contract validation", "version pin", "breaking change", "section manifest", "capability flags", "prompt management"],
     component: lazy(() => import("../promptContracts/PromptContractsTab.jsx"))
   },
   {
@@ -292,7 +262,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "foundations",
     category: "Foundations",
     icon: "📡",
-    keywords: ["prompt regression", "golden set", "behavioural diff", "canary", "rollback", "quiet failure", "evals"],
     component: lazy(() => import("../promptRegression/PromptRegressionTab.jsx"))
   },
   {
@@ -301,7 +270,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "foundations",
     category: "Foundations",
     icon: "🕸️",
-    keywords: ["prompt dependency graph", "blast radius", "reachable vs candidate", "change impact analysis", "section dependents", "composable prompts", "retesting"],
     component: lazy(() => import("../promptDependencyGraph/PromptDependencyGraphTab.jsx"))
   },
   {
@@ -310,7 +278,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "foundations",
     category: "Foundations",
     icon: "📐",
-    keywords: ["structured outputs", "json schema", "constrained decoding", "fsm", "outlines", "pydantic", "instructor", "grammars", "logit masking"],
     component: lazy(() => import("../structuredOutputs/StructuredOutputsTab.jsx"))
   },
   {
@@ -319,7 +286,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "foundations",
     category: "Foundations",
     icon: "🌱",
-    keywords: ["topic modeling", "keynmf", "seeded topic modeling", "turftopic", "llm summarization", "trend tracking", "ecb speeches", "lda"],
     component: lazy(() => import("../topicModeling/TopicModelingTab.jsx"))
   },
   {
@@ -328,7 +294,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "foundations",
     category: "Foundations",
     icon: "🚀",
-    keywords: ["workflows", "claude", "prompt engineering", "chaining"],
     component: lazy(() => import("../App.jsx").then(m => ({ default: m.ClaudeWorkflowsTab })))
   },
   {
@@ -337,7 +302,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "foundations",
     category: "Foundations",
     icon: "🔓",
-    keywords: ["unhobbling", "claude 5", "capabilities", "reasoning"],
     component: lazy(() => import("../App.jsx").then(m => ({ default: m.UnhobblingTab })))
   },
   {
@@ -346,7 +310,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "foundations",
     category: "Foundations",
     icon: "⚙️",
-    keywords: ["ai harness", "training loops", "transformer architecture", "kv cache", "gqa", "rlhf", "dpo", "gradient descent", "chinchilla", "flash attention", "evals", "failure modes"],
     component: lazy(() => import("../aiHarness/AIHarnessTab.jsx"))
   },
   {
@@ -355,7 +318,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "foundations",
     category: "Foundations",
     icon: "🧠",
-    keywords: ["prompt learning", "english feedback", "voyager", "karpathy", "meta-prompt", "instruction management", "online optimization", "critique", "evals"],
     component: lazy(() => import("../promptLearning/PromptLearningTab.jsx"))
   },
 
@@ -366,7 +328,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "rag_architecture",
     category: "RAG Systems",
     icon: "📄",
-    keywords: ["rag", "naive", "advanced", "hybrid", "self-rag", "crag", "graphrag"],
     component: lazy(() => import("../App.jsx").then(m => ({ default: m.RAGTypesTab })))
   },
   {
@@ -375,7 +336,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "rag_architecture",
     category: "RAG Systems",
     icon: "▶",
-    keywords: ["pipeline", "vector db", "embedding", "chunking"],
     component: lazy(() => import("../App.jsx").then(m => ({ default: m.PipelineTab })))
   },
   {
@@ -384,7 +344,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "rag_architecture",
     category: "RAG Systems",
     icon: "⛓️",
-    keywords: ["complete pipeline", "12 steps", "ingestion", "indexing", "retrieval", "generation", "live simulation", "infographic", "toggle steps"],
     component: lazy(() => import("../completePipeline/CompletePipelineTab.jsx"))
   },
   {
@@ -393,7 +352,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "rag_architecture",
     category: "RAG Systems",
     icon: "🔂",
-    keywords: ["question parsing", "query rewrite", "intent"],
     component: lazy(() => import("../App.jsx").then(m => ({ default: m.QuestionParsingLoopTab })))
   },
   {
@@ -402,7 +360,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "rag_architecture",
     category: "RAG Systems",
     icon: "✦",
-    keywords: ["retrieval", "filtering", "anchor detection", "bm25"],
     component: lazy(() => import("../App.jsx").then(m => ({ default: m.FilteringTab })))
   },
   {
@@ -411,7 +368,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "rag_architecture",
     category: "RAG Systems",
     icon: "🗂️",
-    keywords: ["hierarchical", "table of contents", "toc", "tree"],
     component: lazy(() => import("../App.jsx").then(m => ({ default: m.HierarchicalRetrievalTab })))
   },
   {
@@ -420,7 +376,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "rag_architecture",
     category: "RAG Systems",
     icon: "📄",
-    keywords: ["production rag", "pdf", "extraction", "tables"],
     component: lazy(() => import("../App.jsx").then(m => ({ default: m.ProductionRAGTab })))
   },
   {
@@ -429,7 +384,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "rag_architecture",
     category: "RAG Systems",
     icon: "⚡",
-    keywords: ["zero-model router", "fast-path", "calling the llm less", "latency", "cost", "line_df", "co_occurrence_score", "margin", "09ter", "frugalgpt", "router", "fast router"],
     component: lazy(() => import("../zeroModelRouter/ZeroModelRouterTab.jsx"))
   },
   {
@@ -438,7 +392,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "rag_architecture",
     category: "RAG Systems",
     icon: "🧬",
-    keywords: ["generation patterns", "contracts", "pydantic"],
     component: lazy(() => import("../App.jsx").then(m => ({ default: m.GenPatternsTab })))
   },
   {
@@ -447,7 +400,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "rag_architecture",
     category: "RAG Systems",
     icon: "📚",
-    keywords: ["four pdfs", "benchmarks", "evaluation"],
     component: lazy(() => import("../App.jsx").then(m => ({ default: m.FourPDFsTab })))
   },
   {
@@ -456,7 +408,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "rag_architecture",
     category: "RAG Systems",
     icon: "🌊",
-    keywords: ["agent fan-out", "retrieval load", "latency stacking", "stale context", "relevance drift", "unified retrieval", "vespa", "concurrency"],
     component: lazy(() => import("../agentFanout/AgentFanoutTab.jsx"))
   },
   {
@@ -465,7 +416,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "rag_architecture",
     category: "RAG Systems",
     icon: "🧱",
-    keywords: ["hallucinations", "bricks", "verification"],
     component: lazy(() => import("../App.jsx").then(m => ({ default: m.HallucBricksTab })))
   },
   {
@@ -474,7 +424,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "rag_architecture",
     category: "RAG Systems",
     icon: "🔀",
-    keywords: ["workflow loop", "dispatcher", "when to loop", "when to stop", "should_continue", "pdf_qa_loop", "iterate_with_bound", "decide.py", "13", "drift", "audit"],
     component: lazy(() => import("../workflowLoop/WorkflowLoopTab.jsx"))
   },
   {
@@ -483,7 +432,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "rag_architecture",
     category: "RAG Systems",
     icon: "🏷️",
-    keywords: ["proxy pointer", "proxy pointer rag", "structure meets scale", "skeleton tree", "breadcrumb injection", "faiss pointer map", "gemini flash lite noise filter", "15"],
     component: lazy(() => import("../proxyPointer/ProxyPointerTab.jsx"))
   },
   {
@@ -492,7 +440,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "rag_architecture",
     category: "RAG Systems",
     icon: "🔍",
-    keywords: ["agentic rag", "react loop", "multi-step search", "let the agent search", "openai agents sdk", "14", "tools", "trace"],
     component: lazy(() => import("../agenticRAG/AgenticRAGTab.jsx"))
   },
   {
@@ -501,7 +448,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "rag_architecture",
     category: "RAG Systems",
     icon: "🏢",
-    keywords: ["case study", "sdlc rag", "financial rag", "devcontext", "system design", "pseudocode", "architecture", "blueprints"],
     component: lazy(() => import("../tabs/RAGCaseStudiesTab.jsx"))
   },
   {
@@ -510,7 +456,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "rag_architecture",
     category: "RAG Systems",
     icon: "🎯",
-    keywords: ["interview", "questions", "rag interview", "q&a", "study plan"],
     component: lazy(() => import("../tabs/InterviewPrepTab.jsx"))
   },
   {
@@ -519,7 +464,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "rag_architecture",
     category: "RAG Systems",
     icon: "🎓",
-    keywords: ["rag interview", "senior answers", "pro insight", "lost in the middle", "hybrid search", "rrf", "reranker", "ragas metrics", "hallucination gate", "production rag"],
     component: lazy(() => import("../ragInterview/RagInterviewTab.jsx"))
   },
   {
@@ -528,7 +472,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "rag_architecture",
     category: "RAG Systems",
     icon: "🏁",
-    keywords: ["capstone", "boss fight", "rag chatbot", "portfolio", "loop 1", "synthesis"],
     component: lazy(() => import("../capstone1/Capstone1Tab.jsx"))
   },
   {
@@ -537,7 +480,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "rag_architecture",
     category: "RAG Systems",
     icon: "📊",
-    keywords: ["row level chunks", "table rag", "tabular retrieval", "serialize_table_rows", "pipe parser", "docling", "dual scale index"],
     component: lazy(() => import("../rowLevelRAG/RowLevelRAGTab.jsx"))
   },
   {
@@ -546,7 +488,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "rag_architecture",
     category: "RAG Systems",
     icon: "🪜",
-    keywords: ["reranker", "cross-encoder", "cohere rerank", "rankgpt", "colbert", "late interaction", "hyde", "query expansion", "bge-reranker"],
     component: lazy(() => import("../rerankers/RerankersTab.jsx"))
   },
   {
@@ -555,7 +496,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "rag_architecture",
     category: "RAG Systems",
     icon: "📐",
-    keywords: ["rag eval", "ragas", "faithfulness", "context precision", "context recall", "answer relevance", "ship gate", "evals"],
     component: lazy(() => import("../ragEvals/RagEvalTab.jsx"))
   },
   {
@@ -564,7 +504,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "rag_architecture",
     category: "RAG Systems",
     icon: "🌍",
-    keywords: ["multilingual rag", "cross-lingual", "translate query", "mE5", "bge-m3", "fertility", "entity drift"],
     component: lazy(() => import("../multilingualRAG/MultilingualRAGTab.jsx"))
   },
   {
@@ -573,7 +512,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "rag_architecture",
     category: "RAG Systems",
     icon: "🖼️",
-    keywords: ["multimodal rag", "vision rag", "clip", "siglip", "deplot", "chart qa", "vqa", "layout", "ocr", "multi-vector retriever", "pdf pipeline", "image summaries", "partition pdf"],
     component: lazy(() => import("../multimodalRAG/MultimodalRAGTab.jsx"))
   },
   {
@@ -582,7 +520,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "rag_architecture",
     category: "RAG Systems",
     icon: "🔗",
-    keywords: ["text to sql", "sql agent", "schema linking", "guarded sql", "aggregate", "validity join", "read-only"],
     component: lazy(() => import("../textToSQL/TextToSQLTab.jsx"))
   },
   {
@@ -591,7 +528,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "rag_architecture",
     category: "RAG Systems",
     icon: "🚒",
-    keywords: ["capstone", "boss fight", "rescue", "sla", "postmortem", "loop 3", "synthesis"],
     component: lazy(() => import("../capstone3/Capstone3Tab.jsx"))
   },
   {
@@ -600,7 +536,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "rag_architecture",
     category: "RAG Systems",
     icon: "🧩",
-    keywords: ["cross-doc joins", "schema alignment", "column mapping", "unified schedule", "validity join", "corpus aggregate"],
     component: lazy(() => import("../crossDocJoins/CrossDocJoinsTab.jsx"))
   },
   {
@@ -609,7 +544,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "rag_architecture",
     category: "RAG Systems",
     icon: "▦",
-    keywords: ["tables in pdfs", "table_df_meta", "table grid", "O1 O2 O3 O4 O5", "header propagation", "multi-page concat", "question projection", "columnar extraction", "vision fallback", "dispatcher"],
     component: lazy(() => import("../tableGridRAG/TableGridRAGTab.jsx"))
   },
   {
@@ -618,7 +552,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "rag_architecture",
     category: "RAG Systems",
     icon: "🌐",
-    keywords: ["graph traversal", "always fused pipeline", "bitemporal edges", "entity resolution", "two threshold", "valid_from", "valid_to", "discovered contradictions"],
     component: lazy(() => import("../graphTraversalKnowledge/GraphTraversalTab.jsx"))
   },
   {
@@ -627,7 +560,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "rag_architecture",
     category: "RAG Systems",
     icon: "🧠",
-    keywords: ["graphrag", "system 1", "system 2", "noul", "choice primitive", "score primitive", "calibrated boolean", "entity gate", "subgraph pruning", "ontology choice", "gray band", "dual engine", "micro decisions", "token budget", "path ranking"],
     component: lazy(() => import("../graphragSystem1/GraphRagSystem1Tab.jsx"))
   },
   {
@@ -636,7 +568,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "rag_architecture",
     category: "RAG Systems",
     icon: "⏳",
-    keywords: ["temporal graphrag", "knowledge quads", "recency weight", "half life decay", "date filter", "fact timeline", "time aware retrieval", "valid interval", "future leakage"],
     component: lazy(() => import("../temporalGraphRag/TemporalGraphRagTab.jsx"))
   },
   {
@@ -645,7 +576,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "rag_architecture",
     category: "RAG Systems",
     icon: "🗂️",
-    keywords: ["rag corpus shapes", "flat pile failure modes", "unrelated pdfs", "homogeneous typed corpus", "case file bundles", "metadata table indexing", "baseline waste"],
     component: lazy(() => import("../ragCorpusShapes/RAGCorpusShapesTab.jsx"))
   },
   {
@@ -654,7 +584,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "rag_architecture",
     category: "RAG Systems",
     icon: "📣",
-    keywords: ["amplify the expert", "manifesto", "enterprise rag", "two camps", "deterministic dispatch", "relational"],
     component: lazy(() => import("../amplifyExpert/AmplifyExpertTab.jsx"))
   },
   {
@@ -663,7 +592,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "rag_architecture",
     category: "RAG Systems",
     icon: "✂️",
-    keywords: ["chunking", "text splitting", "late chunking", "recursive character splitter", "semantic chunking", "sentence boundaries", "overlap", "parent child", "contextual retrieval", "fixed size"],
     component: lazy(() => import("../ragChunkingStrategy/RAGChunkingStrategyTab.jsx"))
   },
 
@@ -674,7 +602,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "context_memory",
     category: "Context & Memory",
     icon: "✶",
-    keywords: ["context engineering", "write", "select", "compress", "isolate"],
     component: lazy(() => import("../App.jsx").then(m => ({ default: m.ContextEngineeringTab })))
   },
   {
@@ -683,7 +610,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "context_memory",
     category: "Context & Memory",
     icon: "📐",
-    keywords: ["context quality", "evals", "metrics", "recall"],
     component: lazy(() => import("../App.jsx").then(m => ({ default: m.ContextMeasureTab })))
   },
   {
@@ -692,7 +618,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "context_memory",
     category: "Context & Memory",
     icon: "◉",
-    keywords: ["vague questions", "clarification", "ambiguity"],
     component: lazy(() => import("../App.jsx").then(m => ({ default: m.VagueQuestionsTab })))
   },
   {
@@ -701,7 +626,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "context_memory",
     category: "Context & Memory",
     icon: "🚨",
-    keywords: ["hallucination loop", "silent failure", "detection"],
     component: lazy(() => import("../App.jsx").then(m => ({ default: m.HallucinationLoopTab })))
   },
   {
@@ -710,7 +634,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "context_memory",
     category: "Context & Memory",
     icon: "⬡",
-    keywords: ["context graph", "memory", "state"],
     component: lazy(() => import("../App.jsx").then(m => ({ default: m.ContextGraphTab })))
   },
   {
@@ -719,7 +642,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "context_memory",
     category: "Context & Memory",
     icon: "🧠",
-    keywords: ["company brain", "knowledge graph", "enterprise"],
     component: lazy(() => import("../App.jsx").then(m => ({ default: m.CompanyBrainTab })))
   },
   {
@@ -728,7 +650,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "context_memory",
     category: "Context & Memory",
     icon: "🧭",
-    keywords: ["validity layer", "stale context", "active stale superseded unknown", "pre-failure work", "baseline vs aware", "bitemporal"],
     component: lazy(() => import("../validityLayer/ValidityLayerTab.jsx"))
   },
   {
@@ -737,7 +658,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "context_memory",
     category: "Context & Memory",
     icon: "⚡",
-    keywords: ["memory engineering", "persistent memory", "long-term"],
     component: lazy(() => import("../App.jsx").then(m => ({ default: m.MemoryEngineeringTab })))
   },
   {
@@ -746,7 +666,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "context_memory",
     category: "Context & Memory",
     icon: "🗂️",
-    keywords: ["memory hierarchy", "working episodic semantic", "memgpt", "forgetting", "salience", "PII quarantine", "personalization", "cold archive"],
     component: lazy(() => import("../memHierarchy/MemHierarchyTab.jsx"))
   },
   {
@@ -755,7 +674,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "context_memory",
     category: "Context & Memory",
     icon: "📏",
-    keywords: ["long context", "lost in the middle", "needle haystack", "context compression", "compaction", "retrieve then read", "anchors"],
     component: lazy(() => import("../longContext/LongContextTab.jsx"))
   },
   {
@@ -764,7 +682,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "context_memory",
     category: "Context & Memory",
     icon: "🧠",
-    keywords: ["1m context window", "working memory", "bapo model", "microsoft research", "variable tracking", "bapo hard", "bapo easy"],
     component: lazy(() => import("../contextLimits/ContextLimitsTab.jsx"))
   },
 
@@ -775,7 +692,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "agents_frameworks",
     category: "Agents & Frameworks",
     icon: "📦",
-    keywords: ["five assets", "tools", "evals", "prompts"],
     component: lazy(() => import("../App.jsx").then(m => ({ default: m.FiveAssetsTab })))
   },
   {
@@ -784,7 +700,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "agents_frameworks",
     category: "Agents & Frameworks",
     icon: "🏗️",
-    keywords: ["redesign work", "process", "automation"],
     component: lazy(() => import("../App.jsx").then(m => ({ default: m.RedesignWorkTab })))
   },
   {
@@ -793,7 +708,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "agents_frameworks",
     category: "Agents & Frameworks",
     icon: "🧭",
-    keywords: ["solve the right problem", "project preparation framework", "agentic ai", "PID", "discovery report", "functional requirements", "technical requirements", "governance RACI", "roadmap", "reversibility"],
     component: lazy(() => import("../projectPrepFramework/ProjectPrepFrameworkTab.jsx"))
   },
   {
@@ -802,7 +716,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "agents_frameworks",
     category: "Agents & Frameworks",
     icon: "🎯",
-    keywords: ["interview mindset", "coding interview", "system design round", "behavioral interview", "STAR method", "ai-assisted coding", "trade-offs", "hints", "verification", "big tech loop", "bluffing", "hiring"],
     component: lazy(() => import("../interviewMindset/InterviewMindsetTab.jsx"))
   },
   {
@@ -811,7 +724,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "agents_frameworks",
     category: "Agents & Frameworks",
     icon: "🔁",
-    keywords: ["planner", "react", "plan execute", "reflexion", "tree of thoughts", "step cap", "stall detection", "verifier"],
     component: lazy(() => import("../agentPlanner/AgentPlannerTab.jsx"))
   },
   {
@@ -820,7 +732,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "agents_frameworks",
     category: "Agents & Frameworks",
     icon: "🛂",
-    keywords: ["human in the loop", "hitl", "approval gate", "autonomy ladder", "escalation", "audit", "risk score"],
     component: lazy(() => import("../agentHITL/AgentHITLTab.jsx"))
   },
   {
@@ -829,7 +740,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "agents_frameworks",
     category: "Agents & Frameworks",
     icon: "🎛️",
-    keywords: ["control plane", "planning plane", "execution plane", "action proposal", "consequence tier", "authority vs capability", "approval bound to digest", "audit ledger", "untrusted content quarantine"],
     component: lazy(() => import("../agentControlPlane/AgentControlPlaneTab.jsx"))
   },
   {
@@ -838,7 +748,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "agents_frameworks",
     category: "Agents & Frameworks",
     icon: "🔄",
-    keywords: ["agent lifecycle", "double loop learning", "behavioral contract", "consumer driven contract", "shadow mode", "pass at k", "review capacity", "promotion gate", "verification vs validation"],
     component: lazy(() => import("../agentLifecycle/AgentLifecycleTab.jsx"))
   },
   {
@@ -847,7 +756,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "agents_frameworks",
     category: "Agents & Frameworks",
     icon: "📡",
-    keywords: ["a2a", "agent to agent", "supervisor", "mesh", "handoff chain", "mcp", "blackboard", "registry"],
     component: lazy(() => import("../agentA2A/AgentA2ATab.jsx"))
   },
   {
@@ -856,7 +764,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "agents_frameworks",
     category: "Agents & Frameworks",
     icon: "🏰",
-    keywords: ["sandbox", "tool safety", "deny by default", "confused deputy", "idempotency", "secrets broker", "gvisor", "firecracker"],
     component: lazy(() => import("../agentSandbox/AgentSandboxTab.jsx"))
   },
   {
@@ -865,7 +772,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "agents_frameworks",
     category: "Agents & Frameworks",
     icon: "🧪",
-    keywords: ["agent evals", "tau bench", "pass^k", "red team", "prompt injection", "jailbreak", "goal drift", "refusal"],
     component: lazy(() => import("../agentEvals/AgentEvalsTab.jsx"))
   },
   {
@@ -874,7 +780,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "agents_frameworks",
     category: "Agents & Frameworks",
     icon: "👻",
-    keywords: ["handoff watchdog", "intermediate state eval", "silent failure", "empty 200", "plausible but wrong", "confidence floor"],
     component: lazy(() => import("../handoffWatch/HandoffWatchTab.jsx"))
   },
   {
@@ -883,7 +788,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "agents_frameworks",
     category: "Agents & Frameworks",
     icon: "🛡️",
-    keywords: ["verified pipelines", "human review", "policy as code", "ai code bugs", "dora", "review theater", "octopus"],
     component: lazy(() => import("../verifiedPipes/VerifiedPipesTab.jsx"))
   },
   {
@@ -892,7 +796,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "agents_frameworks",
     category: "Agents & Frameworks",
     icon: "🕸️",
-    keywords: ["supply chain", "agentic ui", "skill marketplace", "plugin security", "indirect prompt injection", "tool descriptor", "memory poisoning", "typosquat", "provenance", "capability sandbox", "quarantine reader", "ui redressing", "supply-chain report"],
     component: lazy(() => import("../agentUiSupply/AgentUiSupplyTab.jsx"))
   },
   {
@@ -901,7 +804,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "agents_frameworks",
     category: "Agents & Frameworks",
     icon: "⚖️",
-    keywords: ["coding agents", "executable contracts", "six layers", "trial statistics", "swe-bench", "terminal-bench", "hidden tests", "anthropic evals"],
     component: lazy(() => import("../codingEvals/CodingEvalsTab.jsx"))
   },
   {
@@ -910,7 +812,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "agents_frameworks",
     category: "Agents & Frameworks",
     icon: "🚀",
-    keywords: ["claude code", "100 tasks", "sub-agents", "worktree", "git worktree", "task triage", "task bifurcation", "html report", "verification report", "linear", "slack bot", "autonomous coding"],
     component: lazy(() => import("../claudeCode100/ClaudeCode100Tab.jsx"))
   },
   {
@@ -919,7 +820,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "agents_frameworks",
     category: "Agents & Frameworks",
     icon: "🛡️",
-    keywords: ["typed tools", "hard bounds", "composer gate", "agent governance", "search box", "8 tools", "80-line loop", "contradiction refusal", "escalation architecture", "graph traversal", "time-valid edges"],
     component: lazy(() => import("../typedAgentGate/TypedAgentGateTab.jsx"))
   },
   {
@@ -928,7 +828,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "agents_frameworks",
     category: "Agents & Frameworks",
     icon: "🤝",
-    keywords: ["ai coding agents", "pair programming", "task decomposition", "test-driven", "context injection", "vibe coding", "human in the loop", "token optimization", "token savings", "/compact", "cache read", "input output tokens", "batch commands", "scoped prompts"],
     component: lazy(() => import("../agentPairProgramming/AgentPairTab.jsx"))
   },
   {
@@ -937,7 +836,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "agents_frameworks",
     category: "Agents & Frameworks",
     icon: "🎸",
-    keywords: ["vibe coding", "unit economics", "ukuflow", "minimum viable offer", "static first"],
     component: lazy(() => import("../vibeCode/VibeCodeTab.jsx"))
   },
   {
@@ -946,7 +844,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "agents_frameworks",
     category: "Agents & Frameworks",
     icon: "🛠️",
-    keywords: ["agents as tools", "sub-agents", "tool calling"],
     component: lazy(() => import("../App.jsx").then(m => ({ default: m.AgentsAsToolsTab })))
   },
   {
@@ -955,7 +852,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "agents_frameworks",
     category: "Agents & Frameworks",
     icon: "📞",
-    keywords: ["function calling", "tool calling", "json schema", "parallel calls", "openai tools", "anthropic tool use", "bridge", "data to agents"],
     component: lazy(() => import("../toolCalling/ToolCallingTab.jsx"))
   },
   {
@@ -964,7 +860,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "agents_frameworks",
     category: "Agents & Frameworks",
     icon: "📋",
-    keywords: ["agent tasks", "archetypes", "worktree", "evaluation", "task planning"],
     component: lazy(() => import("../App.jsx").then(m => ({ default: m.AgentTasksTab })))
   },
   {
@@ -973,7 +868,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "agents_frameworks",
     category: "Agents & Frameworks",
     icon: "🤖",
-    keywords: ["cli agent", "ollama", "python", "subprocess", "qwen"],
     component: lazy(() => import("../cliAgents/CliAgentTab.jsx"))
   },
   {
@@ -982,7 +876,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "agents_frameworks",
     category: "Agents & Frameworks",
     icon: "⚡",
-    keywords: ["coding agents", "non-programmers", "no-code"],
     component: lazy(() => import("../App.jsx").then(m => ({ default: m.CodingAgentsNonProgTab })))
   },
   {
@@ -991,7 +884,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "agents_frameworks",
     category: "Agents & Frameworks",
     icon: "◈",
-    keywords: ["multi-agent", "orchestration", "handoffs"],
     component: lazy(() => import("../App.jsx").then(m => ({ default: m.MultiAgentTab })))
   },
   {
@@ -1000,7 +892,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "agents_frameworks",
     category: "Agents & Frameworks",
     icon: "🤝",
-    keywords: ["multi-agent coordination", "specialist agents", "coordinator", "typed findings", "contradiction detection", "risk routing", "model selection"],
     component: lazy(() => import("../multiAgentCoordination/MultiAgentCoordinationTab.jsx"))
   },
   {
@@ -1009,7 +900,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "agents_frameworks",
     category: "Agents & Frameworks",
     icon: "🎯",
-    keywords: ["model routing", "adaptive router", "tiers", "jit planning", "inference cost", "fast balanced powerful"],
     component: lazy(() => import("../modelRouting/ModelRoutingTab.jsx"))
   },
   {
@@ -1018,7 +908,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "agents_frameworks",
     category: "Agents & Frameworks",
     icon: "🔀",
-    keywords: ["decision layer", "route routing", "abstention", "selective prediction", "coverage risk", "typed scores", "threshold policy", "margin policy", "decoder router", "encoder head", "route contract", "calibration", "brier score"],
     component: lazy(() => import("../decisionLayer/DecisionLayerTab.jsx"))
   },
   {
@@ -1027,7 +916,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "agents_frameworks",
     category: "Agents & Frameworks",
     icon: "🦜",
-    keywords: ["langchain", "framework", "chains", "lcel", "pipeline", "prompts", "models", "parsers", "lang chain"],
     component: lazy(() => import("../App.jsx").then(m => ({ default: m.LangChainTab })))
   },
   {
@@ -1036,7 +924,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "agents_frameworks",
     category: "Agents & Frameworks",
     icon: "🕸️",
-    keywords: ["langgraph", "state graph", "nodes", "edges", "hitl", "human in the loop", "checkpointing", "cyclic", "multi-agent", "lang graph"],
     component: lazy(() => import("../App.jsx").then(m => ({ default: m.LangGraphTab })))
   },
   {
@@ -1045,7 +932,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "agents_frameworks",
     category: "Agents & Frameworks",
     icon: "💾",
-    keywords: ["agent memory", "short-term memory", "long-term memory", "conversation buffer", "summarization", "vector store memory", "episodic", "semantic", "procedural", "memory poisoning", "memory lifecycle", "forgetting"],
     component: lazy(() => import("../agentMemory/AgentMemoryTab.jsx"))
   },
   {
@@ -1054,7 +940,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "agents_frameworks",
     category: "Agents & Frameworks",
     icon: "⚖️",
-    keywords: ["compare", "langchain vs langgraph", "comparison", "evaluation", "frameworks", "langchain", "langgraph"],
     component: lazy(() => import("../App.jsx").then(m => ({ default: m.CompareTab })))
   },
   {
@@ -1063,7 +948,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "agents_frameworks",
     category: "Agents & Frameworks",
     icon: "🐞",
-    keywords: ["debugging", "tool errors", "traces", "inspection"],
     component: lazy(() => import("../App.jsx").then(m => ({ default: m.AgentDebuggingTab })))
   },
   {
@@ -1072,7 +956,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "agents_frameworks",
     category: "Agents & Frameworks",
     icon: "🚀",
-    keywords: ["high-scale", "millions requests", "production"],
     component: lazy(() => import("../App.jsx").then(m => ({ default: m.HighScaleAgentsTab })))
   },
   {
@@ -1081,7 +964,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "agents_frameworks",
     category: "Agents & Frameworks",
     icon: "📦",
-    keywords: ["model deployment", "docker", "fastapi", "ec2", "containerization", "ml deployment"],
     component: lazy(() => import("../modelDeployment/ModelDeploymentTab.jsx"))
   },
   {
@@ -1090,7 +972,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "agents_frameworks",
     category: "Agents & Frameworks",
     icon: "🔨",
-    keywords: ["product builder", "prd", "cursorrules", "architecture", "system spec"],
     component: lazy(() => import("../App.jsx").then(m => ({ default: m.AIProductBuilderTab })))
   },
   {
@@ -1099,7 +980,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "agents_frameworks",
     category: "Agents & Frameworks",
     icon: "🏆",
-    keywords: ["capstone", "boss fight", "multi-agent report", "token dashboard", "kill drill", "loop 2", "synthesis"],
     component: lazy(() => import("../capstone2/Capstone2Tab.jsx"))
   },
   {
@@ -1108,7 +988,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "agents_frameworks",
     category: "Agents & Frameworks",
     icon: "🔌",
-    keywords: ["mcp", "model context protocol", "mcp server", "mcp client", "tools", "resources", "prompts", "streamlit", "remote mcp server", "deepwiki", "huggingface", "json-rpc 2.0", "stdio", "streamable http", "tool calling"],
     component: lazy(() => import("../mcpClient/MCPClientTab.jsx"))
   },
   {
@@ -1117,7 +996,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "agents_frameworks",
     category: "Agents & Frameworks",
     icon: "🤝",
-    keywords: ["agents sdk", "handoff", "triage", "agents as tools", "orchestrator", "openai agents", "streamlit"],
     component: lazy(() => import("../agentsSDK/AgentsSDKTab.jsx"))
   },
   {
@@ -1126,7 +1004,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "agents_frameworks",
     category: "Agents & Frameworks",
     icon: "∞",
-    keywords: ["loop engineering", "ralph loop", "ralf", "ralphex", "boris cherny", "peter steinberger", "goal loop", "loop library", "69 loops", "claude basics", "cross-model review", "autonomous agent loops"],
     component: lazy(() => import("../loopEngineering/LoopEngineeringTab.jsx"))
   },
   {
@@ -1135,7 +1012,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "agents_frameworks",
     category: "Agents & Frameworks",
     icon: "🏭",
-    keywords: ["agentic software factory", "autonomous agents", "async automation", "agent harness", "continual learning", "specification", "verification", "background agents", "factory hierarchy"],
     component: lazy(() => import("../agenticSoftwareFactory/AgenticSoftwareFactoryTab.jsx"))
   },
 
@@ -1146,7 +1022,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "data_platform",
     category: "Advanced & Frontiers",
     icon: "🏗️",
-    keywords: ["3 layers", "prompt", "context", "loop", "anthropic"],
     component: lazy(() => import("../engineeringLayers/ThreeLayersTab.jsx"))
   },
   {
@@ -1155,7 +1030,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "data_platform",
     category: "Advanced & Frontiers",
     icon: "📐",
-    keywords: ["document structure", "pdf parsing", "toc", "loop"],
     component: lazy(() => import("../documentStructure/DocumentStructureTab.jsx"))
   },
   {
@@ -1164,7 +1038,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "data_platform",
     category: "Advanced & Frontiers",
     icon: "⚡",
-    keywords: ["agentic parsing", "dispatcher", "pdf nature", "docling", "fitz", "easyocr", "pick richer", "brick 1"],
     component: lazy(() => import("../agenticParsing/AgenticParsingTab.jsx"))
   },
   {
@@ -1173,7 +1046,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "data_platform",
     category: "Advanced & Frontiers",
     icon: "🌱",
-    keywords: ["knowledge base", "efficient knowledge base", "top 10 questions", "cleansing", "deduplication", "hnsw", "ivf", "flat", "rbac", "freshness ttl", "17"],
     component: lazy(() => import("../knowledgeBase/KnowledgeBaseTab.jsx"))
   },
   {
@@ -1182,7 +1054,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "data_platform",
     category: "Data & Platform Layers",
     icon: "🗜️",
-    keywords: ["vector db", "hnsw", "ivf", "pq", "flat index", "qdrant", "milvus", "pgvector", "recall@k", "ram sizing"],
     component: lazy(() => import("../vectorDBOps/VectorDBOpsTab.jsx"))
   },
   {
@@ -1191,7 +1062,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "data_platform",
     category: "Data & Platform Layers",
     icon: "🌊",
-    keywords: ["streaming", "kafka", "flink", "lineage", "openlineage", "dvc", "lakefs", "partitions", "schema registry"],
     component: lazy(() => import("../dataPipeline/DataPipelineTab.jsx"))
   },
   {
@@ -1200,7 +1070,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "data_platform",
     category: "Advanced & Frontiers",
     icon: "🏛️",
-    keywords: ["data platform", "ai-native", "bigquery"],
     component: lazy(() => import("../App.jsx").then(m => ({ default: m.AIDataPlatformTab })))
   },
   {
@@ -1209,7 +1078,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "data_platform",
     category: "Advanced & Frontiers",
     icon: "🥉",
-    keywords: ["medallion", "bronze", "silver", "gold", "data lakehouse"],
     component: lazy(() => import("../App.jsx").then(m => ({ default: m.MedallionArchTab })))
   },
   {
@@ -1218,7 +1086,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "data_platform",
     category: "Advanced & Frontiers",
     icon: "🧪",
-    keywords: ["test data", "synthetic data", "bottleneck"],
     component: lazy(() => import("../App.jsx").then(m => ({ default: m.AITestDataBottleneckTab })))
   },
   {
@@ -1227,7 +1094,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "data_platform",
     category: "Advanced & Frontiers",
     icon: "📊",
-    keywords: ["classical ml", "scikit-learn", "xgboost"],
     component: lazy(() => import("../App.jsx").then(m => ({ default: m.ClassicalMLTab })))
   },
   {
@@ -1236,7 +1102,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "data_platform",
     category: "Data & Platform Layers",
     icon: "💳",
-    keywords: ["fraud detection", "production ml", "nairashield", "lightgbm", "xgboost", "catboost", "latency sla", "cost matrix", "treeshap", "explainability"],
     component: lazy(() => import("../fraudDetectionML/FraudDetectionTab.jsx"))
   },
   {
@@ -1245,7 +1110,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "data_platform",
     category: "Data & Platform Layers",
     icon: "⚡",
-    keywords: ["parquet", "arrow", "feather", "duckdb", "polars", "pd.read_csv", "csv", "data io", "columnar", "predicate pushdown", "zero-copy"],
     component: lazy(() => import("../modernIOFormats/ModernIOTab.jsx"))
   },
   {
@@ -1254,7 +1118,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "data_platform",
     category: "Data & Platform Layers",
     icon: "⏱️",
-    keywords: ["python profiling", "cprofile", "snakeviz", "line_profiler", "scalene", "performance", "vectorization", "tottime", "cumtime"],
     component: lazy(() => import("../pythonProfiling/PythonProfilingTab.jsx"))
   },
   {
@@ -1263,7 +1126,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "data_platform",
     category: "Data & Platform Layers",
     icon: "⚙️",
-    keywords: ["computational engineering", "fea", "finite element", "pid controller", "harmonic oscillator", "rankine cycle", "scipy", "solve_ivp"],
     component: lazy(() => import("../pythonEngineering/PythonEngineeringTab.jsx"))
   },
   {
@@ -1272,7 +1134,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "data_platform",
     category: "Data & Platform Layers",
     icon: "🐍",
-    keywords: ["functools", "total_ordering", "partial", "singledispatch", "lru_cache", "decorators", "python tricks"],
     component: lazy(() => import("../functools/FunctoolsTab.jsx"))
   },
   {
@@ -1281,7 +1142,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "data_platform",
     category: "Data & Platform Layers",
     icon: "🪝",
-    keywords: ["python descriptors", "controlled attributes", "validated attribute", "computed attribute", "lazy loading", "__get__", "__set__", "__set_name__", "attribute protocol", "data descriptor"],
     component: lazy(() => import("../pyDescriptors/PyDescriptorsTab.jsx"))
   },
   {
@@ -1290,7 +1150,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "data_platform",
     category: "Advanced & Frontiers",
     icon: "🎯",
-    keywords: ["active learning", "annotation", "uncertainty"],
     component: lazy(() => import("../App.jsx").then(m => ({ default: m.ActiveLearningTab })))
   },
   {
@@ -1299,7 +1158,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "data_platform",
     category: "Data & Platform Layers",
     icon: "🎯",
-    keywords: ["goal tracker", "vision board", "streamlit", "neon", "postgres", "practical lab", "habits", "2026", "metrics"],
     component: lazy(() => import("../goalTracker/GoalTrackerTab.jsx"))
   },
   {
@@ -1308,7 +1166,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "data_platform",
     category: "Data & Platform Layers",
     icon: "🌀",
-    keywords: ["variational autoencoders", "vaes", "elbo", "reparameterization trick", "kl divergence", "latent space", "generative ai"],
     component: lazy(() => import("../vaes/VAETab.jsx"))
   },
   {
@@ -1317,7 +1174,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "data_platform",
     category: "Data & Platform Layers",
     icon: "⚡",
-    keywords: ["keras 3.0", "pytorch backend", "jax backend", "tensorflow", "nmt", "encoder decoder", "multi-backend"],
     component: lazy(() => import("../keras3/Keras3Tab.jsx"))
   },
   {
@@ -1326,7 +1182,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "data_platform",
     category: "Data & Platform Layers",
     icon: "🧬",
-    keywords: ["bootstrap your own latent", "byol", "self-supervised learning", "grill et al", "deepmind", "ema", "no negative pairs", "online target network"],
     component: lazy(() => import("../byol/BYOLTab.jsx"))
   },
   {
@@ -1335,7 +1190,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "data_platform",
     category: "Data & Platform Layers",
     icon: "🌀",
-    keywords: ["lstm", "xlstm", "slstm", "mlstm", "exponential gating", "matrix memory", "hochreiter", "hand calculation", "recurrent neural networks"],
     component: lazy(() => import("../xlstm/XLSTMTab.jsx"))
   },
   {
@@ -1344,7 +1198,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "data_platform",
     category: "Data & Platform Layers",
     icon: "📈",
-    keywords: ["time series anomaly", "autoencoders", "reconstruction error", "mse loss", "1d cnn", "percentile threshold", "unsupervised anomaly detection"],
     component: lazy(() => import("../tsAnomaly/TSAnomalyTab.jsx"))
   },
   {
@@ -1353,7 +1206,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "data_platform",
     category: "Data & Platform Layers",
     icon: "🚀",
-    keywords: ["3 ai use cases", "beyond chatbot", "feature engineering", "text embeddings", "lead scoring", "unstructured data", "enterprise ai"],
     component: lazy(() => import("../aiUseCases/AIUseCasesTab.jsx"))
   },
   {
@@ -1362,7 +1214,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "data_platform",
     category: "Data & Platform Layers",
     icon: "📧",
-    keywords: ["agentic ui", "email workflow", "no code automation", "purchase order parsing", "wagner whitin", "lot sizing", "demand planning", "optimization endpoint", "csv attachment"],
     component: lazy(() => import("../agenticUiWorkflow/AgenticUiWorkflowTab.jsx"))
   },
   {
@@ -1371,7 +1222,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "data_platform",
     category: "Data & Platform Layers",
     icon: "📐",
-    keywords: ["linear regression", "cost function", "gradient descent", "mse", "mae", "house pricing", "weight update", "optimization"],
     component: lazy(() => import("../linearRegression/LinearRegressionTab.jsx"))
   },
   {
@@ -1380,7 +1230,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "data_platform",
     category: "Data & Platform Layers",
     icon: "🐼",
-    keywords: ["pandas dataframes", "numpy arrays", "ndarrays", "dataframe initialization", "read_csv", "dictionaries", "in-memory analytics"],
     component: lazy(() => import("../pandasDataframes/PandasDataFrameTab.jsx"))
   },
   {
@@ -1389,7 +1238,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "data_platform",
     category: "Data & Platform Layers",
     icon: "🧠",
-    keywords: ["pandas memory", "usecols", "dtype", "category", "sparse", "chunksize", "inplace"],
     component: lazy(() => import("../pandasMem/PandasMemTab.jsx"))
   },
   {
@@ -1398,7 +1246,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "data_platform",
     category: "Data & Platform Layers",
     icon: "🛰️",
-    keywords: ["geospatial", "worldpop", "facebook hrsl", "gadm", "raster", "choropleth", "geopandas", "plotly"],
     component: lazy(() => import("../geoPopViz/GeoPopTab.jsx"))
   },
   {
@@ -1407,7 +1254,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "data_platform",
     category: "Data & Platform Layers",
     icon: "💡",
-    keywords: ["data humanization", "data storytelling", "scintillating grid", "data artisan", "aida", "scqa", "symptom kpi", "humanized insight", "roi", "data-rich action-poor"],
     component: lazy(() => import("../dataHumanization/DataHumanizationTab.jsx"))
   },
   {
@@ -1416,7 +1262,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "data_platform",
     category: "Data & Platform Layers",
     icon: "🎯",
-    keywords: ["model fine tuning", "fine-tuning", "fine tuning", "llm fine tuning", "qlora", "lora", "peft", "4-bit nf4", "double quantization", "paged optimizers", "instruction backtranslation", "sfttrainer", "single gpu", "dpo", "rlhf", "unsloth", "axolotl", "merge_and_unload"],
     component: lazy(() => import("../llmFinetuning/LLMFinetuningTab.jsx"))
   },
 
@@ -1427,7 +1272,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "frontiers_production",
     category: "Advanced & Frontiers",
     icon: "💸",
-    keywords: ["finops", "cost governance", "token bill", "semantic cache", "model routing", "budgets", "savings"],
     component: lazy(() => import("../finOps/FinOpsTab.jsx"))
   },
   {
@@ -1436,7 +1280,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "frontiers_production",
     category: "Advanced & Frontiers",
     icon: "📡",
-    keywords: ["observability", "tracing", "opentelemetry", "langsmith", "langfuse", "spans", "sampling", "monitoring"],
     component: lazy(() => import("../aiObservability/AIObservabilityTab.jsx"))
   },
   {
@@ -1445,7 +1288,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "frontiers_production",
     category: "Advanced & Frontiers",
     icon: "📱",
-    keywords: ["slm", "small language models", "distillation", "phi", "smollm", "qwen", "edge inference", "gguf", "speculative decoding"],
     component: lazy(() => import("../slmEdge/SlmEdgeTab.jsx"))
   },
   {
@@ -1454,7 +1296,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "frontiers_production",
     category: "Advanced & Frontiers",
     icon: "⚡",
-    keywords: ["speculative decoding", "draft model", "target model", "inference speed", "memory bandwidth", "medusa", "eagle", "prompt lookup decoding", "vllm", "lossless acceleration"],
     component: lazy(() => import("../speculativeDecoding/SpeculativeDecodingTab.jsx"))
   },
   {
@@ -1463,7 +1304,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "foundations",
     category: "Foundations",
     icon: "🖼️",
-    keywords: ["vlm", "vision language models", "multimodal", "vit", "vision transformer", "llava", "paligemma", "clip", "siglip", "patches", "cross-modal connector", "q-former", "vqa", "visual question answering", "multimodal rag"],
     component: lazy(() => import("../visionLanguageModels/VisionLanguageTab.jsx"))
   },
   {
@@ -1472,7 +1312,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "foundations",
     category: "Foundations",
     icon: "🎨",
-    keywords: ["diffusion", "diffusion models", "dit", "diffusion transformers", "stable diffusion", "flux", "sora", "cfg", "classifier free guidance", "latent diffusion", "ddpm", "ddim", "score matching", "flow matching", "denoising"],
     component: lazy(() => import("../diffusionModels/DiffusionTab.jsx"))
   },
   {
@@ -1481,7 +1320,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "foundations",
     category: "Foundations",
     icon: "🎙️",
-    keywords: ["speech", "voice", "whisper", "asr", "tts", "speech-to-speech", "voice agent", "mel-spectrogram", "encodec", "rvq", "audio codec", "silero vad", "audio tokenization"],
     component: lazy(() => import("../speechVoiceAI/SpeechVoiceTab.jsx"))
   },
   {
@@ -1490,7 +1328,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "frontiers_production",
     category: "Advanced & Frontiers",
     icon: "💸",
-    keywords: ["token bill", "cost optimization", "pricing"],
     component: lazy(() => import("../App.jsx").then(m => ({ default: m.TokenBillTab })))
   },
   {
@@ -1499,7 +1336,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "frontiers_production",
     category: "Advanced & Frontiers",
     icon: "⚖️",
-    keywords: ["llm evals", "evals based on vibes", "missing layer", "attribution", "specificity", "quality gate", "serve retry block", "regression", "product manager", "pm eval", "spam filter", "tax chatbot", "recsys", "eval to launch", "gsm-symbolic", "gsm-noop", "apple benchmark", "true reasoning", "benchmark contamination"],
     component: lazy(() => import("../llmEvals/LLMEvalLayerTab.jsx"))
   },
   {
@@ -1508,7 +1344,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "frontiers_production",
     category: "Advanced & Frontiers",
     icon: "🏛️",
-    keywords: ["model validation", "sr 11-7", "banking", "risk tiering", "conceptual soundness", "outcomes analysis", "monitoring", "judge the judge", "robustness"],
     component: lazy(() => import("../modelValidation/ModelValidationTab.jsx"))
   },
   {
@@ -1517,7 +1352,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "frontiers_production",
     category: "Production & Frontiers",
     icon: "🔬",
-    keywords: ["gsm-symbolic", "gsm-noop", "apple benchmark", "true reasoning", "benchmark contamination", "llm reasoning", "symbolic mutation", "noise collapse"],
     component: lazy(() => import("../reasoningBench/ReasoningBenchTab.jsx"))
   },
   {
@@ -1526,7 +1360,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "frontiers_production",
     category: "Advanced & Frontiers",
     icon: "✓",
-    keywords: ["best practices", "guidelines", "checklist"],
     component: lazy(() => import("../App.jsx").then(m => ({ default: m.PracticesTab })))
   },
   {
@@ -1535,7 +1368,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "frontiers_production",
     category: "Advanced & Frontiers",
     icon: "⚡",
-    keywords: ["power features", "advanced", "optimizations"],
     component: lazy(() => import("../App.jsx").then(m => ({ default: m.PowerFeaturesTab })))
   },
   {
@@ -1544,7 +1376,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "frontiers_production",
     category: "Advanced & Frontiers",
     icon: "🔮",
-    keywords: ["beyond rag", "future architectures", "agents"],
     component: lazy(() => import("../App.jsx").then(m => ({ default: m.RAGBeyondTab })))
   },
   {
@@ -1553,7 +1384,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "frontiers_production",
     category: "Advanced & Frontiers",
     icon: "🔬",
-    keywords: ["research frontiers", "state of art", "future"],
     component: lazy(() => import("../App.jsx").then(m => ({ default: m.ResearchFrontiersTab })))
   },
   {
@@ -1562,7 +1392,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "frontiers_production",
     category: "Advanced & Frontiers",
     icon: "🎯",
-    keywords: ["progress", "tracking", "checklist"],
     component: lazy(() => import("../App.jsx").then(m => ({ default: m.ProgressTab })))
   },
   {
@@ -1571,7 +1400,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "frontiers_production",
     category: "Advanced & Frontiers",
     icon: "🛡️",
-    keywords: ["responsible ai", "guardrails", "pii redaction", "author redaction", "copyright protection", "ip leak defense", "prompt injection", "jailbreak defense", "llama guard", "nemo guardrails"],
     component: lazy(() => import("../guardrails/GuardrailsTab.jsx"))
   },
   {
@@ -1580,7 +1408,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "frontiers_production",
     category: "Advanced & Frontiers",
     icon: "🚧",
-    keywords: ["agent guardrails", "lethal trifecta", "indirect prompt injection", "action selector", "plan then execute", "code then execute", "dual agent", "map reduce isolation", "context minimization", "untrusted content", "recipient hijack", "quarantined reader"],
     component: lazy(() => import("../agentGuardrails/AgentGuardrailsTab.jsx"))
   },
   {
@@ -1589,7 +1416,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "frontiers_production",
     category: "Advanced & Frontiers",
     icon: "📡",
-    keywords: ["agent observability", "trace waterfall", "span inspection", "duplicate spans", "runaway loops", "trace sampling", "retention tiers", "privacy rules", "alert thresholds"],
     component: lazy(() => import("../agentObservability/AgentObservabilityTab.jsx"))
   },
   {
@@ -1598,7 +1424,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "frontiers_production",
     category: "Advanced & Frontiers",
     icon: "💰",
-    keywords: ["token cost", "cache pricing", "prompt caching", "conversation replay", "cache windows", "token trimming", "cost ladder", "price tiers", "deterministic cost math"],
     component: lazy(() => import("../costTollBooth/CostTollBoothTab.jsx"))
   },
   {
@@ -1607,7 +1432,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "frontiers_production",
     category: "Advanced & Frontiers",
     icon: "⚙️",
-    keywords: ["llm reliability", "fault tolerance", "xml tags", "markup tags", "pydantic validation", "exponential backoff", "multi-provider fallback", "fallback chain", "stochastic"],
     component: lazy(() => import("../llmReliability/LLMReliabilityTab.jsx"))
   },
   {
@@ -1616,7 +1440,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "frontiers_production",
     category: "Advanced & Frontiers",
     icon: "🏛️",
-    keywords: ["enterprise ai", "ai architecture", "ai operations", "token limits", "token governance", "ai gateway", "semantic cache", "model routing", "map reduce", "reranker", "token compression", "finops", "lost in the middle"],
     component: lazy(() => import("../enterpriseAIOps/EnterpriseAIOpsTab.jsx"))
   },
   {
@@ -1625,7 +1448,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "frontiers_production",
     category: "Advanced & Frontiers",
     icon: "🏭",
-    keywords: ["enterprise grade", "end to end", "mlops", "drift", "bias", "crisp-dm", "readiness", "buy-in"],
     component: lazy(() => import("../enterpriseGrade/EnterpriseGradeTab.jsx"))
   },
   {
@@ -1634,7 +1456,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "frontiers_production",
     category: "Advanced & Frontiers",
     icon: "⚡",
-    keywords: ["agentops", "mlops", "earned complexity", "rag complexity", "faq as rag", "semantic cache", "noisy text", "ocr", "typos", "levenshtein", "symspell", "pass^k", "tau-bench", "compounding errors", "hard loop cap", "opentelemetry"],
     component: lazy(() => import("../productionRAGOps/ProductionRAGOpsTab.jsx"))
   },
   {
@@ -1643,7 +1464,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "frontiers_production",
     category: "Advanced & Frontiers",
     icon: "📖",
-    keywords: ["token playbook", "enterprise ai playbook", "docker", "kubernetes", "langsmith", "ragas", "pytest", "asyncio", "ainvoke", "abatch", "redis stack", "qdrant", "token governance", "concurrency", "nagaraj y"],
     component: lazy(() => import("../tokenOrchestrationPlaybook/TokenPlaybookTab.jsx"))
   },
   {
@@ -1652,7 +1472,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "frontiers_production",
     category: "Advanced & Frontiers",
     icon: "🤖",
-    keywords: ["agentic patterns", "react", "plan and execute", "multi-agent", "supervisor agent", "agent memory", "tools", "opentelemetry", "prometheus", "elk", "grafana", "celery", "ray", "kafka", "consistent hashing", "rate limiting", "redis cluster", "nagaraj y"],
     component: lazy(() => import("../enterpriseAdvancedPlaybook/EnterpriseAdvancedPlaybookTab.jsx"))
   },
   // ── Article Tabs ──────────────────────────────────────────────────────
@@ -1662,7 +1481,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "rag_architecture",
     category: "RAG Architectures & Pipelines",
     icon: "📊",
-    keywords: ["text classification", "labeled data", "TF-IDF", "learning curves", "data efficiency", "zero-shot", "LLM vs classical"],
     component: lazy(() => import("../textClassificationData/TextClassificationDataTab.jsx"))
   },
   {
@@ -1671,7 +1489,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "data_platform",
     category: "Data & Platform Layers",
     icon: "🍕",
-    keywords: ["quadratic memory", "N squared", "ML memory", "pizza problem", "cluster matching", "bounding", "decimation", "KD-tree"],
     component: lazy(() => import("../nSquaredPizza/NSquaredPizzaTab.jsx"))
   },
   {
@@ -1680,7 +1497,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "foundations",
     category: "Foundations",
     icon: "🎯",
-    keywords: ["data-centric AI", "model-centric", "label quality", "annotation consistency", "data governance"],
     component: lazy(() => import("../dataCentricAI/DataCentricAITab.jsx"))
   },
   {
@@ -1689,7 +1505,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "foundations",
     category: "Foundations",
     icon: "✍️",
-    keywords: ["prompt engineering", "3 sentences", "plan-first", "better prompts", "AI productivity", "brain dump", "messy prompts", "course correction", "framework", "methodology", "prompt patterns", "prompt framework", "prompt methodology", "quality controller", "prompt optimizer", "prompt studio", "prompt composition", "framework catalog", "few-shot", "grounding", "prompt builder", "prompt evaluation", "structure a prompt", "blueprint", "RTCO", "prompt template", "image prompt", "consistent ai images", "text to image prompt"],
     component: lazy(() => import("../threeSentencePrompt/ThreeSentencePromptTab.jsx"))
   },
   {
@@ -1698,7 +1513,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "foundations",
     category: "Foundations",
     icon: "⌨️",
-    keywords: ["slash commands", "response shape", "prompt shorthand", "tldr", "table mode", "critic mode", "rubber duck", "devils advocate", "custom commands", "prompt contracts", "bullets mode", "clarifying questions"],
     component: lazy(() => import("../slashCommands/SlashCommandsTab.jsx"))
   },
   {
@@ -1707,7 +1521,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "foundations",
     category: "Foundations",
     icon: "🧾",
-    keywords: ["prompt framework", "approval request", "task completion report", "token utilization report", "alignment protocol", "pre-flight check", "meta-prompt", "two-phase prompt", "clarifying questions", "budget report", "action required"],
     component: lazy(() => import("../promptAlignment/PromptAlignmentTab.jsx"))
   },
   {
@@ -1716,7 +1529,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "foundations",
     category: "Foundations",
     icon: "🧬",
-    keywords: ["duplicate content", "content audit", "semantic similarity", "probable duplicate", "primary duplicate", "detect only", "jaccard", "deduplication", "corpus audit", "two-phase gate", "match type", "overlap detection"],
     component: lazy(() => import("../dupaudit/DupAuditTab.jsx"))
   },
   {
@@ -1725,7 +1537,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "foundations",
     category: "Foundations",
     icon: "⚖️",
-    keywords: ["ai harms", "technical causes", "harm taxonomy", "cause tracing", "mitigation", "residual risk", "bias", "proxy variable", "objective misspecification", "feedback loop", "deskilling", "anthropomorphism", "upstream fix", "downstream fix"],
     component: lazy(() => import("../harmcauses/HarmCausesTab.jsx"))
   },
   {
@@ -1734,7 +1545,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "foundations",
     category: "Foundations",
     icon: "🧪",
-    keywords: ["data leakage", "subject leakage", "identity leakage", "train test split", "segment split", "subject blocked", "eeg", "cross validation", "evaluation integrity", "inflation", "generalization", "holdout", "loso"],
     component: lazy(() => import("../subjectLeak/SubjectLeakTab.jsx"))
   },
   {
@@ -1743,7 +1553,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "foundations",
     category: "Foundations",
     icon: "📐",
-    keywords: ["machine learning problem", "problem framing", "classification", "regression", "clustering", "rule extraction", "given identify benefit", "problem taxonomy", "is this ml", "spam detection", "fraud detection", "decision tree", "problem type", "ai effect", "ai-complete"],
     component: lazy(() => import("../mlProblems/MLProblemsTab.jsx"))
   },
   {
@@ -1752,7 +1561,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "agents_frameworks",
     category: "Agents & Frameworks",
     icon: "🏦",
-    keywords: ["banking AI", "MCP", "LangGraph", "compliance", "PII redaction", "RAG", "agentic workflow", "realtime project", "portfolio", "FinAssist"],
     component: lazy(() => import("../finAssistProject/FinAssistProjectTab.jsx"))
   },
   {
@@ -1761,7 +1569,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "agents_frameworks",
     category: "Agents & Frameworks",
     icon: "🥔",
-    keywords: ["multi-agent", "zero-cost", "aging hardware", "quantized models", "C++ daemons", "Win32", "SwarmForge", "O.D.I.N.", "lazy loading", "hacker noon"],
     component: lazy(() => import("../zeroCostMultiAgent/ZeroCostMultiAgentTab.jsx"))
   },
   {
@@ -1770,7 +1577,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "data_platform",
     category: "Data & Platform Layers",
     icon: "🌐",
-    keywords: ["multilingual", "BGE-M3", "scikit-llm", "Ollama", "text classification", "embeddings", "logistic regression", "machine learning mastery"],
     component: lazy(() => import("../multilingualClassification/MultilingualClassificationTab.jsx"))
   },
   {
@@ -1779,7 +1585,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "data_platform",
     category: "Data & Platform Layers",
     icon: "🔬",
-    keywords: ["clustering", "HDBSCAN", "UMAP", "sentence-transformers", "topic discovery", "density-based", "unsupervised", "machine learning mastery"],
     component: lazy(() => import("../textClusteringHDBSCAN/TextClusteringHDBSCANTab.jsx"))
   },
   // ── Hub Pages (Phase 1) ───────────────────────────────────────────────────
@@ -1789,7 +1594,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "foundations",
     category: "Foundations",
     icon: "🚀",
-    keywords: ["start", "orientation", "glossary", "first build"],
     component: lazy(() => import("../hubPages/FndStartHubTab.jsx"))
   },
   {
@@ -1798,7 +1602,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "foundations",
     category: "Foundations",
     icon: "🧠",
-    keywords: ["architecture", "attention", "sampling", "tokens", "serving"],
     component: lazy(() => import("../hubPages/FndInternalsHubTab.jsx"))
   },
   {
@@ -1807,7 +1610,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "foundations",
     category: "Foundations",
     icon: "✍️",
-    keywords: ["prompt engineering", "contracts", "regression", "management"],
     component: lazy(() => import("../hubPages/FndPromptsHubTab.jsx"))
   },
   {
@@ -1816,7 +1618,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "foundations",
     category: "Foundations",
     icon: "⚖️",
-    keywords: ["alignment", "RL", "dialogue", "topic modeling", "ethics"],
     component: lazy(() => import("../hubPages/FndMlsocHubTab.jsx"))
   },
   {
@@ -1825,7 +1626,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "foundations",
     category: "Foundations",
     icon: "🎨",
-    keywords: ["vision", "diffusion", "speech", "multimodal"],
     component: lazy(() => import("../hubPages/FndMultimodalHubTab.jsx"))
   },
   {
@@ -1834,7 +1634,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "rag_architecture",
     category: "RAG Architectures & Pipelines",
     icon: "🔧",
-    keywords: ["pipeline", "chunking", "parsing", "retrieval"],
     component: lazy(() => import("../hubPages/RagCoreHubTab.jsx"))
   },
   {
@@ -1843,7 +1642,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "rag_architecture",
     category: "RAG Architectures & Pipelines",
     icon: "🎯",
-    keywords: ["rerank", "eval", "tables", "multilingual"],
     component: lazy(() => import("../hubPages/RagPrecisionHubTab.jsx"))
   },
   {
@@ -1852,7 +1650,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "rag_architecture",
     category: "RAG Architectures & Pipelines",
     icon: "🚀",
-    keywords: ["production", "agents", "graphs", "SQL", "verification"],
     component: lazy(() => import("../hubPages/RagAdvancedHubTab.jsx"))
   },
   {
@@ -1861,7 +1658,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "rag_architecture",
     category: "RAG Architectures & Pipelines",
     icon: "📋",
-    keywords: ["case studies", "interview prep", "capstone"],
     component: lazy(() => import("../hubPages/RagPracticeHubTab.jsx"))
   },
   {
@@ -1870,7 +1666,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "context_memory",
     category: "Context & Memory Engineering",
     icon: "✂️",
-    keywords: ["curation", "hallucination", "measurement", "vagueness"],
     component: lazy(() => import("../hubPages/CtxCraftHubTab.jsx"))
   },
   {
@@ -1879,7 +1674,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "context_memory",
     category: "Context & Memory Engineering",
     icon: "🧠",
-    keywords: ["tiers", "graphs", "company brain", "hierarchy"],
     component: lazy(() => import("../hubPages/CtxMemoryHubTab.jsx"))
   },
   {
@@ -1888,7 +1682,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "context_memory",
     category: "Context & Memory Engineering",
     icon: "📏",
-    keywords: ["limits", "compression", "tactics", "long context"],
     component: lazy(() => import("../hubPages/CtxLongHubTab.jsx"))
   },
   {
@@ -1897,7 +1690,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "agents_frameworks",
     category: "Agents & Frameworks",
     icon: "🤖",
-    keywords: ["assets", "tools", "prep", "process"],
     component: lazy(() => import("../hubPages/AgtFoundHubTab.jsx"))
   },
   {
@@ -1906,7 +1698,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "agents_frameworks",
     category: "Agents & Frameworks",
     icon: "🛡️",
-    keywords: ["planners", "HITL", "sandboxes", "evals", "gates"],
     component: lazy(() => import("../hubPages/AgtSafetyHubTab.jsx"))
   },
   {
@@ -1915,7 +1706,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "agents_frameworks",
     category: "Agents & Frameworks",
     icon: "🤝",
-    keywords: ["orchestration", "A2A", "LangChain", "LangGraph", "MCP"],
     component: lazy(() => import("../hubPages/AgtMultiHubTab.jsx"))
   },
   {
@@ -1924,7 +1714,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "agents_frameworks",
     category: "Agents & Frameworks",
     icon: "🚀",
-    keywords: ["CLI", "pair programming", "scale", "product"],
     component: lazy(() => import("../hubPages/AgtProdHubTab.jsx"))
   },
   {
@@ -1933,7 +1722,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "data_platform",
     category: "Data & Platform Layers",
     icon: "📊",
-    keywords: ["pandas", "regression", "I/O", "storytelling"],
     component: lazy(() => import("../hubPages/DataFoundHubTab.jsx"))
   },
   {
@@ -1942,7 +1730,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "data_platform",
     category: "Data & Platform Layers",
     icon: "📄",
-    keywords: ["parsing", "KBs", "vector search", "pipelines"],
     component: lazy(() => import("../hubPages/DataDocsHubTab.jsx"))
   },
   {
@@ -1951,7 +1738,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "data_platform",
     category: "Data & Platform Layers",
     icon: "📈",
-    keywords: ["ML tools", "fraud", "VAEs", "BYOL", "LSTMs"],
     component: lazy(() => import("../hubPages/DataMlHubTab.jsx"))
   },
   {
@@ -1960,7 +1746,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "data_platform",
     category: "Data & Platform Layers",
     icon: "⚙️",
-    keywords: ["lakehouse", "profiling", "finetuning", "use cases"],
     component: lazy(() => import("../hubPages/DataScaleHubTab.jsx"))
   },
   {
@@ -1969,7 +1754,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "frontiers_production",
     category: "Advanced & Frontiers",
     icon: "✅",
-    keywords: ["evals", "reasoning", "guardrails", "fault tolerance"],
     component: lazy(() => import("../hubPages/FrEvalHubTab.jsx"))
   },
   {
@@ -1978,7 +1762,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "frontiers_production",
     category: "Advanced & Frontiers",
     icon: "💰",
-    keywords: ["FinOps", "tracing", "AgentOps", "playbooks"],
     component: lazy(() => import("../hubPages/FrOpsHubTab.jsx"))
   },
   {
@@ -1987,7 +1770,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "frontiers_production",
     category: "Advanced & Frontiers",
     icon: "🔮",
-    keywords: ["vision", "diffusion", "speech", "edge SLMs"],
     component: lazy(() => import("../hubPages/FrFrontiersHubTab.jsx"))
   },
   {
@@ -1996,7 +1778,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "frontiers_production",
     category: "Advanced & Frontiers",
     icon: "🎨",
-    keywords: ["image generation", "text to image", "AI workflows", "simulators", "animations", "tables", "DALL-E", "Midjourney", "Stable Diffusion", "Runway", "context engineering", "JEV", "world models"],
     component: lazy(() => import("../aiGenTools/AiGenToolsTab.jsx"))
   },
   {
@@ -2005,7 +1786,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "frontiers_production",
     category: "Advanced & Frontiers",
     icon: "🔒",
-    keywords: ["AI harnesses", "null returns", "coding agents", "guardrails", "pipeline returns", "output verification", "truthful AI", "abstention", "confidence scoring"],
     component: lazy(() => import("../aiHarnessQuality/AiHarnessQualityTab.jsx"))
   },
   {
@@ -2014,7 +1794,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "frontiers_production",
     category: "Advanced & Frontiers",
     icon: "🧭",
-    keywords: ["RAG vs fine-tuning", "agent vs workflow", "tool calling", "code execution", "MCP", "embedding drift", "typesafe AI", "JEV", "architecture decisions"],
     component: lazy(() => import("../aiArchDecisions/AiArchDecisionsTab.jsx"))
   },
   {
@@ -2023,7 +1802,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "agents_frameworks",
     category: "Agents & Frameworks",
     icon: "🪝",
-    keywords: ["functional scars", "enforcement hooks", "correction layers", "pre-call denial", "post-call check", "false positive cost", "scar contract", "retirement date"],
     component: lazy(() => import("../functionalScars/FunctionalScarsTab.jsx"))
   },
   {
@@ -2032,7 +1810,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "agents_frameworks",
     category: "Agents & Frameworks",
     icon: "📏",
-    keywords: ["refactoring health", "code health score", "duplication", "dead code", "complexity hotspots", "per-commit measurement", "anti-gaming", "stop conditions"],
     component: lazy(() => import("../refactorHealth/RefactorHealthTab.jsx"))
   },
   {
@@ -2041,7 +1818,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "agents_frameworks",
     category: "Agents & Frameworks",
     icon: "💡",
-    keywords: ["agent creativity", "self novelty", "human novelty", "impact score", "feasibility gate", "explore exploit", "novelty rubric", "dual optimization"],
     component: lazy(() => import("../agentCreativity/AgentCreativityTab.jsx"))
   },
   {
@@ -2050,7 +1826,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "agents_frameworks",
     category: "Agents & Frameworks",
     icon: "🏢",
-    keywords: ["org chart", "ai hires", "worker role responsibility", "one desk per agent", "kanban workflow", "review economics", "accountability", "role tightness"],
     component: lazy(() => import("../agentOrgChart/AgentOrgChartTab.jsx"))
   },
   {
@@ -2059,7 +1834,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "agents_frameworks",
     category: "Agents & Frameworks",
     icon: "🔀",
-    keywords: ["synchronous execution", "asynchronous execution", "fire and forget", "job queue", "state checkpointing", "timeout trap", "pattern picker", "background workers"],
     component: lazy(() => import("../syncAsyncAgent/SyncAsyncAgentTab.jsx"))
   },
   {
@@ -2068,7 +1842,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "data_platform",
     category: "Data & Platform Layers",
     icon: "🪤",
-    keywords: ["forecasting traps", "time leakage", "reporting delay", "walk-forward", "noise floor", "residual plot", "availability audit", "trust checklist"],
     component: lazy(() => import("../forecastTraps/ForecastTrapsTab.jsx"))
   },
   {
@@ -2077,7 +1850,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "foundations",
     category: "Foundations",
     icon: "🎓",
-    keywords: ["ai learning", "voice exploration", "reusable skills", "spaced repetition", "active recall", "forgetting curve", "triage filter", "study planner"],
     component: lazy(() => import("../aiLearning/AiLearningTab.jsx"))
   },
   {
@@ -2086,7 +1858,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "foundations",
     category: "Foundations",
     icon: "↔️",
-    keywords: ["reversal curse", "one-way memory", "directional recall", "embedding updates", "ask both directions", "symmetric facts", "retrieval fix"],
     component: lazy(() => import("../reversalCurse/ReversalCurseTab.jsx"))
   },
   {
@@ -2095,7 +1866,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "rag_architecture",
     category: "RAG Systems",
     icon: "🧰",
-    keywords: ["zero infra rag", "no vector db", "cosine knn", "brute force retrieval", "chunk overlap", "abstain", "grounded generation", "right-size the store"],
     component: lazy(() => import("../zeroRag/ZeroRagTab.jsx"))
   },
   {
@@ -2104,7 +1874,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "frontiers_production",
     category: "Advanced & Frontiers",
     icon: "🧪",
-    keywords: ["eval harness", "golden dataset", "judge cascade", "deterministic judge", "llm judge", "jsonl log", "re-score without re-run", "concurrency cap", "crash safe"],
     component: lazy(() => import("../evalHarness/EvalHarnessTab.jsx"))
   },
   {
@@ -2113,7 +1882,6 @@ export const TABS_REGISTRY = [
     umbrellaId: "agents_frameworks",
     category: "Agents & Frameworks",
     icon: "🏗️",
-    keywords: ["react loop", "sequential pipeline", "adaptive router", "supervisor worker", "reflection loop", "autonomous swarm", "context engineering", "state projection", "prompt caching", "trajectory metrics", "circuit breaker"],
     component: lazy(() => import("../agentPatterns/AgentPatternsTab.jsx"))
   }
 ];

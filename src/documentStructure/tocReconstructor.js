@@ -1,4 +1,4 @@
-import { enrichLineDfWithStyle } from './pdfParser.js';
+import { enrichLineDfWithStyle } from './lineDfUtils.js';
 import { mergeSplitHeadings, detectBodyHeadings } from './typography.js';
 import { scoreHasNumericPrefix } from './typography.js';
 

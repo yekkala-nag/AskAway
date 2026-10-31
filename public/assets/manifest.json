@@ -1,0 +1,326 @@
+{
+  "1m_context_limits_working_memory_arch.png": {
+    "original": "1m_context_limits_working_memory_arch.png",
+    "webp": "optimized/1m_context_limits_working_memory_arch.webp",
+    "png": "optimized/1m_context_limits_working_memory_arch.png"
+  },
+  "agent_a2a.svg": {
+    "original": "agent_a2a.svg",
+    "svg": "optimized/agent_a2a.svg"
+  },
+  "agent_evals.svg": {
+    "original": "agent_evals.svg",
+    "svg": "optimized/agent_evals.svg"
+  },
+  "agent_fanout.svg": {
+    "original": "agent_fanout.svg",
+    "svg": "optimized/agent_fanout.svg"
+  },
+  "agent_hitl.svg": {
+    "original": "agent_hitl.svg",
+    "svg": "optimized/agent_hitl.svg"
+  },
+  "agent_planner.svg": {
+    "original": "agent_planner.svg",
+    "svg": "optimized/agent_planner.svg"
+  },
+  "agent_sandbox.svg": {
+    "original": "agent_sandbox.svg",
+    "svg": "optimized/agent_sandbox.svg"
+  },
+  "agentic_rag.svg": {
+    "original": "agentic_rag.svg",
+    "svg": "optimized/agentic_rag.svg"
+  },
+  "agentic_software_factory.svg": {
+    "original": "agentic_software_factory.svg",
+    "svg": "optimized/agentic_software_factory.svg"
+  },
+  "agents_sdk.svg": {
+    "original": "agents_sdk.svg",
+    "svg": "optimized/agents_sdk.svg"
+  },
+  "ai_observability.svg": {
+    "original": "ai_observability.svg",
+    "svg": "optimized/ai_observability.svg"
+  },
+  "ai_roadmap.svg": {
+    "original": "ai_roadmap.svg",
+    "svg": "optimized/ai_roadmap.svg"
+  },
+  "ai_use_cases_sales_arch.png": {
+    "original": "ai_use_cases_sales_arch.png",
+    "webp": "optimized/ai_use_cases_sales_arch.webp",
+    "png": "optimized/ai_use_cases_sales_arch.png"
+  },
+  "amplify_expert.svg": {
+    "original": "amplify_expert.svg",
+    "svg": "optimized/amplify_expert.svg"
+  },
+  "arch_mla.svg": {
+    "original": "arch_mla.svg",
+    "svg": "optimized/arch_mla.svg"
+  },
+  "arch_moe.svg": {
+    "original": "arch_moe.svg",
+    "svg": "optimized/arch_moe.svg"
+  },
+  "arch_speculative.svg": {
+    "original": "arch_speculative.svg",
+    "svg": "optimized/arch_speculative.svg"
+  },
+  "askaway-favicon.png": {
+    "original": "askaway-favicon.png",
+    "webp": "optimized/askaway-favicon.webp",
+    "png": "optimized/askaway-favicon.png"
+  },
+  "askaway-logo.png": {
+    "original": "askaway-logo.png",
+    "webp": "optimized/askaway-logo.webp",
+    "png": "optimized/askaway-logo.png"
+  },
+  "askaway-mark.png": {
+    "original": "askaway-mark.png",
+    "webp": "optimized/askaway-mark.webp",
+    "png": "optimized/askaway-mark.png"
+  },
+  "askaway_logo.svg": {
+    "original": "askaway_logo.svg",
+    "svg": "optimized/askaway_logo.svg"
+  },
+  "byol_self_supervised_arch.png": {
+    "original": "byol_self_supervised_arch.png",
+    "webp": "optimized/byol_self_supervised_arch.webp",
+    "png": "optimized/byol_self_supervised_arch.png"
+  },
+  "coding_evals.svg": {
+    "original": "coding_evals.svg",
+    "svg": "optimized/coding_evals.svg"
+  },
+  "complete_rag_pipeline.svg": {
+    "original": "complete_rag_pipeline.svg",
+    "svg": "optimized/complete_rag_pipeline.svg"
+  },
+  "context_engineering.svg": {
+    "original": "context_engineering.svg",
+    "svg": "optimized/context_engineering.svg"
+  },
+  "context_engineering_infographic.png": {
+    "original": "context_engineering_infographic.png",
+    "webp": "optimized/context_engineering_infographic.webp",
+    "png": "optimized/context_engineering_infographic.png"
+  },
+  "context_graph_multi_agent_memory_infographic.png": {
+    "original": "context_graph_multi_agent_memory_infographic.png",
+    "webp": "optimized/context_graph_multi_agent_memory_infographic.webp",
+    "png": "optimized/context_graph_multi_agent_memory_infographic.png"
+  },
+  "cross_doc_joins.svg": {
+    "original": "cross_doc_joins.svg",
+    "svg": "optimized/cross_doc_joins.svg"
+  },
+  "data_pipeline.svg": {
+    "original": "data_pipeline.svg",
+    "svg": "optimized/data_pipeline.svg"
+  },
+  "enterprise_grade.svg": {
+    "original": "enterprise_grade.svg",
+    "svg": "optimized/enterprise_grade.svg"
+  },
+  "finops.svg": {
+    "original": "finops.svg",
+    "svg": "optimized/finops.svg"
+  },
+  "functools.svg": {
+    "original": "functools.svg",
+    "svg": "optimized/functools.svg"
+  },
+  "geo_pop.svg": {
+    "original": "geo_pop.svg",
+    "svg": "optimized/geo_pop.svg"
+  },
+  "hallucination_loop.svg": {
+    "original": "hallucination_loop.svg",
+    "svg": "optimized/hallucination_loop.svg"
+  },
+  "handoff_watchdog.svg": {
+    "original": "handoff_watchdog.svg",
+    "svg": "optimized/handoff_watchdog.svg"
+  },
+  "human_centric.svg": {
+    "original": "human_centric.svg",
+    "svg": "optimized/human_centric.svg"
+  },
+  "hybrid_retrieval_fusion_pipeline.png": {
+    "original": "hybrid_retrieval_fusion_pipeline.png",
+    "webp": "optimized/hybrid_retrieval_fusion_pipeline.webp",
+    "png": "optimized/hybrid_retrieval_fusion_pipeline.png"
+  },
+  "langchain_pipeline.png": {
+    "original": "langchain_pipeline.png",
+    "webp": "optimized/langchain_pipeline.webp",
+    "png": "optimized/langchain_pipeline.png"
+  },
+  "langgraph_framework_infographic.png": {
+    "original": "langgraph_framework_infographic.png",
+    "webp": "optimized/langgraph_framework_infographic.webp",
+    "png": "optimized/langgraph_framework_infographic.png"
+  },
+  "long_context.svg": {
+    "original": "long_context.svg",
+    "svg": "optimized/long_context.svg"
+  },
+  "mem_hierarchy.svg": {
+    "original": "mem_hierarchy.svg",
+    "svg": "optimized/mem_hierarchy.svg"
+  },
+  "memory_engineering_architecture.png": {
+    "original": "memory_engineering_architecture.png",
+    "webp": "optimized/memory_engineering_architecture.webp",
+    "png": "optimized/memory_engineering_architecture.png"
+  },
+  "model_routing.svg": {
+    "original": "model_routing.svg",
+    "svg": "optimized/model_routing.svg"
+  },
+  "model_validation.svg": {
+    "original": "model_validation.svg",
+    "svg": "optimized/model_validation.svg"
+  },
+  "multi_agent_systems_architecture.png": {
+    "original": "multi_agent_systems_architecture.png",
+    "webp": "optimized/multi_agent_systems_architecture.webp",
+    "png": "optimized/multi_agent_systems_architecture.png"
+  },
+  "multilingual_rag.svg": {
+    "original": "multilingual_rag.svg",
+    "svg": "optimized/multilingual_rag.svg"
+  },
+  "multimodal_rag.svg": {
+    "original": "multimodal_rag.svg",
+    "svg": "optimized/multimodal_rag.svg"
+  },
+  "multimodal_rag_pipeline.svg": {
+    "original": "multimodal_rag_pipeline.svg",
+    "svg": "optimized/multimodal_rag_pipeline.svg"
+  },
+  "overview_architecture.svg": {
+    "original": "overview_architecture.svg",
+    "svg": "optimized/overview_architecture.svg"
+  },
+  "pandas_mem.svg": {
+    "original": "pandas_mem.svg",
+    "svg": "optimized/pandas_mem.svg"
+  },
+  "pipeline_flow.svg": {
+    "original": "pipeline_flow.svg",
+    "svg": "optimized/pipeline_flow.svg"
+  },
+  "pos_encoding.svg": {
+    "original": "pos_encoding.svg",
+    "svg": "optimized/pos_encoding.svg"
+  },
+  "project_prep_framework.svg": {
+    "original": "project_prep_framework.svg",
+    "svg": "optimized/project_prep_framework.svg"
+  },
+  "prompt_contracts.svg": {
+    "original": "prompt_contracts.svg",
+    "svg": "optimized/prompt_contracts.svg"
+  },
+  "prompt_dependency_graph.svg": {
+    "original": "prompt_dependency_graph.svg",
+    "svg": "optimized/prompt_dependency_graph.svg"
+  },
+  "prompt_regression.svg": {
+    "original": "prompt_regression.svg",
+    "svg": "optimized/prompt_regression.svg"
+  },
+  "quant_serve.svg": {
+    "original": "quant_serve.svg",
+    "svg": "optimized/quant_serve.svg"
+  },
+  "rag_chunking_strategies.svg": {
+    "original": "rag_chunking_strategies.svg",
+    "svg": "optimized/rag_chunking_strategies.svg"
+  },
+  "rag_eval.svg": {
+    "original": "rag_eval.svg",
+    "svg": "optimized/rag_eval.svg"
+  },
+  "rag_indexing_retrieval_architecture.png": {
+    "original": "rag_indexing_retrieval_architecture.png",
+    "webp": "optimized/rag_indexing_retrieval_architecture.webp",
+    "png": "optimized/rag_indexing_retrieval_architecture.png"
+  },
+  "rag_late_chunking_workflow.svg": {
+    "original": "rag_late_chunking_workflow.svg",
+    "svg": "optimized/rag_late_chunking_workflow.svg"
+  },
+  "rag_types_spectrum.svg": {
+    "original": "rag_types_spectrum.svg",
+    "svg": "optimized/rag_types_spectrum.svg"
+  },
+  "realtime_market_event_processing.png": {
+    "original": "realtime_market_event_processing.png",
+    "webp": "optimized/realtime_market_event_processing.webp",
+    "png": "optimized/realtime_market_event_processing.png"
+  },
+  "rerank_pipeline.svg": {
+    "original": "rerank_pipeline.svg",
+    "svg": "optimized/rerank_pipeline.svg"
+  },
+  "sdlc_incident_context_pack_flow.png": {
+    "original": "sdlc_incident_context_pack_flow.png",
+    "webp": "optimized/sdlc_incident_context_pack_flow.webp",
+    "png": "optimized/sdlc_incident_context_pack_flow.png"
+  },
+  "slm_edge.svg": {
+    "original": "slm_edge.svg",
+    "svg": "optimized/slm_edge.svg"
+  },
+  "table_grid_rag.svg": {
+    "original": "table_grid_rag.svg",
+    "svg": "optimized/table_grid_rag.svg"
+  },
+  "text_to_sql.svg": {
+    "original": "text_to_sql.svg",
+    "svg": "optimized/text_to_sql.svg"
+  },
+  "tokenization.svg": {
+    "original": "tokenization.svg",
+    "svg": "optimized/tokenization.svg"
+  },
+  "tool_calling.svg": {
+    "original": "tool_calling.svg",
+    "svg": "optimized/tool_calling.svg"
+  },
+  "trpo_grpo.svg": {
+    "original": "trpo_grpo.svg",
+    "svg": "optimized/trpo_grpo.svg"
+  },
+  "validity_layer.svg": {
+    "original": "validity_layer.svg",
+    "svg": "optimized/validity_layer.svg"
+  },
+  "vector_db_ops.svg": {
+    "original": "vector_db_ops.svg",
+    "svg": "optimized/vector_db_ops.svg"
+  },
+  "verified_pipes.svg": {
+    "original": "verified_pipes.svg",
+    "svg": "optimized/verified_pipes.svg"
+  },
+  "vibe_code.svg": {
+    "original": "vibe_code.svg",
+    "svg": "optimized/vibe_code.svg"
+  },
+  "vram_conductor.svg": {
+    "original": "vram_conductor.svg",
+    "svg": "optimized/vram_conductor.svg"
+  },
+  "workflows_hierarchy.svg": {
+    "original": "workflows_hierarchy.svg",
+    "svg": "optimized/workflows_hierarchy.svg"
+  }
+}

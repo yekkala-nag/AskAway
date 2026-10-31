@@ -37,7 +37,8 @@ export { Button, Card, Callout, Badge, Input, Divider, Avatar } from '../compone
 export { Diagram, CodeBlock, Stepper, Table, Hero, Accordion, Tabs } from '../components/ui/Content.jsx';
 
 // Navigation
-export { Sidebar, TopBar, CommandPalette, ModuleSwitcher } from '../components/ui/Navigation.jsx';
+export { Sidebar, TopBar, ModuleSwitcher } from '../components/ui/Navigation.jsx';
+export { CommandPalette } from '../components/ui/CommandPalette.jsx';
 
 // Feedback
 export { ToastProvider, useToast, Modal, Tooltip, Skeleton, EmptyState, Progress } from '../components/ui/Feedback.jsx';

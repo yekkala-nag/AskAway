@@ -6,7 +6,13 @@
 import { useState, useEffect, useCallback, useRef, Suspense, lazy } from 'react';
 import { globalStyles } from './design-system/globalStyles.js';
 import { Page, Container, Section } from './components/layout/Primitives.jsx';
-import { Sidebar, TopBar, CommandPalette } from './components/ui/Navigation.jsx';
+import { TopBar } from './components/ui/TopBar.jsx';
+const Sidebar = lazy(() =>
+  import('./components/ui/Sidebar.jsx').then(m => ({ default: m.Sidebar }))
+);
+const CommandPalette = lazy(() =>
+  import('./components/ui/CommandPalette.jsx').then(m => ({ default: m.CommandPalette }))
+);
 import { AdaptiveWorkflowBar } from './components/ui/AdaptiveWorkflowBar.jsx';
 import { ToastProvider, useToast, Skeleton } from './components/ui/Feedback.jsx';
 import { TopicFooter } from './components/ui/TopicFooter.jsx';
@@ -180,7 +186,7 @@ const TabComponents = {
   llmevals: lazy(() => import('./llmEvals/LLMEvalLayerTab.jsx')),
   modelvalidation: lazy(() => import('./modelValidation/ModelValidationTab.jsx')),
   reasoningbench: lazy(() => import('./reasoningBench/ReasoningBenchTab.jsx')),
-  progress: lazy(() => import('./AppContent.jsx').then(m => ({ default: m.ProgressTab }))),
+  progress: lazy(() => import('./tabs/ProgressTab.jsx')),
   guardrails: lazy(() => import('./guardrails/GuardrailsTab.jsx')),
   llmreliability: lazy(() => import('./llmReliability/LLMReliabilityTab.jsx')),
   enterpriseaiops: lazy(() => import('./enterpriseAIOps/EnterpriseAIOpsTab.jsx')),
@@ -277,6 +283,33 @@ function TabSkeleton() {
         </div>
       </div>
     </Section>
+  );
+}
+
+function SidebarSkeleton({ collapsed }) {
+  return (
+    <aside
+      style={{
+        width: collapsed ? '72px' : '260px',
+        height: '100%',
+        background: 'var(--ds-color-chrome-sidebarBg, #EDF1F6)',
+        borderRight: '1px solid var(--ds-color-border-subtle)',
+        display: 'flex', flexDirection: 'column'
+      }}
+    >
+      <div style={{ padding: 'var(--ds-space-4)', borderBottom: '1px solid var(--ds-color-border-subtle)' }}>
+        <Skeleton variant="title" width={collapsed ? '40%' : '60%'} />
+        <Skeleton variant="text" width="30%" style={{ marginTop: 'var(--ds-space-2)' }} />
+      </div>
+      <div style={{ flex: 1, padding: 'var(--ds-space-4)', display: 'flex', flexDirection: 'column', gap: 'var(--ds-space-3)' }}>
+        <Skeleton variant="text" width="100%" />
+        <Skeleton variant="text" width="70%" />
+        <Skeleton variant="card" height="120px" />
+        <Skeleton variant="card" height="160px" />
+        <Skeleton variant="card" height="120px" />
+        <Skeleton variant="card" height="160px" />
+      </div>
+    </aside>
   );
 }
 
@@ -483,14 +516,16 @@ export default function App() {
           </>
         }
         sidebar={
-          <Sidebar
-            activeTab={activeTab}
-            onSelectTab={handleTabSelect}
-            searchQuery={searchQuery}
-            onSearchChange={setSearchQuery}
-            collapsed={sidebarCollapsed}
-            onToggleCollapse={handleSidebarToggle}
-          />
+          <Suspense fallback={<SidebarSkeleton collapsed={sidebarCollapsed} />}>
+            <Sidebar
+              activeTab={activeTab}
+              onSelectTab={handleTabSelect}
+              searchQuery={searchQuery}
+              onSearchChange={setSearchQuery}
+              collapsed={sidebarCollapsed}
+              onToggleCollapse={handleSidebarToggle}
+            />
+          </Suspense>
         }
         sidebarCollapsed={sidebarCollapsed}
         onSidebarToggle={handleSidebarToggle}
@@ -561,12 +596,14 @@ export default function App() {
           </Container>
         </div>
 
-        <CommandPalette
-          isOpen={commandPaletteOpen}
-          onClose={() => setCommandPaletteOpen(false)}
-          tabs={TABS_REGISTRY}
-          onSelectTab={handleTabSelect}
-        />
+        <Suspense fallback={null}>
+          <CommandPalette
+            isOpen={commandPaletteOpen}
+            onClose={() => setCommandPaletteOpen(false)}
+            tabs={TABS_REGISTRY}
+            onSelectTab={handleTabSelect}
+          />
+        </Suspense>
 
         <LegalModal
           isOpen={legalModalOpen}

@@ -11,7 +11,9 @@ const indexHtml = read('index.html');
 const globalStyles = read('src/design-system/globalStyles.js');
 const appNew = read('src/AppNew.jsx');
 const primitives = read('src/components/layout/Primitives.jsx');
-const navigation = read('src/components/ui/Navigation.jsx');
+const topBar = read('src/components/ui/TopBar.jsx');
+const sidebar = read('src/components/ui/Sidebar.jsx');
+const commandPalette = read('src/components/ui/CommandPalette.jsx');
 
 // ── index.html ──
 test('zoom is not blocked (WCAG 1.4.4)', () => {
@@ -99,37 +101,37 @@ test('page root dvh class, scroll region flagged, drawer is a modal dialog', () 
 
 // ── navigation ──
 test('command palette implements the ARIA combobox pattern', () => {
-  assert.match(navigation, /role="combobox"/);
-  assert.match(navigation, /aria-activedescendant/);
-  assert.match(navigation, /id="cp-listbox"/);
-  assert.match(navigation, /role="listbox"/);
-  assert.match(navigation, /role="option"/);
-  assert.match(navigation, /aria-selected=\{isSelected\}/);
-  assert.match(navigation, /scrollIntoView\(\{ block: 'nearest' \}\)/);
-  assert.match(navigation, /e\.key === 'Home'/);
-  assert.match(navigation, /e\.key === 'End'/);
+  assert.match(commandPalette, /role="combobox"/);
+  assert.match(commandPalette, /aria-activedescendant/);
+  assert.match(commandPalette, /id="cp-listbox"/);
+  assert.match(commandPalette, /role="listbox"/);
+  assert.match(commandPalette, /role="option"/);
+  assert.match(commandPalette, /aria-selected=\{isSelected\}/);
+  assert.match(commandPalette, /scrollIntoView\(\{ block: 'nearest' \}\)/);
+  assert.match(commandPalette, /e\.key === 'Home'/);
+  assert.match(commandPalette, /e\.key === 'End'/);
 });
 
 test('sidebar has roving Arrow Up/Down focus with field-guard', () => {
-  assert.match(navigation, /handleNavKeyDown/);
-  assert.match(navigation, /ArrowDown/);
-  assert.match(navigation, /isField/);
-  assert.match(navigation, /aria-expanded=\{isExpanded\}/);
-  assert.match(navigation, /aria-controls=\{isExpanded/);
+  assert.match(sidebar, /handleNavKeyDown/);
+  assert.match(sidebar, /ArrowDown/);
+  assert.match(sidebar, /isField/);
+  assert.match(sidebar, /aria-expanded=\{isExpanded\}/);
+  assert.match(sidebar, /aria-controls=\{isExpanded/);
 });
 
 test('hamburger exposes expanded state and controls the drawer', () => {
-  assert.match(navigation, /aria-expanded=\{!!mobileOpen\}/);
-  assert.match(navigation, /aria-controls="main-sidebar"/);
+  assert.match(topBar, /aria-expanded=\{!!mobileOpen\}/);
+  assert.match(topBar, /aria-controls="main-sidebar"/);
 });
 
 test('topic pagination supports Arrow Left/Right', () => {
-  assert.match(navigation, /aria-label="Topic position navigation"/);
-  assert.match(navigation, /'\.aw-btn-prev'/);
-  assert.match(navigation, /'\.aw-btn-next'/);
+  assert.match(topBar, /aria-label="Topic position navigation"/);
+  assert.match(topBar, /'\.aw-btn-prev'/);
+  assert.match(topBar, /'\.aw-btn-next'/);
 });
 
 test('brand logo div is keyboard operable', () => {
-  assert.match(navigation, /aria-label="AskAway home — go to Overview"/);
-  assert.match(navigation, /role="button"\s*\n\s*tabIndex=\{0\}/);
+  assert.match(topBar, /aria-label="AskAway home — go to Overview"/);
+  assert.match(topBar, /role="button"\s*\n\s*tabIndex=\{0\}/);
 });

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { getTabById, UMBRELLA_TOPICS } from "../registry/tabsRegistry.js";
+import { getTabMeta } from "../registry/tabsMeta.js";
 import { getChildrenForUmbrella as getChildren, getChildById as getChild, getChildSequence, getTopicMeta, getHubPageId } from "../registry/curriculum.js";
 
 const C = {
@@ -35,9 +36,8 @@ export function HubPage({ childId, onSelectTab }) {
   const tabs = getChildSequence(childId);
   const topicMeta = {};
   tabs.forEach(id => {
-    const tab = getTabById(id);
     const meta = getTopicMeta(id);
-    topicMeta[id] = { l: meta?.l || 1, p: meta?.p || [], keywords: tab?.keywords || [] };
+    topicMeta[id] = { l: meta?.l || 1, p: meta?.p || [], keywords: (getTabMeta(id)?.keywords) || [] };
   });
 
   const [progress, setProgress] = useState(() => {

@@ -1,6 +1,5 @@
 import { useState, useRef, useCallback, useEffect } from 'react';
 import {
-  parsePdf,
   enrichLineDfWithStyle,
   detectBodyHeadings,
   reconstructTocFromBody,
@@ -15,11 +14,29 @@ import {
   DualLayerViewer,
   BenchmarkViewer,
 } from '../documentStructure/index.js';
+import { callAIProxy } from '../lib/aiProxy.js';
+
+const API_BASE = (typeof import.meta.env === 'object' && import.meta.env)
+  ? import.meta.env.VITE_API_BASE_URL || ''
+  : '';
+
+async function parsePdfViaProxy(file) {
+  const res = await fetch(`${API_BASE}/api/document/parse`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/octet-stream' },
+    body: file,
+  });
+  if (!res.ok) {
+    let detail = '';
+    try { detail = await res.text(); } catch { /* ignore */ }
+    throw new Error(`PDF parse failed (${res.status}): ${detail}`);
+  }
+  return res.json(); // { line_df, span_df }
+}
 
 const DEFAULT_AI_CONFIG = {
   apiKey: '',
-  endpoint: 'https://api.openai.com/v1/chat/completions',
-  model: 'gpt-4o',
+  model: 'gpt-4o-mini',
 };
 
 export default function DocumentStructureTab() {
@@ -96,9 +113,8 @@ export default function DocumentStructureTab() {
     setProgress('Reading PDF...');
 
     try {
-      const arrayBuffer = await selected.arrayBuffer();
-      setProgress('Extracting text and typography...');
-      const { line_df, span_df } = await parsePdf(arrayBuffer);
+      setProgress('Uploading PDF for server-side parsing...');
+      const { line_df, span_df } = await parsePdfViaProxy(selected);
       setLineDf(line_df);
       setSpanDf(span_df);
 
@@ -116,28 +132,14 @@ export default function DocumentStructureTab() {
   }, [threshold, signalWeights, cascadeMode, recomputeHeadingsAndToc]);
 
   const callLLM = async (config, system, user, schema) => {
-    const body = {
-      model: config.model,
+    const content = await callAIProxy({
       messages: [
         { role: 'system', content: system },
         { role: 'user', content: user },
       ],
-      response_format: { type: 'json_schema', json_schema: { name: 'response', schema } },
-    };
-
-    const res = await fetch(config.endpoint, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${config.apiKey}`,
-      },
-      body: JSON.stringify(body),
+      model: config.model,
+      apiKey: config.apiKey || undefined,
     });
-
-    if (!res.ok) throw new Error(`LLM API error: ${res.status}`);
-    const data = await res.json();
-    const content = data.choices?.[0]?.message?.content;
-    if (!content) throw new Error('Empty LLM response');
     return JSON.parse(content);
   };
 
@@ -648,26 +650,15 @@ export default function DocumentStructureTab() {
             </div>
           )}
 
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
-            <div>
-              <label style={{ display: 'block', fontSize: '0.72rem', fontWeight: 600, color: '#374151', marginBottom: '0.4rem' }}>AI API Key (Optional - Falls back to Mock Validator)</label>
-              <input
-                type="password"
-                value={aiConfig.apiKey}
-                onChange={e => setAiConfig(c => ({ ...c, apiKey: e.target.value }))}
-                placeholder="sk-..."
-                style={s.input}
-              />
-            </div>
-            <div>
-              <label style={{ display: 'block', fontSize: '0.72rem', fontWeight: 600, color: '#374151', marginBottom: '0.4rem' }}>AI Endpoint</label>
-              <input
-                type="text"
-                value={aiConfig.endpoint}
-                onChange={e => setAiConfig(c => ({ ...c, endpoint: e.target.value }))}
-                style={s.input}
-              />
-            </div>
+          <div>
+            <label style={{ display: 'block', fontSize: '0.72rem', fontWeight: 600, color: '#374151', marginBottom: '0.4rem' }}>AI API Key (Optional - Falls back to Mock Validator)</label>
+            <input
+              type="password"
+              value={aiConfig.apiKey}
+              onChange={e => setAiConfig(c => ({ ...c, apiKey: e.target.value }))}
+              placeholder="sk-..."
+              style={s.input}
+            />
           </div>
 
           {lineDf.length > 0 && (

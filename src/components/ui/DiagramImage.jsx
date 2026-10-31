@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { diagramAccentForModule } from "../../design-system/diagramTokens.js";
 import { SHOWCASE, frameStyles, FrameChip, FramePill, FrameHeader, FrameCaption, iconForModule } from "./SpectrumFrame.jsx";
 
@@ -10,6 +10,10 @@ import { SHOWCASE, frameStyles, FrameChip, FramePill, FrameHeader, FrameCaption,
 // P2: loading shimmer (no layout shift), fade-in on load, error fallback
 // with retry, and an `accent` prop (umbrella color) tinting the figure
 // chrome. `moduleId` is shorthand for the canonical accent.
+//
+// Phase 7: Uses <picture> with WebP source + PNG fallback for raster assets.
+// SVG assets use optimized versions directly. Manifest at /assets/manifest.json
+// maps original filenames to optimized paths.
 const DiagramImage = ({
   src,
   alt = "Diagram",
@@ -26,9 +30,37 @@ const DiagramImage = ({
   const [failed, setFailed] = useState(false);
   const [retryKey, setRetryKey] = useState(0);
   const [retryCount, setRetryCount] = useState(0);
+  const [manifest, setManifest] = useState(null);
+
+  // Load manifest to determine optimized asset paths
+  useEffect(() => {
+    fetch('/assets/manifest.json')
+      .then(r => r.ok && r.json())
+      .then(setManifest)
+      .catch(() => {}); // manifest optional; fall back to original src
+  }, []);
 
   const tint = accent || (moduleId ? diagramAccentForModule(moduleId) : "#5EC4C8");
   const frame = frameStyles(tint);
+
+  // Resolve optimized asset path from manifest
+  const getOptimizedSrc = (originalSrc, type) => {
+    if (!manifest) return originalSrc;
+    const filename = originalSrc.split('/').pop();
+    const entry = manifest[filename];
+    if (!entry) return originalSrc;
+    if (type === 'webp' && entry.webp) return `/assets/${entry.webp}`;
+    if (type === 'png' && entry.png) return `/assets/${entry.png}`;
+    if (type === 'svg' && entry.svg) return `/assets/${entry.svg}`;
+    return originalSrc;
+  };
+
+  const isRaster = src && /\.(png|jpg|jpeg|webp)$/i.test(src);
+  const isSvg = src && /\.svg$/i.test(src);
+
+  const thumbnailSrc = isRaster ? getOptimizedSrc(src, 'webp') : (isSvg ? getOptimizedSrc(src, 'svg') : src);
+  const thumbnailFallback = isRaster ? getOptimizedSrc(src, 'png') : src;
+  const fullscreenSrc = isRaster ? getOptimizedSrc(src, 'png') : (isSvg ? getOptimizedSrc(src, 'svg') : src);
 
   const open = () => { if (!failed) { setScale(1); setZoomed(true); } };
   const close = () => setZoomed(false);
@@ -41,6 +73,40 @@ const DiagramImage = ({
     setLoaded(false);
     setRetryCount(c => c + 1);
     setRetryKey(k => k + 1);
+  };
+
+  // Build the inner image element with WebP/PNG fallback for raster
+  const renderImage = (srcProp, fallbackProp, imgProps = {}) => {
+    if (isRaster) {
+      return (
+        <picture>
+          <source srcSet={srcProp} type="image/webp" />
+          <img
+            key={retryKey}
+            src={fallbackProp}
+            alt={alt}
+            loading="lazy"
+            decoding="async"
+            onLoad={() => setLoaded(true)}
+            onError={() => setFailed(true)}
+            {...imgProps}
+          />
+        </picture>
+      );
+    }
+    // SVG or other: single src
+    return (
+      <img
+        key={retryKey}
+        src={srcProp}
+        alt={alt}
+        loading="lazy"
+        decoding="async"
+        onLoad={() => setLoaded(true)}
+        onError={() => setFailed(true)}
+        {...imgProps}
+      />
+    );
   };
 
   return (
@@ -96,21 +162,14 @@ const DiagramImage = ({
               </button>
             </div>
           ) : (
-            <img
-              key={retryKey}
-              src={src}
-              alt={alt}
-              loading="lazy"
-              decoding="async"
-              onLoad={() => setLoaded(true)}
-              onError={() => setFailed(true)}
-              style={{
+            renderImage(thumbnailSrc, thumbnailFallback, {
+              style: {
                 width: "100%", maxWidth, height: "auto", display: "block",
                 objectFit: "contain",
                 opacity: loaded ? 1 : 0,
                 transition: "opacity 0.35s ease",
-              }}
-            />
+              }
+            })
           )}
         </div>
         {caption && <FrameCaption color={tint}>{caption}</FrameCaption>}
@@ -150,7 +209,9 @@ const DiagramImage = ({
             style={{ flex: 1, overflow: "auto", background: "#0F1219", display: "flex", alignItems: "center", justifyContent: "center", padding: "1rem" }}
           >
             <div style={{ background, border: `1px solid ${frame.variant.edge}`, borderRadius: 12, padding: "1.5rem", boxShadow: `0 20px 50px rgba(0,0,0,0.6), 0 0 32px ${frame.variant.glow}`, zoom: scale, width: "100%", maxWidth: 1600, display: "flex", justifyContent: "center" }}>
-              <img src={src} alt={alt} loading="lazy" decoding="async" style={{ width: "100%", maxWidth: "100%", height: "auto", objectFit: "contain", display: "block" }} />
+              {renderImage(fullscreenSrc, fullscreenSrc, {
+                style: { width: "100%", maxWidth: "100%", height: "auto", objectFit: "contain", display: "block" }
+              })}
             </div>
           </div>
         </div>
