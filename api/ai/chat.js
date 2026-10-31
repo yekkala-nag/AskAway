@@ -31,7 +31,7 @@ const MAX_OUTPUT_TOKENS = 4096;       // max_tokens cap
 const DEFAULT_MAX_TOKENS = 1000;
 
 export const config = {
-  runtime: 'nodejs',
+  runtime: 'nodejs22.x',
   // Vercel Hobby serverless functions have a ~60s maxDuration; SSE streams
   // that run longer will be cut off by the platform, which is acceptable for
   // this free-tier design.
