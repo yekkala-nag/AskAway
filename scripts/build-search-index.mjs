@@ -115,8 +115,9 @@ function deriveRelated(a, b) {
 }
 
 async function main() {
-  const [{ TABS_REGISTRY, UMBRELLA_TOPICS }, componentPaths] = await Promise.all([
+  const [{ TABS_REGISTRY, UMBRELLA_TOPICS }, { TABS_META }, componentPaths] = await Promise.all([
     import(pathToFileURL(REGISTRY_PATH).href),
+    import(pathToFileURL(path.join(ROOT, 'src', 'registry', 'tabsMeta.js')).href),
     parseComponentPaths(),
   ]);
   console.log(`Registry: ${TABS_REGISTRY.length} tabs, component paths found: ${componentPaths.size}`);
@@ -155,7 +156,7 @@ async function main() {
       }
     }
 
-    const keywords = (tab.keywords || []).map((k) => cleanText(k).toLowerCase()).filter(Boolean);
+    const keywords = ((TABS_META[tab.id] && TABS_META[tab.id].keywords) || []).map((k) => cleanText(k).toLowerCase()).filter(Boolean);
     const parenAcronyms = [...String(tab.label).matchAll(/\(([A-Z0-9/+.\-]{2,})\)/g)].map((m) => m[1].toLowerCase());
     const tags = [...new Set([...keywords, ...parenAcronyms])];
 

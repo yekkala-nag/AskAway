@@ -353,14 +353,19 @@ host without extra rewrite rules. Vercel still ships a catch-all for safety.
 
 ### Bundle profile (production)
 
-| Artifact | Size | Gzip |
-| --- | --- | --- |
-| Entry `index-*.js` | 627.53 kB | 200.89 kB |
-| Legacy `App-*.js` | 1,358.31 kB | 324.49 kB |
-| `search-index-*.js` | 132.66 kB | 41.50 kB |
-| `tocReconstructor-*.js` | 490.26 kB | 146.67 kB |
-| `dist/` total | ≈ 17 MB | — |
-| Static assets | 9.2 MB (59 SVG, 16 PNG) | — |
+| Artifact | Size | Gzip | Notes |
+| --- | --- | --- | --- |
+| Entry `index-*.js` | 368.59 kB | 116.50 kB | Shell + TopBar + registry + lazy() refs (target ≤ 120 kB) |
+| `react-*.js` | 141.83 kB | 45.41 kB | Split from entry via `manualChunks`, modulepreloaded in parallel |
+| `vendor-*.js` | 496.25 kB | 147.67 kB | Split from entry (minisearch etc.), loaded on demand (search) |
+| `Sidebar-*.js` | 15.49 kB | 4.61 kB | Lazy chrome (Suspense skeleton) |
+| `CommandPalette-*.js` | 10.71 kB | 3.99 kB | Lazy chrome (Suspense fallback) |
+| `ProgressTab-*.js` | 3.94 kB | 1.58 kB | First bridge tab migrated to a standalone module (lazy) |
+| Legacy `App-*.js` | 1,358.43 kB | 324.54 kB | Loads only for remaining bridge-backed tabs; removed per-tab as they migrate |
+| `search-index-*.js` | 132.66 kB | 41.50 kB | Lazy on first palette open |
+| `tocReconstructor-*.js` | 490.26 kB | 146.67 kB | Moves to server in Phase 5 |
+| `dist/` total | ≈ 17 MB | — | — |
+| Static assets | 9.2 MB (59 SVG, 16 PNG) | — | ≤ 3 MB lazy-loaded (Phase 1 asset optimization pending) |
 
 ---
 
@@ -387,3 +392,177 @@ host without extra rewrite rules. Vercel still ships a catch-all for safety.
    unmetered egress the key hosting criteria (hence Cloudflare/Hostinger CDN).
 10. **No router, no state library, no CSS framework.** Deliberate minimal
     dependency surface; the trade-off is manual URL/scroll handling.
+11. **Lazy shell chrome.** `Sidebar` and `CommandPalette` are split out of the entry
+    bundle via `React.lazy` (Suspense skeletons) and `react`/`vendor` are split via
+    Vite `manualChunks`. Entry reduced 200.89 kB → 116.48 kB gzip. Hashed assets are
+    served `Cache-Control: public, max-age=31536000, immutable` via `vercel.json`.
+
+## 8. Client/server split (Phase 2 — Supabase foundation)
+
+AskAway remains a static-first React SPA; a server boundary is added only for what
+must be dynamic: auth, progress sync, AI proxy, and PDF/TOC parsing.
+
+### 8.1 Runtime boundary
+
+| Concern | Client (static SPA) | Server (Vercel functions / Supabase) |
+|---------|---------------------|--------------------------------------|
+| UI + routing | React 18 + Vite, `?tab=<id>` deep links | — |
+| Auth UI | `AuthButton` (lazy-loaded via `React.lazy`) | Supabase Auth (magic link + OAuth) |
+| Auth keys | `VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY` only | `SUPABASE_SERVICE_ROLE_KEY` (server-only, never in client) |
+| OpenAI key | User-supplied at runtime, never stored | `OPENAI_API_KEY` (server-only) |
+| Progress | `localStorage` (source of truth offline) | `user_progress`, `user_profiles`, `user_prompts` (RLS-protected) |
+| AI calls | Proxied through `/api/ai/*` (server) | OpenAI called server-side, JWT-protected, rate-limited |
+| PDF/TOC | — | `/api/document/parse` (Node runtime, pdf.js) |
+| Search | Static JSON index (build-time) | optional `/api/search` (cached) |
+
+### 8.2 Auth model
+
+- Anonymous use is unchanged and fully functional (`localStorage` only).
+- Login is optional and only unlocks cross-device sync.
+- Sign-in methods: magic link (email OTP) + one OAuth provider (Google).
+- `supabaseClient.js` exposes only the anon key to the client; the service-role key
+  and `OPENAI_API_KEY` are server-only (`api/_lib/supabaseAdmin.js`).
+
+### 8.3 Data model (Supabase)
+
+| Table | RLS | Purpose |
+|-------|-----|---------|
+| `profiles` | owner-only | user display name |
+| `user_progress` | owner-only | mastery, completed tabs, track, active tab |
+| `user_prompts` | owner-only | user prompt library (unioned with local by `client_id`) |
+| `ai_usage` | read-own (write via service role) | per-user per-day token/request budget |
+
+Every table has RLS enabled; `user_prompts` is indexed on `(user_id, updated_at)`.
+No table is created without policies. Cross-user reads are verified by
+`supabase/migrations/002_rls_cross_user_check.sql` (must return 0 rows).
+
+### 8.4 API route conventions (Vercel functions)
+
+- Every API route sets explicit `Cache-Control`; uncached routes carry a justification comment.
+- Routes under `/api/` use the Node runtime and `getSupabaseAdmin()` for server-side writes.
+- CORS is restricted to the production domain and Capacitor origins.
+- No secrets, tokens, or user prompts are logged to console or server logs.
+
+### 8.5 Testing
+
+- `tests/supabaseAuth.test.js` covers magic-link, sign-out, session, and auth-state
+  change using dependency injection (no network, no ESM module mocking).
+- RLS cross-user isolation is proved by `supabase/migrations/002_rls_cross_user_check.sql`.
+
+### 8.6 Progress sync (local-first, Phase 3)
+
+- `src/services/sync.js` — localStorage is the source of truth while offline. On
+  login, `initSync` pulls the server row, merges with local, persists, then pushes.
+  Server writes are debounced (≥ 5s) via `markDirty`/`flush` and batched into one
+  request. An offline queue retries failed pushes with exponential backoff.
+- `main.jsx` calls `enableAutoDirty()` — wraps `localStorage.setItem` for sync-relevant
+  keys (`adaptive_mastery_v2`, `adaptive_completed_tabs`, `adaptive_current_track`,
+  `adaptive_active_tab`, `adaptive_placement_v1`, `askaway_prompt_library_v1`,
+  `ai_rag_storage_consent`) so any service write triggers a debounced sync.
+- Consent gate: no server sync without `ai_rag_storage_consent === 'acknowledged'`.
+- `SyncDot` in TopBar shows `synced` / `syncing` / `offline` / `error`; hidden until
+  the user consents.
+- `AuthButton` calls `initSync(userId, supabase)` on sign-in.
+- Merge rules (pure, unit-tested in `tests/sync.test.js`):
+  - mastery score = max per tab (tie → later `updatedAt`, else local)
+  - completed tabs = union (deduped)
+  - prompt library = union by `client_id`, latest `updated_at` wins
+  - track / active tab / placement = latest timestamp wins
+
+### 8.7 AI proxy (`/api/ai/*`, Phase 4)
+
+- `api/ai/chat.js` — Vercel serverless function (Node runtime, maxDuration 60s)
+  proxying OpenAI Chat Completions. Streams the response (SSE) to the client.
+  Configured in `vercel.json` under `functions`.
+- Auth model:
+  - Platform-key path (`OPENAI_API_KEY`, server-only): requires a valid Supabase
+    JWT in the `Authorization` header. JWT is decoded (`sub` extracted) for
+    per-user rate limiting; data access stays protected by RLS.
+  - User-supplied key path (`x-openai-api-key` header): no auth required,
+    per-IP rate limit only. The key is forwarded to OpenAI but never stored
+    server-side.
+- Protection:
+  - Input validation: `messages` required (non-empty array), model allow-listed
+    (`gpt-4o`, `gpt-4o-mini`, `gpt-3.5-turbo`), payload capped at 256 KB,
+    `max_tokens` capped at 4096.
+  - Rate limits: per-user daily budget (50 requests / 50K tokens per day via
+    `ai_usage` table) + per-IP rate limit (20 requests/minute, in-memory best
+    effort).
+  - Returns `429` with a clear message when over quota.
+- Client side: `src/lib/aiProxy.js` calls `/api/ai/chat`, supports SSE
+  streaming via `onToken`, forwards user-supplied key via `x-openai-api-key`.
+- `DocumentStructureTab` `callLLM` and `contentGenerators` `fetchAI` now call
+  the proxy instead of fetching OpenAI directly. Verified: no
+  `api.openai.com`, `Authorization` Bearer, or `OPENAI_API_KEY` in the
+  `DocumentStructureTab` client bundle.
+- `vercel.json` sets `Cache-Control: no-store` and CORS headers for `/api/*`
+  (uncached: dynamic AI proxy; caching LLM outputs would return stale results).
+
+### 8.8 Document parse API (`/api/document/parse`, Phase 5)
+
+- `api/document/parse.js` — Vercel serverless function (Node runtime, maxDuration 60s)
+  that accepts a raw PDF (`application/octet-stream`) and returns structured
+  `{ line_df, span_df }` JSON using `pdfjs-dist/legacy/build/pdf.mjs`
+  (the Node-compatible legacy build; no worker thread required).
+- No auth required — the PDF is processed in-function and never stored.
+- Per-IP rate limit (20 req/min) via the shared in-memory store in
+  `api/_lib/rateLimit.js` (keyed separately from the AI proxy).
+- Input validation: max 20 MB, `%PDF-` magic bytes check, 100-page cap.
+- `Cache-Control: no-store` — the result is document-specific and must not be cached.
+- Client side: `DocumentStructureTab.parsePdfViaProxy(file)` POSTs the file to
+  `/api/document/parse`. The client no longer imports `pdfjs-dist` for parsing.
+- `src/documentStructure/lineDfUtils.js` — pure helpers (`enrichLineDfWithStyle`,
+  `weightedAverageFontSize`, `computeBoldRatio`, `mostCommonFont`) extracted from
+  `pdfParser.js` so they have no pdfjs dependency. Used by client code,
+  `tocReconstructor.js`, and `agenticParsing/methodAdapters.js`.
+- Verified: `grep dist/` confirms the `DocumentStructureTab` chunk contains no
+  `getDocument` or `parsePdf` references; only `parsePdfViaProxy` + `octet-stream`.
+- `PdfOverlayViewer.jsx` retains `pdfjs-dist` for browser-side canvas rendering
+  (legitimate client use — cannot server-render a PDF canvas).
+
+### 8.9 CI/CD & edge caching (Phase 6)
+
+- `.github/workflows/ci.yml` — GitHub Actions workflow running on every push/PR:
+  - `test` job: `npm test` on Node 22 (646 tests, 49 suites).
+  - `build` job: `npm run build` (Vite production build); uploads `dist/` artifact.
+  - Optional `deploy-preview` / `deploy-production` jobs (commented out) for Vercel
+    deployments via `amondnet/vercel-action` — enable by adding
+    `VERCEL_TOKEN`, `VERCEL_ORG_ID`, `VERCEL_PROJECT_ID` as repository secrets.
+- `vercel.json` security headers applied to all responses:
+  - `X-Content-Type-Options: nosniff`
+  - `X-Frame-Options: DENY`
+  - `Referrer-Policy: strict-origin-when-cross-origin`
+- Cache strategy (unchanged from Phase 1/4/5, documented here for completeness):
+  - `/assets/*` (hashed filenames) → `public, max-age=31536000, immutable` (1 year).
+  - `/api/*` (dynamic serverless functions) → `Cache-Control: no-store`.
+  - SPA fallback (`index.html`) → no cache header (served fresh on each deploy).
+- README extended with Vercel deployment guide:
+  - Quick start (CLI), GitHub integration, environment variable hygiene,
+    Hobby tier limits (function duration, payload size, bandwidth, invocations).
+- Bridge tab migration strategy (Phase 7 target):
+  - 43 tabs still routed through `AppContent.jsx` → loads 324 kB gzip `App-*.js` chunk.
+  - Priority order (from `docs/legacy-migration.md`): `overview`, `glossary`, `archconcepts`,
+    `workflows`, `unhobbling`, `promptmgmt`, `rag`, `pipeline`, `filtering`, `hierrag`,
+    `qparseloop`, `prodrag`, `genpatterns`, `fourpdfs`, `hallucbricks`, etc.
+  - Each migrated tab removes one load of the legacy bridge chunk.
+
+### 8.10 Asset optimization (Phase 7)
+
+- `scripts/optimize-assets.mjs` — build-time asset optimizer (runs via `node scripts/optimize-assets.mjs`):
+  - PNG → WebP (quality 85, `sharp`) + optimized PNG (palette + zlib compression). 16 PNGs:
+    4.8 MB → 1.3 MB WebP (73% avg reduction, largest 96% saved).
+  - SVG → SVGO multipass with safe presets. 61 SVGs: ~8% avg reduction (some 17-24%).
+  - Outputs to `public/assets/optimized/` with `manifest.json` mapping originals → optimized paths.
+  - Add `npm run optimize-assets` to the build pipeline or run manually after adding assets.
+- `DiagramImage.jsx` updated to use `<picture>` with WebP source + PNG fallback for raster images
+  (`.png`, `.jpg`, `.webp`); SVGs use the optimized version directly. Manifest-driven path resolution
+  with graceful fallback to the original `src` if the manifest is missing or the entry is not found.
+  - Thumbnail: WebP → PNG fallback. Fullscreen lightbox: PNG (lossless for zoom).
+  - `loading="lazy"` + `decoding="async"` already present (unchanged).
+- `vercel.json`: `/assets/optimized/*` served with `Cache-Control: public, max-age=31536000, immutable`.
+- Build output: `dist/assets/optimized/` contains all WebP/PNG/SVG files + `manifest.json`.
+- Dev deps added: `sharp` (image processing), `svgo` (SVG optimization) — dev-only, not bundled.
+- Bridge tab migration deferred: 43 tabs remain on `AppContent.jsx` (324 kB gzip). Each tab requires
+  extracting inline dependencies from the 22k-line `App.jsx`; tracked in `docs/legacy-migration.md`.
+
+

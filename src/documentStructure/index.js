@@ -1,4 +1,4 @@
-export { parsePdf, enrichLineDfWithStyle } from './pdfParser.js';
+export { enrichLineDfWithStyle } from './lineDfUtils.js';
 export {
   scoreFontSizeRatio,
   scoreIsBold,

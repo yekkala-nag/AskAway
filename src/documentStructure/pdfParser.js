@@ -1,6 +1,28 @@
+/**
+ * pdfParser.js — browser-side PDF parsing with pdfjs-dist.
+ *
+ * NOTE: This file imports pdfjs-dist and is intentionally NOT imported by the
+ * main client bundle after Phase 5. The DocumentStructureTab now uses
+ * /api/document/parse (server-side, Node legacy build) instead of this module.
+ *
+ * This file is kept for:
+ *   - Capacitor / offline deployments that cannot reach the API endpoint.
+ *   - Direct imports by other client-side code that may need client-side parsing.
+ *
+ * enrichLineDfWithStyle has been extracted to lineDfUtils.js (no pdfjs dep).
+ */
 import * as pdfjsLib from 'pdfjs-dist';
 
 pdfjsLib.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.mjs`;
+
+import {
+  weightedAverageFontSize,
+  computeBoldRatio,
+  mostCommonFont,
+  enrichLineDfWithStyle,
+} from './lineDfUtils.js';
+
+export { enrichLineDfWithStyle } from './lineDfUtils.js';
 
 export async function parsePdf(arrayBuffer) {
   const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
@@ -31,7 +53,7 @@ export async function parsePdf(arrayBuffer) {
       if (!lines.has(lineKey)) {
         lines.set(lineKey, {
           page_num: pageNum,
-          line_num: Object.keys(lines).length + 1,
+          line_num: lines.size + 1,
           text: '',
           x0: x,
           y0: y,
@@ -88,53 +110,4 @@ export async function parsePdf(arrayBuffer) {
   }
 
   return { line_df: lineRows, span_df: spanRows };
-}
-
-function weightedAverageFontSize(spans) {
-  let totalWeight = 0;
-  let weightedSum = 0;
-  for (const s of spans) {
-    const w = s.text.length;
-    weightedSum += s.font_size * w;
-    totalWeight += w;
-  }
-  return totalWeight > 0 ? weightedSum / totalWeight : 0;
-}
-
-function computeBoldRatio(spans) {
-  if (spans.length === 0) return 0;
-  const boldChars = spans.filter(s => s.is_bold).reduce((sum, s) => sum + s.text.length, 0);
-  const totalChars = spans.reduce((sum, s) => sum + s.text.length, 0);
-  return totalChars > 0 ? boldChars / totalChars : 0;
-}
-
-function mostCommonFont(spans) {
-  const counts = {};
-  for (const s of spans) {
-    counts[s.font_name] = (counts[s.font_name] || 0) + 1;
-  }
-  return Object.entries(counts).sort((a, b) => b[1] - a[1])[0]?.[0] || '';
-}
-
-export function enrichLineDfWithStyle(lineDf, spanDf) {
-  const spanMap = new Map();
-  for (const span of spanDf) {
-    const key = `${span.page_num}-${span.line_num}`;
-    if (!spanMap.has(key)) spanMap.set(key, []);
-    spanMap.get(key).push(span);
-  }
-
-  return lineDf.map(line => {
-    const key = `${line.page_num}-${line.line_num}`;
-    const spans = spanMap.get(key) || [];
-    const enriched = { ...line };
-    if (spans.length > 0) {
-      enriched.font_size = weightedAverageFontSize(spans);
-      enriched.bold_ratio = computeBoldRatio(spans);
-      enriched.is_bold = enriched.bold_ratio > 0.5;
-      enriched.is_italic = spans.some(s => s.is_italic);
-      enriched.dominant_font_name = mostCommonFont(spans);
-    }
-    return enriched;
-  });
 }
