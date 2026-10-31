@@ -69,10 +69,10 @@ vercel --prod
 4. Build command: `npm run build` (default).
 5. Output directory: `dist` (default).
 6. **Environment Variables** (Project Settings → Environment Variables):
-   - `SUPABASE_URL` — your Supabase project URL
-   - `SUPABASE_SERVICE_ROLE_KEY` — service-role key (server-only)
+   - `SUPABASE_URL` — `https://zmrplimcswbfhgkbslpx.supabase.co`
+   - `SUPABASE_SERVICE_ROLE_KEY` — service-role key (server-only, from Supabase Dashboard → Settings → API)
    - `OPENAI_API_KEY` — OpenAI API key for the AI proxy (server-only)
-   - Client-side vars (prefixed `VITE_`): `VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY`
+   - Client-side vars (prefixed `VITE_`): `VITE_SUPABASE_URL=https://zmrplimcswbfhgkbslpx.supabase.co`, `VITE_SUPABASE_ANON_KEY` (anon key from Supabase Dashboard)
 7. Deploy. Vercel runs the build, deploys `dist/` to the edge network, and provisions the Node.js serverless functions under `api/`.
 
 ### Vercel Hobby tier limits
