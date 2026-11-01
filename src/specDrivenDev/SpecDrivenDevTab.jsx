@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { callAIProxy } from "../lib/aiProxy.js";
+import { LESSON_IMAGES } from "./lessonImages.js";
 import {
   TRACK_OVERVIEW,
   LESSON_MAP,
@@ -284,6 +285,21 @@ function Lessons() {
         <h3 style={{ margin: "0 0 10px 0", color: C.text, fontSize: 18 }}>
           {lesson.icon} {lesson.title}
         </h3>
+        <div style={{ marginBottom: 10 }}>
+          <img
+            src={`/assets/optimized/specdriven/${LESSON_IMAGES.find((li) => li.lesson === lesson.n)?.id ?? `lesson-${lesson.n}`}.png`}
+            alt={lesson.title}
+            style={{
+              width: "100%",
+              maxWidth: 700,
+              height: "auto",
+              borderRadius: 12,
+              border: `1px solid ${C.border}`,
+              display: "block",
+              margin: "0 auto",
+            }}
+          />
+        </div>
         <div style={{ color: C.muted, fontSize: 11, marginBottom: 6, ...mono }}>LEARNING OBJECTIVES</div>
         <ul style={{ margin: "0 0 16px 0", paddingLeft: 18, color: C.text, fontSize: 12, lineHeight: 1.9 }}>
           {lesson.objectives.map((o, i) => (
