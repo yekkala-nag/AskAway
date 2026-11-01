@@ -81,7 +81,7 @@ async function optimizeSvg(inputPath, relPath) {
     plugins: [
       'preset-default',
       'removeDimensions', // let CSS control size
-      'removeXMLNS', // not needed for inline SVG
+      // 'removeXMLNS', // kept: SVG is served via <img> (standalone, needs xmlns for browser parse)
       { name: 'removeViewBox', active: false }, // keep viewBox for scaling
       { name: 'cleanupIds', active: false }, // some SVGs may reference IDs
     ],
