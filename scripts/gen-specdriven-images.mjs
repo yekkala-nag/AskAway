@@ -1,35 +1,26 @@
-//─────────────────────────────────────────────────────────────────────
-// scripts/gen-specdriven-images.mjs
-// Generate one lesson hero image per prompt in src/specDrivenDev/lessonImages.js
-// and save as /public/assets/optimized/specdriven/lesson-{n}.png
-//
-// Usage:
-//   OPENAI_API_KEY=sk-YOUpload this script with the project root as cwd:
-//   node scripts/gen-specdriven-images.mjs
-//
-// The OpenAI key is taken from the environment only; no key is stored in the repo.
-//─────────────────────────────────────────────────────────────────────
-
+#!/usr/bin/env node
 import fs from 'fs';
 import path from 'path';
 
-// Reading package.json to ensure we match the project root
+// Read the lesson images module as text (ESM .js file)
 const projectRoot = process.cwd();
-const imagesSrc = path.join(projectRoot, 'src', 'specDrivenDev', 'lessonImages.js');
-
-// Safely import the prompts module as ES Module text (Node requires a file extension)
+const lessonImagesPath = path.join(projectRoot, 'src', 'specDrivenDev', 'lessonImages.js');
 let LESSON_IMAGES;
-import imagesMod from imagesSrc; // ESM import for .js files (supported by node >=18)
-LESSON_IMAGES = imagesMod.LESSON_IMAGES || imagesMod.default?.LESSON_IMAGES;
-if (!LESSON_IMAGES) {
-  throw new Error('lessonImages.js must export LESSON_IMAGES');
+try {
+  // Read the file as text and extract the exported array
+  const content = fs.readFileSync(lessonImagesPath, 'utf8');
+  // Parse the export: looks like "export const LESSON_IMAGES = [ ... ]"
+  const match = content.match(/export\s+const\s+LESSON_IMAGES\s*=\s*\[([\s\S]+?)\];/);
+  if (!match) throw new Error('Could not parse LESSON_IMAGES from lessonImages.js');
+  LESSON_IMAGES = JSON.parse(match[1]);
+  if (!Array.isArray(LESSON_IMAGES)) throw new Error('LESSON_IMAGES must be an array');
+} catch (e) {
+  throw new Error(`Failed to parse lessonImages.js: ${e.message}`);
 }
 
 const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
 if (!OPENAI_API_KEY || OPENAI_API_KEY.startsWith('sk-YOUR')) {
-  throw new Error(
-    'OPENAI_API_KEY must be set (non-placeholder) to generate images. Set it in your environment or .env.local and rerun.'
-  );
+  throw new Error('OPENAI_API_KEY must be set (non-placeholder) to generate images. Set it in your environment or .env.local and rerun.');
 }
 
 const ENDPOINT = 'https://api.openai.com/v1/images/generations';
@@ -37,11 +28,10 @@ const MODEL = 'gpt-image-1';
 const IMAGE_DIR = path.join(projectRoot, 'public', 'assets', 'optimized', 'specdriven');
 const size = '1024x1024';
 
-// Ensure output directory exists
 if (!fs.existsSync(IMAGE_DIR)) fs.mkdirSync(IMAGE_DIR, { recursive: true });
 
-console.log(`Generating ${LESSON_IMAGES.length} lesson images in ${IMAGE_DIR}...
-`);
+console.log(`Generating ${LESSON_IMAGES.length} lesson images in ${IMAGE_DIR}...`);
+console.log('Using OPENAI_API_KEY from environment:', !!OPENAI_API_KEY);
 
 async function fetchImage(prompt) {
   const body = JSON.stringify({
@@ -50,14 +40,14 @@ async function fetchImage(prompt) {
     n: 1,
     size,
     response_format: 'b64_json',
-    style: { quality: 'high', consistency: true }, // optional; good for UI visuals
+    style: { quality: 'high', consistency: true },
   });
 
   const res = await fetch(ENDPOINT, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${OPENAI_API_KEY}`, // token from env, never logged
+      Authorization: `Bearer ${OPENAI_API_KEY}`,
     },
     body,
   });
@@ -70,18 +60,15 @@ async function fetchImage(prompt) {
   const data = await res.json();
   const image = data.data?.[0];
   if (!image?.b64_json) throw new Error('OpenAI response had no image data.');
-
   return image.b64_json;
 }
 
 async function saveBase64ToFile(base64, filePath) {
-  // Remove potential data URI prefix if present (rare)
   const base64Data = base64.replace(/^data:image\/[a-z]+;base64,/, '');
   const buf = Buffer.from(base64Data, 'base64');
   fs.writeFileSync(filePath, buf);
 }
 
-// Sequential processing (8 is small)
 (async () => {
   let successCount = 0;
   let errorCount = 0;
@@ -98,6 +85,5 @@ async function saveBase64ToFile(base64, filePath) {
       errorCount++;
     }
   }
-  console.log(`\nDone. ${successCount} images saved, ${errorCount} errors.
-`);
+  console.log(`\nDone. ${successCount} images saved, ${errorCount} errors.`);
 })();
