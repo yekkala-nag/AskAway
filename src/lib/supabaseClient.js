@@ -16,16 +16,18 @@ const env = (typeof import.meta.env === 'object' && import.meta.env) || {};
 
 let _client = null;
 
+/** True when the client bundle has Supabase credentials. */
+export function isSupabaseConfigured() {
+  return Boolean(env.VITE_SUPABASE_URL && env.VITE_SUPABASE_ANON_KEY);
+}
+
 function getClient() {
+  // Without credentials the app must still boot: anonymous use stays on
+  // localStorage and login is optional. Consumers treat `null` as "sync off".
+  if (!isSupabaseConfigured()) return null;
   if (_client) return _client;
   const url = env.VITE_SUPABASE_URL;
   const key = env.VITE_SUPABASE_ANON_KEY;
-  if (!url || !key) {
-    throw new Error(
-      'Missing VITE_SUPABASE_URL or VITE_SUPABASE_ANON_KEY. ' +
-        'See .env.example and set them in the Vercel dashboard.',
-    );
-  }
   _client = createClient(url, key, {
     auth: {
       persistSession: true,

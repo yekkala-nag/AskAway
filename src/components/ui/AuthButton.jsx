@@ -6,7 +6,7 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import { signInWithMagicLink, signOut, getSession, onAuthStateChange } from '../../lib/supabaseAuth.js';
-import { supabase } from '../../lib/supabaseClient.js';
+import { supabase, isSupabaseConfigured } from '../../lib/supabaseClient.js';
 import { initSync, setSupabase, setUserId } from '../../services/sync.js';
 import { useToast } from './Feedback.jsx';
 
@@ -18,6 +18,7 @@ export function AuthButton() {
   const { show } = useToast();
 
   useEffect(() => {
+    if (!isSupabaseConfigured()) return undefined;
     let mounted = true;
     (async () => {
       const { data } = await getSession();
@@ -47,7 +48,7 @@ export function AuthButton() {
 
   const handleMagicLink = async (e) => {
     e.preventDefault();
-    if (!email.trim()) return;
+    if (!email.trim() || !supabase) return;
     setLoading(true);
     setMessage(null);
     const { error } = await signInWithMagicLink(email.trim());
@@ -63,6 +64,7 @@ export function AuthButton() {
   };
 
   const handleOAuth = async () => {
+    if (!supabase) return;
     setLoading(true);
     setMessage(null);
     const { error } = await supabase.auth.signInWithOAuth({
@@ -86,6 +88,8 @@ export function AuthButton() {
   };
 
   const clearError = () => setMessage(null);
+
+  if (!isSupabaseConfigured()) return null;
 
   if (user) {
     return (
