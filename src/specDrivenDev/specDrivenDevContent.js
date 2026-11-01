@@ -321,6 +321,7 @@ export const LESSONS = [
       },
       {
         heading: "How to choose",
+        body: [],
         bullets: [
           "Solo or small project, any agent: start with plain markdown and a rules file. You learn the method with zero lock-in.",
           "Team standardizing across several agents: an agent-agnostic toolkit gives shared templates and consistent stages.",

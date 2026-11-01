@@ -265,7 +265,7 @@ function Lessons() {
             <div style={{ color: C.teal, fontWeight: 700, fontSize: 13, marginBottom: 6 }}>
               {s.heading}
             </div>
-            {s.body.map((b, j) => (
+            {(s.body || []).map((b, j) => (
               <div key={j} style={{ color: C.text, fontSize: 12, lineHeight: 1.7, marginBottom: 6 }}>
                 {b}
               </div>
