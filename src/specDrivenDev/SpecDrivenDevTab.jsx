@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { callAIProxy } from "../lib/aiProxy.js";
 import {
   TRACK_OVERVIEW,
   LESSON_MAP,
@@ -219,6 +220,36 @@ function Overview() {
 function Lessons() {
   const [sel, setSel] = useState(0);
   const lesson = LESSONS[sel];
+  const [genType, setGenType] = useState("code");
+  const [genPrompt, setGenPrompt] = useState("");
+  const [genKey, setGenKey] = useState("");
+  const [genResult, setGenResult] = useState("");
+  const [genLoading, setGenLoading] = useState(false);
+  const [genError, setGenError] = useState(null);
+
+  const handleGenerate = async () => {
+    if (!genPrompt.trim()) return;
+    setGenLoading(true);
+    setGenError(null);
+    setGenResult("");
+    try {
+      const result = await callAIProxy({
+        messages: [
+          {
+            role: "user",
+            content: `Generate a ${genType} for: ${genPrompt}. Lesson: ${lesson.title}. Keep it concise and practical.`,
+          },
+        ],
+        stream: false,
+        apiKey: genKey.trim() || undefined,
+      });
+      setGenResult(result);
+    } catch (e) {
+      setGenError(String(e.message));
+    } finally {
+      setGenLoading(false);
+    }
+  };
 
   return (
     <>
@@ -287,6 +318,94 @@ function Lessons() {
           <Callout color={C.teal} title="TAKEAWAY">
             {lesson.takeaway}
           </Callout>
+        </div>
+
+        <div style={sectionStyle}>
+          <div style={labelStyle(C.teal)}>GENERATE WITH AI</div>
+          <div style={{ color: C.muted, fontSize: 12, lineHeight: 1.6, marginBottom: 10 }}>
+            Generate code, a markdown table, or a workflow outline for this lesson&apos;s topic.
+          </div>
+          <div style={{ display: "grid", gap: 8 }}>
+            <select
+              value={genType}
+              onChange={(e) => setGenType(e.target.value)}
+              style={{
+                padding: "6px 10px",
+                borderRadius: 6,
+                background: C.s2,
+                border: `1px solid ${C.border}`,
+                color: C.text,
+                fontSize: 11,
+              }}
+            >
+              <option value="code">Code</option>
+              <option value="table">Markdown table</option>
+              <option value="workflow">Workflow outline</option>
+            </select>
+            <input
+              value={genPrompt}
+              onChange={(e) => setGenPrompt(e.target.value)}
+              placeholder="Your requirement (e.g. password reset endpoint)"
+              style={{
+                padding: "6px 10px",
+                borderRadius: 6,
+                background: C.s2,
+                border: `1px solid ${C.border}`,
+                color: C.text,
+                fontSize: 11,
+              }}
+            />
+            <input
+              value={genKey}
+              onChange={(e) => setGenKey(e.target.value)}
+              type="password"
+              placeholder="OpenAI API key (optional; uses platform key if set)"
+              style={{
+                padding: "6px 10px",
+                borderRadius: 6,
+                background: C.s2,
+                border: `1px solid ${C.border}`,
+                color: C.text,
+                fontSize: 11,
+              }}
+            />
+            <button
+              onClick={handleGenerate}
+              disabled={genLoading}
+              style={{
+                padding: "6px 12px",
+                borderRadius: 6,
+                background: genLoading ? C.muted : C.teal,
+                border: "none",
+                color: C.bg,
+                fontSize: 11,
+                fontWeight: 600,
+                cursor: genLoading ? "not-allowed" : "pointer",
+              }}
+            >
+              {genLoading ? "Generating…" : "Generate"}
+            </button>
+          </div>
+          {genError && (
+            <Callout color={C.coral}>{genError}</Callout>
+          )}
+          {genResult && (
+            <div
+              style={{
+                padding: 12,
+                background: C.s2,
+                borderRadius: 6,
+                borderLeft: `3px solid ${C.teal}`,
+                color: C.text,
+                fontSize: 12,
+                lineHeight: 1.6,
+                whiteSpace: "pre-wrap",
+                fontFamily: "JetBrains Mono, monospace",
+              }}
+            >
+              {genResult}
+            </div>
+          )}
         </div>
       </div>
     </>
