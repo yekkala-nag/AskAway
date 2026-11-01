@@ -157,6 +157,7 @@ export function Sidebar({
   onSearchChange,
   collapsed,
   onToggleCollapse,
+  onClose,
 }) {
   const [expandedModules, setExpandedModules] = useState({
     foundations: true,
@@ -263,6 +264,7 @@ export function Sidebar({
       {/* 1. SIDEBAR DIRECTORY HEADER */}
       <div style={{
         padding: collapsed ? '14px 10px' : '14px 16px',
+        paddingTop: 'max(14px, env(safe-area-inset-top, 0px))',
         borderBottom: '1px solid #F1F3F5',
         flexShrink: 0
       }}>
@@ -286,23 +288,47 @@ export function Sidebar({
           ) : (
             <span style={{ fontSize: '1.1rem' }} title="Curriculum Index">🧭</span>
           )}
-          {onToggleCollapse && (
+          {onClose ? (
             <button
-              onClick={() => onToggleCollapse?.()}
-              title={collapsed ? "Expand sidebar (⌘[)" : "Collapse sidebar (⌘[)"}
+              onClick={onClose}
+              title="Close navigation"
+              aria-label="Close navigation menu"
               style={{
-                background: 'transparent', border: '1px solid #E5E7EB',
-                borderRadius: '6px', color: '#9CA3AF', cursor: 'pointer',
-                width: '28px', height: '28px',
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-                transition: 'all 0.15s ease', fontSize: '0.7rem'
+                background: 'transparent',
+                border: '1px solid #E5E7EB',
+                borderRadius: '6px',
+                color: '#64748B',
+                cursor: 'pointer',
+                width: '30px',
+                height: '30px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontSize: '0.85rem',
+                touchAction: 'manipulation'
               }}
-              onMouseEnter={e => { e.currentTarget.style.background = '#F1F3F5'; e.currentTarget.style.color = '#4B5563'; }}
-              onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = '#9CA3AF'; }}
-              aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
             >
-              {collapsed ? '▸' : '◂'}
+              ✕
             </button>
+          ) : (
+            onToggleCollapse && (
+              <button
+                onClick={() => onToggleCollapse?.()}
+                title={collapsed ? "Expand sidebar (⌘[)" : "Collapse sidebar (⌘[)"}
+                style={{
+                  background: 'transparent', border: '1px solid #E5E7EB',
+                  borderRadius: '6px', color: '#9CA3AF', cursor: 'pointer',
+                  width: '28px', height: '28px',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  transition: 'all 0.15s ease', fontSize: '0.7rem'
+                }}
+                onMouseEnter={e => { e.currentTarget.style.background = '#F1F3F5'; e.currentTarget.style.color = '#4B5563'; }}
+                onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = '#9CA3AF'; }}
+                aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
+              >
+                {collapsed ? '▸' : '◂'}
+              </button>
+            )
           )}
         </div>
       </div>

@@ -14,6 +14,7 @@ const CommandPalette = lazy(() =>
   import('./components/ui/CommandPalette.jsx').then(m => ({ default: m.CommandPalette }))
 );
 import { AdaptiveWorkflowBar } from './components/ui/AdaptiveWorkflowBar.jsx';
+import { MobileBottomNav } from './components/ui/MobileBottomNav.jsx';
 import { ToastProvider, useToast, Skeleton } from './components/ui/Feedback.jsx';
 import { TopicFooter } from './components/ui/TopicFooter.jsx';
 import { LegalModal } from './components/ui/LegalModal.jsx';
@@ -525,13 +526,14 @@ export default function App() {
               onSearchChange={setSearchQuery}
               collapsed={sidebarCollapsed}
               onToggleCollapse={handleSidebarToggle}
+              onClose={() => setMobileOpen(false)}
             />
           </Suspense>
         }
         sidebarCollapsed={sidebarCollapsed}
         onSidebarToggle={handleSidebarToggle}
       >
-        <div ref={contentScrollRef} style={{ flex: 1 }}>
+        <div ref={contentScrollRef} style={{ flex: 1, paddingBottom: 'calc(var(--ds-space-12) + env(safe-area-inset-bottom, 0px))' }}>
           <Container size="normal">
             <TabLoader tabId={activeTab} onSelectTab={handleTabSelect} />
             <AdaptiveWorkflowBar activeTab={activeTab} onSelectTab={handleTabSelect} />
@@ -540,7 +542,7 @@ export default function App() {
               style={{
                 marginTop: 'var(--ds-space-12)',
                 paddingTop: 'var(--ds-space-6)',
-                paddingBottom: 'calc(var(--ds-space-8) + env(safe-area-inset-bottom, 0px))',
+                paddingBottom: 'calc(var(--ds-space-12) + env(safe-area-inset-bottom, 0px))',
                 borderTop: '1px solid var(--ds-color-border-subtle)',
                 display: 'flex',
                 flexDirection: 'column',
@@ -614,6 +616,14 @@ export default function App() {
 
         <StorageNoticeBanner
           onOpenPrivacy={() => openLegal('privacy')}
+        />
+
+        <MobileBottomNav
+          activeTab={activeTab}
+          onSelectTab={handleTabSelect}
+          onToggleSidebar={() => setMobileOpen(!mobileOpen)}
+          onSearchOpen={handleSearchOpen}
+          sidebarOpen={mobileOpen}
         />
       </Page>
     </ToastProvider>

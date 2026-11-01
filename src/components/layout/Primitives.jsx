@@ -13,28 +13,33 @@ import { useModalA11y } from '../../hooks/useModalA11y.js';
 // ============================================
 export function Page({ children, sidebar, header, sidebarCollapsed, onSidebarToggle, mobileOpen, onCloseMobile }) {
   const [isMobile, setIsMobile] = useState(false);
+  const [isTablet, setIsTablet] = useState(false);
 
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768);
+      const width = window.innerWidth;
+      setIsMobile(width <= 768);
+      setIsTablet(width > 768 && width <= 1024);
     };
     handleResize();
     window.addEventListener('resize', handleResize, { passive: true });
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  // Mobile drawer: trap focus while open, restore it on close (desktop unaffected)
-  const drawerOpen = isMobile && !!mobileOpen;
+  const isCompact = isMobile || isTablet;
+
+  // Mobile/Tablet drawer: trap focus while open, restore it on close (desktop unaffected)
+  const drawerOpen = isCompact && !!mobileOpen;
   const { ref: drawerRef, onBackdrop } = useModalA11y(drawerOpen, onCloseMobile, { dismissable: true, autofocus: true });
 
-  const sidebarWidth = isMobile
-    ? (mobileOpen ? '320px' : '0px')
+  const sidebarWidth = isCompact
+    ? (mobileOpen ? 'min(340px, 85vw)' : '0px')
     : (sidebarCollapsed ? '72px' : '320px');
 
   return (
     <div className="app-page" style={{ display: 'flex', flexDirection: 'column', overflow: 'hidden', background: 'var(--ds-color-bg-canvas)', position: 'relative' }}>
-      {/* MOBILE BACKDROP OVERLAY */}
-      {isMobile && mobileOpen && (
+      {/* MOBILE / TABLET BACKDROP OVERLAY */}
+      {isCompact && mobileOpen && (
         <div
           onClick={onBackdrop}
           role="presentation"
@@ -64,25 +69,25 @@ export function Page({ children, sidebar, header, sidebarCollapsed, onSidebarTog
         <div
           ref={drawerRef}
           id="main-sidebar"
-          aria-hidden={isMobile && !mobileOpen}
-          inert={isMobile && !mobileOpen ? true : undefined}
+          aria-hidden={isCompact && !mobileOpen}
+          inert={isCompact && !mobileOpen ? true : undefined}
           role={drawerOpen ? 'dialog' : undefined}
           aria-modal={drawerOpen ? true : undefined}
           aria-label={drawerOpen ? 'Navigation menu' : undefined}
           style={{
             height: '100%',
-            position: isMobile ? 'fixed' : 'relative',
+            position: isCompact ? 'fixed' : 'relative',
             top: 0, left: 0,
             background: 'var(--ds-color-bg-surface)',
             borderRight: '1px solid var(--ds-color-border-subtle)',
             display: 'flex',
             flexDirection: 'column',
-            zIndex: isMobile ? 100 : 'var(--ds-zIndex-sidebar)',
+            zIndex: isCompact ? 100 : 'var(--ds-zIndex-sidebar)',
             width: sidebarWidth,
             minWidth: sidebarWidth,
             transition: 'width 0.25s cubic-bezier(0.4, 0, 0.2, 1), min-width 0.25s cubic-bezier(0.4, 0, 0.2, 1)',
             overflow: 'hidden',
-            boxShadow: isMobile && mobileOpen ? '0 20px 40px rgba(0,0,0,0.4)' : 'none'
+            boxShadow: isCompact && mobileOpen ? '0 20px 40px rgba(0,0,0,0.4)' : 'none'
           }}>
           {sidebar}
         </div>

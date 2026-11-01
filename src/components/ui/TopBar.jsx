@@ -119,6 +119,33 @@ export function TopBar({ activeTab, onSelectTab, onSearchOpen, onToggleSidebar, 
         .topbar-mobile-menu-btn {
           display: none !important;
         }
+        .topbar-header-card {
+          margin: 12px 16px 0;
+          padding: 14px 22px;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 16px;
+          flex-wrap: wrap;
+          background: var(--ds-color-chrome-headerBg, #FFFFFF);
+          border: 1px solid var(--ds-color-chrome-headerBorder, #E7EDF3);
+          border-radius: 18px;
+          box-shadow: var(--ds-color-chrome-headerShadow, 0 10px 30px rgba(22, 40, 63, 0.08));
+        }
+        .topbar-breadcrumbs-row {
+          padding: 7px 20px;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 12px;
+          background: #FAFBFC;
+          overflow-x: auto;
+          -webkit-overflow-scrolling: touch;
+          scrollbar-width: none;
+        }
+        .topbar-breadcrumbs-row::-webkit-scrollbar {
+          display: none;
+        }
         .aw-search-pill {
           background: linear-gradient(var(--ds-color-chrome-searchPill, #F1F4F8), var(--ds-color-chrome-searchPill, #F1F4F8)) padding-box,
                       linear-gradient(120deg, var(--ds-color-chrome-ctaFrom, #14B8A6), var(--ds-color-module-context-primary, #9B89C4)) border-box;
@@ -167,27 +194,61 @@ export function TopBar({ activeTab, onSelectTab, onSearchOpen, onToggleSidebar, 
           box-shadow: 0 8px 22px rgba(20, 184, 166, 0.42);
           filter: saturate(1.08);
         }
+        @media (max-width: 1024px) {
+          .topbar-mobile-menu-btn {
+            display: inline-flex !important;
+          }
+          .topbar-header-card {
+            margin: 8px 12px 0;
+            padding: 10px 16px;
+          }
+        }
         @media (max-width: 768px) {
           .topbar-mobile-menu-btn {
             display: inline-flex !important;
+          }
+          .topbar-header-card {
+            margin: 6px 8px 0 !important;
+            padding: 8px 12px !important;
+            border-radius: 14px !important;
+            gap: 8px !important;
+          }
+          .topbar-brand-tagline {
+            display: none !important;
+          }
+          .aw-search-pill {
+            min-width: unset !important;
+            padding: 8px 12px !important;
+          }
+          .aw-search-kbd {
+            display: none !important;
+          }
+          .topbar-daily-progress {
+            padding: 6px 10px !important;
+          }
+          .topbar-daily-progress-bar {
+            width: 70px !important;
+          }
+          .topbar-daily-progress-items {
+            display: none !important;
+          }
+          .topbar-breadcrumbs-row {
+            padding: 6px 12px !important;
+            gap: 8px !important;
+          }
+        }
+        @media (max-width: 480px) {
+          .topbar-daily-progress-bar {
+            display: none !important;
+          }
+          .aw-search-text {
+            display: none !important;
           }
         }
       `}</style>
 
       {/* 1. ASK AWAY HEADER CARD (floating) */}
-      <div style={{
-        margin: '12px 16px 0',
-        padding: '14px 22px',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        gap: '16px',
-        flexWrap: 'wrap',
-        background: 'var(--ds-color-chrome-headerBg, #FFFFFF)',
-        border: '1px solid var(--ds-color-chrome-headerBorder, #E7EDF3)',
-        borderRadius: '18px',
-        boxShadow: 'var(--ds-color-chrome-headerShadow, 0 10px 30px rgba(22, 40, 63, 0.08))'
-      }}>
+      <div className="topbar-header-card">
         {/* Left: Enlarged Logo + Title + Tagline */}
         <div
           onClick={() => onSelectTab && onSelectTab('overview')}
@@ -283,7 +344,7 @@ export function TopBar({ activeTab, onSelectTab, onSearchOpen, onToggleSidebar, 
                 PRO
               </span>
             </div>
-            <div style={{
+            <div className="topbar-brand-tagline" style={{
               fontSize: '0.76rem',
               color: '#64748B',
               fontWeight: 500,
@@ -301,6 +362,7 @@ export function TopBar({ activeTab, onSelectTab, onSearchOpen, onToggleSidebar, 
         {/* Right: Daily Progress pill + Search Pill Trigger */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexShrink: 0, flexWrap: 'wrap', justifyContent: 'flex-end' }}>
           <div
+            className="topbar-daily-progress"
             title={`Daily Progress — ${activeTrack ? activeTrack.title : 'current track'}`}
             style={{
               display: 'flex',
@@ -327,14 +389,14 @@ export function TopBar({ activeTab, onSelectTab, onSearchOpen, onToggleSidebar, 
                 {trackProgress.percent}%
               </span>
             </div>
-            <div style={{ height: '5px', width: '130px', borderRadius: '3px', background: '#E5E7EB', overflow: 'hidden' }}>
+            <div className="topbar-daily-progress-bar" style={{ height: '5px', width: '130px', borderRadius: '3px', background: '#E5E7EB', overflow: 'hidden' }}>
               <div style={{
                 height: '100%', width: `${trackProgress.percent}%`, borderRadius: '3px',
                 background: 'linear-gradient(90deg, var(--ds-color-chrome-ctaFrom, #14B8A6), var(--ds-color-chrome-ctaTo, #0E9F8A))',
                 transition: 'width 0.3s ease'
               }} />
             </div>
-            <span style={{ fontSize: '0.62rem', fontWeight: 500, color: '#9CA3AF' }}>
+            <span className="topbar-daily-progress-items" style={{ fontSize: '0.62rem', fontWeight: 500, color: '#9CA3AF' }}>
               {trackProgress.completed}/{trackProgress.total} items
             </span>
           </div>
@@ -355,8 +417,8 @@ export function TopBar({ activeTab, onSelectTab, onSearchOpen, onToggleSidebar, 
               cursor: 'pointer'
             }}
           >
-            <span style={{ flex: 1, textAlign: 'left' }}>Search modules…</span>
-            <kbd style={{
+            <span className="aw-search-text" style={{ flex: 1, textAlign: 'left' }}>Search modules…</span>
+            <kbd className="aw-search-kbd" style={{
               fontSize: '0.66rem',
               padding: '3px 8px',
               background: '#FFFFFF',
@@ -375,15 +437,7 @@ export function TopBar({ activeTab, onSelectTab, onSearchOpen, onToggleSidebar, 
       </div>
 
       {/* 2. NAVIGATION BAR (BELOW THE LOGO) */}
-      <div style={{
-        padding: '7px 20px',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        gap: '12px',
-        flexWrap: 'wrap',
-        background: '#FAFBFC'
-      }}>
+      <div className="topbar-breadcrumbs-row">
         {/* Left: Breadcrumbs Path */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px', minWidth: 0, flexWrap: 'wrap' }}>
           {/* Module Pill (Foundations & Architecture) */}

@@ -321,6 +321,11 @@ img, video, iframe, canvas, svg {
 }
 
 /* Responsive Mobile & Tablet Styles */
+@media (max-width: 1024px) {
+  .ds-container-wide { max-width: 100%; }
+  .ds-container-normal { max-width: 100%; }
+}
+
 @media (max-width: 768px) {
   html { font-size: 14px; }
   h1 { font-size: 22px !important; }
@@ -331,6 +336,18 @@ img, video, iframe, canvas, svg {
   button, select, input {
     touch-action: manipulation;
   }
+
+  table {
+    display: block;
+    max-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* Touch feedback and mobile tap highlight removal */
+* {
+  -webkit-tap-highlight-color: transparent;
 }
 
 /* Touch targets (coarse pointers: phones & tablets)

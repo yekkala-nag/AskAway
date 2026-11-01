@@ -90,7 +90,7 @@ function StackBuilder() {
             return (
               <button key={p.id} onClick={() => toggle(p.id)}
                 style={{
-                  textAlign: 'left', padding: 12, borderRadius: 10, cursor: 'pointer', textAlign: 'left',
+                  textAlign: 'left', padding: 12, borderRadius: 10, cursor: 'pointer',
                   border: `1.5px solid ${on ? TEAL : 'var(--ds-color-border-subtle)'}`,
                   background: on ? '#E3F2F2' : 'var(--ds-color-bg-canvas)',
                   transition: 'all var(--ds-motion-duration-base)',

@@ -16,6 +16,11 @@
     "StatusBar": {
       "style": "DARK",
       "backgroundColor": "#0b0c10"
+    },
+    "Keyboard": {
+      "resize": "body",
+      "style": "DARK",
+      "resizeOnFullScreen": true
     }
   }
 }
