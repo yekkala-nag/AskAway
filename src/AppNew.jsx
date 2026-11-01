@@ -115,6 +115,7 @@ const TabComponents = {
   verifiedpipes: lazy(() => import('./verifiedPipes/VerifiedPipesTab.jsx')),
   codingevals: lazy(() => import('./codingEvals/CodingEvalsTab.jsx')),
   vibecode: lazy(() => import('./vibeCode/VibeCodeTab.jsx')),
+  specdriven: lazy(() => import('./specDrivenDev/SpecDrivenDevTab.jsx')),
   fiveassets: lazy(() => import('./AppContent.jsx').then(m => ({ default: m.FiveAssetsTab }))),
   multiagent: lazy(() => import('./AppContent.jsx').then(m => ({ default: m.MultiAgentTab }))),
   multiagentcoord: lazy(() => import('./multiAgentCoordination/MultiAgentCoordinationTab.jsx')),

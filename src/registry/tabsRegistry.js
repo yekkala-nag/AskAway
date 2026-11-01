@@ -50,7 +50,7 @@ export const UMBRELLA_TOPICS = [
     icon: "🤖",
     color: "#F0A89A",
     dark: "#C47A6A",
-    tabs: ["agt_found_hub", "agt_safety_hub", "agt_multi_hub", "agt_prod_hub", "fiveassets", "redesign", "projectprepframework", "agentplanner", "agenthitl", "agentcontrolplane", "agentlifecycle", "agenta2a", "agentsandbox", "agentevals", "handoffwatch", "verifiedpipes", "codingevals", "claudecode100", "typedagentgate", "agentpairprogramming", "vibecode", "agentsastools", "toolcalling", "agenttasks", "agentmemory", "cliagent", "codingagentsnonprog", "multiagent", "multiagentcoord", "modelrouting", "decision_layer", "langchain", "langgraph", "frameworkcompare", "agentdebugging", "agentscale", "modeldeploy", "aiproductbuilder", "mcpclient", "agentsdk", "loopengineering", "agenticsoftwarefactory", "finassistproject", "zerocostmultiagent", "capstone2", "functionalscars", "refactorhealth", "agentcreativity", "agentorgchart", "synasyncagent", "agentpatterns", "agentuisupply", "interviewmindset"]
+    tabs: ["agt_found_hub", "agt_safety_hub", "agt_multi_hub", "agt_prod_hub", "fiveassets", "redesign", "projectprepframework", "agentplanner", "agenthitl", "agentcontrolplane", "agentlifecycle", "agenta2a", "agentsandbox", "agentevals", "handoffwatch", "verifiedpipes", "codingevals", "claudecode100", "typedagentgate", "agentpairprogramming", "vibecode", "specdriven", "agentsastools", "toolcalling", "agenttasks", "agentmemory", "cliagent", "codingagentsnonprog", "multiagent", "multiagentcoord", "modelrouting", "decision_layer", "langchain", "langgraph", "frameworkcompare", "agentdebugging", "agentscale", "modeldeploy", "aiproductbuilder", "mcpclient", "agentsdk", "loopengineering", "agenticsoftwarefactory", "finassistproject", "zerocostmultiagent", "capstone2", "functionalscars", "refactorhealth", "agentcreativity", "agentorgchart", "synasyncagent", "agentpatterns", "agentuisupply", "interviewmindset"]
   },
   {
     id: "frontiers_production",
@@ -837,6 +837,14 @@ export const TABS_REGISTRY = [
     category: "Agents & Frameworks",
     icon: "🎸",
     component: lazy(() => import("../vibeCode/VibeCodeTab.jsx"))
+  },
+  {
+    id: "specdriven",
+    label: "Spec-Driven Development",
+    umbrellaId: "agents_frameworks",
+    category: "Agents & Frameworks",
+    icon: "📐",
+    component: lazy(() => import("../specDrivenDev/SpecDrivenDevTab.jsx"))
   },
   {
     id: "agentsastools",
