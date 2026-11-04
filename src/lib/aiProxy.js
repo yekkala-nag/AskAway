@@ -1,14 +1,17 @@
 /**
- * aiProxy.js — client-side helper for the /api/ai/chat proxy.
+ * aiProxy.js — client-side helper for AI chat calls.
  *
- * Routes OpenAI-style chat requests through the Vercel function so that:
- *   - No OpenAI key or call exists in client bundles.
- *   - The server enforces auth, rate limits, model allow-lists, and quotas.
- *   - SSE streaming is supported when the caller passes onToken.
+ * Two paths:
+ *   - freellmapi key (freellmapi-…): direct browser → localhost OpenAI-compatible
+ *     endpoint (the Vercel proxy cannot reach the user's localhost).
+ *   - otherwise: routes through the /api/ai/chat Vercel function so that
+ *     no OpenAI key or call exists in client bundles, the server enforces
+ *     auth/rate limits/model allow-lists/quotas, and SSE streaming works.
  *
- * The user-supplied key mode is preserved: pass `apiKey` and it is forwarded
- * to the proxy (which relays it to OpenAI). The key is never stored server-side.
+ * Keys are read once from aiKeyStore (localStorage) — never stored server-side.
  */
+
+import { loadAIConfig } from './aiKeyStore.js';
 
 const API_BASE = (typeof import.meta.env === 'object' && import.meta.env)
   ? import.meta.env.VITE_API_BASE_URL || ''
@@ -21,14 +24,39 @@ export async function callAIProxy({
   onToken,
   apiKey,
 }) {
+  const stored = loadAIConfig();
+  const key = apiKey || stored.apiKey;
   const headers = { 'Content-Type': 'application/json' };
-  if (apiKey) headers['x-openai-api-key'] = apiKey;
 
-  const res = await fetch(`${API_BASE}/api/ai/chat`, {
-    method: 'POST',
-    headers,
-    body: JSON.stringify({ messages, model, stream }),
-  });
+  let url;
+  let bodyModel = model;
+  if (key && key.startsWith('freellmapi-')) {
+    // freellmapi is OpenAI-compatible but localhost-only, so the browser must
+    // call it directly (the Vercel proxy cannot reach the user's localhost).
+    // Its model namespace differs from OpenAI's — use the stored model.
+    url = `${stored.baseUrl.replace(/\/$/, '')}/chat/completions`;
+    headers['Authorization'] = `Bearer ${key}`;
+    bodyModel = stored.model;
+  } else {
+    url = `${API_BASE}/api/ai/chat`;
+    if (key) headers['x-openai-api-key'] = key;
+  }
+
+  let res;
+  try {
+    res = await fetch(url, {
+      method: 'POST',
+      headers,
+      body: JSON.stringify({ messages, model: bodyModel, stream }),
+    });
+  } catch (err) {
+    if (headers.Authorization) {
+      throw new Error(
+        `Cannot reach freellmapi at ${url}. Is it running? (npx freellmapi setup opencode)`,
+      );
+    }
+    throw err;
+  }
 
   if (!res.ok) {
     let detail;

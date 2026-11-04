@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { callAIProxy } from "../lib/aiProxy.js";
+import { loadAIConfig, saveAIConfig } from "../lib/aiKeyStore.js";
 import { LESSON_IMAGES } from "./lessonImages.js";
 import {
   TRACK_OVERVIEW,
@@ -223,7 +224,7 @@ function Lessons() {
   const lesson = LESSONS[sel];
   const [genType, setGenType] = useState("code");
   const [genPrompt, setGenPrompt] = useState("");
-  const [genKey, setGenKey] = useState("");
+  const [genKey, setGenKey] = useState(() => loadAIConfig().apiKey);
   const [genResult, setGenResult] = useState("");
   const [genLoading, setGenLoading] = useState(false);
   const [genError, setGenError] = useState(null);
@@ -373,9 +374,12 @@ function Lessons() {
             />
             <input
               value={genKey}
-              onChange={(e) => setGenKey(e.target.value)}
+              onChange={(e) => {
+                setGenKey(e.target.value);
+                saveAIConfig({ apiKey: e.target.value });
+              }}
               type="password"
-              placeholder="OpenAI API key (optional; uses platform key if set)"
+              placeholder="API key (saved in this browser; freellmapi keys work directly)"
               style={{
                 padding: "6px 10px",
                 borderRadius: 6,

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Card, Button } from '../components/ui/Core.jsx';
 import { generateArtifact, generateImage } from './generation.js';
+import { loadAIConfig, saveAIConfig } from '../lib/aiKeyStore.js';
 
 const OUTPUT_TYPES = [
   { id: 'images', label: 'Image', icon: '🎨', description: 'Generate an original image' },
@@ -164,11 +165,15 @@ function ArtifactPreview({ type, artifact }) {
 }
 
 export default function CreationStudio() {
+  const stored = loadAIConfig();
+  const freellmapi = stored.apiKey.startsWith('freellmapi-');
   const [type, setType] = useState('images');
   const [requirements, setRequirements] = useState('');
-  const [apiKey, setApiKey] = useState('');
-  const [endpoint, setEndpoint] = useState('https://api.openai.com/v1/chat/completions');
-  const [model, setModel] = useState('gpt-4o-mini');
+  const [apiKey, setApiKey] = useState(stored.apiKey);
+  const [endpoint, setEndpoint] = useState(
+    freellmapi ? `${stored.baseUrl}/chat/completions` : 'https://api.openai.com/v1/chat/completions',
+  );
+  const [model, setModel] = useState(freellmapi ? stored.model : 'gpt-4o-mini');
   const [imageEndpoint, setImageEndpoint] = useState('https://api.openai.com/v1/images/generations');
   const [imageModel, setImageModel] = useState('gpt-image-1');
   const [artifact, setArtifact] = useState(null);
@@ -243,8 +248,17 @@ export default function CreationStudio() {
           <details>
             <summary style={{ color: '#4B5563', fontSize: '0.76rem', cursor: 'pointer' }}>AI connection settings</summary>
             <div style={{ display: 'grid', gap: '10px', marginTop: '12px' }}>
-              <Field label="API key (kept in this page's memory)">
-                <input type="password" autoComplete="off" value={apiKey} onChange={(event) => setApiKey(event.target.value)} style={inputStyle} />
+              <Field label="API key (saved in this browser)">
+                <input
+                  type="password"
+                  autoComplete="off"
+                  value={apiKey}
+                  onChange={(event) => {
+                    setApiKey(event.target.value);
+                    saveAIConfig({ apiKey: event.target.value });
+                  }}
+                  style={inputStyle}
+                />
               </Field>
               {type !== 'images' && <>
                 <Field label="Chat completions endpoint">
@@ -265,7 +279,7 @@ export default function CreationStudio() {
             </div>
           </details>
           <p style={{ margin: 0, color: '#6B7280', fontSize: '0.68rem', lineHeight: 1.5 }}>
-            The API key is not saved by this feature and is sent from your browser to the endpoint you configure. Use a trusted HTTPS endpoint; compatible providers must allow browser requests.
+            The API key is saved only in this browser (localStorage) and is sent from your browser to the endpoint you configure. Use a trusted HTTPS endpoint; compatible providers must allow browser requests.
           </p>
           <Button onClick={handleGenerate} disabled={generating || !requirements.trim() || !apiKey.trim()} loading={generating}>
             {generating ? 'Generating…' : `Generate ${OUTPUT_TYPES.find((item) => item.id === type)?.label}`}

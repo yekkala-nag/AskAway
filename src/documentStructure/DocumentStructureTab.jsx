@@ -15,6 +15,7 @@ import {
   BenchmarkViewer,
 } from '../documentStructure/index.js';
 import { callAIProxy } from '../lib/aiProxy.js';
+import { loadAIConfig, saveAIConfig } from '../lib/aiKeyStore.js';
 
 const API_BASE = (typeof import.meta.env === 'object' && import.meta.env)
   ? import.meta.env.VITE_API_BASE_URL || ''
@@ -39,6 +40,10 @@ const DEFAULT_AI_CONFIG = {
   model: 'gpt-4o-mini',
 };
 
+function initialAIConfig() {
+  return { ...DEFAULT_AI_CONFIG, apiKey: loadAIConfig().apiKey };
+}
+
 export default function DocumentStructureTab() {
   const [file, setFile] = useState(null);
   const [parsing, setParsing] = useState(false);
@@ -56,7 +61,7 @@ export default function DocumentStructureTab() {
   const [cascadeMode, setCascadeMode] = useState('auto');
   const [validationLogs, setValidationLogs] = useState([]);
 
-  const [aiConfig, setAiConfig] = useState(DEFAULT_AI_CONFIG);
+  const [aiConfig, setAiConfig] = useState(initialAIConfig);
   const [generating, setGenerating] = useState(false);
   const [workflow, setWorkflow] = useState(null);
   const [table, setTable] = useState(null);
@@ -655,8 +660,12 @@ export default function DocumentStructureTab() {
             <input
               type="password"
               value={aiConfig.apiKey}
-              onChange={e => setAiConfig(c => ({ ...c, apiKey: e.target.value }))}
-              placeholder="sk-..."
+              onChange={e => {
+                const apiKey = e.target.value;
+                setAiConfig(c => ({ ...c, apiKey }));
+                saveAIConfig({ apiKey });
+              }}
+              placeholder="sk-... or freellmapi-... (saved in this browser)"
               style={s.input}
             />
           </div>
