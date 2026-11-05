@@ -245,6 +245,8 @@ const TabComponents = {
   forecasttraps: lazy(() => import('./forecastTraps/ForecastTrapsTab.jsx')),
   ailearning: lazy(() => import('./aiLearning/AiLearningTab.jsx')),
   reversalcurse: lazy(() => import('./reversalCurse/ReversalCurseTab.jsx')),
+  'advanced-llm': lazy(() => import('./tabs/AdvancedLLMTab.jsx')),
+
 
 };
 
@@ -537,65 +539,7 @@ export default function App() {
           <Container size="normal">
             <TabLoader tabId={activeTab} onSelectTab={handleTabSelect} />
             <AdaptiveWorkflowBar activeTab={activeTab} onSelectTab={handleTabSelect} />
-            <footer
-              className="bottom-nav"
-              style={{
-                marginTop: 'var(--ds-space-12)',
-                paddingTop: 'var(--ds-space-6)',
-                paddingBottom: 'calc(var(--ds-space-12) + env(safe-area-inset-bottom, 0px))',
-                borderTop: '1px solid var(--ds-color-border-subtle)',
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                justifyContent: 'center',
-                gap: '8px',
-                textAlign: 'center',
-                fontSize: '13px',
-                color: 'var(--ds-color-text-secondary)'
-              }}
-            >
-              <div style={{ fontWeight: 600, color: 'var(--ds-color-text-primary)', display: 'flex', alignItems: 'center', gap: '6px', flexWrap: 'wrap', justifyContent: 'center' }}>
-                <span>© 2025–2026</span>
-                <a
-                  href="https://github.com/nyakkala"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="ds-hoverable"
-                  style={{ color: 'inherit', textDecoration: 'none', borderBottom: '1px dotted var(--ds-color-text-tertiary)' }}
-                  title="View Curator Profile"
-                >
-                  Nagaraj Y
-                </a>
-              </div>
-              <div style={{ fontSize: '12px', color: '#f59e0b', fontWeight: 500 }}>
-                Build, learn, and master the art of Generative AI.
-              </div>
-              <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', justifyContent: 'center', marginTop: '4px', fontSize: '12px' }}>
-                <button
-                  onClick={() => openLegal('privacy')}
-                  className="ds-hoverable"
-                  style={{ background: 'none', border: 'none', padding: '0 4px', color: 'var(--ds-color-text-tertiary)', textDecoration: 'underline', cursor: 'pointer', fontSize: '12px' }}
-                >
-                  Privacy Policy
-                </button>
-                <span style={{ color: 'var(--ds-color-border-subtle)' }}>•</span>
-                <button
-                  onClick={() => openLegal('terms')}
-                  className="ds-hoverable"
-                  style={{ background: 'none', border: 'none', padding: '0 4px', color: 'var(--ds-color-text-tertiary)', textDecoration: 'underline', cursor: 'pointer', fontSize: '12px' }}
-                >
-                  Terms of Service
-                </button>
-                <span style={{ color: 'var(--ds-color-border-subtle)' }}>•</span>
-                <button
-                  onClick={() => openLegal('trademarks')}
-                  className="ds-hoverable"
-                  style={{ background: 'none', border: 'none', padding: '0 4px', color: 'var(--ds-color-text-tertiary)', textDecoration: 'underline', cursor: 'pointer', fontSize: '12px' }}
-                >
-                  Trademarks & Fair Use
-                </button>
-              </div>
-            </footer>
+``
           </Container>
         </div>
 
