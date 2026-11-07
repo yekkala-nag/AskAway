@@ -58,7 +58,7 @@ export const UMBRELLA_TOPICS = [
     icon: "🔮",
     color: "#9B89C4",
     dark: "#6B5E94",
-    tabs: ["fr_eval_hub", "fr_ops_hub", "fr_frontiers_hub", "aigentools", "aiharnessquality", "aiarchdecisions", "firstaiapp", "enterpriseadvancedplaybook", "tokenorchestrationplaybook", "productionragops", "enterpriseaiops", "enterprisegrade", "finops", "observability", "slmedge", "speculativedecoding", "tokenbill", "llmevals", "modelvalidation", "reasoningbench", "practices", "powerfeatures", "ragbeyond", "frontiers", "progress", "guardrails", "agentguardrails", "agentobservability", "costtollbooth", "llmreliability", "evalharness", "advanced-llm"]
+    tabs: ["fr_eval_hub", "fr_ops_hub", "fr_frontiers_hub", "aigentools", "aiharnessquality", "aiarchdecisions", "firstaiapp", "enterpriseadvancedplaybook", "tokenorchestrationplaybook", "productionragops", "enterpriseaiops", "enterprisegrade", "finops", "observability", "slmedge", "speculativedecoding", "tokenbill", "llmevals", "modelvalidation", "reasoningbench", "practices", "powerfeatures", "ragbeyond", "frontiers", "progress", "guardrails", "agentguardrails", "agentobservability", "costtollbooth", "llmreliability", "evalharness", "advanced-llm", "experimenttracking", "llmsummarization"]
   }
 ];
 
@@ -1899,6 +1899,22 @@ export const TABS_REGISTRY = [
     category: "Agents & Frameworks",
     icon: "🏗️",
     component: lazy(() => import("../agentPatterns/AgentPatternsTab.jsx"))
+  },
+  {
+    id: "experimenttracking",
+    label: "LLM Pipeline Experiment Tracking",
+    umbrellaId: "frontiers_production",
+    category: "Advanced & Frontiers",
+    icon: "🧪",
+    component: lazy(() => import("../agentMemory/ExperimentTrackingTab.jsx"))
+  },
+  {
+    id: "llmsummarization",
+    label: "LLM Summarization in Pipelines",
+    umbrellaId: "frontiers_production",
+    category: "Advanced & Frontiers",
+    icon: "✨",
+    component: lazy(() => import("../agentMemory/SummarizationTab.jsx"))
   }
 ];
 
