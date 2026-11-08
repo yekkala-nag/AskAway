@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import DiagramImage from "../components/ui/DiagramImage.jsx";
 import {
   TRACK_OVERVIEW,
   MULTI_AGENT_PATTERNS,
@@ -149,6 +150,17 @@ function MultiAgent() {
     <>
       <div style={sectionStyle}>
         <div style={labelStyle(C.teal)}>MULTI-AGENT ARCHITECTURE PATTERNS</div>
+        <div style={{ marginBottom: 16 }}>
+          <DiagramImage
+            moduleId="agents_frameworks"
+            src="/assets/multi_agent_patterns.svg"
+            alt="Hierarchical vs peer-to-peer multi-agent topologies"
+            title="Hierarchy vs Peer Network"
+            caption="Hierarchy: one manager, specialised workers, clear ownership. P2P: shared bus, consensus, no single point of failure."
+            background="#090d16"
+            maxWidth={1100}
+          />
+        </div>
         <div style={{ display: "grid", gap: 16 }}>
           {MULTI_AGENT_PATTERNS.map((p, i) => (
             <div

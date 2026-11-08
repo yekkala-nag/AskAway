@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 500" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif">
+<defs>
+  <linearGradient id="taobg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#090d16"/><stop offset="100%" stop-color="#101a30"/></linearGradient>
+  <linearGradient id="taoblue" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#38bdf8"/><stop offset="100%" stop-color="#6366f1"/></linearGradient>
+  <linearGradient id="taogreen" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#10b981"/><stop offset="100%" stop-color="#059669"/></linearGradient>
+  <linearGradient id="taoamber" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#f59e0b"/><stop offset="100%" stop-color="#d97706"/></linearGradient>
+  <marker id="taoarr" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0,1 L8,4.5 L0,8 Z" fill="#38bdf8"/></marker>
+  <marker id="taoarrg" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0,1 L8,4.5 L0,8 Z" fill="#10b981"/></marker>
+  <marker id="taoarro" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0,1 L8,4.5 L0,8 Z" fill="#f59e0b"/></marker>
+</defs>
+<rect width="1200" height="500" fill="url(#taobg)" rx="12"/>
+<text x="40" y="46" fill="#fff" font-size="24" font-weight="800">Think → Act → Observe — the loop that makes an agent an agent</text>
+<text x="40" y="70" fill="#94a3b8" font-size="13">Every turn: reason about state, take one action, read the result, update memory, repeat until done or capped.</text>
+
+<g font-size="12" font-weight="700">
+  <rect x="90" y="120" width="320" height="150" rx="12" fill="#0f172a" stroke="#38bdf8" stroke-width="2"/>
+  <text x="112" y="152" fill="#38bdf8" font-size="16">🧠 Think</text>
+  <text x="112" y="180" fill="#e2e8f0" font-weight="400">parse input and context</text>
+  <text x="112" y="204" fill="#e2e8f0" font-weight="400">weigh available options</text>
+  <text x="112" y="228" fill="#e2e8f0" font-weight="400">plan the optimal approach</text>
+  <text x="112" y="252" fill="#94a3b8" font-weight="400">respect goal constraints</text>
+
+  <rect x="790" y="120" width="320" height="150" rx="12" fill="#0f172a" stroke="#10b981" stroke-width="2"/>
+  <text x="812" y="152" fill="#34d399" font-size="16">⚙️ Act</text>
+  <text x="812" y="180" fill="#e2e8f0" font-weight="400">execute the planned step</text>
+  <text x="812" y="204" fill="#e2e8f0" font-weight="400">call the right tool</text>
+  <text x="812" y="228" fill="#e2e8f0" font-weight="400">hit APIs, write output</text>
+  <text x="812" y="252" fill="#94a3b8" font-weight="400">one verifiable action</text>
+
+  <rect x="440" y="310" width="320" height="150" rx="12" fill="#0f172a" stroke="#f59e0b" stroke-width="2"/>
+  <text x="462" y="342" fill="#f59e0b" font-size="16">👁 Observe</text>
+  <text x="462" y="370" fill="#e2e8f0" font-weight="400">assess the action outcome</text>
+  <text x="462" y="394" fill="#e2e8f0" font-weight="400">update working memory</text>
+  <text x="462" y="418" fill="#e2e8f0" font-weight="400">learn from feedback</text>
+  <text x="462" y="442" fill="#94a3b8" font-weight="400">adjust or finish the plan</text>
+</g>
+
+<path d="M410,196 C520,196 610,196 786,196" fill="none" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#taoarr)"/>
+<text x="598" y="184" fill="#38bdf8" font-size="11" font-weight="700" text-anchor="middle">commit to an action</text>
+
+<path d="M950,270 C950,320 900,360 764,372" fill="none" stroke="#10b981" stroke-width="2.5" marker-end="url(#taoarrg)"/>
+<text x="930" y="332" fill="#34d399" font-size="11" font-weight="700" text-anchor="middle">return result</text>
+
+<path d="M436,372 C300,360 250,300 250,274" fill="none" stroke="#f59e0b" stroke-width="2.5" marker-end="url(#taoarro)"/>
+<text x="286" y="332" fill="#f59e0b" font-size="11" font-weight="700" text-anchor="middle">new state, next turn</text>
+
+<rect x="90" y="306" width="300" height="70" rx="10" fill="#0f172a" stroke="#334155"/>
+<text x="108" y="332" fill="#fff" font-size="12" font-weight="700">Guardrails</text>
+<text x="108" y="354" fill="#94a3b8" font-size="11" font-weight="400">step cap · stall detection · approval on irreversible actions</text>
+</svg>

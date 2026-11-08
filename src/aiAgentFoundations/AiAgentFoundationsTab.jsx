@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import DiagramImage from "../components/ui/DiagramImage.jsx";
 import {
   TRACK_OVERVIEW,
   KEY_CHARACTERISTICS,
@@ -136,6 +137,17 @@ function UnderstandingAgents() {
 
       <div style={sectionStyle}>
         <div style={labelStyle(C.gold)}>CORE ARCHITECTURE</div>
+        <div style={{ marginBottom: 16 }}>
+          <DiagramImage
+            moduleId="agents_frameworks"
+            src="/assets/agent_core_architecture.svg"
+            alt="AI agent core architecture"
+            title="Brain, Memory, Tools + 3 Layers"
+            caption="The LLM decides, memory supplies context, tools act. Perception → Reasoning → Action, with memory feeding back."
+            background="#090d16"
+            maxWidth={1100}
+          />
+        </div>
         <div style={{ color: C.muted, fontSize: 12, lineHeight: 1.6, marginBottom: 14 }}>
           An AI agent consists of three core components working together:
         </div>
@@ -175,6 +187,17 @@ function ThinkActObserve() {
     <>
       <div style={sectionStyle}>
         <div style={labelStyle(C.teal)}>THE THINK-ACT-OBSERVE WORKFLOW</div>
+        <div style={{ marginBottom: 16 }}>
+          <DiagramImage
+            moduleId="agents_frameworks"
+            src="/assets/agent_think_act_observe.svg"
+            alt="Think Act Observe cycle"
+            title="Think → Act → Observe"
+            caption="Reason about state, take one verifiable action, read the result, update memory, repeat under a step cap."
+            background="#090d16"
+            maxWidth={1100}
+          />
+        </div>
         <div style={{ color: C.muted, fontSize: 12, lineHeight: 1.6, marginBottom: 14 }}>
           AI agents operate using a continuous cycle that mirrors human problem-solving
           approaches. This workflow ensures agents can adapt and respond effectively to
