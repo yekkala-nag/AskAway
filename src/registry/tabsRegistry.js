@@ -50,7 +50,7 @@ export const UMBRELLA_TOPICS = [
     icon: "🤖",
     color: "#F0A89A",
     dark: "#C47A6A",
-    tabs: ["agt_found_hub", "agt_safety_hub", "agt_multi_hub", "agt_prod_hub", "fiveassets", "redesign", "projectprepframework", "agentplanner", "agenthitl", "agentcontrolplane", "agentlifecycle", "agenta2a", "agentsandbox", "agentevals", "handoffwatch", "verifiedpipes", "codingevals", "claudecode100", "typedagentgate", "agentpairprogramming", "vibecode", "specdriven", "agentsastools", "toolcalling", "agenttasks", "agentmemory", "cliagent", "codingagentsnonprog", "multiagent", "multiagentcoord", "modelrouting", "decision_layer", "langchain", "langgraph", "frameworkcompare", "agentdebugging", "agentscale", "modeldeploy", "aiproductbuilder", "mcpclient", "agentsdk", "loopengineering", "agenticsoftwarefactory", "finassistproject", "zerocostmultiagent", "capstone2", "functionalscars", "refactorhealth", "agentcreativity", "agentorgchart", "synasyncagent", "agentpatterns", "agentuisupply", "interviewmindset"]
+    tabs: ["agt_found_hub", "agt_safety_hub", "agt_multi_hub", "agt_prod_hub", "fiveassets", "redesign", "projectprepframework", "agentplanner", "agenthitl", "agentcontrolplane", "agentlifecycle", "agenta2a", "agentsandbox", "agentevals", "handoffwatch", "verifiedpipes", "codingevals", "claudecode100", "typedagentgate", "agentpairprogramming", "vibecode", "specdriven", "agentflywheel", "beadsplanning", "swarmcoord", "launchharden", "agentsastools", "toolcalling", "agenttasks", "agentmemory", "cliagent", "codingagentsnonprog", "multiagent", "multiagentcoord", "modelrouting", "decision_layer", "langchain", "langgraph", "frameworkcompare", "agentdebugging", "agentscale", "modeldeploy", "aiproductbuilder", "mcpclient", "agentsdk", "loopengineering", "agenticsoftwarefactory", "finassistproject", "zerocostmultiagent", "capstone2", "functionalscars", "refactorhealth", "agentcreativity", "agentorgchart", "synasyncagent", "agentpatterns", "agentuisupply", "interviewmindset"]
   },
   {
     id: "frontiers_production",
@@ -845,6 +845,38 @@ export const TABS_REGISTRY = [
     category: "Agents & Frameworks",
     icon: "📐",
     component: lazy(() => import("../specDrivenDev/SpecDrivenDevTab.jsx"))
+  },
+  {
+    id: "agentflywheel",
+    label: "Agent Flywheel",
+    umbrellaId: "agents_frameworks",
+    category: "Agents & Frameworks",
+    icon: "🔄",
+    component: lazy(() => import("../agentFlywheel/AgentFlywheelTab.jsx"))
+  },
+  {
+    id: "beadsplanning",
+    label: "Planning & Beads",
+    umbrellaId: "agents_frameworks",
+    category: "Agents & Frameworks",
+    icon: "📋",
+    component: lazy(() => import("../beadsPlanning/BeadsPlanningTab.jsx"))
+  },
+  {
+    id: "swarmcoord",
+    label: "Swarm Coordination",
+    umbrellaId: "agents_frameworks",
+    category: "Agents & Frameworks",
+    icon: "🐝",
+    component: lazy(() => import("../swarmCoord/SwarmCoordTab.jsx"))
+  },
+  {
+    id: "launchharden",
+    label: "Launch & Harden",
+    umbrellaId: "agents_frameworks",
+    category: "Agents & Frameworks",
+    icon: "🚀",
+    component: lazy(() => import("../launchHarden/LaunchHardenTab.jsx"))
   },
   {
     id: "hindsight",
