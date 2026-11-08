@@ -18,7 +18,7 @@ export const UMBRELLA_TOPICS = [
     icon: "📚",
     color: "#5EC4C8",
     dark: "#1F6B6E",
-    tabs: ["fnd_start_hub", "fnd_internals_hub", "fnd_prompts_hub", "fnd_mlsoc_hub", "fnd_multimodal_hub", "airoadmap", "overview", "glossary", "reinforcementlearning", "trpo2grpo", "aimoralagency", "humancentric", "dialoguelamda", "modellandscape", "tokenization", "quantserve", "vramconductor", "promptfundamentals", "lstm", "llmsampling", "grokking", "selfattention", "posencoding", "archconcepts", "system1head", "promptmgmt", "promptdependencygraph", "promptcontracts", "promptregression", "structuredoutputs", "topicmodeling", "workflows", "unhobbling", "aiharness", "promptlearning", "visionlanguage", "diffusionmodels", "speechvoice", "datacentricai", "threesentenceprompt", "slashcommands", "ailearning", "reversalcurse", "aigap", "promptalignment", "dupaudit", "harmcauses", "subjectleak", "mlproblems", "hindsight"]
+    tabs: ["fnd_start_hub", "fnd_internals_hub", "fnd_prompts_hub", "fnd_mlsoc_hub", "fnd_multimodal_hub", "airoadmap", "overview", "glossary", "reinforcementlearning", "trpo2grpo", "aimoralagency", "humancentric", "dialoguelamda", "modellandscape", "tokenization", "quantserve", "vramconductor", "promptfundamentals", "lstm", "llmsampling", "grokking", "selfattention", "posencoding", "archconcepts", "system1head", "promptmgmt", "promptdependencygraph", "promptcontracts", "promptregression", "structuredoutputs", "topicmodeling", "workflows", "unhobbling", "aiharness", "promptlearning", "visionlanguage", "diffusionmodels", "speechvoice", "datacentricai", "threesentenceprompt", "slashcommands", "ailearning", "reversalcurse", "aigap", "promptalignment", "dupaudit", "harmcauses", "subjectleak", "mlproblems", "hindsight", "agenticprompts"]
   },
   {
     id: "data_platform",
@@ -853,6 +853,14 @@ export const TABS_REGISTRY = [
     category: "Foundations",
     icon: "🔮",
     component: lazy(() => import("../hindsightDrivenDev/HindsightDrivenDevTab.jsx"))
+  },
+  {
+    id: "agenticprompts",
+    label: "Agentic Coding Prompts",
+    umbrellaId: "foundations",
+    category: "Foundations",
+    icon: "🗂️",
+    component: lazy(() => import("../agenticPrompts/AgenticCodingPromptsTab.jsx"))
   },
   {
     id: "agentsastools",
