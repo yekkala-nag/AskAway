@@ -6,6 +6,7 @@ export const CATEGORIES = [
   "RAG Systems",
   "Context & Memory",
   "Agents & Frameworks",
+  "Hands-On Projects",
   "Advanced & Frontiers"
 ];
 
@@ -51,6 +52,14 @@ export const UMBRELLA_TOPICS = [
     color: "#F0A89A",
     dark: "#C47A6A",
     tabs: ["agt_found_hub", "agt_safety_hub", "agt_multi_hub", "agt_prod_hub", "fiveassets", "redesign", "projectprepframework", "agentplanner", "agenthitl", "agentcontrolplane", "agentlifecycle", "agenta2a", "agentsandbox", "agentevals", "handoffwatch", "verifiedpipes", "codingevals", "claudecode100", "typedagentgate", "agentpairprogramming", "vibecode", "specdriven", "agentflywheel", "beadsplanning", "swarmcoord", "launchharden", "aifoundations", "buildfirstagent", "deploysecureagents", "advancedagenttopics", "agentsastools", "toolcalling", "agenttasks", "agentmemory", "cliagent", "codingagentsnonprog", "multiagent", "multiagentcoord", "modelrouting", "decision_layer", "langchain", "langgraph", "frameworkcompare", "agentdebugging", "agentscale", "modeldeploy", "aiproductbuilder", "mcpclient", "agentsdk", "loopengineering", "agenticsoftwarefactory", "finassistproject", "zerocostmultiagent", "capstone2", "functionalscars", "refactorhealth", "agentcreativity", "agentorgchart", "synasyncagent", "agentpatterns", "agentuisupply", "interviewmindset"]
+  },
+  {
+    id: "hands_on_projects",
+    title: "Hands-On Projects",
+    icon: "🛠️",
+    color: "#7BC99A",
+    dark: "#3F7A56",
+    tabs: ["proj_hub", "projinfra", "projrag", "projagents", "projmultimodal", "projgeneration"]
   },
   {
     id: "frontiers_production",
@@ -1987,6 +1996,55 @@ export const TABS_REGISTRY = [
     category: "Advanced & Frontiers",
     icon: "✨",
     component: lazy(() => import("../agentMemory/SummarizationTab.jsx"))
+  },
+  // ── Umbrella 7 — Hands-On Projects ───────────────────────────────────────
+  {
+    id: "proj_hub",
+    label: "Hands-On Projects",
+    umbrellaId: "hands_on_projects",
+    category: "Hands-On Projects",
+    icon: "🛠️",
+    component: lazy(() => import("../handsOnProjects/ProjectsHubTab.jsx"))
+  },
+  {
+    id: "projinfra",
+    label: "Projects: Infrastructure",
+    umbrellaId: "hands_on_projects",
+    category: "Hands-On Projects",
+    icon: "🧱",
+    component: lazy(() => import("../handsOnProjects/InfrastructureTab.jsx"))
+  },
+  {
+    id: "projrag",
+    label: "Projects: RAG",
+    umbrellaId: "hands_on_projects",
+    category: "Hands-On Projects",
+    icon: "🔎",
+    component: lazy(() => import("../handsOnProjects/RagTab.jsx"))
+  },
+  {
+    id: "projagents",
+    label: "Projects: Agents",
+    umbrellaId: "hands_on_projects",
+    category: "Hands-On Projects",
+    icon: "🤖",
+    component: lazy(() => import("../handsOnProjects/AgentsTab.jsx"))
+  },
+  {
+    id: "projmultimodal",
+    label: "Projects: Multimodal",
+    umbrellaId: "hands_on_projects",
+    category: "Hands-On Projects",
+    icon: "🎙️",
+    component: lazy(() => import("../handsOnProjects/MultimodalTab.jsx"))
+  },
+  {
+    id: "projgeneration",
+    label: "Projects: Generation",
+    umbrellaId: "hands_on_projects",
+    category: "Hands-On Projects",
+    icon: "🎨",
+    component: lazy(() => import("../handsOnProjects/GenerationTab.jsx"))
   }
 ];
 

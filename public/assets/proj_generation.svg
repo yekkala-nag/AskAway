@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 450" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif">
+<defs>
+  <linearGradient id="gnbg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#090d16"/><stop offset="100%" stop-color="#0f2018"/></linearGradient>
+  <linearGradient id="gngrn" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#7BC99A"/><stop offset="100%" stop-color="#4e9c6d"/></linearGradient>
+  <marker id="gnarr" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,1 L7,4 L0,7 Z" fill="#7BC99A"/></marker>
+</defs>
+<rect width="1200" height="450" fill="url(#gnbg)" rx="12"/>
+<text x="40" y="46" fill="#fff" font-size="24" font-weight="800">Two generators, two cost curves</text>
+<text x="40" y="70" fill="#94a3b8" font-size="13">Summarisation pays per chunk; diffusion pays per step × megapixel. Both are bounded by output size.</text>
+
+<rect x="40" y="94" width="540" height="228" rx="12" fill="#0b1220" stroke="#1e293b"/>
+<text x="60" y="122" fill="#7BC99A" font-size="13" font-weight="800">TRANSCRIPT → NOTES</text>
+
+<g font-size="11" font-weight="700">
+  <rect x="62" y="144" width="112" height="58" rx="8" fill="#0f172a" stroke="#7BC99A" stroke-width="1.5"/>
+  <text x="118" y="166" fill="#e2e8f0" text-anchor="middle">Transcript</text>
+  <text x="118" y="184" fill="#94a3b8" font-size="10" font-weight="400" text-anchor="middle">auto-generated</text>
+
+  <rect x="206" y="144" width="112" height="58" rx="8" fill="#0f172a" stroke="#7BC99A" stroke-width="1.5"/>
+  <text x="262" y="166" fill="#e2e8f0" text-anchor="middle">3,000-char split</text>
+  <text x="262" y="184" fill="#94a3b8" font-size="10" font-weight="400" text-anchor="middle">no boundary check</text>
+
+  <rect x="350" y="144" width="94" height="58" rx="8" fill="#0f172a" stroke="#7BC99A" stroke-width="1.5"/>
+  <text x="397" y="166" fill="#e2e8f0" text-anchor="middle">LLM × N</text>
+  <text x="397" y="184" fill="#94a3b8" font-size="10" font-weight="400" text-anchor="middle">one per chunk</text>
+
+  <rect x="476" y="144" width="82" height="58" rx="8" fill="url(#gngrn)"/>
+  <text x="517" y="166" fill="#0d2417" text-anchor="middle">Notes</text>
+  <text x="517" y="184" fill="#1b3d29" font-size="10" font-weight="400" text-anchor="middle">joined</text>
+</g>
+<path d="M174,173 L202,173" stroke="#7BC99A" stroke-width="1.5" marker-end="url(#gnarr)"/>
+<path d="M318,173 L346,173" stroke="#7BC99A" stroke-width="1.5" marker-end="url(#gnarr)"/>
+<path d="M444,173 L472,173" stroke="#7BC99A" stroke-width="1.5" marker-end="url(#gnarr)"/>
+<text x="60" y="234" fill="#94a3b8" font-size="11" font-weight="400">Coverage is per-chunk: a topic spanning two chunks is summarised twice.</text>
+<text x="60" y="254" fill="#94a3b8" font-size="11" font-weight="400">A merge pass over the notes removes the repetition.</text>
+<text x="60" y="274" fill="#E8837A" font-size="11" font-weight="700">Splitting on characters cuts sentences mid-clause.</text>
+<text x="60" y="294" fill="#94a3b8" font-size="11" font-weight="400">Cost = one call per 3,000 chars, so a two-hour talk is ~30 calls.</text>
+
+<rect x="620" y="94" width="540" height="228" rx="12" fill="#0b1220" stroke="#1e293b"/>
+<text x="640" y="122" fill="#F0C674" font-size="13" font-weight="800">PROMPT → IMAGE</text>
+
+<g font-size="11" font-weight="700">
+  <rect x="642" y="144" width="100" height="58" rx="8" fill="#0f172a" stroke="#F0C674" stroke-width="1.5"/>
+  <text x="692" y="166" fill="#e2e8f0" text-anchor="middle">Prompt</text>
+  <text x="692" y="184" fill="#94a3b8" font-size="10" font-weight="400" text-anchor="middle">+ negative</text>
+
+  <rect x="774" y="144" width="132" height="58" rx="8" fill="#0f172a" stroke="#F0C674" stroke-width="1.5"/>
+  <text x="840" y="166" fill="#e2e8f0" text-anchor="middle">Noise × steps</text>
+  <text x="840" y="184" fill="#94a3b8" font-size="10" font-weight="400" text-anchor="middle">30 → 50 denoise</text>
+
+  <rect x="938" y="144" width="132" height="58" rx="8" fill="#0f172a" stroke="#F0C674" stroke-width="1.5"/>
+  <text x="1004" y="166" fill="#e2e8f0" text-anchor="middle">Decode</text>
+  <text x="1004" y="184" fill="#94a3b8" font-size="10" font-weight="400" text-anchor="middle">latent → pixels</text>
+</g>
+<path d="M742,173 L770,173" stroke="#F0C674" stroke-width="1.5" marker-end="url(#gnarr)"/>
+<path d="M906,173 L934,173" stroke="#F0C674" stroke-width="1.5" marker-end="url(#gnarr)"/>
+<text x="640" y="234" fill="#94a3b8" font-size="11" font-weight="400">Runtime ≈ steps × megapixels × device factor. Linear in one, quadratic in the other.</text>
+<text x="640" y="254" fill="#94a3b8" font-size="11" font-weight="400">Guidance 7–8 is balanced; past 12 the image gets contrast-crushed.</text>
+<text x="640" y="274" fill="#E8837A" font-size="11" font-weight="700">CPU fallback works and is unusably slow.</text>
+<text x="640" y="294" fill="#94a3b8" font-size="11" font-weight="400">Fixed seed makes two prompts comparable; change it and nothing is.</text>
+
+<rect x="40" y="340" width="1120" height="76" rx="10" fill="#0f172a" stroke="#7BC99A" stroke-width="1.5"/>
+<text x="60" y="366" fill="#7BC99A" font-size="12" font-weight="700">Generation is where a prototype becomes a bill.</text>
+<text x="60" y="388" fill="#94a3b8" font-size="11" font-weight="400">Cap chunks, cap steps, cap resolution. A bounded output is the only honest cost estimate you can give a user.</text>
+</svg>

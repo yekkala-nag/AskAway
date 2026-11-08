@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 480" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif">
+<defs>
+  <linearGradient id="agbg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#090d16"/><stop offset="100%" stop-color="#1a1430"/></linearGradient>
+  <linearGradient id="agpurp" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#a78bfa"/><stop offset="100%" stop-color="#8b5cf6"/></linearGradient>
+  <marker id="agarr" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,1 L7,4 L0,7 Z" fill="#a78bfa"/></marker>
+</defs>
+<rect width="1200" height="480" fill="url(#agbg)" rx="12"/>
+<text x="40" y="46" fill="#fff" font-size="24" font-weight="800">Two ways to bound autonomy: typed state, or assigned roles</text>
+<text x="40" y="70" fill="#94a3b8" font-size="13">LangGraph passes one dict through nodes. CrewAI passes text between agents with declared tasks.</text>
+
+<rect x="40" y="94" width="540" height="248" rx="12" fill="#0b1220" stroke="#1e293b"/>
+<text x="60" y="122" fill="#a78bfa" font-size="13" font-weight="800">LANGGRAPH · SHARED STATE</text>
+
+<rect x="200" y="142" width="220" height="70" rx="10" fill="url(#agpurp)"/>
+<text x="310" y="170" fill="#fff" font-size="12" font-weight="800" text-anchor="middle">AgentState</text>
+<text x="310" y="190" fill="#ede9fe" font-size="10" font-weight="400" text-anchor="middle">topic · research_data · blog_post</text>
+
+<rect x="70" y="252" width="180" height="60" rx="8" fill="#0f172a" stroke="#a78bfa" stroke-width="1.5"/>
+<text x="160" y="275" fill="#e2e8f0" font-size="11" font-weight="700" text-anchor="middle">researcher</text>
+<text x="160" y="293" fill="#94a3b8" font-size="10" font-weight="400" text-anchor="middle">DDGS → research_data</text>
+
+<rect x="370" y="252" width="180" height="60" rx="8" fill="#0f172a" stroke="#a78bfa" stroke-width="1.5"/>
+<text x="460" y="275" fill="#e2e8f0" font-size="11" font-weight="700" text-anchor="middle">writer</text>
+<text x="460" y="293" fill="#94a3b8" font-size="10" font-weight="400" text-anchor="middle">Ollama → blog_post</text>
+
+<path d="M310,212 L310,232 L160,232 L160,248" stroke="#a78bfa" stroke-width="1.5" fill="none" marker-end="url(#agarr)"/>
+<path d="M160,312 L160,332 L460,332 L460,316" stroke="#a78bfa" stroke-width="1.5" fill="none" marker-end="url(#agarr)"/>
+<text x="60" y="330" fill="#94a3b8" font-size="11" font-weight="400" font-style="italic">entry: researcher → writer → END</text>
+
+<rect x="620" y="94" width="540" height="248" rx="12" fill="#0b1220" stroke="#1e293b"/>
+<text x="640" y="122" fill="#5EC4C8" font-size="13" font-weight="800">CREWAI · ROLES + TASKS</text>
+
+<rect x="650" y="142" width="220" height="70" rx="10" fill="#0f172a" stroke="#5EC4C8" stroke-width="2"/>
+<text x="760" y="166" fill="#e2e8f0" font-size="11" font-weight="700" text-anchor="middle">Market Research Analyst</text>
+<text x="760" y="186" fill="#94a3b8" font-size="10" font-weight="400" text-anchor="middle">research_task</text>
+<text x="760" y="202" fill="#94a3b8" font-size="10" font-weight="400" text-anchor="middle">allow_delegation=False</text>
+
+<rect x="910" y="142" width="220" height="70" rx="10" fill="#0f172a" stroke="#5EC4C8" stroke-width="2"/>
+<text x="1020" y="166" fill="#e2e8f0" font-size="11" font-weight="700" text-anchor="middle">Content Strategist</text>
+<text x="1020" y="186" fill="#94a3b8" font-size="10" font-weight="400" text-anchor="middle">strategy_task</text>
+<text x="1020" y="202" fill="#94a3b8" font-size="10" font-weight="400" text-anchor="middle">depends_on=[research_task]</text>
+
+<path d="M870,177 L906,177" stroke="#5EC4C8" stroke-width="2" fill="none" marker-end="url(#agarr)"/>
+<text x="640" y="248" fill="#94a3b8" font-size="11" font-weight="400">Process.sequential · kickoff() returns the final task output</text>
+<rect x="650" y="266" width="480" height="52" rx="8" fill="#0f172a" stroke="#334155"/>
+<text x="668" y="288" fill="#e2e8f0" font-size="11" font-weight="700">Expected output is the only quality signal the crew gets.</text>
+<text x="668" y="306" fill="#94a3b8" font-size="10" font-weight="400">Vague expected_output → vague deliverable.</text>
+
+<rect x="40" y="364" width="1120" height="88" rx="10" fill="#0f172a" stroke="#a78bfa" stroke-width="1.5"/>
+<text x="60" y="390" fill="#a78bfa" font-size="12" font-weight="700">A crew of 3 agents × 4 calls × 1,200 tokens is 14,400 tokens per run, not 1,200.</text>
+<text x="60" y="412" fill="#94a3b8" font-size="11" font-weight="400">Each agent re-reads the growing context. Budget per run, not per call; local models at 20 tok/s turn that into minutes.</text>
+<text x="60" y="434" fill="#94a3b8" font-size="11" font-weight="400">No loop, no cap needed. Add a loop and you must add a step cap, a stall detector and an approval gate.</text>
+</svg>
